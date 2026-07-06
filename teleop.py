@@ -8,8 +8,8 @@ from pathlib import Path
 from pinocchio.visualize import MeshcatVisualizer
 
 from lerobot.cameras.opencv.configuration_opencv import OpenCVCameraConfig
-from teleoperators.openarm_leader import OpenArmConfig, OpenArmLeader
-from robots.openarm_follower import OpenArmFollowerConfig, OpenArmFollower
+from teleoperators.umeow_openarm_leader import OpenArmConfig, OpenArmLeader
+from robots.umeow_openarm_follower import OpenArmFollowerConfig, OpenArmFollower
 
 camera_config = {}
 

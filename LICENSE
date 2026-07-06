@@ -19,3 +19,34 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+conda create -n colmap python=3.12
+conda activate colmap
+conda install \
+    cmake \
+    ninja \
+    boost \
+    ccache \
+    eigen \
+    openimageio \
+    curl \
+    metis \
+    glog \
+    gtest \
+    ceres-solver=2.2.0=*gpu* \
+    suitesparse \
+    qt \
+    glew \
+    sqlite \
+    cgal-cpp \
+    mesa-libgl-devel-cos7-x86_64 \
+    cuda-toolkit==12.8.1 \
+    libcurand-dev
+
+git clone https://github.com/colmap/colmap.git
+cd colmap
+mkdir build
+cd build
+cmake .. -GNinja -DCMAKE_CUDA_ARCHITECTURES=120 -DCMAKE_INSTALL_PREFIX=$HOME/.colmap-install
+ninja
+ninja install

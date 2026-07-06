@@ -1,0 +1,56 @@
+{
+  "_comment": "Filled in during Phase 0 bench verification (see mirror_bridge.py docstring). Do not guess these values -- run probe_joint_sign.py (sim) against safe_probe.py (real) per joint, and the gripper ramp check, before trusting this file.",
+
+  "left": {
+    "sign": {
+      "_comment": "1 if a positive delta in Isaac Sim moves this joint the same physical direction as a positive delta sent to the real motor; -1 if opposite. Determine per-joint with safe_probe.py --side left --joint N --step 0.05 against probe_joint_sign.py.",
+      "joint1": 1,
+      "joint2": 1,
+      "joint3": 1,
+      "joint4": 1,
+      "joint5": 1,
+      "joint6": 1,
+      "joint7": 1
+    },
+    "offset_rad": {
+      "_comment": "Optional small residual trim in radians, added after the sign flip. Leave at 0.0 if zero-calibration (openarm-can-set-zero) was done properly -- this is not a substitute for real zeroing.",
+      "joint1": 0.0,
+      "joint2": 0.0,
+      "joint3": 0.0,
+      "joint4": 0.0,
+      "joint5": 0.0,
+      "joint6": 0.0,
+      "joint7": 0.0
+    },
+    "gripper": {
+      "_comment": "Raw LJ8.pos motor value at fully-open and fully-closed, from ramping LJ8.pos with safe_probe.py --side left --joint 8.",
+      "open_raw": -1.1755,
+      "closed_raw": 0.0093
+    }
+  },
+
+  "right": {
+    "sign": {
+      "joint1": 1,
+      "joint2": 1,
+      "joint3": 1,
+      "joint4": 1,
+      "joint5": 1,
+      "joint6": 1,
+      "joint7": 1
+    },
+    "offset_rad": {
+      "joint1": 0.0,
+      "joint2": 0.0,
+      "joint3": 0.0,
+      "joint4": 0.0,
+      "joint5": 0.0,
+      "joint6": 0.0,
+      "joint7": 0.0
+    },
+    "gripper": {
+      "open_raw": -1.1976,
+      "closed_raw": -0.0101
+    }
+  }
+}
