@@ -270,7 +270,7 @@ class OpenArmFollower(Robot):
             oa.MITParam(q=action['RJ7.pos'], dq=0.0, tau=tau[16], kp=self.KPs[5], kd=self.KDs[5]),
         ])
         self.right_arm.get_gripper().mit_control_all([
-            oa.MITParam(q=action['RJ8.pos'] + 0.08, dq=0.0, tau=tau[17], kp=self.KPs[7], kd=self.KDs[7])
+            oa.MITParam(q=action['RJ8.pos'], dq=0.0, tau=tau[17], kp=self.KPs[7], kd=self.KDs[7])
         ])
         
         # self.left_arm.get_arm().posvel_control_all([
@@ -295,7 +295,7 @@ class OpenArmFollower(Robot):
             oa.MITParam(q=action['LJ7.pos'], dq=0.0, tau=tau[6], kp=self.KPs[5], kd=self.KDs[5]),
         ])
         self.left_arm.get_gripper().mit_control_all([
-            oa.MITParam(q=action['LJ8.pos'] + 0.08, dq=0.0, tau=tau[7], kp=self.KPs[7], kd=self.KDs[7])
+            oa.MITParam(q=action['LJ8.pos'], dq=0.0, tau=tau[7], kp=self.KPs[7], kd=self.KDs[7])
         ])
         
         return action

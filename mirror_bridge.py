@@ -50,11 +50,94 @@ from sim_bridge_common import (
     load_calibration,
     motor_action_to_sim_joints,
     ramp_to,
+    raw_to_gripper_sim,
     run_startup_handshake,
     sim_joints_to_motor_action,
 )
 
 logger = logging.getLogger("mirror_bridge")
+
+GRIPPER_WIDTH_PRINT_PERIOD_S = 0.5  # throttle -- the mirror loop runs at --loop-hz (default 50Hz)
+
+
+def _sim_finger_val(sim_joints: dict, side: str) -> float:
+    return next((v for k, v in sim_joints.items() if k.startswith(f"openarm_{side}_finger_joint")), 0.0)
+
+
+def _print_gripper_widths(sim_joints: dict, actual: dict, calib: dict) -> None:
+    """Print sim-commanded vs. real-measured gripper opening width (mm) side by side.
+
+    `actual` is the real gripper position read fresh (not the clamped commanded target) so
+    a grasped object stalling the real gripper short of its commanded width is visible here.
+    """
+    for side, prefix in (("left", "L"), ("right", "R")):
+        grip = calib[side]["gripper"]
+        sim_mm = _sim_finger_val(sim_joints, side) * 2000.0
+        real_mm = raw_to_gripper_sim(actual[f"{prefix}J8.pos"], grip["open_raw"], grip["closed_raw"]) * 2000.0
+        print(f"[GRIPPER {side.upper():5s}] sim={sim_mm:5.1f}mm  real={real_mm:5.1f}mm")
+
+
+class GripperStallWatchdog:
+    """Best-effort detector for a gripper motor that has stopped responding to commands.
+
+    The Damiao DM4310 gripper motor reports a fault/error code (overcurrent, overload,
+    overtemp, etc.) in every CAN feedback frame, but the openarm_can binding this codebase
+    uses never decodes that byte and exposes no clear-error call -- so a real fault (e.g.
+    the motor's own overcurrent/overload protection tripping after holding grasp torque
+    against a stalled object for a while) is invisible to us except behaviorally: the motor
+    stops tracking commanded position entirely, even open/close commands that used to work.
+
+    This can NOT simply check "actual != target": a normal grasp hold against an object
+    legitimately sits away from its fully-closed target for as long as the grasp lasts --
+    that is the gripper working correctly, not a fault. Instead this checks whether the
+    actual position responds at all when the COMMANDED target moves substantially -- that
+    only fails to happen when the motor has genuinely stopped listening.
+    """
+
+    RESPONSE_TARGET_RAD = 0.15  # commanded target must move at least this much to test response
+    RESPONSE_ACTUAL_RAD = 0.02  # actual position moving less than this counts as "didn't respond"
+    STUCK_POLLS = 3  # consecutive non-responses (at the caller's poll cadence) before recovering
+
+    def __init__(self):
+        self._prev_target = {"left": None, "right": None}
+        self._prev_actual = {"left": None, "right": None}
+        self._stuck_count = {"left": 0, "right": 0}
+
+    def check(self, side: str, target: float, actual: float) -> bool:
+        """Return True if `side`'s gripper looks stalled and recovery should be attempted."""
+        prev_target, prev_actual = self._prev_target[side], self._prev_actual[side]
+        self._prev_target[side], self._prev_actual[side] = target, actual
+        if prev_target is None:
+            return False
+        target_moved = abs(target - prev_target)
+        actual_moved = abs(actual - prev_actual)
+        if target_moved >= self.RESPONSE_TARGET_RAD and actual_moved < self.RESPONSE_ACTUAL_RAD:
+            self._stuck_count[side] += 1
+        else:
+            self._stuck_count[side] = 0
+        if self._stuck_count[side] >= self.STUCK_POLLS:
+            self._stuck_count[side] = 0  # avoid re-triggering every poll while recovery is retried
+            return True
+        return False
+
+
+def _recover_gripper(robot, side: str) -> None:
+    """Attempt to clear a suspected motor-side fault-latch by power-cycling (disable then
+    re-enable) JUST this gripper's motor -- not the 7 arm joints on the same CAN bus, which
+    keep holding their last commanded position throughout. This is a heuristic recovery
+    (no real fault-clear API exists -- see GripperStallWatchdog docstring), not a guaranteed
+    fix: if the motor is latched in a way disable/enable doesn't reset, it will stay stuck
+    and this will just repeat every time the watchdog re-triggers."""
+    arm = robot.left_arm if side == "left" else robot.right_arm
+    print(f"\n[GRIPPER {side.upper()}] not responding to commands -- attempting recovery"
+          " (disable/enable this gripper motor only; likely a motor-side overcurrent/overload"
+          " fault-latch after a sustained grasp).")
+    try:
+        arm.get_gripper().disable_all()
+        time.sleep(0.1)
+        arm.get_gripper().enable_all()
+    except Exception:
+        logger.exception(f"[GRIPPER {side.upper()}] recovery attempt raised -- may still be stuck")
 
 
 class LatestPacketReceiver:
@@ -196,6 +279,8 @@ def main():
         last_seq = packet[0]
         last_command_time = time.time()
         last_packet_time = packet[1]
+        last_width_print_time = 0.0
+        stall_watchdog = GripperStallWatchdog()
         dt = 1.0 / args.loop_hz
         halted = False
 
@@ -229,6 +314,20 @@ def main():
                     logger.warning(f"Stale packet ({staleness_ms:.0f}ms) -- holding last position.")
                     robot.send_action(current_action)
                     last_command_time = now
+
+            if now - last_width_print_time >= GRIPPER_WIDTH_PRINT_PERIOD_S:
+                last_width_print_time = now
+                try:
+                    actual_gripper = get_current_pos_action(robot)
+                except RuntimeError as e:
+                    logger.warning(f"[GRIPPER] could not read real position: {e}")
+                    actual_gripper = None
+                if actual_gripper is not None:
+                    _print_gripper_widths(sim_joints, actual_gripper, calib)
+                    for side, prefix in (("left", "L"), ("right", "R")):
+                        key = f"{prefix}J8.pos"
+                        if stall_watchdog.check(side, current_action[key], actual_gripper[key]):
+                            _recover_gripper(robot, side)
 
             if feedback_sock is not None:
                 try:
