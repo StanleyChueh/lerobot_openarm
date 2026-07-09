@@ -11,6 +11,7 @@ dependencies = [
     "pin",
     "python-dotenv>=1.2.1",
     "deepdiff>=8.0.0",
+    "num2words>=0.5.14",
 ]
 
 [dependency-groups]
