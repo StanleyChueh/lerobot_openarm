@@ -57,7 +57,7 @@ GRIPPER_MOTOR_TYPE = oa.MotorType.DM4310
 GRIPPER_SEND_ID = 0x08
 GRIPPER_RECV_ID = 0x18
 
-DEFAULT_PORT_FOR_SIDE = {"left": "can3", "right": "can2"}
+DEFAULT_PORT_FOR_SIDE = {"left": "can1", "right": "can0"}
 
 # A human-scale OpenArm joint should never legitimately approach the motor's full
 # +/-12.5 rad encoder range (that range exists to cover multi-turn gripper gearing,

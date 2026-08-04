@@ -272,8 +272,8 @@ def main():
     }
 
     robot_cfg = OpenArmFollowerConfig(
-        right_port="can2",
-        left_port="can3",
+        right_port="can0",
+        left_port="can1",
         enable_fd=True,
         model_path=URDF_PATH,
         cameras=camera_config,  # type: ignore

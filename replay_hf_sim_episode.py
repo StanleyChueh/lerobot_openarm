@@ -5,20 +5,26 @@ onto the real dual-arm OpenArm follower.
 
 Unlike replay_sim_dataset.py (which reads IsaacLab's raw HDF5 export directly via
 --dump_joint_order), this reads a dataset already pushed to the HF Hub, via the
-same `lerobot` LeRobotDataset class replay.py uses. Two format differences from
-the raw-HDF5 path this script accounts for:
+same `lerobot` LeRobotDataset class replay.py uses.
 
-  1. The recorded "action" column is the EE-space IK delta command fed into Isaac
-     Sim's controller that step -- NOT a joint target. The actual joint-space
-     trajectory is "observation.state" (left_joint_1..7, radians), which is what
-     gets replayed here.
-  2. This dataset only records the left arm (no right_joint_* fields at all, and
-     no gripper joint angle -- only a +-1 gripper *command* in action.left_gripper).
-     The right arm is held at whatever pose it's actually in when this script
-     connects (matching the real behavior already confirmed: the right arm is
-     idle for this task in both the sim and real datasets inspected). The
-     gripper command is mapped via gripper_cmd_to_raw(), not gripper_sim_to_raw()
-     (which assumes a 0-0.044 rad joint angle that doesn't exist in this dataset).
+Two dataset schemas are supported, auto-detected from observation.state's names (see
+LEFT_STATE_NAMES_EEF_ACTION / LEFT_STATE_NAMES_JOINT_ACTION below) -- always replays
+"observation.state" (the actual recorded joint-space trajectory), never "action" directly,
+since only observation.state is guaranteed to be real joint positions in both schemas:
+
+  1. EEF-action datasets (e.g. openarm_visuomotor_no_domain_randomization_1000): the recorded
+     "action" column is the EE-space IK delta command fed into Isaac Sim's controller that step
+     -- NOT a joint target. observation.state is the left arm's 7 joints only (left_joint_1..7,
+     radians); the gripper is a +-1 *command* in action.left_gripper, not a joint angle, mapped
+     via gripper_cmd_to_raw().
+  2. Joint-action datasets (e.g. openarm_visuomotor_no_domain_randomization_1000_joints, see
+     IsaacLab's convert_hdf5_to_lerobot.py): observation.state is LJ1.pos..LJ8.pos -- the left
+     arm's 7 joints AND the gripper as an actual 0-0.044 rad joint angle, both already in the
+     representation replayed here. The gripper is mapped via gripper_sim_to_raw() instead.
+
+Neither schema records the right arm -- it's held at whatever pose it's actually in when this
+script connects (matching the real behavior already confirmed: the right arm is idle for this
+task in both the sim and real datasets inspected).
 
 REQUIRED BEFORE RUNNING: the same Phase 0 calibration as mirror_bridge.py /
 replay_sim_dataset.py -- a real calibration.json (see calibration.example.json).
@@ -55,17 +61,34 @@ from sim_bridge_common import (
     clamp_step,
     get_current_pos_action,
     gripper_cmd_to_raw,
+    gripper_sim_to_raw,
     load_calibration,
     ramp_to,
     run_startup_handshake,
 )
 
-LEFT_STATE_NAMES = [f"left_joint_{i}" for i in range(1, 8)]
+# Two dataset schemas this script knows how to replay (detected from observation.state's names):
+#   "eef_action"   -- older EE-delta-action datasets (e.g. openarm_visuomotor_no_domain_
+#                      randomization_1000). observation.state is the left arm's 7 joints only
+#                      (left_joint_1..7); the gripper is a +-1 *command* living in the action
+#                      column (action.left_gripper), not a joint angle -- mapped via
+#                      gripper_cmd_to_raw().
+#   "joint_action" -- newer joint-space-action datasets (e.g. openarm_visuomotor_no_domain_
+#                      randomization_1000_joints, see IsaacLab's convert_hdf5_to_lerobot.py).
+#                      observation.state is LJ1.pos..LJ8.pos -- 7 arm joints AND the gripper as
+#                      an actual 0-0.044 rad joint angle, both already in the exact target
+#                      representation replayed here. Mapped via gripper_sim_to_raw(), the
+#                      function this file's own comments already anticipated needing once a
+#                      dataset like this existed.
+LEFT_STATE_NAMES_EEF_ACTION = [f"left_joint_{i}" for i in range(1, 8)]
+LEFT_STATE_NAMES_JOINT_ACTION = [f"LJ{i}.pos" for i in range(1, 8)] + ["LJ8.pos"]
 POS_KEYS = [f"LJ{i}.pos" for i in range(1, 9)] + [f"RJ{i}.pos" for i in range(1, 9)]
 
 
 def load_trajectory(repo_id: str, episode: int) -> list[dict]:
-    """Returns a list of {"joints": [7 floats, rad], "gripper_cmd": float} per frame."""
+    """Returns a list of {"joints": [7 floats, rad], "gripper_mode": "cmd"|"pos", "gripper_value":
+    float} per frame -- gripper_mode tells frame_to_motor_action() which raw-mapping function to
+    use (see the schema comment above)."""
     # revision="main": this dataset has no version tag on the Hub (unlike e.g.
     # 0422_stanley_red_cube), and LeRobotDataset's default version-tag resolution
     # (get_safe_version) throws on untagged repos due to a huggingface_hub version
@@ -76,26 +99,42 @@ def load_trajectory(repo_id: str, episode: int) -> list[dict]:
 
     state_names = dataset.features[OBS_STATE]["names"]
     action_names = dataset.features[ACTION]["names"]
-    if state_names != LEFT_STATE_NAMES:
+
+    if state_names == LEFT_STATE_NAMES_EEF_ACTION:
+        schema = "eef_action"
+    elif state_names == LEFT_STATE_NAMES_JOINT_ACTION:
+        schema = "joint_action"
+    else:
         raise ValueError(
-            f"Expected observation.state names {LEFT_STATE_NAMES}, got {state_names} --"
-            " this dataset's schema doesn't match what this script assumes."
+            f"observation.state names {state_names} match neither known schema -- expected "
+            f"{LEFT_STATE_NAMES_EEF_ACTION} (EE-delta-action dataset) or "
+            f"{LEFT_STATE_NAMES_JOINT_ACTION} (joint-space dataset)."
         )
-    if "left_gripper" not in action_names:
-        raise ValueError(f"Expected 'left_gripper' in action names, got {action_names}")
-    gripper_idx = action_names.index("left_gripper")
+
+    if schema == "eef_action":
+        if "left_gripper" not in action_names:
+            raise ValueError(f"Expected 'left_gripper' in action names, got {action_names}")
+        gripper_idx = action_names.index("left_gripper")
 
     trajectory = []
     for idx in range(dataset.num_frames):
-        joints = states[idx][OBS_STATE].tolist()
-        gripper_cmd = actions[idx][ACTION][gripper_idx].item()
-        trajectory.append({"joints": joints, "gripper_cmd": gripper_cmd})
+        state_vals = states[idx][OBS_STATE].tolist()
+        if schema == "eef_action":
+            gripper_cmd = actions[idx][ACTION][gripper_idx].item()
+            trajectory.append({"joints": state_vals, "gripper_mode": "cmd", "gripper_value": gripper_cmd})
+        else:
+            trajectory.append({
+                "joints": state_vals[:7],
+                "gripper_mode": "pos",
+                "gripper_value": state_vals[7],
+            })
     return trajectory
 
 
 def frame_to_motor_action(frame: dict, calib: dict, hold_right: dict) -> dict:
-    """Map one frame (left_joint_1..7 rad + left_gripper +-1 cmd) to a full 16-key
-    {"LJ1.pos": rad, ...} motor action. Right arm held constant at `hold_right`."""
+    """Map one frame (left_joint_1..7 rad + a gripper value in either the old +-1 command form or
+    the new 0-0.044 rad joint-angle form, see gripper_mode) to a full 16-key {"LJ1.pos": rad, ...}
+    motor action. Right arm held constant at `hold_right`."""
     sec = calib["left"]
     action = {}
     for n, jkey in enumerate(ARM_JOINT_KEYS, start=1):
@@ -103,7 +142,10 @@ def frame_to_motor_action(frame: dict, calib: dict, hold_right: dict) -> dict:
         offset = sec["offset_rad"][jkey]
         action[f"LJ{n}.pos"] = sign * frame["joints"][n - 1] + offset
     grip = sec["gripper"]
-    action["LJ8.pos"] = gripper_cmd_to_raw(frame["gripper_cmd"], grip["open_raw"], grip["closed_raw"])
+    if frame["gripper_mode"] == "cmd":
+        action["LJ8.pos"] = gripper_cmd_to_raw(frame["gripper_value"], grip["open_raw"], grip["closed_raw"])
+    else:
+        action["LJ8.pos"] = gripper_sim_to_raw(frame["gripper_value"], grip["open_raw"], grip["closed_raw"])
     action.update(hold_right)
     return action
 

@@ -24,8 +24,8 @@
     },
     "gripper": {
       "_comment": "Raw LJ8.pos motor value at fully-open and fully-closed, from ramping LJ8.pos with safe_probe.py --side left --joint 8.",
-      "open_raw": -1.1755,
-      "closed_raw": 0.0093
+      "open_raw": 0.0,
+      "closed_raw": -1.1755
     }
   },
 
@@ -49,8 +49,8 @@
       "joint7": 0.0
     },
     "gripper": {
-      "open_raw": -1.1976,
-      "closed_raw": -0.0101
+      "open_raw": 0.0177,
+      "closed_raw": 1.2304
     }
   }
 }
