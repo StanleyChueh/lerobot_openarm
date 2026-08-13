@@ -118,17 +118,48 @@ def clamp_step(current: dict, target: dict, max_delta: float, gripper_max_delta:
         delta = max(-k_max_delta, min(k_max_delta, tgt - cur))
         out[k] = cur + delta
     return out
+def compute_target_velocity(
+    current: dict[str, float], 
+    clamped_target: dict[str, float], 
+    dt: float,
+    max_velocity: float | dict[str, float] | None = None
+) -> dict[str, float]:
+    """Compute the target velocity for each joint based on the current position, clamped target position, and time step.
+    Args:
+        current: Current joint positions.
+        clamped_target: Clamped target joint positions.
+        dt: Time step in seconds.
+        max_velocity: Maximum allowed velocity for each joint. Can be a single float or a dictionary mapping joint names to their respective maximum velocities.    
+    """
+    target_vel = {}
+    for k, tgt_pos in clamped_target.items():
+        cur_pos = current[k]
+        raw_vel = (tgt_pos - cur_pos) / dt
+        
+        if max_velocity is not None:
+            if isinstance(max_velocity, dict):
+                v_limit = max_velocity.get(k, float("inf"))
+            else:
+                v_limit = max_velocity
+            vel = max(-v_limit, min(v_limit, raw_vel))
+        else:
+            vel = raw_vel
 
+        vel_key = k.replace(".pos", ".vel") if k.endswith(".pos") else f"{k}_vel"
+        target_vel[vel_key] = vel
+
+    return target_vel
 
 def ramp_to(robot, start_action: dict, end_action: dict, duration_s: float, rate_hz: float = 50.0):
     steps = max(1, int(duration_s * rate_hz))
     dt = 1.0 / rate_hz
+    target_vel = {}
     print(f"  [ramp_to] entering loop, about to call send_action() for step 1/{steps}...", flush=True)
     for i in range(1, steps + 1):
         step_start = time.time()
         alpha = i / steps
         cmd = {k: start_action[k] + alpha * (end_action[k] - start_action[k]) for k in start_action}
-        robot.send_action(cmd)
+        robot.send_action(cmd, target_vel)
         call_dt = time.time() - step_start
         if call_dt > dt * 3:
             # send_action() itself took much longer than one tick -- likely a slow/stalled

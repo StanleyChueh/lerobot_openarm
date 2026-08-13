@@ -45,6 +45,7 @@ from reset_to_rest_pose import reset_to_rest_pose
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
 from sim_bridge_common import (
     StdinKillSwitch,
+    compute_target_velocity,
     clamp_step,
     get_current_pos_action,
     load_calibration,
@@ -280,6 +281,7 @@ def main():
         last_command_time = time.time()
         last_packet_time = packet[1]
         last_width_print_time = 0.0
+        target_vel = {}
         stall_watchdog = GripperStallWatchdog()
         dt = 1.0 / args.loop_hz
         halted = False
@@ -301,8 +303,10 @@ def main():
                 tick_dt = now - last_command_time
                 max_delta = args.max_joint_speed * max(tick_dt, dt)
                 gripper_max_delta = args.gripper_max_speed * max(tick_dt, dt)
-                current_action = clamp_step(current_action, desired, max_delta, gripper_max_delta)
-                robot.send_action(current_action)
+                target_action = clamp_step(current_action, desired, max_delta, gripper_max_delta)
+                target_vel = compute_target_velocity(current_action, target_action, tick_dt, args.max_joint_speed)
+                robot.send_action(target_action, target_vel)
+                current_action = target_action
                 last_command_time = now
             else:
                 staleness_ms = (now - last_packet_time) * 1000.0
@@ -312,7 +316,8 @@ def main():
                     break
                 elif staleness_ms > args.stale_ms:
                     logger.warning(f"Stale packet ({staleness_ms:.0f}ms) -- holding last position.")
-                    robot.send_action(current_action)
+                    target_vel =  {k: 0.0 for k in target_vel.keys()}
+                    robot.send_action(current_action, target_vel)
                     last_command_time = now
 
             if now - last_width_print_time >= GRIPPER_WIDTH_PRINT_PERIOD_S:

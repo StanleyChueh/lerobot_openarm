@@ -7,10 +7,10 @@ Unlike replay_sim_dataset.py (which reads IsaacLab's raw HDF5 export directly vi
 --dump_joint_order), this reads a dataset already pushed to the HF Hub, via the
 same `lerobot` LeRobotDataset class replay.py uses.
 
-Two dataset schemas are supported, auto-detected from observation.state's names (see
-LEFT_STATE_NAMES_EEF_ACTION / LEFT_STATE_NAMES_JOINT_ACTION below) -- always replays
-"observation.state" (the actual recorded joint-space trajectory), never "action" directly,
-since only observation.state is guaranteed to be real joint positions in both schemas:
+Three dataset schemas are supported, auto-detected from observation.state's names (see
+LEFT_STATE_NAMES_EEF_ACTION / LEFT_STATE_NAMES_JOINT_ACTION / DUAL_STATE_NAMES below) -- always
+replays "observation.state" (the actual recorded joint-space trajectory), never "action" directly,
+since only observation.state is guaranteed to be real joint positions in every schema:
 
   1. EEF-action datasets (e.g. openarm_visuomotor_no_domain_randomization_1000): the recorded
      "action" column is the EE-space IK delta command fed into Isaac Sim's controller that step
@@ -22,9 +22,15 @@ since only observation.state is guaranteed to be real joint positions in both sc
      arm's 7 joints AND the gripper as an actual 0-0.044 rad joint angle, both already in the
      representation replayed here. The gripper is mapped via gripper_sim_to_raw() instead.
 
-Neither schema records the right arm -- it's held at whatever pose it's actually in when this
-script connects (matching the real behavior already confirmed: the right arm is idle for this
-task in both the sim and real datasets inspected).
+  3. Dual-arm joint-action datasets (convert_hdf5_to_lerobot.py --arms both/auto): the same
+     representation for BOTH arms -- LJ1..LJ8 then RJ1..RJ8, 16 values. Required for a bimanual
+     demo such as a right-to-left hand-over; schemas 1 and 2 carry no right-arm data at all and
+     cannot describe one.
+
+Schemas 1 and 2 do not record the right arm, so under those it is held at whatever pose it is
+actually in when this script connects, rather than being driven from invented values. Schema 3
+drives both arms from the recording. Each arm is mapped through its OWN calibration section --
+the arms are mirrored, so reusing the left section for the right drives several joints backwards.
 
 REQUIRED BEFORE RUNNING: the same Phase 0 calibration as mirror_bridge.py /
 replay_sim_dataset.py -- a real calibration.json (see calibration.example.json).
@@ -59,6 +65,7 @@ from sim_bridge_common import (
     ARM_JOINT_KEYS,
     StdinKillSwitch,
     clamp_step,
+    compute_target_velocity,
     get_current_pos_action,
     gripper_cmd_to_raw,
     gripper_sim_to_raw,
@@ -80,8 +87,14 @@ from sim_bridge_common import (
 #                      representation replayed here. Mapped via gripper_sim_to_raw(), the
 #                      function this file's own comments already anticipated needing once a
 #                      dataset like this existed.
+#   "dual_joint_action" -- the same joint-space representation for BOTH arms: LJ1..LJ8 followed
+#                      by RJ1..RJ8 (16 values). Produced by convert_hdf5_to_lerobot.py --arms
+#                      both/auto, which is what a bimanual recording (e.g. a right-to-left
+#                      hand-over) needs -- the 8-wide schemas above physically cannot describe
+#                      one, since they carry no right-arm data at all.
 LEFT_STATE_NAMES_EEF_ACTION = [f"left_joint_{i}" for i in range(1, 8)]
 LEFT_STATE_NAMES_JOINT_ACTION = [f"LJ{i}.pos" for i in range(1, 8)] + ["LJ8.pos"]
+DUAL_STATE_NAMES = LEFT_STATE_NAMES_JOINT_ACTION + [f"RJ{i}.pos" for i in range(1, 9)]
 POS_KEYS = [f"LJ{i}.pos" for i in range(1, 9)] + [f"RJ{i}.pos" for i in range(1, 9)]
 
 
@@ -104,12 +117,16 @@ def load_trajectory(repo_id: str, episode: int) -> list[dict]:
         schema = "eef_action"
     elif state_names == LEFT_STATE_NAMES_JOINT_ACTION:
         schema = "joint_action"
+    elif state_names == DUAL_STATE_NAMES:
+        schema = "dual_joint_action"
     else:
         raise ValueError(
-            f"observation.state names {state_names} match neither known schema -- expected "
-            f"{LEFT_STATE_NAMES_EEF_ACTION} (EE-delta-action dataset) or "
-            f"{LEFT_STATE_NAMES_JOINT_ACTION} (joint-space dataset)."
+            f"observation.state names {state_names} match no known schema -- expected "
+            f"{LEFT_STATE_NAMES_EEF_ACTION} (EE-delta-action dataset), "
+            f"{LEFT_STATE_NAMES_JOINT_ACTION} (single-arm joint-space dataset), or "
+            f"{DUAL_STATE_NAMES} (dual-arm joint-space dataset)."
         )
+    print(f"Dataset schema: {schema} ({len(state_names)}D observation.state)")
 
     if schema == "eef_action":
         if "left_gripper" not in action_names:
@@ -123,30 +140,46 @@ def load_trajectory(repo_id: str, episode: int) -> list[dict]:
             gripper_cmd = actions[idx][ACTION][gripper_idx].item()
             trajectory.append({"joints": state_vals, "gripper_mode": "cmd", "gripper_value": gripper_cmd})
         else:
-            trajectory.append({
+            frame = {
                 "joints": state_vals[:7],
                 "gripper_mode": "pos",
                 "gripper_value": state_vals[7],
-            })
+            }
+            if schema == "dual_joint_action":
+                # Same representation as the left arm, just the second half of the vector.
+                frame["right_joints"] = state_vals[8:15]
+                frame["right_gripper_value"] = state_vals[15]
+            trajectory.append(frame)
     return trajectory
 
 
-def frame_to_motor_action(frame: dict, calib: dict, hold_right: dict) -> dict:
-    """Map one frame (left_joint_1..7 rad + a gripper value in either the old +-1 command form or
-    the new 0-0.044 rad joint-angle form, see gripper_mode) to a full 16-key {"LJ1.pos": rad, ...}
-    motor action. Right arm held constant at `hold_right`."""
-    sec = calib["left"]
-    action = {}
+def _map_arm(action: dict, prefix: str, sec: dict, joints, gripper_value: float, gripper_mode: str):
+    """Write one arm's 8 motor keys ({prefix}1..8.pos) into *action*, through its calibration.
+
+    Each side has its OWN sign/offset/gripper-raw calibration -- the two arms are mirrored, so
+    applying the left section to the right would drive several joints backwards.
+    """
     for n, jkey in enumerate(ARM_JOINT_KEYS, start=1):
-        sign = sec["sign"][jkey]
-        offset = sec["offset_rad"][jkey]
-        action[f"LJ{n}.pos"] = sign * frame["joints"][n - 1] + offset
+        action[f"{prefix}{n}.pos"] = sec["sign"][jkey] * joints[n - 1] + sec["offset_rad"][jkey]
     grip = sec["gripper"]
-    if frame["gripper_mode"] == "cmd":
-        action["LJ8.pos"] = gripper_cmd_to_raw(frame["gripper_value"], grip["open_raw"], grip["closed_raw"])
+    to_raw = gripper_cmd_to_raw if gripper_mode == "cmd" else gripper_sim_to_raw
+    action[f"{prefix}8.pos"] = to_raw(gripper_value, grip["open_raw"], grip["closed_raw"])
+
+
+def frame_to_motor_action(frame: dict, calib: dict, hold_right: dict) -> dict:
+    """Map one recorded frame to a full 16-key {"LJ1.pos": rad, ...} motor action.
+
+    The left arm always comes from the data. The right arm comes from the data too when the
+    dataset carries it (the dual-arm schema -- see DUAL_STATE_NAMES); otherwise it is pinned to
+    `hold_right`, the pose it was already in, because the single-arm schemas have nothing to say
+    about it and inventing values would move a real arm on no evidence.
+    """
+    _map_arm(action := {}, "LJ", calib["left"], frame["joints"], frame["gripper_value"], frame["gripper_mode"])
+    if "right_joints" in frame:
+        _map_arm(action, "RJ", calib["right"], frame["right_joints"],
+                 frame["right_gripper_value"], frame["gripper_mode"])
     else:
-        action["LJ8.pos"] = gripper_sim_to_raw(frame["gripper_value"], grip["open_raw"], grip["closed_raw"])
-    action.update(hold_right)
+        action.update(hold_right)
     return action
 
 
@@ -194,8 +227,8 @@ def main():
     parser.add_argument("--repo-id", type=str, required=True, help="HF dataset repo id")
     parser.add_argument("--episode", type=int, default=0, help="Episode index inside the dataset")
     parser.add_argument("--calibration", type=str, required=True, help="Path to calibration.json")
-    parser.add_argument("--right-port", type=str, default="can2")
-    parser.add_argument("--left-port", type=str, default="can3")
+    parser.add_argument("--right-port", type=str, default="can0")
+    parser.add_argument("--left-port", type=str, default="can1")
     parser.add_argument("--model-path", type=str, required=True, help="Path to openarm_description.urdf for gravity comp")
     parser.add_argument("--max-joint-speed", type=float, default=0.3, help="rad/s cap applied to every arm joint's per-tick motion.")
     parser.add_argument("--gripper-max-speed", type=float, default=8.0, help="rad/s cap for the gripper channel specifically -- much higher than the arm cap, since gripper commands are a near-instant open/closed toggle, not a smooth trajectory")
@@ -249,9 +282,15 @@ def main():
 
     try:
         current_action = get_current_pos_action(robot)
-        # This dataset has no right-arm data at all -- hold it at whatever pose it's
-        # actually in right now for the whole episode, rather than inventing values.
+        # Only used for the single-arm schemas, which carry no right-arm data: hold it at whatever
+        # pose it is actually in right now for the whole episode, rather than inventing values.
+        # A dual-arm dataset drives it from the recording instead (see frame_to_motor_action).
         hold_right = {k: v for k, v in current_action.items() if k.startswith("R")}
+        dual_arm = "right_joints" in trajectory[0]
+        print(
+            "Right arm: DRIVEN from the dataset (dual-arm replay)" if dual_arm
+            else "Right arm: HELD at its current pose (dataset has no right-arm data)"
+        )
 
         target_action = frame_to_motor_action(trajectory[0], calib, hold_right)
 
@@ -300,8 +339,15 @@ def main():
                 break
 
             desired = frame_to_motor_action(frame, calib, hold_right)
-            current_action = clamp_step(current_action, desired, max_delta, gripper_max_delta)
-            robot.send_action(current_action)
+            target_action = clamp_step(current_action, desired, max_delta, gripper_max_delta)
+            # send_action() takes the feedforward velocity as a REQUIRED second argument -- it
+            # feeds each joint's MIT-control dq term. Derived from the step the clamp actually
+            # allowed (current -> target over dt), not from the raw dataset delta, so a step the
+            # speed cap shortened is not accompanied by a velocity asking for the full jump.
+            # Same construction mirror_bridge.py uses.
+            target_vel = compute_target_velocity(current_action, target_action, dt, args.max_joint_speed)
+            robot.send_action(target_action, target_vel)
+            current_action = target_action
 
             if collect_diagnostics:
                 try:

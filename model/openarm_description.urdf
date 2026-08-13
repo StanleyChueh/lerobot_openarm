@@ -190,6 +190,11 @@
     <visual name="openarm_left_link6_visual">
       <origin rpy="0.0 0.0 0.0" xyz="-0.0375 -0.0 -0.5585"/>
       <geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <mass value="13.89"/>
+      <inertia ixx="1.653" ixy="0.0" ixz="0.0" iyy="1.653" iyz="0.0" izz="0.051"/>
         <mesh filename="link6.stl" scale="0.001 -0.001 0.001"/>
       </geometry>
     </visual>
@@ -256,6 +261,11 @@
         <mesh filename="link0_symp.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
+    </collision>
+    <inertial>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <mass value="13.89"/>
+      <inertia ixx="1.653" ixy="0.0" ixz="0.0" iyy="1.653" iyz="0.0" izz="0.051"/>
     <inertial>
       <origin rpy="0.0 0.0 0.0" xyz="-0.0009483362816297526 0.0001580207020448382 0.03076860287587199"/>
       <mass value="1.1432284943239561"/>

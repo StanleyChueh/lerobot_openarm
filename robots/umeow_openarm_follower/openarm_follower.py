@@ -58,9 +58,10 @@ class OpenArmFollower(Robot):
         # diminishing-returns curve seen on joint1's earlier gain sweep. Applies to both
         # arms (LJ3 and RJ3 share this index).
         # 50 1.0, 45 1.0
-        self.KPs = [ 200.0, 100.0, 150.0, 120.0, 20.0, 45.0, 20.0,  20.0 ]
-        self.KDs = [   5.0,   5.0,   8.0,  6.0,  1.0,  2.0,  1.0,   1.0 ]
-        
+        # self.KPs = [ 200.0, 100.0, 150.0, 120.0, 20.0, 45.0, 20.0,  20.0 ]
+        # self.KDs = [   5.0,   5.0,   8.0,  6.0,  1.0,  2.0,  1.0,   1.0 ]
+        self.KPs = [ 20.0, 10.0, 15.0, 12.0, 5.0, 10.0, 5.0,  5.0 ]
+        self.KDs = [   2.0,   1.0,   1.0,  1.0,  0.5,  1.0,  0.5,   0.5 ]       
         self.model = pin.buildModelFromUrdf(self.config.model_path)
         self.data = self.model.createData()
         
@@ -80,7 +81,8 @@ class OpenArmFollower(Robot):
 
         return obs_dict
 
-    @property
+    @property        # self.KPs = [ 200.0, 100.0, 150.0, 120.0, 20.0, 45.0, 20.0,  20.0 ]
+        # self.KDs = [   5.0,   5.0,   8.0,  6.0,  1.0,  2.0,  1.0,   1.0 ]
     def _cameras_ft(self) -> dict[str, tuple]:
         return {
             cam: (self.config.cameras[cam].height, self.config.cameras[cam].width, 3) for cam in self.cameras
@@ -224,7 +226,7 @@ class OpenArmFollower(Robot):
 
         return obs_dict
 
-    def send_action(self, action: RobotAction) -> RobotAction:
+    def send_action(self, action: RobotAction, target_vel: dict[str, float]) -> RobotAction:
         """Command arm to move to a target joint configuration.
 
         The relative action magnitude may be clipped depending on the configuration parameter
@@ -233,13 +235,14 @@ class OpenArmFollower(Robot):
 
         Args:
             action (RobotAction): The goal positions for the motors.
+            target_vel (dict[str, float]): The target velocities for each joint.
 
         Returns:
             RobotAction: The action sent to the motors, potentially clipped.
         """
         if not self.is_connected:
             raise DeviceNotConnectedError(f"{self} is not connected.")
-
+        vel = target_vel or {}
         q = np.array([
             action['LJ1.pos'], action['LJ2.pos'], action['LJ3.pos'], action['LJ4.pos'],
             action['LJ5.pos'], action['LJ6.pos'], action['LJ7.pos'], action['LJ8.pos'], 0.0,
@@ -261,13 +264,13 @@ class OpenArmFollower(Robot):
         #     oa.PosVelParam(q=action['RJ8.pos'] + 0.08, dq=20.0)
         # ])
         self.right_arm.get_arm().mit_control_all([
-            oa.MITParam(q=action['RJ1.pos'], dq=0.0, tau=tau[10], kp=self.KPs[0], kd=self.KDs[0]),
-            oa.MITParam(q=action['RJ2.pos'], dq=0.0, tau=tau[11], kp=self.KPs[1], kd=self.KDs[1]),
-            oa.MITParam(q=action['RJ3.pos'], dq=0.0, tau=tau[12], kp=self.KPs[2], kd=self.KDs[2]),
-            oa.MITParam(q=action['RJ4.pos'], dq=0.0, tau=tau[13], kp=self.KPs[3], kd=self.KDs[3]),
-            oa.MITParam(q=action['RJ5.pos'], dq=0.0, tau=tau[14], kp=self.KPs[4], kd=self.KDs[4]),
-            oa.MITParam(q=action['RJ6.pos'], dq=0.0, tau=tau[15], kp=self.KPs[5], kd=self.KDs[5]),
-            oa.MITParam(q=action['RJ7.pos'], dq=0.0, tau=tau[16], kp=self.KPs[5], kd=self.KDs[5]),
+            oa.MITParam(q=action['RJ1.pos'], dq=vel.get('RJ1.vel', 0.0), tau=tau[10], kp=self.KPs[0], kd=self.KDs[0]),
+            oa.MITParam(q=action['RJ2.pos'], dq=vel.get('RJ2.vel', 0.0), tau=tau[11], kp=self.KPs[1], kd=self.KDs[1]),
+            oa.MITParam(q=action['RJ3.pos'], dq=vel.get('RJ3.vel', 0.0), tau=tau[12], kp=self.KPs[2], kd=self.KDs[2]),
+            oa.MITParam(q=action['RJ4.pos'], dq=vel.get('RJ4.vel', 0.0), tau=tau[13], kp=self.KPs[3], kd=self.KDs[3]),
+            oa.MITParam(q=action['RJ5.pos'], dq=vel.get('RJ5.vel', 0.0), tau=tau[14], kp=self.KPs[4], kd=self.KDs[4]),
+            oa.MITParam(q=action['RJ6.pos'], dq=vel.get('RJ6.vel', 0.0), tau=tau[15], kp=self.KPs[5], kd=self.KDs[5]),
+            oa.MITParam(q=action['RJ7.pos'], dq=vel.get('RJ7.vel', 0.0), tau=tau[16], kp=self.KPs[5], kd=self.KDs[5]),
         ])
         self.right_arm.get_gripper().mit_control_all([
             oa.MITParam(q=action['RJ8.pos'], dq=0.0, tau=tau[17], kp=self.KPs[7], kd=self.KDs[7])
@@ -286,19 +289,20 @@ class OpenArmFollower(Robot):
         #     oa.PosVelParam(q=action['LJ8.pos'] + 0.08, dq=20.0)
         # ])
         self.left_arm.get_arm().mit_control_all([
-            oa.MITParam(q=action['LJ1.pos'], dq=0.0, tau=tau[0], kp=self.KPs[0], kd=self.KDs[0]),
-            oa.MITParam(q=action['LJ2.pos'], dq=0.0, tau=tau[1], kp=self.KPs[1], kd=self.KDs[1]),
-            oa.MITParam(q=action['LJ3.pos'], dq=0.0, tau=tau[2], kp=self.KPs[2], kd=self.KDs[2]),
-            oa.MITParam(q=action['LJ4.pos'], dq=0.0, tau=tau[3], kp=self.KPs[3], kd=self.KDs[3]),
-            oa.MITParam(q=action['LJ5.pos'], dq=0.0, tau=tau[4], kp=self.KPs[4], kd=self.KDs[4]),
-            oa.MITParam(q=action['LJ6.pos'], dq=0.0, tau=tau[5], kp=self.KPs[5], kd=self.KDs[5]),
-            oa.MITParam(q=action['LJ7.pos'], dq=0.0, tau=tau[6], kp=self.KPs[5], kd=self.KDs[5]),
+            oa.MITParam(q=action['LJ1.pos'], dq=vel.get('LJ1.vel', 0.0), tau=tau[0], kp=self.KPs[0], kd=self.KDs[0]),
+            oa.MITParam(q=action['LJ2.pos'], dq=vel.get('LJ2.vel', 0.0), tau=tau[1], kp=self.KPs[1], kd=self.KDs[1]),
+            oa.MITParam(q=action['LJ3.pos'], dq=vel.get('LJ3.vel', 0.0), tau=tau[2], kp=self.KPs[2], kd=self.KDs[2]),
+            oa.MITParam(q=action['LJ4.pos'], dq=vel.get('LJ4.vel', 0.0), tau=tau[3], kp=self.KPs[3], kd=self.KDs[3]),
+            oa.MITParam(q=action['LJ5.pos'], dq=vel.get('LJ5.vel', 0.0), tau=tau[4], kp=self.KPs[4], kd=self.KDs[4]),
+            oa.MITParam(q=action['LJ6.pos'], dq=vel.get('LJ6.vel', 0.0), tau=tau[5], kp=self.KPs[5], kd=self.KDs[5]),
+            oa.MITParam(q=action['LJ7.pos'], dq=vel.get('LJ7.vel', 0.0), tau=tau[6], kp=self.KPs[5], kd=self.KDs[5]),
         ])
         self.left_arm.get_gripper().mit_control_all([
             oa.MITParam(q=action['LJ8.pos'], dq=0.0, tau=tau[7], kp=self.KPs[7], kd=self.KDs[7])
         ])
         
         return action
+
     
     def disconnect(self):
         if not self.is_connected:

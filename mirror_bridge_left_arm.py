@@ -60,7 +60,7 @@ logger = logging.getLogger("mirror_bridge_left_only")
 
 LEFT_SIM_PREFIX = "openarm_left_"
 LEFT_MOTOR_PREFIX = "LJ"
-LEFT_GRIPPER_KEY = "LJ8.pos"
+LEFT_GRIPPER_KEY = "LJ8.pos"model/openarm_description_leader.urdf  
 GRIPPER_WIDTH_PRINT_PERIOD_S = 0.5
 
 
