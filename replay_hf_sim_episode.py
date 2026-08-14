@@ -230,12 +230,12 @@ def main():
     parser.add_argument("--right-port", type=str, default="can0")
     parser.add_argument("--left-port", type=str, default="can1")
     parser.add_argument("--model-path", type=str, required=True, help="Path to openarm_description.urdf for gravity comp")
-    parser.add_argument("--max-joint-speed", type=float, default=0.3, help="rad/s cap applied to every arm joint's per-tick motion.")
-    parser.add_argument("--gripper-max-speed", type=float, default=8.0, help="rad/s cap for the gripper channel specifically -- much higher than the arm cap, since gripper commands are a near-instant open/closed toggle, not a smooth trajectory")
+    parser.add_argument("--max-joint-speed", type=float, default=1.2, help="rad/s cap applied to every arm joint's per-tick motion.")
+    parser.add_argument("--gripper-max-speed", type=float, default=2.0, help="rad/s cap for the gripper channel specifically -- much higher than the arm cap, since gripper commands are a near-instant open/closed toggle, not a smooth trajectory")
     parser.add_argument("--handshake-tolerance", type=float, default=0.1, help="rad; abort startup if any arm joint differs from the first frame by more than this")
     parser.add_argument("--gripper-handshake-tolerance", type=float, default=1.3, help="rad; separate, more generous tolerance for the gripper channel -- open/closed state legitimately varies between episodes")
     parser.add_argument("--ramp-duration", type=float, default=2.0, help="seconds to smoothly move from real current pose to the first frame")
-    parser.add_argument("--playback-hz", type=float, default=30.0, help="rate to step through the recorded trajectory (this dataset's fps is 30)")
+    parser.add_argument("--playback-hz", type=float, default=20.0, help="rate to step through the recorded trajectory (this dataset's fps is 30)")
     parser.add_argument("--max-steps", type=int, default=None, help="only replay the first N steps of the episode -- use for a cautious first test")
     parser.add_argument(
         "--log-csv", type=str, default=None,

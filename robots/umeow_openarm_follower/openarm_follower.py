@@ -58,10 +58,10 @@ class OpenArmFollower(Robot):
         # diminishing-returns curve seen on joint1's earlier gain sweep. Applies to both
         # arms (LJ3 and RJ3 share this index).
         # 50 1.0, 45 1.0
-        # self.KPs = [ 200.0, 100.0, 150.0, 120.0, 20.0, 45.0, 20.0,  20.0 ]
-        # self.KDs = [   5.0,   5.0,   8.0,  6.0,  1.0,  2.0,  1.0,   1.0 ]
-        self.KPs = [ 20.0, 10.0, 15.0, 12.0, 5.0, 10.0, 5.0,  5.0 ]
-        self.KDs = [   2.0,   1.0,   1.0,  1.0,  0.5,  1.0,  0.5,   0.5 ]       
+        # self.KPs = [ 200.0, 100.0, 150.0, 120.0, 20.0, 45.0, 20.0,  3.0 ]
+        # self.KDs = [   5.0,   5.0,   8.0,  6.0,  1.0,  2.0,  1.0,   0.3]
+        self.KPs = [ 50.0,  50.0,  50.0,  50.0,  20.0, 40.0, 20.0,  3.0 ] #RJ6=30.0
+        self.KDs = [   2.0,   2.0,  2.0,  2.0,  1.0,  1.2,  1.0,  0.3 ]       
         self.model = pin.buildModelFromUrdf(self.config.model_path)
         self.data = self.model.createData()
         
@@ -243,6 +243,15 @@ class OpenArmFollower(Robot):
         if not self.is_connected:
             raise DeviceNotConnectedError(f"{self} is not connected.")
         vel = target_vel or {}
+        # q / tau index layout, from pinocchio's depth-first walk of the URDF tree (root ->
+        # left arm -> left hand -> both left finger prismatics -> right arm -> right fingers):
+        #    0..6  LJ1..LJ7      7,8  left finger_joint1/2   (LJ8 drives one, the mimic is 0.0)
+        #    9..15 RJ1..RJ7    16,17  right finger_joint1/2  (likewise for RJ8)
+        # The right-arm block was indexed one slot high (tau[10..17]) from 32e5cd8 until
+        # 2026-08-13: RJ1 was fed RJ2's gravity torque, and RJ7/RJ8 got a finger's ~0 N
+        # prismatic force, i.e. no feedforward at all. It went unnoticed because every session
+        # since was left-arm only; it showed up as a constant per-joint offset (err ~= dtau/kp,
+        # 0.05-0.07 rad at these gains) on the right arm alone in the sim-vs-real replay plots.
         q = np.array([
             action['LJ1.pos'], action['LJ2.pos'], action['LJ3.pos'], action['LJ4.pos'],
             action['LJ5.pos'], action['LJ6.pos'], action['LJ7.pos'], action['LJ8.pos'], 0.0,
@@ -264,16 +273,16 @@ class OpenArmFollower(Robot):
         #     oa.PosVelParam(q=action['RJ8.pos'] + 0.08, dq=20.0)
         # ])
         self.right_arm.get_arm().mit_control_all([
-            oa.MITParam(q=action['RJ1.pos'], dq=vel.get('RJ1.vel', 0.0), tau=tau[10], kp=self.KPs[0], kd=self.KDs[0]),
-            oa.MITParam(q=action['RJ2.pos'], dq=vel.get('RJ2.vel', 0.0), tau=tau[11], kp=self.KPs[1], kd=self.KDs[1]),
-            oa.MITParam(q=action['RJ3.pos'], dq=vel.get('RJ3.vel', 0.0), tau=tau[12], kp=self.KPs[2], kd=self.KDs[2]),
-            oa.MITParam(q=action['RJ4.pos'], dq=vel.get('RJ4.vel', 0.0), tau=tau[13], kp=self.KPs[3], kd=self.KDs[3]),
-            oa.MITParam(q=action['RJ5.pos'], dq=vel.get('RJ5.vel', 0.0), tau=tau[14], kp=self.KPs[4], kd=self.KDs[4]),
-            oa.MITParam(q=action['RJ6.pos'], dq=vel.get('RJ6.vel', 0.0), tau=tau[15], kp=self.KPs[5], kd=self.KDs[5]),
-            oa.MITParam(q=action['RJ7.pos'], dq=vel.get('RJ7.vel', 0.0), tau=tau[16], kp=self.KPs[5], kd=self.KDs[5]),
+            oa.MITParam(q=action['RJ1.pos'], dq=vel.get('RJ1.vel', 0.0), tau=tau[9], kp=self.KPs[0], kd=self.KDs[0]),
+            oa.MITParam(q=action['RJ2.pos'], dq=vel.get('RJ2.vel', 0.0), tau=tau[10], kp=self.KPs[1], kd=self.KDs[1]),
+            oa.MITParam(q=action['RJ3.pos'], dq=vel.get('RJ3.vel', 0.0), tau=tau[11], kp=self.KPs[2], kd=self.KDs[2]),
+            oa.MITParam(q=action['RJ4.pos'], dq=vel.get('RJ4.vel', 0.0), tau=tau[12], kp=self.KPs[3], kd=self.KDs[3]),
+            oa.MITParam(q=action['RJ5.pos'], dq=vel.get('RJ5.vel', 0.0), tau=tau[13], kp=self.KPs[4], kd=self.KDs[4]),
+            oa.MITParam(q=action['RJ6.pos'], dq=vel.get('RJ6.vel', 0.0), tau=tau[14], kp=self.KPs[5], kd=self.KDs[5]),
+            oa.MITParam(q=action['RJ7.pos'], dq=vel.get('RJ7.vel', 0.0), tau=tau[15], kp=self.KPs[6], kd=self.KDs[6]),
         ])
         self.right_arm.get_gripper().mit_control_all([
-            oa.MITParam(q=action['RJ8.pos'], dq=0.0, tau=tau[17], kp=self.KPs[7], kd=self.KDs[7])
+            oa.MITParam(q=action['RJ8.pos'], dq=0.0, tau=tau[16], kp=self.KPs[7], kd=self.KDs[7])
         ])
         
         # self.left_arm.get_arm().posvel_control_all([
@@ -295,7 +304,7 @@ class OpenArmFollower(Robot):
             oa.MITParam(q=action['LJ4.pos'], dq=vel.get('LJ4.vel', 0.0), tau=tau[3], kp=self.KPs[3], kd=self.KDs[3]),
             oa.MITParam(q=action['LJ5.pos'], dq=vel.get('LJ5.vel', 0.0), tau=tau[4], kp=self.KPs[4], kd=self.KDs[4]),
             oa.MITParam(q=action['LJ6.pos'], dq=vel.get('LJ6.vel', 0.0), tau=tau[5], kp=self.KPs[5], kd=self.KDs[5]),
-            oa.MITParam(q=action['LJ7.pos'], dq=vel.get('LJ7.vel', 0.0), tau=tau[6], kp=self.KPs[5], kd=self.KDs[5]),
+            oa.MITParam(q=action['LJ7.pos'], dq=vel.get('LJ7.vel', 0.0), tau=tau[6], kp=self.KPs[6], kd=self.KDs[6]),
         ])
         self.left_arm.get_gripper().mit_control_all([
             oa.MITParam(q=action['LJ8.pos'], dq=0.0, tau=tau[7], kp=self.KPs[7], kd=self.KDs[7])
