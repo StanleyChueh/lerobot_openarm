@@ -60,8 +60,8 @@ class OpenArmFollower(Robot):
         # 50 1.0, 45 1.0
         # self.KPs = [ 200.0, 100.0, 150.0, 120.0, 20.0, 45.0, 20.0,  3.0 ]
         # self.KDs = [   5.0,   5.0,   8.0,  6.0,  1.0,  2.0,  1.0,   0.3]
-        self.KPs = [ 50.0,  50.0,  50.0,  50.0,  20.0, 40.0, 20.0,  3.0 ] #RJ6=30.0
-        self.KDs = [   2.0,   2.0,  2.0,  2.0,  1.0,  1.2,  1.0,  0.3 ]       
+        self.KPs = [ 50.0,  50.0,  50.0,  60.0,  20.0, 40.0, 20.0,  3.0 ] #RJ6=30.0
+        self.KDs = [   2.0,   2.0,  2.0,  2.5,  1.0,  1.2,  1.0,  0.3 ]       
         self.model = pin.buildModelFromUrdf(self.config.model_path)
         self.data = self.model.createData()
         

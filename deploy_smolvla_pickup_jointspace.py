@@ -152,7 +152,13 @@ from lerobot.policies.factory import make_pre_post_processors
 from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
 from lerobot.policies.utils import build_inference_frame, make_robot_action
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
-from sim_bridge_common import gripper_sim_to_raw, load_calibration, raw_to_gripper_sim
+from sim_bridge_common import (
+    approach_pose,
+    gripper_sim_to_raw,
+    load_calibration,
+    raw_to_gripper_sim,
+    sim_init_pose_action,
+)
 
 MAX_EPISODES = 1              # start at 1 for a first real-hardware test; raise once trusted
 FPS = 30
@@ -512,6 +518,36 @@ def parse_args():
             "hit the success condition or been manually stopped by then is cut short as a timeout."
         ),
     )
+    parser.add_argument(
+        "--no-start-pose",
+        action="store_true",
+        help="Skip the move to Isaac Sim's reset pose before each episode and start the rollout"
+        " from wherever the arm happens to be. Off by default: every demo the policy learned from"
+        " began at that pose, so starting somewhere else puts the policy out of distribution on"
+        " step 0. Only useful when the arm is already positioned deliberately.",
+    )
+    parser.add_argument(
+        "--start-pose-speed",
+        type=float,
+        default=0.3,
+        help="rad/s ceiling for the move to the start pose. Deliberately far below"
+        " --max-joint-speed: that one bounds a policy step, this one covers a large unattended"
+        " repositioning move. The ramp duration is derived from this and the furthest joint.",
+    )
+    parser.add_argument(
+        "--max-start-pose-delta",
+        type=float,
+        default=1.8,
+        help="rad; refuse to run if any joint would have to travel further than this to reach the"
+        " start pose. Guards the case where the calibration or zeroing is wrong rather than the"
+        " arm merely being out of position -- see approach_pose() in sim_bridge_common.py.",
+    )
+    parser.add_argument(
+        "--yes",
+        action="store_true",
+        help="Skip the typed YES confirmation before the FIRST start-pose move (later episodes"
+        " never prompt). For unattended runs only -- --max-start-pose-delta still applies.",
+    )
     return parser.parse_args()
 
 
@@ -638,6 +674,26 @@ def main():
     try:
         for ep in range(MAX_EPISODES):
             print(f"Starting episode {ep}...")
+
+            # Put the arm at Isaac Sim's reset pose before the policy sees anything. Every demo in
+            # the training set begins there (OPENARM_BI_CFG init_state -- arm joints 0 except
+            # joint4 at pi/2, grippers open), so starting a rollout from wherever the previous
+            # episode happened to end leaves the policy out of distribution on its very first
+            # observation. Done per episode, not once per session, so episode 2 starts from the
+            # same place episode 1 did. Only the first one prompts: re-confirming an identical,
+            # already-approved move before every episode is the kind of gate people learn to
+            # answer without reading.
+            if not args.no_start_pose:
+                if approach_pose(
+                    robot, sim_init_pose_action(calib),
+                    label="Isaac Sim's reset pose",
+                    arm_speed=args.start_pose_speed,
+                    max_delta=args.max_start_pose_delta,
+                    assume_yes=args.yes or ep > 0,
+                ) is None:
+                    print("Start-pose approach refused or not confirmed -- not running the policy.")
+                    break
+
             first = True
             interp_start = time.perf_counter()
             episode_start = time.perf_counter()

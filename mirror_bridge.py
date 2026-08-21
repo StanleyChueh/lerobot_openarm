@@ -25,9 +25,12 @@ REQUIRED BEFORE RUNNING THIS SCRIPT (Phase 0 bench verification -- do this by ha
 Fill in calibration.json (see calibration.example.json for the schema) with what you found.
 This script refuses to start without a real calibration file -- there is no safe default.
 
-Even with calibration done, the very first run still performs a startup handshake: it will
-refuse to move the arm if the real robot's current pose doesn't already closely match the
-sim's current pose, and it asks for a typed confirmation before any motion begins.
+Startup: rather than requiring the real arm to already be at sim's pose, this drives it there
+along a speed-limited ramp (--approach-speed, --max-approach-delta) and asks for a typed
+confirmation first -- see approach_pose() in sim_bridge_common.py. It still refuses outright if a
+joint would have to travel further than --max-approach-delta, which is the case the old
+abort-on-mismatch check was really guarding: a gap that large means the calibration or zeroing is
+wrong, not that the arm drifted. Pass --yes to skip the confirmation for an unattended run.
 
 Note: relies on OpenArmFollower.get_observation() using a generous recv_all() timeout
 (patched in robots/umeow_openarm_follower/openarm_follower.py on 2026-07-01) -- the
@@ -41,10 +44,10 @@ import socket
 import threading
 import time
 
-from reset_to_rest_pose import reset_to_rest_pose
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
 from sim_bridge_common import (
     StdinKillSwitch,
+    approach_pose,
     compute_target_velocity,
     clamp_step,
     get_current_pos_action,
@@ -52,7 +55,6 @@ from sim_bridge_common import (
     motor_action_to_sim_joints,
     ramp_to,
     raw_to_gripper_sim,
-    run_startup_handshake,
     sim_joints_to_motor_action,
 )
 
@@ -188,9 +190,12 @@ def main():
     parser.add_argument("--model-path", type=str, required=True, help="Path to openarm_description.urdf for gravity comp")
     parser.add_argument("--max-joint-speed", type=float, default=0.3, help="rad/s cap applied to every arm joint's per-tick motion. Conservative default; raise only after validating on your setup.")
     parser.add_argument("--gripper-max-speed", type=float, default=8.0, help="rad/s cap for the gripper channel specifically -- much higher than the arm cap, since gripper commands are a near-instant open/closed toggle, not a smooth trajectory")
-    parser.add_argument("--handshake-tolerance", type=float, default=0.1, help="rad; abort startup if any arm joint differs from sim by more than this")
-    parser.add_argument("--gripper-handshake-tolerance", type=float, default=1.3, help="rad; separate, more generous tolerance for the gripper channel -- open/closed state legitimately varies between episodes")
-    parser.add_argument("--ramp-duration", type=float, default=2.0, help="seconds to smoothly move from real current pose to sim's current pose at startup")
+    parser.add_argument("--handshake-tolerance", type=float, default=0.05, help="rad; if every joint is already within this of sim's pose the startup approach is skipped as a no-op. NOT an abort threshold any more -- exceeding it just means the arm ramps there (see --max-approach-delta for the gate that does refuse).")
+    parser.add_argument("--max-approach-delta", type=float, default=1.8, help="rad; REFUSE to start if any arm joint would have to travel further than this to reach sim's pose. This is the real safety gate: a gap this large means the calibration or zeroing is wrong, not that the arm drifted, and auto-moving on that assumption is what must not happen.")
+    parser.add_argument("--approach-speed", type=float, default=0.3, help="rad/s ceiling for the startup approach to sim's pose. The ramp duration is derived from this and the furthest-travelling joint, so no joint exceeds it.")
+    parser.add_argument("--yes", action="store_true", help="Skip the typed YES confirmation before the startup approach moves the arm. For unattended runs only -- --max-approach-delta still applies.")
+    parser.add_argument("--ramp-duration", type=float, default=2.0, help="seconds; MINIMUM duration of the startup approach. A longer one is used automatically when --approach-speed requires it for the distance being covered.")
+    parser.add_argument("--first-packet-timeout", type=float, default=600.0, help="Seconds to wait for the sim's first packet before giving up; 0 waits indefinitely. Generous by default because the sim-side script takes minutes to reach the point where it starts broadcasting, and nothing has been commanded to the arm while this waits.")
     parser.add_argument("--stale-ms", type=float, default=150.0, help="hold last command if no new packet within this long")
     parser.add_argument("--timeout-ms", type=float, default=1000.0, help="ramp down and disable if no new packet within this long")
     parser.add_argument("--loop-hz", type=float, default=50.0)
@@ -229,53 +234,61 @@ def main():
     try:
         current_action = get_current_pos_action(robot)
 
-        print("Waiting for first packet from Isaac Sim...")
-        deadline = time.time() + 10.0
+        # The old hardcoded 10s was far too tight for the workflow this is actually used in: the
+        # sim-side script does not broadcast anything until it has loaded Isaac Sim, connected to
+        # the policy server and reset the scene, which is minutes, and if it dies on the way (a
+        # refused policy-server connection, say) this would abort long before the operator could
+        # see why. Waiting costs nothing -- nothing has been commanded yet.
+        wait_desc = "indefinitely" if args.first_packet_timeout <= 0 else f"up to {args.first_packet_timeout:g}s"
+        print(f"Waiting for first packet from Isaac Sim ({wait_desc}; Ctrl-C to give up)...")
+        deadline = None if args.first_packet_timeout <= 0 else time.time() + args.first_packet_timeout
         packet = None
-        while time.time() < deadline:
+        waited = 0.0
+        while deadline is None or time.time() < deadline:
             packet = receiver.latest()
             if packet is not None:
                 break
             time.sleep(0.1)
+            waited += 0.1
+            if abs(waited % 15.0) < 0.05:
+                print(f"  … still no packet after {waited:.0f}s. The sim-side script only starts"
+                      " broadcasting once it reaches its first rollout hold.")
         if packet is None:
-            print("No packet received from Isaac Sim within 10s. Is --mirror_udp_port set and matching? Aborting.")
+            print(f"No packet received from Isaac Sim within {args.first_packet_timeout:g}s."
+                  " Check --udp-port here matches --mirror_udp_port there, and that the sim-side"
+                  " script is still alive. Aborting.")
             return
 
         _, _, sim_joints = packet
         target_action = sim_joints_to_motor_action(sim_joints, calib)
 
-        if not run_startup_handshake(robot, target_action, args.handshake_tolerance, args.gripper_handshake_tolerance):
-            retry = input(
-                "\nThis is often just the real arm having drifted since a previous session."
-                " Try moving it to match sim's current pose, then re-check? [y/N]: "
-            )
-            if retry.strip().lower() != "y":
-                return
-            # reset_to_rest_pose() has its own independent handshake gate and its own typed "YES"
-            # confirmation before it moves anything -- this does not bypass either check, it's a
-            # separate, explicitly-offered corrective action. We re-verify below rather than
-            # assuming it fixed things.
-            if not reset_to_rest_pose(robot, calib, target_action=target_action):
-                return
-            if not run_startup_handshake(robot, target_action, args.handshake_tolerance, args.gripper_handshake_tolerance):
-                print("Still mismatched against the sim pose after resetting. Aborting.")
-                return
-
-        confirm = input("Type YES to ramp the real arm to the sim's pose and begin mirroring: ")
-        if confirm.strip() != "YES":
-            print("Not confirmed. Aborting without moving the arm.")
+        # Go to sim's pose along a speed-limited ramp instead of demanding the arm already be
+        # there. The old flow compared the two, aborted on any joint past --handshake-tolerance,
+        # and offered a rest-pose reset that could not fix it anyway: the residual it measures is
+        # mostly steady-state droop the arm reproduces every time it holds a pose, not drift a
+        # human can correct by repositioning. approach_pose() keeps the part of that check that
+        # was actually load-bearing -- refusing a move so large it implies bad calibration -- as
+        # --max-approach-delta. See its docstring.
+        approached = approach_pose(
+            robot, target_action,
+            label="sim's current pose",
+            arm_speed=args.approach_speed,
+            gripper_speed=args.gripper_max_speed,
+            max_delta=args.max_approach_delta,
+            settled_tolerance=args.handshake_tolerance,
+            min_duration=args.ramp_duration,
+            assume_yes=args.yes,
+        )
+        if approached is None:
             return
+        current_action = approached
 
-        # Started only now, not before the confirmation prompt above -- this thread
-        # continuously reads stdin in the background, and starting it earlier races
-        # with input() for whoever typed "YES", occasionally swallowing it and hanging
-        # the main thread forever with no error.
+        # Started only after the confirmation prompt inside approach_pose(), not before -- this
+        # thread continuously reads stdin in the background, and starting it earlier races with
+        # input() for whoever typed "YES", occasionally swallowing it and hanging the main thread
+        # forever with no error.
         kill_switch = StdinKillSwitch()
-        print("Type 'q' + Enter at any time to stop the arm.")
-
-        print(f"Ramping to sim pose over {args.ramp_duration}s...")
-        current_action = ramp_to(robot, current_action, target_action, args.ramp_duration)
-        print("Ramp complete. Mirroring live. Type 'q' + Enter to stop.")
+        print("Mirroring live. Type 'q' + Enter at any time to stop the arm.")
 
         last_seq = packet[0]
         last_command_time = time.time()

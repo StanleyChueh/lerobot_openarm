@@ -35,15 +35,14 @@ import time
 import h5py
 import numpy as np
 
-from reset_to_rest_pose import reset_to_rest_pose
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
 from sim_bridge_common import (
+    approach_pose,
     StdinKillSwitch,
     clamp_step,
     get_current_pos_action,
     load_calibration,
     ramp_to,
-    run_startup_handshake,
     sim_joints_to_motor_action,
 )
 
@@ -81,8 +80,10 @@ def main():
     parser.add_argument("--model-path", type=str, required=True, help="Path to openarm_description.urdf for gravity comp")
     parser.add_argument("--max-joint-speed", type=float, default=0.3, help="rad/s cap applied to every arm joint's per-tick motion.")
     parser.add_argument("--gripper-max-speed", type=float, default=8.0, help="rad/s cap for the gripper channel specifically -- much higher than the arm cap, since gripper commands are a near-instant open/closed toggle, not a smooth trajectory")
-    parser.add_argument("--handshake-tolerance", type=float, default=0.1, help="rad; abort startup if any arm joint differs from the first frame by more than this")
-    parser.add_argument("--gripper-handshake-tolerance", type=float, default=1.3, help="rad; separate, more generous tolerance for the gripper channel -- open/closed state legitimately varies between episodes")
+    parser.add_argument("--handshake-tolerance", type=float, default=0.05, help="rad; if every joint is already within this of the first frame the startup approach is skipped as a no-op. NOT an abort threshold any more -- exceeding it just means the arm ramps there (see --max-approach-delta for the gate that does refuse).")
+    parser.add_argument("--max-approach-delta", type=float, default=1.8, help="rad; REFUSE to start if any arm joint would have to travel further than this to reach the start pose. This is the real safety gate: a gap that large means the calibration or zeroing is wrong, not that the arm drifted.")
+    parser.add_argument("--approach-speed", type=float, default=0.3, help="rad/s ceiling for the startup approach. The ramp duration is derived from this and the furthest-travelling joint, so no joint exceeds it.")
+    parser.add_argument("--yes", action="store_true", help="Skip the typed YES confirmation before the startup approach moves the arm. For unattended runs only -- --max-approach-delta still applies.")
     parser.add_argument("--ramp-duration", type=float, default=2.0, help="seconds to smoothly move from real current pose to the first frame")
     parser.add_argument("--playback-hz", type=float, default=20.0, help="rate to step through the recorded trajectory (match the task's control rate, default 20Hz per decimation=5 @ 100Hz sim)")
     parser.add_argument("--max-steps", type=int, default=None, help="only replay the first N steps of the episode -- use for a cautious first test")
@@ -107,34 +108,31 @@ def main():
         current_action = get_current_pos_action(robot)
         target_action = sim_joints_to_motor_action(trajectory[0], calib)
 
-        if not run_startup_handshake(robot, target_action, args.handshake_tolerance, args.gripper_handshake_tolerance):
-            retry = input(
-                "\nThis is often just the real arm having drifted since a previous session."
-                " Try moving it to match the episode's first frame, then re-check? [y/N]: "
-            )
-            if retry.strip().lower() != "y":
-                return
-            if not reset_to_rest_pose(robot, calib, target_action=target_action):
-                return
-            if not run_startup_handshake(robot, target_action, args.handshake_tolerance, args.gripper_handshake_tolerance):
-                print("Still mismatched against the first frame after resetting. Aborting.")
-                return
-
-        confirm = input(f"Type YES to ramp to the first frame and replay {len(trajectory)} steps: ")
-        if confirm.strip() != "YES":
-            print("Not confirmed. Aborting without moving the arm.")
+        # Go to the episode's first frame along a speed-limited ramp instead of demanding the arm
+        # already be there. See approach_pose() in sim_bridge_common.py for why the old
+        # abort-and-reposition-by-hand gate could not be satisfied: the residual it measured is
+        # mostly steady-state droop the arm reproduces every time it holds a pose. The part of it
+        # that was load-bearing -- refusing a move so large it implies bad calibration -- survives
+        # as --max-approach-delta.
+        approached = approach_pose(
+            robot, target_action,
+            label="the episode's first frame",
+            arm_speed=args.approach_speed,
+            max_delta=args.max_approach_delta,
+            settled_tolerance=args.handshake_tolerance,
+            min_duration=args.ramp_duration,
+            assume_yes=args.yes,
+        )
+        if approached is None:
             return
+        current_action = approached
 
-        # Started only now, not before the confirmation prompt above -- this thread
-        # continuously reads stdin in the background, and starting it earlier races
-        # with input() for whoever typed "YES", occasionally swallowing it and hanging
-        # the main thread forever with no error.
+        # Started only after the confirmation prompt inside approach_pose(), not before -- this
+        # thread continuously reads stdin in the background, and starting it earlier races with
+        # input() for whoever typed "YES", occasionally swallowing it and hanging the main thread
+        # forever with no error.
         kill_switch = StdinKillSwitch()
-        print("Type 'q' + Enter at any time to stop playback and safely ramp down.")
-
-        print(f"Ramping to first frame over {args.ramp_duration}s...")
-        current_action = ramp_to(robot, current_action, target_action, args.ramp_duration)
-        print("Ramp complete. Replaying. Type 'q' + Enter to stop.")
+        print("Replaying. Type 'q' + Enter at any time to stop playback and safely ramp down.")
 
         dt = 1.0 / args.playback_hz
         max_delta = args.max_joint_speed * dt

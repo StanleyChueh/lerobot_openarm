@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Move the real dual-arm OpenArm follower to the sim's default rest pose --
-all arm joints at 0 rad (mapped through calibration), gripper fully open.
+every arm joint at 0 rad except joint4 (the elbow) at pi/2, gripper fully open,
+all mapped through calibration. See rest_pose_action() on why joint4 is not 0.
 
 Run this BEFORE mirror_bridge.py / replay_sim_dataset.py / replay_hf_sim_episode.py
 whenever the real arm has drifted from that pose (e.g. left wherever a previous
@@ -26,26 +27,26 @@ import argparse
 
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
 from sim_bridge_common import (
-    ARM_JOINT_KEYS,
     get_current_pos_action,
     load_calibration,
     ramp_to,
     run_startup_handshake,
+    sim_init_pose_action,
 )
 
 
 def rest_pose_action(calib: dict) -> dict:
-    """All arm joints at sim-joint-angle 0 (mapped through calibration), gripper
-    fully open -- matches this task's default env.reset() pose."""
-    action = {}
-    for side, prefix in (("left", "L"), ("right", "R")):
-        sec = calib[side]
-        for n, jkey in enumerate(ARM_JOINT_KEYS, start=1):
-            sign = sec["sign"][jkey]
-            offset = sec["offset_rad"][jkey]
-            action[f"{prefix}J{n}.pos"] = sign * 0.0 + offset
-        action[f"{prefix}J8.pos"] = sec["gripper"]["open_raw"]
-    return action
+    """Isaac Sim's own env.reset() pose, mapped through calibration: every arm joint at 0 EXCEPT
+    joint4 at pi/2, both grippers fully open.
+
+    This used to put joint4 at 0 along with the rest while still describing itself as matching
+    env.reset(). It did not: OPENARM_BI_CFG's init_state (IsaacLab's
+    source/isaaclab_assets/isaaclab_assets/robots/openarm.py) starts both elbows bent at 1.570796,
+    which is why a live sim packet's LJ4/RJ4 read +1.5708 and a reset run against this function's
+    all-zeros left those two joints a full 1.57 rad away from the pose it claimed to have reached.
+    Now delegates to the single shared definition in sim_bridge_common.
+    """
+    return sim_init_pose_action(calib)
 
 
 def reset_to_rest_pose(

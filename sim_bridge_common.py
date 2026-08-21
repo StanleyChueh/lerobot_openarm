@@ -247,3 +247,134 @@ class StdinKillSwitch:
     @property
     def triggered(self) -> bool:
         return self._triggered.is_set()
+
+
+# Isaac Sim's own reset pose for this robot, from OPENARM_BI_CFG's init_state.joint_pos in
+# IsaacLab's source/isaaclab_assets/isaaclab_assets/robots/openarm.py: every arm joint at 0.0
+# EXCEPT joint4 at pi/2, both grippers fully open. This is the pose env.reset() puts the sim robot
+# in, so it is the pose every recorded demo starts from and therefore the one a policy expects to
+# be looking at on step 0 of a rollout. NOT all-zeros -- joint4 is the elbow, and starting a
+# rollout with it straight instead of bent is a different task from the one the policy learned.
+SIM_INIT_ARM_JOINT_RAD = {
+    "joint1": 0.0,
+    "joint2": 0.0,
+    "joint3": 0.0,
+    "joint4": 1.570796,
+    "joint5": 0.0,
+    "joint6": 0.0,
+    "joint7": 0.0,
+}
+
+
+def sim_init_pose_action(calib: dict) -> dict:
+    """The full 16-key motor action for Isaac Sim's reset pose (see SIM_INIT_ARM_JOINT_RAD),
+    mapped through calibration exactly the way a live sim packet would be."""
+    sim_joints = {}
+    for side in ("left", "right"):
+        for n in range(1, 8):
+            sim_joints[f"openarm_{side}_joint{n}"] = SIM_INIT_ARM_JOINT_RAD[f"joint{n}"]
+        sim_joints[f"openarm_{side}_finger_joint1"] = GRIPPER_SIM_OPEN
+    return sim_joints_to_motor_action(sim_joints, calib)
+
+
+def approach_pose(
+    robot,
+    target_action: dict,
+    *,
+    label: str = "the target pose",
+    arm_speed: float = 0.3,
+    gripper_speed: float = 1.5,
+    max_delta: float = 1.8,
+    settled_tolerance: float = 0.05,
+    min_duration: float = 1.5,
+    assume_yes: bool = False,
+    rate_hz: float = 50.0,
+) -> dict | None:
+    """Drive the arm to `target_action` along a speed-limited ramp, and return the action it ended
+    up commanded to (or None if the move was refused or not confirmed).
+
+    This exists to replace "compare, then abort and tell the human to move the arm by hand", which
+    run_startup_handshake() does and which is unworkable as a precondition for an autonomous
+    rollout. Two reasons it cannot be satisfied by hand:
+
+      - The residual it measures is largely steady-state droop, not drift. Ramping to the rest pose
+        and re-reading still leaves joints tens of milliradians off (observed 2026-08-19: RJ2 at
+        0.118 rad immediately after a clean 4 s ramp to that exact target), because these joints
+        settle wherever gravity and their gains balance. No amount of repositioning by hand fixes a
+        number the arm reproduces every time it holds a pose.
+      - Every rollout needs the SAME start pose, so the approach has to happen before each episode,
+        not once per session with a human in the loop.
+
+    What is actually worth gating is the case the handshake was really protecting against: a target
+    so far from the current pose that the calibration is probably wrong and moving would be
+    dangerous. That is `max_delta`, and it still refuses outright.
+
+    The velocity bound comes from the ramp duration rather than from a per-tick clamp: ramp_to()
+    interpolates linearly from the current pose to the target over `duration`, so choosing
+    duration = worst_delta / arm_speed makes every joint move at or below `arm_speed` rad/s by
+    construction, with the longest-travelling joint setting the pace and the rest arriving together.
+
+    Grippers get their own `gripper_speed` for the reason clamp_step() gives them their own delta
+    cap: an open/close is a near-instant toggle, and pacing it like an arm joint would stretch the
+    whole approach to the gripper's full travel time for no benefit.
+    """
+    current = get_current_pos_action(robot)
+    missing = [k for k in target_action if k not in current]
+    if missing:
+        raise KeyError(f"target_action has keys the robot does not report: {missing}")
+
+    deltas = {k: target_action[k] - current[k] for k in target_action}
+    arm_keys = [k for k in target_action if not k.endswith("8.pos")]
+    grip_keys = [k for k in target_action if k.endswith("8.pos")]
+    worst_arm_key = max(arm_keys, key=lambda k: abs(deltas[k]))
+    worst_arm = abs(deltas[worst_arm_key])
+    worst_grip = max((abs(deltas[k]) for k in grip_keys), default=0.0)
+
+    print(f"\nApproach to {label} -- current vs target:")
+    for k in target_action:
+        flag = "  <-- furthest" if k == worst_arm_key else ""
+        print(f"  {k:10s} real={current[k]:+.4f}  target={target_action[k]:+.4f}"
+              f"  delta={deltas[k]:+.4f}{flag}")
+
+    if worst_arm > max_delta:
+        print(
+            f"\nREFUSED: {worst_arm_key} would have to travel {worst_arm:.3f} rad, beyond the"
+            f" {max_delta:.2f} rad this approach is willing to move in one go. A gap that large"
+            " usually means the calibration or the zeroing is wrong rather than that the arm"
+            " drifted -- moving on that assumption is exactly what should not happen"
+            " automatically. Check Phase 0 calibration, or move the arm closer by hand first."
+        )
+        return None
+
+    if worst_arm <= settled_tolerance and worst_grip <= settled_tolerance:
+        print(f"\nAlready at {label} (worst joint {worst_arm_key} at {worst_arm:.4f} rad)."
+              " No approach motion needed.")
+        return current
+
+    duration = max(min_duration, worst_arm / arm_speed, worst_grip / gripper_speed)
+    print(
+        f"\nPlanned approach: {worst_arm:.3f} rad on {worst_arm_key} over {duration:.1f}s"
+        f" (<= {arm_speed:g} rad/s per joint; grippers <= {gripper_speed:g} rad/s)."
+    )
+
+    if not assume_yes:
+        confirm = input(f"Type YES to move the real arm to {label}: ")
+        if confirm.strip() != "YES":
+            print("Not confirmed. Aborting without moving the arm.")
+            return None
+
+    ramp_to(robot, current, target_action, duration, rate_hz)
+
+    # Report where it actually landed rather than assuming the command was reached. A residual of
+    # a few tens of milliradians here is normal steady-state error, not a failure -- see above --
+    # so this prints it instead of gating on it.
+    try:
+        settled = get_current_pos_action(robot)
+        worst_key = max(target_action, key=lambda k: abs(target_action[k] - settled[k]))
+        worst = abs(target_action[worst_key] - settled[worst_key])
+        print(f"Approach complete. Worst residual: {worst_key} at {worst:.4f} rad"
+              " (steady-state error at this hold; expected, not a fault).")
+    except RuntimeError as e:
+        print(f"Approach complete, but the settle-check read did not stabilize: {e}")
+
+    return dict(target_action)

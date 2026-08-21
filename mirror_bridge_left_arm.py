@@ -42,9 +42,9 @@ import threading
 import time
 from typing import Any
 
-from reset_to_rest_pose import reset_to_rest_pose
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
 from sim_bridge_common import (
+    approach_pose,
     StdinKillSwitch,
     clamp_step,
     get_current_pos_action,
@@ -52,7 +52,6 @@ from sim_bridge_common import (
     motor_action_to_sim_joints,
     ramp_to,
     raw_to_gripper_sim,
-    run_startup_handshake,
     sim_joints_to_motor_action,
 )
 
@@ -60,7 +59,7 @@ logger = logging.getLogger("mirror_bridge_left_only")
 
 LEFT_SIM_PREFIX = "openarm_left_"
 LEFT_MOTOR_PREFIX = "LJ"
-LEFT_GRIPPER_KEY = "LJ8.pos"model/openarm_description_leader.urdf  
+LEFT_GRIPPER_KEY = "LJ8.pos"
 GRIPPER_WIDTH_PRINT_PERIOD_S = 0.5
 
 
@@ -330,14 +329,31 @@ def main() -> None:
     parser.add_argument(
         "--handshake-tolerance",
         type=float,
-        default=0.1,
-        help="Arm-joint startup tolerance in radians.",
+        default=0.05,
+        help="rad; if every joint is already within this of the simulation pose the startup"
+        " approach is skipped as a no-op. NOT an abort threshold any more -- exceeding it just"
+        " means the arm ramps there (see --max-approach-delta for the gate that does refuse).",
     )
     parser.add_argument(
-        "--gripper-handshake-tolerance",
+        "--max-approach-delta",
         type=float,
-        default=1.3,
-        help="Left-gripper startup tolerance in radians.",
+        default=1.8,
+        help="rad; REFUSE to start if any arm joint would have to travel further than this to"
+        " reach the simulation pose. A gap that large means the calibration or zeroing is wrong,"
+        " not that the arm drifted.",
+    )
+    parser.add_argument(
+        "--approach-speed",
+        type=float,
+        default=0.3,
+        help="rad/s ceiling for the startup approach. The ramp duration is derived from this and"
+        " the furthest-travelling joint, so no joint exceeds it.",
+    )
+    parser.add_argument(
+        "--yes",
+        action="store_true",
+        help="Skip the typed YES confirmation before the startup approach moves the arm. For"
+        " unattended runs only -- --max-approach-delta still applies.",
     )
     parser.add_argument(
         "--ramp-duration",
@@ -445,59 +461,33 @@ def main() -> None:
             calib=calib,
         )
 
-        if not run_startup_handshake(
-            robot,
-            target_action,
-            args.handshake_tolerance,
-            args.gripper_handshake_tolerance,
-        ):
-            retry = input(
-                "\nThe real LEFT arm does not match the simulation pose. Move it to match "
-                "the simulation and re-check, or use the guarded reset helper. Retry with "
-                "reset_to_rest_pose? [y/N]: "
-            )
-            if retry.strip().lower() != "y":
-                return
-
-            # The target keeps non-left channels at their measured startup values, so the
-            # corrective target does not request a new right-arm pose.
-            if not reset_to_rest_pose(robot, calib, target_action=target_action):
-                return
-
-            current_action = get_current_pos_action(robot)
-            non_left_hold_action = {
-                key: value for key, value in current_action.items() if not _is_left_motor_key(key)
-            }
-            target_action = _build_left_only_target(
-                incoming_sim_joints=sim_joints,
-                reference_action=current_action,
-                non_left_hold_action=non_left_hold_action,
-                calib=calib,
-            )
-
-            if not run_startup_handshake(
-                robot,
-                target_action,
-                args.handshake_tolerance,
-                args.gripper_handshake_tolerance,
-            ):
-                print("The LEFT arm still does not match the simulation pose. Aborting.")
-                return
-
-        confirm = input(
-            "Type YES to ramp the real LEFT arm to the simulation pose and begin mirroring: "
+        # Go to the simulation pose along a speed-limited ramp instead of demanding the LEFT arm
+        # already be there. See approach_pose() in sim_bridge_common.py for why the old
+        # abort-and-reposition-by-hand gate could not be satisfied: the residual it measured is
+        # mostly steady-state droop the arm reproduces every time it holds a pose. The part of it
+        # that was load-bearing -- refusing a move so large it implies bad calibration -- survives
+        # as --max-approach-delta. target_action already holds every non-left channel at its
+        # measured startup value (see _build_left_only_target), so this ramp asks the right arm
+        # for no new pose, exactly as the reset helper it replaces was careful to do.
+        approached = approach_pose(
+            robot, target_action,
+            label="the simulation pose (LEFT arm)",
+            arm_speed=args.approach_speed,
+            gripper_speed=args.gripper_max_speed,
+            max_delta=args.max_approach_delta,
+            settled_tolerance=args.handshake_tolerance,
+            min_duration=args.ramp_duration,
+            assume_yes=args.yes,
         )
-        if confirm.strip() != "YES":
-            print("Not confirmed. Aborting without commanding motion.")
+        if approached is None:
             return
+        current_action = _freeze_non_left_targets(approached, non_left_hold_action)
 
+        # Started only after the confirmation prompt inside approach_pose(), not before -- this
+        # thread continuously reads stdin in the background, and starting it earlier races with
+        # input() for whoever typed "YES".
         kill_switch = StdinKillSwitch()
-        print("Type 'q' + Enter at any time to stop the left arm.")
-
-        print(f"Ramping the LEFT arm to the simulation pose over {args.ramp_duration}s...")
-        current_action = ramp_to(robot, current_action, target_action, args.ramp_duration)
-        current_action = _freeze_non_left_targets(current_action, non_left_hold_action)
-        print("Ramp complete. Mirroring the LEFT arm live. Type 'q' + Enter to stop.")
+        print("Mirroring the LEFT arm live. Type 'q' + Enter at any time to stop the left arm.")
 
         last_seq = packet[0]
         last_command_time = time.time()
