@@ -58,8 +58,8 @@ class OpenArmFollower(Robot):
         # diminishing-returns curve seen on joint1's earlier gain sweep. Applies to both
         # arms (LJ3 and RJ3 share this index).
         # 50 1.0, 45 1.0
-        # self.KPs = [ 200.0, 100.0, 150.0, 120.0, 20.0, 45.0, 20.0,  3.0 ]
-        # self.KDs = [   5.0,   5.0,   8.0,  6.0,  1.0,  2.0,  1.0,   0.3]
+        # self.KPs = [ 200.0, 200.0, 200.0, 40.0, 40.0, 40.0, 40.0,  3.0 ]
+        # self.KDs = [   3.0,   3.0,   3.0,  1.5,  1.5,  1.5,  1.5,   0.3]
         self.KPs = [ 50.0,  50.0,  50.0,  60.0,  20.0, 40.0, 20.0,  3.0 ] #RJ6=30.0
         self.KDs = [   2.0,   2.0,  2.0,  2.5,  1.0,  1.2,  1.0,  0.3 ]       
         self.model = pin.buildModelFromUrdf(self.config.model_path)
@@ -151,14 +151,47 @@ class OpenArmFollower(Robot):
     _PLAUSIBLE_ARM_JOINT_RANGE = 3.2  # rad
 
     def _read_motor_positions_once(self) -> dict:
+        # recv_all()'s timeout is MICROSECONDS (see OpenArm::recv_all in openarm_can), not
+        # milliseconds -- the 500us default was too short for a reliable USB-CAN round trip and
+        # was observed returning stale/never-updated positions, which is why this was hard-coded
+        # to 8 rounds of 50_000us. Measurement (profile_can_read.py, 2026-08-21, 30 samples per
+        # setting) showed what that actually costs and what it buys:
+        #
+        #   * recv_all() blocks its FULL timeout whenever the socket has nothing buffered. Read
+        #     cost came out as exactly rounds x 2 arms x timeout at every setting measured, so
+        #     8 x 50_000us is 801ms per read -- on a 20 Hz control loop whose entire cycle budget
+        #     is 50ms.
+        #   * refresh_all() is called ONCE but recv_all() N times, so rounds 2..N have no refresh
+        #     response of their own outstanding. In a control loop they feed instead on the
+        #     feedback frames send_action() leaves unread (each MIT command makes every motor
+        #     reply; 10 interpolation substeps is ~80 frames per arm per cycle).
+        #   * That backlog is why the same read costs 8-59ms inside deploy_smolvla_pickup_
+        #     jointspace.py rather than 801ms -- and why it DEGRADES: as the backlog depletes,
+        #     one more round per cycle hits the timeout, and the observed cycle time climbed in
+        #     exact 100ms steps (110ms -> 210ms -> 310ms, i.e. 9.1 Hz -> 3.2 Hz) heading for the
+        #     no-backlog 801ms.
+        #   * A long timeout does NOT buy freshness. rounds=1 at 50_000us blocked its full 100ms
+        #     with nothing arriving, and still returned plausible positions -- i.e. retained Motor
+        #     state. Whether a frame arrives is decided by whether one was generated, not by how
+        #     long this waits. So a shorter timeout does not make a stale read more likely; it
+        #     makes the same stale read 100x cheaper, and the plausibility retry in
+        #     _read_motor_positions_stable() is unchanged either way.
+        #
+        # Hence the split: round 1 keeps a real timeout because it is the only one with a
+        # refresh_all() response outstanding, while the mop-up rounds -- whose job is to drain
+        # send_action's backlog so it can neither deplete nor accumulate -- are bounded so that a
+        # dry buffer costs microseconds. Draining to empty every cycle is what stops the runaway.
+        # Defaults in OpenArmFollowerConfig reproduce the old behaviour exactly; callers opt in.
+        cfg = self.config
+        mop_us = cfg.recv_mop_timeout_us if cfg.recv_mop_timeout_us is not None else cfg.recv_first_timeout_us
+
         self.right_arm.refresh_all()
         self.left_arm.refresh_all()
-        for _ in range(8):
-            # recv_all()'s timeout is MICROSECONDS (see OpenArm::recv_all in openarm_can),
-            # not milliseconds -- the 500us default is too short for a reliable USB-CAN
-            # round trip and was observed returning stale/never-updated positions.
-            self.right_arm.recv_all(50_000)
-            self.left_arm.recv_all(50_000)
+        self.right_arm.recv_all(cfg.recv_first_timeout_us)
+        self.left_arm.recv_all(cfg.recv_first_timeout_us)
+        for _ in range(max(0, cfg.recv_rounds - 1)):
+            self.right_arm.recv_all(mop_us)
+            self.left_arm.recv_all(mop_us)
 
         obs_dict = {}
         for i, motor in enumerate(self.right_arm.get_arm().get_motors()):

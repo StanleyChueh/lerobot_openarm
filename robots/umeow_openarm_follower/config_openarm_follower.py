@@ -53,6 +53,16 @@ class OpenArmFollowerConfig(RobotConfig):
         ControlMode.MIT, ControlMode.MIT,
         ControlMode.MIT, ControlMode.MIT, ControlMode.MIT
     ])
+
+    # --- CAN receive tuning, consumed by _read_motor_positions_once() -------------------------
+    # Defaults reproduce the historical hard-coded behaviour EXACTLY (8 rounds, 50000us each, no
+    # split), so every existing caller is unaffected. Only callers that opt in get the cheaper
+    # settings -- see the block comment in openarm_follower._read_motor_positions_once for the
+    # measurements (profile_can_read.py, 2026-08-21) and why a long timeout does not buy
+    # freshness.
+    recv_rounds: int = 8
+    recv_first_timeout_us: int = 50_000
+    recv_mop_timeout_us: int | None = None   # None -> every round uses recv_first_timeout_us
     
     gripper_motor_type = MotorType.DM4310
     gripper_motor_send_id = 0x08

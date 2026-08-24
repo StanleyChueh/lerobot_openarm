@@ -73,9 +73,15 @@ block (ACTION_NAMES = LJ_NAMES + RJ_NAMES), because that is the order the real r
 is written and read in. Nothing is held at its current pose any more.
 
 Speed limiting still applies the same way as the EE-delta version, now across all 16 joints: the
-raw target is clamped to move at most --max-joint-speed * (1/--inference-hz) radians from the
-CURRENT measured joint angles each inference step, then the existing interpolation loop smooths that move in time across
-control substeps. Optional EMA smoothing (--action-smoothing-alpha) is available but defaults to
+raw target is clamped to move at most --max-joint-speed * (one cycle period) radians from the
+CURRENT measured joint angles each inference step, then the existing interpolation loop smooths
+that move in time across control substeps -- the substeps being spread over whatever is left of
+the cycle budget after inference, so the loop period converges on 1/--inference-hz instead of
+1/--inference-hz PLUS the inference time. "One cycle period" is the measured period by default,
+not the requested one (--speed-clamp-basis): on hardware where a cycle costs more than the
+requested budget, converting the speed against the nominal period is what silently turned
+--max-joint-speed 1.5 into ~0.49 rad/s at a requested 20 Hz that only held 6.5 Hz.
+Optional EMA smoothing (--action-smoothing-alpha) is available but defaults to
 off (1.0) -- unlike the EE-delta checkpoint, there's no known noise-amplification mechanism here
 yet, so start trusting the raw model output and only add smoothing if the diagnostic plot below
 shows it's actually needed.
@@ -151,6 +157,7 @@ from lerobot.datasets.feature_utils import hw_to_dataset_features
 from lerobot.policies.factory import make_pre_post_processors
 from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
 from lerobot.policies.utils import build_inference_frame, make_robot_action
+from attention_overlay import AttentionDump
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
 from sim_bridge_common import (
     approach_pose,
@@ -160,9 +167,13 @@ from sim_bridge_common import (
     sim_init_pose_action,
 )
 
-MAX_EPISODES = 1              # start at 1 for a first real-hardware test; raise once trusted
+MAX_EPISODES = 100              # start at 1 for a first real-hardware test; raise once trusted
 FPS = 30
-TASK = "Pick up the cube."
+# Must match the training dataset's task string VERBATIM -- SmolVLA conditions on it, and the
+# pringles checkpoints were trained on exactly one task string (read off meta/tasks.parquet of
+# ethanCSL/openarm_visuomotor_VR_pringles_V12/V13, which V14 inherits). "Pick up the cube." was
+# left over from the cube checkpoint and puts the VLM prefix out of distribution on every step.
+TASK = "Pick up the Pringles can with the right arm, hand it to the left arm"
 ROBOT_TYPE = "openarm_follower"
 URDF_PATH = "/home/csl/Stanley_ws/IsaacLab/source/isaaclab_assets/data/v1_camera_isaac/urdf/v1_camera.urdf"
 
@@ -370,6 +381,21 @@ def _expected_image_inputs(model, preprocess) -> list:
     )
 
 
+def _image_key_labels(model, preprocess) -> dict:
+    """Post-rename image key -> camera name, for labelling the attention panels.
+
+    Same rename inversion as _expected_image_inputs, kept as a mapping instead of a sorted list
+    because the attention view needs to label a SPECIFIC key, not just know the set."""
+    rename = {}
+    for step in getattr(preprocess, "steps", []):
+        rename.update(getattr(step, "rename_map", None) or {})
+    to_input = {dst: src for src, dst in rename.items()}
+    return {
+        k: to_input.get(k, k).removeprefix("observation.images.")
+        for k in model.config.image_features
+    }
+
+
 def _check_checkpoint_matches(model, preprocess, model_cam_keys: list) -> None:
     """Compare what the checkpoint expects against what this invocation is set up to feed it.
 
@@ -477,7 +503,11 @@ def parse_args():
         help=(
             "Model inference / control-loop rate in Hz (default 30, matching the training data's "
             "recording rate). Lowering this gives the arm more time to physically reach each "
-            "target before the next one is issued -- try e.g. 10-15 for a first real-hardware run."
+            "target before the next one is issued -- try e.g. 10-15 for a first real-hardware run. "
+            "This is a BUDGET, not a guarantee: one cycle costs a full 16-joint CAN read plus the "
+            "policy forward, and if that exceeds 1/hz the loop free-runs slower and says so (each "
+            "step line prints the achieved Hz, and a one-shot [WARN] names an --inference-hz the "
+            "loop can actually hold). Every episode ends with an achieved-vs-requested summary."
         ),
     )
     parser.add_argument(
@@ -486,9 +516,93 @@ def parse_args():
             "Maximum joint speed in rad/s for all 16 dual-arm joints (grippers included), "
             "enforced by clamping how far the model's raw target may move from the current "
             "measured joint angles each inference "
-            "step (default 1.0 rad/s ~= 57 deg/s). The interpolation step alone only smooths this "
+            "step (default 1.0 rad/s ~= 57 deg/s). What one 'step' is worth in seconds comes from "
+            "--speed-clamp-basis, not from --inference-hz directly. The interpolation step alone only smooths this "
             "move in time, not in magnitude, so this is the main safety/smoothness control for a "
             "first run -- try e.g. 0.3 to start."
+        ),
+    )
+    parser.add_argument(
+        "--speed-clamp-basis", choices=("measured", "nominal"), default="measured",
+        help=(
+            "Which cycle period --max-joint-speed is converted against (it is a speed; the clamp "
+            "needs a distance per cycle). 'measured' (default) uses the SHORTEST period seen in "
+            "the last 20 cycles -- the shortest, not the average, so the distance stays safe on "
+            "the loop's fastest cycle -- capped at 2x the requested period, which keeps "
+            "--max-joint-speed meaning what it says even when the loop cannot keep up. 'nominal' "
+            "uses 1/--inference-hz, the old "
+            "behaviour: whenever the loop overruns, the arm moves proportionally slower than "
+            "asked (a 20 Hz request holding 6.5 Hz turned --max-joint-speed 1.5 into ~0.49 rad/s). "
+            "Use 'nominal' if you deliberately want the slower, more conservative motion."
+        ),
+    )
+    parser.add_argument(
+        "--no-attention-dump", dest="attention_dump", action="store_false",
+        help=(
+            "Skip writing attention dumps. On by default: one PNG per policy re-plan holding the "
+            "action expert's cross-attention over each camera AND the VLM's prefix self-attention "
+            "over the same images, plus attention_log.csv with each chunk's per-modality shares "
+            "(images / task text / robot state) and per-camera spatial entropy. Costs +23ms on a "
+            "re-plan step and nothing on the steps that pop a cached action."
+        ),
+    )
+    parser.add_argument(
+        "--attention-dir", type=str, default=None,
+        help=(
+            "Where to write the attention dumps (default: ./attention_<timestamp> in the current "
+            "directory). Point two runs at their own directories -- one with the target object "
+            "present, one without -- to compare them."
+        ),
+    )
+    parser.add_argument(
+        "--n-action-steps", type=int, default=None,
+        help=(
+            "How many actions from each predicted chunk to execute before running the policy "
+            "again. Defaults to the checkpoint's own value, which for these checkpoints is 50 -- "
+            "i.e. one look at the cameras every 50 control steps, and blind in between (2.5s at "
+            "--inference-hz 20, 6.7s at 7.5). Lower it for closed-loop behaviour: the policy then "
+            "re-plans from the CURRENT observation every N steps, at the cost of one forward pass "
+            "every N steps -- measured 90ms warm on this machine, i.e. ~9ms/step amortised at "
+            "N=10 and ~18ms/step at N=5, against a 50ms budget at 20 Hz. Cannot exceed the "
+            "checkpoint's chunk_size."
+        ),
+    )
+    parser.add_argument(
+        "--no-probe-timing", dest="probe_timing", action="store_false",
+        help=(
+            "Skip the startup timing probe. The probe measures the CAN read and camera reads "
+            "separately over 20 samples and says whether --inference-hz is reachable at all, "
+            "before the arm is asked to move -- it costs about a second and needs no hardware "
+            "motion, so there is rarely a reason to skip it."
+        ),
+    )
+    parser.add_argument(
+        "--can-recv-rounds", type=int, default=16,
+        help=(
+            "recv_all() calls per position read, per arm. Each round drains buffered motor "
+            "feedback; rounds beyond the first exist to mop up the frames send_action leaves "
+            "unread, so enough of them must run to empty the socket every cycle or the backlog "
+            "drifts and the read cost drifts with it. Cheap now that they are bounded by "
+            "--can-mop-timeout-us (the follower's own default is 8 rounds at the full 50ms, i.e. "
+            "up to 801ms per read)."
+        ),
+    )
+    parser.add_argument(
+        "--can-first-timeout-us", type=int, default=2_000,
+        help=(
+            "Microseconds the FIRST recv_all() waits -- the only round with a refresh_all() "
+            "response outstanding, so this is the one that should be patient. 50000 (the "
+            "follower default) was measured to block in full without collecting anything, so it "
+            "buys stalling rather than freshness."
+        ),
+    )
+    parser.add_argument(
+        "--can-mop-timeout-us", type=int, default=200,
+        help=(
+            "Microseconds each mop-up recv_all() waits. Must be small: it is paid in full on "
+            "every round that finds the buffer already empty, which is the normal case once the "
+            "backlog is drained. Worst-case read cost is roughly "
+            "2 * (--can-first-timeout-us + (--can-recv-rounds - 1) * this)."
         ),
     )
     parser.add_argument(
@@ -559,6 +673,40 @@ def main():
     grip = _gripper_calib(calib)   # both arms' grippers -- see _gripper_calib()
 
     model = SmolVLAPolicy.from_pretrained(args.checkpoint)
+
+    # OPEN-LOOP HORIZON. SmolVLAPolicy.select_action refills its action queue only when the queue
+    # is EMPTY (see _check_get_actions_condition), then executes n_action_steps actions from that
+    # one forward pass before looking at another observation. These checkpoints ship
+    # chunk_size=50, n_action_steps=50, so the policy sees the world once every 50 control steps
+    # and is blind in between -- 2.5s at --inference-hz 20, 6.7s at 7.5. Anything that happens
+    # inside a chunk (the object moving, a grasp slipping, the operator intervening) is invisible
+    # until the chunk runs out, and two runs from near-identical starts diverge permanently on
+    # whatever single frame each chunk boundary happened to land on.
+    #
+    # This is a DEPLOYMENT choice, not a property of the trained weights: the chunk is still
+    # predicted 50 steps long, n_action_steps only decides how many of them get executed before
+    # re-planning. Lowering it costs one forward pass more often -- measured 90ms on this machine
+    # (2026-08-21, warm; the ~490ms seen on step 0 is cold-start, not the steady-state cost), so
+    # against a 50ms budget at 20 Hz a refill overruns by ~40ms. Amortised, n_action_steps=10 adds
+    # ~9ms per step and n_action_steps=5 ~18ms, both of which fit; n_action_steps=1 does not.
+    if args.n_action_steps is not None:
+        if not 1 <= args.n_action_steps <= model.config.chunk_size:
+            print(f"[ERROR] --n-action-steps must be between 1 and the checkpoint's chunk_size "
+                  f"({model.config.chunk_size}); got {args.n_action_steps}.")
+            return
+        print(f"[INFO] n_action_steps: {model.config.n_action_steps} (checkpoint) -> "
+              f"{args.n_action_steps} (--n-action-steps)")
+        model.config.n_action_steps = args.n_action_steps
+    model.reset()   # rebuild the action queue at the new maxlen, and start from a known-empty one
+
+    horizon_s = model.config.n_action_steps / args.inference_hz
+    print(f"[INFO] open-loop horizon: {model.config.n_action_steps} steps per forward pass = "
+          f"{horizon_s:.1f}s at --inference-hz {args.inference_hz:.1f}. The policy does NOT look "
+          f"at\n       the cameras or joint state again until that many steps have elapsed."
+          + ("" if horizon_s <= 1.0 else
+             "\n       Pass --n-action-steps to shorten it if you want the policy reacting to "
+             "what it currently sees."))
+
     model.to(device)
     model.eval()
 
@@ -600,12 +748,22 @@ def main():
     # own config before the robot is even connected.
     _check_checkpoint_matches(model, preprocess, MODEL_CAM_KEYS)
 
+    # CAN receive tuning -- the single biggest term in the cycle budget. The shipped follower
+    # default (8 rounds x 50_000us) costs up to 801ms per read against this loop's 50ms budget at
+    # --inference-hz 20, and drifts UPWARD as send_action's unread feedback backlog depletes:
+    # measured 110ms -> 210ms -> 310ms cycles within 20s of a rollout, i.e. 9.1 Hz decaying to
+    # 3.2 Hz. See _read_motor_positions_once for the full measurement writeup. The defaults below
+    # bound the read at ~10ms worst case while draining that backlog every cycle so it can never
+    # build up again.
     robot_cfg = OpenArmFollowerConfig(
         right_port="can0",
         left_port="can1",
         enable_fd=True,
         model_path=URDF_PATH,
         cameras=camera_config,  # type: ignore
+        recv_rounds=args.can_recv_rounds,
+        recv_first_timeout_us=args.can_first_timeout_us,
+        recv_mop_timeout_us=args.can_mop_timeout_us,
     )
     robot = OpenArmFollower(robot_cfg)
     robot.connect()
@@ -637,6 +795,25 @@ def main():
         live_view = False
     video_writer = None
 
+    # Attention dumps. Written to disk rather than shown live: the maps only change when the
+    # policy re-plans (every n_action_steps), so a live window spends most of its time redrawing a
+    # cached image, and the question these answer -- is the policy actually using its cameras --
+    # is one you compare across runs, which needs files. No GUI is required.
+    attn_dump = None
+    if args.attention_dump:
+        attn_dir = args.attention_dir or os.path.join(
+            os.getcwd(), f"attention_{time.strftime('%Y%m%d_%H%M%S')}"
+        )
+        attn_dump = AttentionDump(model, attn_dir, key_labels=_image_key_labels(model, preprocess))
+        if attn_dump.enabled:
+            print(f"[INFO] attention dumps -> {attn_dir}\n"
+                  f"       One PNG per re-plan (every {model.config.n_action_steps} steps): action-"
+                  f"expert cross-attention on top, VLM prefix self-attention below,\n"
+                  f"       plus attention_log.csv with per-modality shares and spatial entropy.")
+        else:
+            print(f"[WARN] attention dumps unavailable: {attn_dump.error}")
+            attn_dump = None
+
     # Keep only the camera image entries from the generic hw feature set -- state and action are
     # both built manually below as the same 16 dual-arm joint names in ACTION_NAMES' left-block-
     # then-right-block order, matching exactly what convert_hdf5_to_lerobot.py wrote into the
@@ -655,9 +832,68 @@ def main():
     dataset_features = {**action_features, **state_features, **image_obs_features}
 
     model_dt = 1.0 / args.inference_hz
-    max_step_rad = args.max_joint_speed * model_dt
     interp_steps = 10
-    control_dt = model_dt / interp_steps
+
+    # --max-joint-speed is a SPEED, but the clamp below can only express it as a distance per
+    # inference cycle -- so it needs the cycle's real period, not the requested one. The two are
+    # not the same thing: one cycle costs a full 16-joint CAN read plus the policy forward, and on
+    # this hardware that alone can exceed 1/--inference-hz, in which case the loop free-runs
+    # slower than asked. Clamping against the NOMINAL period then scales the arm down by exactly
+    # the ratio the loop missed, silently (measured 2026-08-21: 20 Hz requested, ~6.5 Hz achieved,
+    # so --max-joint-speed 1.5 behaved as ~0.49 rad/s).
+    #
+    # cycle_dt is the SHORTEST period seen in the last CYCLE_DT_WINDOW cycles, not the mean and
+    # not an EMA: --max-joint-speed is a maximum, so the distance it authorises has to be safe on
+    # this loop's FASTEST cycle. Against an average, the cycles that come in under it exceed the
+    # stated limit (an 86ms mean over periods alternating 70/120ms authorises 1.75 rad/s on the
+    # 70ms ones for a --max-joint-speed of 1.5). The window also caps how long one stalled cycle
+    # can influence the clamp, and MAX_CYCLE_STRETCH bounds it outright.
+    MAX_CYCLE_STRETCH = 2.0
+    CYCLE_DT_WINDOW = 20
+    cycle_dt = model_dt          # seeded at nominal until a window of real periods exists
+    cycle_periods: list[float] = []
+    overruns = 0
+    clamp_steps = 0          # steps where --max-joint-speed actually bound at least one joint
+    peak_demand_rad = 0.0    # largest single-joint distance the clamp was asked to allow
+
+    def _rate_summary() -> None:
+        """Report the rate the loop actually held vs the one asked for, then reset the counters.
+
+        Printed per episode AND on Ctrl+C, because a mismatch here invalidates more than the
+        header of the log lines: the policy was trained at a fixed rate, so a loop running at a
+        third of it feeds the model a world moving three times slower than any of its demos."""
+        nonlocal cycle_periods, overruns, clamp_steps, peak_demand_rad
+        if not cycle_periods:
+            return
+        srt = sorted(cycle_periods)
+        med = srt[len(srt) // 2]
+        mean = sum(cycle_periods) / len(cycle_periods)
+        print(
+            f"  rate: requested {args.inference_hz:.1f} Hz, achieved "
+            f"{len(cycle_periods) / sum(cycle_periods):.1f} Hz mean / {1.0 / med:.1f} Hz median "
+            f"(cycle {mean * 1000:.1f}ms mean, {med * 1000:.1f}ms median, {srt[-1] * 1000:.1f}ms "
+            f"worst); {overruns}/{len(cycle_periods)} cycles over budget."
+        )
+        if args.save_video and abs(1.0 / med - args.inference_hz) > 0.1 * args.inference_hz:
+            print(
+                f"  note: {args.save_video} carries a {args.inference_hz:.1f} fps header but its "
+                f"frames were captured at ~{1.0 / med:.1f} fps, so it plays back "
+                f"{args.inference_hz * med:.1f}x fast. Retime without re-encoding:\n"
+                f"    ffmpeg -r {1.0 / med:.2f} -i {args.save_video} -c copy retimed.mp4"
+            )
+        n = len(cycle_periods)
+        print(f"  clamp: --max-joint-speed {args.max_joint_speed:.2f} rad/s bound at least one "
+              f"joint on {clamp_steps}/{n} steps ({100.0*clamp_steps/max(1, n):.0f}%); largest "
+              f"single-joint demand was {peak_demand_rad:.4f} rad "
+              f"({peak_demand_rad/max(med, 1e-9):.2f} rad/s at the median cycle).")
+        if clamp_steps == 0:
+            print("         It never bound -- the policy never asked to move faster than this, so "
+                  "raising\n         --max-joint-speed would change nothing about how the arm "
+                  "moves.")
+        cycle_periods = []
+        overruns = 0
+        clamp_steps = 0
+        peak_demand_rad = 0.0
 
     # For the target-vs-actual tracking plot: dense target curve (once per control substep) vs.
     # sparser actual-measured curve (once per inference step) for the same 16 joints.
@@ -669,6 +905,90 @@ def main():
     # drift/oscillation seen in the target-vs-actual plot originates in the policy itself or gets
     # introduced by the smoothing/clamp chain downstream of it.
     raw_time_log, raw_log = [], {k: [] for k in ACTION_NAMES}
+    # ------------------------------------------------------------------ startup timing probe
+    # Answers "can this machine actually hold --inference-hz?" BEFORE the arm is asked to move,
+    # by measuring the two terms that dominate a cycle and that no amount of reasoning about the
+    # code can predict. Both are inside the loop's `model:` figure, so a slow one is otherwise
+    # only visible after the fact, mixed together.
+    #
+    # The policy forward is deliberately NOT probed: select_action() would populate its action
+    # chunk (n_action_steps=50 for these checkpoints) from a pre-episode observation, and the
+    # first 50 steps of episode 0 would then replay actions computed for a scene that no longer
+    # exists. Its cost shows up in the step lines instead -- expect one large spike every 50
+    # steps, when the chunk is refilled, and a ~490ms first pass.
+    #
+    # Cameras are reported as a DELIVERY RATE per camera rather than as a cost, because that is
+    # what bounds the loop: async_read() blocks until a new frame arrives, so the cycle can never
+    # outrun the slowest camera no matter how much budget is left over. A first version of this
+    # probe timed three async_read() calls inside a free-running loop and reported 27.7ms -- but
+    # that loop was polling faster than 30 fps, so the figure was just one frame period minus the
+    # CAN time (5.7 + 27.7 = 33.4ms = 30 fps). It would have read as "cameras are too slow" on
+    # cameras that were performing exactly to spec.
+    if args.probe_timing:
+        n = 20
+        can_ms = []
+        for _ in range(n):
+            t0 = time.perf_counter()
+            robot._read_motor_positions_stable()   # the CAN half of get_observation(), alone
+            can_ms.append((time.perf_counter() - t0) * 1e3)
+
+        # Per-camera DELIVERY RATE, which is the number that actually bounds the loop -- not the
+        # cost of a read at some arbitrary polling rate. async_read() blocks until a NEW frame
+        # arrives (it clears the frame event on every call), so back-to-back reads are always
+        # faster than the camera and each call's duration IS one frame period. Measuring the
+        # aggregate cost of three reads in a free-running probe instead measures the probe's own
+        # rate against the frame rate -- it returns ~one frame period no matter how fast the
+        # cameras are, which is exactly the false alarm this replaced.
+        cam_hz = {}
+        for name, cam in robot.cameras.items():
+            try:
+                cam.async_read()          # discard one, so the first timed call starts aligned
+                gaps = []
+                for _ in range(n):
+                    t0 = time.perf_counter()
+                    cam.async_read()
+                    gaps.append(time.perf_counter() - t0)
+                gaps.sort()
+                cam_hz[name] = 1.0 / gaps[len(gaps) // 2]
+            except Exception as e:
+                print(f"[WARN] timing probe could not read {name}: {e}")
+
+        can_med = sorted(can_ms)[len(can_ms) // 2]
+        can_worst = max(can_ms)
+        print(f"\n[timing probe] {n} samples, arm still, policy not yet running:")
+        print(f"  CAN read ({args.can_recv_rounds} rounds, {args.can_first_timeout_us}us first, "
+              f"{args.can_mop_timeout_us}us mop): {can_med:.1f}ms median, {can_worst:.1f}ms worst")
+        for name, hz in cam_hz.items():
+            note = "" if hz >= args.inference_hz else "   <-- SLOWER THAN THE REQUESTED RATE"
+            print(f"  {name:<16} delivering {hz:5.1f} fps ({1000/hz:5.1f}ms/frame){note}")
+
+        # The loop reads every camera once per cycle and blocks until each has a NEW frame, so it
+        # can never run faster than the slowest camera, whatever the rest of the budget allows.
+        slowest_hz = min(cam_hz.values()) if cam_hz else float("inf")
+        cam_wait_ms = max(0.0, 1000.0 / slowest_hz - model_dt * 1000.0)
+        floor_ms = can_med + cam_wait_ms
+        print(f"  floor per cycle, before the policy: {floor_ms:.1f}ms "
+              f"(CAN {can_med:.1f}ms + camera wait {cam_wait_ms:.1f}ms) -- budget is "
+              f"{model_dt*1000:.1f}ms at --inference-hz {args.inference_hz:.1f}")
+        if slowest_hz < args.inference_hz:
+            print(f"  VERDICT: --inference-hz {args.inference_hz:.1f} is NOT reachable -- the "
+                  f"slowest camera delivers {slowest_hz:.1f} fps, and the loop waits for a new "
+                  f"frame from\n           every camera each cycle. Ceiling is {slowest_hz:.1f} Hz "
+                  f"until that camera is fixed (auto-exposure lengthening exposure time in low "
+                  f"light is the\n           usual cause -- check with: v4l2-ctl -d /dev/video"
+                  f"{args.body_cam_index} --get-ctrl=auto_exposure,exposure_time_absolute).")
+        elif floor_ms >= model_dt * 1000:
+            print(f"  VERDICT: --inference-hz {args.inference_hz:.1f} is NOT reachable -- the floor "
+                  f"alone exceeds the budget before the policy has run.\n"
+                  f"           The most this loop could hold is {1000/floor_ms:.1f} Hz.")
+        else:
+            head = model_dt * 1000 - floor_ms
+            print(f"  VERDICT: floor fits, leaving {head:.1f}ms of the budget for the policy and "
+                  f"the interpolation sends.\n           Cameras are not the limit "
+                  f"({slowest_hz:.1f} fps >= {args.inference_hz:.1f} Hz requested); whether 20 Hz "
+                  f"holds now depends on the policy's\n           per-step cost, which the step "
+                  f"lines below will show.")
+
     start_time = time.perf_counter()
 
     try:
@@ -694,9 +1014,18 @@ def main():
                     print("Start-pose approach refused or not confirmed -- not running the policy.")
                     break
 
+            # Discard any actions left in the policy's queue from the previous episode. Without
+            # this, episode N+1 opens by replaying up to n_action_steps actions that were planned
+            # from episode N's final observation -- of a scene that no longer exists, from a pose
+            # the arm has since been ramped away from. Across separate PROCESSES the queue starts
+            # empty anyway (from_pretrained calls reset()), so this is about episode-to-episode
+            # carryover within one run, which is where it actually bites.
+            model.reset()
+
             first = True
-            interp_start = time.perf_counter()
             episode_start = time.perf_counter()
+            cycle_start = episode_start   # deadline anchor, re-stamped at the top of every cycle
+            rate_warned = False
             step = 0
             filtered_target = np.zeros(ACTION_DIM)
             # Latched binarization decision per gripper (see _binarize_gripper). Starts open so a
@@ -705,7 +1034,8 @@ def main():
             gripper_cmd = {i: GRIPPER_OPEN_CMD for i in GRIPPER_IDX}
 
             while time.perf_counter() - episode_start < args.max_episode_seconds:
-                model_start = time.perf_counter()
+                cycle_start = time.perf_counter()
+                model_start = cycle_start
 
                 # _get_obs_sim_gripper (not robot.get_observation() directly) maps LJ8.pos through
                 # calibration -- see GRIPPER CALIBRATION note above -- and clips it to
@@ -715,6 +1045,15 @@ def main():
                 # the interpolation loop below would blend its start point (prev_action = obs) from
                 # that bad reading even though the *target* end point was already clamped.
                 obs = _get_obs_sim_gripper(robot, grip)
+
+                # This read doubles as the "where did the arm actually end up" sample for the
+                # PREVIOUS cycle's interpolated move: it lands at the same instant the separate
+                # settle-read at the bottom of the loop used to, and costs nothing extra. That
+                # second read was a second full _read_motor_positions_stable() -- roughly a third
+                # of the cycle budget -- spent only to feed the tracking plot.
+                actual_time_log.append(time.perf_counter() - start_time)
+                for k in PLOT_JOINTS:
+                    actual_log[k].append(obs[k])
 
                 # Live cv2 view / video recording of body+wrist(+side) cameras -- purely a
                 # human-facing preview, no bearing on the model's input (built from `obs` above).
@@ -750,6 +1089,17 @@ def main():
 
                 if first:
                     first = False
+                    # Record the state this episode actually starts from. approach_pose ramps to
+                    # Isaac Sim's reset pose but settles with real steady-state error (0.2768 rad
+                    # on RJ1 was observed on 2026-08-21, ~16 deg), and that error depends on where
+                    # the arm was ramped FROM -- i.e. on how the previous run ended. That makes it
+                    # a genuine run-to-run coupling: same command, same scene, measurably
+                    # different initial condition. Printing the full vector makes two runs
+                    # diffable when they behave differently.
+                    print("Episode start state (what the policy's first observation actually was):")
+                    print("  " + "  ".join(f"{n}={obs[n]:+.4f}" for n in ACTION_NAMES[:8]))
+                    print("  " + "  ".join(f"{n}={obs[n]:+.4f}" for n in ACTION_NAMES[8:]))
+
                     filtered_target = np.array([obs[k] for k in ACTION_NAMES], dtype=np.float64)
                     # Seed the latch from where the grippers physically are, so the dead band holds
                     # the real current state rather than an assumed one.
@@ -766,9 +1116,24 @@ def main():
                 )
                 obs_processed = preprocess(obs_frame)
 
+                # An empty action queue means select_action is about to run a real forward pass
+                # rather than pop a cached action -- which is exactly when fresh attention gets
+                # captured. Checked BEFORE the call, since the queue is refilled by it.
+                replanned = sum(len(q) for q in model._queues.values()) == 0
+
                 raw_action = model.select_action(obs_processed)
                 raw_action = postprocess(raw_action)
                 policy_action = make_robot_action(raw_action, dataset_features)  # {LJ1.pos: v, ...}
+
+                # Dump only on a re-plan: on every other step the captured maps are the same
+                # tensors as the last dump, so writing them again would just multiply identical
+                # PNGs and dilute the CSV.
+                if attn_dump is not None and replanned:
+                    if not attn_dump.enabled:
+                        print(f"[WARN] attention dumps stopped: {attn_dump.error}")
+                        attn_dump = None
+                    else:
+                        attn_dump.dump(step=step, t_s=time.perf_counter() - episode_start)
 
                 raw_target = np.array([policy_action[n] for n in ACTION_NAMES], dtype=np.float64)
 
@@ -796,7 +1161,20 @@ def main():
                 # this inference step, to --max-joint-speed * model_dt radians -- see module
                 # docstring for why this (not the interpolation loop alone) is what actually
                 # bounds jerkiness/speed.
-                delta_q = np.clip(filtered_target - current_q, -max_step_rad, max_step_rad)
+                clamp_dt = cycle_dt if args.speed_clamp_basis == "measured" else model_dt
+                max_step_rad = args.max_joint_speed * clamp_dt
+                raw_delta = filtered_target - current_q
+                # Does --max-joint-speed actually bind? Raising it only changes the arm's
+                # behaviour on steps where it does; on every other step it is inert. Worth
+                # measuring rather than assuming, because the demand here is not the policy's
+                # intended step size -- the clamp is applied against the CURRENT MEASURED joints,
+                # so tracking error (approach_pose alone settles ~0.28 rad out) shows up as
+                # demand the clamp then rate-limits the arm's catch-up to.
+                joints_clamped = int(np.count_nonzero(np.abs(raw_delta) > max_step_rad + 1e-12))
+                if joints_clamped:
+                    clamp_steps += 1
+                peak_demand_rad = max(peak_demand_rad, float(np.max(np.abs(raw_delta))))
+                delta_q = np.clip(raw_delta, -max_step_rad, max_step_rad)
                 target_q = current_q + delta_q
                 for i in GRIPPER_IDX:  # gripper safety clip (both arms)
                     target_q[i] = float(np.clip(target_q[i], GRIPPER_MIN, GRIPPER_MAX))
@@ -813,10 +1191,20 @@ def main():
 
                 # Interpolate from the CURRENT measured observation (not the previous action)
                 # toward the new target -- self-correcting against any tracking error.
+                #
+                # PACING: the substeps are spread across whatever is LEFT of this cycle's budget
+                # (cycle_start + model_dt), not across a fresh model_dt of their own. Sleeping a
+                # full model_dt here, after model_time had already been spent, made the cycle
+                # period model_time + model_dt -- so the loop could not reach --inference-hz even
+                # in principle: a free policy would have hit it exactly, and a real one misses by
+                # its entire inference time. When nothing is left of the budget every substep is
+                # still sent, back to back with no sleep (the arm is a position controller, so a
+                # compressed ramp converges on the same end point), and the cycle is counted as an
+                # overrun below rather than silently stretching the period.
+                interp_start = time.perf_counter()
+                substep_dt = max(0.0, (cycle_start + model_dt) - interp_start) / interp_steps
                 prev_action = obs
-                next_time = time.perf_counter()
                 for i in range(interp_steps):
-                    next_time += control_dt
                     alpha = (i + 1) / interp_steps
                     interp_action = {
                         joint: prev_action[joint] + (target_action[joint] - prev_action[joint]) * alpha
@@ -833,35 +1221,66 @@ def main():
                     for k in PLOT_JOINTS:
                         target_log[k].append(interp_action[k])
 
-                    now = time.perf_counter()
-                    sleep_time = next_time - now
+                    sleep_time = (interp_start + substep_dt * (i + 1)) - time.perf_counter()
                     if sleep_time > 0:
                         time.sleep(sleep_time)
-                    else:
-                        next_time = now
-
-                # Measure where the arm actually ended up after this step's interpolated moves.
-                settled_obs = _get_obs_sim_gripper(robot, grip)
-                actual_time_log.append(time.perf_counter() - start_time)
-                for k in PLOT_JOINTS:
-                    actual_log[k].append(settled_obs[k])
 
                 interp_time = time.perf_counter() - interp_start
+                cycle_time = time.perf_counter() - cycle_start
+                cycle_periods.append(cycle_time)
+                cycle_dt = min(
+                    min(cycle_periods[-CYCLE_DT_WINDOW:]), MAX_CYCLE_STRETCH * model_dt
+                )
+                over = cycle_time - model_dt
+                if over > 1e-3:
+                    overruns += 1
                 elapsed = time.perf_counter() - episode_start
                 print(
                     f"[step {step} @ {elapsed:.1f}s/{args.max_episode_seconds:.1f}s] "
-                    f"model: {model_time*1000:.1f}ms  "
-                    f"interp(total): {interp_time*1000:.1f}ms  "
-                    f"per step: {(interp_time/interp_steps)*1000:.1f}ms"
+                    f"cycle: {cycle_time*1000:.1f}ms = {1.0/cycle_time:.1f} Hz"
+                    + (f" (OVER budget by {over*1000:.1f}ms)" if over > 1e-3 else "")
+                    + f"  model: {model_time*1000:.1f}ms  "
+                    f"interp: {interp_time*1000:.1f}ms ({interp_steps} x "
+                    f"{(interp_time/interp_steps)*1000:.1f}ms)  "
+                    f"clamp: {max_step_rad*1000:.1f}mrad/cycle"
+                    + (f" ({joints_clamped} joints hit)" if joints_clamped else "")
                 )
+
+                # One-shot, once there is enough evidence that this is not just warm-up (the first
+                # forward pass alone ran ~490ms): name the rate the loop CAN hold instead of
+                # leaving a wrong --inference-hz sitting in the header of every later line.
+                if not rate_warned and len(cycle_periods) >= 20:
+                    med = sorted(cycle_periods[-20:])[10]
+                    if med > model_dt * 1.1:
+                        rate_warned = True
+                        print(
+                            f"[WARN] loop is holding {1.0/med:.1f} Hz, not the requested "
+                            f"{args.inference_hz:.1f} Hz (median cycle {med*1000:.1f}ms vs a "
+                            f"{model_dt*1000:.1f}ms budget). The policy is seeing a world moving "
+                            f"{model_dt/med:.2f}x slower than its training demos. Pass "
+                            f"--inference-hz {1.0/med:.0f} to make the request match reality."
+                        )
                 step += 1
 
             print(f"Episode {ep} ended after {time.perf_counter() - episode_start:.1f}s ({step} steps).")
+            _rate_summary()
 
     except KeyboardInterrupt:
         print("\n[INFO] Ctrl+C detected, stopping loop...")
+        _rate_summary()
 
     finally:
+        # Before anything else in teardown: the whole point of the dumps is the aggregate, and a
+        # run ended with Ctrl+C is the normal case, not the exception.
+        if attn_dump is not None:
+            csv_path = attn_dump.write_csv()
+            print("\nAttention summary:")
+            for line in attn_dump.summary_lines():
+                print(line)
+            if csv_path:
+                print(f"  csv: {csv_path}")
+            attn_dump.detach()
+
         try:
             robot.disconnect()
         except Exception as e:
