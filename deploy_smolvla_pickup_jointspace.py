@@ -161,6 +161,7 @@ from attention_overlay import AttentionDump
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
 from sim_bridge_common import (
     approach_pose,
+    check_arms_not_crossed,
     gripper_sim_to_raw,
     load_calibration,
     raw_to_gripper_sim,
@@ -767,6 +768,7 @@ def main():
     )
     robot = OpenArmFollower(robot_cfg)
     robot.connect()
+    check_arms_not_crossed(robot, calib)
 
     # Optional EXTRA camera, purely for the human-facing live view / saved video below -- never
     # part of the model's input (unlike right_wrist_cam/front_cam above, which -- if given -- are

@@ -41,9 +41,31 @@ Usage:
 """
 
 import argparse
+import importlib.util
+import os
 import time
 
 import openarm_can as oa
+
+# Loaded by PATH, not by package import, deliberately. `from robots.umeow_openarm_follower.
+# can_monitor import ...` would execute that package's __init__, which pulls in the whole
+# follower, lerobot and pinocchio -- and this is the tool you reach for when the rig is already
+# broken. It must not stop working because something further up the stack does.
+def _load_can_monitor():
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        "robots", "umeow_openarm_follower", "can_monitor.py")
+    try:
+        spec = importlib.util.spec_from_file_location("safe_probe_can_monitor", path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
+    except Exception as e:  # noqa: BLE001 -- a missing tap must never block a safety probe
+        print(f"[note] CAN feedback tap unavailable ({type(e).__name__}: {e});"
+              " freshness of the readings below cannot be confirmed.")
+        return None
+
+
+can_monitor = _load_can_monitor()
 
 ARM_JOINT_COUNT = 7
 MOTOR_TYPES = [
@@ -79,15 +101,34 @@ def hold_neutral(arm) -> None:
     arm.get_gripper().mit_control_all(neutral_params(1))
 
 
-def safe_connect(arm, skip_ctrl_mode: bool = False) -> None:
+def safe_connect(arm, write_ctrl_mode: bool = False) -> None:
     arm.init_arm_motors(MOTOR_TYPES, SEND_IDS, RECV_IDS)
     arm.init_gripper_motor(GRIPPER_MOTOR_TYPE, GRIPPER_SEND_ID, GRIPPER_RECV_ID)
-    if not skip_ctrl_mode:
+    if write_ctrl_mode:
+        # OFF BY DEFAULT, and only opt-in-able so the experiment below stays reproducible --
+        # this write BRICKS the motors it touches until they are power-cycled. Confirmed both
+        # directions on 2026-08-26 with a single-joint probe at kp=15:
+        #
+        #   right J5, write skipped -> -0.0341 moved to +0.2447 (target +0.2659) -- healthy
+        #   left  J5, write sent    -> +0.7582 moved to +0.7582 -- bit-identical, no motion
+        #
+        # A bricked motor still answers refresh_all() with fresh, plausible positions, so it
+        # looks alive to every reader in this repo; it just never executes a MIT command again.
+        # The state SURVIVES process exit, so one run of this script with the write enabled
+        # silently poisons every later session on that arm -- that is what left the right
+        # wrist (J5-J8, all the DM4310s) unable to reach the reset pose across days of
+        # deploy_smolvla_pickup_jointspace.py runs, showing up as RJ7 flagged "stale read" in
+        # reset_to_rest_pose.py's tracking plot. Nothing in the normal bring-up path repairs
+        # it: OpenArmFollower.configure() passes the modes to init_arm_motors() instead of
+        # writing CTRL_MODE, which neither breaks nor fixes a motor. Only power-cycling does.
+        #
         # lerobot's DamiaoMotorsBus.configure_motors() (proven to work, used by replay.py)
-        # never sends this -- it only enables torque, relying on the motor already being
-        # provisioned for MIT mode from a one-time setup. Re-writing CTRL_MODE at runtime,
-        # every invocation, is this script's own addition and is suspected of leaving
-        # joints 5-7 in a bad state. --skip-ctrl-mode tests that theory directly.
+        # never sends this either -- it only enables torque, relying on the motor already
+        # being provisioned for MIT mode from a one-time setup. Re-writing CTRL_MODE at
+        # runtime, every invocation, was this script's own addition and was never needed.
+        print("[WARNING] --write-ctrl-mode: set_control_mode_all(MIT) is about to be written."
+              " This has been measured to leave motors unresponsive to MIT commands until they"
+              " are power-cycled. See safe_connect() in this file.", flush=True)
         arm.get_arm().set_control_mode_all(oa.ControlMode.MIT)
         arm.get_gripper().set_control_mode_all(oa.ControlMode.MIT)
     arm.set_callback_mode_all(oa.CallbackMode.STATE)
@@ -97,20 +138,36 @@ def safe_connect(arm, skip_ctrl_mode: bool = False) -> None:
     hold_neutral(arm)  # authoritative post-enable neutral
 
 
-def read_positions(arm, prefix: str, recv_timeout_us: int = 50_000) -> dict:
-    """Read positions with a generous per-call recv timeout.
+READ_DEADLINE_S = 0.008     # ceiling on how long one read waits for the eight answers
 
-    OpenArm::recv_all(int timeout_us = 500) takes MICROSECONDS, not
-    milliseconds -- the codebase's own "recv_all(2500)" calls elsewhere
-    (e.g. just_enable.py) are really only waiting 2.5ms, apparently just
-    barely enough for the 7 arm joints but not reliably enough for the
-    gripper. 50_000us = 50ms is still effectively instant to a human and
-    costs nothing -- this is a read-only operation with zero motion risk
-    regardless of how long it waits.
+
+def read_positions(arm, prefix: str, recv_timeout_us: int = 50_000, tap=None) -> dict:
+    """Read positions, WAITING for the answers rather than polling for them.
+
+    recv_all()'s timeout argument does not produce a wait on this build: measured 2026-08-26, it
+    returns in 0.04-0.16 ms whether it is passed 500 us or 200 000 us. So the old "8 rounds of
+    50_000 us" was not 400 ms of patience, it was about a millisecond of spinning -- against
+    motors that answer 0.13 ms (J1) to 0.87 ms (J8) after the request, in ascending CAN-id order.
+    The joints that answer LAST were the ones that kept falling outside the window, which is the
+    mechanism behind this file's own "unstable by 12.4676 rad" retries and behind the stale wrist
+    readings in reset_to_rest_pose.py.
+
+    With a tap open, the loop stops the moment every channel has answered, so a healthy read is
+    faster than the old spin. Without one it simply waits out the deadline.
     """
+    if tap is not None and tap.available:
+        tap.mark_cycle()
     arm.refresh_all()
-    for _ in range(8):
+    deadline = time.perf_counter() + READ_DEADLINE_S
+    while True:
         arm.recv_all(recv_timeout_us)
+        if tap is not None and tap.available:
+            tap.poll()
+            if not tap.pending():
+                break
+        if time.perf_counter() >= deadline:
+            break
+        time.sleep(50e-6)
     pos = {f"{prefix}J{i + 1}.pos": m.get_position() for i, m in enumerate(arm.get_arm().get_motors())}
     pos[f"{prefix}J8.pos"] = arm.get_gripper().get_motor().get_position()
     return pos
@@ -128,7 +185,7 @@ def find_implausible_key(pos: dict) -> str | None:
 
 
 def read_positions_stable(arm, prefix: str, recv_timeout_us: int = 50_000, agreement_tol: float = 0.01,
-                           max_attempts: int = 8) -> dict:
+                           max_attempts: int = 8, tap=None) -> dict:
     """Retry until two CONSECUTIVE, individually-plausible reads agree.
 
     An intermittent single-motor glitch (~12.5 rad, consistent with a stale/never-updated
@@ -140,9 +197,9 @@ def read_positions_stable(arm, prefix: str, recv_timeout_us: int = 50_000, agree
     allowed to count. Silently returning a possibly-glitched reading is not acceptable for
     anything safety-critical, so this raises rather than guessing if positions never settle.
     """
-    prev = read_positions(arm, prefix, recv_timeout_us)
+    prev = read_positions(arm, prefix, recv_timeout_us, tap)
     for attempt in range(1, max_attempts):
-        cur = read_positions(arm, prefix, recv_timeout_us)
+        cur = read_positions(arm, prefix, recv_timeout_us, tap)
 
         bad_key = find_implausible_key(cur)
         if bad_key is not None:
@@ -181,6 +238,78 @@ def gain_and_position_ramp(arm, motor_index: int, is_gripper: bool, q_start: flo
         time.sleep(dt)
 
 
+def joint_motor(arm, motor_index: int, is_gripper: bool):
+    """The Motor object for this probe's target. Re-fetch after every read: get_motors() hands
+    back COPIES of the motor state, so a handle kept from before a read is a stale snapshot."""
+    if is_gripper:
+        return arm.get_gripper().get_motor()
+    return arm.get_arm().get_motors()[motor_index]
+
+
+def report_move(key, start, target, observed, motor, max_kp, step, fresh):
+    """Say what happened, and when nothing happened, say which of the three reasons it was.
+
+    "Observed after move: +0.7105" on a joint that started at +0.7105 is the least informative
+    thing this script could print, because three different situations produce it and they need
+    opposite responses:
+
+      - the feedback never refreshed, so the number is retained state and says nothing at all;
+      - the motor pushed as hard as it was allowed to and the load won;
+      - the motor is not executing commands at all.
+
+    The reported torque separates the last two, and the CAN tap separates the first. Note the
+    ramp commands tau=0 and leaves every OTHER joint at kp=0, so on a joint that carries weight
+    the ONLY thing opposing gravity is kp*(q_target - q), i.e. at most max_kp*step -- which on
+    this rig is 0.75 N-m at the defaults, against a J4 elbow that needs about 1.9 N-m just to
+    stay where it is. That is not a fault, it is the probe being asked for more authority than
+    its safety ceiling allows.
+    """
+    moved = observed - start
+    want = target - start
+    print(f"\nObserved after move: {key} = {observed:+.4f}"
+          f"  (started {start:+.4f}, target {target:+.4f}, moved {moved:+.4f} of {want:+.4f})")
+
+    if fresh is False:
+        print("  VERDICT: unknown -- this channel sent no state frames during the read, so the"
+              " number above is retained state, not a measurement. Nothing can be concluded"
+              " about whether the joint moved. Fix the feedback first.")
+        return
+
+    if abs(moved) >= 0.2 * abs(want):
+        print("  VERDICT: the joint followed.")
+        return
+
+    torque = motor.get_torque()
+    ceiling = max_kp * abs(step)
+    print(f"  motor reported torque {torque:+.3f} N-m at the end of the ramp"
+          f" (this command's ceiling is kp {max_kp:g} x {abs(step):g} rad = {ceiling:.2f} N-m)")
+    if abs(torque) >= 0.5 * ceiling:
+        print("  VERDICT: the motor pushed and the load won. It was producing most of the torque"
+              " this command allows and the joint still did not move, so the command has less"
+              " authority than the joint's gravity and friction load -- expected on J1-J4, which"
+              " carry the arm's weight, because the ramp sends tau=0 (no gravity feedforward)."
+              "\n    This says nothing bad about the motor.")
+        # The measured torque is a LOWER bound on what this joint needs, not an estimate of it:
+        # the motor hit the command's own ceiling, so all it proves is "more than this much".
+        # Scaling the suggestion off that number lands just short every time and costs another
+        # run -- the first version of this message suggested kp=30 for a joint measured at 1.9
+        # N-m of gravity load, i.e. 1.5 N-m of authority against 1.9 N-m of load.
+        print(f"    Authority here is kp x step. {abs(torque):.2f} N-m is only a FLOOR on what"
+              f" this joint needs, so step up properly rather than by a little:"
+              f" --max-kp {max_kp * 4:.0f} gives {max_kp * 4 * abs(step):.1f} N-m."
+              " A larger --step raises the demand the same way and moves the joint further,"
+              " so raise one or the other, not both."
+              "\n    For a joint that carries weight, the honest fix is gravity feedforward"
+              " rather than brute gain: that is what OpenArmFollower.send_action() adds (tau from"
+              " pinocchio, kp=60 on J4) and why reset_to_rest_pose.py moves this joint at gains"
+              " this probe would call unsafe.")
+    else:
+        print("  VERDICT: the motor did NOT push. Fresh feedback, near-zero torque, no motion:"
+              " it is answering on the bus but not executing MIT commands. That is the signature"
+              " of a motor left in a bad control mode -- see safe_connect()'s --write-ctrl-mode"
+              " note; only a power cycle clears it.")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--side", choices=["left", "right"], required=True)
@@ -192,9 +321,11 @@ def main():
     parser.add_argument("--ramp-steps", type=int, default=60)
     parser.add_argument("--ramp-dt", type=float, default=0.03)
     parser.add_argument(
-        "--skip-ctrl-mode", action="store_true",
-        help="Skip the runtime set_control_mode_all(MIT) write -- test whether that write itself"
-        " is what's leaving certain joints unresponsive (see safe_connect() comment).",
+        "--write-ctrl-mode", action="store_true",
+        help="Send the runtime set_control_mode_all(MIT) write before enabling. OFF by default"
+        " because it has been measured to leave the motors it touches unresponsive to MIT"
+        " commands until they are power-cycled, and that state survives process exit (see"
+        " safe_connect()). Only pass this to reproduce that failure deliberately.",
     )
     args = parser.parse_args()
 
@@ -203,11 +334,17 @@ def main():
     arm = oa.OpenArm(port, True)
     connected = False
 
+    tap = None
+    if can_monitor is not None:
+        channels = {rid: f"{prefix}J{i + 1}" for i, rid in enumerate(RECV_IDS)}
+        channels[GRIPPER_RECV_ID] = f"{prefix}J8"
+        tap = can_monitor.CanFeedbackMonitor(port, channels)
+
     try:
-        safe_connect(arm, skip_ctrl_mode=args.skip_ctrl_mode)
+        safe_connect(arm, write_ctrl_mode=args.write_ctrl_mode)
         connected = True
 
-        pos = read_positions_stable(arm, prefix)
+        pos = read_positions_stable(arm, prefix, tap=tap)
         print(f"Torque-free positions on {args.side} arm ({port}) -- safe to trust, read after neutral hold:")
         for k, v in pos.items():
             print(f"  {k}: {v:+.4f}")
@@ -228,11 +365,18 @@ def main():
 
         is_gripper = args.joint == 8
         motor_index = args.joint - 1
+        if tap is not None and tap.available:
+            tap.take_counts()
         gain_and_position_ramp(arm, motor_index, is_gripper, current, target,
                                 args.max_kp, args.max_kd, args.ramp_steps, args.ramp_dt)
 
-        pos_after = read_positions_stable(arm, prefix)
-        print(f"\nObserved after move: {key} = {pos_after[key]:+.4f}")
+        pos_after = read_positions_stable(arm, prefix, tap=tap)
+        fresh = None
+        if tap is not None and tap.available:
+            fresh = tap.take_counts().get(f"{prefix}J{args.joint}", 0) > 0
+        report_move(key, current, target, pos_after[key],
+                    joint_motor(arm, motor_index, is_gripper),
+                    args.max_kp, args.step, fresh)
 
     except KeyboardInterrupt:
         print("\nInterrupted.")
@@ -248,6 +392,8 @@ def main():
             arm.disable_all()
         except Exception:
             print("WARNING: disable_all() failed -- verify motor power manually / cut power at the source.")
+        if tap is not None:
+            tap.close()
         print("Done.")
 
 

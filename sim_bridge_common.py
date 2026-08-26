@@ -43,6 +43,70 @@ def load_calibration(path: str) -> dict:
     return calib
 
 
+ARMS_CROSSED_MARGIN = 0.15  # rad of slack past a gripper's calibrated end before it counts as
+# "outside its own range". The grippers legitimately sit a little beyond open_raw when pressed
+# against the mechanical stop (-1.3136 read against an open_raw of -1.2980, measured 2026-08-26).
+
+
+def check_arms_not_crossed(robot, calib: dict, margin: float = ARMS_CROSSED_MARGIN) -> None:
+    """Raise if the two arms' CAN cables are swapped relative to right_port/left_port.
+
+    The grippers are the ONLY channel that can detect this. Every arm joint has sign=+1 and
+    offset=0.0 on both sides of calibration.json, so a crossed pair produces perfectly plausible
+    arm-joint readings and nothing anywhere notices. The grippers do not: the two motors turn
+    opposite ways to close, so their calibrated travel has OPPOSITE SIGN -- left runs
+    0.0 (closed) .. +1.2121 (open), right runs 0.0 (closed) .. -1.2980 (open). An arm reading the
+    other side's open position is therefore unambiguous.
+
+    Worth failing hard over, because "crossed" is not a cosmetic mix-up. sim_init_pose_action()
+    commands each gripper to its OWN side's open_raw, so under a crossed pair each gripper is sent
+    a target ~1.2 rad past its own CLOSED stop and stalls there for the whole run. Measured
+    2026-08-26: both grippers held 3.3 N-m against their stops from the first tick, and the four
+    DM4310s (J5-J8) on one arm dropped off the CAN bus partway through every such run while the
+    same hardware was clean on a correctly-wired run minutes earlier.
+
+    Conservative by construction: it fires only when BOTH grippers read outside their own range
+    AND inside the other's. The two ranges meet at 0.0, so two closed grippers are ambiguous and
+    are never flagged; one odd reading is never enough on its own.
+    """
+    def span(side):
+        grip = calib[side]["gripper"]
+        lo, hi = sorted((grip["closed_raw"], grip["open_raw"]))
+        return lo, hi
+
+    def inside(value, bounds):
+        lo, hi = bounds
+        return lo - margin <= value <= hi + margin
+
+    pos = get_current_pos_action(robot)
+    readings = {"left": pos["LJ8.pos"], "right": pos["RJ8.pos"]}
+    spans = {"left": span("left"), "right": span("right")}
+    other = {"left": "right", "right": "left"}
+
+    crossed = all(
+        not inside(readings[side], spans[side]) and inside(readings[side], spans[other[side]])
+        for side in ("left", "right")
+    )
+    if not crossed:
+        return
+
+    detail = "\n".join(
+        f"  {'L' if side == 'left' else 'R'}J8.pos reads {readings[side]:+.4f}, which is outside"
+        f" the {side} gripper's own range [{spans[side][0]:+.4f}, {spans[side][1]:+.4f}]"
+        f" and inside the {other[side]} one's"
+        f" [{spans[other[side]][0]:+.4f}, {spans[other[side]][1]:+.4f}]"
+        for side in ("left", "right")
+    )
+    raise RuntimeError(
+        "The two arms' CAN cables are SWAPPED -- each side is reading the other gripper's"
+        f" calibrated open position:\n{detail}\n"
+        "  Swap the two CAN cables at the adapter (or swap --right-port/--left-port) and re-run."
+        " Refusing to move: every gripper command would be sent to the wrong arm, ~1.2 rad past"
+        " its own closed stop, and both grippers would stall against their stops for the whole"
+        " run."
+    )
+
+
 def gripper_sim_to_raw(sim_val: float, open_raw: float, closed_raw: float) -> float:
     frac = max(0.0, min(1.0, (sim_val - GRIPPER_SIM_CLOSED) / (GRIPPER_SIM_OPEN - GRIPPER_SIM_CLOSED)))
     return closed_raw + frac * (open_raw - closed_raw)
@@ -150,10 +214,36 @@ def compute_target_velocity(
 
     return target_vel
 
-def ramp_to(robot, start_action: dict, end_action: dict, duration_s: float, rate_hz: float = 50.0):
+def ramp_to(robot, start_action: dict, end_action: dict, duration_s: float, rate_hz: float = 50.0,
+            on_tick=None):
+    """Linearly interpolate from start_action to end_action over duration_s.
+
+    on_tick, if given, is called as on_tick(elapsed_s, commanded_action, step_index, steps)
+    after each send_action(), for callers that want to log or plot what the ramp did.
+    Anything it does costs wall-clock inside the tick budget -- notably reading the robot
+    back, which on this CAN stack is tens of milliseconds (see _read_motor_positions_once).
+    That overrun makes the ramp take LONGER than duration_s, i.e. it moves the arm more
+    slowly than planned, never faster; the interpolation is indexed by step, not by clock.
+    So a hook is safe to add, but its own timestamps -- not `duration_s` -- are what any
+    resulting plot's time axis should use. The send_action() slow-call warning below is
+    measured around send_action() alone so the hook's cost can't be misattributed to it.
+    """
     steps = max(1, int(duration_s * rate_hz))
     dt = 1.0 / rate_hz
-    target_vel = {}
+    # The MIT command's dq is a velocity SETPOINT, and this used to send 0 for every joint on
+    # every tick while simultaneously commanding a position that was moving. The motor-side law is
+    # tau = kp*(q_des - q) + kd*(dq_des - dq) + tau_ff, so dq_des = 0 during a ramp turns the kd
+    # term into a brake proportional to the joint's actual speed, and the loop can only settle
+    # where kp*err balances it: a standing lag of kd*v/kp rad for the whole ramp, on top of
+    # whatever friction costs. At the arm's default 0.3 rad/s cap that is ~15 mrad on J5/J7
+    # (kd=1.0, kp=20) and ~13 mrad on J4 (kd=2.5, kp=60) -- present on every joint, in the
+    # direction of travel, and entirely self-inflicted since the ramp knows its own velocity.
+    # A hold is start_action == end_action, which makes every entry exactly 0.0 as before.
+    target_vel = {
+        f"{k[:-4]}.vel": (end_action[k] - start_action[k]) / duration_s
+        for k in start_action if k.endswith(".pos") and k in end_action
+    } if duration_s > 0 else {}
+    t0 = time.time()
     print(f"  [ramp_to] entering loop, about to call send_action() for step 1/{steps}...", flush=True)
     for i in range(1, steps + 1):
         step_start = time.time()
@@ -165,7 +255,9 @@ def ramp_to(robot, start_action: dict, end_action: dict, duration_s: float, rate
             # send_action() itself took much longer than one tick -- likely a slow/stalled
             # CAN response, not a frozen script. Surface it instead of silently absorbing it.
             print(f"  [ramp_to step {i}/{steps}] send_action() took {call_dt * 1000:.0f}ms (expected ~{dt * 1000:.0f}ms)", flush=True)
-        remaining = dt - call_dt
+        if on_tick is not None:
+            on_tick(time.time() - t0, cmd, i, steps)
+        remaining = dt - (time.time() - step_start)
         if remaining > 0:
             time.sleep(remaining)
     return end_action
@@ -289,6 +381,7 @@ def approach_pose(
     min_duration: float = 1.5,
     assume_yes: bool = False,
     rate_hz: float = 50.0,
+    on_tick=None,
 ) -> dict | None:
     """Drive the arm to `target_action` along a speed-limited ramp, and return the action it ended
     up commanded to (or None if the move was refused or not confirmed).
@@ -317,6 +410,8 @@ def approach_pose(
     Grippers get their own `gripper_speed` for the reason clamp_step() gives them their own delta
     cap: an open/close is a near-instant toggle, and pacing it like an arm joint would stretch the
     whole approach to the gripper's full travel time for no benefit.
+
+    `on_tick` is forwarded verbatim to ramp_to() -- see there for what it costs.
     """
     current = get_current_pos_action(robot)
     missing = [k for k in target_action if k not in current]
@@ -363,7 +458,7 @@ def approach_pose(
             print("Not confirmed. Aborting without moving the arm.")
             return None
 
-    ramp_to(robot, current, target_action, duration, rate_hz)
+    ramp_to(robot, current, target_action, duration, rate_hz, on_tick=on_tick)
 
     # Report where it actually landed rather than assuming the command was reached. A residual of
     # a few tens of milliradians here is normal steady-state error, not a failure -- see above --

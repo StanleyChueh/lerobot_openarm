@@ -87,9 +87,15 @@ and this file owns the only queue. Episode-to-episode carryover is handled by fl
 Usage (same checkpoint/cameras/calibration as the sync script):
   python deploy_smolvla_async.py \\
       --checkpoint ethanCSL/openarm_visuomotor_VR_pringles_V14_background \\
-      --body-cam-index 4 --wrist-cam-index 16 --right-wrist-cam-index 10 \\
+      --body-cam-index rs_body --wrist-cam-index rs_wrist_left --right-wrist-cam-index rs_wrist_right \\
       --calibration calibration.json \\
       --control-hz 20 --max-joint-speed 2.0 --max-episode-seconds 30
+
+  The camera arguments take either a /dev/video index or a udev alias pinned to the camera's USB
+  serial (rs_body / rs_wrist_left / rs_wrist_right, from /etc/udev/rules.d/99-realsense-rgb.rules).
+  Prefer the alias: a D435i publishes six /dev/video nodes and their numbering shifts on re-plug,
+  reboot, or the USB reset this script itself does at startup, so a hard-coded index can silently
+  swap the body and wrist feeds -- which the policy cannot detect, it just acts on the wrong view.
 
 Tuning, in the order worth touching:
   --chunk-size-threshold  when to re-plan, as a fraction of a chunk still queued (default 0.9).
@@ -110,12 +116,15 @@ unchanged from deploy_smolvla_pickup_jointspace.py rather than re-derived, so th
 """
 
 import argparse
+import os
+import re
 import threading
 import time
 from collections import deque
 from dataclasses import dataclass
 
 import cv2
+import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
@@ -148,7 +157,12 @@ from deploy_smolvla_pickup_jointspace import (
     GRIPPER_OPEN_CMD,
 )
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
-from sim_bridge_common import approach_pose, load_calibration, sim_init_pose_action
+from sim_bridge_common import (
+    approach_pose,
+    check_arms_not_crossed,
+    load_calibration,
+    sim_init_pose_action,
+)
 
 # lerobot/async_inference/configs.py's AGGREGATE_FUNCTIONS, verbatim. These blend an incoming
 # chunk's action with the queued action for the SAME timestep -- the overlap that exists because
@@ -396,22 +410,52 @@ class AsyncPolicy:
                 )
 
 
+def _video_index(spec: str) -> int:
+    """Camera CLI argument -> /dev/video index.
+
+    Accepts a bare index ("4"), a stable udev alias ("rs_rgb_1", from 99-realsense-rgb.rules), or
+    any path that resolves to a /dev/videoN node ("/dev/rs_rgb_1", "/dev/v4l/by-id/usb-Intel...").
+    Everything downstream -- OpenCVCameraConfig and the USB reset, which reads
+    /sys/class/video4linux/videoN -- wants the integer, so the alias is resolved here, once.
+
+    The aliases exist because a RealSense exposes four /dev/video nodes and their numbering shifts
+    when cameras are re-plugged or the machine reboots; the symlink is pinned to the camera's USB
+    serial, so it always points at that camera's colour stream."""
+    if spec.isdigit():
+        return int(spec)
+
+    path = spec if os.path.isabs(spec) else os.path.join("/dev", spec)
+    if not os.path.exists(path):
+        raise argparse.ArgumentTypeError(
+            f"{spec!r} is neither a /dev/video index nor an existing device path ({path} not found)")
+
+    node = os.path.basename(os.path.realpath(path))
+    if not re.fullmatch(r"video\d+", node):
+        raise argparse.ArgumentTypeError(f"{spec!r} resolves to {node}, which is not a /dev/videoN node")
+    return int(node[len("video"):])
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("--checkpoint", type=str, required=True,
                         help="HF repo id or local path of the joint-space SmolVLA checkpoint.")
-    parser.add_argument("--body-cam-index", type=int, required=True,
-                        help="/dev/video index for observation.images.body_cam.")
-    parser.add_argument("--wrist-cam-index", type=int, required=True,
-                        help="/dev/video index for observation.images.wrist_cam (the LEFT wrist).")
-    parser.add_argument("--right-wrist-cam-index", type=int, default=None,
-                        help="/dev/video index for observation.images.right_wrist_cam (dual-arm checkpoints).")
-    parser.add_argument("--front-cam-index", type=int, default=None,
-                        help="/dev/video index for observation.images.front_cam (the '..._three_cams' variant).")
-    parser.add_argument("--side-cam-index", type=int, default=None,
-                        help="EXTRA camera for the live view only -- never fed to the model.")
+    parser.add_argument("--body-cam-index", type=_video_index, required=True,
+                        help="Camera for observation.images.body_cam. "
+                             "Takes a /dev/video index or a udev alias (rs_body).")
+    parser.add_argument("--wrist-cam-index", type=_video_index, required=True,
+                        help="Camera for observation.images.wrist_cam (the LEFT wrist). "
+                             "Takes a /dev/video index or a udev alias (rs_body).")
+    parser.add_argument("--right-wrist-cam-index", type=_video_index, default=None,
+                        help="Camera for observation.images.right_wrist_cam (dual-arm checkpoints). "
+                             "Takes a /dev/video index or a udev alias (rs_body).")
+    parser.add_argument("--front-cam-index", type=_video_index, default=None,
+                        help="Camera for observation.images.front_cam (the '..._three_cams' variant). "
+                             "Takes a /dev/video index or a udev alias (rs_body).")
+    parser.add_argument("--side-cam-index", type=_video_index, default=None,
+                        help="EXTRA camera for the live view only -- never fed to the model. "
+                             "Takes a /dev/video index or a udev alias (rs_body).")
     parser.add_argument("--calibration", type=str, required=True,
                         help="calibration.json -- required for the gripper raw<->sim mapping (see the "
                              "GRIPPER CALIBRATION note in deploy_smolvla_pickup_jointspace.py).")
@@ -479,6 +523,18 @@ def parse_args():
                         help="Disable the live cv2 camera window.")
     parser.add_argument("--quiet", action="store_true",
                         help="Suppress the per-replan and per-second control-loop lines.")
+
+    parser.add_argument("--no-plot", action="store_true",
+                        help="Skip the target-vs-actual tracking plots shown on shutdown.")
+    parser.add_argument("--save-plot", type=str, default=None,
+                        help="Also write the tracking plots to this path (a '-raw' variant is "
+                             "written alongside it). Useful over SSH, where plt.show() has no "
+                             "window to open.")
+    parser.add_argument("--plot-max-samples", type=int, default=24_000,
+                        help="Ticks of tracking history to keep, per joint (20 minutes at the "
+                             "default --control-hz). The logs are ring buffers, so a longer run "
+                             "keeps its most RECENT window -- which is the part worth seeing when "
+                             "you Ctrl+C to look at what the arm was just doing.")
     return parser.parse_args()
 
 
@@ -544,6 +600,7 @@ def main():
         recv_mop_timeout_us=args.can_mop_timeout_us,
     ))
     robot.connect()
+    check_arms_not_crossed(robot, calib)
     grip = _gripper_calib(calib)
 
     side_cam = None
@@ -599,6 +656,42 @@ def main():
     loop_periods: deque[float] = deque(maxlen=200)
     busy_periods: deque[float] = deque(maxlen=200)
 
+    # Target-vs-actual tracking history, same purpose as deploy_smolvla_pickup_jointspace.py's
+    # end-of-run plots. Simpler to collect here: that script interpolates several substeps per
+    # inference step, so it needs a dense target log and a sparse actual log on separate clocks,
+    # whereas this loop sends exactly one action per tick and reads the arm once per tick -- so
+    # every series shares one timebase and one sample per tick.
+    #
+    # Bounded, unlike that script's unbounded lists: --max-episodes 20 x --max-episode-seconds 600
+    # at 20 Hz is 240k ticks, and three unbounded float lists per joint at that length run into
+    # hundreds of MB during a run that is already holding a policy on the GPU. Ring buffers keep
+    # the most recent window instead, which is the one a Ctrl+C is asking about.
+    plot_n = max(0, args.plot_max_samples)
+    plotting = not args.no_plot and plot_n > 0
+    plot_time: deque[float] = deque(maxlen=plot_n)
+    target_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
+    actual_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
+    # The queued action as the policy produced it, BEFORE binarization and the speed clamp -- the
+    # async counterpart of that script's raw-policy-output plot, and the way to tell whether motion
+    # in the tracking plot is the policy's shape or the clamp's. NaN on a starved tick so a gap in
+    # the queue reads as a gap in the line rather than as the policy holding still.
+    raw_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
+    # Was this tick's reading bit-identical to the previous one WHILE the command moved on? On this
+    # CAN stack a read that never refreshed returns the retained value, which is plausible and
+    # unchanging -- indistinguishable from a joint holding station until you also look at whether
+    # the command was asking it to move. Bit-identity alone fires on every joint told to hold, so
+    # it only counts once the command has swept past STALE_TRAVEL_RAD since the reading last
+    # changed. Worth flagging here and not just in reset_to_rest_pose.py, because the speed clamp
+    # below anchors on current_q: a frozen reading does not merely mislead this plot, it stops the
+    # commands tracking the arm's real position.
+    STALE_TRAVEL_RAD = 0.02
+    stale_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
+    prev_actual: dict[str, float] = {}
+    prev_cmd: dict[str, float] = {}
+    cmd_travel: dict[str, float] = {}
+    episode_marks: list[tuple[float, int]] = []
+    run_start = time.perf_counter()
+
     try:
         for ep in range(args.max_episodes):
             print(f"\n===== Episode {ep} =====")
@@ -634,6 +727,8 @@ def main():
             held_target: np.ndarray | None = None  # what to command while the queue is empty
 
             episode_start = time.perf_counter()
+            if plotting:
+                episode_marks.append((episode_start - run_start, ep))
             tick = 0
             starved_ticks = 0
             clamped_ticks = 0
@@ -674,8 +769,10 @@ def main():
                     # the joint down instead of holding it.
                     starved_ticks += 1
                     target_q = held_target.copy()
+                    raw_q = None
                 else:
                     target_q = timed.action.copy()
+                    raw_q = target_q.copy()   # before binarization and the speed clamp
 
                     # Binarize both grippers, in the sim convention, before the speed clamp: the
                     # clamp then limits how fast the gripper travels to its endpoint rather than
@@ -697,6 +794,26 @@ def main():
                 for i in GRIPPER_IDX:
                     target_q[i] = float(np.clip(target_q[i], GRIPPER_MIN, GRIPPER_MAX))
                 held_target = target_q
+
+                if plotting:
+                    # current_q is the read taken at the top of THIS tick, i.e. where the arm
+                    # ended up under the previous tick's command -- so it belongs on the same
+                    # timestamp as the target about to be sent, one tick behind it by
+                    # construction. That one-tick offset is the tracking lag being measured, not
+                    # an artefact to correct for.
+                    plot_time.append(tick_start - run_start)
+                    for j, name in enumerate(ACTION_NAMES):
+                        tgt, act = float(target_q[j]), float(current_q[j])
+                        target_log[name].append(tgt)
+                        actual_log[name].append(act)
+                        raw_log[name].append(float(raw_q[j]) if raw_q is not None else float("nan"))
+                        if name in prev_actual and act == prev_actual[name]:
+                            cmd_travel[name] = (cmd_travel.get(name, 0.0)
+                                                + abs(tgt - prev_cmd.get(name, tgt)))
+                        else:
+                            cmd_travel[name] = 0.0
+                        stale_log[name].append(cmd_travel[name] > STALE_TRAVEL_RAD)
+                        prev_actual[name], prev_cmd[name] = act, tgt
 
                 target_action = dict(obs)
                 for name, value in zip(ACTION_NAMES, target_q):
@@ -787,6 +904,106 @@ def main():
             cv2.destroyAllWindows()
         robot.disconnect()
         print("[INFO] robot disconnected (motors are NOT powered off -- use emergency_disable.py).")
+
+        # Last in teardown, and deliberately so: plt.show() blocks until the window is closed, and
+        # nothing that powers down hardware should wait on a human closing a plot. By here the
+        # inference thread is joined, the cameras are released and the robot is disconnected.
+        if plotting:
+            _show_tracking_plots(plot_time, target_log, actual_log, raw_log,
+                                 episode_marks, args.save_plot, stale_log)
+
+
+def _show_tracking_plots(plot_time, target_log, actual_log, raw_log, episode_marks, save_path=None,
+                         stale_log=None):
+    """End-of-run target-vs-actual and raw-policy-output plots, matching what
+    deploy_smolvla_pickup_jointspace.py shows when a run ends.
+
+    Called from a finally block, so it must not raise: a plotting backend that cannot open a window
+    (this is routinely run over SSH) must not turn a clean shutdown into a traceback that buries the
+    episode summary printed above it. --save-plot is the answer in that case, and the failure says
+    so rather than just reporting the exception.
+    """
+    t = list(plot_time)
+    if not t:
+        print("[WARN] No tracking data to plot.")
+        return
+
+    print(f"[INFO] Plotting target vs. actual joint tracking ({len(t)} ticks, "
+          f"{t[0]:.0f}-{t[-1]:.0f}s)...")
+    if len(t) == plot_time.maxlen:
+        print(f"[INFO] history capped at --plot-max-samples ({plot_time.maxlen}); "
+              f"showing the most recent {t[-1] - t[0]:.0f}s of the run.")
+
+    # An episode boundary older than the retained window would draw a rule outside the data.
+    marks = [(mt, ep) for mt, ep in episode_marks if t[0] <= mt <= t[-1]]
+
+    def _grid(logs, title, ylabel="rad", legend=None, mark_stale=False):
+        fig, axes = plt.subplots(8, 2, figsize=(14, 24), sharex=True)
+        for ax, joint in zip(axes.flat, ACTION_NAMES):
+            for label, log, style in logs:
+                ax.plot(t, list(log[joint]), label=label, linewidth=1, **style)
+            if mark_stale and stale_log is not None:
+                flags = list(stale_log[joint])
+                acts = list(actual_log[joint])
+                st = [(ti, a) for ti, a, f in zip(t, acts, flags) if f]
+                if st:
+                    ax.plot([x for x, _ in st], [y for _, y in st], linestyle="none",
+                            marker=".", markersize=3, color="tab:red", label="stale read")
+            for mt, ep in marks:
+                ax.axvline(mt, color="grey", linewidth=0.6, linestyle=":")
+            ax.set_title(joint)
+            ax.set_ylabel(ylabel)
+            ax.grid(True)
+        if legend:
+            axes.flat[0].legend(loc="upper right")
+        for ax in axes[-1, :]:
+            ax.set_xlabel("Time (s)")
+        fig.suptitle(title + (f"  (dotted: start of episodes {', '.join(str(ep) for _, ep in marks)})"
+                              if marks else ""))
+        fig.tight_layout()
+        return fig
+
+    try:
+        fig = _grid(
+            [("target", target_log, {}),
+             ("actual", actual_log, {"marker": "o", "markersize": 2})],
+            "Both arms + grippers: commanded target vs. measured actual (async)",
+            legend=True, mark_stale=True,
+        )
+        fig2 = _grid(
+            [("raw queued action", raw_log, {})],
+            "Queued policy action before binarize + speed clamp"
+            " -- gaps are ticks the queue was starved",
+        )
+
+        if stale_log is not None:
+            # Printed, not just plotted: a frozen channel also freezes the speed clamp's anchor,
+            # so this is a control-correctness number, not a plotting footnote.
+            rows = [(k, sum(stale_log[k]) / len(stale_log[k])) for k in ACTION_NAMES
+                    if len(stale_log[k])]
+            bad = [(k, f) for k, f in rows if f > 0.05]
+            if bad:
+                print("[WARN] feedback stopped refreshing on: "
+                      + ", ".join(f"{k} {f:.0%}" for k, f in sorted(bad, key=lambda r: -r[1])))
+                print("       Those channels' 'actual' traces are retained values, and because the"
+                      " speed clamp anchors on the measured position, their COMMANDS are affected"
+                      " too -- not just the plot. Raise --can-recv-rounds / lower"
+                      " --can-first-timeout-us and re-run before reading anything into them.")
+            else:
+                print("[INFO] no channel showed stale feedback (>5% of ticks).")
+
+        if save_path:
+            # splitext, not rpartition("."): a path like out.d/run splits on the directory's dot.
+            base, ext = os.path.splitext(save_path)
+            ext = ext or ".png"
+            fig.savefig(base + ext, dpi=120)
+            fig2.savefig(f"{base}-raw{ext}", dpi=120)
+            print(f"[INFO] Saved tracking plots to {base}{ext} and {base}-raw{ext}")
+
+        plt.show()
+    except Exception as e:
+        print(f"[WARN] Could not display the tracking plots ({type(e).__name__}: {e}). "
+              f"Re-run with --save-plot PATH to write them to disk instead.")
 
 
 if __name__ == "__main__":

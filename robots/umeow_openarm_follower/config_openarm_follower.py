@@ -63,6 +63,29 @@ class OpenArmFollowerConfig(RobotConfig):
     recv_rounds: int = 8
     recv_first_timeout_us: int = 50_000
     recv_mop_timeout_us: int | None = None   # None -> every round uses recv_first_timeout_us
+
+    # How long a read may WAIT for the motors to answer, as opposed to how many times it polls.
+    # These are different things and only this one is under our control: OpenArm::recv_all()'s
+    # timeout argument does not produce a wait on this build -- measured 2026-08-26, recv_all()
+    # returns in 0.04-0.16 ms whether it is passed 500 us or 200 000 us, on an empty socket. So
+    # `recv_rounds` rounds of it cover 2-3 ms of wall clock in total, and cover it by spinning,
+    # not by waiting. The motors answer 0.26 ms (J1) to 1.02 ms (J8) after the request on an idle
+    # bus and later than that under a control loop's traffic, so the drain window was racing the
+    # replies, and the motors that answer LAST -- the highest CAN ids, J5-J8 -- were the ones the
+    # window kept closing on. See _read_motor_positions_once().
+    #
+    # The read now stops as soon as every channel has answered, so this ceiling is only ever paid
+    # when something really is missing; a healthy read costs about as much as the old spin did.
+    recv_deadline_us: int = 8_000
+
+    # How long a still-silent channel waits before its arm is asked again, inside one read.
+    # 0 disables re-asking entirely, which is there to be USED: a re-ask puts another burst on
+    # the wire, and if a motor's reply latency ever grew past this interval the re-ask would be
+    # landing on top of the very answer it is waiting for -- a self-sustaining outage that looks
+    # exactly like a hardware fault. Measured reply latency on this rig is 0.13-0.87 ms with a
+    # max of 0.87, so 3 ms has a comfortable margin, but the margin is an assumption about a
+    # moving arm made from measurements on a still one. Run once with 0 to settle it.
+    recv_retry_us: int = 3_000
     
     gripper_motor_type = MotorType.DM4310
     gripper_motor_send_id = 0x08

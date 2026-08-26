@@ -1,6 +1,5 @@
 {
   "_comment": "Filled in during Phase 0 bench verification (see mirror_bridge.py docstring). Do not guess these values -- run probe_joint_sign.py (sim) against safe_probe.py (real) per joint, and the gripper ramp check, before trusting this file.",
-
   "left": {
     "sign": {
       "_comment": "1 if a positive delta in Isaac Sim moves this joint the same physical direction as a positive delta sent to the real motor; -1 if opposite. Determine per-joint with safe_probe.py --side left --joint N --step 0.05 against probe_joint_sign.py.",
@@ -23,12 +22,11 @@
       "joint7": 0.0
     },
     "gripper": {
-      "_comment": "Raw LJ8.pos motor value at fully-open and fully-closed, from ramping LJ8.pos with safe_probe.py --side left --joint 8.",
-      "open_raw": 0.0,
-      "closed_raw": -1.1755
+      "_comment": "Raw LJ8/RJ8 motor value at fully-open and fully-closed. Re-measured 2026-08-25 after re-zeroing BOTH gripper motors at the firmly-closed stop with openarm-can-set-zero <canport> 008, which is the vendor convention (docs.openarm.dev motor-config: 'For grippers, the closed position is used as zero by default'). closed_raw is therefore exactly 0.0 now; it used to be open_raw that sat at ~0. The two open_raw values have OPPOSITE signs because the two gripper motors turn opposite ways to close -- that is real, not a typo, and is why openarm-can-zero-position-calibration's hardcoded +0.2 deg bump_to_limit() finds the CLOSED stop on the right arm and the OPEN stop on the left.",
+      "open_raw": 1.2121,
+      "closed_raw": 0.0
     }
   },
-
   "right": {
     "sign": {
       "joint1": 1,
@@ -49,8 +47,9 @@
       "joint7": 0.0
     },
     "gripper": {
-      "open_raw": 0.0177,
-      "closed_raw": 1.2304
+      "open_raw": -1.298,
+      "closed_raw": 0.0,
+      "_comment": "Raw LJ8/RJ8 motor value at fully-open and fully-closed. Re-measured 2026-08-25 after re-zeroing BOTH gripper motors at the firmly-closed stop with openarm-can-set-zero <canport> 008, which is the vendor convention (docs.openarm.dev motor-config: 'For grippers, the closed position is used as zero by default'). closed_raw is therefore exactly 0.0 now; it used to be open_raw that sat at ~0. The two open_raw values have OPPOSITE signs because the two gripper motors turn opposite ways to close -- that is real, not a typo, and is why openarm-can-zero-position-calibration's hardcoded +0.2 deg bump_to_limit() finds the CLOSED stop on the right arm and the OPEN stop on the left."
     }
   }
 }
