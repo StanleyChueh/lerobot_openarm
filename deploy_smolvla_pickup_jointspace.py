@@ -20,7 +20,7 @@ runs an UNTESTED checkpoint on real hardware for the first time.
 Usage (dual-arm checkpoint: body + BOTH wrist cameras fed to the model):
   python deploy_smolvla_pickup_jointspace.py \\
       --checkpoint ethanCSL/<dual_arm_checkpoint> \\
-      --body-cam-index 4 --wrist-cam-index 10 --right-wrist-cam-index 12 \\
+      --body-cam-index rs_body --wrist-cam-index rs_wrist_left --right-wrist-cam-index rs_wrist_right \\
       --inference-hz 10 --max-joint-speed 0.3 --max-episode-seconds 10
 
 Usage (two-camera checkpoint, body + left wrist only):
@@ -40,6 +40,11 @@ exactly, so the names here are deliberately the dataset's own, not "left"/"right
                               third camera; omit for an older left-arm-only two-camera checkpoint)
   --front-cam-index        -> observation.images.front_cam        (the older "..._three_cams"
                               variant's third camera; unrelated to the right wrist one)
+
+Every camera option takes either a bare /dev/video index (4) or a stable udev alias
+(rs_body / rs_wrist_left / rs_wrist_right, from /etc/udev/rules.d/99-realsense-rgb.rules) -- the
+alias is pinned to the camera's USB serial, so prefer it: a RealSense exposes four /dev/video
+nodes and their numbering shifts on re-plug or reboot.
 
 Only pass the optional ones for a checkpoint actually trained with them -- the preprocessor will
 otherwise reject/ignore an unexpected image key, and a camera the checkpoint DOES expect but that
@@ -144,6 +149,7 @@ model for it and the raw prediction should be passed through instead.
 import argparse
 import fcntl
 import os
+import re
 import time
 
 import cv2
@@ -430,6 +436,31 @@ def _check_checkpoint_matches(model, preprocess, model_cam_keys: list) -> None:
         )
 
 
+def _video_index(spec: str) -> int:
+    """Camera CLI argument -> /dev/video index.
+
+    Accepts a bare index ("4"), a stable udev alias ("rs_body", from 99-realsense-rgb.rules), or
+    any path that resolves to a /dev/videoN node ("/dev/rs_body", "/dev/v4l/by-id/usb-Intel...").
+    Everything downstream -- OpenCVCameraConfig and the USB reset, which reads
+    /sys/class/video4linux/videoN -- wants the integer, so the alias is resolved here, once.
+
+    The aliases exist because a RealSense exposes four /dev/video nodes and their numbering shifts
+    when cameras are re-plugged or the machine reboots; the symlink is pinned to the camera's USB
+    serial, so it always points at that camera's colour stream."""
+    if spec.isdigit():
+        return int(spec)
+
+    path = spec if os.path.isabs(spec) else os.path.join("/dev", spec)
+    if not os.path.exists(path):
+        raise argparse.ArgumentTypeError(
+            f"{spec!r} is neither a /dev/video index nor an existing device path ({path} not found)")
+
+    node = os.path.basename(os.path.realpath(path))
+    if not re.fullmatch(r"video\d+", node):
+        raise argparse.ArgumentTypeError(f"{spec!r} resolves to {node}, which is not a /dev/videoN node")
+    return int(node[len("video"):])
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
@@ -441,39 +472,43 @@ def parse_args():
         ),
     )
     parser.add_argument(
-        "--body-cam-index", type=int, required=True,
-        help="/dev/video index of the RealSense D435i mounted on the robot body (its color/RGB stream).",
-    )
-    parser.add_argument(
-        "--wrist-cam-index", type=int, required=True,
+        "--body-cam-index", type=_video_index, required=True,
         help=(
-            "/dev/video index of the RealSense D435i mounted on the LEFT wrist (its color/RGB "
-            "stream) -- fed to the model as observation.images.wrist_cam (the dataset's key for "
-            "the left wrist has no 'left_' prefix; only the right one is prefixed)."
+            "Camera on the robot body (its color/RGB stream). Takes a /dev/video index (4) or "
+            "a stable udev alias (rs_body, from 99-realsense-rgb.rules)."
         ),
     )
     parser.add_argument(
-        "--right-wrist-cam-index", type=int, default=None,
+        "--wrist-cam-index", type=_video_index, required=True,
         help=(
-            "/dev/video index of the camera on the RIGHT wrist, fed to the model as "
-            "observation.images.right_wrist_cam. REQUIRED for the dual-arm checkpoints trained "
-            "with it (body_cam + wrist_cam + right_wrist_cam); omit for an older left-arm-only "
-            "two-camera checkpoint."
+            "Camera on the LEFT wrist (its color/RGB stream) -- fed to the model as "
+            "observation.images.wrist_cam (the dataset's key for the left wrist has no 'left_' "
+            "prefix; only the right one is prefixed). Takes a /dev/video index (10) or a stable "
+            "udev alias (rs_wrist_left)."
         ),
     )
     parser.add_argument(
-        "--front-cam-index", type=int, default=None,
+        "--right-wrist-cam-index", type=_video_index, default=None,
         help=(
-            "/dev/video index of a camera named 'front_cam', for the older checkpoints trained "
+            "Camera on the RIGHT wrist, fed to the model as observation.images.right_wrist_cam. "
+            "REQUIRED for the dual-arm checkpoints trained with it (body_cam + wrist_cam + "
+            "right_wrist_cam); omit for an older left-arm-only two-camera checkpoint. Takes a "
+            "/dev/video index or a udev alias (rs_wrist_right)."
+        ),
+    )
+    parser.add_argument(
+        "--front-cam-index", type=_video_index, default=None,
+        help=(
+            "Camera named 'front_cam' (a /dev/video index or a udev alias), for the older checkpoints trained "
             "with one (e.g. ..._three_cams) -- unlike --side-cam-index, this one IS fed to the "
             "model as a real observation.images.front_cam input, same as body/wrist. Unrelated to "
             "--right-wrist-cam-index. Omit unless the checkpoint was trained with a front camera."
         ),
     )
     parser.add_argument(
-        "--side-cam-index", type=int, default=None,
+        "--side-cam-index", type=_video_index, default=None,
         help=(
-            "/dev/video index of an EXTRA camera (e.g. a side-view webcam at /dev/video12) shown "
+            "An EXTRA camera (a /dev/video index or a udev alias, e.g. a side-view webcam at /dev/video12) shown "
             "in the live visualization / saved video only -- NOT fed to the model regardless of "
             "checkpoint (that's what --right-wrist-cam-index / --front-cam-index are for). Omit "
             "to skip it."
