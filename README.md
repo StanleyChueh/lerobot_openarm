@@ -1,88 +1,30 @@
-# lerobot_openarm
+# Run in Real-world
 
-Please install uv first. See Installation for details.
- [Installation](https://docs.astral.sh/uv/getting-started/installation/).
-
-Clone this repo, and sync the environments automatically.
+## Activate CAN-FD
 
 ```
-git clone https://github.com/umeow0716/lerobot_openarm.git
+cd ~/Stanley_ws/openarm_can/setup
+```
+
+```
+sudo ./my_arm 
+```
+
+## Model evaluation on real robot
+
+```
+cd ~/Stanley_ws/lerobot_openarm
 uv sync
 source .venv/bin/activate
+env -u PYTHONPATH LD_LIBRARY_PATH=/usr/local/cuda/lib64 python deploy_smolvla_pickup_jointspace.py     --checkpoint ethanCSL/openarm_visuomotor_VR_pringles_V14_background_30hz     --body-cam-index rs_body --wrist-cam-index rs_wrist_left --right-wrist-cam-index rs_wrist_right     --calibration calibration.json     --inference-hz 30 --max-joint-speed 1.5 --max-episode-seconds 600 
 ```
 
-Ensure the robotic arm is powered on and correctly plugged in. Then, run this script to enable the CAN interface:
+Deploy in async evaluation
 
 ```
-cd ~/openarm_can/setup
-sudo ./my_arm
+cd ~/Stanley_ws/lerobot_openarm
+uv sync
+source .venv/bin/activate
+env -u PYTHONPATH LD_LIBRARY_PATH=/usr/local/cuda/lib64 python deploy_smolvla_async.py     --checkpoint ethanCSL/openarm_visuomotor_VR_pringles_V14_background_30hz    --body-cam-index rs_body --wrist-cam-index rs_wrist_left --right-wrist-cam-index rs_wrist_right     --calibration calibration.json     --control-hz 30 --max-joint-speed 1.5     --actions-per-chunk 50 --chunk-size-threshold 0.8     --max-episode-seconds 25 --max-episodes 20
 ```
 
-### Record an eposide 
-```
-python record.py
-```
-
-### Training
-```
-lerobot-train \
-    --policy.path=lerobot/smolvla_openarm \
-    --dataset.repo_id=ethanCSL/0508-6767 \
-    --batch_size=32 \
-    --steps=30000 \
-    --output_dir=outputs/train/svla_multiblock \
-    --job_name=my_smolvla_training \
-    --policy.device=cuda \
-    --wandb.enable=false \
-    --policy.repo_id=0508-6767 \
-    --rename_map='{"observation.images.right_camera": "observation.images.camera1", "observation.images.left_camera": "observation.images.camera2", "observation.images.body_camera": "observation.images.camera3"}'
-
-``` 
-
-### Deploy the policy
-```
-python deploy_ACT.py
-python deploy_smolvla.py
-```
-
-lerobot-train \
-    --policy.type=smolvla_openarm \
-    --dataset.repo_id=ethanCSL/0409tist \
-    --batch_size=32 \
-    --steps=30000 \
-    --output_dir=outputs/train/0409tist3 \
-    --job_name=my_smolvla_training \
-    --policy.device=cuda \
-    --wandb.enable=false \
-    --policy.repo_id=0409tist3 \
-    --rename_map='{"observation.images.right_camera": "observation.images.camera1", "observation.images.left_camera": "observation.images.camera2", "observation.images.body_camera": "observation.images.camera3"}'
-
-lerobot-train \
-  --dataset.repo_id=ethanCSL/0409tist \
-  --policy.type=smolvla_openarm \
-  --policy.expert_width_multiplier=0.5 \
-  --policy.num_vlm_layers=0 \
-  --policy.vlm_model_name=HuggingFaceTB/SmolVLM2-500M-Instruct \
-  --output_dir=outputs/train/0409tist4 \
-  --job_name=smolvla_pick_openarm \
-  --batch_size=16 \
-  --steps=30000 \
-  --optimizer.lr=1e-5 \
-  --num_workers=4 \
-  --save_freq=2500 \
-  --eval_freq=2500 \
-  --wandb.enable=false \
-  --policy.push_to_hub=true \
-  --save_checkpoint=true \
-  --policy.repo_id=0409tist4
-
-lerobot-train \
-    --policy.type=smolvla \
-    --dataset.repo_id=ethanCSL/0422_stanley_red_cube \
-    --batch_size=32 \
-    --steps=30000 \
-    --output_dir=outputs/train/ethanCSL/0422_umeow_red_cube \
-    --job_name=my_smolvla_training \
-    --policy.device=cuda \
-    --policy.repo_id=ethanCSL/0422_umeow_red_cube_test \
-    --wandb.enable=false
