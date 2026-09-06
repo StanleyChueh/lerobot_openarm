@@ -205,3 +205,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Per-run attention-visualization dumps (large PNGs, not meant for version control)
+attention_*/

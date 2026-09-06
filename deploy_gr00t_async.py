@@ -1,118 +1,75 @@
 """
-Asynchronous SmolVLA rollout on the real OpenArm follower -- the same 16D joint-space checkpoint
-deploy_smolvla_pickup_jointspace.py runs, but with inference moved OFF the control loop.
+Asynchronous GR00T N1.7 rollout on the real OpenArm follower -- the GR00T counterpart of
+deploy_smolvla_async.py, same wire-free threading split (control thread vs inference thread), same
+hardware layer (cameras, calibration, gripper binarization, speed clamp), different model.
 
-WHY THIS EXISTS. The synchronous script's loop is: read observation -> forward pass -> send action.
-Inference is therefore *inside* the control period, so the only way to afford a forward pass is to
-amortise it over a long action chunk: n_action_steps=50 at the dataset's own 20 Hz means the
-policy looks at the cameras once every 2.5 seconds and the arm is blind in between. Lowering
---n-action-steps buys reactivity but pays for it in control rate, because the forward pass is
-still serialised with the motion. There is no setting of that script where the robot both holds
-20 Hz and re-plans often.
+Read deploy_smolvla_async.py's own docstring first for WHY async exists at all (decoupling
+inference from the control period) and for the full RATE / ActionQueue / ObservationBus
+explanation -- none of that is repeated here because none of it changed. This docstring only
+covers what is different for GR00T, all found and fixed while getting
+scripts/imitation_learning/lerobot/gr00t_server.py (IsaacLab, same checkpoint family) working:
 
-Async breaks the coupling: a control thread pops one action per tick from a queue and never waits
-for the GPU, while an inference thread refills that queue from the LATEST observation whenever the
-queue drains past a threshold. The control rate is then bounded by the CAN read, and the re-plan
-rate by the forward pass, independently.
+1. THIS CHECKPOINT USES RELATIVE ACTIONS -- predict_action_chunk() output is joint-position DELTAS
+   relative to the observation the chunk was predicted from (see its config.json:
+   use_relative_actions=True, relative_exclude_joints=["LJ8", "RJ8"] for the two grippers, which
+   stay absolute). That has one consequence this file cannot copy from the SmolVLA version:
+   deploy_smolvla_async.py's AsyncPolicy._predict_chunk() postprocesses ONE TIMESTEP AT A TIME
+   (`postprocess(chunk[:, i, :])` in a loop) because SmolVLA's actions are absolute and independent
+   per step. GR00T's own postprocessor step (GrootN17ActionDecodeStep) explicitly REJECTS that:
 
-RATE. The training data is 20 fps -- meta/info.json says fps=20 and the episode timestamps step
-by exactly 50.0ms -- so --control-hz 20 plays the policy's chunk back at the speed its demos were
-recorded at, and is the default here. Raising it does NOT make the robot more reactive (that is
---chunk-size-threshold's job); it makes the demo motions play fast-forward.
+       "GrootN17ActionDecodeStep cannot decode native relative actions one step at a time. Decode
+       the full action chunk returned by predict_action_chunk while the matching
+       GrootN17PackInputsStep state is still cached, then queue the decoded absolute actions."
 
-Measured on this machine, V14_background at 512x512 x3 cameras: 316ms for the first forward pass,
-then 84-93ms warm. So the floor on the re-plan interval is ~92ms; where it actually lands is set
-by how much queued motion --chunk-size-threshold lets drain first, which is what the two knobs
-below trade against each other. Re-plan interval is (1 - threshold) * actions_per_chunk ticks,
-floored at one forward pass. From the threading harness at --control-hz 20 with inference stubbed
-at 92ms (starved% is the fraction of ticks that found an empty queue and held position -- the 1.7%
-here is entirely the cold-start pass):
+   Each row of the chunk is a delta relative to the SAME cached observation state, added back by
+   the decode step; feeding it one row at a time collapses the batch dimension it uses to do that
+   and raises NotImplementedError. So _predict_chunk here calls self.postprocess() ONCE on the
+   whole (1, actions_per_chunk, ACTION_DIM) tensor -- still stateless overall (nothing carries
+   between calls; each forward pass supplies its own reference state) -- and only splits into
+   per-timestep dicts (make_robot_action per row) AFTER that single decode call.
 
-    --actions-per-chunk  --chunk-size-threshold   re-plan every   starved
-             50                  0.50                1200ms         1.7%
-             50                  0.80                 500ms         1.7%
-             50                  0.90                 250ms         1.7%   <- default
-             25                  0.80                 250ms         1.7%
-             10                  0.50                 250ms         1.7%
-             10                  0.80                  92ms         1.7%   <- GPU-bound
-              5                  0.50                 150ms         1.7%
+2. LOADING: strict=False and a CPU-first load, not model.to(device) then done.
+   - strict=False: GR00T's Qwen backbone ties its (unused) LM head weight to the input embedding
+     (see lerobot's groot_n1_7._tie_unused_qwen_lm_head). The checkpoint's safetensors file lists
+     embed_tokens.weight separately from that tie; the freshly constructed (already-tied) model
+     does not, so a strict load raises "Unexpected key(s)" on a weight that loads correctly under
+     lm_head.weight either way -- confirmed harmless, not a missing weight.
+   - CPU-first: GrootPolicy.from_pretrained() (via the base PreTrainedPolicy.from_pretrained) moves
+     the policy to config.device BEFORE returning, and this checkpoint's saved config.json says
+     device="cuda". Casting to bf16 AFTER that needs the fp32 and bf16 copies resident on the GPU
+     at the same time, and CUDA's caching allocator does not hand the freed fp32 blocks back to the
+     driver afterward -- measured on the IsaacLab side: 13.6GB resident, barely under the full fp32
+     footprint, instead of the ~6GB bf16 needs. Forcing config.device="cpu" before from_pretrained()
+     keeps the fp32 load AND the cast in system RAM (plentiful), so the GPU only ever receives the
+     already-bf16-sized model in the one .to(device) call that follows. See --dtype below.
 
-The sync script at this rate looks at the cameras once every 2.5s (50 steps at 20 Hz), so the
-default here is 10x fresher. Prefer raising the threshold over shrinking the chunk: every queued
-action is re-blended at 0.7 weight on each re-plan, so a long chunk refreshed often stays smoother
-than a short chunk replaced outright.
+3. CHUNK SIZE: this checkpoint's chunk_size/n_action_steps is 16, not SmolVLA's 50 (see its
+   config.json). --actions-per-chunk here is bounded by THIS checkpoint's chunk_size, so
+   deploy_smolvla_async.py's own example (--actions-per-chunk 50) would be rejected outright --
+   leave --actions-per-chunk unset (defaults to model.config.chunk_size) unless you have a specific
+   reason to keep fewer than the full 16.
 
-RELATION TO lerobot/async_inference. This is a port of the algorithm in
-lerobot_experiment/lerobot/src/lerobot/async_inference/{robot_client,policy_server,configs}.py,
-with the gRPC transport removed. Ported faithfully:
+4. TASK / cameras / action layout are UNCHANGED: this checkpoint
+   (ethanCSL/openarm_visuomotor_VR_pringles_V14_background_30hz_gr00t) is a GR00T fine-tune of the
+   exact same dataset the SmolVLA checkpoint above is, converted through the same pipeline, so the
+   16D LJ1..LJ8+RJ1..RJ8 layout, ACTION_NAMES, TASK string, and the observation.images.{body_cam,
+   wrist_cam,right_wrist_cam} camera keys (confirmed against this checkpoint's own config.json --
+   no --rename_map was used) all match deploy_smolvla_pickup_jointspace.py's constants exactly, so
+   this file imports them unchanged rather than redefining them.
 
-  - TimedAction / integer timestep bookkeeping        (helpers.py)
-  - the chunk_size_threshold re-plan trigger          (RobotClient._ready_to_send_observation)
-  - must-go: an empty queue always forces a re-plan   (RobotClient.control_loop_observation)
-  - overlap aggregation between the queued chunk and
-    the incoming one, keyed by timestep               (RobotClient._aggregate_action_queues)
-  - AGGREGATE_FUNCTIONS by name                       (configs.py)
-  - latest-observation-only, maxsize=1 semantics      (PolicyServer.observation_queue)
-
-Deliberately NOT ported -- the two-process gRPC split. Three things make it cost more than it buys
-on this setup, all checked rather than assumed:
-
-  - OpenArmFollower is not in lerobot's robot registry, so RobotClient's make_robot_from_config()
-    cannot build it; it would have to be re-exposed as a lerobot plugin first.
-  - OpenArmFollower.send_action(action, target_vel) takes a second required argument (abd1499),
-    while RobotClient.control_loop_action calls send_action(dict) -- a TypeError on the first tick.
-  - The gripper calibration boundary (raw <-> sim, see the GRIPPER CALIBRATION note in
-    deploy_smolvla_pickup_jointspace.py) has to wrap get_observation/send_action on the ROBOT side.
-    RobotClient has no hook there, so the policy server would be normalising raw motor units.
-
-  Also: grpcio is not installed in this env (lerobot.transport raises on import), and the local
-  policy_server.py's _get_action_chunk() is hard-coded to pi05's RTC signature --
-  predict_action_chunk(obs, inference_delay=..., prev_chunk_left_over=..., execution_horizon=...)
-  -- which SmolVLAPolicy.predict_action_chunk(batch, noise=None, **kwargs) would reject.
-
-  None of that is fatal, and the split is worth doing if the policy ever moves to a second machine.
-  The thread boundary here is the same boundary, so that change is localised to _inference_worker.
-
-WHAT THIS DOES NOT FIX. Async makes the policy react to what it currently sees. It does not give
-it a behaviour it never learned: the training set contains no failed grasps and no empty-table
-frames (Mimic diverts failed trials to a separate *_failed.hdf5), so a missed grasp is still
-followed by the rest of the hand-over script. Async raises the chance of grasping correctly in the
-first place -- it does not add retry. Retry has to come from outside the policy (detect, reset,
-re-run) or from adding recovery demos and retraining.
-
-POLICY STATE. Unlike the sync script this never calls model.select_action(), so SmolVLA's internal
-action queue is never used and model.reset() is never needed: predict_action_chunk() is stateless,
-and this file owns the only queue. Episode-to-episode carryover is handled by flushing OUR queue.
-
-Usage (same checkpoint/cameras/calibration as the sync script):
-  python deploy_smolvla_async.py \\
-      --checkpoint ethanCSL/openarm_visuomotor_VR_pringles_V14_background \\
+Usage (cameras/calibration identical to the SmolVLA scripts; --actions-per-chunk left at this
+checkpoint's own chunk_size of 16 -- do not copy SmolVLA's --actions-per-chunk 50):
+  python deploy_gr00t_async.py \\
+      --checkpoint ethanCSL/openarm_visuomotor_VR_pringles_V14_background_30hz_gr00t \\
       --body-cam-index rs_body --wrist-cam-index rs_wrist_left --right-wrist-cam-index rs_wrist_right \\
       --calibration calibration.json \\
-      --control-hz 20 --max-joint-speed 2.0 --max-episode-seconds 30
+      --control-hz 30 --max-joint-speed 1.5 --chunk-size-threshold 0.8 \\
+      --max-episode-seconds 25 --max-episodes 20
 
-  The camera arguments take either a /dev/video index or a udev alias pinned to the camera's USB
-  serial (rs_body / rs_wrist_left / rs_wrist_right, from /etc/udev/rules.d/99-realsense-rgb.rules).
-  Prefer the alias: a D435i publishes six /dev/video nodes and their numbering shifts on re-plug,
-  reboot, or the USB reset this script itself does at startup, so a hard-coded index can silently
-  swap the body and wrist feeds -- which the policy cannot detect, it just acts on the wrong view.
-
-Tuning, in the order worth touching:
-  --chunk-size-threshold  when to re-plan, as a fraction of a chunk still queued (default 0.9).
-                          Higher = re-plans sooner = fresher actions, more GPU. 0.0 re-plans only
-                          when the queue empties (closest to the sync script's behaviour). This,
-                          not --control-hz, is the reactivity knob.
-  --actions-per-chunk     how much of each 50-step chunk to keep (default 50). Lowering it bounds
-                          how stale a queued action can be if inference stalls.
-  --aggregate-fn          how an incoming chunk blends with the overlapping queued one.
-                          weighted_average (default) = 0.3*old + 0.7*new, latest_only = hard swap.
-  --control-hz            leave at 20: it is the dataset's own fps, so the chunk plays at demo
-                          speed. The loop has ~8ms of work per tick, so the headroom is real but
-                          spending it on a higher rate just runs the demos fast-forward.
-
-Everything below the queue -- gripper calibration, Schmitt-trigger binarization, the
---max-joint-speed clamp against measured joints, Isaac Sim's reset pose per episode -- is imported
-unchanged from deploy_smolvla_pickup_jointspace.py rather than re-derived, so the two stay in sync.
+Everything from ActionQueue down through the control loop and plotting is a straight copy of
+deploy_smolvla_async.py's own classes/loop (the async harness itself has nothing policy-specific in
+it) with only the two changes above; consult that file's docstring for the reasoning behind
+--chunk-size-threshold, --aggregate-fn, the speed clamp, and the tracking plots.
 """
 
 import argparse
@@ -130,8 +87,9 @@ import torch
 
 from lerobot.cameras.opencv.camera_opencv import OpenCVCamera
 from lerobot.cameras.opencv.configuration_opencv import OpenCVCameraConfig
+from lerobot.configs import PreTrainedConfig
 from lerobot.policies.factory import make_pre_post_processors
-from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
+from lerobot.policies.groot.modeling_groot import GrootPolicy
 from lerobot.policies.utils import build_inference_frame, make_robot_action
 from lerobot.utils.feature_utils import hw_to_dataset_features
 
@@ -164,12 +122,8 @@ from sim_bridge_common import (
     sim_init_pose_action,
 )
 
-# lerobot/async_inference/configs.py's AGGREGATE_FUNCTIONS, verbatim. These blend an incoming
-# chunk's action with the queued action for the SAME timestep -- the overlap that exists because
-# inference started from an observation several control ticks ago and the chunk it produced covers
-# ticks the queue already has an opinion about. A hard swap (latest_only) is not obviously right:
-# the queued action came from a chunk that was internally smooth, and replacing individual actions
-# inside it mid-execution is what produces a visible discontinuity in the arm.
+# lerobot/async_inference/configs.py's AGGREGATE_FUNCTIONS, verbatim -- see deploy_smolvla_async.py
+# for why a weighted blend rather than a hard swap.
 AGGREGATE_FUNCTIONS = {
     "weighted_average": lambda old, new: 0.3 * old + 0.7 * new,
     "latest_only": lambda old, new: new,
@@ -182,11 +136,8 @@ AGGREGATE_FUNCTIONS = {
 class TimedAction:
     """One action, tagged with the control-tick index it is meant to be executed on.
 
-    The timestep -- not arrival order -- is what makes async coherent: a chunk predicted from the
-    observation at tick 100 covers ticks 100..149 no matter when it lands, so actions for ticks
-    already executed can be dropped and actions for ticks still queued can be aggregated against
-    what is already there. lerobot's TimedAction also carries a wall-clock timestamp for measuring
-    network latency; with no network here that field would only ever be read by a log line."""
+    See deploy_smolvla_async.py's TimedAction docstring -- unchanged reasoning, timestep rather
+    than arrival order is what makes the aggregation in ActionQueue.ingest coherent."""
 
     timestep: int
     action: np.ndarray  # (ACTION_DIM,) absolute joint targets, sim convention (0.0..0.044 grippers)
@@ -195,24 +146,17 @@ class TimedAction:
 class ActionQueue:
     """Timestep-keyed action queue shared by the control and inference threads.
 
-    A dict rather than lerobot's Queue-of-TimedAction: _aggregate_action_queues rebuilds a fresh
-    Queue on every ingest precisely because a Queue cannot be indexed by timestep, and that rebuild
-    is the only reason it holds the lock across the whole merge. Keyed by timestep the merge is a
-    dict update, and popping is min(keys) -- same semantics, no rebuild."""
+    Identical to deploy_smolvla_async.py's ActionQueue -- the scheduling policy (dict keyed by
+    timestep, popped by min(keys)) has nothing to do with which policy fills it."""
 
     def __init__(self):
         self._lock = threading.Lock()
         self._actions: dict[int, np.ndarray] = {}
         self._latest_executed = -1
-        self.chunk_size = 1  # largest chunk seen, for the fill-ratio trigger (RobotClient's own)
+        self.chunk_size = 1  # largest chunk seen, for the fill-ratio trigger
 
     def ingest(self, chunk: np.ndarray, first_timestep: int, aggregate_fn) -> tuple[int, int, int]:
-        """Merge a freshly predicted chunk in. Returns (dropped, merged, added) for logging.
-
-        `dropped` is the count of chunk actions whose tick has already been executed -- i.e. how
-        many control ticks elapsed while this forward pass ran. That number IS the inference
-        latency in ticks, measured rather than assumed, and it is worth watching: if it approaches
-        --actions-per-chunk the queue is being refilled with actions that are all already stale."""
+        """Merge a freshly predicted chunk in. Returns (dropped, merged, added) for logging."""
         dropped = merged = added = 0
         with self._lock:
             self.chunk_size = max(self.chunk_size, len(chunk))
@@ -239,11 +183,7 @@ class ActionQueue:
             return TimedAction(timestep=ts, action=action)
 
     def flush(self) -> None:
-        """Drop every queued action and restart tick numbering -- called between episodes.
-
-        Without this, episode N+1 opens by executing actions planned from episode N's final
-        observation, of a scene that no longer exists and from a pose the arm has since been ramped
-        away from. Same reason the sync script calls model.reset() per episode."""
+        """Drop every queued action and restart tick numbering -- called between episodes."""
         with self._lock:
             self._actions.clear()
             self._latest_executed = -1
@@ -258,10 +198,7 @@ class ActionQueue:
             return len(self._actions)
 
     def fill_ratio(self) -> float:
-        """Queued actions as a fraction of one chunk -- RobotClient._ready_to_send_observation's
-        quantity. Re-planning when this drops below --chunk-size-threshold means the next chunk
-        arrives while there is still queued motion to cover the forward pass, which is the whole
-        reason the control thread never stalls."""
+        """Queued actions as a fraction of one chunk -- the re-plan trigger's own quantity."""
         with self._lock:
             return len(self._actions) / max(self.chunk_size, 1)
 
@@ -269,9 +206,9 @@ class ActionQueue:
 class ObservationBus:
     """Single-slot handoff of the latest observation to the inference thread.
 
-    maxsize=1 with overwrite, matching PolicyServer.observation_queue: an observation that has been
-    superseded before inference picked it up is worthless, and queueing it would only guarantee the
-    policy plans from a stale frame. Publishing overwrites; there is nothing to fall behind on."""
+    Identical to deploy_smolvla_async.py's ObservationBus -- maxsize=1 with overwrite, since an
+    observation superseded before inference picks it up is worthless regardless of which policy
+    would have consumed it."""
 
     def __init__(self):
         self._lock = threading.Lock()
@@ -279,9 +216,6 @@ class ObservationBus:
         self._ready = threading.Event()
 
     def publish(self, obs: dict, timestep: int) -> None:
-        # Copy the camera arrays: lerobot's OpenCVCamera hands back a frame the reader thread may
-        # reuse, and the inference thread holds this for the length of a forward pass. Copying only
-        # on publish (once per re-plan, not once per control tick) keeps that off the hot path.
         snapshot = {k: (v.copy() if isinstance(v, np.ndarray) else v) for k, v in obs.items()}
         with self._lock:
             self._slot = (snapshot, timestep)
@@ -305,11 +239,10 @@ class ObservationBus:
 class AsyncPolicy:
     """The inference thread: latest observation in, action chunk out, forever.
 
-    This is policy_server.py's GetActions loop with the gRPC and pickle layers deleted. Everything
-    it touches (model, preprocessor, postprocessor, CUDA) stays on this thread; everything the
-    control thread touches (robot, CAN, cameras) stays on that one. The only shared state is the
-    two synchronised objects above, which is what makes the split safe without the process
-    boundary lerobot uses to enforce it."""
+    Structurally identical to deploy_smolvla_async.py's AsyncPolicy. The one real change is inside
+    _predict_chunk: the postprocess() call moves from per-timestep (a loop over chunk[:, i, :]) to
+    once on the whole chunk, because this checkpoint's relative-action decode step requires the
+    batch dimension intact to read back its cached reference state -- see the module docstring."""
 
     def __init__(self, *, model, preprocess, postprocess, dataset_features, device,
                  actions_per_chunk, aggregate_fn, chunk_size_threshold, obs_bus, action_queue,
@@ -329,7 +262,7 @@ class AsyncPolicy:
         self.shutdown = threading.Event()
         self.inference_times: deque[float] = deque(maxlen=50)
         self.replans = 0
-        self.discarded = 0  # observations withdrawn because a chunk landed while they waited
+        self.discarded = 0
         self.thread = threading.Thread(target=self._worker, name="inference", daemon=True)
 
     def start(self) -> None:
@@ -343,10 +276,14 @@ class AsyncPolicy:
     def _predict_chunk(self, obs: dict) -> np.ndarray:
         """One forward pass -> (K, ACTION_DIM) absolute joint targets in the sim convention.
 
-        predict_action_chunk() rather than select_action(): select_action pops one action from
-        SmolVLA's own internal queue and refills it only when empty, which is exactly the
-        chunk-scheduling policy this file replaces. Asking for the raw chunk is what lets the
-        queue above own the scheduling instead."""
+        predict_action_chunk() rather than select_action(): GrootPolicy.select_action() explicitly
+        raises NotImplementedError for a relative-action checkpoint like this one (cached queued
+        actions would be decoded against a newer, wrong, observation state) -- see module
+        docstring point 1. Asking for the raw chunk and owning the queue ourselves is not a
+        workaround for that restriction, it is the documented way around it: GrootPolicy's own
+        select_action docstring says to "use predict_action_chunk and postprocess the full chunk
+        before queuing actions", which is exactly this method.
+        """
         frame = build_inference_frame(
             observation=obs,
             ds_features=self.dataset_features,
@@ -359,11 +296,15 @@ class AsyncPolicy:
             chunk = chunk.unsqueeze(0)
         chunk = chunk[:, : self.actions_per_chunk, :]
 
-        # Unnormalise one action at a time: the postprocessor pipeline is built for (B, action_dim)
-        # per call, not (B, chunk_size, action_dim). Same loop policy_server._predict_action_chunk
-        # runs, and the reason it is a loop rather than a reshape.
+        # ONE call on the whole (1, actions_per_chunk, ACTION_DIM) chunk -- NOT a per-timestep
+        # loop like deploy_smolvla_async.py's. GrootN17ActionDecodeStep reads the reference state
+        # this chunk's deltas are relative to off a cache the preprocess() call above just filled,
+        # and raises NotImplementedError if handed a 2D (B, D) slice instead of the full 3D
+        # (B, T, D) chunk -- it cannot decode one relative step in isolation. Splitting into
+        # per-timestep dicts only happens AFTER the chunk is already absolute.
+        chunk = self.postprocess(chunk)
         actions = [
-            make_robot_action(self.postprocess(chunk[:, i, :]), self.dataset_features)
+            make_robot_action(chunk[:, i, :], self.dataset_features)
             for i in range(chunk.shape[1])
         ]
         return np.array(
@@ -377,14 +318,9 @@ class AsyncPolicy:
                 continue
             obs, timestep = taken
 
-            # Re-check the trigger on THIS thread before spending a forward pass. The control
-            # thread publishes once per tick for as long as the queue sits below the threshold,
-            # so a ~92ms forward pass at 20 Hz leaves ~2 observations published behind it, the last
-            # of which is still waiting when the chunk lands. Gating only on the control thread
-            # means that one gets consumed before the next tick can withdraw it, and it produces a
-            # chunk that is ~94% overlap with what was just queued -- a full forward pass whose
-            # only effect is to re-weight actions already decided. Measured on the threading
-            # harness: it doubled the re-plan count for no additional coverage.
+            # Re-check the trigger on THIS thread before spending a forward pass -- see
+            # deploy_smolvla_async.py's identical comment for the measured reason (avoids doubling
+            # the re-plan count for near-zero additional coverage).
             if self.action_queue.fill_ratio() > self.chunk_size_threshold:
                 self.discarded += 1
                 continue
@@ -411,16 +347,8 @@ class AsyncPolicy:
 
 
 def _video_index(spec: str) -> int:
-    """Camera CLI argument -> /dev/video index.
-
-    Accepts a bare index ("4"), a stable udev alias ("rs_rgb_1", from 99-realsense-rgb.rules), or
-    any path that resolves to a /dev/videoN node ("/dev/rs_rgb_1", "/dev/v4l/by-id/usb-Intel...").
-    Everything downstream -- OpenCVCameraConfig and the USB reset, which reads
-    /sys/class/video4linux/videoN -- wants the integer, so the alias is resolved here, once.
-
-    The aliases exist because a RealSense exposes four /dev/video nodes and their numbering shifts
-    when cameras are re-plugged or the machine reboots; the symlink is pinned to the camera's USB
-    serial, so it always points at that camera's colour stream."""
+    """Camera CLI argument -> /dev/video index. Identical to deploy_smolvla_async.py's -- see
+    there for why the udev-alias form is preferred over a bare index."""
     if spec.isdigit():
         return int(spec)
 
@@ -440,7 +368,17 @@ def parse_args():
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("--checkpoint", type=str, required=True,
-                        help="HF repo id or local path of the joint-space SmolVLA checkpoint.")
+                        help="HF repo id or local path of the joint-space GR00T N1.7 checkpoint.")
+    parser.add_argument("--dtype", default="bfloat16", choices=["float32", "bfloat16", "float16"],
+                        help="Parameter dtype to cast the loaded policy to before moving it onto "
+                             "--device. This checkpoint's fp32 master weights (~12GB for the 3B "
+                             "backbone) are cast down in system RAM before the one GPU transfer -- "
+                             "see module docstring point 2 for why that ordering matters (casting "
+                             "after the model is already on the GPU measured 13.6GB resident "
+                             "instead of ~6GB). predict_action_chunk() already runs its forward "
+                             "pass under torch.autocast(dtype=torch.bfloat16) whenever "
+                             "config.use_bf16 (True for this checkpoint) regardless of stored "
+                             "parameter dtype, so bf16 storage does not change what is computed.")
     parser.add_argument("--body-cam-index", type=_video_index, required=True,
                         help="Camera for observation.images.body_cam. "
                              "Takes a /dev/video index or a udev alias (rs_body).")
@@ -451,57 +389,50 @@ def parse_args():
                         help="Camera for observation.images.right_wrist_cam (dual-arm checkpoints). "
                              "Takes a /dev/video index or a udev alias (rs_body).")
     parser.add_argument("--front-cam-index", type=_video_index, default=None,
-                        help="Camera for observation.images.front_cam (the '..._three_cams' variant). "
+                        help="Camera for observation.images.front_cam (older variants). "
                              "Takes a /dev/video index or a udev alias (rs_body).")
     parser.add_argument("--side-cam-index", type=_video_index, default=None,
                         help="EXTRA camera for the live view only -- never fed to the model. "
                              "Takes a /dev/video index or a udev alias (rs_body).")
     parser.add_argument("--calibration", type=str, required=True,
-                        help="calibration.json -- required for the gripper raw<->sim mapping (see the "
-                             "GRIPPER CALIBRATION note in deploy_smolvla_pickup_jointspace.py).")
+                        help="calibration.json -- required for the gripper raw<->sim mapping (see "
+                             "the GRIPPER CALIBRATION note in deploy_smolvla_pickup_jointspace.py).")
 
-    parser.add_argument("--control-hz", type=float, default=20.0,
-                        help="Control-loop rate. One queued action is sent per tick, so this is also the "
-                             "rate the policy's chunk plays back at -- 20 is the training data's own fps "
-                             "(meta/info.json fps=20, timestamps stepping by 50.0ms), which is what makes "
-                             "demo motions run at demo speed. Raising it does NOT add reactivity, it "
-                             "fast-forwards the demos; use --chunk-size-threshold for reactivity. Unlike "
-                             "the sync script's --inference-hz this does NOT include a forward pass, so "
-                             "the only thing that has to fit in the period is one 16-joint CAN read "
-                             "(~8ms measured, i.e. 84%% of a 20 Hz period is idle sleep).")
-    parser.add_argument("--chunk-size-threshold", type=float, default=0.9,
-                        help="Re-plan once the queue holds less than this fraction of a chunk. THE "
-                             "reactivity knob: the interval is (1 - this) * --actions-per-chunk ticks, "
-                             "floored at one forward pass (~92ms). Default 0.9 gives 5 ticks = 250ms at "
-                             "20 Hz, against 2.5s for the sync script; lerobot's own default is 0.5, which "
-                             "here would be 1.2s. 0.0 waits for the queue to drain entirely.")
+    parser.add_argument("--control-hz", type=float, default=30.0,
+                        help="Control-loop rate. This checkpoint was fine-tuned from the "
+                             "'_30hz' dataset variant, so 30 plays its chunk back at the speed its "
+                             "demos were recorded at -- see deploy_smolvla_async.py's --control-hz "
+                             "help for why this is not the reactivity knob (--chunk-size-threshold "
+                             "is).")
+    parser.add_argument("--chunk-size-threshold", type=float, default=0.8,
+                        help="Re-plan once the queue holds less than this fraction of a chunk. "
+                             "With this checkpoint's chunk_size=16 (not SmolVLA's 50), the re-plan "
+                             "interval (1 - this) * --actions-per-chunk ticks is already short at "
+                             "the default -- 0.8 is ~3 ticks (~100ms at 30Hz), floored at one "
+                             "forward pass. 0.0 waits for the queue to drain entirely.")
     parser.add_argument("--actions-per-chunk", type=int, default=None,
-                        help="How many actions to keep from each predicted chunk (default: the checkpoint's "
-                             "full chunk_size, 50). Unlike the sync script's --n-action-steps this does not "
-                             "set the re-plan interval -- --chunk-size-threshold does -- it bounds how far "
-                             "ahead the queue can run, i.e. how stale an action can get if inference stalls.")
+                        help="How many actions to keep from each predicted chunk (default: this "
+                             "checkpoint's own chunk_size, 16 -- NOT SmolVLA's 50; passing a value "
+                             "above the checkpoint's chunk_size is rejected). Bounds how far ahead "
+                             "the queue can run, i.e. how stale an action can get if inference "
+                             "stalls; it does not set the re-plan interval on its own -- "
+                             "--chunk-size-threshold does.")
     parser.add_argument("--aggregate-fn", choices=tuple(AGGREGATE_FUNCTIONS), default="weighted_average",
                         help="How an incoming chunk blends with the queued actions it overlaps.")
     parser.add_argument("--max-joint-speed", type=float, default=1.0,
-                        help="rad/s ceiling for all 16 joints, enforced by clamping how far the queued "
-                             "target may move from the CURRENT measured joints each control tick (one tick "
-                             "authorises max-joint-speed/--control-hz rad). Sized against the demos "
-                             "themselves: at the dataset's 20 fps their 99th-percentile joint speed peaks "
-                             "at 1.92 rad/s (RJ4) and their 95th at 1.06, so 2.0 passes every demo motion "
-                             "through unclipped and 1.5 clips the fastest ~1%% of RJ4/LJ5 transit. Lower it "
-                             "for a cautious first run, not as a smoothness control.")
+                        help="rad/s ceiling for all 16 joints, enforced by clamping how far the "
+                             "queued target may move from the CURRENT measured joints each control "
+                             "tick. See deploy_smolvla_async.py's --max-joint-speed help for the "
+                             "demos' own measured joint-speed percentiles (same dataset).")
     parser.add_argument("--max-episode-seconds", type=float, default=30.0,
-                        help="Wall-clock limit per episode. The demos are 358 frames = 17.9s at the "
-                             "dataset's 20 fps, so 30 leaves room for a slow start plus settling. Anything "
-                             "under ~20 cuts the hand-over off before a successful demo would have "
-                             "finished it.")
+                        help="Wall-clock limit per episode.")
     parser.add_argument("--max-episodes", type=int, default=1,
-                        help="Episodes to run. Each one ramps back to Isaac Sim's reset pose (which reopens "
-                             "both grippers) and flushes the action queue, so this is also the re-arm "
-                             "mechanism: put a fresh can down during the reset and the next episode runs.")
+                        help="Episodes to run. Each one ramps back to Isaac Sim's reset pose and "
+                             "flushes the action queue -- the re-arm mechanism between episodes.")
     parser.add_argument("--episode-gap-seconds", type=float, default=5.0,
-                        help="Pause after each episode's reset pose, before the policy is given control -- "
-                             "time to take the can out of the left gripper and place a new one.")
+                        help="Pause after each episode's reset pose, before the policy is given "
+                             "control -- time to take the can out of the left gripper and place a "
+                             "new one.")
 
     parser.add_argument("--no-start-pose", action="store_true",
                         help="Skip the ramp to Isaac Sim's reset pose before each episode.")
@@ -531,10 +462,7 @@ def parse_args():
                              "written alongside it). Useful over SSH, where plt.show() has no "
                              "window to open.")
     parser.add_argument("--plot-max-samples", type=int, default=24_000,
-                        help="Ticks of tracking history to keep, per joint (20 minutes at the "
-                             "default --control-hz). The logs are ring buffers, so a longer run "
-                             "keeps its most RECENT window -- which is the part worth seeing when "
-                             "you Ctrl+C to look at what the arm was just doing.")
+                        help="Ticks of tracking history to keep, per joint.")
     return parser.parse_args()
 
 
@@ -546,25 +474,38 @@ def main():
     calib = load_calibration(args.calibration)
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    print(f"[INFO] loading {args.checkpoint} on {device}...")
-    model = SmolVLAPolicy.from_pretrained(args.checkpoint)
+    print(f"[INFO] loading {args.checkpoint} on {device} (dtype={args.dtype})...")
+
+    # CPU-first load -- see module docstring point 2. config.device is forced to "cpu" BEFORE
+    # from_pretrained() so the fp32 checkpoint (and the dtype cast below) stay in system RAM; only
+    # the already-cast, already-small model is moved to the GPU.
+    config = PreTrainedConfig.from_pretrained(args.checkpoint)
+    config.device = "cpu"
+    # strict=False: see module docstring point 2 -- the tied Qwen LM-head/embed_tokens key.
+    model = GrootPolicy.from_pretrained(args.checkpoint, config=config, strict=False)
+    torch_dtype = getattr(torch, args.dtype)
+    if torch_dtype is not torch.float32:
+        model.to(dtype=torch_dtype)
+    model.config.device = device
     model.to(device)
     model.eval()
-    preprocess, postprocess = make_pre_post_processors(model.config, args.checkpoint)
+
+    preprocess, postprocess = make_pre_post_processors(
+        policy_cfg=model.config,
+        pretrained_path=args.checkpoint,
+        preprocessor_overrides={"device_processor": {"device": device}},
+    )
 
     actions_per_chunk = args.actions_per_chunk or model.config.chunk_size
     if not 1 <= actions_per_chunk <= model.config.chunk_size:
         raise SystemExit(f"--actions-per-chunk must be in [1, {model.config.chunk_size}]")
 
-    # What the async setup actually buys, stated in the units that matter, before anything moves.
-    # The sync equivalent is chunk_size / control_hz seconds of blindness; here it is one forward
-    # pass, and the line below is the claim to check against the [replan] lines once it is running.
     sync_blind_s = model.config.n_action_steps / args.control_hz
     print(f"[INFO] chunk_size {model.config.chunk_size}, keeping {actions_per_chunk} per re-plan.\n"
           f"[INFO] re-plan trigger: queue below {args.chunk_size_threshold:.2f} of a chunk "
           f"(~{actions_per_chunk * (1 - args.chunk_size_threshold) / args.control_hz:.2f}s of queued "
           f"motion consumed), or empty.\n"
-          f"[INFO] for reference, the SYNC script at this rate would look at the cameras once every "
+          f"[INFO] for reference, a SYNC loop at this rate would look at the cameras once every "
           f"{sync_blind_s:.1f}s ({model.config.n_action_steps} steps).")
 
     _usb_reset_for_video_node(args.body_cam_index)
@@ -647,43 +588,15 @@ def main():
 
     control_dt = 1.0 / args.control_hz
     max_step_rad = args.max_joint_speed * control_dt
-    # Two separate measurements, because they answer different questions and conflating them is
-    # actively misleading: busy_periods is how long a tick's WORK takes (CAN read + clamp + send),
-    # loop_periods is the wall-clock gap between consecutive ticks, i.e. the rate the arm actually
-    # sees. Reporting the first as "control Hz" reads as a loop running 6x faster than it is --
-    # the headroom, not the rate. The gap between them is the sleep, and it is the useful number:
-    # busy well under control_dt means --control-hz can be raised.
     loop_periods: deque[float] = deque(maxlen=200)
     busy_periods: deque[float] = deque(maxlen=200)
 
-    # Target-vs-actual tracking history, same purpose as deploy_smolvla_pickup_jointspace.py's
-    # end-of-run plots. Simpler to collect here: that script interpolates several substeps per
-    # inference step, so it needs a dense target log and a sparse actual log on separate clocks,
-    # whereas this loop sends exactly one action per tick and reads the arm once per tick -- so
-    # every series shares one timebase and one sample per tick.
-    #
-    # Bounded, unlike that script's unbounded lists: --max-episodes 20 x --max-episode-seconds 600
-    # at 20 Hz is 240k ticks, and three unbounded float lists per joint at that length run into
-    # hundreds of MB during a run that is already holding a policy on the GPU. Ring buffers keep
-    # the most recent window instead, which is the one a Ctrl+C is asking about.
     plot_n = max(0, args.plot_max_samples)
     plotting = not args.no_plot and plot_n > 0
     plot_time: deque[float] = deque(maxlen=plot_n)
     target_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
     actual_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
-    # The queued action as the policy produced it, BEFORE binarization and the speed clamp -- the
-    # async counterpart of that script's raw-policy-output plot, and the way to tell whether motion
-    # in the tracking plot is the policy's shape or the clamp's. NaN on a starved tick so a gap in
-    # the queue reads as a gap in the line rather than as the policy holding still.
     raw_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
-    # Was this tick's reading bit-identical to the previous one WHILE the command moved on? On this
-    # CAN stack a read that never refreshed returns the retained value, which is plausible and
-    # unchanging -- indistinguishable from a joint holding station until you also look at whether
-    # the command was asking it to move. Bit-identity alone fires on every joint told to hold, so
-    # it only counts once the command has swept past STALE_TRAVEL_RAD since the reading last
-    # changed. Worth flagging here and not just in reset_to_rest_pose.py, because the speed clamp
-    # below anchors on current_q: a frozen reading does not merely mislead this plot, it stops the
-    # commands tracking the arm's real position.
     STALE_TRAVEL_RAD = 0.02
     stale_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
     prev_actual: dict[str, float] = {}
@@ -696,11 +609,6 @@ def main():
         for ep in range(args.max_episodes):
             print(f"\n===== Episode {ep} =====")
 
-            # Ramp to Isaac Sim's reset pose first. Both grippers reopen as part of it, which is
-            # what re-arms the policy: the terminal state of a successful demo is the start pose
-            # with the LEFT gripper closed on the can, so without reopening it the policy's own
-            # observation still says "done" and it holds still. Measured over 300 demos: start and
-            # end joint medians differ by <0.07 rad on every joint except LJ8 (0.044 -> 0.021).
             if not args.no_start_pose:
                 if approach_pose(
                     robot, sim_init_pose_action(calib),
@@ -712,7 +620,6 @@ def main():
                     print("Start-pose approach refused -- not running the policy.")
                     break
 
-            # Everything planned before this point described a scene that no longer exists.
             action_queue.flush()
             obs_bus.clear()
 
@@ -721,10 +628,8 @@ def main():
                       f"the left gripper and place a new one.")
                 time.sleep(args.episode_gap_seconds)
 
-            # Latched gripper decisions, seeded from where the grippers physically are so the
-            # Schmitt trigger's dead band holds the real state rather than an assumed one.
             gripper_cmd = {i: GRIPPER_OPEN_CMD for i in GRIPPER_IDX}
-            held_target: np.ndarray | None = None  # what to command while the queue is empty
+            held_target: np.ndarray | None = None
 
             episode_start = time.perf_counter()
             if plotting:
@@ -734,7 +639,7 @@ def main():
             clamped_ticks = 0
             last_report = episode_start
             last_tick_start: float | None = None
-            replans_at_start = async_policy.replans   # the counter is cumulative across episodes
+            replans_at_start = async_policy.replans
 
             while time.perf_counter() - episode_start < args.max_episode_seconds:
                 tick_start = time.perf_counter()
@@ -750,43 +655,24 @@ def main():
                 if held_target is None:
                     held_target = current_q.copy()
 
-                # RobotClient._ready_to_send_observation, plus its must_go: an empty queue always
-                # re-plans regardless of the threshold, because there is nothing left to execute
-                # and the alternative is holding position until the next trigger.
                 if action_queue.fill_ratio() <= args.chunk_size_threshold:
                     obs_bus.publish(obs, timestep=action_queue.latest_executed + 1)
                 else:
-                    # The trigger is satisfied again -- a chunk landed. Withdraw any observation
-                    # published while it was in flight but not yet picked up, so the next re-plan
-                    # starts from a fresh frame instead of one predating the chunk now queued.
                     obs_bus.clear()
 
                 timed = action_queue.pop()
                 if timed is None:
-                    # Queue starved: hold the last commanded target rather than re-commanding the
-                    # measured position. Commanding the measurement makes the arm creep -- each
-                    # tick's droop becomes the next tick's setpoint, and under gravity that walks
-                    # the joint down instead of holding it.
                     starved_ticks += 1
                     target_q = held_target.copy()
                     raw_q = None
                 else:
                     target_q = timed.action.copy()
-                    raw_q = target_q.copy()   # before binarization and the speed clamp
+                    raw_q = target_q.copy()
 
-                    # Binarize both grippers, in the sim convention, before the speed clamp: the
-                    # clamp then limits how fast the gripper travels to its endpoint rather than
-                    # smearing the decision back into the intermediate widths binarization exists
-                    # to remove.
                     for i in GRIPPER_IDX:
                         gripper_cmd[i] = _binarize_gripper(target_q[i], gripper_cmd[i])
                         target_q[i] = gripper_cmd[i]
 
-                # Speed clamp against the CURRENT measured joints, not against the previous target:
-                # self-correcting for tracking error, and the only thing bounding how fast the arm
-                # is asked to move. One control tick's worth of travel, since one action is sent
-                # per tick here -- there is no separate inference period to convert against, which
-                # is the ambiguity --speed-clamp-basis exists to resolve in the sync script.
                 delta = target_q - current_q
                 if np.any(np.abs(delta) > max_step_rad + 1e-12):
                     clamped_ticks += 1
@@ -796,11 +682,6 @@ def main():
                 held_target = target_q
 
                 if plotting:
-                    # current_q is the read taken at the top of THIS tick, i.e. where the arm
-                    # ended up under the previous tick's command -- so it belongs on the same
-                    # timestamp as the target about to be sent, one tick behind it by
-                    # construction. That one-tick offset is the tracking lag being measured, not
-                    # an artefact to correct for.
                     plot_time.append(tick_start - run_start)
                     for j, name in enumerate(ACTION_NAMES):
                         tgt, act = float(target_q[j]), float(current_q[j])
@@ -872,27 +753,17 @@ def main():
                 f"({100.0 * starved_ticks / max(tick, 1):.1f}%), {clamped_ticks} clamped "
                 f"({100.0 * clamped_ticks / max(tick, 1):.1f}%)."
             )
-            # Headroom, reported but explicitly NOT a suggestion to raise --control-hz. The
-            # control thread does no GPU work, so a tick costing ~8ms against a 50ms period is
-            # normal and correct: 20 Hz is the dataset's own fps, and spending the headroom on a
-            # higher rate would play the demos fast-forward rather than make the policy react
-            # sooner. The idle time is what a re-plan lands in; --chunk-size-threshold spends it.
             if busy > 0 and args.control_hz * busy < 0.5:
                 print(f"[INFO] a tick's work costs {busy * 1000:.1f}ms of the "
                       f"{control_dt * 1000:.0f}ms period ({100 * (1 - args.control_hz * busy):.0f}% "
-                      f"idle). That headroom is correct at the dataset's 20 fps -- spend it on "
-                      f"--chunk-size-threshold (re-plan sooner), not on --control-hz (play faster).")
-            # A starved tick is a tick the arm spent holding position because inference could not
-            # keep up -- the async equivalent of an overrun, and the number to act on: raise
-            # --chunk-size-threshold so re-plans start earlier, or lower --control-hz.
+                      f"idle). Spend that headroom on --chunk-size-threshold (re-plan sooner), not "
+                      f"on --control-hz (play faster).")
             if starved_ticks > 0.05 * max(tick, 1):
                 print(f"[WARN] {100.0 * starved_ticks / max(tick, 1):.0f}% of ticks had an empty queue. "
                       f"Inference is not keeping ahead of the control loop.")
             if clamped_ticks > 0.25 * max(tick, 1):
                 print(f"[WARN] --max-joint-speed {args.max_joint_speed:.2f} bound "
-                      f"{100.0 * clamped_ticks / max(tick, 1):.0f}% of ticks. The demos' own 99th "
-                      f"percentile peaks at 1.92 rad/s (RJ4) at 20 fps, so anything below 2.0 is "
-                      f"holding the arm under demo speed.")
+                      f"{100.0 * clamped_ticks / max(tick, 1):.0f}% of ticks.")
 
     except KeyboardInterrupt:
         print("\n[INFO] interrupted -- stopping.")
@@ -905,9 +776,6 @@ def main():
         robot.disconnect()
         print("[INFO] robot disconnected (motors are NOT powered off -- use emergency_disable.py).")
 
-        # Last in teardown, and deliberately so: plt.show() blocks until the window is closed, and
-        # nothing that powers down hardware should wait on a human closing a plot. By here the
-        # inference thread is joined, the cameras are released and the robot is disconnected.
         if plotting:
             _show_tracking_plots(plot_time, target_log, actual_log, raw_log,
                                  episode_marks, args.save_plot, stale_log)
@@ -915,14 +783,8 @@ def main():
 
 def _show_tracking_plots(plot_time, target_log, actual_log, raw_log, episode_marks, save_path=None,
                          stale_log=None):
-    """End-of-run target-vs-actual and raw-policy-output plots, matching what
-    deploy_smolvla_pickup_jointspace.py shows when a run ends.
-
-    Called from a finally block, so it must not raise: a plotting backend that cannot open a window
-    (this is routinely run over SSH) must not turn a clean shutdown into a traceback that buries the
-    episode summary printed above it. --save-plot is the answer in that case, and the failure says
-    so rather than just reporting the exception.
-    """
+    """End-of-run target-vs-actual and raw-policy-output plots -- identical to
+    deploy_smolvla_async.py's own; see there for the full rationale of each panel."""
     t = list(plot_time)
     if not t:
         print("[WARN] No tracking data to plot.")
@@ -934,7 +796,6 @@ def _show_tracking_plots(plot_time, target_log, actual_log, raw_log, episode_mar
         print(f"[INFO] history capped at --plot-max-samples ({plot_time.maxlen}); "
               f"showing the most recent {t[-1] - t[0]:.0f}s of the run.")
 
-    # An episode boundary older than the retained window would draw a rule outside the data.
     marks = [(mt, ep) for mt, ep in episode_marks if t[0] <= mt <= t[-1]]
 
     def _grid(logs, title, ylabel="rad", legend=None, mark_stale=False):
@@ -967,7 +828,7 @@ def _show_tracking_plots(plot_time, target_log, actual_log, raw_log, episode_mar
         fig = _grid(
             [("target", target_log, {}),
              ("actual", actual_log, {"marker": "o", "markersize": 2})],
-            "Both arms + grippers: commanded target vs. measured actual (async)",
+            "Both arms + grippers: commanded target vs. measured actual (async, GR00T)",
             legend=True, mark_stale=True,
         )
         fig2 = _grid(
@@ -977,8 +838,6 @@ def _show_tracking_plots(plot_time, target_log, actual_log, raw_log, episode_mar
         )
 
         if stale_log is not None:
-            # Printed, not just plotted: a frozen channel also freezes the speed clamp's anchor,
-            # so this is a control-correctness number, not a plotting footnote.
             rows = [(k, sum(stale_log[k]) / len(stale_log[k])) for k in ACTION_NAMES
                     if len(stale_log[k])]
             bad = [(k, f) for k, f in rows if f > 0.05]
@@ -993,7 +852,6 @@ def _show_tracking_plots(plot_time, target_log, actual_log, raw_log, episode_mar
                 print("[INFO] no channel showed stale feedback (>5% of ticks).")
 
         if save_path:
-            # splitext, not rpartition("."): a path like out.d/run splits on the directory's dot.
             base, ext = os.path.splitext(save_path)
             ext = ext or ".png"
             fig.savefig(base + ext, dpi=120)
