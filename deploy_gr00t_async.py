@@ -92,6 +92,7 @@ from lerobot.policies.factory import make_pre_post_processors
 from lerobot.policies.groot.modeling_groot import GrootPolicy
 from lerobot.policies.utils import build_inference_frame, make_robot_action
 from lerobot.utils.feature_utils import hw_to_dataset_features
+from lerobot.utils.visualization_utils import init_rerun, log_rerun_data, shutdown_rerun
 
 from deploy_smolvla_pickup_jointspace import (
     ACTION_DIM,
@@ -363,6 +364,21 @@ def _video_index(spec: str) -> int:
     return int(node[len("video"):])
 
 
+def _write_video_frame(
+    writers: dict, key: str, frame_bgr: np.ndarray, video_dir: str, ep: int, fps: float,
+) -> None:
+    """Append one BGR frame to <video_dir>/ep<NN>_<key>.mp4, opening the writer lazily on the first
+    frame so it can be sized off the actual frame instead of an assumed resolution. Identical to
+    deploy_smolvla_async.py's own helper."""
+    writer = writers.get(key)
+    if writer is None:
+        h, w = frame_bgr.shape[:2]
+        path = os.path.join(video_dir, f"ep{ep:02d}_{key}.mp4")
+        writer = cv2.VideoWriter(path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
+        writers[key] = writer
+    writer.write(frame_bgr)
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -452,6 +468,15 @@ def parse_args():
 
     parser.add_argument("--no-live-view", action="store_true",
                         help="Disable the live cv2 camera window.")
+    parser.add_argument("--rerun", action="store_true",
+                        help="Also stream every camera plus the joint state/target to a Rerun "
+                             "viewer window (spawned locally). Independent of --no-live-view -- "
+                             "runs alongside the cv2 window, or on its own if that is disabled.")
+    parser.add_argument("--save-video-dir", type=str, default=None,
+                        help="Directory to write one MP4 per camera per episode "
+                             "(<dir>/ep<NN>_<camera>.mp4), from the same frames the live view "
+                             "shows -- the model-input cameras plus --side-cam-index if set. "
+                             "Off by default.")
     parser.add_argument("--quiet", action="store_true",
                         help="Suppress the per-replan and per-second control-loop lines.")
 
@@ -561,6 +586,15 @@ def main():
         print("[WARN] opencv-python-headless (GUI: NONE) -- continuing without the live window.")
         live_view = False
 
+    if args.rerun:
+        init_rerun(session_name="deploy_gr00t_async")
+        print("[INFO] rerun viewer streaming cameras + joint state/target.")
+
+    if args.save_video_dir:
+        os.makedirs(args.save_video_dir, exist_ok=True)
+        print(f"[INFO] saving per-camera rollout videos to {args.save_video_dir}")
+    video_writers: dict[str, cv2.VideoWriter] = {}  # reset per episode; released in finally too
+
     full_obs_features = hw_to_dataset_features(robot.observation_features, "observation")
     image_obs_features = {k: v for k, v in full_obs_features.items() if v["dtype"] in ("image", "video")}
     dataset_features = {
@@ -622,6 +656,9 @@ def main():
 
             action_queue.flush()
             obs_bus.clear()
+            for w in video_writers.values():
+                w.release()
+            video_writers = {}
 
             if ep > 0 and args.episode_gap_seconds > 0:
                 print(f"[INFO] {args.episode_gap_seconds:.0f}s to reset the scene -- take the can out of "
@@ -701,22 +738,44 @@ def main():
                     target_action[name] = float(value)
                 _send_action_sim_gripper(robot, target_action, grip)
 
-                if live_view:
+                saving_video = args.save_video_dir is not None
+                if live_view or saving_video:
                     side_frame = None
                     if side_cam is not None:
                         try:
                             side_frame = side_cam.async_read()
                         except Exception as e:
                             print(f"[WARN] side camera read failed: {e}")
-                    frame = _build_combined_frame(obs, side_frame, model_cam_keys)
-                    if frame is not None:
-                        try:
-                            cv2.imshow(LIVE_VIEW_WINDOW, frame)
-                            if (cv2.waitKey(1) & 0xFF) in (ord("q"), 27):
-                                raise KeyboardInterrupt
-                        except cv2.error as e:
-                            print(f"[WARN] live view failed ({e}) -- disabled for the rest of the run.")
-                            live_view = False
+
+                    if saving_video:
+                        for key in model_cam_keys:
+                            if key in obs:
+                                _write_video_frame(
+                                    video_writers, key, cv2.cvtColor(obs[key], cv2.COLOR_RGB2BGR),
+                                    args.save_video_dir, ep, args.control_hz,
+                                )
+                        if side_frame is not None:
+                            _write_video_frame(
+                                video_writers, "side_cam", cv2.cvtColor(side_frame, cv2.COLOR_RGB2BGR),
+                                args.save_video_dir, ep, args.control_hz,
+                            )
+
+                    if live_view:
+                        frame = _build_combined_frame(obs, side_frame, model_cam_keys)
+                        if frame is not None:
+                            try:
+                                cv2.imshow(LIVE_VIEW_WINDOW, frame)
+                                if (cv2.waitKey(1) & 0xFF) in (ord("q"), 27):
+                                    raise KeyboardInterrupt
+                            except cv2.error as e:
+                                print(f"[WARN] live view failed ({e}) -- disabled for the rest of the run.")
+                                live_view = False
+
+                if args.rerun:
+                    log_rerun_data(
+                        observation=obs,
+                        action={name: float(v) for name, v in zip(ACTION_NAMES, target_q)},
+                    )
 
                 tick += 1
                 busy_periods.append(time.perf_counter() - tick_start)
@@ -769,6 +828,10 @@ def main():
         print("\n[INFO] interrupted -- stopping.")
     finally:
         async_policy.stop()
+        for w in video_writers.values():
+            w.release()
+        if args.rerun:
+            shutdown_rerun()
         if side_cam is not None:
             side_cam.disconnect()
         if live_view:
