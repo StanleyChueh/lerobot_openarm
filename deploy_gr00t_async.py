@@ -247,11 +247,12 @@ class AsyncPolicy:
 
     def __init__(self, *, model, preprocess, postprocess, dataset_features, device,
                  actions_per_chunk, aggregate_fn, chunk_size_threshold, obs_bus, action_queue,
-                 verbose):
+                 verbose, task):
         self.model = model
         self.preprocess = preprocess
         self.postprocess = postprocess
         self.dataset_features = dataset_features
+        self.task = task
         self.device = device
         self.actions_per_chunk = actions_per_chunk
         self.aggregate_fn = aggregate_fn
@@ -289,7 +290,7 @@ class AsyncPolicy:
             observation=obs,
             ds_features=self.dataset_features,
             device=self.device,
-            task=TASK,
+            task=self.task,
             robot_type=ROBOT_TYPE,
         )
         chunk = self.model.predict_action_chunk(self.preprocess(frame))
@@ -385,6 +386,9 @@ def parse_args():
     )
     parser.add_argument("--checkpoint", type=str, required=True,
                         help="HF repo id or local path of the joint-space GR00T N1.7 checkpoint.")
+    parser.add_argument("--task", type=str, default=TASK,
+                        help="Language instruction to condition the policy on for every rollout "
+                             f"(default: {TASK!r}).")
     parser.add_argument("--dtype", default="bfloat16", choices=["float32", "bfloat16", "float16"],
                         help="Parameter dtype to cast the loaded policy to before moving it onto "
                              "--device. This checkpoint's fp32 master weights (~12GB for the 3B "
@@ -495,6 +499,7 @@ def main():
     args = parse_args()
     if not 0.0 <= args.chunk_size_threshold <= 1.0:
         raise SystemExit(f"--chunk-size-threshold must be in [0, 1], got {args.chunk_size_threshold}")
+    print(f"[INFO] task: {args.task!r}")
 
     calib = load_calibration(args.calibration)
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -617,6 +622,7 @@ def main():
         obs_bus=obs_bus,
         action_queue=action_queue,
         verbose=not args.quiet,
+        task=args.task,
     )
     async_policy.start()
 

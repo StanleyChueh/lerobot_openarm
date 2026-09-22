@@ -472,6 +472,10 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--task", type=str, default=TASK,
+        help=f"Language instruction to condition the policy on for every rollout (default: {TASK!r}).",
+    )
+    parser.add_argument(
         "--body-cam-index", type=_video_index, required=True,
         help=(
             "Camera on the robot body (its color/RGB stream). Takes a /dev/video index (4) or "
@@ -703,6 +707,7 @@ def parse_args():
 
 def main():
     args = parse_args()
+    print(f"[INFO] task: {args.task!r}")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     calib = load_calibration(args.calibration)
@@ -1148,7 +1153,7 @@ def main():
                     observation=obs,
                     ds_features=dataset_features,
                     device=device,
-                    task=TASK,
+                    task=args.task,
                     robot_type=ROBOT_TYPE,
                 )
                 obs_processed = preprocess(obs_frame)
