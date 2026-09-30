@@ -1,0 +1,38 @@
+{
+  "exclude_episodes": [
+    7,
+    79,
+    108,
+    148,
+    204,
+    205,
+    240,
+    299,
+    318,
+    327,
+    335,
+    345,
+    394,
+    445,
+    448,
+    456
+  ],
+  "reasons": {
+    "7": "right_regrasp,left_early_close,timing_outlier",
+    "79": "right_regrasp,timing_outlier",
+    "108": "right_regrasp,timing_outlier",
+    "148": "left_early_close",
+    "204": "right_regrasp,timing_outlier",
+    "205": "right_regrasp",
+    "240": "right_regrasp,timing_outlier",
+    "299": "right_regrasp,timing_outlier",
+    "318": "right_regrasp,timing_outlier",
+    "327": "left_early_close,gripper_twitch,hold_slip",
+    "335": "right_regrasp,timing_outlier",
+    "345": "right_regrasp,gripper_twitch,timing_outlier",
+    "394": "right_regrasp,timing_outlier",
+    "445": "right_regrasp,timing_outlier",
+    "448": "right_regrasp,timing_outlier",
+    "456": "right_regrasp,timing_outlier"
+  }
+}

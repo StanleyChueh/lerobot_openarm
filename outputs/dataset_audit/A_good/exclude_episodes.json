@@ -1,0 +1,42 @@
+{
+  "exclude_episodes": [
+    21,
+    63,
+    96,
+    102,
+    127,
+    131,
+    132,
+    135,
+    137,
+    163,
+    224,
+    263,
+    265,
+    277,
+    279,
+    280,
+    312,
+    321
+  ],
+  "reasons": {
+    "21": "right_post_release_close,gripper_twitch,hold_slip",
+    "63": "right_regrasp,timing_outlier",
+    "96": "right_regrasp,action_spike",
+    "102": "right_regrasp,timing_outlier",
+    "127": "right_regrasp,gripper_twitch,timing_outlier",
+    "131": "right_post_release_close,gripper_twitch",
+    "132": "right_regrasp,timing_outlier",
+    "135": "right_regrasp,gripper_twitch,hold_slip,timing_outlier",
+    "137": "right_regrasp,timing_outlier",
+    "163": "right_regrasp,timing_outlier",
+    "224": "right_post_release_close,gripper_twitch",
+    "263": "right_regrasp,timing_outlier",
+    "265": "right_regrasp,timing_outlier",
+    "277": "right_regrasp,timing_outlier",
+    "279": "right_regrasp,timing_outlier,action_spike",
+    "280": "right_regrasp,timing_outlier",
+    "312": "right_regrasp,timing_outlier",
+    "321": "right_regrasp,timing_outlier"
+  }
+}

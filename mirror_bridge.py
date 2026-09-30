@@ -40,6 +40,8 @@ Note: relies on OpenArmFollower.get_observation() using a generous recv_all() ti
 import argparse
 import json
 import logging
+import math
+import signal
 import socket
 import threading
 import time
@@ -57,6 +59,7 @@ from sim_bridge_common import (
     raw_to_gripper_sim,
     sim_joints_to_motor_action,
 )
+from real_episode_recorder import DEFAULT_CAMERAS, EpisodeEventReceiver, RealEpisodeRecorder, parse_camera_spec
 
 logger = logging.getLogger("mirror_bridge")
 
@@ -143,6 +146,58 @@ def _recover_gripper(robot, side: str) -> None:
         logger.exception(f"[GRIPPER {side.upper()}] recovery attempt raised -- may still be stuck")
 
 
+class LoopStats:
+    """Every REPORT_PERIOD_S, one line saying where the real arm's lag is coming from.
+
+    "The real arm feels laggy" has three unrelated causes that look the same from the headset: the
+    sim is sending fewer packets than it should, this loop is overrunning its tick, or the
+    --max-joint-speed clamp is holding the arm back from a target it could otherwise reach. The
+    last is by far the usual one, and it is the only one a flag fixes, so it gets its own numbers:
+    how often the clamp was the thing limiting a command, and how far behind it left the arm.
+    """
+
+    REPORT_PERIOD_S = 5.0
+    ARM_KEYS = [f"{p}J{i}.pos" for p in "LR" for i in range(1, 8)]
+
+    def __init__(self):
+        self._reset(time.perf_counter())
+
+    def _reset(self, now: float):
+        self._t0 = now
+        self._ticks = 0
+        self._busy_max = 0.0
+        self._commands = 0
+        self._clamped = 0
+        self._behind_max = 0.0
+
+    def command(self, desired: dict, sent: dict):
+        self._commands += 1
+        behind = max(abs(desired[k] - sent[k]) for k in self.ARM_KEYS)
+        if behind > 1e-6:
+            self._clamped += 1
+        self._behind_max = max(self._behind_max, behind)
+
+    def tick(self, busy_s: float):
+        self._ticks += 1
+        self._busy_max = max(self._busy_max, busy_s)
+
+    def maybe_report(self, max_joint_speed: float):
+        now = time.perf_counter()
+        span = now - self._t0
+        if span < self.REPORT_PERIOD_S:
+            return
+        if self._commands:
+            clamped_pct = 100.0 * self._clamped / self._commands
+            line = (f"[BRIDGE] loop {self._ticks / span:.0f} Hz (worst tick {self._busy_max * 1e3:.1f} ms)"
+                    f" | sim packets {self._commands / span:.0f} Hz"
+                    f" | speed cap {max_joint_speed:g} rad/s limited {clamped_pct:.0f}% of commands,"
+                    f" arm up to {self._behind_max:.2f} rad behind sim")
+            if clamped_pct > 20:
+                line += "  <-- the cap is the lag; raise --real_arm_max_joint_speed"
+            print(line)
+        self._reset(now)
+
+
 class LatestPacketReceiver:
     """Background UDP listener that only ever keeps the newest packet."""
 
@@ -152,6 +207,10 @@ class LatestPacketReceiver:
         self._sock.settimeout(0.5)
         self._lock = threading.Lock()
         self._latest = None  # (seq, recv_time, joints_dict)
+        # The newest packet's "hold_ms" (0 when absent): the sim sends one right before a blocking
+        # env.reset(), to say "no packets for up to this long, and that is expected".
+        self.hold_ms = 0.0
+        self.shutdown = False  # set once the sim says it is exiting
         self._stop = threading.Event()
         self._thread = threading.Thread(target=self._run, daemon=True)
         self._thread.start()
@@ -170,6 +229,9 @@ class LatestPacketReceiver:
                 continue
             with self._lock:
                 self._latest = (packet["seq"], time.time(), packet["joints"])
+                self.hold_ms = float(packet.get("hold_ms", 0.0))
+                if packet.get("shutdown"):
+                    self.shutdown = True
 
     def latest(self):
         with self._lock:
@@ -206,11 +268,65 @@ def main():
         " names, for record_demos_openarm.py's --mirror_feedback_port to plot against sim. Off by"
         " default since normal mirroring doesn't need the extra read.",
     )
+    rec = parser.add_argument_group(
+        "real-robot dataset recording (see real_episode_recorder.py; set by record_demos_openarm.py's"
+        " --real_arm_dataset)")
+    rec.add_argument("--record-root", type=str, default=None,
+                     help="If set, record the real cameras + joints into a LeRobot v3 dataset at this"
+                          " directory, one episode per demo the sim saves.")
+    rec.add_argument("--record-repo-id", type=str, default=None,
+                     help="repo_id stored in the dataset. Default: local/<basename of --record-root>.")
+    rec.add_argument("--record-task", type=str, default=None,
+                     help="Task string for every frame. Required with --record-root; must match the"
+                          " sim dataset's task string verbatim if the two are trained together.")
+    rec.add_argument("--record-cameras", type=str, default=DEFAULT_CAMERAS,
+                     help="Comma-separated <dataset_key>=<video index or udev alias> pairs.")
+    rec.add_argument("--record-fps", type=int, default=30,
+                     help="Dataset fps. The mirror loop runs at this rate while recording (overrides"
+                          " --loop-hz), one frame per tick.")
+    rec.add_argument("--record-event-port", type=int, default=5559,
+                     help="UDP port the sim sends start/save/reset episode events to.")
+    rec.add_argument("--record-action-source", choices=["command", "next_state"], default="command",
+                     help="'command': the sim target the real arm was told to follow. 'next_state':"
+                          " the next tick's measured real state (what convert_hdf5_to_lerobot.py uses"
+                          " for sim data).")
+    rec.add_argument("--record-vcodec", type=str, default="libsvtav1",
+                     help="Video codec (libsvtav1, h264, ...). Not 'auto': it picks h264_nvenc here, which fails to open.")
+    rec.add_argument("--record-resume", action="store_true", help="Append to an existing dataset.")
+    rec.add_argument("--record-overwrite", action="store_true", help="Delete an existing dataset first.")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
     calib = load_calibration(args.calibration)
+
+    # Cameras and the dataset come up BEFORE the CAN motors are energised, so a missing camera or a
+    # refused dataset directory fails with the arm still limp.
+    recorder = None
+    event_receiver = None
+    record_every = 1
+    if args.record_root:
+        if not args.record_task:
+            parser.error("--record-root needs --record-task")
+        if args.record_resume and args.record_overwrite:
+            parser.error("--record-resume and --record-overwrite are mutually exclusive")
+        recorder = RealEpisodeRecorder(
+            root=args.record_root, repo_id=args.record_repo_id, task=args.record_task,
+            fps=args.record_fps, cameras=parse_camera_spec(args.record_cameras), calib=calib,
+            resume=args.record_resume, overwrite=args.record_overwrite,
+            action_source=args.record_action_source, vcodec=args.record_vcodec,
+        )
+        recorder.connect()
+        event_receiver = EpisodeEventReceiver(args.udp_host, args.record_event_port)
+        # The loop stays at least as fast as --loop-hz asked for, rounded UP to a whole multiple of
+        # the dataset fps, and a frame is recorded every record_every-th tick. Running the loop AT
+        # the dataset fps instead (as this first did) means a sim packet waits up to a full 33 ms
+        # tick to be forwarded, and two unsynchronised 30 Hz clocks beat against each other.
+        record_every = max(1, math.ceil(args.loop_hz / args.record_fps - 1e-9))
+        args.loop_hz = float(args.record_fps * record_every)
+        print(f"[REAL REC] Mirror loop at {args.loop_hz:g} Hz, one dataset frame every"
+              f" {record_every} tick(s) = {args.record_fps} fps.")
+        print(f"[REAL REC] Listening for episode events on {args.udp_host}:{args.record_event_port}")
 
     receiver = LatestPacketReceiver(args.udp_host, args.udp_port)
     print("Listening for sim packets...")
@@ -298,68 +414,109 @@ def main():
         stall_watchdog = GripperStallWatchdog()
         dt = 1.0 / args.loop_hz
         halted = False
+        holding_for_reset = False
+        tick = 0
+        next_tick = time.perf_counter()
+        stats = LoopStats()
 
         while not halted:
             loop_start = time.time()
+            tick += 1
 
             if kill_switch.triggered:
                 print("\nKill switch pressed. Ramping down and disabling motors.")
                 halted = True
                 break
 
+            if receiver.shutdown:
+                print("\nSim finished. Ramping down and disabling motors.")
+                halted = True
+                break
+
+            if event_receiver is not None:
+                for event in event_receiver.drain():
+                    recorder.handle_event(event)
+
             packet = receiver.latest()
             now = time.time()
 
             if packet is not None and packet[0] != last_seq:
+                holding_for_reset = False
                 last_seq, last_packet_time, sim_joints = packet
                 desired = sim_joints_to_motor_action(sim_joints, calib)
                 tick_dt = now - last_command_time
                 max_delta = args.max_joint_speed * max(tick_dt, dt)
                 gripper_max_delta = args.gripper_max_speed * max(tick_dt, dt)
                 target_action = clamp_step(current_action, desired, max_delta, gripper_max_delta)
+                stats.command(desired, target_action)
                 target_vel = compute_target_velocity(current_action, target_action, tick_dt, args.max_joint_speed)
                 robot.send_action(target_action, target_vel)
                 current_action = target_action
                 last_command_time = now
             else:
                 staleness_ms = (now - last_packet_time) * 1000.0
-                if staleness_ms > args.timeout_ms:
-                    print(f"\nNo packet for {staleness_ms:.0f}ms (> --timeout-ms). Ramping down and disabling.")
+                # During a sim reset the silence is announced (see LatestPacketReceiver.hold_ms), so
+                # the arm holds its last position instead of being disabled and dropping.
+                hold_ms = receiver.hold_ms
+                if staleness_ms > max(args.timeout_ms, hold_ms):
+                    print(f"\nNo packet for {staleness_ms:.0f}ms (> --timeout-ms"
+                          f"{f' / announced hold {hold_ms:.0f}ms' if hold_ms else ''})."
+                          " Ramping down and disabling.")
                     halted = True
                     break
                 elif staleness_ms > args.stale_ms:
-                    logger.warning(f"Stale packet ({staleness_ms:.0f}ms) -- holding last position.")
+                    if not hold_ms:
+                        logger.warning(f"Stale packet ({staleness_ms:.0f}ms) -- holding last position.")
+                    elif not holding_for_reset:
+                        print(f"[BRIDGE] Sim is resetting -- holding position (up to {hold_ms / 1000:.0f}s).")
+                    holding_for_reset = bool(hold_ms)
                     target_vel =  {k: 0.0 for k in target_vel.keys()}
                     robot.send_action(current_action, target_vel)
                     last_command_time = now
 
-            if now - last_width_print_time >= GRIPPER_WIDTH_PRINT_PERIOD_S:
-                last_width_print_time = now
-                try:
-                    actual_gripper = get_current_pos_action(robot)
-                except RuntimeError as e:
-                    logger.warning(f"[GRIPPER] could not read real position: {e}")
-                    actual_gripper = None
-                if actual_gripper is not None:
-                    _print_gripper_widths(sim_joints, actual_gripper, calib)
-                    for side, prefix in (("left", "L"), ("right", "R")):
-                        key = f"{prefix}J8.pos"
-                        if stall_watchdog.check(side, current_action[key], actual_gripper[key]):
-                            _recover_gripper(robot, side)
-
-            if feedback_sock is not None:
+            # One CAN read per tick serves the recorder, the feedback plot and the gripper printout;
+            # it is only made on ticks where one of them needs it.
+            recording = recorder is not None and recorder.recording and tick % record_every == 0
+            print_widths = now - last_width_print_time >= GRIPPER_WIDTH_PRINT_PERIOD_S
+            actual = None
+            if recording or feedback_sock is not None or print_widths:
                 try:
                     actual = get_current_pos_action(robot)
+                except RuntimeError as e:
+                    logger.warning(f"could not read real position: {e}")
+
+            if recording:
+                recorder.record(actual, sim_joints)
+
+            if print_widths:
+                last_width_print_time = now
+                if actual is not None:
+                    _print_gripper_widths(sim_joints, actual, calib)
+                    for side, prefix in (("left", "L"), ("right", "R")):
+                        key = f"{prefix}J8.pos"
+                        if stall_watchdog.check(side, current_action[key], actual[key]):
+                            _recover_gripper(robot, side)
+
+            if feedback_sock is not None and actual is not None:
+                try:
                     sim_joints_fb = motor_action_to_sim_joints(actual, calib)
                     feedback_sock.sendto(
                         json.dumps({"t": time.time(), "joints": sim_joints_fb}).encode("utf-8"), feedback_addr
                     )
-                except (RuntimeError, OSError):
-                    pass  # best-effort only -- never let a read glitch or networking hiccup break mirroring
+                except OSError:
+                    pass  # best-effort only -- never let a networking hiccup break mirroring
 
-            elapsed = time.time() - loop_start
-            if elapsed < dt:
-                time.sleep(dt - elapsed)
+            # Absolute schedule rather than "sleep whatever is left of this tick": that one drifts by
+            # the sleep overshoot every tick, so a 30 fps recording would really be ~29.x fps while
+            # its timestamps claim 30.
+            stats.tick(time.time() - loop_start)
+            next_tick += dt
+            remaining = next_tick - time.perf_counter()
+            if remaining > 0:
+                time.sleep(remaining)
+            elif remaining < -dt:
+                next_tick = time.perf_counter()  # fell a whole tick behind: don't burst to catch up
+            stats.maybe_report(args.max_joint_speed)
 
         print("Ramping down to a safe hold before disabling...")
         safe_hold = get_current_pos_action(robot)
@@ -371,6 +528,20 @@ def main():
         receiver.stop()
         if feedback_sock is not None:
             feedback_sock.close()
+        if event_receiver is not None:
+            event_receiver.stop()
+        if recorder is not None:
+            # The sim side sends SIGINT when it exits; a second one landing mid-finalize would
+            # leave the parquet footers unwritten and the dataset unreadable.
+            signal.signal(signal.SIGINT, signal.SIG_IGN)
+            try:
+                # Anything still queued (e.g. the last demo's "save", sent just before the sim
+                # exited) is applied before the dataset is finalized.
+                for event in event_receiver.drain():
+                    recorder.handle_event(event)
+                recorder.close()
+            except Exception:
+                logger.exception("[REAL REC] error while finalizing the dataset")
         try:
             robot.disconnect()
         except Exception:
