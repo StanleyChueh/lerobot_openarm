@@ -607,6 +607,12 @@ def parse_args():
                         help="Also write the tracking plots to this path (a '-raw' variant is "
                              "written alongside it). Useful over SSH, where plt.show() has no "
                              "window to open.")
+    parser.add_argument("--save-trace", type=str, default=None,
+                        help="Write the per-tick commanded-vs-measured joint log to this .npz (one segment per "
+                             "episode) for the sim<->real system identification in IsaacLab's "
+                             "scripts/tools/sysid/fit_sim_actuators.py. A deploy rollout moves at deploy speed "
+                             "(--max-joint-speed), which the mirror_bridge recordings never did, so it is the "
+                             "large-signal data the real dataset lacks. Independent of --no-plot.")
     parser.add_argument("--plot-max-samples", type=int, default=24_000,
                         help="Ticks of tracking history to keep, per joint (20 minutes at the "
                              "default --control-hz). The logs are ring buffers, so a longer run "
@@ -756,6 +762,7 @@ def main():
     # the most recent window instead, which is the one a Ctrl+C is asking about.
     plot_n = max(0, args.plot_max_samples)
     plotting = not args.no_plot and plot_n > 0
+    recording = (plotting or bool(args.save_trace)) and plot_n > 0   # keep the per-tick logs
     plot_time: deque[float] = deque(maxlen=plot_n)
     target_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
     actual_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
@@ -824,7 +831,7 @@ def main():
             held_target: np.ndarray | None = None  # what to command while the queue is empty
 
             episode_start = time.perf_counter()
-            if plotting:
+            if recording:
                 episode_marks.append((episode_start - run_start, ep))
             tick = 0
             starved_ticks = 0
@@ -893,7 +900,7 @@ def main():
                     target_q[i] = float(np.clip(target_q[i], GRIPPER_MIN, GRIPPER_MAX))
                 held_target = target_q
 
-                if plotting:
+                if recording:
                     # current_q is the read taken at the top of THIS tick, i.e. where the arm
                     # ended up under the previous tick's command -- so it belongs on the same
                     # timestamp as the target about to be sent, one tick behind it by
@@ -1032,9 +1039,43 @@ def main():
         # Last in teardown, and deliberately so: plt.show() blocks until the window is closed, and
         # nothing that powers down hardware should wait on a human closing a plot. By here the
         # inference thread is joined, the cameras are released and the robot is disconnected.
+        if args.save_trace:
+            _save_trace(args.save_trace, plot_time, target_log, actual_log, episode_marks, args.control_hz)
         if plotting:
             _show_tracking_plots(plot_time, target_log, actual_log, raw_log,
                                  episode_marks, args.save_plot, stale_log)
+
+
+def _save_trace(path, plot_time, target_log, actual_log, episode_marks, control_hz) -> None:
+    """Write the commanded-vs-measured log in the traces.npz layout fit_sim_actuators.py reads.
+
+    ``epNNN_cmd`` is the target sent on each tick (after binarisation and the speed clamp) and
+    ``epNNN_meas`` the joints read at the top of that same tick, i.e. the response to the PREVIOUS tick's
+    command -- the same one-tick alignment the dataset-derived traces use. Segments are cut at the episode
+    starts, so no segment spans the ramp back to the reset pose between episodes. Never raises: it runs
+    in a finally block, after the robot is already disconnected.
+    """
+    try:
+        t = np.asarray(plot_time, dtype=np.float64)
+        if len(t) < 2:
+            print("[TRACE] nothing recorded -- no trace written.")
+            return
+        cmd = np.stack([np.asarray(target_log[k], dtype=np.float64) for k in ACTION_NAMES], axis=1)
+        meas = np.stack([np.asarray(actual_log[k], dtype=np.float64) for k in ACTION_NAMES], axis=1)
+        starts = [mt for mt, _ in episode_marks if t[0] <= mt <= t[-1]] or [t[0]]
+        bounds = [int(np.searchsorted(t, s)) for s in starts] + [len(t)]
+        out = {"names": np.array(ACTION_NAMES), "dt": 1.0 / control_hz, "cap": float("nan")}
+        n = 0
+        for a, b in zip(bounds[:-1], bounds[1:]):
+            if b - a >= 30:   # skip stubs from an interrupted episode
+                out[f"ep{n:03d}_cmd"], out[f"ep{n:03d}_meas"] = cmd[a:b], meas[a:b]
+                n += 1
+        np.savez_compressed(path, **out)
+        periods = np.diff(t)
+        print(f"[TRACE] {n} segment(s) written to {path} (nominal dt {1000 / control_hz:.1f} ms; "
+              f"measured tick period median {1000 * np.median(periods):.1f} ms, p99 {1000 * np.percentile(periods, 99):.1f} ms).")
+    except Exception as e:  # noqa: BLE001
+        print(f"[TRACE] could not write {path}: {e!r}")
 
 
 def _show_tracking_plots(plot_time, target_log, actual_log, raw_log, episode_marks, save_path=None,
