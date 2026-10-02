@@ -63,7 +63,7 @@ from real_episode_recorder import DEFAULT_CAMERAS, EpisodeEventReceiver, RealEpi
 
 logger = logging.getLogger("mirror_bridge")
 
-GRIPPER_WIDTH_PRINT_PERIOD_S = 0.5  # throttle -- the mirror loop runs at --loop-hz (default 50Hz)
+GRIPPER_CHECK_PERIOD_S = 0.5  # stall watchdog (and --print-gripper-widths) cadence; the loop runs at --loop-hz
 
 
 def _sim_finger_val(sim_joints: dict, side: str) -> float:
@@ -292,8 +292,13 @@ def main():
                           " for sim data).")
     rec.add_argument("--record-vcodec", type=str, default="libsvtav1",
                      help="Video codec (libsvtav1, h264, ...). Not 'auto': it picks h264_nvenc here, which fails to open.")
+    rec.add_argument("--record-view-hz", type=float, default=10.0,
+                     help="Rate of the live rerun window showing the real cameras and the collection"
+                          " status (collection_viewer.py). 0 disables it.")
     rec.add_argument("--record-resume", action="store_true", help="Append to an existing dataset.")
     rec.add_argument("--record-overwrite", action="store_true", help="Delete an existing dataset first.")
+    parser.add_argument("--print-gripper-widths", action="store_true",
+                        help="Print sim-commanded vs. real-measured gripper width every 0.5s (debugging).")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -304,6 +309,7 @@ def main():
     # refused dataset directory fails with the arm still limp.
     recorder = None
     event_receiver = None
+    viewer = None
     record_every = 1
     if args.record_root:
         if not args.record_task:
@@ -327,6 +333,13 @@ def main():
         print(f"[REAL REC] Mirror loop at {args.loop_hz:g} Hz, one dataset frame every"
               f" {record_every} tick(s) = {args.record_fps} fps.")
         print(f"[REAL REC] Listening for episode events on {args.udp_host}:{args.record_event_port}")
+        if args.record_view_hz > 0:
+            try:
+                from collection_viewer import CollectionViewer
+
+                viewer = CollectionViewer(recorder.cameras, hz=args.record_view_hz, recorder=recorder)
+            except Exception as e:
+                print(f"[VIEWER] could not start the rerun window ({e}) -- recording without it.")
 
     receiver = LatestPacketReceiver(args.udp_host, args.udp_port)
     print("Listening for sim packets...")
@@ -409,7 +422,7 @@ def main():
         last_seq = packet[0]
         last_command_time = time.time()
         last_packet_time = packet[1]
-        last_width_print_time = 0.0
+        last_gripper_check_time = 0.0
         target_vel = {}
         stall_watchdog = GripperStallWatchdog()
         dt = 1.0 / args.loop_hz
@@ -435,7 +448,11 @@ def main():
 
             if event_receiver is not None:
                 for event in event_receiver.drain():
-                    recorder.handle_event(event)
+                    if event.get("event") == "status":
+                        if viewer is not None:
+                            viewer.set_status(event)
+                    else:
+                        recorder.handle_event(event)
 
             packet = receiver.latest()
             now = time.time()
@@ -474,12 +491,12 @@ def main():
                     robot.send_action(current_action, target_vel)
                     last_command_time = now
 
-            # One CAN read per tick serves the recorder, the feedback plot and the gripper printout;
+            # One CAN read per tick serves the recorder, the feedback plot and the gripper stall check;
             # it is only made on ticks where one of them needs it.
             recording = recorder is not None and recorder.recording and tick % record_every == 0
-            print_widths = now - last_width_print_time >= GRIPPER_WIDTH_PRINT_PERIOD_S
+            check_grippers = now - last_gripper_check_time >= GRIPPER_CHECK_PERIOD_S
             actual = None
-            if recording or feedback_sock is not None or print_widths:
+            if recording or feedback_sock is not None or check_grippers:
                 try:
                     actual = get_current_pos_action(robot)
                 except RuntimeError as e:
@@ -488,10 +505,11 @@ def main():
             if recording:
                 recorder.record(actual, sim_joints)
 
-            if print_widths:
-                last_width_print_time = now
+            if check_grippers:
+                last_gripper_check_time = now
                 if actual is not None:
-                    _print_gripper_widths(sim_joints, actual, calib)
+                    if args.print_gripper_widths:
+                        _print_gripper_widths(sim_joints, actual, calib)
                     for side, prefix in (("left", "L"), ("right", "R")):
                         key = f"{prefix}J8.pos"
                         if stall_watchdog.check(side, current_action[key], actual[key]):
@@ -530,6 +548,8 @@ def main():
             feedback_sock.close()
         if event_receiver is not None:
             event_receiver.stop()
+        if viewer is not None:
+            viewer.stop()
         if recorder is not None:
             # The sim side sends SIGINT when it exits; a second one landing mid-finalize would
             # leave the parquet footers unwritten and the dataset unreadable.
@@ -538,7 +558,8 @@ def main():
                 # Anything still queued (e.g. the last demo's "save", sent just before the sim
                 # exited) is applied before the dataset is finalized.
                 for event in event_receiver.drain():
-                    recorder.handle_event(event)
+                    if event.get("event") != "status":
+                        recorder.handle_event(event)
                 recorder.close()
             except Exception:
                 logger.exception("[REAL REC] error while finalizing the dataset")

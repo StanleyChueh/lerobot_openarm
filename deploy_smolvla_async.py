@@ -116,21 +116,27 @@ unchanged from deploy_smolvla_pickup_jointspace.py rather than re-derived, so th
 """
 
 import argparse
+import json
 import os
 import re
 import threading
+import tempfile
 import time
 from collections import deque
 from dataclasses import dataclass
 
 import cv2
+import draccus
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+from huggingface_hub import hf_hub_download
 
 from lerobot.cameras.opencv.camera_opencv import OpenCVCamera
 from lerobot.cameras.opencv.configuration_opencv import OpenCVCameraConfig
+from lerobot.configs.policies import PreTrainedConfig
 from lerobot.policies.factory import make_pre_post_processors
+from lerobot.policies.smolvla.configuration_smolvla import SmolVLAConfig
 from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
 from lerobot.policies.utils import build_inference_frame, make_robot_action
 from lerobot.utils.feature_utils import hw_to_dataset_features
@@ -205,17 +211,31 @@ class ActionQueue:
         self._lock = threading.Lock()
         self._actions: dict[int, np.ndarray] = {}
         self._latest_executed = -1
+        self._generation = 0  # bumped by flush(); tags which episode an observation/chunk belongs to
         self.chunk_size = 1  # largest chunk seen, for the fill-ratio trigger (RobotClient's own)
 
-    def ingest(self, chunk: np.ndarray, first_timestep: int, aggregate_fn) -> tuple[int, int, int]:
+    @property
+    def generation(self) -> int:
+        with self._lock:
+            return self._generation
+
+    def ingest(self, chunk: np.ndarray, first_timestep: int, aggregate_fn,
+               generation: int | None = None) -> tuple[int, int, int] | None:
         """Merge a freshly predicted chunk in. Returns (dropped, merged, added) for logging.
 
         `dropped` is the count of chunk actions whose tick has already been executed -- i.e. how
         many control ticks elapsed while this forward pass ran. That number IS the inference
         latency in ticks, measured rather than assumed, and it is worth watching: if it approaches
-        --actions-per-chunk the queue is being refilled with actions that are all already stale."""
+        --actions-per-chunk the queue is being refilled with actions that are all already stale.
+
+        `generation` is the flush() generation the chunk's observation was taken in. A chunk whose
+        generation no longer matches was planned from a previous episode's scene and is refused
+        under the same lock flush() takes, so it cannot slip in between a flush and the next
+        episode's first tick. Returns None in that case."""
         dropped = merged = added = 0
         with self._lock:
+            if generation is not None and generation != self._generation:
+                return None
             self.chunk_size = max(self.chunk_size, len(chunk))
             for i, action in enumerate(chunk):
                 ts = first_timestep + i
@@ -248,6 +268,7 @@ class ActionQueue:
         with self._lock:
             self._actions.clear()
             self._latest_executed = -1
+            self._generation += 1
 
     @property
     def latest_executed(self) -> int:
@@ -276,19 +297,19 @@ class ObservationBus:
 
     def __init__(self):
         self._lock = threading.Lock()
-        self._slot: tuple[dict, int] | None = None
+        self._slot: tuple[dict, int, int] | None = None
         self._ready = threading.Event()
 
-    def publish(self, obs: dict, timestep: int) -> None:
+    def publish(self, obs: dict, timestep: int, generation: int = 0) -> None:
         # Copy the camera arrays: lerobot's OpenCVCamera hands back a frame the reader thread may
         # reuse, and the inference thread holds this for the length of a forward pass. Copying only
         # on publish (once per re-plan, not once per control tick) keeps that off the hot path.
         snapshot = {k: (v.copy() if isinstance(v, np.ndarray) else v) for k, v in obs.items()}
         with self._lock:
-            self._slot = (snapshot, timestep)
+            self._slot = (snapshot, timestep, generation)
         self._ready.set()
 
-    def take(self, timeout: float) -> tuple[dict, int] | None:
+    def take(self, timeout: float) -> tuple[dict, int, int] | None:
         """Block until an observation is published, then consume it. None on timeout."""
         if not self._ready.wait(timeout):
             return None
@@ -377,7 +398,7 @@ class AsyncPolicy:
             taken = self.obs_bus.take(timeout=0.1)
             if taken is None:
                 continue
-            obs, timestep = taken
+            obs, timestep, generation = taken
 
             # Re-check the trigger on THIS thread before spending a forward pass. The control
             # thread publishes once per tick for as long as the queue sits below the threshold,
@@ -402,7 +423,11 @@ class AsyncPolicy:
             self.inference_times.append(elapsed)
             self.replans += 1
 
-            dropped, merged, added = self.action_queue.ingest(chunk, timestep, self.aggregate_fn)
+            ingested = self.action_queue.ingest(chunk, timestep, self.aggregate_fn, generation)
+            if ingested is None:  # the episode ended while this forward pass was in flight
+                self.discarded += 1
+                continue
+            dropped, merged, added = ingested
             if self.verbose:
                 print(
                     f"[replan {self.replans}] from tick {timestep} | {elapsed * 1000:.0f}ms | "
@@ -449,6 +474,29 @@ def _write_video_frame(
         writer = cv2.VideoWriter(path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
         writers[key] = writer
     writer.write(frame_bgr)
+
+
+def _load_smolvla_config(checkpoint: str) -> PreTrainedConfig:
+    """PreTrainedConfig.from_pretrained(), tolerating a config.json saved without its "type" tag.
+    Some training-side lerobot versions drop that key on upload; everything else in the file is a
+    plain SmolVLAConfig, and this script only loads SmolVLA anyway, so parse it as one directly."""
+    try:
+        return PreTrainedConfig.from_pretrained(checkpoint)
+    except ValueError as e:
+        if "Missing 'type' field" not in str(e):
+            raise
+    print("[WARN] checkpoint config.json has no 'type' field; assuming 'smolvla'.")
+    if os.path.isdir(checkpoint):
+        config_file = os.path.join(checkpoint, "config.json")
+    else:
+        config_file = hf_hub_download(repo_id=checkpoint, filename="config.json")
+    with open(config_file) as f:
+        config = json.load(f)
+    with tempfile.NamedTemporaryFile("w+", suffix=".json") as f:
+        json.dump(config, f)
+        f.flush()
+        with draccus.config_type("json"):
+            return draccus.parse(SmolVLAConfig, f.name, args=[])
 
 
 def parse_args():
@@ -518,9 +566,10 @@ def parse_args():
                         help="Episodes to run. Each one ramps back to Isaac Sim's reset pose (which reopens "
                              "both grippers) and flushes the action queue, so this is also the re-arm "
                              "mechanism: put a fresh can down during the reset and the next episode runs.")
-    parser.add_argument("--episode-gap-seconds", type=float, default=5.0,
-                        help="Pause after each episode's reset pose, before the policy is given control -- "
-                             "time to take the can out of the left gripper and place a new one.")
+    parser.add_argument("--episode-gap-seconds", type=float, default=None,
+                        help="After each episode's reset pose, wait this many seconds before the policy is "
+                             "given control. Default (unset): wait for Enter instead, so the policy never "
+                             "starts while the can is still being swapped or a hand is in the cameras' view.")
 
     parser.add_argument("--no-start-pose", action="store_true",
                         help="Skip the ramp to Isaac Sim's reset pose before each episode.")
@@ -576,7 +625,7 @@ def main():
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     print(f"[INFO] loading {args.checkpoint} on {device}...")
-    model = SmolVLAPolicy.from_pretrained(args.checkpoint)
+    model = SmolVLAPolicy.from_pretrained(args.checkpoint, config=_load_smolvla_config(args.checkpoint))
     model.to(device)
     model.eval()
     preprocess, postprocess = make_pre_post_processors(model.config, args.checkpoint)
@@ -758,10 +807,16 @@ def main():
                 w.release()
             video_writers = {}
 
-            if ep > 0 and args.episode_gap_seconds > 0:
-                print(f"[INFO] {args.episode_gap_seconds:.0f}s to reset the scene -- take the can out of "
-                      f"the left gripper and place a new one.")
-                time.sleep(args.episode_gap_seconds)
+            if ep > 0:
+                if args.episode_gap_seconds is None:
+                    # Cameras keep capturing in their background threads while this blocks, so the
+                    # first observation after Enter is a fresh frame, not one from the swap.
+                    input("[INFO] Take the can out of the left gripper, place a new one, move your "
+                          "hands clear, then press Enter to start the next episode: ")
+                elif args.episode_gap_seconds > 0:
+                    print(f"[INFO] {args.episode_gap_seconds:.0f}s to reset the scene -- take the can "
+                          f"out of the left gripper and place a new one.")
+                    time.sleep(args.episode_gap_seconds)
 
             # Latched gripper decisions, seeded from where the grippers physically are so the
             # Schmitt trigger's dead band holds the real state rather than an assumed one.
@@ -796,7 +851,8 @@ def main():
                 # re-plans regardless of the threshold, because there is nothing left to execute
                 # and the alternative is holding position until the next trigger.
                 if action_queue.fill_ratio() <= args.chunk_size_threshold:
-                    obs_bus.publish(obs, timestep=action_queue.latest_executed + 1)
+                    obs_bus.publish(obs, timestep=action_queue.latest_executed + 1,
+                                    generation=action_queue.generation)
                 else:
                     # The trigger is satisfied again -- a chunk landed. Withdraw any observation
                     # published while it was in flight but not yet picked up, so the next re-plan

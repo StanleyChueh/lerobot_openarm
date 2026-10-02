@@ -8,6 +8,9 @@ check all live there -- so it sends each decision here as a UDP JSON event on a 
 
   {"event": "start" | "save" | "reset", "seq": int, "t": float, "demo": int}
 
+(It also sends {"event": "status", ...} for the operator's display; mirror_bridge.py hands those to
+collection_viewer.py and they never reach this recorder.)
+
   start  -- button X armed the episode (or a reset finished, in the always-armed modes). Frames are
             recorded from here on.
   save   -- the sim exported this episode as a demo. The real episode is saved too.
@@ -140,6 +143,11 @@ class RealEpisodeRecorder:
         self._broken_reason = None
         self._pending = None  # next_state only: the frame still waiting for its action
         self._saved_this_session = 0
+
+    @property
+    def frames(self) -> int:
+        """Frames added to the episode being recorded so far."""
+        return self._frames
 
     # ── setup / teardown ───────────────────────────────────────────────────────
 
