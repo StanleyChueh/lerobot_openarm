@@ -56,6 +56,9 @@ class OpenArmUmeowConfig(RobotConfig):
     # Refuse the connect-time approach if any joint would travel further than this (rad): a gap
     # that large means the calibration or zeroing is wrong. Same gate as mirror_bridge.py.
     max_approach_delta: float = 1.8
+    # lerobot-rollout only: precision the policy is loaded in. "auto" = bf16 for GR00T (its fp32 weights
+    # do not fit a 16 GB GPU), unchanged otherwise; "bf16" / "fp32" force it. See policy_loading.py.
+    policy_dtype: str = "auto"
     # Skip the typed YES before the connect-time approach.
     assume_yes: bool = False
     # On disconnect, ramp back to the pose read at connect (arms hanging) before de-energising,

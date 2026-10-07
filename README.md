@@ -283,7 +283,60 @@ Notes:
   joints triggers a `SAFETY HOLD` (the arm stops) instead of being executed.
 - lerobot-rollout returns to the start pose in a fixed 1 s (between episodes) / 3 s (exit); the robot plugin
   stretches that so no joint exceeds `--robot.return_speed` (0.3 rad/s).
-- Slow inference: `--inference.type=rtc --inference.rtc.execution_horizon=10` (not tested on this robot yet).
+
+#### Asynchronous evaluation (SmolVLA and GR00T N1.7)
+
+`--inference.type=rtc` runs the policy in a background thread (Real-Time Chunking): the 30 Hz control loop
+never waits for inference, and each new action chunk is blended into the one being executed. This is the
+official replacement for `deploy_smolvla_async.py` / `deploy_gr00t_async.py`. It works with `base` and
+`episodic`.
+
+SmolVLA:
+
+```bash
+lerobot-rollout --strategy.type=base --inference.type=rtc --inference.rtc.execution_horizon=10 \
+  --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --duration=60 --display_data=true
+```
+
+GR00T N1.7 (no `--rename_map`: GR00T keeps the dataset's camera names):
+
+```bash
+lerobot-rollout --strategy.type=base --inference.type=rtc --inference.rtc.execution_horizon=8 \
+  --policy.path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --duration=60 --display_data=true
+```
+
+- **GR00T must use `--inference.type=rtc`**: with relative actions (our recipe) lerobot refuses the plain
+  synchronous path.
+- GR00T is loaded on the CPU, cast to **bf16**, then moved to the GPU (`--robot.policy_dtype=auto`, the
+  default; `fp32` / `bf16` force it). In fp32 it ran out of memory on the 16 GB RTX 5080 (14.7 GB); in bf16 it
+  peaks at ~7 GB.
+- `execution_horizon`: how many actions of each chunk are blended with the next; keep it below the chunk
+  size (SmolVLA 50, GR00T 16 in our recipe).
+- lerobot's separate `async_inference` policy server / robot client is **not** usable for our policies as
+  shipped: the client cannot pass `--rename_map` (SmolVLA), and the server decodes chunks one step at a
+  time, which GR00T's relative actions reject.
+
+GR00T N1.7 training, the same recipe as the earlier `openarm_pringles_gr00t_real_v00` checkpoint (does **not**
+fit the 16 GB GPU here, even at batch 1 -- train on a larger GPU):
+
+```bash
+lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B \
+  --policy.chunk_size=16 --policy.n_action_steps=16 \
+  --policy.use_relative_actions=true --policy.relative_exclude_joints='["LJ8", "RJ8"]' \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
+  --policy.repo_id=ethanCSL/groot_pringles_lerobot_real_v00 \
+  --batch_size=64 --steps=20000 --policy.device=cuda \
+  --output_dir=outputs/train/groot_pringles_lerobot_real_v00 --job_name=groot_pringles_lerobot_real_v00
+```
 
 ### Troubleshooting
 
@@ -308,7 +361,9 @@ python plugins/tests/test_quest_safety.py               # fake Quest: anchoring,
 python plugins/tests/test_robot_guard.py                # robot safety hold: jumps, tracking error, speed clamp
 python plugins/tests/test_rerun_status.py /tmp/mock_rr  # rerun status panel through a 2-episode mocked lerobot-record
 python plugins/tests/test_record_gate.py /tmp/mock_gate # episodes start on X; X ends the reset; timer end returns home
-bash plugins/tests/eval_chain/run_chain.sh /tmp/chain   # record -> lerobot-train SmolVLA (30 steps) -> lerobot-rollout base + episodic (GPU, ~3 min)
+bash plugins/tests/eval_chain/run_chain.sh /tmp/chain   # record -> lerobot-train SmolVLA (30 steps) -> lerobot-rollout base, episodic, base+RTC (GPU, ~3 min)
+# GR00T N1.7 + RTC on the mocked robot, with any GR00T checkpoint (an old one only proves it loads and runs):
+python plugins/tests/eval_chain/chain_rollout.py base <groot checkpoint> - plugins/tests/eval_chain --inference.type=rtc --inference.rtc.execution_horizon=8
 python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
 python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
 ```

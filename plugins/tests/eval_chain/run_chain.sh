@@ -11,11 +11,11 @@ RUN=(env -u PYTHONPATH LD_LIBRARY_PATH=/usr/local/cuda/lib64 HF_HUB_OFFLINE=1)
 RENAME='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}'
 mkdir -p "$OUT"; cd "$REPO"
 
-echo "== 1/4 lerobot-record (3 episodes)"
+echo "== 1/5 lerobot-record (3 episodes)"
 "${RUN[@]}" "$PY" -u "$HERE/chain_record.py" "$OUT/ds" "$HERE" > "$OUT/record.log" 2>&1
 grep "CHAIN RECORD" "$OUT/record.log"
 
-echo "== 2/4 lerobot-train SmolVLA (30 steps)"
+echo "== 2/5 lerobot-train SmolVLA (30 steps)"
 rm -rf "$OUT/train"
 "${RUN[@]}" "$REPO/.venv/bin/lerobot-train" --policy.path=lerobot/smolvla_base --policy.push_to_hub=false \
   --policy.device=cuda --dataset.repo_id=local/chain --dataset.root="$OUT/ds" --rename_map="$RENAME" \
@@ -24,10 +24,15 @@ rm -rf "$OUT/train"
 grep -o "step:30 .*loss:[0-9.]*" "$OUT/train.log"
 CK="$OUT/train/checkpoints/last/pretrained_model"
 
-echo "== 3/4 lerobot-rollout base"
-"${RUN[@]}" "$PY" -u "$HERE/chain_rollout.py" base "$CK" - "$HERE" > "$OUT/rollout_base.log" 2>&1
+echo "== 3/5 lerobot-rollout base"
+"${RUN[@]}" "$PY" -u "$HERE/chain_rollout.py" base "$CK" - "$HERE" --rename_map="$RENAME" > "$OUT/rollout_base.log" 2>&1
 grep "ROLLOUT" "$OUT/rollout_base.log"
 
-echo "== 4/4 lerobot-rollout episodic (2 recorded eval episodes)"
-"${RUN[@]}" "$PY" -u "$HERE/chain_rollout.py" episodic "$CK" "$OUT/eval_ds" "$HERE" > "$OUT/rollout_episodic.log" 2>&1
+echo "== 4/5 lerobot-rollout episodic (2 recorded eval episodes)"
+"${RUN[@]}" "$PY" -u "$HERE/chain_rollout.py" episodic "$CK" "$OUT/eval_ds" "$HERE" --rename_map="$RENAME" > "$OUT/rollout_episodic.log" 2>&1
 grep "ROLLOUT" "$OUT/rollout_episodic.log"
+
+echo "== 5/5 lerobot-rollout base with asynchronous (RTC) inference"
+"${RUN[@]}" "$PY" -u "$HERE/chain_rollout.py" base "$CK" - "$HERE" --rename_map="$RENAME" \
+  --inference.type=rtc --inference.rtc.execution_horizon=10 > "$OUT/rollout_rtc.log" 2>&1
+grep "ROLLOUT\|ticks over" "$OUT/rollout_rtc.log"

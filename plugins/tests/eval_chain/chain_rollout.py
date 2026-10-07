@@ -1,9 +1,10 @@
 """Chain step 3: the official lerobot-rollout with the trained SmolVLA checkpoint on the mocked robot.
 
-    python chain_rollout.py base|episodic <checkpoint> <eval dataset root or -> <this directory>     (run_chain.sh does it)
+    python chain_rollout.py base|episodic <checkpoint> <eval dataset root or -> <this directory> [extra lerobot-rollout args]
 """
 import json, shutil, sys, time
 mode, policy, root, here = sys.argv[1:5]
+extra = sys.argv[5:]  # e.g. --rename_map=..., --inference.type=rtc
 sys.path.insert(0, here)
 from mock_hw import CAMERAS_ARG, FAKE, KEYS
 import numpy as np
@@ -23,8 +24,7 @@ def timed(hw, duration_s=3.0, fps=50):
 core.RolloutStrategy.return_to_initial_position = staticmethod(timed)
 
 argv = ["lerobot-rollout", f"--policy.path={policy}", "--robot.type=openarm_umeow", "--robot.assume_yes=true",
-        f"--robot.cameras={CAMERAS_ARG}", "--task=reach out and back",
-        '--rename_map={"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}', "--play_sounds=false", "--display_data=false"]
+        f"--robot.cameras={CAMERAS_ARG}", "--task=reach out and back", *extra, "--play_sounds=false", "--display_data=false"]
 if mode == "base":
     argv += ["--strategy.type=base", "--duration=8"]
 else:
