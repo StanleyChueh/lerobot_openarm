@@ -39,6 +39,13 @@ def _connect(self, calibrate=True):
 OpenArmUmeow.connect = _connect
 PORT = 5997
 q = {"rx": 0.25, "x": False, "rt": 0.0, "run": True}
+def _waiting_long() -> bool:
+    """Press X once lerobot has been waiting for it for 0.5 s (every episode, like an operator)."""
+    from lerobot_robot_openarm_umeow.rerun_status import BOARD
+
+    return BOARD.phase == "WAITING" and time.perf_counter() - BOARD.phase_t > 0.5
+
+
 def sender():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     pose = lambda x: {"x": x, "y": 1.1, "z": 0.3, "qx": 0, "qy": 0, "qz": 0, "qw": 1}
@@ -46,7 +53,7 @@ def sender():
         el = time.time() - fake.get("ready_t", float("inf"))  # operator script starts once the arm is at home
         # X at 1 s (anchor), then sweep the right hand 10 cm and close the right trigger.
         msg = {"rc": pose(0.25 + (0.10 * min(1.0, max(0.0, el - 1.5) / 1.5))), "lc": pose(-0.25), "rf": pose(0) | {"y": 1.5},
-               "rt": 1.0 if el > 3.0 else 0.0, "lt": 0.0, "x": 1.0 <= el < 1.1, "y": False, "a": False, "b": False, "v": 0}
+               "rt": 1.0 if el > 3.0 else 0.0, "lt": 0.0, "x": _waiting_long(), "y": False, "a": False, "b": False, "v": 0}
         s.sendto(json.dumps(msg).encode(), ("127.0.0.1", PORT)); time.sleep(1 / 72)
 threading.Thread(target=sender, daemon=True).start()
 
@@ -114,7 +121,8 @@ def check(name, ok, detail=""):
         FAILS.append(name)
 
 
-expected = ["starting", "RECORDING · episode 0 of 2", "RESETTING", "SAVING · episode 0", "RECORDING · episode 1 of 2",
+expected = ["starting", "WAITING for X", "RECORDING · episode 0 of 2", "RESETTING", "SAVING · episode 0",
+            "WAITING for X", "RECORDING · episode 1 of 2",
             "SAVING · episode 1", "FINALIZING", "STOPPING", "returning to rest"]
 it = iter(shown)
 check("phases appear in order: " + " -> ".join(expected), all(any(e in h for h in it) for e in expected))

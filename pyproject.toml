@@ -35,3 +35,8 @@ lerobot = { git = "https://github.com/huggingface/lerobot.git", branch = "main" 
 lerobot_robot_openarm_umeow = { path = "plugins/lerobot_robot_openarm_umeow", editable = true }
 lerobot_teleoperator_openarm_quest = { path = "plugins/lerobot_teleoperator_openarm_quest", editable = true }
 openarm_control = { git = "https://github.com/enactic/openarm_control", rev = "2f1ee56ef2bf1272329b213a1f0b0768b9d07f2b" }
+
+[tool.uv]
+# torchcodec must match torch's minor version (0.11 <-> torch 2.11); the 0.10 lerobot's lock picked
+# could not load against torch 2.11 and printed a long traceback at every lerobot start.
+constraint-dependencies = ["torchcodec>=0.11,<0.12"]

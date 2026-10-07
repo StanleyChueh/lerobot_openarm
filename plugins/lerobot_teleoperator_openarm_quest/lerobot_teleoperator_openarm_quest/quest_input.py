@@ -38,6 +38,7 @@ class JsonUdpReceiver:
         self._latest: dict | None = None
         self._latest_t: float | None = None  # perf_counter() of the newest packet
         self._count = 0
+        self.sender: str | None = None  # "ip:port" of the Quest, once a packet has arrived
         self._running = True
         self._thread = threading.Thread(target=self._loop, daemon=True, name="quest-udp")
         self._thread.start()
@@ -69,9 +70,12 @@ class JsonUdpReceiver:
                     print(f"[openarm_quest] listening for the Quest on UDP {self._host}:{self._port}", flush=True)
                     while self._running:
                         try:
-                            data, _ = srv.recvfrom(self._buf_size)
+                            data, addr = srv.recvfrom(self._buf_size)
                         except TimeoutError:
                             continue
+                        if self.sender is None:
+                            self.sender = f"{addr[0]}:{addr[1]}"
+                            print(f"[openarm_quest] first Quest packet received from {self.sender}", flush=True)
                         last, n = self._parse(data), 1
                         # Drain anything queued and keep only the freshest packet.
                         while select.select([srv], [], [], 0.0)[0]:

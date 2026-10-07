@@ -31,6 +31,7 @@ REFRESH_S = 0.5
 
 _PHASE_STYLE = {
     "STARTING": ("⚪", "starting"),
+    "WAITING": ("⏳", "WAITING for X (not recording yet)"),
     "RECORDING": ("🔴", "RECORDING"),
     "RESETTING": ("🟡", "RESETTING the scene (not recorded)"),
     "SAVING": ("💾", "SAVING"),
@@ -40,6 +41,37 @@ _PHASE_STYLE = {
     "TELEOP": ("🟢", "teleoperating (not recording)"),
     "ROLLOUT": ("🟢", "running the policy (lerobot-rollout)"),
 }
+_VALID = {0: "OK", 1: "STALE", 2: "LOST"}
+
+
+def _quest_lines(t: dict) -> list[str]:
+    """What the Quest is sending, so a dead link or an untracked controller is visible at a glance."""
+    now = time.perf_counter()
+    q, age = t["quest"], (None if t["packet_t"] is None else now - t["packet_t"])
+    if q is None or age is None:
+        return ["**Meta Quest:** ❌ NO PACKETS -- start the Quest app; it must send to this PC (UDP 5006),"
+                " and the dora dataflow must be stopped"]
+    if age > 1.0:
+        head = f"**Meta Quest:** ❌ packets STOPPED {age:.0f} s ago (headset asleep / app closed?)"
+    else:
+        head = f"**Meta Quest:** ✅ connected ({t['sender']}, last packet {age * 1000:.0f} ms ago)"
+
+    def track(v: int) -> str:
+        return ("✅ " if v == 0 else "⚠️ " if v == 1 else "❌ ") + _VALID.get(v, str(v))
+
+    def p(xyz) -> str:
+        return "-" if xyz is None else f"({xyz[0]:+.2f}, {xyz[1]:+.2f}, {xyz[2]:+.2f})"
+
+    return [
+        head,
+        f"headset {track(q['v'])} · right controller {track(q['vr'])} {p(q['rc'])} ·"
+        f" left controller {track(q['vl'])} {p(q['lc'])}",
+        f"buttons pressed: **{' '.join(q['buttons']) or 'none'}** · triggers R {q['rt']:.2f} L {q['lt']:.2f}"
+        f" · grips R {q['rg']:.2f} L {q['lg']:.2f} · sticks R ({q['rstick'][0]:+.2f}, {q['rstick'][1]:+.2f})"
+        f" L ({q['lstick'][0]:+.2f}, {q['lstick'][1]:+.2f})",
+    ]
+
+
 _TELEOP_STYLE = {
     "HELD": "⏸ HELD at home, grippers open -- press **X** to start",
     "LIVE": "▶ LIVE -- arms follow the controllers. **X** = save, **Y** = discard",
@@ -105,6 +137,9 @@ class StatusBoard:
         self.saved: int | None = None
         self.total: int | None = None
         self.last_note = ""
+        # Set by the openarm_quest record gate: lerobot's "Recording episode N" then only means "waiting
+        # for X"; the gate itself announces RECORDING when it really starts.
+        self.gated = False
         self._running = False
         self._thread: threading.Thread | None = None
         self._handler: _LerobotLogHandler | None = None
@@ -138,7 +173,7 @@ class StatusBoard:
             self.episode = episode
             if self.saved is None:
                 self.saved = episode  # episodes already in the dataset (non-zero with --resume)
-        self.set_phase("RECORDING")
+        self.set_phase("WAITING" if self.gated else "RECORDING")
 
     def on_saved(self, total_saved: int) -> None:
         with self._lock:
@@ -172,10 +207,13 @@ class StatusBoard:
 
         teleop = TELEOP_STATE.snapshot()
         if teleop["state"]:
+            lines.extend(_quest_lines(teleop))
             line = f"**Quest:** {_TELEOP_STYLE.get(teleop['state'], teleop['state'])}"
             if teleop["state"] == "PAUSED" and teleop["reason"]:
                 line += f"  \n reason: {teleop['reason']}"
             lines.append(line)
+            if teleop["message"]:
+                lines.append(f"teleop says: *{teleop['message']}*")
             if phase == "RESETTING":
                 pending = "DISCARDED" if (teleop["last_key"] == "left" and teleop["last_key_t"] > self.phase_t - 5) else "SAVED"
                 lines.append(f"episode {episode} will be **{pending}** when the reset ends"
@@ -268,4 +306,46 @@ def _wrap_blueprint() -> None:
     viz._build_blueprint = build_blueprint
 
 
+def _port_busy(port: int) -> bool:
+    import socket
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.bind(("0.0.0.0", port))
+            return False
+        except OSError:
+            return True
+
+
+def _patch_spawn() -> None:
+    """lerobot opens its viewer with rr.spawn() on rerun's default port 9876, and rerun silently REUSES
+    any viewer already there -- e.g. one left open by an earlier session -- so this session's data goes
+    to that old (often hidden) window and no new window appears. Open a fresh one on a free port instead.
+    Runs when the plugin is imported, which lerobot does before it starts rerun."""
+    try:
+        import rerun as rr
+    except Exception:
+        return
+    if getattr(rr, "_openarm_spawn_patched", False):
+        return
+    original = rr.spawn
+
+    def spawn(*, port: int = 9876, **kwargs):
+        if _port_busy(port):
+            import socket
+
+            with socket.socket() as s:
+                s.bind(("127.0.0.1", 0))
+                free = s.getsockname()[1]
+            print(f"[openarm] another rerun viewer already holds port {port} (an old session?): opening a NEW"
+                  f" window on port {free} for this one. Close the old one with: pkill -f 'rerun --port={port}'",
+                  flush=True)
+            port = free
+        return original(port=port, **kwargs)
+
+    rr.spawn = spawn
+    rr._openarm_spawn_patched = True
+
+
+_patch_spawn()
 BOARD = StatusBoard()

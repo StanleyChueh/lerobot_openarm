@@ -58,6 +58,9 @@ class OpenArmQuest(Teleoperator):
 
     def connect(self, calibrate: bool = True) -> None:
         cfg = self.config
+        from .record_gate import install
+
+        install(type(self))  # lerobot-record only: episodes start on the first X
         if cfg.episode_buttons:
             try:
                 from pynput.keyboard import Controller

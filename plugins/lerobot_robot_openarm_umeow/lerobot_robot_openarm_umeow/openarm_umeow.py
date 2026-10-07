@@ -95,6 +95,13 @@ class OpenArmUmeow(OpenArmFollower):
 
     def connect(self, calibrate: bool = True) -> None:
         BOARD.start()  # rerun status panel; no-op unless --display_data=true
+        ROBOT_STATE.connecting = True
+        try:
+            self._connect()
+        finally:
+            ROBOT_STATE.connecting = False
+
+    def _connect(self) -> None:
         super().connect(calibrate=False)
         cfg = self.umeow_config
         try:

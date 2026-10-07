@@ -17,6 +17,9 @@ class RobotState:
         self._last_sent: dict | None = None
         self._last_sent_t = 0.0
         self._fault: str | None = None
+        # True while the robot connects and ramps to its start pose: nothing the teleop commands is
+        # executed then, so the teleop must not go LIVE.
+        self.connecting = False
 
     def publish(self, last_sent: dict, fault: str | None) -> None:
         with self._lock:
@@ -49,6 +52,13 @@ class TeleopState:
         self.reason = ""
         self.last_key: str | None = None  # "right" (save) / "left" (discard) last sent from the Quest
         self.last_key_t = 0.0
+        # The newest Quest packet, summarised (see ik_driver.QuestIKDriver._publish_quest), plus how many
+        # packets have arrived, when the last did, and from where.
+        self.quest: dict | None = None
+        self.packets = 0
+        self.packet_t: float | None = None
+        self.sender: str | None = None
+        self.message = ""  # the teleop's latest terminal message, e.g. why X was ignored
 
     def publish(self, state: str, reason: str) -> None:
         with self._lock:
@@ -58,10 +68,19 @@ class TeleopState:
         with self._lock:
             self.last_key, self.last_key_t = key, time.perf_counter()
 
+    def log(self, text: str) -> None:
+        with self._lock:
+            self.message = text
+
+    def publish_quest(self, quest: dict | None, packets: int, packet_t: float | None, sender: str | None) -> None:
+        with self._lock:
+            self.quest, self.packets, self.packet_t, self.sender = quest, packets, packet_t, sender
+
     def snapshot(self) -> dict:
         with self._lock:
             return {"state": self.state, "reason": self.reason, "last_key": self.last_key,
-                    "last_key_t": self.last_key_t}
+                    "last_key_t": self.last_key_t, "quest": self.quest, "packets": self.packets,
+                    "packet_t": self.packet_t, "sender": self.sender, "message": self.message}
 
 
 ROBOT_STATE = RobotState()

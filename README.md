@@ -57,8 +57,8 @@ ROS's pinocchio instead of the venv's, and the robot plugin then fails with
 
 3. **Stop the dora dataflow** if it is running (`dora run dataflow-vr-mujoco-ros2.yaml`): only one
    program can receive the Quest's packets on UDP port 5006.
-4. Close any rerun viewer left over from an earlier session (`pkill -f 'rerun --port=9876'`), so
-   `--display_data=true` opens a fresh window for this one.
+4. (Optional) close rerun viewers left from earlier sessions: `pkill -f 'rerun --port='`. If one is still
+   open, a new window opens anyway (on another port) and the terminal says so.
 5. Start the Quest app as usual. It keeps sending to this PC's port 5006; nothing changes on the headset.
 
 ### Step 2. Dry run: check the VR mapping (nothing moves)
@@ -137,24 +137,30 @@ What happens:
    The **status** panel at the top of the rerun window shows, live:
 
    ```
-   🔴 RECORDING · episode 3 of 50 · 12 s          (or 🟡 RESETTING / 💾 SAVING / ⚫ STOPPING ...)
+   ⏳ WAITING for X (not recording yet) · episode 3 of 50 · 4 s   (🔴 RECORDING / 🟡 RESETTING / 💾 SAVING ...)
    saved in the dataset: 3 of 50
-   Quest: ▶ LIVE -- arms follow the controllers. X = save, Y = discard
+   Meta Quest: ✅ connected (192.168.x.x, last packet 12 ms ago)          <- or ❌ NO PACKETS / STOPPED
+   headset ✅ OK · right controller ✅ OK (+0.25, +1.10, +0.30) · left controller ❌ LOST (...)
+   buttons pressed: X · triggers R 0.60 L 0.00 · grips R 1.00 L 0.00 · sticks R (+0.50, -0.20) L (...)
+   Quest: ⏸ HELD at home, grippers open -- press X to start
+   teleop says: X ignored: the left controller is not tracked -- wake it / bring it into view.
    episode 3 will be SAVED when the reset ends (Y now = discard instead)     <- during the reset
    ⛔ ROBOT SAFETY HOLD: ...                                                  <- only if it fires
    last: episode 2 SAVED (3 in the dataset)
    ```
 
-   The "will be SAVED / DISCARDED" line follows the Quest's X / Y; a keyboard arrow press is not shown there.
-2. Recording of episode 0 starts. The arms hold the home pose (`HELD`) until you press **X**.
-3. Each episode: **X** to start driving, do the task, then **X** again to **save** it or **Y** to **discard**
+   If the arms do not respond, look here first: no packets, a ❌ controller, or the "teleop says" line tells
+   you why. The "will be SAVED / DISCARDED" line follows the Quest's X / Y, not keyboard arrows.
+2. Each episode **waits for your X** (`⏳ WAITING`): nothing is recorded until you press X, so episodes
+   never start with you getting ready. X is ignored while the robot is still moving to home at startup.
+3. **X** starts recording and driving; do the task; then **X** again to **save** it or **Y** to **discard**
    it. Either way the arms return home slowly and the grippers open (see
-   [Quest controls](#quest-controls-and-safety)).
-4. The reset phase (`reset_time_s`, not recorded) follows. The arms finish returning home; reset the scene.
-   A saved episode is written at the end of the reset phase; pressing **Y** during the reset phase
-   discards it after all. Keep `reset_time_s` longer than the return (a return of up to ~1.5 rad takes ~5 s).
+   [Quest controls](#quest-controls-and-safety)). If `episode_time_s` ends an episode first, it is saved
+   and the arms still return home.
+4. The reset phase (`reset_time_s`, not recorded) follows; reset the scene. Press **X** once the arms are
+   home to end the reset early and start recording the next episode right away. A saved episode is written
+   at the end of the reset phase; **Y** during the reset discards it after all.
 5. Keyboard equivalents: **Right arrow** = save, **Left arrow** = discard, **Esc** = stop the whole session.
-   `episode_time_s` is only a cap: episodes normally end on your 2nd X / Y.
 6. When done (or on Esc), the arms ramp back to where they started, then the motors are disabled.
 
 Useful flags:
@@ -252,8 +258,9 @@ lerobot-rollout \
 | `The two arms' CAN cables are SWAPPED` | swap the CAN cables, or swap `--robot.right_port` / `--robot.left_port` |
 | A/B buttons do nothing / `episode_buttons disabled (No module named 'pynput')` | `uv sync` (installs `pynput`). A/B simulate arrow-key presses, so they need the X11 desktop session; the keyboard arrows (or `n` / `r` / `q` in the terminal) always work |
 | `--display_data=true` but no rerun window, or it shows old data | an old rerun viewer (e.g. from `mirror_bridge.py`'s collection viewer) still holds port 9876 and receives the data instead. Close it, or `pkill -f 'rerun --port=9876'`, then start again |
-| `torchcodec ... cannot be loaded` warnings (a long traceback at start) | harmless, not an error: torchcodec is an optional video *decoder*; lerobot uses pyav instead and recording is unaffected |
-| no rerun window opens / the run looks stuck after the approach table | an old rerun viewer holds port 9876 and receives everything: `pkill -f 'rerun --port=9876'`, then start again |
+| `Could not load libtorchcodec` traceback at start | `uv sync` on this branch: torchcodec is pinned to 0.11 to match torch 2.11 (0.10 could not load) |
+| `another rerun viewer already holds port 9876` | an old viewer is still open; a new window was opened anyway. Close the old one: `pkill -f 'rerun --port=9876'` |
+| the arms do not respond to the Quest | read the rerun status panel: `NO PACKETS` (app not sending to this PC / dora still running), a ❌ controller or headset, or the "teleop says" line (e.g. why X was ignored) |
 | an episode is missing after Ctrl-C | an episode is only saved after its reset phase; end it with X (save) first, then Esc or Ctrl-C |
 
 ### Tests without hardware
@@ -262,6 +269,7 @@ lerobot-rollout \
 python plugins/tests/test_quest_safety.py               # fake Quest: anchoring, headset swing, glitches, slow return, grippers
 python plugins/tests/test_robot_guard.py                # robot safety hold: jumps, tracking error, speed clamp
 python plugins/tests/test_rerun_status.py /tmp/mock_rr  # rerun status panel through a 2-episode mocked lerobot-record
+python plugins/tests/test_record_gate.py /tmp/mock_gate # episodes start on X; X ends the reset; timer end returns home
 python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
 python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
 ```

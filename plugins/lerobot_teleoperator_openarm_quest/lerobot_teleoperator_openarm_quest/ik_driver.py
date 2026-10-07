@@ -57,7 +57,7 @@ from openarm_control import (
     register_ik_args,
     setup_from_args,
 )
-from lerobot_robot_openarm_umeow.shared import TELEOP_STATE
+from lerobot_robot_openarm_umeow.shared import ROBOT_STATE, TELEOP_STATE
 from scipy.spatial.transform import Rotation
 
 from .quest_input import (
@@ -138,6 +138,7 @@ class QuestIKDriver:
         on_episode_key=None,
     ):
         self.kin = build_kinematics(xml, keyframe, ik_args)
+        self.port = port
         self.keyframe = keyframe
         self.ik_hz = ik_hz
         self.max_joint_speed = max_joint_speed
@@ -187,6 +188,9 @@ class QuestIKDriver:
         self._last_count = 0
         self._last_t = time.perf_counter()
         self._stale_warned = False
+        self._started_t = time.perf_counter()
+        self._packet_warn_t = 0.0
+        self._return_request: str | None = None  # set from other threads, served by _step
 
         self._lock = threading.Lock()
         self._command = self.home_driver.copy()
@@ -204,6 +208,11 @@ class QuestIKDriver:
     def command(self) -> np.ndarray:
         with self._lock:
             return self._command.copy()
+
+    def request_return(self, source: str) -> None:
+        """Ask for the slow return home (no episode key), e.g. when lerobot ended an episode by its own
+        timer. Served on the IK thread; ignored unless LIVE or PAUSED."""
+        self._return_request = source
 
     def status(self) -> dict:
         _, packet_t, packets = self.receiver.latest()
@@ -249,6 +258,13 @@ class QuestIKDriver:
         new_packet = count != self._last_count
         self._last_count = count
         fresh = msg is not None and msg_t is not None and now - msg_t < self.pose_fresh_s
+        if new_packet:
+            self._publish_quest(msg, msg_t, count)
+        self._warn_if_no_packets(now, msg_t)
+
+        request, self._return_request = self._return_request, None
+        if request and self._state in (LIVE, PAUSED):
+            self._start_return(request)
 
         fault = self._robot_fault()
         if fault and self._state != PAUSED:
@@ -357,6 +373,9 @@ class QuestIKDriver:
             self._log("X ignored: still returning home -- wait for HELD.")
 
     def _go_live(self, msg: dict, fresh: bool, now: float) -> None:
+        if ROBOT_STATE.connecting:
+            self._log("X ignored: the robot is still starting up (moving to home) -- press X when it is done.")
+            return
         if not fresh:
             self._log("X ignored: no fresh Quest packet to anchor on.")
             return
@@ -449,6 +468,37 @@ class QuestIKDriver:
         with self._lock:
             self._command = cmd
 
+    def _publish_quest(self, msg: dict, msg_t: float, count: int) -> None:
+        """Summarise the newest packet for the rerun status panel."""
+
+        def pos(key: str):
+            c = msg.get(key)
+            return None if c is None else tuple(round(float(c[a]), 3) for a in ("x", "y", "z"))
+
+        def f(key: str) -> float:
+            return float(msg.get(key, 0.0) or 0.0)
+
+        quest = {
+            "v": int(msg.get("v", VALID_OK)), "vr": int(msg.get("vr", VALID_OK)), "vl": int(msg.get("vl", VALID_OK)),
+            "buttons": [b.upper() for b in ("x", "y", "a", "b") if msg.get(b)],
+            "rt": f("rt"), "lt": f("lt"), "rg": f("rg"), "lg": f("lg"),
+            "rstick": (f("rsx"), f("rsy")), "lstick": (f("lsx"), f("lsy")),
+            "rc": pos("rc"), "lc": pos("lc"), "rf": pos("rf"),
+        }
+        TELEOP_STATE.publish_quest(quest, count, msg_t, self.receiver.sender)
+
+    def _warn_if_no_packets(self, now: float, msg_t: float | None) -> None:
+        """Say so in the terminal, every 5 s, while the Quest is silent."""
+        if now - self._packet_warn_t < 5.0:
+            return
+        if msg_t is None and now - self._started_t > 3.0:
+            self._log(f"NO packets from the Quest on UDP port {self.port} yet: is the Quest app running and"
+                      " sending to this PC's IP and port, and is the dora dataflow stopped?")
+            self._packet_warn_t = now
+        elif msg_t is not None and now - msg_t > 2.0:
+            self._log(f"Quest packets STOPPED {now - msg_t:.0f} s ago -- the arms hold. Headset asleep or app closed?")
+            self._packet_warn_t = now
+
     def _set_state(self, state: str, reason: str) -> None:
         with self._lock:
             self._state, self._reason = state, reason
@@ -457,3 +507,4 @@ class QuestIKDriver:
     @staticmethod
     def _log(text: str) -> None:
         print(f"[openarm_quest] {text}", flush=True)
+        TELEOP_STATE.log(text)
