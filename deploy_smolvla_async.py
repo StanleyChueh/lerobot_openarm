@@ -161,6 +161,7 @@ from deploy_smolvla_pickup_jointspace import (
     _gripper_calib,
     _send_action_sim_gripper,
     _usb_reset_for_video_node,
+    GRIPPER_CLOSED_CMD,
     GRIPPER_OPEN_CMD,
 )
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
@@ -557,6 +558,13 @@ def parse_args():
                              "at 1.92 rad/s (RJ4) and their 95th at 1.06, so 2.0 passes every demo motion "
                              "through unclipped and 1.5 clips the fastest ~1%% of RJ4/LJ5 transit. Lower it "
                              "for a cautious first run, not as a smoothness control.")
+    parser.add_argument("--gripper-squeeze-tau", type=float, default=1.0,
+                        help="N-m of extra closing torque added to each gripper's MIT command while its "
+                             "binarized command is CLOSED (0 = off), same as mirror_bridge.py's flag. The "
+                             "gripper's kp is only 3.0, so on a thin object (a plate rim) the jaws stall "
+                             "near the closed stop and kp*err alone squeezes ~0.2 N-m; this torque holds "
+                             "regardless of object width. The DM4310 is rated 3 N-m (7 peak) -- stay at or "
+                             "below ~2 and watch the gripper temperature, since it is a sustained stall.")
     parser.add_argument("--max-episode-seconds", type=float, default=30.0,
                         help="Wall-clock limit per episode. The demos are 358 frames = 17.9s at the "
                              "dataset's 20 fps, so 30 leaves room for a slow start plus settling. Anything "
@@ -790,6 +798,7 @@ def main():
     try:
         for ep in range(args.max_episodes):
             print(f"\n===== Episode {ep} =====")
+            robot.gripper_squeeze_tau = {"L": 0.0, "R": 0.0}  # release the grasp before the reset ramp
 
             # Ramp to Isaac Sim's reset pose first. Both grippers reopen as part of it, which is
             # what re-arms the policy: the terminal state of a successful demo is the start pose
@@ -923,6 +932,14 @@ def main():
                 target_action = dict(obs)
                 for name, value in zip(ACTION_NAMES, target_q):
                     target_action[name] = float(value)
+                if args.gripper_squeeze_tau:
+                    # Keyed off the latched decision, not the clamped target, so the squeeze starts
+                    # as soon as the policy decides to close and stops the tick it decides to open.
+                    for i, name, prefix in ((GRIPPER_IDX[0], "LJ8.pos", "L"), (GRIPPER_IDX[1], "RJ8.pos", "R")):
+                        span = grip[name]["open_raw"] - grip[name]["closed_raw"]
+                        closing_sign = 1.0 if span < 0 else -1.0  # toward closed_raw, in motor angle
+                        closed = gripper_cmd[i] == GRIPPER_CLOSED_CMD
+                        robot.gripper_squeeze_tau[prefix] = closing_sign * args.gripper_squeeze_tau if closed else 0.0
                 _send_action_sim_gripper(robot, target_action, grip)
 
                 saving_video = args.save_video_dir is not None
@@ -1024,6 +1041,7 @@ def main():
     except KeyboardInterrupt:
         print("\n[INFO] interrupted -- stopping.")
     finally:
+        robot.gripper_squeeze_tau = {"L": 0.0, "R": 0.0}
         async_policy.stop()
         for w in video_writers.values():
             w.release()

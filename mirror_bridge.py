@@ -252,6 +252,7 @@ def main():
     parser.add_argument("--model-path", type=str, required=True, help="Path to openarm_description.urdf for gravity comp")
     parser.add_argument("--max-joint-speed", type=float, default=0.3, help="rad/s cap applied to every arm joint's per-tick motion. Conservative default; raise only after validating on your setup.")
     parser.add_argument("--gripper-max-speed", type=float, default=8.0, help="rad/s cap for the gripper channel specifically -- much higher than the arm cap, since gripper commands are a near-instant open/closed toggle, not a smooth trajectory")
+    parser.add_argument("--gripper-squeeze-tau", type=float, default=0.0, help="N-m of extra closing torque added to each gripper's MIT command while the sim commands it fully closed (0 = off). The gripper's kp is only 3.0, so on a thin object (a plate rim) kp*err alone barely squeezes; this torque holds regardless of object width. The DM4310 is rated 3 N-m (7 peak) -- stay at or below ~2 and watch the gripper temperature, since it is a sustained stall.")
     parser.add_argument("--handshake-tolerance", type=float, default=0.05, help="rad; if every joint is already within this of sim's pose the startup approach is skipped as a no-op. NOT an abort threshold any more -- exceeding it just means the arm ramps there (see --max-approach-delta for the gate that does refuse).")
     parser.add_argument("--max-approach-delta", type=float, default=1.8, help="rad; REFUSE to start if any arm joint would have to travel further than this to reach sim's pose. This is the real safety gate: a gap this large means the calibration or zeroing is wrong, not that the arm drifted, and auto-moving on that assumption is what must not happen.")
     parser.add_argument("--approach-speed", type=float, default=0.3, help="rad/s ceiling for the startup approach to sim's pose. The ramp duration is derived from this and the furthest-travelling joint, so no joint exceeds it.")
@@ -465,6 +466,13 @@ def main():
                 max_delta = args.max_joint_speed * max(tick_dt, dt)
                 gripper_max_delta = args.gripper_max_speed * max(tick_dt, dt)
                 target_action = clamp_step(current_action, desired, max_delta, gripper_max_delta)
+                if args.gripper_squeeze_tau:
+                    for side, prefix in (("left", "L"), ("right", "R")):
+                        grip = calib[side]["gripper"]
+                        span = grip["open_raw"] - grip["closed_raw"]
+                        closed_cmd = abs(desired[f"{prefix}J8.pos"] - grip["closed_raw"]) < 0.05 * abs(span)
+                        closing_sign = 1.0 if span < 0 else -1.0  # toward closed_raw, in motor angle
+                        robot.gripper_squeeze_tau[prefix] = closing_sign * args.gripper_squeeze_tau if closed_cmd else 0.0
                 stats.command(desired, target_action)
                 target_vel = compute_target_velocity(current_action, target_action, tick_dt, args.max_joint_speed)
                 robot.send_action(target_action, target_vel)
@@ -536,6 +544,7 @@ def main():
                 next_tick = time.perf_counter()  # fell a whole tick behind: don't burst to catch up
             stats.maybe_report(args.max_joint_speed)
 
+        robot.gripper_squeeze_tau = {"L": 0.0, "R": 0.0}  # release the grasp before the ramp-down
         print("Ramping down to a safe hold before disabling...")
         safe_hold = get_current_pos_action(robot)
         ramp_to(robot, current_action, safe_hold, duration_s=1.0)

@@ -113,6 +113,7 @@ from deploy_smolvla_pickup_jointspace import (
     _gripper_calib,
     _send_action_sim_gripper,
     _usb_reset_for_video_node,
+    GRIPPER_CLOSED_CMD,
     GRIPPER_OPEN_CMD,
 )
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig
@@ -154,12 +155,23 @@ class ActionQueue:
         self._lock = threading.Lock()
         self._actions: dict[int, np.ndarray] = {}
         self._latest_executed = -1
+        self._generation = 0  # bumped by flush(); tags which episode an observation/chunk belongs to
         self.chunk_size = 1  # largest chunk seen, for the fill-ratio trigger
 
-    def ingest(self, chunk: np.ndarray, first_timestep: int, aggregate_fn) -> tuple[int, int, int]:
-        """Merge a freshly predicted chunk in. Returns (dropped, merged, added) for logging."""
+    @property
+    def generation(self) -> int:
+        with self._lock:
+            return self._generation
+
+    def ingest(self, chunk: np.ndarray, first_timestep: int, aggregate_fn,
+               generation: int | None = None) -> tuple[int, int, int] | None:
+        """Merge a freshly predicted chunk in. Returns (dropped, merged, added) for logging, or None
+        if the chunk was planned in an earlier flush() generation (a previous episode's scene) --
+        see deploy_smolvla_async.py's ActionQueue.ingest."""
         dropped = merged = added = 0
         with self._lock:
+            if generation is not None and generation != self._generation:
+                return None
             self.chunk_size = max(self.chunk_size, len(chunk))
             for i, action in enumerate(chunk):
                 ts = first_timestep + i
@@ -188,6 +200,7 @@ class ActionQueue:
         with self._lock:
             self._actions.clear()
             self._latest_executed = -1
+            self._generation += 1
 
     @property
     def latest_executed(self) -> int:
@@ -213,16 +226,16 @@ class ObservationBus:
 
     def __init__(self):
         self._lock = threading.Lock()
-        self._slot: tuple[dict, int] | None = None
+        self._slot: tuple[dict, int, int] | None = None
         self._ready = threading.Event()
 
-    def publish(self, obs: dict, timestep: int) -> None:
+    def publish(self, obs: dict, timestep: int, generation: int = 0) -> None:
         snapshot = {k: (v.copy() if isinstance(v, np.ndarray) else v) for k, v in obs.items()}
         with self._lock:
-            self._slot = (snapshot, timestep)
+            self._slot = (snapshot, timestep, generation)
         self._ready.set()
 
-    def take(self, timeout: float) -> tuple[dict, int] | None:
+    def take(self, timeout: float) -> tuple[dict, int, int] | None:
         """Block until an observation is published, then consume it. None on timeout."""
         if not self._ready.wait(timeout):
             return None
@@ -318,7 +331,7 @@ class AsyncPolicy:
             taken = self.obs_bus.take(timeout=0.1)
             if taken is None:
                 continue
-            obs, timestep = taken
+            obs, timestep, generation = taken
 
             # Re-check the trigger on THIS thread before spending a forward pass -- see
             # deploy_smolvla_async.py's identical comment for the measured reason (avoids doubling
@@ -338,7 +351,11 @@ class AsyncPolicy:
             self.inference_times.append(elapsed)
             self.replans += 1
 
-            dropped, merged, added = self.action_queue.ingest(chunk, timestep, self.aggregate_fn)
+            ingested = self.action_queue.ingest(chunk, timestep, self.aggregate_fn, generation)
+            if ingested is None:  # the episode ended while this forward pass was in flight
+                self.discarded += 1
+                continue
+            dropped, merged, added = ingested
             if self.verbose:
                 print(
                     f"[replan {self.replans}] from tick {timestep} | {elapsed * 1000:.0f}ms | "
@@ -444,15 +461,22 @@ def parse_args():
                              "queued target may move from the CURRENT measured joints each control "
                              "tick. See deploy_smolvla_async.py's --max-joint-speed help for the "
                              "demos' own measured joint-speed percentiles (same dataset).")
+    parser.add_argument("--gripper-squeeze-tau", type=float, default=1.0,
+                        help="N-m of extra closing torque added to each gripper's MIT command while its "
+                             "binarized command is CLOSED (0 = off), same as deploy_smolvla_async.py's "
+                             "flag. The gripper's kp is only 3.0, so on a thin object the jaws stall near "
+                             "the closed stop and kp*err alone barely squeezes; this torque holds "
+                             "regardless of object width. The DM4310 is rated 3 N-m (7 peak) -- stay at or "
+                             "below ~2 and watch the gripper temperature, since it is a sustained stall.")
     parser.add_argument("--max-episode-seconds", type=float, default=30.0,
                         help="Wall-clock limit per episode.")
     parser.add_argument("--max-episodes", type=int, default=1,
                         help="Episodes to run. Each one ramps back to Isaac Sim's reset pose and "
                              "flushes the action queue -- the re-arm mechanism between episodes.")
-    parser.add_argument("--episode-gap-seconds", type=float, default=5.0,
-                        help="Pause after each episode's reset pose, before the policy is given "
-                             "control -- time to take the can out of the left gripper and place a "
-                             "new one.")
+    parser.add_argument("--episode-gap-seconds", type=float, default=None,
+                        help="After each episode's reset pose, wait this many seconds before the policy is "
+                             "given control. Default (unset): wait for Enter instead, so the policy never "
+                             "starts while the scene is still being reset or a hand is in the cameras' view.")
 
     parser.add_argument("--no-start-pose", action="store_true",
                         help="Skip the ramp to Isaac Sim's reset pose before each episode.")
@@ -490,6 +514,10 @@ def parse_args():
                         help="Also write the tracking plots to this path (a '-raw' variant is "
                              "written alongside it). Useful over SSH, where plt.show() has no "
                              "window to open.")
+    parser.add_argument("--save-trace", type=str, default=None,
+                        help="Write the per-tick commanded-vs-measured joint log to this .npz (one segment per "
+                             "episode) for IsaacLab's scripts/tools/sysid/fit_sim_actuators.py -- same "
+                             "format as deploy_smolvla_async.py's --save-trace. Independent of --no-plot.")
     parser.add_argument("--plot-max-samples", type=int, default=24_000,
                         help="Ticks of tracking history to keep, per joint.")
     return parser.parse_args()
@@ -633,6 +661,7 @@ def main():
 
     plot_n = max(0, args.plot_max_samples)
     plotting = not args.no_plot and plot_n > 0
+    recording = (plotting or bool(args.save_trace)) and plot_n > 0   # keep the per-tick logs
     plot_time: deque[float] = deque(maxlen=plot_n)
     target_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
     actual_log = {k: deque(maxlen=plot_n) for k in ACTION_NAMES}
@@ -648,6 +677,7 @@ def main():
     try:
         for ep in range(args.max_episodes):
             print(f"\n===== Episode {ep} =====")
+            robot.gripper_squeeze_tau = {"L": 0.0, "R": 0.0}  # release the grasp before the reset ramp
 
             if not args.no_start_pose:
                 if approach_pose(
@@ -666,16 +696,21 @@ def main():
                 w.release()
             video_writers = {}
 
-            if ep > 0 and args.episode_gap_seconds > 0:
-                print(f"[INFO] {args.episode_gap_seconds:.0f}s to reset the scene -- take the can out of "
-                      f"the left gripper and place a new one.")
-                time.sleep(args.episode_gap_seconds)
+            if ep > 0:
+                if args.episode_gap_seconds is None:
+                    # Cameras keep capturing in their background threads while this blocks, so the
+                    # first observation after Enter is a fresh frame, not one from the reset.
+                    input("[INFO] Reset the scene, move your hands clear, then press Enter to start "
+                          "the next episode: ")
+                elif args.episode_gap_seconds > 0:
+                    print(f"[INFO] {args.episode_gap_seconds:.0f}s to reset the scene.")
+                    time.sleep(args.episode_gap_seconds)
 
             gripper_cmd = {i: GRIPPER_OPEN_CMD for i in GRIPPER_IDX}
             held_target: np.ndarray | None = None
 
             episode_start = time.perf_counter()
-            if plotting:
+            if recording:
                 episode_marks.append((episode_start - run_start, ep))
             tick = 0
             starved_ticks = 0
@@ -699,7 +734,8 @@ def main():
                     held_target = current_q.copy()
 
                 if action_queue.fill_ratio() <= args.chunk_size_threshold:
-                    obs_bus.publish(obs, timestep=action_queue.latest_executed + 1)
+                    obs_bus.publish(obs, timestep=action_queue.latest_executed + 1,
+                                    generation=action_queue.generation)
                 else:
                     obs_bus.clear()
 
@@ -724,7 +760,7 @@ def main():
                     target_q[i] = float(np.clip(target_q[i], GRIPPER_MIN, GRIPPER_MAX))
                 held_target = target_q
 
-                if plotting:
+                if recording:
                     plot_time.append(tick_start - run_start)
                     for j, name in enumerate(ACTION_NAMES):
                         tgt, act = float(target_q[j]), float(current_q[j])
@@ -742,6 +778,14 @@ def main():
                 target_action = dict(obs)
                 for name, value in zip(ACTION_NAMES, target_q):
                     target_action[name] = float(value)
+                if args.gripper_squeeze_tau:
+                    # Keyed off the latched decision, not the clamped target, so the squeeze starts
+                    # as soon as the policy decides to close and stops the tick it decides to open.
+                    for i, name, prefix in ((GRIPPER_IDX[0], "LJ8.pos", "L"), (GRIPPER_IDX[1], "RJ8.pos", "R")):
+                        span = grip[name]["open_raw"] - grip[name]["closed_raw"]
+                        closing_sign = 1.0 if span < 0 else -1.0  # toward closed_raw, in motor angle
+                        closed = gripper_cmd[i] == GRIPPER_CLOSED_CMD
+                        robot.gripper_squeeze_tau[prefix] = closing_sign * args.gripper_squeeze_tau if closed else 0.0
                 _send_action_sim_gripper(robot, target_action, grip)
 
                 saving_video = args.save_video_dir is not None
@@ -833,6 +877,7 @@ def main():
     except KeyboardInterrupt:
         print("\n[INFO] interrupted -- stopping.")
     finally:
+        robot.gripper_squeeze_tau = {"L": 0.0, "R": 0.0}
         async_policy.stop()
         for w in video_writers.values():
             w.release()
@@ -845,9 +890,43 @@ def main():
         robot.disconnect()
         print("[INFO] robot disconnected (motors are NOT powered off -- use emergency_disable.py).")
 
+        if args.save_trace:
+            _save_trace(args.save_trace, plot_time, target_log, actual_log, episode_marks, args.control_hz)
         if plotting:
             _show_tracking_plots(plot_time, target_log, actual_log, raw_log,
                                  episode_marks, args.save_plot, stale_log)
+
+
+def _save_trace(path, plot_time, target_log, actual_log, episode_marks, control_hz) -> None:
+    """Write the commanded-vs-measured log in the traces.npz layout fit_sim_actuators.py reads.
+
+    ``epNNN_cmd`` is the target sent on each tick (after binarisation and the speed clamp) and
+    ``epNNN_meas`` the joints read at the top of that same tick, i.e. the response to the PREVIOUS tick's
+    command -- the same one-tick alignment the dataset-derived traces use. Segments are cut at the episode
+    starts, so no segment spans the ramp back to the reset pose between episodes. Never raises: it runs
+    in a finally block, after the robot is already disconnected.
+    """
+    try:
+        t = np.asarray(plot_time, dtype=np.float64)
+        if len(t) < 2:
+            print("[TRACE] nothing recorded -- no trace written.")
+            return
+        cmd = np.stack([np.asarray(target_log[k], dtype=np.float64) for k in ACTION_NAMES], axis=1)
+        meas = np.stack([np.asarray(actual_log[k], dtype=np.float64) for k in ACTION_NAMES], axis=1)
+        starts = [mt for mt, _ in episode_marks if t[0] <= mt <= t[-1]] or [t[0]]
+        bounds = [int(np.searchsorted(t, s)) for s in starts] + [len(t)]
+        out = {"names": np.array(ACTION_NAMES), "dt": 1.0 / control_hz, "cap": float("nan")}
+        n = 0
+        for a, b in zip(bounds[:-1], bounds[1:]):
+            if b - a >= 30:   # skip stubs from an interrupted episode
+                out[f"ep{n:03d}_cmd"], out[f"ep{n:03d}_meas"] = cmd[a:b], meas[a:b]
+                n += 1
+        np.savez_compressed(path, **out)
+        periods = np.diff(t)
+        print(f"[TRACE] {n} segment(s) written to {path} (nominal dt {1000 / control_hz:.1f} ms; "
+              f"measured tick period median {1000 * np.median(periods):.1f} ms, p99 {1000 * np.percentile(periods, 99):.1f} ms).")
+    except Exception as e:  # noqa: BLE001
+        print(f"[TRACE] could not write {path}: {e!r}")
 
 
 def _show_tracking_plots(plot_time, target_log, actual_log, raw_log, episode_marks, save_path=None,

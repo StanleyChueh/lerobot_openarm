@@ -68,7 +68,16 @@ class OpenArmFollower(Robot):
         self.data = self.model.createData()
         
         self.goal_pos = None
-        
+
+        # Extra feedforward torque (N-m, signed in the gripper MOTOR's own angle convention) added
+        # on top of the gripper's kp*err term, per side. At kp=3.0 a closed gripper squeezes only
+        # kp * (object width in motor rad): a thin rim ~10 mm wide is ~0.14 rad, i.e. ~0.4 N-m --
+        # too little to hold a plate. A constant feedforward torque does not depend on how wide
+        # the object is, and unlike a higher kp it cannot grow past a bound when a fat object
+        # stalls the jaws far from the closed stop. Set per tick by mirror_bridge.py
+        # (--gripper-squeeze-tau); zero everywhere else, so no other caller changes behaviour.
+        self.gripper_squeeze_tau = {"L": 0.0, "R": 0.0}
+
         self._is_connected = False
         
         self._shared_array = Array('d', 16)  # Shared array for 16 doubles
@@ -932,7 +941,7 @@ class OpenArmFollower(Robot):
             oa.MITParam(q=action['RJ7.pos'], dq=vel.get('RJ7.vel', 0.0), tau=tau[15], kp=self.KPs[6], kd=self.KDs[6]),
         ])
         self.right_arm.get_gripper().mit_control_all([
-            oa.MITParam(q=action['RJ8.pos'], dq=0.0, tau=tau[16], kp=self.KPs[7], kd=self.KDs[7])
+            oa.MITParam(q=action['RJ8.pos'], dq=0.0, tau=tau[16] + self.gripper_squeeze_tau['R'], kp=self.KPs[7], kd=self.KDs[7])
         ])
 
         # Same shared-adapter problem the read path has (see _REQUEST_STAGGER_S): handing the
@@ -967,7 +976,7 @@ class OpenArmFollower(Robot):
             oa.MITParam(q=action['LJ7.pos'], dq=vel.get('LJ7.vel', 0.0), tau=tau[6], kp=self.KPs[6], kd=self.KDs[6]),
         ])
         self.left_arm.get_gripper().mit_control_all([
-            oa.MITParam(q=action['LJ8.pos'], dq=0.0, tau=tau[7], kp=self.KPs[7], kd=self.KDs[7])
+            oa.MITParam(q=action['LJ8.pos'], dq=0.0, tau=tau[7] + self.gripper_squeeze_tau['L'], kp=self.KPs[7], kd=self.KDs[7])
         ])
         
         return action
