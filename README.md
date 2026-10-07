@@ -3,7 +3,7 @@
 Two ways to collect data and evaluate on the real OpenArm:
 
 - **[Official LeRobot pipeline with the Meta Quest](#official-lerobot-pipeline-meta-quest)** (this branch,
-  `official-lerobot-quest`): `lerobot-record` / `lerobot-train` / `lerobot-rollout`, exactly as on Koch /
+  `official-lerobot-quest`): `lerobot-teleoperate` / `lerobot-record` / `lerobot-train` / `lerobot-rollout`, exactly as on Koch /
   SO-100. No Isaac Sim, ROS 2 or dora in the loop.
 - **[Legacy pipeline](#legacy-pipeline-isaac-sim-mirror--custom-deploy-scripts)**: Isaac Sim mirror
   collection (`record_demos_openarm.py --real_arm`) and the custom `deploy_smolvla_*.py` scripts.
@@ -79,7 +79,40 @@ A MuJoCo window shows the pose the IK would send. The terminal prints:
 
 Ctrl-C to quit.
 
-### Step 3. Record a dataset
+### Step 3. Teleoperate the real arm (no recording)
+
+Drive the real OpenArm with the Quest through the official `lerobot-teleoperate`. Use it to practise the
+task and to check tracking before you record.
+
+```bash
+lerobot-teleoperate \
+  --robot.type=openarm_umeow \
+  --robot.right_port=can2 --robot.left_port=can3 \
+  --robot.max_joint_speed=1.0 \
+  --teleop.type=openarm_quest \
+  --fps=30
+```
+
+What happens:
+
+1. The terminal shows each joint's current vs. home position. **Type `YES`**, and both arms move slowly
+   (0.3 rad/s) to the home pose.
+2. The arms hold home until you press **X** in the headset. X anchors your current hand pose onto the home
+   pose, so there is no jump, and from then on the arms follow your hands.
+3. **Triggers** close the grippers. **X** again or **Y** sends the arms home and holds them; press **X** to
+   drive again.
+4. **Ctrl-C** stops: the arms ramp back to where they started, then the motors are disabled.
+
+Notes:
+
+- `--robot.max_joint_speed=1.0` is a cautious jump guard for the first session. Once tracking looks right,
+  raise it to the default 2.0 (or drop the flag).
+- `--fps=30` matches recording. The default of 60 is more than the follower's CAN reads keep up with.
+- To see the cameras while teleoperating, add the `--robot.cameras=...` from Step 4 plus `--display_data=true`.
+- Every 5 s the terminal prints an `[openarm_umeow]` status line; its `bound X%` should stay near 0%.
+- Keep a hand near the power / e-stop for the first run.
+
+### Step 4. Record a dataset
 
 ```bash
 lerobot-record \
@@ -129,7 +162,7 @@ Check the recorded data:
 lerobot-dataset-viz --repo-id ethanCSL/openarm_plate_wiping_quest_v00 --episode-index 0
 ```
 
-### Step 4. Train (official command, unchanged)
+### Step 5. Train (official command, unchanged)
 
 ```bash
 lerobot-train \
@@ -145,7 +178,7 @@ lerobot-train \
 `--policy.repo_id` is where the model is uploaded. To keep it local instead, replace that line with
 `--policy.push_to_hub=false`.
 
-### Step 5. Evaluate on the real robot
+### Step 6. Evaluate on the real robot
 
 Prepare the terminal as in Step 1 (the Quest is not needed). Then:
 
@@ -183,6 +216,7 @@ lerobot-rollout \
 ```bash
 python plugins/tests/test_quest_teleop.py               # fake Quest -> teleop: hold, anchor, tracking, triggers
 python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
+python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
 ```
 
 More detail on the plugins: [plugins/README.md](plugins/README.md).
