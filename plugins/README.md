@@ -70,6 +70,7 @@ lr lerobot-record \
 
 ```bash
 lr lerobot-train --policy.path=lerobot/smolvla_base \
+  --policy.repo_id=ethanCSL/smolvla_plate_wiping_quest_v00 \
   --dataset.repo_id=ethanCSL/openarm_plate_wiping_quest_v00 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
   --output_dir=outputs/train/smolvla_plate_quest --job_name=smolvla_plate_quest
