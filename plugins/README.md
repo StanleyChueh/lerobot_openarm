@@ -47,7 +47,7 @@ lr lerobot-record \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --teleop.type=openarm_quest \
-  --dataset.repo_id=ethanCSL/openarm_plate_wiping_quest_v00 \
+  --dataset.repo_id=ethanCSL/openarm_plate_wiping_quest_v00 --dataset.no_stamp=true \
   --dataset.single_task="Pick up the plate and then wipe it" \
   --dataset.num_episodes=50 --dataset.fps=30 \
   --dataset.episode_time_s=120 --dataset.reset_time_s=15 \

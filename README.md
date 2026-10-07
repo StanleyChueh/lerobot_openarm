@@ -159,7 +159,9 @@ What happens:
 
 Useful flags:
 
-- `--resume=true`: add episodes to an existing dataset (same `--dataset.repo_id`).
+- `--dataset.no_stamp=true`: keep the dataset name exactly as typed. Without it lerobot appends the start
+  time (`..._v00_20261007_191607`), a new dataset per run, and Step 5's `--dataset.repo_id` must use that name.
+- `--resume=true`: add episodes to an existing dataset (same `--dataset.repo_id`, so use `no_stamp`).
 - `--dataset.push_to_hub=false`: keep the dataset local only. It is saved under
   `~/.cache/huggingface/lerobot/<repo_id>` either way.
 - Every 5 s the robot prints `[openarm_umeow] 30 Hz commands | step limit 1 rad/s bound 0% of them ...`,
@@ -250,7 +252,9 @@ lerobot-rollout \
 | `The two arms' CAN cables are SWAPPED` | swap the CAN cables, or swap `--robot.right_port` / `--robot.left_port` |
 | A/B buttons do nothing / `episode_buttons disabled (No module named 'pynput')` | `uv sync` (installs `pynput`). A/B simulate arrow-key presses, so they need the X11 desktop session; the keyboard arrows (or `n` / `r` / `q` in the terminal) always work |
 | `--display_data=true` but no rerun window, or it shows old data | an old rerun viewer (e.g. from `mirror_bridge.py`'s collection viewer) still holds port 9876 and receives the data instead. Close it, or `pkill -f 'rerun --port=9876'`, then start again |
-| `torchcodec ... cannot be loaded` warnings | harmless: lerobot falls back to pyav for video |
+| `torchcodec ... cannot be loaded` warnings (a long traceback at start) | harmless, not an error: torchcodec is an optional video *decoder*; lerobot uses pyav instead and recording is unaffected |
+| no rerun window opens / the run looks stuck after the approach table | an old rerun viewer holds port 9876 and receives everything: `pkill -f 'rerun --port=9876'`, then start again |
+| an episode is missing after Ctrl-C | an episode is only saved after its reset phase; end it with X (save) first, then Esc or Ctrl-C |
 
 ### Tests without hardware
 
