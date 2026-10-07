@@ -44,7 +44,7 @@ in MuJoCo. Press X and move: if the pose looks wrong here, it is the VR mapping 
 
 ```bash
 lr lerobot-record \
-  --robot.type=openarm_umeow --robot.right_port=can2 --robot.left_port=can3 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --teleop.type=openarm_quest \
   --dataset.repo_id=ethanCSL/openarm_plate_wiping_quest_v00 \
@@ -81,7 +81,7 @@ lr lerobot-train --policy.path=lerobot/smolvla_base \
 ```bash
 lr lerobot-rollout --strategy.type=base \
   --policy.path=outputs/train/smolvla_plate_quest/checkpoints/last/pretrained_model \
-  --robot.type=openarm_umeow --robot.right_port=can2 --robot.left_port=can3 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="<same as recording>" \
   --task="Pick up the plate and then wipe it" --duration=60
 ```

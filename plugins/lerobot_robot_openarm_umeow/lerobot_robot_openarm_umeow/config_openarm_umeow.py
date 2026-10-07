@@ -17,8 +17,8 @@ class OpenArmUmeowConfig(RobotConfig):
     squeeze; the motors' zero is never touched (unlike the official openarm_follower's calibrate()).
     """
 
-    right_port: str = "can2"
-    left_port: str = "can3"
+    right_port: str = "can0"
+    left_port: str = "can1"
     # URDF for the follower's pinocchio gravity feed-forward.
     model_path: str = DEFAULT_URDF
     calibration: str = DEFAULT_CALIBRATION
