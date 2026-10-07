@@ -40,4 +40,29 @@ class RobotState:
             return self._fault
 
 
+class TeleopState:
+    """The openarm_quest teleop's state, for the rerun status panel (rerun_status.py)."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self.state: str | None = None  # HELD / LIVE / RETURNING / PAUSED, None = no teleop
+        self.reason = ""
+        self.last_key: str | None = None  # "right" (save) / "left" (discard) last sent from the Quest
+        self.last_key_t = 0.0
+
+    def publish(self, state: str, reason: str) -> None:
+        with self._lock:
+            self.state, self.reason = state, reason
+
+    def episode_key(self, key: str) -> None:
+        with self._lock:
+            self.last_key, self.last_key_t = key, time.perf_counter()
+
+    def snapshot(self) -> dict:
+        with self._lock:
+            return {"state": self.state, "reason": self.reason, "last_key": self.last_key,
+                    "last_key_t": self.last_key_t}
+
+
 ROBOT_STATE = RobotState()
+TELEOP_STATE = TeleopState()

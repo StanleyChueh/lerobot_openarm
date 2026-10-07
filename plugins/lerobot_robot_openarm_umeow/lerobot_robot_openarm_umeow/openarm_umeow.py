@@ -26,6 +26,7 @@ from .common import (
     sim_joints_to_motor_action,
 )
 from .config_openarm_umeow import OpenArmUmeowConfig
+from .rerun_status import BOARD
 from .shared import ROBOT_STATE
 
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig  # noqa: E402  (after common's sys.path)
@@ -93,6 +94,7 @@ class OpenArmUmeow(OpenArmFollower):
         pass
 
     def connect(self, calibrate: bool = True) -> None:
+        BOARD.start()  # rerun status panel; no-op unless --display_data=true
         super().connect(calibrate=False)
         cfg = self.umeow_config
         try:
@@ -232,6 +234,7 @@ class OpenArmUmeow(OpenArmFollower):
             self._stats_reset(now)
 
     def disconnect(self) -> None:
+        BOARD.stop("SHUTDOWN")
         cfg = self.umeow_config
         if self.is_connected and cfg.return_to_rest and self._rest_action is not None:
             try:

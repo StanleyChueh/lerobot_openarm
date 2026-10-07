@@ -130,6 +130,19 @@ What happens:
    position and asks you to **type `YES`**. It moves both arms slowly (0.3 rad/s) to the home pose with the
    grippers open. Add `--robot.assume_yes=true` to skip the prompt. The cameras and joint plots appear in
    rerun once recording starts.
+
+   The **status** panel at the top of the rerun window shows, live:
+
+   ```
+   🔴 RECORDING · episode 3 of 50 · 12 s          (or 🟡 RESETTING / 💾 SAVING / ⚫ STOPPING ...)
+   saved in the dataset: 3 of 50
+   Quest: ▶ LIVE -- arms follow the controllers. X = save, Y = discard
+   episode 3 will be SAVED when the reset ends (Y now = discard instead)     <- during the reset
+   ⛔ ROBOT SAFETY HOLD: ...                                                  <- only if it fires
+   last: episode 2 SAVED (3 in the dataset)
+   ```
+
+   The "will be SAVED / DISCARDED" line follows the Quest's X / Y; a keyboard arrow press is not shown there.
 2. Recording of episode 0 starts. The arms hold the home pose (`HELD`) until you press **X**.
 3. Each episode: **X** to start driving, do the task, then **X** again to **save** it or **Y** to **discard**
    it. Either way the arms return home slowly and the grippers open (see
@@ -241,6 +254,7 @@ lerobot-rollout \
 ```bash
 python plugins/tests/test_quest_safety.py               # fake Quest: anchoring, headset swing, glitches, slow return, grippers
 python plugins/tests/test_robot_guard.py                # robot safety hold: jumps, tracking error, speed clamp
+python plugins/tests/test_rerun_status.py /tmp/mock_rr  # rerun status panel through a 2-episode mocked lerobot-record
 python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
 python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
 ```

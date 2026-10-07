@@ -57,6 +57,7 @@ from openarm_control import (
     register_ik_args,
     setup_from_args,
 )
+from lerobot_robot_openarm_umeow.shared import TELEOP_STATE
 from scipy.spatial.transform import Rotation
 
 from .quest_input import (
@@ -150,7 +151,13 @@ class QuestIKDriver:
         # on_episode_key("right" | "left"). All optional, so the driver also runs without a robot.
         self._held_command = held_command or (lambda: None)
         self._robot_fault = robot_fault or (lambda: None)
-        self._on_episode_key = on_episode_key or (lambda key: None)
+        episode_key = on_episode_key or (lambda key: None)
+
+        def on_key(key: str) -> None:
+            TELEOP_STATE.episode_key(key)
+            episode_key(key)
+
+        self._on_episode_key = on_key
 
         setup = self.kin.setup
         self.grip = {s: _gripper_endpoints(setup.model, s) for s in SIDES}
@@ -166,6 +173,7 @@ class QuestIKDriver:
         self._smoothers = {s: OneEuroPoseSmoother(*smoothing) for s in SIDES}
         self._state = HELD
         self._reason = ""
+        TELEOP_STATE.publish(HELD, "")
         self._ref = None  # reference pose latched on X
         self._base: dict[str, np.ndarray] = {}  # EE pose per arm at anchoring
         self._anchor: dict[str, np.ndarray] = {}  # controller pose per arm at anchoring
@@ -214,6 +222,7 @@ class QuestIKDriver:
         self._running = False
         self._thread.join(timeout=2.0)
         self.receiver.close()
+        TELEOP_STATE.publish(None, "")
 
     # ── loop ──────────────────────────────────────────────────────────────────
 
@@ -443,6 +452,7 @@ class QuestIKDriver:
     def _set_state(self, state: str, reason: str) -> None:
         with self._lock:
             self._state, self._reason = state, reason
+        TELEOP_STATE.publish(state, reason)
 
     @staticmethod
     def _log(text: str) -> None:
