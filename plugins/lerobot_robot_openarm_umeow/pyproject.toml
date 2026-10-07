@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# The distribution name must equal the import name: lerobot's register_third_party_plugins()
+# imports every installed distribution whose name starts with "lerobot_robot_" by that name.
+name = "lerobot_robot_openarm_umeow"
+version = "0.1.0"
+description = "LeRobot robot plugin: this lab's dual-arm OpenArm follower (robots/umeow_openarm_follower) for the official lerobot-record / lerobot-rollout CLIs."
+requires-python = ">=3.10"
+dependencies = ["lerobot", "mujoco>=3.6.0", "numpy"]
+
+[tool.setuptools]
+packages = ["lerobot_robot_openarm_umeow"]

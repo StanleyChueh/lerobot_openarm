@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# The distribution name must equal the import name: lerobot's register_third_party_plugins()
+# imports every installed distribution whose name starts with "lerobot_teleoperator_" by that name.
+name = "lerobot_teleoperator_openarm_quest"
+version = "0.1.0"
+description = "LeRobot teleoperator plugin: Meta Quest controllers -> mink IK -> OpenArm joint targets, for the official lerobot-record CLI."
+requires-python = ">=3.10"
+dependencies = [
+    "lerobot",
+    "lerobot_robot_openarm_umeow",
+    "mujoco>=3.6.0",
+    "openarm_control",
+    "numpy",
+    "scipy",
+]
+
+[tool.setuptools]
+packages = ["lerobot_teleoperator_openarm_quest"]

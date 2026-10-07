@@ -12,6 +12,15 @@ dependencies = [
     "python-dotenv>=1.2.1",
     "deepdiff>=8.0.0",
     "num2words>=0.5.14",
+    # Official lerobot-record / lerobot-rollout plugins (plugins/README.md).
+    "lerobot_robot_openarm_umeow",
+    "lerobot_teleoperator_openarm_quest",
+    # The Quest teleop's IK, pinned to what the dora pipeline's ik node runs.
+    "openarm_control",
+    "openarm-mujoco==2.1.0",
+    "mink==1.1.0",
+    "mujoco==3.11.0",
+    "scipy",
 ]
 
 [dependency-groups]
@@ -21,3 +30,6 @@ dev = [
 
 [tool.uv.sources]
 lerobot = { git = "https://github.com/huggingface/lerobot.git", branch = "main" }
+lerobot_robot_openarm_umeow = { path = "plugins/lerobot_robot_openarm_umeow", editable = true }
+lerobot_teleoperator_openarm_quest = { path = "plugins/lerobot_teleoperator_openarm_quest", editable = true }
+openarm_control = { git = "https://github.com/enactic/openarm_control", rev = "2f1ee56ef2bf1272329b213a1f0b0768b9d07f2b" }
