@@ -210,42 +210,80 @@ Check the recorded data:
 lerobot-dataset-viz --repo-id ethanCSL/openarm_plate_wiping_quest_v00 --episode-index 0
 ```
 
-### Step 5. Train (official command, unchanged)
+### Step 5. Train (official command)
 
 ```bash
 lerobot-train \
   --policy.path=lerobot/smolvla_base \
-  --policy.repo_id=ethanCSL/smolvla_plate_wiping_quest_v00 \
-  --dataset.repo_id=ethanCSL/openarm_plate_wiping_quest_v00 \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --policy.repo_id=ethanCSL/smolvla_pringles_lerobot_real_v00 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/smolvla_plate_wiping_quest_v00 \
-  --job_name=smolvla_plate_wiping_quest_v00 \
+  --output_dir=outputs/train/smolvla_pringles_lerobot_real_v00 \
+  --job_name=smolvla_pringles_lerobot_real_v00 \
   --wandb.enable=true
 ```
 
-`--policy.repo_id` is where the model is uploaded. To keep it local instead, replace that line with
-`--policy.push_to_hub=false`.
+- `--rename_map` is required: `smolvla_base` names its three cameras `camera1/2/3`, our datasets name them
+  `right_wrist_cam / wrist_cam / body_cam`. This is the same mapping your earlier SmolVLA checkpoints used.
+- `--policy.repo_id` is where the model is uploaded; to keep it local, use `--policy.push_to_hub=false` instead.
+- Train on datasets recorded with **this** pipeline. Checkpoints trained on the Isaac-mirror datasets are not
+  interchangeable: those store sim-unit joints (grippers 0-0.044) in a different key order.
 
-### Step 6. Evaluate on the real robot
+### Step 6. Evaluate on the real robot (official `lerobot-rollout`)
 
-Prepare the terminal as in Step 1 (the Quest is not needed). Then:
+Prepare the terminal as in Step 1 (the Quest is not needed). Run the policy, no recording:
 
 ```bash
 lerobot-rollout \
   --strategy.type=base \
-  --policy.path=outputs/train/smolvla_plate_wiping_quest_v00/checkpoints/last/pretrained_model \
+  --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the plate and then wipe it" \
-  --duration=60
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --duration=60 --display_data=true
 ```
 
-- `--policy.path` also takes a Hub id, e.g. `ethanCSL/smolvla_plate_wiping_quest_v00`.
+Or run several **evaluation episodes** and record them (to watch or score later):
+
+```bash
+lerobot-rollout \
+  --strategy.type=episodic \
+  --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_v00 --dataset.no_stamp=true \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --display_data=true
+```
+
+What happens:
+
+1. The arm goes to the home pose first (type `YES`; `--robot.assume_yes=true` skips it). That pose, grippers
+   open, is the "start pose" every episode begins from.
+2. `base`: the policy runs for `--duration` seconds (0 = until Ctrl-C), then the arm returns to the start pose.
+3. `episodic`: each episode runs the policy for at most `episode_time_s`; **Right arrow** ends it early
+   (saved), **Left arrow** discards it, **Esc** stops. Then the arm returns **slowly** (<= 0.3 rad/s) to the
+   start pose and the reset phase gives you `reset_time_s` to reset the scene; **Right arrow** ends the
+   reset early and starts the next episode. The rerun panel shows `🤖 POLICY RUNNING · episode N of M` /
+   `🟡 RESETTING`.
+4. On exit the arm returns to the start pose, then to where it was before connecting, then the motors are disabled.
+
+Notes:
+
+- `--rename_map` is required here too (lerobot-rollout checks the cameras before loading the policy).
 - `--task` and `--robot.cameras` must match the recording **exactly** (same text, same camera names).
-- The arm goes to the home pose first (type `YES`), then the policy runs for `--duration` seconds.
-- Slow inference: add `--inference.type=rtc --inference.rtc.execution_horizon=10`.
-- To record the evaluation runs as a dataset: `--strategy.type=episodic --dataset.repo_id=ethanCSL/eval_...`
-  (see `lerobot-rollout --help`).
+- `episodic` dataset names must start with `rollout_` (lerobot-rollout enforces it).
+- `--policy.path` also takes a Hub id, e.g. `ethanCSL/smolvla_pringles_lerobot_real_v00`.
+- The robot's safety guard applies to the policy too: an action that jumps or strays from the measured
+  joints triggers a `SAFETY HOLD` (the arm stops) instead of being executed.
+- lerobot-rollout returns to the start pose in a fixed 1 s (between episodes) / 3 s (exit); the robot plugin
+  stretches that so no joint exceeds `--robot.return_speed` (0.3 rad/s).
+- Slow inference: `--inference.type=rtc --inference.rtc.execution_horizon=10` (not tested on this robot yet).
 
 ### Troubleshooting
 
@@ -270,6 +308,7 @@ python plugins/tests/test_quest_safety.py               # fake Quest: anchoring,
 python plugins/tests/test_robot_guard.py                # robot safety hold: jumps, tracking error, speed clamp
 python plugins/tests/test_rerun_status.py /tmp/mock_rr  # rerun status panel through a 2-episode mocked lerobot-record
 python plugins/tests/test_record_gate.py /tmp/mock_gate # episodes start on X; X ends the reset; timer end returns home
+bash plugins/tests/eval_chain/run_chain.sh /tmp/chain   # record -> lerobot-train SmolVLA (30 steps) -> lerobot-rollout base + episodic (GPU, ~3 min)
 python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
 python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
 ```

@@ -50,6 +50,9 @@ class OpenArmUmeowConfig(RobotConfig):
     ik_xml: str = DEFAULT_IK_XML
     start_keyframe: str = "home"
     approach_speed: float = 0.3
+    # lerobot-rollout returns the arm to its start pose between episodes in a FIXED 1 s (episodic) or
+    # 3 s (shutdown), however far it is; those returns are stretched so no joint exceeds this (rad/s).
+    return_speed: float = 0.3
     # Refuse the connect-time approach if any joint would travel further than this (rad): a gap
     # that large means the calibration or zeroing is wrong. Same gate as mirror_bridge.py.
     max_approach_delta: float = 1.8

@@ -33,6 +33,7 @@ _PHASE_STYLE = {
     "STARTING": ("⚪", "starting"),
     "WAITING": ("⏳", "WAITING for X (not recording yet)"),
     "RECORDING": ("🔴", "RECORDING"),
+    "POLICY": ("🤖", "POLICY RUNNING (recorded)"),
     "RESETTING": ("🟡", "RESETTING the scene (not recorded)"),
     "SAVING": ("💾", "SAVING"),
     "STOPPING": ("⚫", "STOPPING"),
@@ -173,7 +174,8 @@ class StatusBoard:
             self.episode = episode
             if self.saved is None:
                 self.saved = episode  # episodes already in the dataset (non-zero with --resume)
-        self.set_phase("WAITING" if self.gated else "RECORDING")
+        command = sys.argv[0].rsplit("/", 1)[-1] if sys.argv else ""
+        self.set_phase("WAITING" if self.gated else "POLICY" if "rollout" in command else "RECORDING")
 
     def on_saved(self, total_saved: int) -> None:
         with self._lock:

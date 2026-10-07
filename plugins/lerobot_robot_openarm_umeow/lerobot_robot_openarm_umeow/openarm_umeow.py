@@ -58,6 +58,36 @@ class _RawSender:
         return self._robot.get_observation()
 
 
+def _slow_down_rollout_returns(speed: float) -> None:
+    """Stretch lerobot-rollout's return_to_initial_position so no arm joint moves faster than `speed`.
+
+    lerobot-rollout calls it with a fixed duration (1 s between episodic episodes, 3 s at shutdown),
+    whatever the distance: a 1.5 rad return in 1 s is the fast, dangerous reset the Quest teleop's slow
+    return replaced. A no-op outside lerobot-rollout."""
+    import sys
+
+    core = sys.modules.get("lerobot.rollout.strategies.core")
+    if core is None or getattr(core, "_openarm_slow_return", False):
+        return
+    original = core.RolloutStrategy.return_to_initial_position
+
+    def slow_return(hw, duration_s: float = 3.0, fps: int = 50) -> bool:
+        try:
+            obs = hw.robot_wrapper.get_observation()
+            dist = max((abs(hw.initial_position[k] - obs[k]) for k in hw.initial_position
+                        if k in obs and k in ARM_KEYS), default=0.0)
+        except Exception:
+            dist = 0.0
+        duration = max(duration_s, dist / speed)
+        print(f"[openarm_umeow] returning to the start pose slowly: {dist:.2f} rad over {duration:.1f} s"
+              f" (<= {speed:g} rad/s)", flush=True)
+        BOARD.note(f"returning to the start pose ({duration:.0f} s)")
+        return original(hw, duration_s=duration, fps=fps)
+
+    core.RolloutStrategy.return_to_initial_position = staticmethod(slow_return)
+    core._openarm_slow_return = True
+
+
 class OpenArmUmeow(OpenArmFollower):
     config_class = OpenArmUmeowConfig
     name = "openarm_umeow"
@@ -95,6 +125,7 @@ class OpenArmUmeow(OpenArmFollower):
 
     def connect(self, calibrate: bool = True) -> None:
         BOARD.start()  # rerun status panel; no-op unless --display_data=true
+        _slow_down_rollout_returns(self.umeow_config.return_speed)
         ROBOT_STATE.connecting = True
         try:
             self._connect()
