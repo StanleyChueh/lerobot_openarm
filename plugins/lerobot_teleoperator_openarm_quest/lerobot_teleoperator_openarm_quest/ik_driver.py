@@ -97,6 +97,11 @@ class QuestIKDriver:
         jr, fr = resolver.get_driver(home_qpos, "right")
         jl, fl = resolver.get_driver(home_qpos, "left")
         self.home_driver = np.concatenate([np.append(jr, float(fr)), np.append(jl, float(fl))]).astype(np.float32)
+        # Hold with the grippers OPEN, not at the keyframe's closed fingers: the real gripper gets a
+        # squeeze torque whenever it is commanded closed (openarm_umeow), and holding that against
+        # its own stop until X is pressed is a sustained stall. Open is also how the Isaac pipeline
+        # started every episode (sim_bridge_common.sim_init_pose_action).
+        self.home_driver[7], self.home_driver[15] = self.grip["right"][0], self.grip["left"][0]
 
         self._smoothers = {s: OneEuroPoseSmoother(*smoothing) for s in ("right", "left")}
         self._prev_valid = {"right": VALID_OK, "left": VALID_OK}
@@ -104,7 +109,7 @@ class QuestIKDriver:
         self._latest_target: dict[str, np.ndarray] = {}
         self._buttons_prev = {"x": False, "y": False, "a": False, "b": False}
         self._x_presses = 0
-        self._gripper = {"right": 0.0, "left": 0.0}
+        self._gripper = {s: self.grip[s][0] for s in ("right", "left")}  # open until a trigger reading
         self._hold: np.ndarray | None = self.home_driver.copy() if hold_until_anchor else None
 
         self._lock = threading.Lock()

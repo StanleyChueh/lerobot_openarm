@@ -24,6 +24,9 @@ def press(k):
     state[k] = True; time.sleep(0.1); state[k] = False; time.sleep(0.1)
 home_cmd = d.home_driver.copy()
 time.sleep(1.0)
+g = {s: t.calib[s]["gripper"] for s in ("left", "right")}
+a0 = t.get_action()
+print("0 HELD grippers open: RJ8 %.3f (open_raw %.3f), LJ8 %.3f (open_raw %.3f)" % (a0["RJ8.pos"], g["right"]["open_raw"], a0["LJ8.pos"], g["left"]["open_raw"]))
 c = d.command(); print("1 HELD before X: equals home driver:", np.allclose(c[[*range(7), *range(8, 15)]], home_cmd[[*range(7), *range(8, 15)]]), "| status", d.status())
 
 press("x"); time.sleep(0.5)

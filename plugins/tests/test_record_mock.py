@@ -74,4 +74,5 @@ right = [names.index(f"RJ{k}.pos") for k in range(1, 8)]
 gap = np.abs(a - s)[:, arm].max(1)
 print(f"DATASET: {len(a)} frames @ {info['fps']} fps, robot_type {info['robot_type']}")
 print("DATASET: right-arm joints moved over the episode (rad):", np.round(np.abs(a[-1, right] - a[0, right]), 3))
+print("DATASET: first frame grippers (motor rad) RJ8 %.3f LJ8 %.3f -- open_raw is -1.298 / +1.212" % (a[0, names.index("RJ8.pos")], a[0, names.index("LJ8.pos")]))
 print(f"DATASET: max|action - state| median {np.median(gap):.4f}, max {gap.max():.4f} rad")

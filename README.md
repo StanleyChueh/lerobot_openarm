@@ -57,7 +57,9 @@ ROS's pinocchio instead of the venv's, and the robot plugin then fails with
 
 3. **Stop the dora dataflow** if it is running (`dora run dataflow-vr-mujoco-ros2.yaml`): only one
    program can receive the Quest's packets on UDP port 5006.
-4. Start the Quest app as usual. It keeps sending to this PC's port 5006; nothing changes on the headset.
+4. Close any rerun viewer left over from an earlier session (`pkill -f 'rerun --port=9876'`), so
+   `--display_data=true` opens a fresh window for this one.
+5. Start the Quest app as usual. It keeps sending to this PC's port 5006; nothing changes on the headset.
 
 ### Step 2. Dry run: check the VR mapping (nothing moves)
 
@@ -129,8 +131,10 @@ lerobot-record \
 
 What happens:
 
-1. The robot prints each joint's current vs. target position and asks you to **type `YES`**, then moves both
-   arms slowly (0.3 rad/s) to the home pose. Add `--robot.assume_yes=true` to skip the prompt.
+1. A rerun window opens (`--display_data=true`), then the robot prints each joint's current vs. target
+   position and asks you to **type `YES`**. It moves both arms slowly (0.3 rad/s) to the home pose with the
+   grippers open. Add `--robot.assume_yes=true` to skip the prompt. The cameras and joint plots appear in
+   rerun once recording starts.
 2. Recording of episode 0 starts. The arms hold the home pose until you press **X**.
 3. Each episode, in the headset:
 
@@ -208,7 +212,8 @@ lerobot-rollout \
 | preview shows `quest 0 Hz (last none yet)` | dora still running, or the Quest app sends to another IP/port |
 | `REFUSED: ... would have to travel ... rad` at start | the arm is too far from home: move it closer by hand, or check `calibration.json` |
 | `The two arms' CAN cables are SWAPPED` | swap the CAN cables, or swap `--robot.right_port` / `--robot.left_port` |
-| A/B buttons do nothing | use the keyboard arrows; A/B simulate key presses and need a desktop (X11) session |
+| A/B buttons do nothing / `episode_buttons disabled (No module named 'pynput')` | `uv sync` (installs `pynput`). A/B simulate arrow-key presses, so they need the X11 desktop session; the keyboard arrows (or `n` / `r` / `q` in the terminal) always work |
+| `--display_data=true` but no rerun window, or it shows old data | an old rerun viewer (e.g. from `mirror_bridge.py`'s collection viewer) still holds port 9876 and receives the data instead. Close it, or `pkill -f 'rerun --port=9876'`, then start again |
 | `torchcodec ... cannot be loaded` warnings | harmless: lerobot falls back to pyav for video |
 
 ### Tests without hardware

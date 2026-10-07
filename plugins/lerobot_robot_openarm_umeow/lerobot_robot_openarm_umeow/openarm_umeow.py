@@ -26,6 +26,7 @@ from .config_openarm_umeow import OpenArmUmeowConfig
 
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig  # noqa: E402  (after common's sys.path)
 from sim_bridge_common import (  # noqa: E402
+    GRIPPER_SIM_OPEN,
     approach_pose,
     check_arms_not_crossed,
     clamp_step,
@@ -91,9 +92,12 @@ class OpenArmUmeow(OpenArmFollower):
             self._rest_action = get_current_pos_action(self)
             current = dict(self._rest_action)
             if cfg.start_pose == "keyframe":
-                target = sim_joints_to_motor_action(
-                    keyframe_sim_joints(cfg.ik_xml, cfg.start_keyframe), self.calib
-                )
+                start = keyframe_sim_joints(cfg.ik_xml, cfg.start_keyframe)
+                # Grippers open, matching the teleop's hold pose (see its ik_driver.py) rather than the
+                # keyframe's closed fingers.
+                for side in ("left", "right"):
+                    start[f"openarm_{side}_finger_joint1"] = GRIPPER_SIM_OPEN
+                target = sim_joints_to_motor_action(start, self.calib)
                 approached = approach_pose(
                     _RawSender(self),
                     target,
