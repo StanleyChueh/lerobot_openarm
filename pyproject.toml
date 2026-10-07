@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "lerobot[dataset,groot,training,viz]",
+    "lerobot[dataset,groot,training,viz,async]",
     "matplotlib>=3.10.8",
     "openarm-can>=1.2.3",
     "pin",

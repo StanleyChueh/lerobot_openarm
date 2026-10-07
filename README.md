@@ -230,102 +230,7 @@ lerobot-train \
 - Train on datasets recorded with **this** pipeline. Checkpoints trained on the Isaac-mirror datasets are not
   interchangeable: those store sim-unit joints (grippers 0-0.044) in a different key order.
 
-### Step 6. Evaluate on the real robot (official `lerobot-rollout`)
-
-Prepare the terminal as in Step 1 (the Quest is not needed). Run the policy, no recording:
-
-```bash
-lerobot-rollout \
-  --strategy.type=base \
-  --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --duration=60 --display_data=true
-```
-
-Or run several **evaluation episodes** and record them (to watch or score later):
-
-```bash
-lerobot-rollout \
-  --strategy.type=episodic \
-  --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_v00 --dataset.no_stamp=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
-  --display_data=true
-```
-
-What happens:
-
-1. The arm goes to the home pose first (type `YES`; `--robot.assume_yes=true` skips it). That pose, grippers
-   open, is the "start pose" every episode begins from.
-2. `base`: the policy runs for `--duration` seconds (0 = until Ctrl-C), then the arm returns to the start pose.
-3. `episodic`: each episode runs the policy for at most `episode_time_s`; **Right arrow** ends it early
-   (saved), **Left arrow** discards it, **Esc** stops. Then the arm returns **slowly** (<= 0.3 rad/s) to the
-   start pose and the reset phase gives you `reset_time_s` to reset the scene; **Right arrow** ends the
-   reset early and starts the next episode. The rerun panel shows `🤖 POLICY RUNNING · episode N of M` /
-   `🟡 RESETTING`.
-4. On exit the arm returns to the start pose, then to where it was before connecting, then the motors are disabled.
-
-Notes:
-
-- `--rename_map` is required here too (lerobot-rollout checks the cameras before loading the policy).
-- `--task` and `--robot.cameras` must match the recording **exactly** (same text, same camera names).
-- `episodic` dataset names must start with `rollout_` (lerobot-rollout enforces it).
-- `--policy.path` also takes a Hub id, e.g. `ethanCSL/smolvla_pringles_lerobot_real_v00`.
-- The robot's safety guard applies to the policy too: an action that jumps or strays from the measured
-  joints triggers a `SAFETY HOLD` (the arm stops) instead of being executed.
-- lerobot-rollout returns to the start pose in a fixed 1 s (between episodes) / 3 s (exit); the robot plugin
-  stretches that so no joint exceeds `--robot.return_speed` (0.3 rad/s).
-
-#### Asynchronous evaluation (SmolVLA and GR00T N1.7)
-
-`--inference.type=rtc` runs the policy in a background thread (Real-Time Chunking): the 30 Hz control loop
-never waits for inference, and each new action chunk is blended into the one being executed. This is the
-official replacement for `deploy_smolvla_async.py` / `deploy_gr00t_async.py`. It works with `base` and
-`episodic`.
-
-SmolVLA:
-
-```bash
-lerobot-rollout --strategy.type=base --inference.type=rtc --inference.rtc.execution_horizon=10 \
-  --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --duration=60 --display_data=true
-```
-
-GR00T N1.7 (no `--rename_map`: GR00T keeps the dataset's camera names):
-
-```bash
-lerobot-rollout --strategy.type=base --inference.type=rtc --inference.rtc.execution_horizon=8 \
-  --policy.path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --duration=60 --display_data=true
-```
-
-- **GR00T must use `--inference.type=rtc`**: with relative actions (our recipe) lerobot refuses the plain
-  synchronous path.
-- GR00T is loaded on the CPU, cast to **bf16**, then moved to the GPU (`--robot.policy_dtype=auto`, the
-  default; `fp32` / `bf16` force it). In fp32 it ran out of memory on the 16 GB RTX 5080 (14.7 GB); in bf16 it
-  peaks at ~7 GB.
-- `execution_horizon`: how many actions of each chunk are blended with the next; keep it below the chunk
-  size (SmolVLA 50, GR00T 16 in our recipe).
-- lerobot's separate `async_inference` policy server / robot client is **not** usable for our policies as
-  shipped: the client cannot pass `--rename_map` (SmolVLA), and the server decodes chunks one step at a
-  time, which GR00T's relative actions reject.
-
-GR00T N1.7 training, the same recipe as the earlier `openarm_pringles_gr00t_real_v00` checkpoint (does **not**
+**GR00T N1.7**, the same recipe as the earlier `openarm_pringles_gr00t_real_v00` checkpoint (does **not**
 fit the 16 GB GPU here, even at batch 1 -- train on a larger GPU):
 
 ```bash
@@ -337,6 +242,119 @@ lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B 
   --batch_size=64 --steps=20000 --policy.device=cuda \
   --output_dir=outputs/train/groot_pringles_lerobot_real_v00 --job_name=groot_pringles_lerobot_real_v00
 ```
+
+### Step 6. Evaluate on the real robot: normal, async, RTC
+
+Three ways to run a trained policy, all official lerobot tools, for both SmolVLA and GR00T N1.7. Prepare the
+terminal as in Step 1 (the Quest is not needed).
+
+| mode | what it does | tool |
+|---|---|---|
+| **normal** | predict a chunk, execute it, predict the next; the robot waits during each inference | `lerobot-rollout` |
+| **async** ([docs](https://huggingface.co/docs/lerobot/main/en/async)) | a policy server computes the next chunk while the robot client is still executing the current one, and overlapping chunks are aggregated; no waiting, inference can run on another machine | `policy_server` + `robot_client` |
+| **RTC** ([docs](https://huggingface.co/docs/lerobot/main/en/rtc)) | inference in a background thread, and each new chunk is *guided* to continue smoothly from the actions already being executed | `lerobot-rollout --inference.type=rtc` |
+
+#### Normal
+
+```bash
+# SmolVLA
+lerobot-rollout --strategy.type=base \
+  --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" --duration=60 --display_data=true
+
+# GR00T N1.7 (no --rename_map: GR00T keeps the dataset's camera names)
+lerobot-rollout --strategy.type=base \
+  --policy.path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" --duration=60 --display_data=true
+```
+
+#### Async (policy server + robot client)
+
+Terminal 1, the policy server (same machine: `127.0.0.1`; another GPU machine: its IP, and `--host=0.0.0.0`):
+
+```bash
+python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
+```
+
+Terminal 2, the robot client:
+
+```bash
+# SmolVLA
+python -m lerobot.async_inference.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=smolvla --pretrained_name_or_path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=weighted_average --fps=30
+
+# GR00T N1.7: --policy_type=groot --pretrained_name_or_path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model --actions_per_chunk=16
+```
+
+- Use **`lerobot_robot_openarm_umeow.policy_server`**, not `lerobot.async_inference.policy_server`: it is
+  lerobot's server with the fixes our checkpoints need -- it keeps the checkpoint's camera rename map
+  (lerobot's client cannot send one, and the server would otherwise drop it), decodes GR00T's relative
+  actions a whole chunk at a time (lerobot's server does one step at a time, which GR00T rejects), and
+  loads GR00T in bf16 (`--policy_dtype=auto|bf16|fp32`). Same flags otherwise.
+- The client is lerobot's own. `--actions_per_chunk` <= the policy's chunk size (SmolVLA 50, our GR00T 16);
+  `--chunk_size_threshold` 0.5-0.6 is the docs' recommendation; add `--debug_visualize_queue_size=true` to
+  plot the action queue when tuning.
+- The arm goes home first (type `YES`); Ctrl-C stops the client, and the arm returns to its rest pose.
+
+#### RTC (Real-Time Chunking)
+
+```bash
+# SmolVLA
+lerobot-rollout --strategy.type=base \
+  --inference.type=rtc --inference.rtc.mode=guided \
+  --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0 \
+  --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" --duration=60 --display_data=true
+
+# GR00T N1.7: same with --policy.path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model, --inference.rtc.execution_horizon=8, no --rename_map
+```
+
+- `execution_horizon`: actions of the previous chunk the new one is guided to match; 8-12, and below the
+  chunk size. `max_guidance_weight` 10.0 is the docs' value for 10-step flow matching.
+
+#### Recording evaluation episodes
+
+Normal and RTC also work with `--strategy.type=episodic` instead of `base`, which records each evaluation
+episode (to watch or score later):
+
+```bash
+  --strategy.type=episodic \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_v00 --dataset.no_stamp=true \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60
+```
+
+During an episode **Right arrow** ends it (saved), **Left arrow** discards it, **Esc** stops. Then the arm
+returns **slowly** (<= 0.3 rad/s) to the start pose and the reset phase gives you `reset_time_s` to reset
+the scene; **Right arrow** ends the reset early. Episodic dataset names must start with `rollout_`.
+
+#### Notes for all modes
+
+- The arm goes to the home pose first (type `YES`; `--robot.assume_yes=true` skips it), grippers open. On exit
+  it returns to that pose, then to where it was before connecting, then the motors are disabled.
+- `--rename_map` is required for SmolVLA in `lerobot-rollout` (it checks the cameras before loading the policy).
+- `--task` and `--robot.cameras` must match the recording **exactly** (same text, same camera names).
+- GR00T uses relative actions: lerobot's normal mode decodes them one step at a time, which GR00T rejects,
+  so the robot plugin decodes each chunk whole instead (same result, still synchronous). GR00T is also loaded
+  in bf16 (`--robot.policy_dtype=auto`, the default): in fp32 it ran out of memory on the 16 GB GPU.
+- The robot's safety guard applies to every mode: an action that jumps or strays from the measured joints
+  triggers a `SAFETY HOLD` (the arm stops) instead of being executed.
+- Checkpoints trained on the old Isaac-mirror datasets cannot drive this robot (different joint order and
+  units): train on data recorded with Step 4.
 
 ### Troubleshooting
 
@@ -361,9 +379,11 @@ python plugins/tests/test_quest_safety.py               # fake Quest: anchoring,
 python plugins/tests/test_robot_guard.py                # robot safety hold: jumps, tracking error, speed clamp
 python plugins/tests/test_rerun_status.py /tmp/mock_rr  # rerun status panel through a 2-episode mocked lerobot-record
 python plugins/tests/test_record_gate.py /tmp/mock_gate # episodes start on X; X ends the reset; timer end returns home
-bash plugins/tests/eval_chain/run_chain.sh /tmp/chain   # record -> lerobot-train SmolVLA (30 steps) -> lerobot-rollout base, episodic, base+RTC (GPU, ~3 min)
-# GR00T N1.7 + RTC on the mocked robot, with any GR00T checkpoint (an old one only proves it loads and runs):
-python plugins/tests/eval_chain/chain_rollout.py base <groot checkpoint> - plugins/tests/eval_chain --inference.type=rtc --inference.rtc.execution_horizon=8
+bash plugins/tests/eval_chain/run_chain.sh /tmp/chain   # record -> lerobot-train SmolVLA (30 steps) -> evaluate: normal, episodic, RTC, async (GPU, ~4 min)
+# GR00T N1.7 on the mocked robot with any GR00T checkpoint (an old one only proves it loads and runs):
+python plugins/tests/eval_chain/chain_rollout.py base <groot checkpoint> - plugins/tests/eval_chain                    # normal
+python plugins/tests/eval_chain/chain_rollout.py base <groot checkpoint> - plugins/tests/eval_chain --inference.type=rtc --inference.rtc.execution_horizon=8   # RTC
+python plugins/tests/eval_chain/chain_async.py groot <groot checkpoint> 16 plugins/tests/eval_chain                     # async
 python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
 python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
 ```
