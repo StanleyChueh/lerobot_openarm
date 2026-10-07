@@ -45,6 +45,16 @@ def driver16_to_sim_joints(command: np.ndarray) -> dict:
     return sim
 
 
+def sim_joints_to_driver16(sim: dict) -> np.ndarray:
+    """Inverse of driver16_to_sim_joints."""
+    out = np.zeros(16, dtype=np.float32)
+    for side, base in (("right", 0), ("left", 8)):
+        for n in range(1, 8):
+            out[base + n - 1] = sim[f"openarm_{side}_joint{n}"]
+        out[base + 7] = sim[f"openarm_{side}_finger_joint1"]
+    return out
+
+
 def keyframe_sim_joints(xml_path: str, keyframe: str = "home") -> dict:
     """The arm and finger joint values of one MJCF keyframe, by sim joint name."""
     import mujoco
@@ -75,5 +85,6 @@ __all__ = [
     "keyframe_sim_joints",
     "load_calibration",
     "motor_action_to_sim_joints",
+    "sim_joints_to_driver16",
     "sim_joints_to_motor_action",
 ]

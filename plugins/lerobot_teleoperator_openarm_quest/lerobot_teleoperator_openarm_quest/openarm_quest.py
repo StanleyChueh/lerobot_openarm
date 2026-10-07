@@ -13,13 +13,14 @@ from lerobot_robot_openarm_umeow.common import (
     MOTOR_KEYS,
     driver16_to_sim_joints,
     load_calibration,
+    motor_action_to_sim_joints,
+    sim_joints_to_driver16,
     sim_joints_to_motor_action,
 )
+from lerobot_robot_openarm_umeow.shared import ROBOT_STATE
 
 from .config_openarm_quest import OpenArmQuestConfig
 from .ik_driver import QuestIKDriver
-
-STALE_WARN_S = 0.5
 
 
 class OpenArmQuest(Teleoperator):
@@ -32,7 +33,6 @@ class OpenArmQuest(Teleoperator):
         self.calib = load_calibration(config.calibration)
         self.driver: QuestIKDriver | None = None
         self._keyboard = None
-        self._stale_warned = False
 
     @property
     def action_features(self) -> dict[str, type]:
@@ -73,42 +73,49 @@ class OpenArmQuest(Teleoperator):
             ik_args=cfg.ik_args,
             ik_hz=cfg.ik_hz,
             smoothing=(cfg.smoothing_min_cutoff, cfg.smoothing_beta, cfg.smoothing_d_cutoff),
-            hold_until_anchor=cfg.hold_until_anchor,
-            on_button=self._on_episode_button,
+            max_joint_speed=cfg.max_joint_speed,
+            return_speed=cfg.return_speed,
+            glitch_position_m=cfg.glitch_position_m,
+            glitch_rotation_deg=cfg.glitch_rotation_deg,
+            ik_jump_rad=cfg.ik_jump_rad,
+            max_lead_rad=cfg.max_lead_rad,
+            pose_fresh_s=cfg.pose_fresh_s,
+            held_command=self._robot_held_command,
+            robot_fault=ROBOT_STATE.fault,
+            on_episode_key=self._press_episode_key,
         )
         print(
-            "[openarm_quest] connected. X = anchor / reset, Y = reset and hold, triggers = grippers"
-            + (", A = save episode (Right arrow), B = re-record (Left arrow)" if self._keyboard else ""),
+            "[openarm_quest] connected. X = start driving; 2nd X = save + return home; Y = discard +"
+            " return home; triggers = grippers"
+            + ("" if self._keyboard else " (episode keys off: use the keyboard arrows)"),
             flush=True,
         )
 
     def get_action(self) -> dict[str, float]:
         if self.driver is None:
             raise RuntimeError("openarm_quest is not connected")
-        st = self.driver.status()
-        age = st["packet_age_s"]
-        if st["live"] and (age is None or age > STALE_WARN_S):
-            if not self._stale_warned:
-                print("[openarm_quest] no fresh Quest packets -- holding the last command.", flush=True)
-                self._stale_warned = True
-        else:
-            self._stale_warned = False
         motor = sim_joints_to_motor_action(driver16_to_sim_joints(self.driver.command()), self.calib)
         return {k: float(motor[k]) for k in MOTOR_KEYS}
 
     def send_feedback(self, feedback: dict) -> None:
         pass
 
-    def _on_episode_button(self, name: str) -> None:
+    def _robot_held_command(self):
+        """The robot's last executed command as an IK driver vector, or None without a robot."""
+        motor = ROBOT_STATE.last_sent()
+        if motor is None:
+            return None
+        return sim_joints_to_driver16(motor_action_to_sim_joints(motor, self.calib))
+
+    def _press_episode_key(self, key: str) -> None:
         if self._keyboard is None:
             return
         from pynput.keyboard import Key
 
-        key = Key.right if name == "a" else Key.left
-        self._keyboard.press(key)
+        k = Key.right if key == "right" else Key.left
+        self._keyboard.press(k)
         time.sleep(0.02)
-        self._keyboard.release(key)
-        print(f"[openarm_quest] {name.upper()}: sent {'Right' if name == 'a' else 'Left'} arrow", flush=True)
+        self._keyboard.release(k)
 
     def disconnect(self) -> None:
         if self.driver is not None:

@@ -21,7 +21,7 @@ Two lerobot plugins in [`plugins/`](plugins/README.md) make this work:
 | CLI flag | what it is |
 |---|---|
 | `--robot.type=openarm_umeow` | Our follower (`robots/umeow_openarm_follower`: gravity feed-forward, CAN fixes) with a safe start/stop, a jump guard and the gripper squeeze. Uses `calibration.json`; never re-zeroes the motors. |
-| `--teleop.type=openarm_quest` | The Quest controllers -> the same pose mapping, smoothing, X/Y anchoring and IK as the dora pipeline -> joint targets for the robot. |
+| `--teleop.type=openarm_quest` | The Quest controllers -> the dora pipeline's pose mapping, smoothing and IK -> joint targets for the robot, with the reference captured on X, a slow return home and safety pauses. |
 
 > ⚠️ Do **not** use the official `--robot.type=openarm_follower` / `lerobot-calibrate` on this robot: its
 > calibration writes a new zero into the motors and breaks `calibration.json`.
@@ -90,25 +90,20 @@ task and to check tracking before you record.
 lerobot-teleoperate \
   --robot.type=openarm_umeow \
   --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.max_joint_speed=1.0 \
-  --teleop.type=openarm_quest \
+  --teleop.type=openarm_quest --teleop.episode_buttons=false \
   --fps=30
 ```
 
 What happens:
 
 1. The terminal shows each joint's current vs. home position. **Type `YES`**, and both arms move slowly
-   (0.3 rad/s) to the home pose.
-2. The arms hold home until you press **X** in the headset. X anchors your current hand pose onto the home
-   pose, so there is no jump, and from then on the arms follow your hands.
-3. **Triggers** close the grippers. **X** again or **Y** sends the arms home and holds them; press **X** to
-   drive again.
-4. **Ctrl-C** stops: the arms ramp back to where they started, then the motors are disabled.
+   (0.3 rad/s) to the home pose with the grippers open.
+2. The arms hold home (`HELD`) until you press **X** in the headset. See [Quest controls](#quest-controls-and-safety).
+3. **Ctrl-C** stops: the arms ramp back to where they started, then the motors are disabled.
 
 Notes:
 
-- `--robot.max_joint_speed=1.0` is a cautious jump guard for the first session. Once tracking looks right,
-  raise it to the default 2.0 (or drop the flag).
+- `--teleop.episode_buttons=false`: nothing records here, so X/Y must not press arrow keys into your desktop.
 - `--fps=30` matches recording. The default of 60 is more than the follower's CAN reads keep up with.
 - To see the cameras while teleoperating, add the `--robot.cameras=...` from Step 4 plus `--display_data=true`.
 - Every 5 s the terminal prints an `[openarm_umeow]` status line; its `bound X%` should stay near 0%.
@@ -124,7 +119,7 @@ lerobot-record \
   --dataset.repo_id=ethanCSL/openarm_plate_wiping_quest_v00 \
   --dataset.single_task="Pick up the plate and then wipe it" \
   --dataset.num_episodes=50 --dataset.fps=30 \
-  --dataset.episode_time_s=60 --dataset.reset_time_s=20 \
+  --dataset.episode_time_s=120 --dataset.reset_time_s=15 \
   --dataset.streaming_encoding=true --dataset.encoder_threads=2 \
   --display_data=true
 ```
@@ -135,30 +130,55 @@ What happens:
    position and asks you to **type `YES`**. It moves both arms slowly (0.3 rad/s) to the home pose with the
    grippers open. Add `--robot.assume_yes=true` to skip the prompt. The cameras and joint plots appear in
    rerun once recording starts.
-2. Recording of episode 0 starts. The arms hold the home pose until you press **X**.
-3. Each episode, in the headset:
-
-   | Quest button | action |
-   |---|---|
-   | **X** (1st press) | anchor your current hand pose onto the home pose and start driving the arms |
-   | **X** (2nd press) or **Y** | send the arms back to home and hold there |
-   | **Triggers** | close the grippers |
-   | **A** | end this episode and **save** it (same as the Right arrow key) |
-   | **B** | **discard and re-record** this episode (same as the Left arrow key) |
-
-   On the keyboard: **Right arrow** = save, **Left arrow** = re-record, **Esc** = stop the whole session.
-4. After each episode comes a `reset_time_s` reset phase (not recorded). The teleop stays live, so press
-   **Y** to send the arms home and reset the scene, then **X** when the next episode starts.
-5. When done (or on Esc), the arms ramp back to where they started, then the motors are disabled.
+2. Recording of episode 0 starts. The arms hold the home pose (`HELD`) until you press **X**.
+3. Each episode: **X** to start driving, do the task, then **X** again to **save** it or **Y** to **discard**
+   it. Either way the arms return home slowly and the grippers open (see
+   [Quest controls](#quest-controls-and-safety)).
+4. The reset phase (`reset_time_s`, not recorded) follows. The arms finish returning home; reset the scene.
+   A saved episode is written at the end of the reset phase; pressing **Y** during the reset phase
+   discards it after all. Keep `reset_time_s` longer than the return (a return of up to ~1.5 rad takes ~5 s).
+5. Keyboard equivalents: **Right arrow** = save, **Left arrow** = discard, **Esc** = stop the whole session.
+   `episode_time_s` is only a cap: episodes normally end on your 2nd X / Y.
+6. When done (or on Esc), the arms ramp back to where they started, then the motors are disabled.
 
 Useful flags:
 
 - `--resume=true`: add episodes to an existing dataset (same `--dataset.repo_id`).
 - `--dataset.push_to_hub=false`: keep the dataset local only. It is saved under
   `~/.cache/huggingface/lerobot/<repo_id>` either way.
-- `--robot.max_joint_speed=2.0` (rad/s): the jump guard. Every 5 s the robot prints
-  `[openarm_umeow] 30 Hz commands | step limit 2 rad/s bound 0% of them ...`, which should stay near **0%**.
-  Higher means the recorded actions are running ahead of the arm.
+- Every 5 s the robot prints `[openarm_umeow] 30 Hz commands | step limit 1 rad/s bound 0% of them ...`,
+  which should stay near **0%**. Higher means the recorded actions are running ahead of the arm.
+
+### Quest controls and safety
+
+| Quest | state | what happens |
+|---|---|---|
+| **X** | `HELD` | **Start driving** (`LIVE`). Your current hand poses *and* the headset's pose are captured at this press; the arms follow your hands *relative to that moment* only. |
+| **X** | `LIVE` | **Save** the episode (recording) and **return home slowly** (`RETURNING`, every joint <= 0.3 rad/s). On arrival the grippers **open** and the arms wait (`HELD`). |
+| **Y** | `LIVE` / `PAUSED` | **Discard** the episode (recording) and **return home slowly**, grippers open on arrival. |
+| **X** | `RETURNING` | ignored: wait for `HELD`. |
+| **X** | `PAUSED` | **Resume** driving from where the arms stopped (re-anchors, no jump). |
+| **Triggers** | `LIVE` | close the grippers. |
+| **A** / **B** | any | save / discard the episode without moving the arms. |
+
+The arms never jump to the controllers: on every X the hand poses are re-captured, and nothing from an
+earlier press or episode is reused. The headset can hang and swing at your neck: its pose is only read on X.
+(Before this, a 5 degree swing of the headset moved the arm targets 3.4 cm with the hands still.)
+
+**`PAUSED`**: the teleop stops the arms where they are and prints the reason when something looks wrong:
+
+- `controller pose jumped N cm / M deg between two packets (tracking glitch)`: no hand moves that fast.
+- `IK solution jumped ...` / `IK target ran ... ahead ...`: the arm would have to jump or race.
+- `the robot refused a command (...)`: the robot's own guard below fired.
+
+Then **X** resumes from there, **Y** returns home (and discards the episode). A controller that loses
+tracking (asleep, out of view) makes its arm hold; when it is seen again it is re-anchored where it
+reappears. X is refused while a controller is untracked.
+
+**`SAFETY HOLD`** (robot side, also for `lerobot-rollout`): the robot refuses any command whose arm joints
+jump more than `--robot.max_command_jump` (0.25 rad) in one tick or sit more than
+`--robot.max_tracking_error` (0.5 rad) from the measured joints, and holds the arm until commands come back
+near the held pose. It never executes more than `--robot.max_joint_speed` (1 rad/s) per joint.
 
 Check the recorded data:
 
@@ -219,7 +239,8 @@ lerobot-rollout \
 ### Tests without hardware
 
 ```bash
-python plugins/tests/test_quest_teleop.py               # fake Quest -> teleop: hold, anchor, tracking, triggers
+python plugins/tests/test_quest_safety.py               # fake Quest: anchoring, headset swing, glitches, slow return, grippers
+python plugins/tests/test_robot_guard.py                # robot safety hold: jumps, tracking error, speed clamp
 python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
 python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
 ```

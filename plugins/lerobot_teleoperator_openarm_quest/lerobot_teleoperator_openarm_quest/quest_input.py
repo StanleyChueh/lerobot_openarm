@@ -101,13 +101,22 @@ def pose_to_array(pos: np.ndarray, rot: Rotation) -> np.ndarray:
     return np.array([pos[0], pos[1], pos[2], q[3], q[0], q[1], q[2]], dtype=np.float32)
 
 
-def mapped_controller_poses(msg: dict) -> tuple[np.ndarray | None, np.ndarray | None]:
+def reference_pose(msg: dict) -> tuple[np.ndarray, Rotation]:
+    """The packet's rf reference pose (the headset, worn at the neck), right-handed."""
+    return parse_lh_to_rh(msg.get("rf") or _IDENTITY_REF)
+
+
+def mapped_controller_poses(
+    msg: dict, reference: tuple[np.ndarray, Rotation] | None = None
+) -> tuple[np.ndarray | None, np.ndarray | None]:
     """(right, left) controller poses mapped into the robot arm_origin frame, [x y z qw qx qy qz].
 
-    Relative to the rf reference pose (identity when absent), then rotated by _R_FRAME, offset by
-    FRAME_OFFSET_NECK and post-rotated by R_FIX -- quest_receiver.py's QuestPoseProcessor.
+    Relative to a reference pose, then rotated by _R_FRAME, offset by FRAME_OFFSET_NECK and
+    post-rotated by R_FIX -- quest_receiver.py's QuestPoseProcessor. The reference defaults to this
+    packet's live rf (what the dora pipeline does); pass a latched one to stop the headset's own
+    motion -- it hangs at the operator's neck -- from moving the targets.
     """
-    p_ref, r_ref = parse_lh_to_rh(msg.get("rf") or _IDENTITY_REF)
+    p_ref, r_ref = reference if reference is not None else reference_pose(msg)
     r_ref_inv = r_ref.inv()
 
     def convert(packet: dict | None) -> np.ndarray | None:

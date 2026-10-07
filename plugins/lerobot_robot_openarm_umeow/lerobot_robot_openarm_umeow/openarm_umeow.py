@@ -6,8 +6,11 @@ What it adds to the follower, and why:
     follower's own send_action(action, target_vel) requires the velocity feed-forward argument;
     here it is derived from consecutive commands.
   - A per-tick step limit (max_joint_speed), the role max_relative_target plays in the official
-    robots. lerobot-record saves the teleop's action, not the clamped one, so the limit is set high
-    enough that it only catches jumps -- see OpenArmUmeowConfig.max_joint_speed.
+    robots.
+  - A safety guard that REFUSES a request whose arm joints jump in one tick or sit far from the
+    measured joints, and holds the arm until requests come back near the held pose -- see
+    OpenArmUmeowConfig.max_command_jump / max_tracking_error. The state is published to
+    shared.ROBOT_STATE so the openarm_quest teleop pauses with it instead of fighting it.
   - A speed-limited approach to the start pose on connect, with mirror_bridge.py's typed-YES and
     max-delta gates, and a ramp back to the connect-time pose before de-energising on disconnect.
   - The gripper squeeze torque mirror_bridge.py applies while a gripper is commanded closed.
@@ -23,6 +26,7 @@ from .common import (
     sim_joints_to_motor_action,
 )
 from .config_openarm_umeow import OpenArmUmeowConfig
+from .shared import ROBOT_STATE
 
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig  # noqa: E402  (after common's sys.path)
 from sim_bridge_common import (  # noqa: E402
@@ -73,6 +77,10 @@ class OpenArmUmeow(OpenArmFollower):
         self._last_sent: dict | None = None
         self._last_t: float | None = None
         self._rest_action: dict | None = None
+        self._last_desired: dict | None = None
+        self._measured: dict | None = None
+        self._measured_t = 0.0
+        self._fault: str | None = None
         self._stats_reset(time.perf_counter())
 
     # lerobot asks for these; the follower's own raise NotImplementedError. This robot's
@@ -116,8 +124,35 @@ class OpenArmUmeow(OpenArmFollower):
             super().disconnect()
             raise
         self._last_sent = {k: current[k] for k in MOTOR_KEYS}
+        self._last_desired = dict(self._last_sent)
         self._last_t = time.perf_counter()
+        self._fault = None
+        ROBOT_STATE.publish(self._last_sent, None)
         self._stats_reset(self._last_t)  # the startup ramp is not part of the command-rate stats
+
+    def get_observation(self):
+        obs = super().get_observation()
+        # Kept for the tracking guard: lerobot's loops read the observation right before sending.
+        self._measured = {k: float(obs[k]) for k in MOTOR_KEYS}
+        self._measured_t = time.perf_counter()
+        return obs
+
+    def _check_request(self, desired: dict, now: float) -> str | None:
+        """Why this request must not be executed, or None if it may be."""
+        cfg = self.umeow_config
+        if self._last_desired is not None:
+            key = max(ARM_KEYS, key=lambda k: abs(desired[k] - self._last_desired[k]))
+            jump = abs(desired[key] - self._last_desired[key])
+            if jump > cfg.max_command_jump:
+                return (f"{key} request jumped {jump:.2f} rad in one tick"
+                        f" (> max_command_jump {cfg.max_command_jump:g})")
+        if self._measured is not None and now - self._measured_t < 0.25:
+            key = max(ARM_KEYS, key=lambda k: abs(desired[k] - self._measured[k]))
+            err = abs(desired[key] - self._measured[key])
+            if err > cfg.max_tracking_error:
+                return (f"{key} request is {err:.2f} rad from the measured joint"
+                        f" (> max_tracking_error {cfg.max_tracking_error:g})")
+        return None
 
     def send_action(self, action, target_vel: dict | None = None):
         cfg = self.umeow_config
@@ -125,7 +160,30 @@ class OpenArmUmeow(OpenArmFollower):
         now = time.perf_counter()
         if self._last_sent is None:
             self._last_sent = get_current_pos_action(self)
+            self._last_desired = dict(self._last_sent)
             self._last_t = now
+
+        if self._fault is None:
+            reason = self._check_request(desired, now)
+            if reason is not None:
+                self._fault = reason
+                print(f"\n[openarm_umeow] SAFETY HOLD: {reason}. The arm holds where it is; it resumes"
+                      f" once requests come back within {cfg.resume_tolerance:g} rad of the held pose"
+                      " (Quest: X = resume from here, Y = return home).", flush=True)
+        elif max(abs(desired[k] - self._last_sent[k]) for k in ARM_KEYS) < cfg.resume_tolerance:
+            print("[openarm_umeow] safety hold released: requests are back at the held pose.", flush=True)
+            self._fault = None
+        self._last_desired = desired
+
+        if self._fault is not None:
+            # Hold: re-send the last executed command with zero velocity. Grippers keep their command
+            # and squeeze, so a held object is not dropped.
+            hold = dict(self._last_sent)
+            super().send_action(hold, {k.replace(".pos", ".vel"): 0.0 for k in MOTOR_KEYS})
+            self._last_t = now
+            ROBOT_STATE.publish(hold, self._fault)
+            return hold
+
         # The elapsed time sets this tick's allowance, floored so a burst of calls cannot crawl and
         # capped so a long pause (a blocking reset, a slow first frame) cannot release a jump.
         dt = min(max(now - self._last_t, 1.0 / 200.0), 0.1)
@@ -139,6 +197,7 @@ class OpenArmUmeow(OpenArmFollower):
         super().send_action(sent, vel)
         self._stats_record(now, desired, sent)
         self._last_sent, self._last_t = sent, now
+        ROBOT_STATE.publish(sent, None)
         return sent
 
     def _apply_squeeze(self, desired: dict) -> None:
@@ -189,4 +248,5 @@ class OpenArmUmeow(OpenArmFollower):
                 )
             except Exception:
                 logger.exception("Return to rest failed; disabling where the arm is.")
+        ROBOT_STATE.clear()
         super().disconnect()

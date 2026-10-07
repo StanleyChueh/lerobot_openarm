@@ -27,9 +27,23 @@ class OpenArmQuestConfig(TeleoperatorConfig):
     smoothing_min_cutoff: float = 2.0
     smoothing_beta: float = 0.04
     smoothing_d_cutoff: float = 1.5
-    # Start holding the keyframe pose until X anchors the operator (ik.py --hold-until-anchor).
-    hold_until_anchor: bool = True
 
-    # Quest A / B press the Right / Left arrow keys, which lerobot-record's keyboard listener reads
-    # as "end this episode (save)" / "re-record this episode". Needs an X display; Esc still stops.
+    # Safety (see ik_driver.py's module docstring for why each exists).
+    # The shipped joint command moves at most this fast (rad/s); keep it <= the robot's max_joint_speed.
+    max_joint_speed: float = 1.0
+    # Speed of the 2nd-X / Y return to home (rad/s, every joint).
+    return_speed: float = 0.3
+    # A controller pose jumping more than this between two packets is a tracking glitch -> PAUSE.
+    glitch_position_m: float = 0.08
+    glitch_rotation_deg: float = 35.0
+    # The raw IK solution moving more than this in one solve -> PAUSE (rad).
+    ik_jump_rad: float = 0.2
+    # The raw IK solution running more than this ahead of the rate-limited command -> PAUSE (rad).
+    max_lead_rad: float = 0.6
+    # X anchors only on a packet younger than this (s); LIVE holds the arms when packets get older.
+    pose_fresh_s: float = 0.15
+
+    # Episode control from the Quest, through the Right / Left arrow keys lerobot-record reads:
+    # 2nd X and A = end the episode and save it, Y and B = end it and discard it (re-record).
+    # Needs an X11 desktop. Turn off for lerobot-teleoperate, where nothing listens for the keys.
     episode_buttons: bool = True

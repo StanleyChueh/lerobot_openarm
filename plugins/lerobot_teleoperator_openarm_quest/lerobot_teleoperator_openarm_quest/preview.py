@@ -94,7 +94,7 @@ def main() -> None:
                 ik_hz = (st["solves"] - prev_status["solves"]) / span if span > 0 else 0.0
                 age = "none yet" if st["packet_age_s"] is None else f"{st['packet_age_s'] * 1e3:.0f} ms"
                 print(
-                    f"\n[{'LIVE' if st['live'] else 'HELD'}] quest {pkt_hz:5.1f} Hz (last {age}) | IK {ik_hz:5.0f} Hz"
+                    f"\n[{st['state']}{(': ' + st['reason']) if st['state'] == 'PAUSED' else ''}] quest {pkt_hz:5.1f} Hz (last {age}) | IK {ik_hz:5.0f} Hz"
                     f" ({st['failed_solves']} failed) | biggest arm step between frames {max_step:.3f} rad"
                 )
                 for prefix in ("L", "R"):

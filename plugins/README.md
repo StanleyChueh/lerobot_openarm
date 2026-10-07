@@ -6,7 +6,7 @@ Two lerobot plugins, so data collection, training and evaluation all run through
 | plugin | type | what it is |
 |---|---|---|
 | `lerobot_robot_openarm_umeow` | `--robot.type=openarm_umeow` | `robots/umeow_openarm_follower` (gravity feed-forward, CAN-read fixes) with the official one-argument `send_action`, a per-tick step limit, a safe start/stop and the gripper squeeze. Uses `calibration.json`; never re-zeroes the motors. |
-| `lerobot_teleoperator_openarm_quest` | `--teleop.type=openarm_quest` | The Quest app's UDP packets -> the same pose mapping, smoothing, X/Y anchoring and mink IK as the dora pipeline -> joint targets in motor radians. |
+| `lerobot_teleoperator_openarm_quest` | `--teleop.type=openarm_quest` | The Quest app's UDP packets -> the dora pipeline's pose mapping, smoothing and mink IK -> joint targets in motor radians, with the reference captured on X, a slow return home and safety pauses. |
 
 ```
 Quest app (UDP :5006) -> openarm_quest (IK @ ~500 Hz) -> lerobot-record (30 Hz) -> openarm_umeow -> CAN
@@ -50,20 +50,23 @@ lr lerobot-record \
   --dataset.repo_id=ethanCSL/openarm_plate_wiping_quest_v00 \
   --dataset.single_task="Pick up the plate and then wipe it" \
   --dataset.num_episodes=50 --dataset.fps=30 \
-  --dataset.episode_time_s=60 --dataset.reset_time_s=20 \
+  --dataset.episode_time_s=120 --dataset.reset_time_s=15 \
   --dataset.streaming_encoding=true --dataset.encoder_threads=2 \
   --display_data=true
 ```
 
-- On connect the arm ramps at 0.3 rad/s to the IK model's `home` keyframe (type `YES` first; add
-  `--robot.assume_yes=true` to skip). On exit it ramps back to where it started before de-energising.
-- Each episode: **X** anchors your hands onto the home pose and starts driving. **X** again or **Y**
-  resets to home and holds. Triggers drive the grippers.
-- **A** = end the episode and save it (Right arrow), **B** = re-record it (Left arrow), **Esc** = stop.
-  The arrows also work on the keyboard. Without a display, type `n` / `r` / `q` + Enter in the terminal.
-- The reset phase between episodes keeps the teleop live: press Y to send the arm home.
+- On connect the arm ramps at 0.3 rad/s to the IK model's `home` keyframe with the grippers open (type
+  `YES` first; add `--robot.assume_yes=true` to skip). On exit it ramps back to where it started before
+  de-energising.
+- Each episode: **X** starts driving (hand and headset poses captured at that press only). **X** again =
+  save, **Y** = discard; both return the arms home slowly (<= 0.3 rad/s) and open the grippers on
+  arrival. Triggers drive the grippers. **A** / **B** save / discard without moving the arms.
+- The teleop **PAUSES** the arms on a tracking glitch or an IK jump, and the robot **SAFETY HOLDs** on a
+  command jump or a large tracking error; X resumes from there, Y returns home. Details and thresholds:
+  the top-level README's "Quest controls and safety", and `ik_driver.py`'s module docstring.
+- The arrow keys work too (Right = save, Left = discard, Esc = stop); without a display, `n` / `r` / `q`.
 - `--resume=true` continues a dataset; `--dataset.push_to_hub=false` keeps it local.
-- Every 5 s the robot prints how often the step limit (`--robot.max_joint_speed`, 2.0 rad/s) cut a
+- Every 5 s the robot prints how often the step limit (`--robot.max_joint_speed`, 1.0 rad/s) cut a
   command. It should stay near 0%. If it does not, recorded actions are running ahead of the arm.
 
 ## 2. Train (unchanged)

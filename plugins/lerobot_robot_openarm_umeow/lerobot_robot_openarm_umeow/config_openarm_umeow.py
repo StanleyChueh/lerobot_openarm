@@ -25,12 +25,21 @@ class OpenArmUmeowConfig(RobotConfig):
     cameras: dict[str, CameraConfig] = field(default_factory=dict)
 
     # Per-tick limit on every command, from the last command sent: max_joint_speed * dt rad per
-    # arm joint. Only a safety net against a jump (a reset snap, a bad IK solve, a policy glitch):
-    # at the default the clamp should almost never bind during normal teleop, so the recorded
-    # action is what the arm was actually sent. The Isaac pipeline's 0.3 rad/s default bound
-    # constantly, which is what left the recorded actions far ahead of the arm.
-    max_joint_speed: float = 2.0
+    # arm joint. The openarm_quest teleop already rate-limits its own command to the same speed, so
+    # in normal teleop this rarely binds and the recorded action is what the arm was sent. (The
+    # Isaac pipeline's 0.3 rad/s cap bound constantly, leaving recorded actions far ahead of the arm.)
+    max_joint_speed: float = 1.0
     gripper_max_speed: float = 8.0
+
+    # Safety guard -- refuse a command instead of executing it. If any ARM joint's request jumps by
+    # more than max_command_jump (rad) from the previous request in one tick, or sits more than
+    # max_tracking_error (rad) from the measured joint, the arm HOLDS where it was last commanded and
+    # the reason is printed. It stays held until a request comes back within resume_tolerance (rad)
+    # of the held command on every arm joint (the openarm_quest teleop does that itself: it pauses
+    # on the hold and resumes from the held pose on X, or returns home on Y).
+    max_command_jump: float = 0.25
+    max_tracking_error: float = 0.5
+    resume_tolerance: float = 0.1
     # Extra closing torque (N-m) while a gripper is commanded fully closed -- see mirror_bridge.py's
     # --gripper-squeeze-tau. 1.5 is record_demos_openarm.py's --real_arm_gripper_squeeze_tau default.
     gripper_squeeze_tau: float = 1.5
