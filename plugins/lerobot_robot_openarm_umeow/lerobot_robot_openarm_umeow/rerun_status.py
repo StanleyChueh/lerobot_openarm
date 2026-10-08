@@ -63,19 +63,8 @@ def _quest_lines(t: dict) -> list[str]:
     def p(xyz) -> str:
         return "-" if xyz is None else f"({xyz[0]:+.2f}, {xyz[1]:+.2f}, {xyz[2]:+.2f})"
 
-    net = q.get("net") or {}
-    if net.get("extra_ms") is not None:
-        extra = net["extra_ms"]
-        mark = "✅" if extra < 50 else "⚠️" if extra < 150 else "❌"
-        net_line = (f"Wi-Fi delay: {mark} **+{extra:.0f} ms** vs the best this session · "
-                    f"{net['gaps_10s']} gaps > 100 ms in the last 10 s")
-    elif net.get("has_t") is False:
-        net_line = f"Wi-Fi delay: not measurable (the app sends no clock) · {net.get('gaps_10s', 0)} gaps > 100 ms in 10 s"
-    else:
-        net_line = None
     return [
         head,
-        *([net_line] if net_line else []),
         f"headset {track(q['v'])} · right controller {track(q['vr'])} {p(q['rc'])} ·"
         f" left controller {track(q['vl'])} {p(q['lc'])}",
         f"buttons pressed: **{' '.join(q['buttons']) or 'none'}** · triggers R {q['rt']:.2f} L {q['lt']:.2f}"
@@ -139,6 +128,132 @@ class _LerobotLogHandler(logging.Handler):
             pass
 
 
+class NetworkMonitor:
+    """The top-right "network" panel: ping to the Quest, the Quest packets' extra delay, and this PC's Wi-Fi.
+
+    Once a second: a burst of 3 pings to the Quest's address (taken from its packets) -- reported as their
+    median, with the burst's worst counted as a spike when it is far above: the Quest's Wi-Fi naps between
+    packets (power saving), so a lone ping mostly measures the radio waking up (100-200 ms on this setup)
+    rather than the path the teleop packets take, which keep it awake at 72 Hz --, the extra one-way delay of
+    the Quest's packets measured from the headset clock (quest_input.py), the packet rate; every 5 s the
+    PC's link from `iw dev <iface> link`. Logged as a text panel and as two plotted series (ms), so latency
+    building up over a session shows as a rising line. Display only.
+    """
+
+    ENTITY = "network"
+    PLOT = "network_plot"
+
+    def __init__(self) -> None:
+        self._running = False
+        self._pings: list[tuple[float, float | None, float | None]] = []  # (time, median ms, max ms), last 30 s
+        self._iface: dict[str, str | None] = {}
+        self._link: dict = {}
+        self._link_t = 0.0
+        self._packets_prev: tuple[float, int] | None = None
+        self._rate = 0.0
+
+    def start(self) -> None:
+        if self._running:
+            return
+        self._running = True
+        threading.Thread(target=self._loop, daemon=True, name="rerun-network").start()
+
+    def stop(self) -> None:
+        self._running = False
+
+    @staticmethod
+    def _run(cmd: list[str], timeout: float = 2.0) -> str:
+        import subprocess
+
+        try:
+            return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout).stdout
+        except Exception:
+            return ""
+
+    def _ping(self, ip: str) -> tuple[float | None, float | None]:
+        rtts = sorted(float(v) for v in re.findall(r"time[=<]([\d.]+) ms",
+                                                   self._run(["ping", "-c", "3", "-i", "0.05", "-W", "1", ip])))
+        return (rtts[len(rtts) // 2], rtts[-1]) if rtts else (None, None)
+
+    def _wifi(self, ip: str) -> dict:
+        if ip not in self._iface:
+            m = re.search(r" dev (\S+)", self._run(["ip", "route", "get", ip]))
+            self._iface[ip] = m.group(1) if m else None
+        iface = self._iface[ip]
+        if not iface:
+            return {}
+        out = self._run(["iw", "dev", iface, "link"])
+        if not out or "Not connected" in out:
+            return {"iface": iface, "wired": not out}
+        get = lambda pat: (re.search(pat, out).group(1) if re.search(pat, out) else None)  # noqa: E731
+        return {"iface": iface, "ssid": get(r"SSID: (.+)"), "freq": get(r"freq: ([\d.]+)"),
+                "signal": get(r"signal: (-?\d+) dBm"), "tx": get(r"tx bitrate: ([\d.]+) MBit/s")}
+
+    def _loop(self) -> None:
+        while self._running:
+            t0 = time.perf_counter()
+            try:
+                self._tick(t0)
+            except Exception:
+                logger.debug("network panel tick failed", exc_info=True)
+            time.sleep(max(0.0, 1.0 - (time.perf_counter() - t0)))
+
+    def _tick(self, now: float) -> None:
+        import rerun as rr
+
+        snap = TELEOP_STATE.snapshot()
+        ip = snap["sender"].split(":")[0] if snap["sender"] else None
+        if ip:
+            self._pings.append((now, *self._ping(ip)))
+            self._pings = [p for p in self._pings if now - p[0] <= 30.0]
+            if now - self._link_t > 5.0:
+                self._link, self._link_t = self._wifi(ip), now
+        if self._packets_prev is not None and now > self._packets_prev[0]:
+            self._rate = (snap["packets"] - self._packets_prev[1]) / (now - self._packets_prev[0])
+        self._packets_prev = (now, snap["packets"])
+        net = ((snap["quest"] or {}).get("net") or {})
+
+        rr.log(self.ENTITY, rr.TextDocument(self._render(ip, net), media_type=rr.MediaType.MARKDOWN))
+        last = self._pings[-1][1] if self._pings else None
+        if last is not None:
+            rr.log(f"{self.PLOT}/ping_ms", rr.Scalars(last))
+        if net.get("extra_ms") is not None:
+            rr.log(f"{self.PLOT}/quest_packet_delay_ms", rr.Scalars(net["extra_ms"]))
+
+    def _render(self, ip: str | None, net: dict) -> str:
+        lines = ["### 📶 Network"]
+        if not ip:
+            return "\n\n".join(lines + ["waiting for the Quest's first packet..."])
+        rtts = [r for _, r, _ in self._pings if r is not None]
+        lost = sum(1 for _, r, _ in self._pings if r is None)
+        spikes = sum(1 for _, r, mx in self._pings if r is not None and mx is not None and mx > max(50.0, 3 * r))
+        last = self._pings[-1][1] if self._pings else None
+        if last is None:
+            ping = "❌ no reply"
+        else:
+            ping = f"{'✅' if last < 30 else '⚠️' if last < 100 else '❌'} **{last:.0f} ms**"
+        loss = 100.0 * lost / len(self._pings) if self._pings else 0.0
+        stats = (f" (30 s: avg {sum(rtts) / len(rtts):.0f}, max {max(rtts):.0f}, loss {loss:.0f}%,"
+                 f" {spikes} Wi-Fi wake-up spikes)") if rtts else ""
+        lines.append(f"**Ping to Quest** {ip}: {ping}{stats}")
+        extra = net.get("extra_ms")
+        if extra is not None:
+            lines.append(f"**Quest packets**: {'✅' if extra < 50 else '⚠️' if extra < 150 else '❌'} **+{extra:.0f} ms**"
+                         f" late vs best · {self._rate:.0f} Hz · {net.get('gaps_10s', 0)} gaps > 100 ms / 10 s")
+        else:
+            lines.append(f"**Quest packets**: {self._rate:.0f} Hz · {net.get('gaps_10s', 0)} gaps > 100 ms / 10 s")
+        w = self._link
+        if w.get("ssid"):
+            sig = int(w["signal"]) if w.get("signal") else None
+            bar = "" if sig is None else ("✅" if sig > -60 else "⚠️" if sig > -70 else "❌")
+            ghz = f"{float(w['freq']) / 1000:.1f} GHz" if w.get("freq") else ""
+            lines.append(f"**PC Wi-Fi** {w['iface']}: {w['ssid']} · {ghz} · {bar} {w.get('signal')} dBm"
+                         f" · {w.get('tx') or '?'} Mbit/s")
+        elif w.get("wired"):
+            lines.append(f"**PC link** {w['iface']}: wired")
+        return "\n\n".join(lines)
+
+
 class StatusBoard:
     def __init__(self) -> None:
         self._lock = threading.Lock()
@@ -167,12 +282,14 @@ class StatusBoard:
         self._running = True
         self._thread = threading.Thread(target=self._loop, daemon=True, name="rerun-status")
         self._thread.start()
+        NETWORK.start()
 
     def stop(self, final_phase: str | None = None) -> None:
         if final_phase:
             self.set_phase(final_phase)
             self._log()
         self._running = False
+        NETWORK.stop()
         if self._handler is not None:
             logging.getLogger().removeHandler(self._handler)
             self._handler = None
@@ -315,9 +432,16 @@ def _wrap_blueprint() -> None:
             views.append(rrb.TimeSeriesView(name="observation", contents=sorted(observation_paths)))
         if action_paths:
             views.append(rrb.TimeSeriesView(name="action", contents=sorted(action_paths)))
-        return rrb.Blueprint(
-            rrb.Vertical(rrb.TextDocumentView(origin=ENTITY, name="status"), rrb.Grid(*views), row_shares=[1, 5])
+        top = rrb.Horizontal(
+            rrb.TextDocumentView(origin=ENTITY, name="status"),
+            rrb.Vertical(
+                rrb.TextDocumentView(origin=NetworkMonitor.ENTITY, name="network"),
+                rrb.TimeSeriesView(origin=NetworkMonitor.PLOT, name="latency (ms)"),
+                row_shares=[1, 1],
+            ),
+            column_shares=[2, 1],
         )
+        return rrb.Blueprint(rrb.Vertical(top, rrb.Grid(*views), row_shares=[1.4, 5]))
 
     viz._build_blueprint = build_blueprint
 
@@ -406,4 +530,5 @@ def _patch_spawn() -> None:
 
 
 _patch_spawn()
+NETWORK = NetworkMonitor()
 BOARD = StatusBoard()

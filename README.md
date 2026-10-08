@@ -109,6 +109,12 @@ more than 1 rad behind its target (joint speed cap: 2 rad/s), or the IK jumping 
 The terminal and the rerun panel say which joint or limit and why. If `episode_time_s` runs out meanwhile,
 X recovers home and the episode is saved on arrival.
 
+**Rerun window** (`--display_data=true`): top-left the **status** panel (episode, phase, Quest buttons and
+tracking); top-right the **network** panel and a latency plot -- ping to the Quest (median of 3 per second,
+plus Wi-Fi wake-up spikes), how late the Quest's packets arrive vs the best this session (the lag your
+teleop actually feels), and this PC's Wi-Fi (SSID, band, signal, link speed). A line climbing in the plot
+means latency is building up; ✅ < 50 ms, ⚠️ < 150 ms, ❌ above.
+
 Check the recorded data:
 
 ```bash

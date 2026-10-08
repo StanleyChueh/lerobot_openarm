@@ -129,7 +129,17 @@ check("phases appear in order: " + " -> ".join(expected), all(any(e in h for h i
 notes = {l for p in panels for l in p.splitlines() if l.startswith("last:")}
 check("saved counts shown", {"last: episode 0 SAVED (1 in the dataset)", "last: episode 1 SAVED (2 in the dataset)"} <= notes, str(sorted(notes)))
 check("Quest state shown", any("**Quest:** ▶ LIVE" in p for p in panels) and any("**Quest:** ⏸ HELD" in p for p in panels))
-check("lerobot's layout has the status view on top", len(blueprints) == 1
-      and type(blueprints[0].root_container.contents[0]).__name__ == "TextDocumentView")
+def _views(c):
+    out = []
+    for x in [x for x in (getattr(c, "contents", None) or []) if not isinstance(x, str)]:
+        out += [type(x).__name__ + ":" + str(getattr(x, "origin", ""))] + _views(x)
+    return out
+
+
+top = blueprints[0].root_container.contents[0] if blueprints else None
+names = _views(top) if top is not None else []
+check("layout: status panel top-left, network panel + latency plot top-right, lerobot's views below",
+      len(blueprints) == 1 and type(top).__name__ == "Horizontal"
+      and names[0].startswith("TextDocumentView") and any(n.startswith("TimeSeriesView") for n in names), str(names))
 print(f"\n{len(FAILS)} failed" + (f": {FAILS}" if FAILS else ""))
 sys.exit(1 if FAILS else 0)
