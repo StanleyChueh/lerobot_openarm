@@ -43,6 +43,8 @@ CHAIN_OUT="$OUT" "${RUN[@]}" "$PY" -u "$HERE/chain_async.py" smolvla "$CK" 50 "$
 grep "ASYNC" "$OUT/async.log"
 echo "   policy server errors: $(grep -c 'Error in StreamActions' "$OUT/policy_server_smolvla.log")," \
      "inferences: $(grep -c 'Running inference for observation' "$OUT/policy_server_smolvla.log")"
+grep -m3 "passed at its own resolution" "$OUT/policy_server_smolvla.log" | sed 's/^/   /'
+grep -q "passed at its own resolution" "$OUT/policy_server_smolvla.log" || { echo "   FAIL: images were resized"; exit 1; }
 
 echo "== 7/7 async + RTC: policy server --rtc=true + robot_client --aggregate_fn_name=latest_only"
 CHAIN_OUT="$OUT" CHAIN_SERVER_ARGS="--rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0" \

@@ -244,6 +244,10 @@ python -m lerobot.async_inference.robot_client \
   whose joint vector is within 1.0 of the last one it ran, meant as ~1 degree for lerobot's degree-based arms;
   ours report radians (1.0 = ~57 degrees), so lerobot's server only predicted once the client's queue had
   emptied -- async collapsed to synchronous. Now `--obs_similarity_atol=0.0175` (1 degree in radians).
+- And it passes the camera images at their own resolution. lerobot's server resizes them to the policy's
+  image feature shape, which for a SmolVLA fine-tuned from smolvla_base is the base model's 256x256: our
+  640x480 frames were squashed (aspect ratio lost), unlike in training and in `lerobot-rollout`, where the
+  policy gets the full frame and letterboxes it itself. On a real checkpoint that changed actions by up to 0.04 rad.
 - The client is lerobot's own. `--actions_per_chunk` <= the policy's chunk size (SmolVLA 50, our GR00T 16);
   `--chunk_size_threshold` 0.5-0.6 is the docs' recommendation; add `--debug_visualize_queue_size=true` to
   plot the action queue when tuning.

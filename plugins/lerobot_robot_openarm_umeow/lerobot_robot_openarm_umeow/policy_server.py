@@ -5,7 +5,7 @@
         [--rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP]
 
 Same flags and behaviour as `python -m lerobot.async_inference.policy_server`, which this runs after
-patching three things in it (none changes a policy that does not need it):
+patching a few things in it (none changes a policy that does not need it):
 
   - rename map: the robot client never sends one, and the server then OVERRIDES the map stored in the
     checkpoint with an empty one -- so a SmolVLA fine-tuned with --rename_map (smolvla_base's camera1/2/3)
@@ -18,6 +18,13 @@ patching three things in it (none changes a policy that does not need it):
     NotImplementedError otherwise). For relative-action policies the chunk is decoded whole, right after
     inference, and the per-step loop then passes the decoded actions through unchanged.
   - bf16 loading for GR00T (--policy_dtype, default auto): see policy_loading.py.
+  - image size: the server resizes each camera image to the policy's image feature shape before the
+    policy sees it. A SmolVLA fine-tuned from smolvla_base keeps the base model's features (3x256x256),
+    not this robot's, so every 640x480 frame was squashed to 256x256 (aspect ratio lost) -- while in
+    training, and in lerobot-rollout, the policy gets the full frame and letterboxes it itself
+    (resize_with_pad to 512x512). Up to 0.04 rad of action difference on a real checkpoint. Images are now
+    passed at the camera's own resolution, as lerobot-train and lerobot-rollout do; for a policy trained
+    from the dataset's own features (GR00T) the resize was already a no-op.
   - "too similar" observations: the server skips an observation whose joint-state vector is within 1.0
     (norm) of the last one it ran -- lerobot's robots report DEGREES, so ~1 degree. This robot reports
     RADIANS, where 1.0 is ~57 degrees: nearly every observation sent mid-chunk was skipped and the server
@@ -89,6 +96,21 @@ def _patch(server_module) -> None:
         return original_similar(obs1, obs2, lerobot_features=lerobot_features, atol=_OBS_ATOL)
 
     server_module.observations_similar = observations_similar
+
+    # Images at the camera's resolution, as in training: (H, W, C) -> (C, H, W), no resize.
+    import lerobot.async_inference.helpers as helpers
+
+    seen_shapes = set()
+
+    def resize_robot_observation_image(image, resize_dims):
+        if tuple(image.shape) not in seen_shapes:
+            seen_shapes.add(tuple(image.shape))
+            print(f"[openarm] policy server: camera image {tuple(image.shape)} passed at its own resolution"
+                  f" (lerobot would resize it to {tuple(resize_dims)}); the policy resizes it as in training.",
+                  flush=True)
+        return image.permute(2, 0, 1)
+
+    helpers.resize_robot_observation_image = resize_robot_observation_image
 
     server_cls = server_module.PolicyServer
 
