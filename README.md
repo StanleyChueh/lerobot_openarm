@@ -179,6 +179,10 @@ lerobot-rollout --strategy.type=base \
 Terminal 1, the policy server (same machine: `127.0.0.1`; another GPU machine: its IP, and `--host=0.0.0.0`):
 
 ```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
 ```
 
@@ -186,6 +190,10 @@ Terminal 2, the robot client:
 
 ```bash
 # SmolVLA
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot.async_inference.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
