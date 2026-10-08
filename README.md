@@ -1,14 +1,4 @@
-# Run in Real-world
-
-Two ways to collect data and evaluate on the real OpenArm:
-
-- **[Official LeRobot pipeline with the Meta Quest](#official-lerobot-pipeline-meta-quest)** (this branch,
-  `official-lerobot-quest`): `lerobot-teleoperate` / `lerobot-record` / `lerobot-train` / `lerobot-rollout`, exactly as on Koch /
-  SO-100. No Isaac Sim, ROS 2 or dora in the loop.
-- **[Legacy pipeline](#legacy-pipeline-isaac-sim-mirror--custom-deploy-scripts)**: Isaac Sim mirror
-  collection (`record_demos_openarm.py --real_arm`) and the custom `deploy_smolvla_*.py` scripts.
-
----
+# This is the LeRobot-comparible VLA Training Pipeline
 
 ## Official LeRobot pipeline (Meta Quest)
 
@@ -51,37 +41,7 @@ unset PYTHONPATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 ```
 
-The `unset` / `export` lines are required in every new terminal: the ROS 2 Humble environment loads
-ROS's pinocchio instead of the venv's, and the robot plugin then fails with
-`Could not import third-party plugin: lerobot_robot_openarm_umeow`.
-
-3. **Stop the dora dataflow** if it is running (`dora run dataflow-vr-mujoco-ros2.yaml`): only one
-   program can receive the Quest's packets on UDP port 5006.
-4. (Optional) close rerun viewers left from earlier sessions: `pkill -f 'rerun --port='`. If one is still
-   open, a new window opens anyway (on another port) and the terminal says so.
-5. Start the Quest app as usual. It keeps sending to this PC's port 5006; nothing changes on the headset.
-
-### Step 2. Dry run: check the VR mapping (nothing moves)
-
-```bash
-python -m lerobot_teleoperator_openarm_quest.preview --viewer
-```
-
-A MuJoCo window shows the pose the IK would send. The terminal prints:
-
-```
-[LIVE] quest  72.0 Hz (last 5 ms) | IK   460 Hz (0 failed) | biggest arm step between frames 0.012 rad
-  LJ1..8 (motor rad): ...
-  RJ1..8 (motor rad): ...
-```
-
-- `quest ~70 Hz`: the headset packets arrive. `none yet`: check the Quest app's target IP/port and that dora is stopped.
-- Press **X**: `HELD` -> `LIVE`, then move your hands and watch the arms follow in the window.
-- If the pose looks wrong here, the problem is the VR mapping or the IK, not the robot.
-
-Ctrl-C to quit.
-
-### Step 3. Teleoperate the real arm (no recording)
+### Step 2. Teleoperate the real arm (no recording)
 
 Drive the real OpenArm with the Quest through the official `lerobot-teleoperate`. Use it to practise the
 task and to check tracking before you record.
@@ -108,7 +68,7 @@ Notes:
 - Every 5 s the terminal prints an `[openarm_umeow]` status line; its `bound X%` should stay near 0%.
 - Keep a hand near the power / e-stop for the first run.
 
-### Step 4. Record a dataset
+### Step 3. Record a dataset
 
 ```bash
 cd ~/Stanley_ws/lerobot_openarm && source .venv/bin/activate
@@ -126,84 +86,21 @@ lerobot-record \
   --display_data=true
 ```
 
-What happens:
-
-1. A rerun window opens (`--display_data=true`), then the robot prints each joint's current vs. target
-   position and asks you to **type `YES`**. It moves both arms slowly (0.3 rad/s) to the home pose with the
-   grippers open. Add `--robot.assume_yes=true` to skip the prompt. The cameras and joint plots appear in
-   rerun once recording starts.
-
-   The **status** panel at the top of the rerun window shows, live:
-
-   ```
-   ⏳ WAITING for X (not recording yet) · episode 3 of 50 · 4 s   (🔴 RECORDING / 🟡 RESETTING / 💾 SAVING ...)
-   saved in the dataset: 3 of 50
-   Meta Quest: ✅ connected (192.168.x.x, last packet 12 ms ago)          <- or ❌ NO PACKETS / STOPPED
-   headset ✅ OK · right controller ✅ OK (+0.25, +1.10, +0.30) · left controller ❌ LOST (...)
-   buttons pressed: X · triggers R 0.60 L 0.00 · grips R 1.00 L 0.00 · sticks R (+0.50, -0.20) L (...)
-   Quest: ⏸ HELD at home, grippers open -- press X to start
-   teleop says: X ignored: the left controller is not tracked -- wake it / bring it into view.
-   episode 3 will be SAVED when the reset ends (Y now = discard instead)     <- during the reset
-   ⛔ ROBOT SAFETY HOLD: ...                                                  <- only if it fires
-   last: episode 2 SAVED (3 in the dataset)
-   ```
-
-   If the arms do not respond, look here first: no packets, a ❌ controller, or the "teleop says" line tells
-   you why.
-2. Each episode **waits for your X** (`⏳ WAITING`): nothing is recorded until you press X, so episodes
-   never start with you getting ready. X is ignored while the robot is still moving to home at startup.
-3. **X** starts recording and driving; do the task; then:
-   - **X** again: the arms return home slowly (<= 0.3 rad/s) **while still recording**, and the episode is
-     **saved when they arrive**, so it always ends at the home pose. The grippers stay as they were until
-     the episode has ended, then open.
-   - **Y**: the episode is **discarded** at once, and the arms return home (not recorded).
-   - `episode_time_s` running out acts like the 2nd X: return home, then save. It is a cap, not a cut.
-4. The reset phase (`reset_time_s`, not recorded) follows; reset the scene. X is ignored until the next
-   episode shows `⏳ WAITING for X`.
-5. Keyboard: **Right arrow** = end and save at once (no recorded return), **Left arrow** = discard,
-   **Esc** = stop the whole session.
-6. When done (or on Esc), the arms ramp back to where they started, then the motors are disabled.
-
 Useful flags:
 
-- `--dataset.no_stamp=true`: keep the dataset name exactly as typed. Without it lerobot appends the start
-  time (`..._v00_20261007_191607`), a new dataset per run, and Step 5's `--dataset.repo_id` must use that name.
-- `--resume=true`: add episodes to an existing dataset (same `--dataset.repo_id`, so use `no_stamp`).
+- `--resume=true`: add episodes to an existing dataset
 - `--dataset.push_to_hub=false`: keep the dataset local only. It is saved under
   `~/.cache/huggingface/lerobot/<repo_id>` either way.
-- Every 5 s the robot prints `[openarm_umeow] 30 Hz commands | step limit 1 rad/s bound 0% of them ...`,
-  which should stay near **0%**. Higher means the recorded actions are running ahead of the arm.
 
 ### Quest controls and safety
 
 | Quest | state | what happens |
 |---|---|---|
-| **X** | `HELD` | **Start driving** (`LIVE`). Your current hand poses *and* the headset's pose are captured at this press; the arms follow your hands *relative to that moment* only. |
-| **X** | `LIVE` | **Return home slowly** (`RETURNING`, every joint <= 0.3 rad/s), still recording, then **save** the episode on arrival. The grippers open after the save. |
+| **1st X** | `HELD` | **Start driving** (`LIVE`). Your current hand poses *and* the headset's pose are captured at this press; the arms follow your hands *relative to that moment* only. |
+| **2nd X** | `LIVE` | **Return home slowly** (`RETURNING`, every joint <= 0.3 rad/s), still recording, then **save** the episode on arrival. The grippers open after the save. |
 | **Y** | `LIVE` / `PAUSED` | **Discard** the episode at once and **return home slowly**; grippers open on arrival. |
-| **X** | `RETURNING` / `PAUSED` | ignored. From `PAUSED`, only Y. |
-| **X** | `HELD`, during the reset | ignored: wait for `WAITING for X`. |
 | **Triggers** | `LIVE` | close the grippers. |
 | **A** / **B** | any | no function. |
-
-The arms never jump to the controllers: on every X the hand poses are re-captured, and nothing from an
-earlier press or episode is reused. The headset can hang and swing at your neck: its pose is only read on X.
-(Before this, a 5 degree swing of the headset moved the arm targets 3.4 cm with the hands still.)
-
-**`PAUSED`**: the teleop stops the arms where they are and prints the reason when something looks wrong:
-
-- `controller pose jumped N cm / M deg between two packets (tracking glitch)`: no hand moves that fast.
-- `IK solution jumped ...` / `IK target ran ... ahead ...`: the arm would have to jump or race.
-- `the robot refused a command (...)`: the robot's own guard below fired.
-
-Then **Y** discards the episode and returns home. A controller that loses
-tracking (asleep, out of view) makes its arm hold; when it is seen again it is re-anchored where it
-reappears. X is refused while a controller is untracked.
-
-**`SAFETY HOLD`** (robot side, also for `lerobot-rollout`): the robot refuses any command whose arm joints
-jump more than `--robot.max_command_jump` (0.25 rad) in one tick or sit more than
-`--robot.max_tracking_error` (0.5 rad) from the measured joints, and holds the arm until commands come back
-near the held pose. It never executes more than `--robot.max_joint_speed` (1 rad/s) per joint.
 
 Check the recorded data:
 
@@ -403,71 +300,3 @@ the scene; **Right arrow** ends the reset early. Episodic dataset names must sta
   triggers a `SAFETY HOLD` (the arm stops) instead of being executed.
 - Checkpoints trained on the old Isaac-mirror datasets cannot drive this robot (different joint order and
   units): train on data recorded with Step 4.
-
-### Troubleshooting
-
-| symptom | fix |
-|---|---|
-| `Could not import third-party plugin: lerobot_robot_openarm_umeow` / pinocchio `undefined symbol` | `unset PYTHONPATH; export LD_LIBRARY_PATH=/usr/local/cuda/lib64` (Step 1) |
-| `invalid choice: 'openarm_umeow'` | run `uv sync` on this branch |
-| preview shows `quest 0 Hz (last none yet)` | dora still running, or the Quest app sends to another IP/port |
-| `REFUSED: ... would have to travel ... rad` at start | the arm is too far from home: move it closer by hand, or check `calibration.json` |
-| `The two arms' CAN cables are SWAPPED` | swap the CAN cables, or swap `--robot.right_port` / `--robot.left_port` |
-| `No module named 'pynput'` | `uv sync` (lerobot-record's keyboard controls need it). The Quest's X / Y do not: they set lerobot-record's episode flags directly |
-| `--display_data=true` but no rerun window, or it shows old data | an old rerun viewer (e.g. from `mirror_bridge.py`'s collection viewer) still holds port 9876 and receives the data instead. Close it, or `pkill -f 'rerun --port=9876'`, then start again |
-| `Could not load libtorchcodec` traceback at start | `uv sync` on this branch: torchcodec is pinned to 0.11 to match torch 2.11 (0.10 could not load) |
-| `another rerun viewer already holds port 9876` | an old viewer is still open; a new window was opened anyway. Close the old one: `pkill -f 'rerun --port=9876'` |
-| the arms do not respond to the Quest | read the rerun status panel: `NO PACKETS` (app not sending to this PC / dora still running), a ❌ controller or headset, or the "teleop says" line (e.g. why X was ignored) |
-| an episode is missing after Ctrl-C | an episode is only saved after its reset phase; end it with X (save) first, then Esc or Ctrl-C |
-
-### Tests without hardware
-
-```bash
-python plugins/tests/test_quest_safety.py               # fake Quest: anchoring, headset swing, glitches, slow return, grippers
-python plugins/tests/test_robot_guard.py                # robot safety hold: jumps, tracking error, speed clamp
-python plugins/tests/test_rerun_status.py /tmp/mock_rr  # rerun status panel through a 2-episode mocked lerobot-record
-python plugins/tests/test_record_gate.py /tmp/mock_gate # episodes start on X; X ends the reset; timer end returns home
-bash plugins/tests/eval_chain/run_chain.sh /tmp/chain   # record -> lerobot-train SmolVLA (30 steps) -> evaluate: normal, episodic, RTC, async, async+RTC (GPU, ~5 min)
-# GR00T N1.7 on the mocked robot with any GR00T checkpoint (an old one only proves it loads and runs):
-python plugins/tests/eval_chain/chain_rollout.py base <groot checkpoint> - plugins/tests/eval_chain                    # normal
-python plugins/tests/eval_chain/chain_rollout.py base <groot checkpoint> - plugins/tests/eval_chain --inference.type=rtc --inference.rtc.execution_horizon=8   # RTC
-python plugins/tests/eval_chain/chain_async.py groot <groot checkpoint> 16 plugins/tests/eval_chain                     # async
-CHAIN_SERVER_ARGS="--rtc=true --rtc_execution_horizon=8" CHAIN_CLIENT_ARGS="--aggregate_fn_name=latest_only" \
-  python plugins/tests/eval_chain/chain_async.py groot <groot checkpoint> 16 plugins/tests/eval_chain                   # async + RTC
-python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
-python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
-```
-
-More detail on the plugins: [plugins/README.md](plugins/README.md).
-
----
-
-## Legacy pipeline (Isaac Sim mirror + custom deploy scripts)
-
-### Activate CAN-FD
-
-```
-cd ~/Stanley_ws/openarm_can/setup
-```
-
-```
-sudo ./my_arm 
-```
-
-### Model evaluation on real robot
-
-```
-cd ~/Stanley_ws/lerobot_openarm
-uv sync
-source .venv/bin/activate
-env -u PYTHONPATH LD_LIBRARY_PATH=/usr/local/cuda/lib64 python deploy_smolvla_pickup_jointspace.py     --checkpoint ethanCSL/openarm_visuomotor_VR_pringles_V14_background_30hz     --body-cam-index rs_body --wrist-cam-index rs_wrist_left --right-wrist-cam-index rs_wrist_right     --calibration calibration.json     --inference-hz 30 --max-joint-speed 1.5 --max-episode-seconds 600 
-```
-
-Deploy in async evaluation
-
-```
-cd ~/Stanley_ws/lerobot_openarm
-uv sync
-source .venv/bin/activate
-env -u PYTHONPATH LD_LIBRARY_PATH=/usr/local/cuda/lib64 python deploy_smolvla_async.py     --checkpoint ethanCSL/openarm_visuomotor_VR_pringles_V14_background_30hz    --body-cam-index rs_body --wrist-cam-index rs_wrist_left --right-wrist-cam-index rs_wrist_right     --calibration calibration.json     --control-hz 30 --max-joint-speed 1.5     --actions-per-chunk 50 --chunk-size-threshold 0.8     --max-episode-seconds 25 --max-episodes 20
-```
