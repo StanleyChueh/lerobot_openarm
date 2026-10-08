@@ -88,9 +88,10 @@ lerobot-record \
 
 Useful flags:
 
-- `--resume=true`: add episodes to an existing dataset. lerobot needs its local folder too:
-  `--dataset.root=$HOME/.cache/huggingface/lerobot/<repo_id>` (same `--dataset.repo_id`, with `--dataset.no_stamp=true`).
-  `--dataset.num_episodes` then counts the episodes to ADD, not the total.
+- Continuing a dataset is automatic: run the same command again (same `--dataset.repo_id`, with
+  `--dataset.no_stamp=true`). If `~/.cache/huggingface/lerobot/<repo_id>` already has episodes, the plugin adds
+  `--resume=true --dataset.root=...` itself and prints how many there are. `--dataset.num_episodes` then counts the
+  episodes to ADD, not the total. `--resume=false` turns this off.
 - `--dataset.push_to_hub=false`: keep the dataset local only. It is saved under
   `~/.cache/huggingface/lerobot/<repo_id>` either way.
 
