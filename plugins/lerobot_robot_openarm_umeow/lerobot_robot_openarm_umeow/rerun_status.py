@@ -74,10 +74,10 @@ def _quest_lines(t: dict) -> list[str]:
 
 
 _TELEOP_STYLE = {
-    "HELD": "⏸ HELD at home, grippers open -- press **X** to start",
-    "LIVE": "▶ LIVE -- arms follow the controllers. **X** = save, **Y** = discard",
-    "RETURNING": "↩ RETURNING home slowly -- wait",
-    "PAUSED": "⛔ PAUSED -- **X** = resume from here, **Y** = return home",
+    "HELD": "⏸ HELD at home -- press **X** to start (when WAITING for X)",
+    "LIVE": "▶ LIVE -- arms follow the controllers. **X** = return home, then save · **Y** = discard",
+    "RETURNING": "↩ RETURNING home slowly -- wait (after a 2nd X: still recorded, saved on arrival)",
+    "PAUSED": "⛔ PAUSED -- **Y** = discard the episode and return home",
 }
 
 

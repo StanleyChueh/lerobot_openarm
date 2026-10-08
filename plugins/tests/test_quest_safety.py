@@ -31,7 +31,7 @@ def check(name, ok, detail=""):
 
 # ── synthetic Quest: Unity left-handed poses, headset (rf) worn at the neck ───────
 Q = {"rc": [0.25, 1.1, 0.3], "lc": [-0.25, 1.1, 0.3], "rf": [0.0, 1.3, 0.0], "rf_yaw": 0.0,
-     "rt": 0.0, "lt": 0.0, "x": False, "y": False, "v": 0, "vr": 0, "vl": 0, "run": True, "jump": None}
+     "rt": 0.0, "lt": 0.0, "x": False, "y": False, "a": False, "b": False, "v": 0, "vr": 0, "vl": 0, "run": True, "jump": None}
 
 
 def pose(p, yaw_deg=0.0):
@@ -47,7 +47,7 @@ def sender():
             rc = [rc[0] + Q["jump"], rc[1], rc[2]]
             Q["jump"] = None
         msg = {"rc": pose(rc), "lc": pose(Q["lc"]), "rf": pose(Q["rf"], Q["rf_yaw"]), "rt": Q["rt"],
-               "lt": Q["lt"], "x": Q["x"], "y": Q["y"], "a": False, "b": False, "v": Q["v"], "vr": Q["vr"], "vl": Q["vl"]}
+               "lt": Q["lt"], "x": Q["x"], "y": Q["y"], "a": Q["a"], "b": Q["b"], "v": Q["v"], "vr": Q["vr"], "vl": Q["vl"]}
         s.sendto(json.dumps(msg).encode(), ("127.0.0.1", PORT))
         time.sleep(1 / 72)
 
@@ -83,14 +83,22 @@ def press(k):
     time.sleep(0.12)
 
 
-def peak_speed(t0, t1):
+def peak_speed(t0, t1, span=5):
+    """Peak joint speed over `span` monitor samples (~50 ms): single 10 ms samples carry the timing jitter
+    of reading a 500 Hz command from a 100 Hz thread, not real speed."""
     seg = [(ts, c) for ts, c in log if t0 <= ts <= t1]
-    v = [np.abs(b[1][ARM] - a[1][ARM]).max() / (b[0] - a[0]) for a, b in zip(seg, seg[1:]) if b[0] > a[0]]
+    v = [np.abs(b[1][ARM] - a[1][ARM]).max() / (b[0] - a[0]) for a, b in zip(seg, seg[span:]) if b[0] > a[0]]
     return max(v) if v else 0.0
 
 
 def state():
     return d.status()["state"]
+
+
+def wait_home(timeout=20):
+    t0 = time.perf_counter()
+    while state() == "RETURNING" and time.perf_counter() - t0 < timeout:
+        time.sleep(0.05)
 
 
 def move(key, axis, dist, secs):
@@ -146,10 +154,14 @@ c1 = d.command()
 check("E  hand motion while PAUSED is ignored", np.abs(c1[ARM] - c[ARM]).max() < 1e-6)
 
 press("x")
+check("F  X ignored while PAUSED", state() == "PAUSED")
+keys.clear()
+press("y")
+check("F  Y in PAUSED -> discard ('left') at once, RETURNING", state() == "RETURNING" and keys == ["left"], f"keys {keys}")
+wait_home()
+press("x")
 time.sleep(0.5)
-c2 = d.command()
-check("F  X in PAUSED -> LIVE, resumes with no jump", state() == "LIVE" and np.abs(c2[ARM] - c1[ARM]).max() < 0.01,
-      f"jump {np.abs(c2[ARM] - c1[ARM]).max():.4f} rad")
+check("F  X from HELD -> LIVE again, no jump", state() == "LIVE" and np.abs(d.command()[ARM] - home[ARM]).max() < 0.01)
 
 c0 = d.command()
 Q["vr"] = 2  # right controller loses tracking ...
@@ -168,9 +180,10 @@ time.sleep(0.8)
 c = d.command()
 check("H  trigger closes the right gripper", np.isclose(c[GRIP["right"]], d.grip["right"][1]))
 keys.clear()
-t_r = time.perf_counter()
 press("x")
-check("H  2nd X -> RETURNING, episode key 'right' (save)", state() == "RETURNING" and keys == ["right"], f"keys {keys}")
+t_r = time.perf_counter()  # measure the return itself (the ramp is linear: its peak speed is the same throughout)
+check("H  2nd X -> RETURNING, save NOT sent yet (the return is part of the episode)", state() == "RETURNING" and keys == [],
+      f"keys {keys}")
 press("x")
 check("H  X ignored while RETURNING", state() == "RETURNING")
 c_mid = d.command()
@@ -182,7 +195,25 @@ c = d.command()
 check("H  return speed <= return_speed", peak_speed(t_r, time.perf_counter()) <= t.config.return_speed * 1.15,
       f"peak {peak_speed(t_r, time.perf_counter()):.2f} rad/s")
 check("H  arrives HELD at home", state() == "HELD" and np.allclose(c[ARM], home[ARM]))
+check("H  save ('right') sent on arrival", keys == ["right"], f"keys {keys}")
 check("H  grippers open after the return", all(np.isclose(c[GRIP[s]], d.grip[s][0]) for s in ("right", "left")))
+
+# With a recorder (defer_gripper_open): the grippers stay as they were until the episode has ended.
+d.defer_gripper_open = True
+press("x")
+Q["rt"] = 1.0
+time.sleep(0.8)
+keys.clear()
+press("x")
+wait_home()
+c = d.command()
+check("H2 recorder: save on arrival, grippers still closed", keys == ["right"] and np.isclose(c[GRIP["right"]], d.grip["right"][1]),
+      f"keys {keys}")
+d.release_grippers()
+Q["rt"] = 0.0
+time.sleep(0.3)
+check("H2 recorder: grippers open after release_grippers()", np.isclose(d.command()[GRIP["right"]], d.grip["right"][0]))
+d.defer_gripper_open = False
 
 keys.clear()
 press("x")
@@ -214,7 +245,11 @@ check("K  robot refuses a command -> PAUSED at the robot's held pose",
 ROBOT_STATE.clear()
 
 time.sleep(0.2)
-press("x")  # resume
+press("x")
+check("K  X ignored while PAUSED (no resume)", state() == "PAUSED")
+press("y")
+wait_home()
+press("x")
 time.sleep(0.3)
 c0 = d.command()
 Q["v"] = 2  # the headset itself loses tracking: controller poses are unreliable
@@ -226,6 +261,21 @@ c = d.command()
 check("L  headset lost tracking: both arms hold", state() == "LIVE" and np.abs(c_lost[ARM] - c0[ARM]).max() < 0.01,
       f"{np.abs(c_lost[ARM] - c0[ARM]).max():.4f}")
 check("L  headset tracked again: no jump", np.abs(c[ARM] - c0[ARM]).max() < 0.01, f"{np.abs(c[ARM] - c0[ARM]).max():.4f}")
+
+keys.clear()
+Q["a"] = True
+time.sleep(0.15)
+Q["a"] = False
+Q["b"] = True
+time.sleep(0.15)
+Q["b"] = False
+time.sleep(0.2)
+check("M  A / B do nothing", keys == [] and state() == "LIVE", f"keys {keys}, {state()}")
+press("y")
+wait_home()
+d.x_allowed = lambda: False
+press("x")
+check("N  X refused while the recorder does not allow it (reset phase)", state() == "HELD")
 
 Q["run"] = False
 t.disconnect()

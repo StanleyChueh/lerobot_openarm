@@ -43,7 +43,7 @@ class OpenArmQuestConfig(TeleoperatorConfig):
     # X anchors only on a packet younger than this (s); LIVE holds the arms when packets get older.
     pose_fresh_s: float = 0.15
 
-    # Episode control from the Quest, through the Right / Left arrow keys lerobot-record reads:
-    # 2nd X and A = end the episode and save it, Y and B = end it and discard it (re-record).
-    # Needs an X11 desktop. Turn off for lerobot-teleoperate, where nothing listens for the keys.
+    # lerobot-record: the Quest's save (2nd X, applied when the arms are home) and discard (Y) end the
+    # episode, straight through lerobot-record's own event flags (record_gate.py) -- no key presses. False:
+    # only the keyboard (Right / Left / Esc) ends episodes. No effect in lerobot-teleoperate.
     episode_buttons: bool = True

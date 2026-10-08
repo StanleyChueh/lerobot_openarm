@@ -90,7 +90,7 @@ task and to check tracking before you record.
 lerobot-teleoperate \
   --robot.type=openarm_umeow \
   --robot.right_port=can0 --robot.left_port=can1 \
-  --teleop.type=openarm_quest --teleop.episode_buttons=false \
+  --teleop.type=openarm_quest \
   --fps=30
 ```
 
@@ -103,7 +103,6 @@ What happens:
 
 Notes:
 
-- `--teleop.episode_buttons=false`: nothing records here, so X/Y must not press arrow keys into your desktop.
 - `--fps=30` matches recording. The default of 60 is more than the follower's CAN reads keep up with.
 - To see the cameras while teleoperating, add the `--robot.cameras=...` from Step 4 plus `--display_data=true`.
 - Every 5 s the terminal prints an `[openarm_umeow]` status line; its `bound X%` should stay near 0%.
@@ -150,17 +149,19 @@ What happens:
    ```
 
    If the arms do not respond, look here first: no packets, a ❌ controller, or the "teleop says" line tells
-   you why. The "will be SAVED / DISCARDED" line follows the Quest's X / Y, not keyboard arrows.
+   you why.
 2. Each episode **waits for your X** (`⏳ WAITING`): nothing is recorded until you press X, so episodes
    never start with you getting ready. X is ignored while the robot is still moving to home at startup.
-3. **X** starts recording and driving; do the task; then **X** again to **save** it or **Y** to **discard**
-   it. Either way the arms return home slowly and the grippers open (see
-   [Quest controls](#quest-controls-and-safety)). If `episode_time_s` ends an episode first, it is saved
-   and the arms still return home.
-4. The reset phase (`reset_time_s`, not recorded) follows; reset the scene. Press **X** once the arms are
-   home to end the reset early and start recording the next episode right away. A saved episode is written
-   at the end of the reset phase; **Y** during the reset discards it after all.
-5. Keyboard equivalents: **Right arrow** = save, **Left arrow** = discard, **Esc** = stop the whole session.
+3. **X** starts recording and driving; do the task; then:
+   - **X** again: the arms return home slowly (<= 0.3 rad/s) **while still recording**, and the episode is
+     **saved when they arrive**, so it always ends at the home pose. The grippers stay as they were until
+     the episode has ended, then open.
+   - **Y**: the episode is **discarded** at once, and the arms return home (not recorded).
+   - `episode_time_s` running out acts like the 2nd X: return home, then save. It is a cap, not a cut.
+4. The reset phase (`reset_time_s`, not recorded) follows; reset the scene. X is ignored until the next
+   episode shows `⏳ WAITING for X`.
+5. Keyboard: **Right arrow** = end and save at once (no recorded return), **Left arrow** = discard,
+   **Esc** = stop the whole session.
 6. When done (or on Esc), the arms ramp back to where they started, then the motors are disabled.
 
 Useful flags:
@@ -178,12 +179,12 @@ Useful flags:
 | Quest | state | what happens |
 |---|---|---|
 | **X** | `HELD` | **Start driving** (`LIVE`). Your current hand poses *and* the headset's pose are captured at this press; the arms follow your hands *relative to that moment* only. |
-| **X** | `LIVE` | **Save** the episode (recording) and **return home slowly** (`RETURNING`, every joint <= 0.3 rad/s). On arrival the grippers **open** and the arms wait (`HELD`). |
-| **Y** | `LIVE` / `PAUSED` | **Discard** the episode (recording) and **return home slowly**, grippers open on arrival. |
-| **X** | `RETURNING` | ignored: wait for `HELD`. |
-| **X** | `PAUSED` | **Resume** driving from where the arms stopped (re-anchors, no jump). |
+| **X** | `LIVE` | **Return home slowly** (`RETURNING`, every joint <= 0.3 rad/s), still recording, then **save** the episode on arrival. The grippers open after the save. |
+| **Y** | `LIVE` / `PAUSED` | **Discard** the episode at once and **return home slowly**; grippers open on arrival. |
+| **X** | `RETURNING` / `PAUSED` | ignored. From `PAUSED`, only Y. |
+| **X** | `HELD`, during the reset | ignored: wait for `WAITING for X`. |
 | **Triggers** | `LIVE` | close the grippers. |
-| **A** / **B** | any | save / discard the episode without moving the arms. |
+| **A** / **B** | any | no function. |
 
 The arms never jump to the controllers: on every X the hand poses are re-captured, and nothing from an
 earlier press or episode is reused. The headset can hang and swing at your neck: its pose is only read on X.
@@ -195,7 +196,7 @@ earlier press or episode is reused. The headset can hang and swing at your neck:
 - `IK solution jumped ...` / `IK target ran ... ahead ...`: the arm would have to jump or race.
 - `the robot refused a command (...)`: the robot's own guard below fired.
 
-Then **X** resumes from there, **Y** returns home (and discards the episode). A controller that loses
+Then **Y** discards the episode and returns home. A controller that loses
 tracking (asleep, out of view) makes its arm hold; when it is seen again it is re-anchored where it
 reappears. X is refused while a controller is untracked.
 
@@ -412,7 +413,7 @@ the scene; **Right arrow** ends the reset early. Episodic dataset names must sta
 | preview shows `quest 0 Hz (last none yet)` | dora still running, or the Quest app sends to another IP/port |
 | `REFUSED: ... would have to travel ... rad` at start | the arm is too far from home: move it closer by hand, or check `calibration.json` |
 | `The two arms' CAN cables are SWAPPED` | swap the CAN cables, or swap `--robot.right_port` / `--robot.left_port` |
-| A/B buttons do nothing / `episode_buttons disabled (No module named 'pynput')` | `uv sync` (installs `pynput`). A/B simulate arrow-key presses, so they need the X11 desktop session; the keyboard arrows (or `n` / `r` / `q` in the terminal) always work |
+| `No module named 'pynput'` | `uv sync` (lerobot-record's keyboard controls need it). The Quest's X / Y do not: they set lerobot-record's episode flags directly |
 | `--display_data=true` but no rerun window, or it shows old data | an old rerun viewer (e.g. from `mirror_bridge.py`'s collection viewer) still holds port 9876 and receives the data instead. Close it, or `pkill -f 'rerun --port=9876'`, then start again |
 | `Could not load libtorchcodec` traceback at start | `uv sync` on this branch: torchcodec is pinned to 0.11 to match torch 2.11 (0.10 could not load) |
 | `another rerun viewer already holds port 9876` | an old viewer is still open; a new window was opened anyway. Close the old one: `pkill -f 'rerun --port=9876'` |

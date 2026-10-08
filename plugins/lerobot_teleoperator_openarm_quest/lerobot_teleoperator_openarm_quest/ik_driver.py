@@ -10,14 +10,16 @@ driver therefore runs an explicit state machine:
   LIVE       the arms follow the controllers.
   RETURNING  a slow, linear ramp to the home pose (every joint <= return_speed rad/s), starting from
              the command the robot last actually executed; the grippers open on arrival -> HELD.
-  PAUSED     frozen where the robot last was, after a safety trip. X resumes from there (no jump),
-             Y returns home.
+  PAUSED     frozen where the robot last was, after a safety trip. Y discards and returns home.
 
 Buttons:
-  X  HELD/PAUSED -> LIVE (anchor). LIVE -> RETURNING, and "end and save the episode".
-     Ignored while RETURNING.
-  Y  "end and discard the episode"; LIVE/PAUSED -> RETURNING.
-  A / B  "end and save" / "end and discard" without moving the arms.
+  X  HELD -> LIVE (anchor), when x_allowed() (lerobot-record: only while it waits for X, not while it
+     resets the scene). LIVE -> RETURNING with "save on arrival": the return is part of the episode, the
+     "save" decision is sent when the arms reach home, and the grippers open only after that (at once
+     without a recorder; when the recorder says the episode has ended with one -- release_grippers()).
+     Ignored while RETURNING or PAUSED.
+  Y  LIVE / PAUSED: "discard the episode" at once, then RETURNING; grippers open on arrival. Ignored
+     otherwise.
   Triggers drive the grippers, LIVE only.
 
 Safety, and why each is needed:
@@ -190,7 +192,13 @@ class QuestIKDriver:
         self._stale_warned = False
         self._started_t = time.perf_counter()
         self._packet_warn_t = 0.0
-        self._return_request: str | None = None  # set from other threads, served by _step
+        self._return_request: tuple[str, bool] | None = None  # (source, save), set from other threads
+        self._release_request = False  # open the grippers held closed after a save (release_grippers)
+        self._save_on_arrival = False
+        # Hooks for a recorder (record_gate.py): whether X may start driving now, and whether the grippers
+        # must stay as they are until the recorder confirms the saved episode has ended.
+        self.x_allowed = lambda: True
+        self.defer_gripper_open = False
 
         self._lock = threading.Lock()
         self._command = self.home_driver.copy()
@@ -209,10 +217,14 @@ class QuestIKDriver:
         with self._lock:
             return self._command.copy()
 
-    def request_return(self, source: str) -> None:
-        """Ask for the slow return home (no episode key), e.g. when lerobot ended an episode by its own
-        timer. Served on the IK thread; ignored unless LIVE or PAUSED."""
-        self._return_request = source
+    def request_return(self, source: str, save: bool = False) -> None:
+        """Ask for the slow return home; with save=True the "save" decision is sent on arrival (as for the
+        2nd X). Served on the IK thread; ignored unless LIVE or PAUSED."""
+        self._return_request = (source, save)
+
+    def release_grippers(self) -> None:
+        """Open grippers held closed after a save, once the recorder has ended the episode."""
+        self._release_request = True
 
     def status(self) -> dict:
         _, packet_t, packets = self.receiver.latest()
@@ -264,7 +276,14 @@ class QuestIKDriver:
 
         request, self._return_request = self._return_request, None
         if request and self._state in (LIVE, PAUSED):
-            self._start_return(request)
+            self._start_return(request[0], save=request[1] and self._state == LIVE)
+        if self._release_request:
+            self._release_request = False
+            if self._state == HELD:
+                with self._lock:
+                    for s in SIDES:
+                        self._command[GRIP[s]] = self.home_driver[GRIP[s]]
+                self._log("grippers opened -- press X for the next episode.")
 
         fault = self._robot_fault()
         if fault and self._state != PAUSED:
@@ -352,23 +371,24 @@ class QuestIKDriver:
     # ── state changes ─────────────────────────────────────────────────────────
 
     def _on_press(self, name: str, msg: dict, fresh: bool, now: float) -> None:
-        if name == "a":
-            self._log("A: end the episode and save it.")
-            self._on_episode_key("right")
-        elif name == "b":
-            self._log("B: end the episode and discard it.")
-            self._on_episode_key("left")
-        elif name == "y":
-            self._log("Y: end the episode and DISCARD it.")
-            self._on_episode_key("left")
+        if name == "y":
             if self._state in (LIVE, PAUSED):
-                self._start_return("Y")
-        elif self._state in (HELD, PAUSED):
-            self._go_live(msg, fresh, now)
+                self._log("Y: DISCARD the episode.")
+                self._on_episode_key("left")
+                self._start_return("Y", save=False)
+            else:
+                self._log(f"Y ignored: nothing to discard while {self._state}.")
+        elif name != "x":
+            return  # A / B: no function
+        elif self._state == HELD:
+            if self.x_allowed():
+                self._go_live(msg, fresh, now)
+            else:
+                self._log("X ignored: lerobot is resetting the scene -- wait for WAITING for X.")
         elif self._state == LIVE:
-            self._log("X: end the episode and SAVE it.")
-            self._on_episode_key("right")
-            self._start_return("X")
+            self._start_return("X", save=True)
+        elif self._state == PAUSED:
+            self._log("X ignored while PAUSED -- press Y to discard the episode and return home.")
         else:  # RETURNING
             self._log("X ignored: still returning home -- wait for HELD.")
 
@@ -437,9 +457,9 @@ class QuestIKDriver:
         self._ik_prev = None
         self._return = None
         self._set_state(PAUSED, reason)
-        self._log(f"PAUSED: {reason}. X = resume from here, Y = return home (and discard).")
+        self._log(f"PAUSED: {reason}. Y = discard the episode and return home.")
 
-    def _start_return(self, source: str) -> None:
+    def _start_return(self, source: str, save: bool = False) -> None:
         held = self._held_command()
         with self._lock:
             start = self._command.copy()
@@ -450,9 +470,11 @@ class QuestIKDriver:
         with self._lock:
             self._command = start.copy()
         self._return = (start, time.perf_counter(), duration)
+        self._save_on_arrival = save
         self._set_state(RETURNING, source)
         self._log(f"{source}: returning home slowly ({dist:.2f} rad over {duration:.1f} s,"
-                  f" <= {self.return_speed:g} rad/s); grippers open on arrival.")
+                  f" <= {self.return_speed:g} rad/s)"
+                  + ("; the episode is SAVED on arrival, return included." if save else "; grippers open on arrival."))
 
     def _advance_return(self, now: float) -> None:
         start, t0, duration = self._return
@@ -460,11 +482,20 @@ class QuestIKDriver:
         cmd = start.copy()
         cmd[ARM] = start[ARM] + a * (self.home_driver[ARM] - start[ARM])
         if a >= 1.0:
-            cmd = self.home_driver.copy()  # arrived: grippers open
+            cmd = self.home_driver.copy()
+            keep_grippers = self._save_on_arrival and self.defer_gripper_open
+            if keep_grippers:  # the saved episode ends with the arms home and the grippers as they were
+                for s in SIDES:
+                    cmd[GRIP[s]] = start[GRIP[s]]
             self.kin.sync(cmd)
             self._return = None
             self._set_state(HELD, "")
-            self._log("HELD at home, grippers open -- press X for the next episode.")
+            if self._save_on_arrival:
+                self._save_on_arrival = False
+                self._log("home: SAVE the episode.")
+                self._on_episode_key("right")
+            self._log("HELD at home" + (" -- grippers open once the episode is saved." if keep_grippers
+                                        else ", grippers open -- press X for the next episode."))
         with self._lock:
             self._command = cmd
 

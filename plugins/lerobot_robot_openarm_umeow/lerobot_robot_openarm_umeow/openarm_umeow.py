@@ -209,7 +209,7 @@ class OpenArmUmeow(OpenArmFollower):
                 self._fault = reason
                 print(f"\n[openarm_umeow] SAFETY HOLD: {reason}. The arm holds where it is; it resumes"
                       f" once requests come back within {cfg.resume_tolerance:g} rad of the held pose"
-                      " (Quest: X = resume from here, Y = return home).", flush=True)
+                      " (Quest: Y = discard and return home).", flush=True)
         elif max(abs(desired[k] - self._last_sent[k]) for k in ARM_KEYS) < cfg.resume_tolerance:
             print("[openarm_umeow] safety hold released: requests are back at the held pose.", flush=True)
             self._fault = None

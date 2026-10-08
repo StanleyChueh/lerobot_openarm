@@ -6,8 +6,6 @@ robot's measured `observation.state` -- the same joint-target-vs-measured-joint 
 gives on Koch / SO-100.
 """
 
-import time
-
 from lerobot.teleoperators.teleoperator import Teleoperator
 from lerobot_robot_openarm_umeow.common import (
     MOTOR_KEYS,
@@ -32,7 +30,9 @@ class OpenArmQuest(Teleoperator):
         self.config = config
         self.calib = load_calibration(config.calibration)
         self.driver: QuestIKDriver | None = None
-        self._keyboard = None
+        # Where the Quest's save / discard decisions go: lerobot-record's event flags, set by record_gate.py
+        # while an episode is recorded. None (lerobot-teleoperate, or between episodes): they go nowhere.
+        self.episode_sink = None
 
     @property
     def action_features(self) -> dict[str, type]:
@@ -61,13 +61,6 @@ class OpenArmQuest(Teleoperator):
         from .record_gate import install
 
         install(type(self))  # lerobot-record only: episodes start on the first X
-        if cfg.episode_buttons:
-            try:
-                from pynput.keyboard import Controller
-
-                self._keyboard = Controller()
-            except Exception as e:
-                print(f"[openarm_quest] episode_buttons disabled ({e}); use the keyboard arrows.", flush=True)
         self.driver = QuestIKDriver(
             host=cfg.host,
             port=cfg.port,
@@ -88,9 +81,8 @@ class OpenArmQuest(Teleoperator):
             on_episode_key=self._press_episode_key,
         )
         print(
-            "[openarm_quest] connected. X = start driving; 2nd X = save + return home; Y = discard +"
-            " return home; triggers = grippers"
-            + ("" if self._keyboard else " (episode keys off: use the keyboard arrows)"),
+            "[openarm_quest] connected. X = start driving; 2nd X = return home, then save; Y = discard +"
+            " return home; triggers = grippers",
             flush=True,
         )
 
@@ -111,14 +103,9 @@ class OpenArmQuest(Teleoperator):
         return sim_joints_to_driver16(motor_action_to_sim_joints(motor, self.calib))
 
     def _press_episode_key(self, key: str) -> None:
-        if self._keyboard is None:
-            return
-        from pynput.keyboard import Key
-
-        k = Key.right if key == "right" else Key.left
-        self._keyboard.press(k)
-        time.sleep(0.02)
-        self._keyboard.release(k)
+        """"right" = save the episode, "left" = discard it (record_gate.py decides what reaches lerobot)."""
+        if self.episode_sink is not None:
+            self.episode_sink(key)
 
     def disconnect(self) -> None:
         if self.driver is not None:

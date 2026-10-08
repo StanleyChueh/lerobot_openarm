@@ -58,11 +58,12 @@ lr lerobot-record \
 - On connect the arm ramps at 0.3 rad/s to the IK model's `home` keyframe with the grippers open (type
   `YES` first; add `--robot.assume_yes=true` to skip). On exit it ramps back to where it started before
   de-energising.
-- Each episode: **X** starts driving (hand and headset poses captured at that press only). **X** again =
-  save, **Y** = discard; both return the arms home slowly (<= 0.3 rad/s) and open the grippers on
-  arrival. Triggers drive the grippers. **A** / **B** save / discard without moving the arms.
+- Each episode starts recording on **X** (hand and headset poses captured at that press only). **X** again
+  = return home slowly (<= 0.3 rad/s) while still recording, then save on arrival, grippers opened after
+  the save; **Y** = discard at once and return home. `episode_time_s` acts like the 2nd X. X is ignored
+  during the reset. Triggers drive the grippers.
 - The teleop **PAUSES** the arms on a tracking glitch or an IK jump, and the robot **SAFETY HOLDs** on a
-  command jump or a large tracking error; X resumes from there, Y returns home. Details and thresholds:
+  command jump or a large tracking error; then Y discards and returns home. Details and thresholds:
   the top-level README's "Quest controls and safety", and `ik_driver.py`'s module docstring.
 - The arrow keys work too (Right = save, Left = discard, Esc = stop); without a display, `n` / `r` / `q`.
 - `--resume=true` continues a dataset; `--dataset.push_to_hub=false` keeps it local.
