@@ -245,14 +245,17 @@ lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B 
 
 ### Step 6. Evaluate on the real robot: normal, async, RTC
 
-Three ways to run a trained policy, all official lerobot tools, for both SmolVLA and GR00T N1.7. Prepare the
-terminal as in Step 1 (the Quest is not needed).
+Four ways to run a trained policy, for both SmolVLA and GR00T N1.7: normal, async and RTC are official lerobot
+tools; async + RTC is the combination the RTC docs recommend ("use both together"), which lerobot's policy
+server does not implement, so our server wrapper adds it. Prepare the terminal as in Step 1 (the Quest is not
+needed).
 
 | mode | what it does | tool |
 |---|---|---|
 | **normal** | predict a chunk, execute it, predict the next; the robot waits during each inference | `lerobot-rollout` |
 | **async** ([docs](https://huggingface.co/docs/lerobot/main/en/async)) | a policy server computes the next chunk while the robot client is still executing the current one, and overlapping chunks are aggregated; no waiting, inference can run on another machine | `policy_server` + `robot_client` |
 | **RTC** ([docs](https://huggingface.co/docs/lerobot/main/en/rtc)) | inference in a background thread, and each new chunk is *guided* to continue smoothly from the actions already being executed | `lerobot-rollout --inference.type=rtc` |
+| **async + RTC** | async's server/client split, with every chunk RTC-guided to continue the client's unexecuted actions | `policy_server --rtc=true` + `robot_client` |
 
 #### Normal
 
@@ -302,6 +305,10 @@ python -m lerobot.async_inference.robot_client \
   (lerobot's client cannot send one, and the server would otherwise drop it), decodes GR00T's relative
   actions a whole chunk at a time (lerobot's server does one step at a time, which GR00T rejects), and
   loads GR00T in bf16 (`--policy_dtype=auto|bf16|fp32`). Same flags otherwise.
+- It also fixes lerobot's "too similar observation" filter for this robot: the server skips an observation
+  whose joint vector is within 1.0 of the last one it ran, meant as ~1 degree for lerobot's degree-based arms;
+  ours report radians (1.0 = ~57 degrees), so lerobot's server only predicted once the client's queue had
+  emptied -- async collapsed to synchronous. Now `--obs_similarity_atol=0.0175` (1 degree in radians).
 - The client is lerobot's own. `--actions_per_chunk` <= the policy's chunk size (SmolVLA 50, our GR00T 16);
   `--chunk_size_threshold` 0.5-0.6 is the docs' recommendation; add `--debug_visualize_queue_size=true` to
   plot the action queue when tuning.
@@ -325,6 +332,46 @@ lerobot-rollout --strategy.type=base \
 
 - `execution_horizon`: actions of the previous chunk the new one is guided to match; 8-12, and below the
   chunk size. `max_guidance_weight` 10.0 is the docs' value for 10-step flow matching.
+
+#### Async + RTC
+
+The async setup above, with RTC done by the server: for each new observation, the server takes the actions
+of its last chunk that the client has not executed yet (it knows their timesteps), re-anchors them to the new
+state for relative-action policies (GR00T), and predicts the next chunk RTC-guided to continue them, with the
+inference delay estimated from the measured latency -- the same lerobot helpers `lerobot-rollout`'s RTC uses.
+
+Terminal 1:
+
+```bash
+# SmolVLA
+python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
+  --rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
+
+# GR00T N1.7: the same with --rtc_execution_horizon=8
+```
+
+Terminal 2, as for async but with `--aggregate_fn_name=latest_only` (RTC has already blended the overlap;
+averaging it again would undo that):
+
+```bash
+# SmolVLA
+python -m lerobot.async_inference.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=smolvla --pretrained_name_or_path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=latest_only --fps=30
+
+# GR00T N1.7: --policy_type=groot --pretrained_name_or_path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model --actions_per_chunk=16
+```
+
+- The server log shows each chunk: `RTC chunk @ timestep N: guided by K unexecuted actions, inference_delay D`.
+  `K` > 0 means RTC is active; `D` is the estimated latency in steps (measured on the RTX 5080: about 2 for
+  GR00T, 4-5 for SmolVLA; it rises for a while after a slow inference).
+- RTC needs observations mid-chunk: keep `--chunk_size_threshold` around 0.5. Near 0 the client only asks
+  when its queue is empty, and there is nothing left to continue.
 
 #### Recording evaluation episodes
 
@@ -379,11 +426,13 @@ python plugins/tests/test_quest_safety.py               # fake Quest: anchoring,
 python plugins/tests/test_robot_guard.py                # robot safety hold: jumps, tracking error, speed clamp
 python plugins/tests/test_rerun_status.py /tmp/mock_rr  # rerun status panel through a 2-episode mocked lerobot-record
 python plugins/tests/test_record_gate.py /tmp/mock_gate # episodes start on X; X ends the reset; timer end returns home
-bash plugins/tests/eval_chain/run_chain.sh /tmp/chain   # record -> lerobot-train SmolVLA (30 steps) -> evaluate: normal, episodic, RTC, async (GPU, ~4 min)
+bash plugins/tests/eval_chain/run_chain.sh /tmp/chain   # record -> lerobot-train SmolVLA (30 steps) -> evaluate: normal, episodic, RTC, async, async+RTC (GPU, ~5 min)
 # GR00T N1.7 on the mocked robot with any GR00T checkpoint (an old one only proves it loads and runs):
 python plugins/tests/eval_chain/chain_rollout.py base <groot checkpoint> - plugins/tests/eval_chain                    # normal
 python plugins/tests/eval_chain/chain_rollout.py base <groot checkpoint> - plugins/tests/eval_chain --inference.type=rtc --inference.rtc.execution_horizon=8   # RTC
 python plugins/tests/eval_chain/chain_async.py groot <groot checkpoint> 16 plugins/tests/eval_chain                     # async
+CHAIN_SERVER_ARGS="--rtc=true --rtc_execution_horizon=8" CHAIN_CLIENT_ARGS="--aggregate_fn_name=latest_only" \
+  python plugins/tests/eval_chain/chain_async.py groot <groot checkpoint> 16 plugins/tests/eval_chain                   # async + RTC
 python plugins/tests/test_record_mock.py /tmp/mock_ds   # official lerobot-record end to end, CAN mocked out
 python plugins/tests/test_teleoperate_mock.py           # official lerobot-teleoperate end to end, CAN mocked out
 ```
