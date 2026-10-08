@@ -107,7 +107,12 @@ Useful flags:
 | **Triggers** | `LIVE` | close the grippers. |
 | **A** / **B** | any | no function. |
 
-`PAUSED` stops the arms where they are when something is too fast: the hand over 4 m/s or 900 deg/s, a joint
+A controller position that jumps faster than 4 m/s or 900 deg/s is never followed. One such jump is a
+tracking snap (the Quest re-finding a controller it lost sight of, e.g. held low or behind the can, since the
+headset hangs at the neck): it is ignored, the arm holds still and follows on from there (terminal: "a tracking
+snap -- IGNORED"). Keep the controllers in front of the headset to avoid them.
+
+`PAUSED` stops the arms where they are when something is too fast: repeated jumps (3 within 2 s), a joint
 more than 1 rad behind its target (joint speed cap: 2 rad/s), or the IK jumping (e.g. an arm stretched out).
 The terminal and the rerun panel say which joint or limit and why. If `episode_time_s` runs out meanwhile,
 X recovers home and the episode is saved on arrival.

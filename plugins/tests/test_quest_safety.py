@@ -147,10 +147,25 @@ check("D  command speed <= max_joint_speed", peak_speed(t_b, time.perf_counter()
       f"peak {peak_speed(t_b, time.perf_counter()):.2f} rad/s")
 
 c0 = d.command()
-Q["jump"] = 0.15  # one packet 15 cm off, then back
+Q["jump"] = 0.15  # one packet 15 cm off, then back: a tracking snap
 time.sleep(0.5)
 c = d.command()
-check("E  15 cm tracking glitch -> PAUSED", state() == "PAUSED", d.status()["reason"])
+from lerobot_robot_openarm_umeow.shared import TELEOP_STATE as _TS  # noqa: E402
+check("E  isolated 15 cm tracking snap -> ignored, still LIVE, the arm did not move",
+      state() == "LIVE" and np.abs(c[ARM] - c0[ARM]).max() < 0.02 and "IGNORED" in (_TS.snapshot()["message"] or ""),
+      f"{state()}, moved {np.abs(c[ARM] - c0[ARM]).max():.3f} rad, says {_TS.snapshot()['message']!r}")
+move("rc", 0, 0.05, 1.0)  # ... and the arm keeps following the hand after it
+c_f = d.command()
+check("E  ... and keeps following the hand afterwards", state() == "LIVE" and np.abs(c_f[ARM] - c[ARM]).max() > 0.02,
+      f"moved {np.abs(c_f[ARM] - c[ARM]).max():.3f} rad")
+move("rc", 0, -0.05, 0.5)
+c0 = d.command()
+Q["jump"] = 0.15
+time.sleep(0.15)
+Q["jump"] = 0.15  # snaps again and again (4 jumps within 2 s): sustained glitching
+time.sleep(0.5)
+c = d.command()
+check("E  repeated snaps (3 within 2 s) -> PAUSED", state() == "PAUSED", d.status()["reason"])
 check("E  arms frozen while PAUSED", np.abs(c[ARM] - c0[ARM]).max() < 0.02, f"moved {np.abs(c[ARM] - c0[ARM]).max():.3f} rad")
 move("rc", 1, 0.05, 0.5)  # hand moves while paused: must not move the arm
 c1 = d.command()

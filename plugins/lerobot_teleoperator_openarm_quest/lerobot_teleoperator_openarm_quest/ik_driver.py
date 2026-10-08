@@ -35,9 +35,11 @@ Safety, and why each is needed:
     a pose remembered from before (a controller that had gone to sleep or lost tracking).
   - A controller that loses tracking and gets it back is re-anchored (clutched) where it reappears,
     so the hand's untracked motion is not replayed as a jump.
-  - A tracked pose moving faster than glitch_speed_mps / glitch_rot_speed_dps PAUSES both arms: a
-    tracking glitch (a pose snapping several cm within one headset frame), or a motion too fast to follow
-    safely. The speed is the change since the previous packet over the time between them, by the
+  - A tracked pose moving faster than glitch_speed_mps / glitch_rot_speed_dps is never followed. One or
+    two such jumps within 2 s are a tracking SNAP (the Quest re-locating a controller it had lost sight
+    of, while still reporting it tracked: 49 cm / 78 deg in one 15 ms frame was seen): the jump is ignored,
+    the arm holds still and the hand is re-anchored where the controller now is. glitch_pause_count of
+    them within 2 s (sustained glitching, or a motion too fast to follow safely) PAUSE both arms. The speed is the change since the previous packet over the time between them, by the
     headset's own clock (packet field "t"; arrival time if absent) -- NOT a distance per processed packet:
     if this thread is delayed for a moment (e.g. the video encoders starting at the first recorded frame),
     an ordinary hand movement over that gap must not look like a jump. A gap longer than pose_fresh_s
@@ -146,6 +148,7 @@ class QuestIKDriver:
         glitch_speed_mps: float,
         glitch_rot_speed_dps: float,
         ik_jump_rad: float,
+        glitch_pause_count: int = 3,
         max_lead_rad: float,
         pose_fresh_s: float,
         held_command=None,
@@ -160,6 +163,8 @@ class QuestIKDriver:
         self.return_speed = return_speed
         self.glitch_speed_mps = glitch_speed_mps
         self.glitch_rot_speed_dps = glitch_rot_speed_dps
+        self.glitch_pause_count = max(1, int(glitch_pause_count))
+        self._glitch_times: list[float] = []  # recent jumps (perf_counter), for glitch_pause_count
         self.ik_jump_rad = ik_jump_rad
         self.max_lead_rad = max_lead_rad
         self.pose_fresh_s = pose_fresh_s
@@ -358,9 +363,17 @@ class QuestIKDriver:
                 dp, dr = _pose_jump(self._last_raw[side], pose)
                 dt = max(packet_t - self._last_raw_t[side], 1.0 / 90.0)  # at least one headset frame
                 if dp / dt > self.glitch_speed_mps or dr / dt > self.glitch_rot_speed_dps:
-                    self._pause(f"{side} controller moved {dp * 100:.0f} cm / {dr:.0f} deg in {dt * 1000:.0f} ms"
-                                f" ({dp / dt:.1f} m/s, {dr / dt:.0f} deg/s): tracking glitch or too fast")
-                    return
+                    what = (f"{side} controller moved {dp * 100:.0f} cm / {dr:.0f} deg in {dt * 1000:.0f} ms"
+                            f" ({dp / dt:.1f} m/s, {dr / dt:.0f} deg/s)")
+                    self._glitch_times = [t for t in self._glitch_times if now - t < 2.0] + [now]
+                    if len(self._glitch_times) >= self.glitch_pause_count:
+                        self._pause(f"{what}: tracking glitch or too fast"
+                                    + (f" ({len(self._glitch_times)} jumps in 2 s)" if len(self._glitch_times) > 1 else ""))
+                        return
+                    # A tracking snap: never followed. Re-anchor onto the target the IK already tracks.
+                    self._clutch(side, pose, now, base=self._last_target[side])
+                    self._log(f"{what}: a tracking snap -- IGNORED, the arm held still and follows on from here."
+                              " Keep the controllers in the headset's view.")
             if new_packet:
                 self._last_raw[side] = pose
                 self._last_raw_t[side] = packet_t
@@ -483,6 +496,7 @@ class QuestIKDriver:
             self._clutch(side, raw[side], now, cmd)
             self._gripper[side] = float(cmd[GRIP[side]])
         self._ik_prev = None
+        self._glitch_times = []
         prev = self._state
         resumed = self._episode_hold
         self._episode_hold = False

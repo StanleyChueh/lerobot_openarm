@@ -73,6 +73,7 @@ class OpenArmQuest(Teleoperator):
             return_speed=cfg.return_speed,
             glitch_speed_mps=cfg.glitch_speed_mps,
             glitch_rot_speed_dps=cfg.glitch_rot_speed_dps,
+            glitch_pause_count=cfg.glitch_pause_count,
             ik_jump_rad=cfg.ik_jump_rad,
             max_lead_rad=cfg.max_lead_rad,
             pose_fresh_s=cfg.pose_fresh_s,

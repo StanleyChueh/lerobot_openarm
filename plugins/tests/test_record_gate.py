@@ -5,7 +5,7 @@
 The follower's CAN methods are patched out (perfect tracking) and the keyboard listener is replaced by
 lerobot-record's own event flags with no key ever pressed: the Quest's save / discard reach them through
 record_gate.py, as in a real session. The scripted operator:
-  episode 0      waits 2 s (not recorded), X, drives 2 s with the right gripper closed, a 30 cm snap ->
+  episode 0      waits 2 s (not recorded), X, drives 2 s with the right gripper closed, repeated 30 cm snaps ->
                  PAUSED, X -> back home still recording, X -> continues, drives, X -> the return home is
                  recorded and the episode saved on arrival, grippers still closed in its last frame;
   reset          X 1 s into it must be ignored (the reset runs its full length);
@@ -113,7 +113,12 @@ def operator():
     press("x", "X start ep0")
     Q["rt"] = 1.0  # close the right gripper
     drive(2.0)
-    Q["rx"] += 0.30  # a 30 cm snap in one packet -> PAUSED
+    for _ in range(3):  # 30 cm snaps, again and again (one alone is ignored) -> PAUSED
+        Q["rx"] += 0.30
+        time.sleep(0.06)
+        Q["rx"] -= 0.30
+        time.sleep(0.06)
+    Q["rx"] += 0.30
     time.sleep(0.4)
     log.append((time.perf_counter(), f"after snap: {TELEOP_STATE.snapshot()['state']}"))
     press("x", "X recover ep0")

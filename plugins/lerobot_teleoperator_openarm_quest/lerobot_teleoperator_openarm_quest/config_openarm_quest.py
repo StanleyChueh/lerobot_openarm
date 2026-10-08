@@ -40,6 +40,11 @@ class OpenArmQuestConfig(TeleoperatorConfig):
     # within one headset frame (~9 m/s and up).
     glitch_speed_mps: float = 4.0
     glitch_rot_speed_dps: float = 900.0
+    # How many such jumps within 2 s PAUSE. Fewer are a tracking SNAP (the Quest re-locating a controller
+    # it had lost sight of, e.g. held low with the headset at the neck): the jump is ignored -- the arm
+    # holds still -- and the hand is re-anchored where the controller now is, so driving continues.
+    # 1 = pause on every jump.
+    glitch_pause_count: int = 3
     # The raw IK solution moving more than this in one solve -> PAUSE (rad).
     ik_jump_rad: float = 0.2
     # The raw IK solution running more than this ahead of the rate-limited command -> PAUSE (rad):
