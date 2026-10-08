@@ -5,8 +5,9 @@
 The follower's CAN methods are patched out (perfect tracking) and the keyboard listener is replaced by
 lerobot-record's own event flags with no key ever pressed: the Quest's save / discard reach them through
 record_gate.py, as in a real session. The scripted operator:
-  episode 0      waits 2 s (not recorded), X, drives 2 s with the right gripper closed, 2nd X -> the return
-                 home is recorded and the episode saved on arrival, grippers still closed in its last frame;
+  episode 0      waits 2 s (not recorded), X, drives 2 s with the right gripper closed, a 30 cm snap ->
+                 PAUSED, X -> back home still recording, X -> continues, drives, X -> the return home is
+                 recorded and the episode saved on arrival, grippers still closed in its last frame;
   reset          X 1 s into it must be ignored (the reset runs its full length);
   episode 1      X, drives, Y -> discarded, re-recorded;
   episode 1 again X, drives until episode_time_s -> return home and save, the return included.
@@ -112,6 +113,18 @@ def operator():
     press("x", "X start ep0")
     Q["rt"] = 1.0  # close the right gripper
     drive(2.0)
+    Q["rx"] += 0.30  # a 30 cm snap in one packet -> PAUSED
+    time.sleep(0.4)
+    log.append((time.perf_counter(), f"after snap: {TELEOP_STATE.snapshot()['state']}"))
+    press("x", "X recover ep0")
+    t0 = time.perf_counter()
+    while TELEOP_STATE.snapshot()["reason"] != "in episode" and time.perf_counter() - t0 < 20:
+        time.sleep(0.02)
+    log.append((time.perf_counter(), f"recovered: {TELEOP_STATE.snapshot()['state']} {TELEOP_STATE.snapshot()['reason']}"))
+    Q["rx"] = 0.25
+    time.sleep(0.3)
+    press("x", "X continue ep0")
+    drive(1.0)
     press("x", "X save ep0")
     wait_phase("RESETTING")
     log.append((time.perf_counter(), f"reset starts, teleop {TELEOP_STATE.snapshot()['state']}"))
@@ -140,7 +153,7 @@ sys.argv = ["lerobot-record",
     "--robot.type=openarm_umeow", "--robot.assume_yes=true",
     "--teleop.type=openarm_quest", f"--teleop.port={PORT}",
     "--dataset.repo_id=local/openarm_gate_mock", f"--dataset.root={root}", "--dataset.push_to_hub=false",
-    "--dataset.single_task=gate test", "--dataset.num_episodes=2", "--dataset.episode_time_s=3",
+    "--dataset.single_task=gate test", "--dataset.num_episodes=2", "--dataset.episode_time_s=6",
     "--dataset.reset_time_s=4", "--dataset.fps=30", "--play_sounds=false", "--display_data=false"]
 t_start = time.perf_counter()
 rec.main()
@@ -180,8 +193,12 @@ check("ep0 starts at home (the 2 s wait before X not recorded)", np.abs(a0[1, ar
 check("ep0 includes the return: it ends back at home", np.abs(a0[-1, arm] - home).max() < 0.01,
       f"last frame {np.abs(a0[-1, arm] - home).max():.4f} rad from home")
 t_x0, t_s0 = at("X start ep0"), at("X save ep0")
-check("ep0 lasts past the 2nd X (drive ~2 s + return), not cut at it",
-      len(a0) / 30 > (t_s0 - t_x0) + 0.3, f"{len(a0) / 30:.1f} s recorded, 2nd X at {t_s0 - t_x0:.1f} s")
+check("ep0 lasts past the saving X (drive, pause, recovery, drive, return), not cut at it",
+      len(a0) / 30 > (t_s0 - t_x0) + 0.3, f"{len(a0) / 30:.1f} s recorded, saving X at {t_s0 - t_x0:.1f} s")
+snap = next((e for _, e in log if e.startswith("after snap")), "")
+rec_ = next((e for _, e in log if e.startswith("recovered")), "")
+check("ep0: the snap PAUSED the arms, X recovered home with the episode still recording",
+      snap.endswith("PAUSED") and rec_ == "recovered: HELD in episode", f"{snap} | {rec_}")
 check("ep0 last frame: right gripper still closed (opens only after the save)",
       abs(a0[-1, rj8] - 0.0) < 0.05, f"RJ8 {a0[-1, rj8]:.3f} (closed 0.0, open -1.298)")
 after_reset_x = next((e for _, e in log if e.startswith("after X during reset")), "")
@@ -189,8 +206,8 @@ check("X during the reset is ignored", after_reset_x.endswith("HELD"), after_res
 t_rs, t_w1 = at("reset starts"), at("waiting for ep1")
 check("the reset ran its full 4 s (X did not end it early)", t_rs is not None and t_w1 is not None and t_w1 - t_rs > 3.5,
       f"{(t_w1 - t_rs) if t_rs and t_w1 else float('nan'):.1f} s")
-check("ep1 = the re-recorded attempt: time limit 3 s, then the return, ending at home",
-      len(a1) / 30 > 3.0 and np.abs(a1[-1, arm] - home).max() < 0.01,
+check("ep1 = the re-recorded attempt: time limit 6 s, then the return, ending at home",
+      len(a1) / 30 > 6.0 and np.abs(a1[-1, arm] - home).max() < 0.01,
       f"{len(a1) / 30:.1f} s, last frame {np.abs(a1[-1, arm] - home).max():.4f} rad from home")
 print(f"\n{len(FAILS)} failed" + (f": {FAILS}" if FAILS else ""))
 sys.exit(1 if FAILS else 0)

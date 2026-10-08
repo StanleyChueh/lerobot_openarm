@@ -76,7 +76,7 @@ fake["offset"] = 0.0
 r.umeow_config.max_command_jump = 10.0  # isolate the speed clamp
 r._fault = None
 sent = tick(**{"LJ1.pos": cmd["LJ1.pos"] + 0.2})
-check("5  speed clamp: one tick moves <= max_joint_speed * dt", sent["LJ1.pos"] <= 1.0 / 30 * 1.3,
+check("5  speed clamp: one tick moves <= max_joint_speed * dt", sent["LJ1.pos"] <= r.umeow_config.max_joint_speed / 30 * 1.3,
       f"moved {sent['LJ1.pos']:.3f} rad of 0.2")
 
 r.disconnect()

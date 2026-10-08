@@ -29,8 +29,10 @@ class OpenArmQuestConfig(TeleoperatorConfig):
     smoothing_d_cutoff: float = 1.5
 
     # Safety (see ik_driver.py's module docstring for why each exists).
-    # The shipped joint command moves at most this fast (rad/s); keep it <= the robot's max_joint_speed.
-    max_joint_speed: float = 1.0
+    # The shipped joint command moves at most this fast (rad/s); keep it below the robot's max_joint_speed.
+    # 2.0: measured with brisk 30 cm reaches -- at 1.0 the elbow / wrist (J4 / J7) fell behind and paused
+    # already at 0.5 m/s of hand speed; at 2.0 reaches up to 1.6 m/s followed without a pause.
+    max_joint_speed: float = 2.0
     # Speed of the 2nd-X / Y return to home (rad/s, every joint).
     return_speed: float = 0.3
     # A controller moving faster than this (by the headset's clock) is a tracking glitch or a motion too
@@ -40,8 +42,9 @@ class OpenArmQuestConfig(TeleoperatorConfig):
     glitch_rot_speed_dps: float = 900.0
     # The raw IK solution moving more than this in one solve -> PAUSE (rad).
     ik_jump_rad: float = 0.2
-    # The raw IK solution running more than this ahead of the rate-limited command -> PAUSE (rad).
-    max_lead_rad: float = 0.6
+    # The raw IK solution running more than this ahead of the rate-limited command -> PAUSE (rad):
+    # at max_joint_speed 2.0 that is ~0.5 s behind the hand.
+    max_lead_rad: float = 1.0
     # X anchors only on a packet younger than this (s); LIVE holds the arms when packets get older.
     pose_fresh_s: float = 0.15
 

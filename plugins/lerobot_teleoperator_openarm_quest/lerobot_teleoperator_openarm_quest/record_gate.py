@@ -14,7 +14,8 @@ teleop wraps it -- only when the teleoperator is openarm_quest:
                Y: DISCARD at once (rerecord_episode + exit_early); the arms return home during the reset.
             4. episode_time_s is enforced here, not by lerobot: when it runs out the arms start the same
                saving return as a 2nd X, so the saved episode always ends at home, never cut mid-return.
-               (While PAUSED it waits: press Y.) This save always ends the episode, even with
+               (While PAUSED it waits for X -- recover home, then saved -- or Y.)
+               This save always ends the episode, even with
                --teleop.episode_buttons=false (which only stops the Quest's own 2nd X / Y from doing so).
   reset     lerobot's own loop, unchanged. X is refused from the end of an episode until the next one
             waits for it (the reset, and the save); before the first episode it is accepted, and recording
@@ -80,13 +81,24 @@ def _record_episode(original, teleop, events: dict, kw: dict):
     def enforce_cap():
         if done.wait(cap):
             return
-        state = TELEOP_STATE.snapshot()["state"]
-        if state == _LIVE:
-            print(f"[openarm_quest] episode_time_s ({cap:g} s) reached: returning home, then saving.", flush=True)
-            capped.set()
-            teleop.driver.request_return("episode time limit", save=True)
-        elif state == "PAUSED":
-            print(f"[openarm_quest] episode_time_s ({cap:g} s) reached while PAUSED: press Y to discard.", flush=True)
+        requested = told = False
+        while not done.is_set():  # past the limit: end the episode at home as soon as the arms allow it
+            snap = TELEOP_STATE.snapshot()
+            if snap["state"] == _LIVE and not requested:
+                print(f"[openarm_quest] episode_time_s ({cap:g} s) reached: returning home, then saving.", flush=True)
+                capped.set()
+                teleop.driver.request_return("episode time limit", save=True)
+                requested = True
+            elif snap["state"] == "HELD" and snap["reason"] == "in episode":  # home after a recovery
+                print(f"[openarm_quest] episode_time_s ({cap:g} s) reached, arms home: saving.", flush=True)
+                capped.set()
+                sink("right")
+                return
+            elif snap["state"] == "PAUSED" and not told:
+                print(f"[openarm_quest] episode_time_s ({cap:g} s) reached while PAUSED: X = return home (then it is"
+                      " saved), Y = discard.", flush=True)
+                told = True
+            done.wait(0.2)
 
     def sink(key: str) -> None:
         # The time limit's save always ends the episode; the Quest's own 2nd X / Y only if episode_buttons.

@@ -63,11 +63,13 @@ lr lerobot-record \
   the save; **Y** = discard at once and return home. `episode_time_s` acts like the 2nd X. X is ignored
   during the reset. Triggers drive the grippers.
 - The teleop **PAUSES** the arms on a tracking glitch or an IK jump, and the robot **SAFETY HOLDs** on a
-  command jump or a large tracking error; then Y discards and returns home. Details and thresholds:
+  command jump or a large tracking error; then X returns home still recording (X again continues), Y
+  discards. Details and thresholds:
   the top-level README's "Quest controls and safety", and `ik_driver.py`'s module docstring.
 - The arrow keys work too (Right = save, Left = discard, Esc = stop); without a display, `n` / `r` / `q`.
 - `--resume=true` continues a dataset; `--dataset.push_to_hub=false` keeps it local.
-- Every 5 s the robot prints how often the step limit (`--robot.max_joint_speed`, 1.0 rad/s) cut a
+- Every 5 s the robot prints how often its backstop step limit (`--robot.max_joint_speed`, 2.5 rad/s, above the
+  teleop's own 2.0 rad/s cap) cut a
   command. It should stay near 0%. If it does not, recorded actions are running ahead of the arm.
 
 ## 2. Train (unchanged)

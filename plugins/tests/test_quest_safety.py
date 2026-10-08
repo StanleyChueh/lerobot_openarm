@@ -156,15 +156,22 @@ move("rc", 1, 0.05, 0.5)  # hand moves while paused: must not move the arm
 c1 = d.command()
 check("E  hand motion while PAUSED is ignored", np.abs(c1[ARM] - c[ARM]).max() < 1e-6)
 
-press("x")
-check("F  X ignored while PAUSED", state() == "PAUSED")
 keys.clear()
-press("y")
-check("F  Y in PAUSED -> discard ('left') at once, RETURNING", state() == "RETURNING" and keys == ["left"], f"keys {keys}")
+c_p = d.command()
+press("x")
+check("F  X in PAUSED -> RETURNING home, the episode keeps recording (no save / discard)",
+      state() == "RETURNING" and keys == [], f"{state()}, keys {keys}")
 wait_home()
+c_h = d.command()
+check("F  ... then HELD 'in episode' at home, grippers as they were",
+      state() == "HELD" and d.status()["reason"] == "in episode" and np.allclose(c_h[ARM], home[ARM])
+      and all(np.isclose(c_h[GRIP[s_]], c_p[GRIP[s_]]) for s_ in ("right", "left")))
+d.x_allowed = lambda: False  # as between episodes: X must still continue an episode in progress
 press("x")
 time.sleep(0.5)
-check("F  X from HELD -> LIVE again, no jump", state() == "LIVE" and np.abs(d.command()[ARM] - home[ARM]).max() < 0.01)
+check("F  X continues the same episode from home, no jump", state() == "LIVE"
+      and np.abs(d.command()[ARM] - home[ARM]).max() < 0.01)
+d.x_allowed = lambda: True
 
 c0 = d.command()
 Q["vr"] = 2  # right controller loses tracking ...
@@ -248,10 +255,13 @@ check("K  robot refuses a command -> PAUSED at the robot's held pose",
 ROBOT_STATE.clear()
 
 time.sleep(0.2)
-press("x")
-check("K  X ignored while PAUSED (no resume)", state() == "PAUSED")
-press("y")
+press("x")  # recover home, still recording
 wait_home()
+keys.clear()
+press("y")
+check("K  Y while HELD in episode -> discard ('left'), grippers open",
+      keys == ["left"] and state() == "HELD" and d.status()["reason"] == ""
+      and all(np.isclose(d.command()[GRIP[s_]], d.grip[s_][0]) for s_ in ("right", "left")), f"keys {keys}")
 press("x")
 time.sleep(0.3)
 c0 = d.command()
@@ -295,6 +305,23 @@ check("O  ... and the arm does not rush to catch up (re-anchored)", np.abs(d.com
       f"moved {np.abs(d.command()[ARM] - c0[ARM]).max():.3f} rad")
 
 from lerobot_robot_openarm_umeow.shared import TELEOP_STATE  # noqa: E402
+
+# Faster than the joints may follow (but far below the 4 m/s glitch speed): the arm stops, and says which
+# joint and what to do.
+press("y")
+wait_home()
+press("x")
+time.sleep(0.5)
+move("rc", 1, 0.60, 0.25)  # 60 cm in 0.25 s (2.4 m/s): faster than the joints may follow
+time.sleep(0.5)
+reason = d.status()["reason"]
+check("Q  too fast -> PAUSED, saying why (joint named + fix, or the hand-speed limit)",
+      state() == "PAUSED" and (("fell" in reason and " J" in reason and "max_joint_speed" in reason) or "too fast" in reason),
+      reason)
+press("y")
+wait_home()
+press("x")
+time.sleep(0.5)
 
 REACH_LOG = []
 _log_orig = TELEOP_STATE.log

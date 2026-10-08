@@ -24,11 +24,11 @@ class OpenArmUmeowConfig(RobotConfig):
     calibration: str = DEFAULT_CALIBRATION
     cameras: dict[str, CameraConfig] = field(default_factory=dict)
 
-    # Per-tick limit on every command, from the last command sent: max_joint_speed * dt rad per
-    # arm joint. The openarm_quest teleop already rate-limits its own command to the same speed, so
-    # in normal teleop this rarely binds and the recorded action is what the arm was sent. (The
-    # Isaac pipeline's 0.3 rad/s cap bound constantly, leaving recorded actions far ahead of the arm.)
-    max_joint_speed: float = 1.0
+    # Per-tick limit on every command, from the last command sent: max_joint_speed * dt rad per arm
+    # joint -- a backstop. Keep it ABOVE the openarm_quest teleop's own max_joint_speed (2.0): with the
+    # same value, the jitter between the teleop's and this loop's clocks made it clip commands that were
+    # within the teleop's limit (real session: "bound 8-20%", recorded actions leading the arm).
+    max_joint_speed: float = 2.5
     gripper_max_speed: float = 8.0
 
     # Safety guard -- refuse a command instead of executing it. If any ARM joint's request jumps by

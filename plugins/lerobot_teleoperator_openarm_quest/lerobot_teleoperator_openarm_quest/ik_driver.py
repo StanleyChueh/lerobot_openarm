@@ -10,16 +10,19 @@ driver therefore runs an explicit state machine:
   LIVE       the arms follow the controllers.
   RETURNING  a slow, linear ramp to the home pose (every joint <= return_speed rad/s), starting from
              the command the robot last actually executed; the grippers open on arrival -> HELD.
-  PAUSED     frozen where the robot last was, after a safety trip. Y discards and returns home.
+  PAUSED     frozen where the robot last was, after a safety trip. X returns home slowly and the episode
+             KEEPS RECORDING (grippers kept, so a held object stays held), then waits at home (HELD, "in
+             episode") for X to continue it from there. Y discards and returns home.
 
 Buttons:
   X  HELD -> LIVE (anchor), when x_allowed() (lerobot-record: only while it waits for X, not while it
      resets the scene). LIVE -> RETURNING with "save on arrival": the return is part of the episode, the
      "save" decision is sent when the arms reach home, and the grippers open only after that (at once
      without a recorder; when the recorder says the episode has ended with one -- release_grippers()).
-     Ignored while RETURNING or PAUSED.
-  Y  LIVE / PAUSED: "discard the episode" at once, then RETURNING; grippers open on arrival. Ignored
-     otherwise.
+     PAUSED -> RETURNING home, still recording, grippers kept -> HELD in episode. HELD in episode -> LIVE
+     (re-anchored at home; the episode continues). Ignored while RETURNING.
+  Y  LIVE / PAUSED / HELD in episode: "discard the episode" at once, then RETURNING (or, already home, the
+     grippers open). Ignored otherwise.
   Triggers drive the grippers, LIVE only.
 
 Safety, and why each is needed:
@@ -81,6 +84,11 @@ SIDES = ("right", "left")
 ARM = np.r_[0:7, 8:15]  # driver-vector indices of the 14 arm joints (7 and 15 are the fingers)
 GRIP = {"right": 7, "left": 15}
 VALID_KEY = {"right": "vr", "left": "vl"}
+
+
+def _joint_name(driver_index: int) -> str:
+    """Driver-vector index -> 'right J5' / 'left J2' (the dataset's RJ5 / LJ2)."""
+    return f"{'right' if driver_index < 8 else 'left'} J{driver_index % 8 + 1}"
 
 
 def _gripper_endpoints(model: mujoco.MjModel, side: str) -> tuple[float, float]:
@@ -203,6 +211,8 @@ class QuestIKDriver:
         self._return_request: tuple[str, bool] | None = None  # (source, save), set from other threads
         self._release_request = False  # open the grippers held closed after a save (release_grippers)
         self._save_on_arrival = False
+        self._recover = False  # the current return is a mid-episode recovery from PAUSED (X)
+        self._episode_hold = False  # HELD at home after a recovery, the episode still recording
         # Hooks for a recorder (record_gate.py): whether X may start driving now, and whether the grippers
         # must stay as they are until the recorder confirms the saved episode has ended.
         self.x_allowed = lambda: True
@@ -287,6 +297,7 @@ class QuestIKDriver:
             self._start_return(request[0], save=request[1] and self._state == LIVE)
         if self._release_request:
             self._release_request = False
+            self._episode_hold = False  # the episode has ended
             if self._state == HELD:
                 with self._lock:
                     for s in SIDES:
@@ -364,9 +375,11 @@ class QuestIKDriver:
             self._failed_solves += 1
             return
         if self._ik_prev is not None:
-            jump = float(np.abs(result[ARM] - self._ik_prev[ARM]).max())
+            steps = np.abs(result[ARM] - self._ik_prev[ARM])
+            jump = float(steps.max())
             if jump > self.ik_jump_rad:
-                self._pause(f"IK solution jumped {jump:.2f} rad in one solve")
+                self._pause(f"IK solution jumped {jump:.2f} rad in one solve on {_joint_name(int(ARM[np.argmax(steps)]))}"
+                            " (usually the arm stretched out or the wrist aligned: a pose the IK cannot hold)")
                 return
         self._ik_prev = result.copy()
         self._check_reach(result, now)
@@ -377,10 +390,12 @@ class QuestIKDriver:
         cmd[ARM] += np.clip(result[ARM] - cmd[ARM], -step, step)
         for s in SIDES:
             cmd[GRIP[s]] = self._gripper[s]
-        lead = float(np.abs(result[ARM] - cmd[ARM]).max())
+        leads = np.abs(result[ARM] - cmd[ARM])
+        lead = float(leads.max())
         if lead > self.max_lead_rad:
-            self._pause(f"the IK target ran {lead:.2f} rad ahead of what the arm may follow"
-                        f" at {self.max_joint_speed:g} rad/s")
+            self._pause(f"you moved faster than the arm may follow: {_joint_name(int(ARM[np.argmax(leads)]))} fell"
+                        f" {lead:.2f} rad behind (limit {self.max_joint_speed:g} rad/s per joint). Move slower, or"
+                        " raise --teleop.max_joint_speed (and --robot.max_joint_speed above it)")
             return
         with self._lock:
             self._command = cmd
@@ -411,23 +426,30 @@ class QuestIKDriver:
 
     def _on_press(self, name: str, msg: dict, fresh: bool, now: float) -> None:
         if name == "y":
-            if self._state in (LIVE, PAUSED):
+            if self._state in (LIVE, PAUSED) or (self._state == HELD and self._episode_hold):
                 self._log("Y: DISCARD the episode.")
                 self._on_episode_key("left")
-                self._start_return("Y", save=False)
+                if self._state == HELD:  # already home: just end the hold and open the grippers
+                    self._episode_hold = False
+                    with self._lock:
+                        for s in SIDES:
+                            self._command[GRIP[s]] = self.home_driver[GRIP[s]]
+                    self._set_state(HELD, "")
+                else:
+                    self._start_return("Y", save=False)
             else:
                 self._log(f"Y ignored: nothing to discard while {self._state}.")
         elif name != "x":
             return  # A / B: no function
         elif self._state == HELD:
-            if self.x_allowed():
+            if self._episode_hold or self.x_allowed():
                 self._go_live(msg, fresh, now)
             else:
                 self._log("X ignored: lerobot is resetting the scene -- wait for WAITING for X.")
         elif self._state == LIVE:
             self._start_return("X", save=True)
         elif self._state == PAUSED:
-            self._log("X ignored while PAUSED -- press Y to discard the episode and return home.")
+            self._start_return("X (recover)", save=False, recover=True)
         else:  # RETURNING
             self._log("X ignored: still returning home -- wait for HELD.")
 
@@ -462,9 +484,10 @@ class QuestIKDriver:
             self._gripper[side] = float(cmd[GRIP[side]])
         self._ik_prev = None
         prev = self._state
+        resumed = self._episode_hold
+        self._episode_hold = False
         self._set_state(LIVE, "")
-        self._log(f"X: anchored ({'resumed from the paused pose' if prev == PAUSED else 'from home'})"
-                  " -- the arms follow the controllers.")
+        self._log("X: anchored " + ("at home -- the episode continues." if resumed else "from home -- the arms follow the controllers."))
 
     def _clutch(self, side: str, pose: np.ndarray, now: float, cmd: np.ndarray | None = None,
                 base: np.ndarray | None = None) -> None:
@@ -497,9 +520,9 @@ class QuestIKDriver:
         self._ik_prev = None
         self._return = None
         self._set_state(PAUSED, reason)
-        self._log(f"PAUSED: {reason}. Y = discard the episode and return home.")
+        self._log(f"PAUSED: {reason}. X = return home and keep recording, Y = discard the episode.")
 
-    def _start_return(self, source: str, save: bool = False) -> None:
+    def _start_return(self, source: str, save: bool = False, recover: bool = False) -> None:
         held = self._held_command()
         with self._lock:
             start = self._command.copy()
@@ -511,10 +534,13 @@ class QuestIKDriver:
             self._command = start.copy()
         self._return = (start, time.perf_counter(), duration)
         self._save_on_arrival = save
+        self._recover = recover
         self._set_state(RETURNING, source)
         self._log(f"{source}: returning home slowly ({dist:.2f} rad over {duration:.1f} s,"
                   f" <= {self.return_speed:g} rad/s)"
-                  + ("; the episode is SAVED on arrival, return included." if save else "; grippers open on arrival."))
+                  + ("; the episode is SAVED on arrival, return included." if save
+                     else "; the episode keeps recording, grippers kept -- then X to continue." if recover
+                     else "; grippers open on arrival."))
 
     def _advance_return(self, now: float) -> None:
         start, t0, duration = self._return
@@ -523,12 +549,21 @@ class QuestIKDriver:
         cmd[ARM] = start[ARM] + a * (self.home_driver[ARM] - start[ARM])
         if a >= 1.0:
             cmd = self.home_driver.copy()
-            keep_grippers = self._save_on_arrival and self.defer_gripper_open
-            if keep_grippers:  # the saved episode ends with the arms home and the grippers as they were
+            keep_grippers = (self._save_on_arrival and self.defer_gripper_open) or self._recover
+            if keep_grippers:  # a saved episode ends, or a recovered one waits, with the grippers as they were
                 for s in SIDES:
                     cmd[GRIP[s]] = start[GRIP[s]]
+                    self._gripper[s] = float(start[GRIP[s]])
             self.kin.sync(cmd)
             self._return = None
+            if self._recover:
+                self._recover = False
+                self._episode_hold = True
+                self._set_state(HELD, "in episode")
+                self._log("home -- the episode is still RECORDING: X = continue from here, Y = discard.")
+                with self._lock:
+                    self._command = cmd
+                return
             self._set_state(HELD, "")
             if self._save_on_arrival:
                 self._save_on_arrival = False

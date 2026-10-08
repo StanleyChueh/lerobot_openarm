@@ -98,9 +98,16 @@ Useful flags:
 |---|---|---|
 | **1st X** | `HELD` | **Start driving** (`LIVE`). Your current hand poses *and* the headset's pose are captured at this press; the arms follow your hands *relative to that moment* only. |
 | **2nd X** | `LIVE` | **Return home slowly** (`RETURNING`, every joint <= 0.3 rad/s), still recording, then **save** the episode on arrival. The grippers open after the save. |
-| **Y** | `LIVE` / `PAUSED` | **Discard** the episode at once and **return home slowly**; grippers open on arrival. |
+| **X** | `PAUSED` | **Return home slowly while still recording** (grippers kept, so a held object stays held); the arms then wait at home with the episode open. |
+| **X** | `HELD` (episode open) | **Continue** the same episode from home (hands re-anchored, no jump). |
+| **Y** | `LIVE` / `PAUSED` / `HELD` (episode open) | **Discard** the episode at once and **return home slowly**; grippers open on arrival. |
 | **Triggers** | `LIVE` | close the grippers. |
 | **A** / **B** | any | no function. |
+
+`PAUSED` stops the arms where they are when something is too fast: the hand over 4 m/s or 900 deg/s, a joint
+more than 1 rad behind its target (joint speed cap: 2 rad/s), or the IK jumping (e.g. an arm stretched out).
+The terminal and the rerun panel say which joint or limit and why. If `episode_time_s` runs out meanwhile,
+X recovers home and the episode is saved on arrival.
 
 Check the recorded data:
 

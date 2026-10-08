@@ -77,7 +77,7 @@ _TELEOP_STYLE = {
     "HELD": "⏸ HELD at home -- press **X** to start (when WAITING for X)",
     "LIVE": "▶ LIVE -- arms follow the controllers. **X** = return home, then save · **Y** = discard",
     "RETURNING": "↩ RETURNING home slowly -- wait (after a 2nd X: still recorded, saved on arrival)",
-    "PAUSED": "⛔ PAUSED -- **Y** = discard the episode and return home",
+    "PAUSED": "⛔ PAUSED -- **X** = return home and keep recording · **Y** = discard the episode",
 }
 
 
@@ -210,7 +210,10 @@ class StatusBoard:
         teleop = TELEOP_STATE.snapshot()
         if teleop["state"]:
             lines.extend(_quest_lines(teleop))
-            line = f"**Quest:** {_TELEOP_STYLE.get(teleop['state'], teleop['state'])}"
+            style = ("⏸ HELD at home, the episode still RECORDING -- **X** = continue · **Y** = discard"
+                     if teleop["state"] == "HELD" and teleop["reason"] == "in episode"
+                     else _TELEOP_STYLE.get(teleop["state"], teleop["state"]))
+            line = f"**Quest:** {style}"
             if teleop["state"] == "PAUSED" and teleop["reason"]:
                 line += f"  \n reason: {teleop['reason']}"
             lines.append(line)
