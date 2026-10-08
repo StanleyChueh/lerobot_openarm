@@ -79,6 +79,51 @@ sent = tick(**{"LJ1.pos": cmd["LJ1.pos"] + 0.2})
 check("5  speed clamp: one tick moves <= max_joint_speed * dt", sent["LJ1.pos"] <= r.umeow_config.max_joint_speed / 30 * 1.3,
       f"moved {sent['LJ1.pos']:.3f} rad of 0.2")
 
+# Motor watchdog: a motor that trips its protection switches itself off, while its last position is still
+# reported. The status nibble is the only sign.
+import contextlib  # noqa: E402
+import io  # noqa: E402
+
+r.umeow_config.max_command_jump = 0.25
+r._fault = None
+for _ in range(3):
+    tick()
+STATUS = {k.replace(".pos", ""): 0x1 for k in MOTOR_KEYS}
+r.get_feedback_status = lambda: dict(STATUS)
+r.get_motor_health = lambda: {"RJ7": {"t_mos": 41, "t_rotor": 38}}
+out = io.StringIO()
+with contextlib.redirect_stdout(out):
+    STATUS["RJ7"] = 0xA  # OVERCURRENT
+    time.sleep(0.6)
+    held = dict(fake["sent"][-1])
+    sent = tick(**{"RJ1.pos": cmd["RJ1.pos"] + 0.02})
+check("6  a motor reporting OVERCURRENT -> the arm HOLDS, the terminal names the motor, fault and temperatures",
+      ROBOT_STATE.fault() is not None and "RJ7 OVERCURRENT" in ROBOT_STATE.fault() and sent == held
+      and "MOTOR FAULT" in out.getvalue() and "MOS 41 C" in out.getvalue(), ROBOT_STATE.fault() or "")
+for _ in range(3):
+    sent = tick(**{"RJ1.pos": held["RJ1.pos"]})  # requests at the held pose: a normal hold would release
+check("6  ... and the hold is NOT released while the motor stays faulted", ROBOT_STATE.fault() is not None)
+with contextlib.redirect_stdout(out):
+    STATUS["RJ7"] = 0x1
+    time.sleep(0.6)
+    tick(**{"RJ1.pos": held["RJ1.pos"]})
+    sent = tick(**{"RJ1.pos": held["RJ1.pos"]})
+check("6  ... released once the motor reports enabled and requests are at the held pose",
+      ROBOT_STATE.fault() is None and "enabled again" in out.getvalue(), ROBOT_STATE.fault() or "")
+
+# A joint that does not reach a steady command (blocked, or limp without a status report).
+out = io.StringIO()
+with contextlib.redirect_stdout(out):
+    fake["offset"] = 0.3  # RJ4 measured 0.3 rad off, under max_tracking_error: no hold, but not following
+    t0 = time.perf_counter()
+    while time.perf_counter() - t0 < 2.5:
+        tick()
+    fake["offset"] = 0.0
+    tick()
+check("7  a joint 0.3 rad from a steady command for 2 s is reported as NOT following, then as following again",
+      "RJ4.pos is NOT following" in out.getvalue() and "RJ4.pos is following its command again" in out.getvalue(),
+      out.getvalue().strip().splitlines()[0] if out.getvalue().strip() else "nothing printed")
+
 r.disconnect()
 print(f"\n{len(FAILS)} failed" + (f": {FAILS}" if FAILS else ""))
 sys.exit(1 if FAILS else 0)

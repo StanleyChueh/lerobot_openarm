@@ -17,6 +17,9 @@ class RobotState:
         self._last_sent: dict | None = None
         self._last_sent_t = 0.0
         self._fault: str | None = None
+        # The arm joint furthest from its command, as measured: (key, commanded, measured) and when.
+        self._worst: tuple[str, float, float] | None = None
+        self._worst_t = 0.0
         # True while the robot connects and ramps to its start pose: nothing the teleop commands is
         # executed then, so the teleop must not go LIVE.
         self.connecting = False
@@ -27,9 +30,21 @@ class RobotState:
             self._last_sent_t = time.perf_counter()
             self._fault = fault
 
+    def publish_tracking(self, key: str, commanded: float, measured: float) -> None:
+        with self._lock:
+            self._worst, self._worst_t = (key, commanded, measured), time.perf_counter()
+
+    def tracking(self, max_age_s: float = 0.5) -> tuple[str, float, float] | None:
+        """(key, commanded, measured) of the arm joint furthest from its command, if measured within
+        max_age_s; None without a robot (or a stale one)."""
+        with self._lock:
+            if self._worst is None or time.perf_counter() - self._worst_t > max_age_s:
+                return None
+            return self._worst
+
     def clear(self) -> None:
         with self._lock:
-            self._last_sent, self._fault = None, None
+            self._last_sent, self._fault, self._worst = None, None, None
 
     def last_sent(self, max_age_s: float = 0.5) -> dict | None:
         """The motor command last sent, if the robot sent one within max_age_s."""

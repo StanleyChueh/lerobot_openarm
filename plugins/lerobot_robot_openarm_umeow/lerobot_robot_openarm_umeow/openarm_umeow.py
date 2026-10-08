@@ -14,6 +14,13 @@ What it adds to the follower, and why:
   - A speed-limited approach to the start pose on connect, with mirror_bridge.py's typed-YES and
     max-delta gates, and a ramp back to the connect-time pose before de-energising on disconnect.
   - The gripper squeeze torque mirror_bridge.py applies while a gripper is commanded closed.
+  - A motor watchdog. A Damiao motor that trips its own protection (over-current from twisting a joint
+    against its stop or cable, over-temperature, lost comms) switches itself OFF: the joint goes limp
+    and stays wherever it is, while the follower keeps reporting its last position -- the arm "will
+    not return home" with nothing in the logs. Every 0.5 s the motors' status nibbles are checked; a
+    fault holds the arm (the teleop pauses with it), says which motor, why, and its temperatures, and
+    the hold is not released while the motor stays faulted. And a joint that stays more than 0.15
+    rad from a steady command for 2 s is reported as not following.
 """
 
 import logging
@@ -30,6 +37,7 @@ from .rerun_status import BOARD
 from .shared import ROBOT_STATE
 
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig  # noqa: E402  (after common's sys.path)
+from robots.umeow_openarm_follower.can_monitor import is_fault, status_name  # noqa: E402
 from sim_bridge_common import (  # noqa: E402
     GRIPPER_SIM_OPEN,
     approach_pose,
@@ -43,6 +51,9 @@ logger = logging.getLogger(__name__)
 
 STATS_PERIOD_S = 5.0
 ARM_KEYS = [k for k in MOTOR_KEYS if not k.endswith("8.pos")]
+HEALTH_PERIOD_S = 0.5
+LAG_RAD, LAG_S = 0.15, 2.0
+HOME_TOL_RAD = 0.1  # a reset counts as done only with every arm joint this close to the start pose  # a joint this far from a steady command for this long is not following
 
 
 class _RawSender:
@@ -82,7 +93,22 @@ def _slow_down_rollout_returns(speed: float) -> None:
         print(f"[openarm_umeow] returning to the start pose slowly: {dist:.2f} rad over {duration:.1f} s"
               f" (<= {speed:g} rad/s)", flush=True)
         BOARD.note(f"returning to the start pose ({duration:.0f} s)")
-        return original(hw, duration_s=duration, fps=fps)
+        result = original(hw, duration_s=duration, fps=fps)
+        # Every reset must END at the start pose, whatever the episode did: check it, do not assume it.
+        try:
+            time.sleep(1.0)  # settle
+            obs = hw.robot_wrapper.get_observation()
+            key = max((k for k in hw.initial_position if k in obs and k in ARM_KEYS),
+                      key=lambda k: abs(hw.initial_position[k] - obs[k]))
+            off = obs[key] - hw.initial_position[key]
+            if abs(off) > HOME_TOL_RAD:
+                print(f"[openarm_umeow] NOT at the start pose after the reset: {key} is {off:+.2f} rad off"
+                      " (motor off, blocked, or twisted against its cable/stop -- see any MOTOR FAULT above).",
+                      flush=True)
+                BOARD.note(f"NOT at the start pose: {key} {off:+.2f} rad off")
+        except Exception:
+            logger.debug("start-pose check failed", exc_info=True)
+        return result
 
     core.RolloutStrategy.return_to_initial_position = staticmethod(slow_return)
     core._openarm_slow_return = True
@@ -112,6 +138,10 @@ class OpenArmUmeow(OpenArmFollower):
         self._measured: dict | None = None
         self._measured_t = 0.0
         self._fault: str | None = None
+        self._motor_fault: str | None = None  # a motor reports a protection fault (see _check_motors)
+        self._health_t = 0.0
+        self._seen_enabled: set[str] = set()
+        self._lag: dict[str, tuple[float, float, bool]] = {}  # key -> (since, command then, told)
         self._stats_reset(time.perf_counter())
 
     # lerobot asks for these; the follower's own raise NotImplementedError. This robot's
@@ -166,12 +196,18 @@ class OpenArmUmeow(OpenArmFollower):
         self._last_sent = {k: current[k] for k in MOTOR_KEYS}
         self._last_desired = dict(self._last_sent)
         self._last_t = time.perf_counter()
-        self._fault = None
+        self._fault = self._motor_fault = None
+        self._lag = {}
         ROBOT_STATE.publish(self._last_sent, None)
         self._stats_reset(self._last_t)  # the startup ramp is not part of the command-rate stats
 
     def get_observation(self):
+        t0 = time.perf_counter()
         obs = super().get_observation()
+        read = time.perf_counter() - t0
+        self._stats_read_sum += read
+        self._stats_read_n += 1
+        self._stats_read_max = max(self._stats_read_max, read)
         # Kept for the tracking guard: lerobot's loops read the observation right before sending.
         self._measured = {k: float(obs[k]) for k in MOTOR_KEYS}
         self._measured_t = time.perf_counter()
@@ -203,6 +239,7 @@ class OpenArmUmeow(OpenArmFollower):
             self._last_desired = dict(self._last_sent)
             self._last_t = now
 
+        self._check_motors(now)
         if self._fault is None:
             reason = self._check_request(desired, now)
             if reason is not None:
@@ -210,7 +247,7 @@ class OpenArmUmeow(OpenArmFollower):
                 print(f"\n[openarm_umeow] SAFETY HOLD: {reason}. The arm holds where it is; it resumes"
                       f" once requests come back within {cfg.resume_tolerance:g} rad of the held pose"
                       " (Quest: X = return home and keep recording, Y = discard).", flush=True)
-        elif max(abs(desired[k] - self._last_sent[k]) for k in ARM_KEYS) < cfg.resume_tolerance:
+        elif self._motor_fault is None and max(abs(desired[k] - self._last_sent[k]) for k in ARM_KEYS) < cfg.resume_tolerance:
             print("[openarm_umeow] safety hold released: requests are back at the held pose.", flush=True)
             self._fault = None
         self._last_desired = desired
@@ -220,6 +257,7 @@ class OpenArmUmeow(OpenArmFollower):
             # and squeeze, so a held object is not dropped.
             hold = dict(self._last_sent)
             super().send_action(hold, {k.replace(".pos", ".vel"): 0.0 for k in MOTOR_KEYS})
+            self._check_following(now, hold)
             self._last_t = now
             ROBOT_STATE.publish(hold, self._fault)
             return hold
@@ -236,9 +274,69 @@ class OpenArmUmeow(OpenArmFollower):
         self._apply_squeeze(desired)
         super().send_action(sent, vel)
         self._stats_record(now, desired, sent)
+        self._check_following(now, sent)
         self._last_sent, self._last_t = sent, now
         ROBOT_STATE.publish(sent, None)
         return sent
+
+    def _check_motors(self, now: float) -> None:
+        """Every HEALTH_PERIOD_S: a motor reporting a protection fault (or disabled) -> hold, and say so."""
+        if now - self._health_t < HEALTH_PERIOD_S:
+            return
+        self._health_t = now
+        try:
+            status = self.get_feedback_status()
+        except Exception:
+            return
+        self._seen_enabled.update(k for k, c in status.items() if c == 0x1)
+        # "disabled" counts only for a motor seen enabled in this session (a switch-off, not a start-up state)
+        bad = {k: c for k, c in sorted(status.items()) if is_fault(c) or (c == 0x0 and k in self._seen_enabled)}
+        if bad and self._motor_fault is None:
+            try:
+                health = self.get_motor_health()
+            except Exception:
+                health = {}
+
+            def temps(k):
+                h = health.get(k) or {}
+                return f"MOS {h.get('t_mos', '?')} C, rotor {h.get('t_rotor', '?')} C"
+
+            what = ", ".join(f"{k} {status_name(c)}" for k, c in bad.items())
+            self._motor_fault = f"motor fault: {what}"
+            self._fault = self._motor_fault
+            detail = "\n".join(f"           {k}: {status_name(c)} ({temps(k)})" for k, c in bad.items())
+            print(f"\n[openarm_umeow] MOTOR FAULT -- the motor switched itself OFF:\n{detail}\n"
+                  "           That joint is limp: it stays wherever it is and will NOT return home. The other\n"
+                  "           joints hold. OVERCURRENT / OVERLOAD usually means the joint was twisted against\n"
+                  "           its stop or its cable (e.g. a wrist rotated too far); OVERTEMP: let it cool.\n"
+                  "           Ctrl+C (saved episodes are safe), support the arm, then restart lerobot-record.",
+                  flush=True)
+            BOARD.note(f"MOTOR FAULT: {what} -- that joint is limp; Ctrl+C and restart")
+        elif not bad and self._motor_fault is not None:
+            print(f"[openarm_umeow] motors report enabled again (was: {self._motor_fault}).", flush=True)
+            self._motor_fault = None
+
+    def _check_following(self, now: float, sent: dict) -> None:
+        """Say so when a joint stays LAG_RAD from a steady command for LAG_S: it is not following."""
+        if self._measured is None or now - self._measured_t > 0.25:
+            return
+        worst = max(ARM_KEYS, key=lambda k: abs(self._measured[k] - sent[k]))
+        ROBOT_STATE.publish_tracking(worst, sent[worst], self._measured[worst])
+        for k in ARM_KEYS:
+            err = self._measured[k] - sent[k]
+            entry = self._lag.get(k)
+            if abs(err) <= LAG_RAD:
+                if entry and entry[2]:
+                    print(f"[openarm_umeow] {k} is following its command again.", flush=True)
+                self._lag.pop(k, None)
+            elif entry is None or abs(sent[k] - entry[1]) > 0.05:
+                self._lag[k] = (now, sent[k], bool(entry and entry[2]))  # (re)start: the command moved
+            elif not entry[2] and now - entry[0] > LAG_S:
+                self._lag[k] = (entry[0], entry[1], True)
+                print(f"[openarm_umeow] {k} is NOT following: commanded {sent[k]:+.2f} rad, measured"
+                      f" {self._measured[k]:+.2f} rad ({err:+.2f}) for {now - entry[0]:.0f} s -- the motor is off,"
+                      " blocked, or twisted against its cable/stop.", flush=True)
+                BOARD.note(f"{k} not following its command ({err:+.2f} rad off)")
 
     def _apply_squeeze(self, desired: dict) -> None:
         """Same rule as mirror_bridge.py: extra closing torque while a gripper is commanded closed."""
@@ -252,6 +350,7 @@ class OpenArmUmeow(OpenArmFollower):
 
     def _stats_reset(self, now: float) -> None:
         self._stats_t0, self._stats_n, self._stats_clamped, self._stats_behind = now, 0, 0, 0.0
+        self._stats_read_sum, self._stats_read_n, self._stats_read_max = 0.0, 0, 0.0
 
     def _stats_record(self, now: float, desired: dict, sent: dict) -> None:
         self._stats_n += 1
@@ -266,6 +365,9 @@ class OpenArmUmeow(OpenArmFollower):
                 f" {self.umeow_config.max_joint_speed:g} rad/s bound {pct:.0f}% of them,"
                 f" worst {self._stats_behind:.3f} rad short of the request"
             )
+            if self._stats_read_n:
+                line += (f" | observation read {1000 * self._stats_read_sum / self._stats_read_n:.0f} ms avg,"
+                         f" {1000 * self._stats_read_max:.0f} max")
             if pct > 5:
                 line += "  <-- recorded actions now lead the arm; check the teleop/policy for jumps"
             print(line, flush=True)

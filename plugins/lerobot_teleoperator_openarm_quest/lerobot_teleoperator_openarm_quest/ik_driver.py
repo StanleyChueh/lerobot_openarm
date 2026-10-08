@@ -21,6 +21,9 @@ Buttons:
      without a recorder; when the recorder says the episode has ended with one -- release_grippers()).
      PAUSED -> RETURNING home, still recording, grippers kept -> HELD in episode. HELD in episode -> LIVE
      (re-anchored at home; the episode continues). Ignored while RETURNING.
+     Every return ends only when the ROBOT measures every arm joint within HOME_TOL_RAD of home (up to
+     SETTLE_S to get there). If one is not, the terminal and rerun name it and X is refused until it
+     is: no episode starts from a wrong pose, whatever the previous one did.
   Y  LIVE / PAUSED / HELD in episode: "discard the episode" at once, then RETURNING (or, already home, the
      grippers open). Ignored otherwise.
   Triggers drive the grippers, LIVE only.
@@ -83,6 +86,8 @@ from .quest_input import (
 
 HELD, LIVE, RETURNING, PAUSED = "HELD", "LIVE", "RETURNING", "PAUSED"
 SIDES = ("right", "left")
+HOME_TOL_RAD = 0.1  # measured arm joints this close to home = at home
+SETTLE_S = 3.0  # how long a return may take to settle at home before the arm is reported not there
 ARM = np.r_[0:7, 8:15]  # driver-vector indices of the 14 arm joints (7 and 15 are the fingers)
 GRIP = {"right": 7, "left": 15}
 VALID_KEY = {"right": "vr", "left": "vl"}
@@ -218,6 +223,8 @@ class QuestIKDriver:
         self._save_on_arrival = False
         self._recover = False  # the current return is a mid-episode recovery from PAUSED (X)
         self._episode_hold = False  # HELD at home after a recovery, the episode still recording
+        self._settle_t0: float | None = None  # when the return's command reached home
+        self._not_home: str | None = None  # why the arm is not verified at home (X refused meanwhile)
         # Hooks for a recorder (record_gate.py): whether X may start driving now, and whether the grippers
         # must stay as they are until the recorder confirms the saved episode has ended.
         self.x_allowed = lambda: True
@@ -322,6 +329,9 @@ class QuestIKDriver:
 
         if self._state == RETURNING:
             self._advance_return(now)
+        elif self._state == HELD and self._not_home is not None and self._home_error() is None:
+            self._not_home = None
+            self._log("the arm is at home now (measured) -- X can start.")
         if self._state != LIVE:
             return
 
@@ -466,7 +476,25 @@ class QuestIKDriver:
         else:  # RETURNING
             self._log("X ignored: still returning home -- wait for HELD.")
 
+    def _home_error(self) -> str | None:
+        """Why the MEASURED arm is not at its commanded (home) pose, or None (also None without a robot)."""
+        worst = ROBOT_STATE.tracking()
+        if worst is None:
+            return None
+        key, commanded, measured = worst
+        off = measured - commanded
+        if abs(off) <= HOME_TOL_RAD:
+            return None
+        return f"{key} is {off:+.2f} rad from home (commanded {commanded:+.2f}, measured {measured:+.2f})"
+
     def _go_live(self, msg: dict, fresh: bool, now: float) -> None:
+        if self._not_home is not None:
+            why = self._home_error()
+            if why is not None:
+                self._log(f"X ignored: the arm is NOT at the reset pose -- {why}. Check that joint (a MOTOR FAULT"
+                          " above? blocked? cable twisted?); X works once it is home.")
+                return
+            self._not_home = None
         if ROBOT_STATE.connecting:
             self._log("X ignored: the robot is still starting up (moving to home) -- press X when it is done.")
             return
@@ -547,6 +575,7 @@ class QuestIKDriver:
         with self._lock:
             self._command = start.copy()
         self._return = (start, time.perf_counter(), duration)
+        self._settle_t0 = None
         self._save_on_arrival = save
         self._recover = recover
         self._set_state(RETURNING, source)
@@ -568,6 +597,19 @@ class QuestIKDriver:
                 for s in SIDES:
                     cmd[GRIP[s]] = start[GRIP[s]]
                     self._gripper[s] = float(start[GRIP[s]])
+            # Commanded home; arrived only once the robot MEASURES it there (or SETTLE_S has passed).
+            if self._settle_t0 is None:
+                self._settle_t0 = now
+            why = self._home_error()
+            if why is not None and now - self._settle_t0 < SETTLE_S:
+                with self._lock:
+                    self._command = cmd
+                return
+            self._settle_t0 = None
+            self._not_home = why
+            if why is not None:
+                self._log(f"NOT at the reset pose after the return: {why}. That joint did not follow -- X is refused"
+                          " until it is home.")
             self.kin.sync(cmd)
             self._return = None
             if self._recover:

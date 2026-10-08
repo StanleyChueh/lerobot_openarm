@@ -349,6 +349,39 @@ check("P  out of reach: says so (terminal + rerun panel)", reached_msg, f"{REACH
 check("P  ... and if the IK then jumps at the stretched-out pose, the arm stops (PAUSED)",
       state() == "LIVE" or "IK solution jumped" in d.status()["reason"], f"{state()} | {d.status()['reason']}")
 
+# Every reset must END at home, measured: a robot whose right wrist stays 0.5 rad off home after the return.
+from lerobot_robot_openarm_umeow.shared import ROBOT_STATE  # noqa: E402
+
+if state() == "PAUSED":
+    press("y")
+    wait_home()
+press("x") if state() == "HELD" else None
+time.sleep(0.3)
+ROBOT_ARM = {"off": 0.5, "run": True}
+
+
+def fake_robot():  # what openarm_umeow publishes each tick: the worst arm joint, commanded vs measured
+    while ROBOT_ARM["run"]:
+        ROBOT_STATE.publish_tracking("RJ7.pos", 0.0, ROBOT_ARM["off"])
+        time.sleep(1 / 30)
+
+
+threading.Thread(target=fake_robot, daemon=True).start()
+REACH_LOG.clear()
+press("y")  # discard + return home
+wait_home(timeout=40)
+check("R  wrist not at home after the return -> reported, naming the joint",
+      state() == "HELD" and any("NOT at the reset pose" in m and "RJ7.pos" in m for m in REACH_LOG), f"{REACH_LOG[-2:]}")
+press("x")
+check("R  ... and X is REFUSED (no episode starts from a wrong pose)",
+      state() == "HELD" and any("X ignored: the arm is NOT at the reset pose" in m for m in REACH_LOG), f"{REACH_LOG[-1:]}")
+ROBOT_ARM["off"] = 0.02  # the wrist gets home
+time.sleep(0.3)
+check("R  ... once it measures at home, that is said", any("at home now" in m for m in REACH_LOG), f"{REACH_LOG[-1:]}")
+press("x")
+check("R  ... and X starts again", state() == "LIVE", state())
+ROBOT_ARM["run"] = False
+
 Q["run"] = False
 t.disconnect()
 print(f"\n{len(FAILS)} failed" + (f": {FAILS}" if FAILS else ""))

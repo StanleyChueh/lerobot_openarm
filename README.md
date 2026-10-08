@@ -112,6 +112,14 @@ tracking snap (the Quest re-finding a controller it lost sight of, e.g. held low
 headset hangs at the neck): it is ignored, the arm holds still and follows on from there (terminal: "a tracking
 snap -- IGNORED"). Keep the controllers in front of the headset to avoid them.
 
+Every return home (2nd X, Y, the time limit, recovery) is verified on the MEASURED joints: it ends only
+when each arm joint is within 0.1 rad of home (3 s to settle). If one is not, the terminal and rerun say
+`NOT at the reset pose: RJ7.pos is +0.50 rad from home`, and X is refused until it is -- no episode starts
+from a wrong pose. A motor that trips its protection (OVERCURRENT from twisting a wrist against its stop or
+cable, OVERTEMP, ...) switches itself off and goes limp: `MOTOR FAULT` names it, the arm holds, and the
+hold stays until the motor answers again (Ctrl+C and restart; saved episodes are safe). The 5 s stats line
+also shows the observation read time, which grows when a motor stops answering.
+
 `PAUSED` stops the arms where they are when something is too fast: repeated jumps (3 within 2 s), a joint
 more than 1 rad behind its target (joint speed cap: 2 rad/s), or the IK jumping (e.g. an arm stretched out).
 The terminal and the rerun panel say which joint or limit and why. If `episode_time_s` runs out meanwhile,
