@@ -10,6 +10,7 @@ qw} in Unity left-handed world coordinates; lt / rt triggers and lg / rg grips 0
 rsx / rsy sticks; a / b / x / y buttons; v / vl / vr validity (0 OK, 1 STALE, 2 INVALID).
 """
 
+import collections
 import json
 import select
 import socket
@@ -39,6 +40,14 @@ class JsonUdpReceiver:
         self._latest_t: float | None = None  # perf_counter() of the newest packet
         self._count = 0
         self.sender: str | None = None  # "ip:port" of the Quest, once a packet has arrived
+        # Network delay, from the headset's own clock: arrival time minus the packet's "t", relative to the
+        # smallest such offset seen (the best-case path) = the EXTRA delay of this packet (the two clocks'
+        # constant offset cancels). Plus the arrival gaps longer than 100 ms.
+        self._offset_best: float | None = None
+        self._extra_s: float | None = None
+        self._gaps: collections.deque = collections.deque()  # arrival times of >100 ms gaps
+        self._prev_arrival: float | None = None
+        self.has_headset_clock: bool | None = None
         self._running = True
         self._thread = threading.Thread(target=self._loop, daemon=True, name="quest-udp")
         self._thread.start()
@@ -47,6 +56,31 @@ class JsonUdpReceiver:
         """(newest packet, its arrival perf_counter(), packets received so far)."""
         with self._lock:
             return self._latest, self._latest_t, self._count
+
+    def net_stats(self) -> dict:
+        """{"extra_ms": extra one-way delay vs the best seen (None without "t"), "gaps_10s": arrival gaps
+        over 100 ms in the last 10 s, "has_t": whether packets carry the headset clock}."""
+        now = time.perf_counter()
+        with self._lock:
+            while self._gaps and now - self._gaps[0] > 10.0:
+                self._gaps.popleft()
+            return {"extra_ms": None if self._extra_s is None else self._extra_s * 1000.0,
+                    "gaps_10s": len(self._gaps), "has_t": self.has_headset_clock}
+
+    def _measure(self, msg: dict, arrival: float) -> None:
+        t = msg.get("t")
+        with self._lock:
+            if self._prev_arrival is not None and arrival - self._prev_arrival > 0.1:
+                self._gaps.append(arrival)
+            self._prev_arrival = arrival
+            if not isinstance(t, (int, float)):
+                self.has_headset_clock = False
+                return
+            self.has_headset_clock = True
+            offset = arrival - float(t)
+            if self._offset_best is None or offset < self._offset_best or offset - self._offset_best > 5.0:
+                self._offset_best = offset  # first packet, a faster path, or the app restarted (clock jump)
+            self._extra_s = offset - self._offset_best
 
     def close(self) -> None:
         self._running = False
@@ -84,8 +118,10 @@ class JsonUdpReceiver:
                             if parsed is not None:
                                 last = parsed
                         if last is not None:
+                            arrival = time.perf_counter()
+                            self._measure(last, arrival)
                             with self._lock:
-                                self._latest, self._latest_t = last, time.perf_counter()
+                                self._latest, self._latest_t = last, arrival
                                 self._count += n
             except OSError as e:
                 if self._running:

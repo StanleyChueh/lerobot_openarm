@@ -590,12 +590,19 @@ class QuestIKDriver:
             "rt": f("rt"), "lt": f("lt"), "rg": f("rg"), "lg": f("lg"),
             "rstick": (f("rsx"), f("rsy")), "lstick": (f("lsx"), f("lsy")),
             "rc": pos("rc"), "lc": pos("lc"), "rf": pos("rf"),
+            "net": self.receiver.net_stats(),
         }
         TELEOP_STATE.publish_quest(quest, count, msg_t, self.receiver.sender)
 
     def _warn_if_no_packets(self, now: float, msg_t: float | None) -> None:
-        """Say so in the terminal, every 5 s, while the Quest is silent."""
+        """Say so in the terminal, every 5 s, while the Quest is silent or its packets arrive late."""
         if now - self._packet_warn_t < 5.0:
+            return
+        net = self.receiver.net_stats()
+        if msg_t is not None and now - msg_t <= 2.0 and (net["extra_ms"] or 0) > 150:
+            self._log(f"Wi-Fi: Quest packets arrive {net['extra_ms']:.0f} ms later than at best"
+                      f" ({net['gaps_10s']} gaps > 100 ms in the last 10 s) -- the arms lag by that much.")
+            self._packet_warn_t = now
             return
         if msg_t is None and now - self._started_t > 3.0:
             self._log(f"NO packets from the Quest on UDP port {self.port} yet: is the Quest app running and"

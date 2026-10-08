@@ -63,8 +63,19 @@ def _quest_lines(t: dict) -> list[str]:
     def p(xyz) -> str:
         return "-" if xyz is None else f"({xyz[0]:+.2f}, {xyz[1]:+.2f}, {xyz[2]:+.2f})"
 
+    net = q.get("net") or {}
+    if net.get("extra_ms") is not None:
+        extra = net["extra_ms"]
+        mark = "✅" if extra < 50 else "⚠️" if extra < 150 else "❌"
+        net_line = (f"Wi-Fi delay: {mark} **+{extra:.0f} ms** vs the best this session · "
+                    f"{net['gaps_10s']} gaps > 100 ms in the last 10 s")
+    elif net.get("has_t") is False:
+        net_line = f"Wi-Fi delay: not measurable (the app sends no clock) · {net.get('gaps_10s', 0)} gaps > 100 ms in 10 s"
+    else:
+        net_line = None
     return [
         head,
+        *([net_line] if net_line else []),
         f"headset {track(q['v'])} · right controller {track(q['vr'])} {p(q['rc'])} ·"
         f" left controller {track(q['vl'])} {p(q['lc'])}",
         f"buttons pressed: **{' '.join(q['buttons']) or 'none'}** · triggers R {q['rt']:.2f} L {q['lt']:.2f}"
