@@ -31,7 +31,7 @@ def check(name, ok, detail=""):
 
 # ── synthetic Quest: Unity left-handed poses, headset (rf) worn at the neck ───────
 Q = {"rc": [0.25, 1.1, 0.3], "lc": [-0.25, 1.1, 0.3], "rf": [0.0, 1.3, 0.0], "rf_yaw": 0.0,
-     "rt": 0.0, "lt": 0.0, "x": False, "y": False, "a": False, "b": False, "v": 0, "vr": 0, "vl": 0, "run": True, "jump": None}
+     "rt": 0.0, "lt": 0.0, "x": False, "y": False, "a": False, "b": False, "v": 0, "vr": 0, "vl": 0, "run": True, "jump": None, "silent": False}
 
 
 def pose(p, yaw_deg=0.0):
@@ -42,11 +42,14 @@ def pose(p, yaw_deg=0.0):
 def sender():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     while Q["run"]:
+        if Q["silent"]:  # the Quest (or the IK thread) goes quiet for a moment
+            time.sleep(1 / 72)
+            continue
         rc = list(Q["rc"])
         if Q["jump"] is not None:  # one-packet tracking glitch
             rc = [rc[0] + Q["jump"], rc[1], rc[2]]
             Q["jump"] = None
-        msg = {"rc": pose(rc), "lc": pose(Q["lc"]), "rf": pose(Q["rf"], Q["rf_yaw"]), "rt": Q["rt"],
+        msg = {"t": time.perf_counter(), "rc": pose(rc), "lc": pose(Q["lc"]), "rf": pose(Q["rf"], Q["rf_yaw"]), "rt": Q["rt"],
                "lt": Q["lt"], "x": Q["x"], "y": Q["y"], "a": Q["a"], "b": Q["b"], "v": Q["v"], "vr": Q["vr"], "vl": Q["vl"]}
         s.sendto(json.dumps(msg).encode(), ("127.0.0.1", PORT))
         time.sleep(1 / 72)
@@ -276,6 +279,33 @@ wait_home()
 d.x_allowed = lambda: False
 press("x")
 check("N  X refused while the recorder does not allow it (reset phase)", state() == "HELD")
+d.x_allowed = lambda: True
+
+# Your failure: a gap in packets while the hand moves at a normal speed must not look like a glitch.
+press("x")
+time.sleep(0.5)
+c0 = d.command()
+Q["silent"] = True
+move("rc", 0, 0.30, 0.3)  # 30 cm ...
+time.sleep(0.3)            # ... over a 0.6 s gap = 0.5 m/s
+Q["silent"] = False
+time.sleep(0.5)
+check("O  normal motion across a 0.6 s packet gap does NOT pause", state() == "LIVE", d.status()["reason"])
+check("O  ... and the arm does not rush to catch up (re-anchored)", np.abs(d.command()[ARM] - c0[ARM]).max() < 0.02,
+      f"moved {np.abs(d.command()[ARM] - c0[ARM]).max():.3f} rad")
+
+from lerobot_robot_openarm_umeow.shared import TELEOP_STATE  # noqa: E402
+
+REACH_LOG = []
+_log_orig = TELEOP_STATE.log
+TELEOP_STATE.log = lambda text: (REACH_LOG.append(text), _log_orig(text))[1]
+move("rc", 2, -1.00, 4.0)  # push the right hand 1 m forward (Unity -z), slowly: past the arm's reach
+time.sleep(1.0)
+msg = TELEOP_STATE.snapshot()["message"]
+reached_msg = any("cannot reach" in m for m in REACH_LOG)
+check("P  out of reach: says so (terminal + rerun panel)", reached_msg, f"{REACH_LOG[-1:] or msg}")
+check("P  ... and if the IK then jumps at the stretched-out pose, the arm stops (PAUSED)",
+      state() == "LIVE" or "IK solution jumped" in d.status()["reason"], f"{state()} | {d.status()['reason']}")
 
 Q["run"] = False
 t.disconnect()

@@ -32,8 +32,13 @@ Safety, and why each is needed:
     a pose remembered from before (a controller that had gone to sleep or lost tracking).
   - A controller that loses tracking and gets it back is re-anchored (clutched) where it reappears,
     so the hand's untracked motion is not replayed as a jump.
-  - A tracked pose that jumps more than glitch_position_m / glitch_rotation_deg between two packets
-    (a tracking glitch; no hand moves that fast) PAUSES both arms.
+  - A tracked pose moving faster than glitch_speed_mps / glitch_rot_speed_dps PAUSES both arms: a
+    tracking glitch (a pose snapping several cm within one headset frame), or a motion too fast to follow
+    safely. The speed is the change since the previous packet over the time between them, by the
+    headset's own clock (packet field "t"; arrival time if absent) -- NOT a distance per processed packet:
+    if this thread is delayed for a moment (e.g. the video encoders starting at the first recorded frame),
+    an ordinary hand movement over that gap must not look like a jump. A gap longer than pose_fresh_s
+    re-anchors the hand where it is instead (as after lost tracking): no catch-up rush either.
   - The IK follows a target step completely in a single solve, so any discontinuity becomes a joint
     jump. A raw solution that moves more than ik_jump_rad in one solve PAUSES; the shipped command is
     additionally rate-limited to max_joint_speed, and if the solution runs more than max_lead_rad
@@ -130,8 +135,8 @@ class QuestIKDriver:
         smoothing: tuple[float, float, float],
         max_joint_speed: float,
         return_speed: float,
-        glitch_position_m: float,
-        glitch_rotation_deg: float,
+        glitch_speed_mps: float,
+        glitch_rot_speed_dps: float,
         ik_jump_rad: float,
         max_lead_rad: float,
         pose_fresh_s: float,
@@ -145,8 +150,8 @@ class QuestIKDriver:
         self.ik_hz = ik_hz
         self.max_joint_speed = max_joint_speed
         self.return_speed = return_speed
-        self.glitch_position_m = glitch_position_m
-        self.glitch_rotation_deg = glitch_rotation_deg
+        self.glitch_speed_mps = glitch_speed_mps
+        self.glitch_rot_speed_dps = glitch_rot_speed_dps
         self.ik_jump_rad = ik_jump_rad
         self.max_lead_rad = max_lead_rad
         self.pose_fresh_s = pose_fresh_s
@@ -181,6 +186,9 @@ class QuestIKDriver:
         self._base: dict[str, np.ndarray] = {}  # EE pose per arm at anchoring
         self._anchor: dict[str, np.ndarray] = {}  # controller pose per arm at anchoring
         self._last_raw: dict[str, np.ndarray | None] = {s: None for s in SIDES}
+        self._last_raw_t: dict[str, float | None] = {s: None for s in SIDES}  # packet time of _last_raw
+        self._reach = {s: {"since": None, "told": False} for s in SIDES}  # target-out-of-reach notices
+        self._reach_check_t = 0.0
         self._last_target: dict[str, np.ndarray] = {}
         self._lost = {s: False for s in SIDES}
         self._gripper = {s: self.grip[s][0] for s in SIDES}
@@ -315,6 +323,7 @@ class QuestIKDriver:
                 self._gripper[side] = open_v + t * (closed_v - open_v)
 
         raw = dict(zip(SIDES, mapped_controller_poses(msg, self._ref)))
+        packet_t = float(msg["t"]) if isinstance(msg.get("t"), (int, float)) else msg_t  # headset clock if sent
         headset_lost = int(msg.get("v", VALID_OK)) == VALID_INVALID  # controllers are tracked by it
         for side in SIDES:
             pose = raw[side]
@@ -328,14 +337,22 @@ class QuestIKDriver:
                 # Onto the target the IK is already tracking for this arm, so the solver sees no step.
                 self._clutch(side, pose, now, base=self._last_target[side])
                 self._log(f"{side} controller tracked again -- re-anchored where it reappeared, no jump.")
-            elif new_packet and self._last_raw[side] is not None:
+            elif new_packet and self._last_raw_t[side] is not None and packet_t - self._last_raw_t[side] > self.pose_fresh_s:
+                # A gap in packets (or in this thread): the hand's motion meanwhile is not replayed as a
+                # catch-up rush -- re-anchor where it is now, as after lost tracking.
+                gap_ms = (packet_t - self._last_raw_t[side]) * 1000
+                self._clutch(side, pose, now, base=self._last_target[side])
+                self._log(f"{side}: {gap_ms:.0f} ms without Quest packets -- re-anchored where the hand is now, no jump.")
+            elif new_packet and self._last_raw[side] is not None and self._last_raw_t[side] is not None:
                 dp, dr = _pose_jump(self._last_raw[side], pose)
-                if dp > self.glitch_position_m or dr > self.glitch_rotation_deg:
-                    self._pause(f"{side} controller pose jumped {dp * 100:.0f} cm / {dr:.0f} deg"
-                                " between two packets (tracking glitch)")
+                dt = max(packet_t - self._last_raw_t[side], 1.0 / 90.0)  # at least one headset frame
+                if dp / dt > self.glitch_speed_mps or dr / dt > self.glitch_rot_speed_dps:
+                    self._pause(f"{side} controller moved {dp * 100:.0f} cm / {dr:.0f} deg in {dt * 1000:.0f} ms"
+                                f" ({dp / dt:.1f} m/s, {dr / dt:.0f} deg/s): tracking glitch or too fast")
                     return
             if new_packet:
                 self._last_raw[side] = pose
+                self._last_raw_t[side] = packet_t
             smoothed = self._smoothers[side].smooth(now, pose)
             self._last_target[side] = _anchored_pose(self._base[side], self._anchor[side], smoothed)
             self.kin.set_target(side, self._last_target[side])
@@ -352,6 +369,7 @@ class QuestIKDriver:
                 self._pause(f"IK solution jumped {jump:.2f} rad in one solve")
                 return
         self._ik_prev = result.copy()
+        self._check_reach(result, now)
 
         with self._lock:
             cmd = self._command.copy()
@@ -367,6 +385,27 @@ class QuestIKDriver:
         with self._lock:
             self._command = cmd
             self._solves += 1
+
+    def _check_reach(self, result: np.ndarray, now: float) -> None:
+        """Say so (terminal + rerun panel) when an arm cannot follow its target: the IK stops short at a
+        joint limit, or slows at a straight-arm / aligned-wrist (singular) pose. Display only."""
+        if now - self._reach_check_t < 0.2:
+            return
+        self._reach_check_t = now
+        right, left = self.kin.fk_bimanual(result[0:8], result[8:16])
+        for side, ee in (("right", right), ("left", left)):
+            gap = float(np.linalg.norm(np.asarray(ee[:3]) - np.asarray(self._last_target[side][:3])))
+            r = self._reach[side]
+            if gap > 0.03:
+                r["since"] = r["since"] or now
+                if not r["told"] and now - r["since"] > 0.5:
+                    r["told"] = True
+                    self._log(f"{side} arm cannot reach the target ({gap * 100:.0f} cm short): a joint limit or a"
+                              " straight-arm / aligned-wrist pose -- move that hand back toward the robot.")
+            else:
+                if r["told"]:
+                    self._log(f"{side} arm is following again.")
+                r["since"], r["told"] = None, False
 
     # ── state changes ─────────────────────────────────────────────────────────
 
@@ -442,6 +481,7 @@ class QuestIKDriver:
         self._smoothers[side].reset()
         self._smoothers[side].smooth(now, pose)
         self._last_raw[side] = pose
+        self._last_raw_t[side] = None  # no speed check against the packet before the anchor
         self._last_target[side] = self._base[side].astype(np.float32)
         self._lost[side] = False
 

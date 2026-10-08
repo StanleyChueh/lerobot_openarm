@@ -319,10 +319,52 @@ def _port_busy(port: int) -> bool:
             return True
 
 
+def _old_viewer_pids() -> list[int]:
+    """Rerun viewer processes of this user (any port), e.g. left open by earlier lerobot runs."""
+    import os
+
+    me, pids = os.getuid(), []
+    for entry in os.listdir("/proc"):
+        if not entry.isdigit() or int(entry) == os.getpid():
+            continue
+        try:
+            if os.stat(f"/proc/{entry}").st_uid != me:
+                continue
+            with open(f"/proc/{entry}/cmdline", "rb") as f:
+                argv = [a.decode(errors="replace") for a in f.read().split(b"\0") if a]
+        except OSError:
+            continue
+        # The viewer binary (rerun_cli/rerun) or its python launcher (.../bin/rerun), started with a port.
+        if any(a.rsplit("/", 1)[-1] == "rerun" for a in argv[:2]) and any(a.startswith("--port") for a in argv):
+            pids.append(int(entry))
+    return pids
+
+
+def _close_old_viewers(port: int) -> None:
+    import os
+    import signal
+    import time
+
+    pids = _old_viewer_pids()
+    for pid in pids:
+        try:
+            os.kill(pid, signal.SIGTERM)
+        except OSError:
+            pass
+    deadline = time.time() + 3.0
+    while pids and _port_busy(port) and time.time() < deadline:
+        time.sleep(0.1)
+    if pids:
+        print(f"[openarm] closed {len(pids)} rerun viewer process(es) left from earlier runs; opening a fresh window.",
+              flush=True)
+
+
 def _patch_spawn() -> None:
     """lerobot opens its viewer with rr.spawn() on rerun's default port 9876, and rerun silently REUSES
-    any viewer already there -- e.g. one left open by an earlier session -- so this session's data goes
-    to that old (often hidden) window and no new window appears. Open a fresh one on a free port instead.
+    any viewer already there -- one left open (often hidden, holding old data) by an earlier session --
+    and every run otherwise leaves its own window behind. So: close the rerun viewers left from earlier
+    runs, then let lerobot open one fresh window on the usual port. If the port is still taken (not by a
+    viewer), a free port is used instead so this session still gets its own window.
     Runs when the plugin is imported, which lerobot does before it starts rerun."""
     try:
         import rerun as rr
@@ -333,14 +375,14 @@ def _patch_spawn() -> None:
     original = rr.spawn
 
     def spawn(*, port: int = 9876, **kwargs):
+        _close_old_viewers(port)
         if _port_busy(port):
             import socket
 
             with socket.socket() as s:
                 s.bind(("127.0.0.1", 0))
                 free = s.getsockname()[1]
-            print(f"[openarm] another rerun viewer already holds port {port} (an old session?): opening a NEW"
-                  f" window on port {free} for this one. Close the old one with: pkill -f 'rerun --port={port}'",
+            print(f"[openarm] port {port} is still held by another program: opening the rerun window on {free}.",
                   flush=True)
             port = free
         return original(port=port, **kwargs)

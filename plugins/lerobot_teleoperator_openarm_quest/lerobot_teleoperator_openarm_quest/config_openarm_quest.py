@@ -33,9 +33,11 @@ class OpenArmQuestConfig(TeleoperatorConfig):
     max_joint_speed: float = 1.0
     # Speed of the 2nd-X / Y return to home (rad/s, every joint).
     return_speed: float = 0.3
-    # A controller pose jumping more than this between two packets is a tracking glitch -> PAUSE.
-    glitch_position_m: float = 0.08
-    glitch_rotation_deg: float = 35.0
+    # A controller moving faster than this (by the headset's clock) is a tracking glitch or a motion too
+    # fast to follow safely -> PAUSE. Teleoperation hand motion stays well below; a glitch snaps several cm
+    # within one headset frame (~9 m/s and up).
+    glitch_speed_mps: float = 4.0
+    glitch_rot_speed_dps: float = 900.0
     # The raw IK solution moving more than this in one solve -> PAUSE (rad).
     ik_jump_rad: float = 0.2
     # The raw IK solution running more than this ahead of the rate-limited command -> PAUSE (rad).
