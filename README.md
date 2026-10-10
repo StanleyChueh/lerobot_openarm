@@ -184,28 +184,57 @@ needed).
 | **RTC** ([docs](https://huggingface.co/docs/lerobot/main/en/rtc)) | inference in a background thread, and each new chunk is *guided* to continue smoothly from the actions already being executed | `lerobot-rollout --inference.type=rtc` |
 | **async + RTC** | async's server/client split, with every chunk RTC-guided to continue the client's unexecuted actions | `policy_server --rtc=true` + `robot_client` |
 
+Every command below runs a series of **evaluation episodes**: the policy drives for `episode_time_s`, the arm
+returns **slowly** (<= 0.3 rad/s) to the start pose and is checked there, then `reset_time_s` gives you time
+to reset the scene, and the next episode starts -- `num_episodes` times. The three numbers are set by:
+
+| | normal, RTC (`lerobot-rollout`) | async, async + RTC (`robot_client`) |
+|---|---|---|
+| number of episodes | `--dataset.num_episodes=10` | `--num_episodes=10` |
+| episode time (s) | `--dataset.episode_time_s=60` | `--episode_time_s=60` |
+| reset time (s) | `--dataset.reset_time_s=60` | `--reset_time_s=60` |
+
+Same keys in every mode: during an episode **Right arrow** (or `n`) ends it, **Left arrow** (`r`) runs it
+again (not counted), **Esc** (`q`) stops; during a reset **Right arrow** ends it early. After the last
+episode (or Esc) the arm returns to the start pose, then disconnects.
+
 #### Normal
+
+`lerobot-rollout --strategy.type=episodic` also records each episode as a dataset, to watch or score later.
+The name must start with `rollout_`; lerobot appends the date and time to it (`..._v00_20261010_153000`), so
+the same command can be run again for the next evaluation.
 
 ```bash
 # SmolVLA
-lerobot-rollout --strategy.type=base \
+lerobot-rollout --strategy.type=episodic \
   --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" --duration=60 --display_data=true
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --display_data=true
 
 # GR00T N1.7 (no --rename_map: GR00T keeps the dataset's camera names)
-lerobot-rollout --strategy.type=base \
+lerobot-rollout --strategy.type=episodic \
   --policy.path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" --duration=60 --display_data=true
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_groot_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --display_data=true
 ```
+
+For one open-ended run instead: `--strategy.type=base --duration=60` and no `--dataset.*` flags.
 
 #### Async (policy server + robot client)
 
-Terminal 1, the policy server (same machine: `127.0.0.1`; another GPU machine: its IP, and `--host=0.0.0.0`):
+Terminal 1, the policy server (same machine: `127.0.0.1`; another GPU machine: its IP, and `--host=0.0.0.0`).
+It stays up across episodes, and across evaluations:
 
 ```bash
 cd ~/Stanley_ws/lerobot_openarm
@@ -218,21 +247,32 @@ python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
 Terminal 2, the robot client:
 
 ```bash
-# SmolVLA
 cd ~/Stanley_ws/lerobot_openarm
 source .venv/bin/activate
 unset PYTHONPATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot.async_inference.robot_client \
+
+# SmolVLA
+python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --policy_type=smolvla --pretrained_name_or_path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=weighted_average --fps=30
+  --aggregate_fn_name=weighted_average --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 
-# GR00T N1.7: --policy_type=groot --pretrained_name_or_path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model --actions_per_chunk=16
+# GR00T N1.7
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=groot --pretrained_name_or_path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=weighted_average --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 ```
 
 - Use **`lerobot_robot_openarm_umeow.policy_server`**, not `lerobot.async_inference.policy_server`: it is
@@ -248,25 +288,45 @@ python -m lerobot.async_inference.robot_client \
   image feature shape, which for a SmolVLA fine-tuned from smolvla_base is the base model's 256x256: our
   640x480 frames were squashed (aspect ratio lost), unlike in training and in `lerobot-rollout`, where the
   policy gets the full frame and letterboxes it itself. On a real checkpoint that changed actions by up to 0.04 rad.
-- The client is lerobot's own. `--actions_per_chunk` <= the policy's chunk size (SmolVLA 50, our GR00T 16);
-  `--chunk_size_threshold` 0.5-0.6 is the docs' recommendation; add `--debug_visualize_queue_size=true` to
-  plot the action queue when tuning.
-- The arm goes home first (type `YES`); Ctrl-C stops the client, and the arm returns to its rest pose.
+- **`lerobot_robot_openarm_umeow.robot_client`** is lerobot's robot client (same flags, same action queue and
+  aggregation) run as episodes; lerobot's own has none. The policy is loaded once. Each episode starts clean:
+  the client's action queue is emptied and the server is told a new client is ready, so it forgets the
+  previous episode's observations and (with `--rtc=true`) its last chunk. It prints each episode's length and
+  actions executed, and a summary at the end; nothing is recorded. Without `--num_episodes` it is lerobot's
+  client unchanged (one open-ended run, Ctrl-C stops).
+- `--actions_per_chunk` <= the policy's chunk size (SmolVLA 50, our GR00T 16); `--chunk_size_threshold`
+  0.5-0.6 is the docs' recommendation; add `--debug_visualize_queue_size=true` to plot the action queue when
+  tuning.
 
 #### RTC (Real-Time Chunking)
 
 ```bash
 # SmolVLA
-lerobot-rollout --strategy.type=base \
+lerobot-rollout --strategy.type=episodic \
   --inference.type=rtc --inference.rtc.mode=guided \
   --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0 \
   --policy.path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" --duration=60 --display_data=true
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_rtc_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --display_data=true
 
-# GR00T N1.7: same with --policy.path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model, --inference.rtc.execution_horizon=8, no --rename_map
+# GR00T N1.7 (execution_horizon 8, no --rename_map)
+lerobot-rollout --strategy.type=episodic \
+  --inference.type=rtc --inference.rtc.mode=guided \
+  --inference.rtc.execution_horizon=8 --inference.rtc.max_guidance_weight=10.0 \
+  --policy.path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_groot_rtc_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --display_data=true
 ```
 
 - `execution_horizon`: actions of the previous chunk the new one is guided to match; 8-12, and below the
@@ -286,7 +346,9 @@ Terminal 1:
 python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
   --rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
 
-# GR00T N1.7: the same with --rtc_execution_horizon=8
+# GR00T N1.7
+python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
+  --rtc=true --rtc_execution_horizon=8 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
 ```
 
 Terminal 2, as for async but with `--aggregate_fn_name=latest_only` (RTC has already blended the overlap;
@@ -294,70 +356,34 @@ averaging it again would undo that):
 
 ```bash
 # SmolVLA
-python -m lerobot.async_inference.robot_client \
+python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --policy_type=smolvla --pretrained_name_or_path=outputs/train/smolvla_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=latest_only --fps=30
+  --aggregate_fn_name=latest_only --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 
-# GR00T N1.7: --policy_type=groot --pretrained_name_or_path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model --actions_per_chunk=16
-```
-
-- The server log shows each chunk: `RTC chunk @ timestep N: guided by K unexecuted actions, inference_delay D`.
-  `K` > 0 means RTC is active; `D` is the estimated latency in steps (measured on the RTX 5080: about 2 for
-  GR00T, 4-5 for SmolVLA; it rises for a while after a slow inference).
-- RTC needs observations mid-chunk: keep `--chunk_size_threshold` around 0.5. Near 0 the client only asks
-  when its queue is empty, and there is nothing left to continue.
-
-#### Evaluating several episodes (all four modes)
-
-Every mode can run a series of evaluation episodes: the policy drives for `episode_time_s`, the arm returns
-**slowly** (<= 0.3 rad/s) to the start pose and is checked there, then `reset_time_s` gives you time to
-reset the scene, and the next episode starts -- `num_episodes` times. Same keys everywhere: during an
-episode **Right arrow** (or `n`) ends it, **Left arrow** (`r`) runs it again, **Esc** (`q`) stops; during a
-reset **Right arrow** ends it early.
-
-**Normal and RTC**: lerobot-rollout's own `--strategy.type=episodic` instead of `base`. It also records each
-episode as a dataset, to watch or score later (the name must start with `rollout_`):
-
-```bash
-  --strategy.type=episodic \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_v00 --dataset.push_to_hub=false \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60
-```
-
-(and no `--duration`). lerobot appends the date and time to the name (`..._v00_20261010_153000`), so
-the same command can be run again for the next evaluation.
-
-**Async and async + RTC**: lerobot's robot client has no episodes, so run it through
-`lerobot_robot_openarm_umeow.robot_client` -- the same client and flags, plus three:
-
-```bash
-# Terminal 1: the policy server as above (add --rtc=true ... for async + RTC)
-# Terminal 2:
+# GR00T N1.7
 python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
+  --policy_type=groot --pretrained_name_or_path=outputs/train/groot_pringles_lerobot_real_v00/checkpoints/last/pretrained_model \
   --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=weighted_average --fps=30 \
+  --aggregate_fn_name=latest_only --fps=30 \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
-
-# SmolVLA: --policy_type=smolvla --pretrained_name_or_path=<checkpoint> --actions_per_chunk=50
-# async + RTC: --aggregate_fn_name=latest_only
 ```
 
-- The policy is loaded once. Each episode starts clean: the client's action queue is emptied and the server
-  is told a new client is ready, so it forgets the previous episode's observations and (with `--rtc=true`)
-  its last chunk.
-- It prints each episode's length and actions executed, and a summary at the end. Nothing is recorded.
-- Without `--num_episodes` it is lerobot's client, unchanged.
+- The server log shows each chunk: `RTC chunk @ timestep N: guided by K unexecuted actions, inference_delay D`.
+  `K` > 0 means RTC is active; `D` is the estimated latency in steps (measured on the RTX 5080: about 2 for
+  GR00T, 4-5 for SmolVLA; it rises for a while after a slow inference). The first chunk of every episode is
+  guided by 0: the previous episode's chunk is forgotten.
+- RTC needs observations mid-chunk: keep `--chunk_size_threshold` around 0.5. Near 0 the client only asks
+  when its queue is empty, and there is nothing left to continue.
 
 #### Notes for all modes
 

@@ -85,17 +85,22 @@ lr lerobot-train --policy.path=lerobot/smolvla_base \
 ## 3. Evaluate
 
 ```bash
-lr lerobot-rollout --strategy.type=base \
+lr lerobot-rollout --strategy.type=episodic \
   --policy.path=outputs/train/smolvla_plate_quest/checkpoints/last/pretrained_model \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="<same as recording>" \
-  --task="Pick up the plate and then wipe it" --duration=60
+  --task="Pick up the plate and then wipe it" \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_plate_quest_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the plate and then wipe it" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=120 --dataset.reset_time_s=30
 ```
 
-For a slow VLA, add `--inference.type=rtc --inference.rtc.execution_horizon=10`. To run (and record)
-several evaluation episodes, use `--strategy.type=episodic` with `--dataset.repo_id=...` (see
-`lerobot-rollout --help`). For async inference, `python -m lerobot_robot_openarm_umeow.robot_client` is
-lerobot's robot client with `--num_episodes / --episode_time_s / --reset_time_s` (main README, Step 6).
+`num_episodes` episodes of `episode_time_s`, each followed by a slow return to the start pose and
+`reset_time_s` to reset the scene; each episode is recorded (the name must start with `rollout_`). For one
+open-ended run: `--strategy.type=base --duration=60`, no `--dataset.*`. For a slow VLA, add
+`--inference.type=rtc --inference.rtc.execution_horizon=10`. For async inference,
+`python -m lerobot_robot_openarm_umeow.robot_client` is lerobot's robot client with
+`--num_episodes=10 --episode_time_s=120 --reset_time_s=30` (main README, Step 6).
 
 ## Keep in step with the dora pipeline
 
