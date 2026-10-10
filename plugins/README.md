@@ -92,9 +92,10 @@ lr lerobot-rollout --strategy.type=base \
   --task="Pick up the plate and then wipe it" --duration=60
 ```
 
-For a slow VLA, add `--inference.type=rtc --inference.rtc.execution_horizon=10`. To record the
-evaluation episodes, use `--strategy.type=episodic` with `--dataset.repo_id=...` (see
-`lerobot-rollout --help`).
+For a slow VLA, add `--inference.type=rtc --inference.rtc.execution_horizon=10`. To run (and record)
+several evaluation episodes, use `--strategy.type=episodic` with `--dataset.repo_id=...` (see
+`lerobot-rollout --help`). For async inference, `python -m lerobot_robot_openarm_umeow.robot_client` is
+lerobot's robot client with `--num_episodes / --episode_time_s / --reset_time_s` (main README, Step 6).
 
 ## Keep in step with the dora pipeline
 

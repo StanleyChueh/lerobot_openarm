@@ -312,21 +312,52 @@ python -m lerobot.async_inference.robot_client \
 - RTC needs observations mid-chunk: keep `--chunk_size_threshold` around 0.5. Near 0 the client only asks
   when its queue is empty, and there is nothing left to continue.
 
-#### Recording evaluation episodes
+#### Evaluating several episodes (all four modes)
 
-Normal and RTC also work with `--strategy.type=episodic` instead of `base`, which records each evaluation
-episode (to watch or score later):
+Every mode can run a series of evaluation episodes: the policy drives for `episode_time_s`, the arm returns
+**slowly** (<= 0.3 rad/s) to the start pose and is checked there, then `reset_time_s` gives you time to
+reset the scene, and the next episode starts -- `num_episodes` times. Same keys everywhere: during an
+episode **Right arrow** (or `n`) ends it, **Left arrow** (`r`) runs it again, **Esc** (`q`) stops; during a
+reset **Right arrow** ends it early.
+
+**Normal and RTC**: lerobot-rollout's own `--strategy.type=episodic` instead of `base`. It also records each
+episode as a dataset, to watch or score later (the name must start with `rollout_`):
 
 ```bash
   --strategy.type=episodic \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_v00 --dataset.no_stamp=true \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_v00 --dataset.push_to_hub=false \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60
 ```
 
-During an episode **Right arrow** ends it (saved), **Left arrow** discards it, **Esc** stops. Then the arm
-returns **slowly** (<= 0.3 rad/s) to the start pose and the reset phase gives you `reset_time_s` to reset
-the scene; **Right arrow** ends the reset early. Episodic dataset names must start with `rollout_`.
+(and no `--duration`). lerobot appends the date and time to the name (`..._v00_20261010_153000`), so
+the same command can be run again for the next evaluation.
+
+**Async and async + RTC**: lerobot's robot client has no episodes, so run it through
+`lerobot_robot_openarm_umeow.robot_client` -- the same client and flags, plus three:
+
+```bash
+# Terminal 1: the policy server as above (add --rtc=true ... for async + RTC)
+# Terminal 2:
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
+  --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=weighted_average --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+
+# SmolVLA: --policy_type=smolvla --pretrained_name_or_path=<checkpoint> --actions_per_chunk=50
+# async + RTC: --aggregate_fn_name=latest_only
+```
+
+- The policy is loaded once. Each episode starts clean: the client's action queue is emptied and the server
+  is told a new client is ready, so it forgets the previous episode's observations and (with `--rtc=true`)
+  its last chunk.
+- It prints each episode's length and actions executed, and a summary at the end. Nothing is recorded.
+- Without `--num_episodes` it is lerobot's client, unchanged.
 
 #### Notes for all modes
 
