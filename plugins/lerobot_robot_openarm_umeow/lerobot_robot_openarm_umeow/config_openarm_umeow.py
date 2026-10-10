@@ -64,3 +64,24 @@ class OpenArmUmeowConfig(RobotConfig):
     # On disconnect, ramp back to the pose read at connect (arms hanging) before de-energising,
     # so the arms do not drop.
     return_to_rest: bool = True
+
+
+@RobotConfig.register_subclass("openarm_isaac")
+@dataclass(kw_only=True)
+class OpenArmIsaacConfig(OpenArmUmeowConfig):
+    """The same robot in Isaac Sim, served by IsaacLab's scripts/tools/lerobot_sim_server.py.
+
+    Every OpenArmUmeowConfig setting applies unchanged (step limit, safety guard, start keyframe, slow
+    returns), so a sim session runs the real arm's code paths with only the hardware layer swapped:
+    actions and observations are the same motor-radian LJ1..8 / RJ1..8 keys, mapped to the sim's joints
+    through the same calibration.json. The CAN ports, URDF and --robot.cameras are not used: the
+    cameras are the simulator's, named in sim_cameras and rendered at camera_width x camera_height.
+    """
+
+    host: str = "127.0.0.1"
+    port: int = 5710
+    sim_cameras: list[str] = field(default_factory=lambda: ["body_cam", "wrist_cam", "right_wrist_cam"])
+    camera_width: int = 640
+    camera_height: int = 480
+    # Nothing physical to confirm before the start-pose approach.
+    assume_yes: bool = True

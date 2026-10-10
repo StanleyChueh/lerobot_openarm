@@ -63,7 +63,7 @@ class _RawSender:
         self._robot = robot
 
     def send_action(self, action, target_vel):
-        return OpenArmFollower.send_action(self._robot, action, target_vel)
+        return self._robot._hw_send_action(action, target_vel)
 
     def get_observation(self):
         return self._robot.get_observation()
@@ -90,6 +90,8 @@ def _slow_down_rollout_returns(speed: float) -> None:
         except Exception:
             dist = 0.0
         duration = max(duration_s, dist / speed)
+        robot = getattr(hw.robot_wrapper, "_robot", hw.robot_wrapper)  # under lerobot-rollout's ThreadSafeRobot
+        ran = getattr(robot, "steps_since_reset", 0) > 0  # simulation: an episode ran since the last scene reset
         print(f"[openarm_umeow] returning to the start pose slowly: {dist:.2f} rad over {duration:.1f} s"
               f" (<= {speed:g} rad/s)", flush=True)
         BOARD.note(f"returning to the start pose ({duration:.0f} s)")
@@ -108,6 +110,9 @@ def _slow_down_rollout_returns(speed: float) -> None:
                 BOARD.note(f"NOT at the start pose: {key} {off:+.2f} rad off")
         except Exception:
             logger.debug("start-pose check failed", exc_info=True)
+        # In simulation (openarm_isaac) the table is reset here, where a person would reset it.
+        if hasattr(robot, "reset_scene"):
+            robot.reset_scene(report=ran)
         return result
 
     core.RolloutStrategy.return_to_initial_position = staticmethod(slow_return)
@@ -129,6 +134,10 @@ class OpenArmUmeow(OpenArmFollower):
             cameras=config.cameras,
         )
         super().__init__(follower_cfg)
+        self._init_umeow(config)
+
+    def _init_umeow(self, config: OpenArmUmeowConfig) -> None:
+        """The wrapper's own state, separate from the follower's hardware setup (openarm_isaac reuses it)."""
         self.umeow_config = config
         self.calib = load_calibration(config.calibration)
         self._last_sent: dict | None = None
@@ -143,6 +152,24 @@ class OpenArmUmeow(OpenArmFollower):
         self._seen_enabled: set[str] = set()
         self._lag: dict[str, tuple[float, float, bool]] = {}  # key -> (since, command then, told)
         self._stats_reset(time.perf_counter())
+
+    # The hardware layer: the follower's CAN bus and cameras. openarm_isaac (openarm_isaac.py) overrides
+    # these five and nothing else, so everything above them -- start pose, step limit, safety guard,
+    # squeeze, slow returns -- is the same code on the real arm and in simulation.
+    def _hw_connect(self) -> None:
+        OpenArmFollower.connect(self, calibrate=False)
+
+    def _hw_get_observation(self):
+        return OpenArmFollower.get_observation(self)
+
+    def _hw_send_action(self, action, target_vel):
+        return OpenArmFollower.send_action(self, action, target_vel)
+
+    def _hw_disconnect(self) -> None:
+        OpenArmFollower.disconnect(self)
+
+    def _hw_feedback_status(self) -> dict:
+        return self.get_feedback_status()
 
     # lerobot asks for these; the follower's own raise NotImplementedError. This robot's
     # calibration is calibration.json plus the motors' stored zero, neither of which is changed here.
@@ -163,7 +190,7 @@ class OpenArmUmeow(OpenArmFollower):
             ROBOT_STATE.connecting = False
 
     def _connect(self) -> None:
-        super().connect(calibrate=False)
+        self._hw_connect()
         cfg = self.umeow_config
         try:
             check_arms_not_crossed(self, self.calib)
@@ -191,7 +218,7 @@ class OpenArmUmeow(OpenArmFollower):
             elif cfg.start_pose != "none":
                 raise ValueError(f"start_pose must be 'keyframe' or 'none', got {cfg.start_pose!r}")
         except BaseException:
-            super().disconnect()
+            self._hw_disconnect()
             raise
         self._last_sent = {k: current[k] for k in MOTOR_KEYS}
         self._last_desired = dict(self._last_sent)
@@ -203,7 +230,7 @@ class OpenArmUmeow(OpenArmFollower):
 
     def get_observation(self):
         t0 = time.perf_counter()
-        obs = super().get_observation()
+        obs = self._hw_get_observation()
         read = time.perf_counter() - t0
         self._stats_read_sum += read
         self._stats_read_n += 1
@@ -256,7 +283,7 @@ class OpenArmUmeow(OpenArmFollower):
             # Hold: re-send the last executed command with zero velocity. Grippers keep their command
             # and squeeze, so a held object is not dropped.
             hold = dict(self._last_sent)
-            super().send_action(hold, {k.replace(".pos", ".vel"): 0.0 for k in MOTOR_KEYS})
+            self._hw_send_action(hold, {k.replace(".pos", ".vel"): 0.0 for k in MOTOR_KEYS})
             self._check_following(now, hold)
             self._last_t = now
             ROBOT_STATE.publish(hold, self._fault)
@@ -272,7 +299,7 @@ class OpenArmUmeow(OpenArmFollower):
             self._last_sent, sent, dt, cfg.max_joint_speed
         )
         self._apply_squeeze(desired)
-        super().send_action(sent, vel)
+        self._hw_send_action(sent, vel)
         self._stats_record(now, desired, sent)
         self._check_following(now, sent)
         self._last_sent, self._last_t = sent, now
@@ -285,7 +312,7 @@ class OpenArmUmeow(OpenArmFollower):
             return
         self._health_t = now
         try:
-            status = self.get_feedback_status()
+            status = self._hw_feedback_status()
         except Exception:
             return
         self._seen_enabled.update(k for k, c in status.items() if c == 0x1)
@@ -392,4 +419,4 @@ class OpenArmUmeow(OpenArmFollower):
             except Exception:
                 logger.exception("Return to rest failed; disabling where the arm is.")
         ROBOT_STATE.clear()
-        super().disconnect()
+        self._hw_disconnect()

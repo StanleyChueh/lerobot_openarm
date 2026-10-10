@@ -7,6 +7,7 @@ Two lerobot plugins, so data collection, training and evaluation all run through
 |---|---|---|
 | `lerobot_robot_openarm_umeow` | `--robot.type=openarm_umeow` | `robots/umeow_openarm_follower` (gravity feed-forward, CAN-read fixes) with the official one-argument `send_action`, a per-tick step limit, a safe start/stop and the gripper squeeze. Uses `calibration.json`; never re-zeroes the motors. |
 | `lerobot_teleoperator_openarm_quest` | `--teleop.type=openarm_quest` | The Quest app's UDP packets -> the dora pipeline's pose mapping, smoothing and mink IK -> joint targets in motor radians, with the reference captured on X, a slow return home and safety pauses. |
+| `lerobot_robot_openarm_umeow` | `--robot.type=openarm_isaac` | The same robot in Isaac Sim (IsaacLab `scripts/tools/lerobot_sim_server.py`, wire format `sim_link.py`): only the hardware layer (`_hw_*`) is replaced. See the top-level README's Isaac Sim section. |
 
 ```
 Quest app (UDP :5006) -> openarm_quest (IK @ ~500 Hz) -> lerobot-record (30 Hz) -> openarm_umeow -> CAN

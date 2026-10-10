@@ -17,6 +17,8 @@ teleop wraps it -- only when the teleoperator is openarm_quest:
                (While PAUSED it waits for X -- recover home, then saved -- or Y.)
                This save always ends the episode, even with
                --teleop.episode_buttons=false (which only stops the Quest's own 2nd X / Y from doing so).
+  sim       with --robot.type=openarm_isaac, the scene is re-randomized as each episode starts waiting for X
+            (the robot stays where it is), and the last episode's success is printed.
   reset     lerobot's own loop, unchanged. X is refused from the end of an episode until the next one
             waits for it (the reset, and the save); before the first episode it is accepted, and recording
             then starts as soon as the gate sees the arms LIVE.
@@ -33,7 +35,7 @@ from lerobot_robot_openarm_umeow.shared import TELEOP_STATE
 
 _LIVE = "LIVE"
 _FOREVER = 10.0**9  # lerobot's own episode clock is disabled; the cap below replaces it
-_STATE = {"x_ok": True}  # X may start driving: before the first episode, and while an episode waits for it
+_STATE = {"x_ok": True, "episodes": 0}  # x_ok: X may start driving: before the first episode, and while an episode waits for it
 
 
 def install(teleop_cls) -> None:
@@ -128,6 +130,9 @@ def _wait_for_x(kw: dict) -> bool:
     if display:
         from lerobot.utils.visualization_utils import log_visualization_data
     BOARD.set_phase("WAITING")
+    if hasattr(robot, "reset_scene"):  # simulation (openarm_isaac): a fresh scene for every episode
+        robot.reset_scene(report=_STATE["episodes"] > 0)
+    _STATE["episodes"] += 1
     print("[openarm_quest] waiting for X to start recording this episode (nothing is recorded yet).", flush=True)
     _STATE["x_ok"] = True
     try:
