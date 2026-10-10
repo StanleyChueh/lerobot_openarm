@@ -23,6 +23,7 @@ dependencies = [
     "mink==1.1.0",
     "mujoco==3.11.0",
     "scipy",
+    "h5py>=3.10",
 ]
 
 [dependency-groups]

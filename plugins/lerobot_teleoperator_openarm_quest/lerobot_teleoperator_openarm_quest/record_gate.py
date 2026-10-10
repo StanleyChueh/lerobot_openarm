@@ -18,7 +18,9 @@ teleop wraps it -- only when the teleoperator is openarm_quest:
                This save always ends the episode, even with
                --teleop.episode_buttons=false (which only stops the Quest's own 2nd X / Y from doing so).
   sim       with --robot.type=openarm_isaac, the scene is re-randomized as each episode starts waiting for X
-            (the robot stays where it is), and the last episode's success is printed.
+            (the robot stays where it is), and the last episode's success is printed. Each episode is also
+            recorded as a Mimic source demo (if the server has --mimic_hdf5), kept or dropped exactly as
+            lerobot saves or discards the episode.
   reset     lerobot's own loop, unchanged. X is refused from the end of an episode until the next one
             waits for it (the reset, and the save); before the first episode it is accepted, and recording
             then starts as soon as the gate sees the arms LIVE.
@@ -53,8 +55,11 @@ def install(teleop_cls) -> None:
         driver.x_allowed = lambda: _STATE["x_ok"]
         if kwargs.get("dataset") is None:
             return original(*args, **kwargs)  # reset phase: lerobot's own
+        _link_dataset(kwargs["dataset"], kwargs.get("robot"))
         if not _wait_for_x(kwargs):
             return None
+        if hasattr(kwargs.get("robot"), "begin_episode"):  # simulation: the Mimic source demo starts with the episode
+            kwargs["robot"].begin_episode()
         if kwargs.get("timer") is not None:
             kwargs["timer"].restart()  # the wait is not part of the episode's cadence
         return _record_episode(original, teleop, events, kwargs)
@@ -62,6 +67,26 @@ def install(teleop_cls) -> None:
     module.record_loop = record_loop
     module._openarm_record_gate = True
     BOARD.gated = True
+
+
+def _link_dataset(dataset, robot) -> None:
+    """Tell a robot that keeps its own copy of each episode (openarm_isaac's Mimic source demos) what lerobot did
+    with it, at the very calls that decide it -- so the two stay one-to-one whatever ended the episode."""
+    if not hasattr(robot, "end_episode") or getattr(dataset, "_openarm_linked", False):
+        return
+    save, clear = dataset.save_episode, dataset.clear_episode_buffer
+
+    def save_episode(*args, **kwargs):
+        result = save(*args, **kwargs)
+        robot.end_episode(saved=True)
+        return result
+
+    def clear_episode_buffer(*args, **kwargs):
+        robot.end_episode(saved=False)
+        return clear(*args, **kwargs)
+
+    dataset.save_episode, dataset.clear_episode_buffer = save_episode, clear_episode_buffer
+    dataset._openarm_linked = True
 
 
 def _decide(events: dict, key: str) -> None:
@@ -115,6 +140,8 @@ def _record_episode(original, teleop, events: dict, kw: dict):
         return original(**{**kw, "control_time_s": _FOREVER})
     finally:
         done.set()
+        if hasattr(kw.get("robot"), "close_episode"):  # simulation: nothing after this belongs to the demo
+            kw["robot"].close_episode()
         teleop.episode_sink = None
         # Ended some other way (keyboard arrow, Esc): send the arms home too, unrecorded.
         teleop.driver.request_return("episode ended")

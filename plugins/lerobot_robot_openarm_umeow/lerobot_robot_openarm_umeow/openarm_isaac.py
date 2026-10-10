@@ -12,6 +12,10 @@ LOCKSTEP: every send_action advances the simulation by exactly one control step 
 and get_observation returns the state and camera frames that step produced. A frame is therefore always
 one control period of sim time, even when rendering three cameras is slower than real time.
 
+With the server's --mimic_hdf5, every episode lerobot-record saves is also written there as an Isaac Lab
+Mimic source demo (begin_episode / end_episode, called by the Quest record gate at X and at lerobot's own
+save_episode / clear_episode_buffer), so Mimic can multiply the very demos the lerobot dataset holds.
+
 The scene is re-randomized (the can moved, randomization re-drawn) by reset_scene(), which leaves the
 robot where it is -- like a person resetting the table. The Quest record gate calls it each time an
 episode starts waiting for X; lerobot-rollout and the async robot client call it after each return to
@@ -105,6 +109,21 @@ class OpenArmIsaac(OpenArmUmeow):
 
     def _hw_feedback_status(self) -> dict:
         return {}  # simulated motors never trip
+
+    # -- Mimic source demos (the server's --mimic_hdf5) ------------------------------------------------------
+    def begin_episode(self) -> None:
+        """A lerobot episode starts recording: the server starts the matching Mimic source demo."""
+        self._sim.request("episode_begin")
+
+    def close_episode(self) -> None:
+        """The episode's last frame is recorded (lerobot's reset phase follows before it saves or discards)."""
+        self._sim.request("episode_close")
+
+    def end_episode(self, saved: bool) -> None:
+        """lerobot saved (or discarded) the episode: the server writes (or drops) the Mimic source demo."""
+        reply = self._sim.request("episode_end", save=saved)
+        if reply.get("saved"):
+            print(f"[openarm_isaac] also saved as Mimic source demo {reply['saved']} ({reply['steps']} steps).", flush=True)
 
     # -- the table --------------------------------------------------------------------------------------
     def reset_scene(self, report: bool = False) -> None:

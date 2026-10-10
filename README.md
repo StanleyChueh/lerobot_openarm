@@ -1,5 +1,11 @@
 # This is the LeRobot-compatible VLA Training Pipeline
 
+![Real and sim data collection, training and evaluation pipeline](docs/pipeline.svg)
+
+Three ways to collect data, one dataset format, then train on any mix and evaluate on the real arm or in Isaac
+Sim: ① the real robot (Steps 0-5 below), ② the same teleop pipeline in Isaac Sim and ③ Isaac Lab Mimic synthetic
+data from those sim demos ([Isaac Sim through the same pipeline](#isaac-sim-through-the-same-pipeline---robottypeopenarm_isaac)).
+
 ## Official LeRobot pipeline (Meta Quest)
 
 ```
@@ -411,7 +417,22 @@ python -m lerobot_robot_openarm_umeow.robot_client \
 
 ```
 Quest -> openarm_quest (same IK) -> lerobot-record (30 Hz) -> openarm_isaac -> TCP :5710 -> lerobot_sim_server.py (Isaac Sim)
+                                         |                                                        |  (--mimic_hdf5)
+                              lerobot dataset (sim teleop)                             Mimic source demos (HDF5)
+                                         |                                                        |
+                                         |                       annotate_demos.py -> generate_dataset.py (+ domain randomization)
+                                         |                                                        |
+                                         |                                          mimic_to_lerobot.py (synthetic, same format)
+                                         v                                                        v
+                      train: real only | synthetic only | co-train (lerobot-edit-dataset merge)  -> evaluate: real or sim
 ```
+
+| sim step | what | output |
+|---|---|---|
+| 1-3 | teleoperate in sim through `lerobot-record`, exactly like the real arm | `..._sim_v00` lerobot dataset + the same demos as Mimic source HDF5 |
+| 4 | Isaac Lab Mimic multiplies the demos to new can poses, with domain randomization, then converts | `..._mimic_v00` lerobot dataset |
+| 5 | pick the training mix: synthetic only, or merge with the real dataset | a trained policy |
+| 6 | evaluate in sim (or on the real arm, Step 5) | success tally |
 
 `openarm_isaac` is `openarm_umeow` with Isaac Sim in place of the CAN bus and the RealSense cameras: the start
 pose, step limit, safety guard, slow returns, Quest controls, episode structure and dataset format are the same
@@ -448,16 +469,26 @@ Differences from the real commands, everywhere below:
 ```bash
 cd ~/Stanley_ws/IsaacLab
 conda activate env_isaaclab
-./isaaclab.sh -p scripts/tools/lerobot_sim_server.py --enable_cameras \
+./isaaclab.sh -p scripts/tools/lerobot_sim_server.py --enable_cameras --headless \
   --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-v0 --task_mode handover \
-  --domain_randomization none
+  --domain_randomization none \
+  --mimic_hdf5 logs/demos/pringles_sim_src_v00.hdf5
 ```
 
 Wait for `[lerobot_sim_server] ready on 127.0.0.1:5710` (~1 min). It serves one robot at a time and waits for
-the next when one disconnects, so it stays up across recordings and evaluations; Ctrl-C stops it. For
-recording, add `--headless`: the window costs ~40% of the speed (see above), and `--display_data=true`
-shows the three cameras in rerun instead. Options: `--domain_randomization visual|full` (+ `--enable_camera_shake`),
-`--task_mode left|right|handover`, `--port` (then the same `--robot.port=...` on the lerobot side).
+the next when one disconnects, so it stays up across recordings and evaluations; Ctrl-C stops it.
+
+- `--mimic_hdf5`: every episode `lerobot-record` SAVES is also written to this Isaac Lab HDF5 as a Mimic source
+  demo (absolute joint targets, scene states each step), and discarded ones are dropped -- the HDF5 and the
+  lerobot dataset hold the same demos in the same order. An existing file is appended to. Leave it out for
+  teleoperation and evaluation.
+- Record the Mimic source demos with `--domain_randomization none`: randomization belongs to the generation
+  step (Sim Step 4), and annotation replays the demos in an unrandomized env.
+- `--headless` keeps the sim near real time (the window costs ~40% of the speed, see above); watch the three
+  cameras in rerun (`--display_data=true`). Drop `--headless` to see the Isaac Sim window.
+- Other options: `--task_mode left|right|handover`, `--port` (then `--robot.port=...` on the lerobot side),
+  `--domain_randomization visual|full` (+ `--enable_camera_shake`) for randomized evaluation or for a
+  randomized teleop dataset.
 
 The lerobot commands below run in a second terminal, prepared as in Step 1 without the CAN step:
 
@@ -477,10 +508,9 @@ lerobot-teleoperate \
   --fps=30 --display_data=true
 ```
 
-Same Quest controls as on the real arm ([Quest controls](#quest-controls-and-safety)); watch the Isaac Sim
-window or the cameras in rerun. Ctrl-C stops.
+Same Quest controls as on the real arm ([Quest controls](#quest-controls-and-safety)). Ctrl-C stops.
 
-### Sim Step 3. Record a sim dataset
+### Sim Step 3. Record sim demos (lerobot dataset + Mimic source demos)
 
 ```bash
 lerobot-record \
@@ -488,40 +518,114 @@ lerobot-record \
   --teleop.type=openarm_quest \
   --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_sim_v00 --dataset.no_stamp=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=50 --dataset.fps=30 \
+  --dataset.num_episodes=20 --dataset.fps=30 \
   --dataset.episode_time_s=120 --dataset.reset_time_s=1 \
   --dataset.streaming_encoding=true --dataset.encoder_threads=2 \
   --display_data=true
 ```
 
-Use the same `--dataset.single_task` text as the real dataset: it is the prompt the policy is trained and
-evaluated with. Continuing, `--dataset.push_to_hub=false` and the viewer work as in Step 3.
+One session gives two outputs: the lerobot dataset `ethanCSL/openarm_pringles_lerobot_sim_v00` (trainable
+as is) and, with the server's `--mimic_hdf5`, the same episodes in `logs/demos/pringles_sim_src_v00.hdf5`
+for Mimic (the terminal says `also saved as Mimic source demo demo_N`).
 
-### Sim Step 4. Co-train on real + sim
+- Use the same `--dataset.single_task` text as the real dataset: it is the prompt the policy is trained and
+  evaluated with. Continuing, `--dataset.push_to_hub=false` and the viewer work as in Step 3.
+- For Mimic, each demo must END with the hand-over done and the can still in the LEFT hand: Mimic only keeps
+  generated episodes whose last frame shows that. Do the hand-over, then press X: the arms return home still
+  holding what they hold (recorded), and the grippers open only after the save -- which is what makes it work.
+- Mimic transforms only the right arm's reach-and-grasp to each new can pose; everything after the grasp,
+  including the left arm and the return home, is replayed as recorded. Hold the can still at the pass point for
+  ~0.5 s before the left hand closes: the two arms then have slack to stay in step in generated episodes.
+- ~10-20 good demos covering the can's spawn area are enough for Mimic.
 
-Merge the two datasets into one (the merge refuses datasets whose fps, robot type or features differ; these
-match), then train on it with the Step 4 commands:
+### Sim Step 4. Generate a synthetic dataset with Isaac Lab Mimic (domain randomization here)
+
+Terminal 1 (stop the server first, Ctrl-C: one Isaac Sim at a time fits the 16 GB GPU):
 
 ```bash
-lerobot-edit-dataset --operation.type=merge \
-  --operation.repo_ids='["ethanCSL/openarm_pringles_lerobot_real_v00", "ethanCSL/openarm_pringles_lerobot_sim_v00"]' \
-  --new_repo_id=ethanCSL/openarm_pringles_lerobot_real_sim_v00 --push_to_hub=true
+cd ~/Stanley_ws/IsaacLab && conda activate env_isaaclab
 
+# 4a. Annotate the subtask boundaries (replays each demo from its recorded states)
+./isaaclab.sh -p scripts/imitation_learning/isaaclab_mimic/annotate_demos.py \
+  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v0 \
+  --task_mode handover --auto --from_states \
+  --enable_cameras --headless \
+  --input_file logs/demos/pringles_sim_src_v00.hdf5 \
+  --output_file logs/demos/pringles_sim_src_v00_annotated.hdf5
+
+# 4b. Generate: new can poses, with domain randomization
+./isaaclab.sh -p scripts/imitation_learning/isaaclab_mimic/generate_dataset.py \
+  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v0 --task_mode handover \
+  --input_file logs/demos/pringles_sim_src_v00_annotated.hdf5 \
+  --output_file logs/demos/pringles_sim_mimic_v00.hdf5 \
+  --generation_num_trials 500 --num_envs 4 --enable_cameras --headless \
+  --enable_domain_randomization --domain_randomization_profile visual
+```
+
+- Annotate exports only the demos whose hand-over completes (`Exported N (out of M) annotated episodes`).
+- Generation keeps only successful trials, and for OpenArm `--generation_num_trials` counts SUCCESSES (the
+  Mimic cfg sets `generation_guarantee`): it keeps trying until it has that many. It prints the success rate.
+  Randomization: `--domain_randomization_profile visual` (lighting, materials, camera pose) or `full`, plus
+  `--enable_camera_shake` and `--randomize_object_size`. Keep `--num_envs` <= 4 (8 envs x 3 cameras ran out of
+  GPU memory); 500 episodes take ~70 GB of disk.
+- Both scripts refuse demos recorded at another control rate; the server and generation both run at 30 Hz.
+- For OpenArm tasks, generation also records the joint targets the IK commands each step
+  (`lerobot/joint_pos_target`, see IsaacLab `openarm_recorders.py`): that is what the converter below stores as
+  `action`, the same quantity as the teleop's command in the real datasets.
+
+Back in the lerobot terminal, convert it to the real datasets' format:
+
+```bash
+python mimic_to_lerobot.py \
+  --hdf5 ~/Stanley_ws/IsaacLab/logs/demos/pringles_sim_mimic_v00.hdf5 \
+  --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v00 --push_to_hub
+```
+
+Per step: `observation.state` = the measured joints before the step, `observation.images.*` = the frames
+rendered before it, `action` = the joint targets of the step, all mapped to motor radians through
+`calibration.json`. Same keys, order, units, `robot_type`, 30 fps and video encoding as `lerobot-record`, so it
+merges with the real and the teleop-sim datasets. It refuses an HDF5 generated at another rate, and
+`--task` defaults to the real datasets' task string.
+
+### Sim Step 5. Train: synthetic only, or co-train sim + real
+
+All three datasets have the same format, so the choice is only which dataset `lerobot-train` gets:
+
+| model | dataset |
+|---|---|
+| real only | `ethanCSL/openarm_pringles_lerobot_real_v00` (Step 4) |
+| synthetic only | `ethanCSL/openarm_pringles_lerobot_mimic_v00` (optionally merged with the teleop demos `..._sim_v00`) |
+| co-train | real + mimic (+ sim teleop), merged |
+
+Merge (it refuses datasets whose fps, robot type or features differ; these match):
+
+```bash
+# co-train: real + synthetic (+ the sim teleop demos)
+lerobot-edit-dataset --operation.type=merge \
+  --operation.repo_ids='["ethanCSL/openarm_pringles_lerobot_real_v00", "ethanCSL/openarm_pringles_lerobot_mimic_v00", "ethanCSL/openarm_pringles_lerobot_sim_v00"]' \
+  --new_repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 --push_to_hub=true
+```
+
+then train on the merged (or the synthetic-only) repo with the Step 4 command, e.g. SmolVLA:
+
+```bash
 lerobot-train \
   --policy.path=lerobot/smolvla_base \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_sim_v00 \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --policy.repo_id=ethanCSL/smolvla_pringles_lerobot_real_sim_v00 \
+  --policy.repo_id=ethanCSL/smolvla_pringles_lerobot_real_mimic_v00 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/smolvla_pringles_lerobot_real_sim_v00 \
-  --job_name=smolvla_pringles_lerobot_real_sim_v00 \
+  --output_dir=outputs/train/smolvla_pringles_lerobot_real_mimic_v00 \
+  --job_name=smolvla_pringles_lerobot_real_mimic_v00 \
   --wandb.enable=true
 ```
 
-(GR00T: the Step 4 GR00T command with `--dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_sim_v00`.)
-A sim-only model: train on `ethanCSL/openarm_pringles_lerobot_sim_v00` directly.
+(GR00T: the Step 4 GR00T command with the merged `--dataset.repo_id`.) A merge is a plain concatenation:
+500 synthetic episodes next to 50 real ones means ~10 synthetic frames per real one in every batch. To weight
+the real data more, merge fewer synthetic episodes (e.g. generate fewer trials) -- lerobot 0.6 has no
+per-dataset sampling weights.
 
-### Sim Step 5. Evaluate in sim: normal, async, RTC
+### Sim Step 6. Evaluate in sim: normal, async, RTC
 
 The same four modes and keys as Step 5, against the simulator. Each episode: the policy drives for
 `episode_time_s`, the arm returns slowly home, the success tally is printed, the scene is re-randomized.
