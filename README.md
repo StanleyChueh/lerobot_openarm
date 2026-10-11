@@ -145,6 +145,16 @@ lerobot-dataset-viz --repo-id ethanCSL/openarm_pringles_lerobot_real_v00 --episo
 
 ### Step 4. Train (official command)
 
+Training runs on the training machine (RTX Pro 6000, 96 GB) with the lerobot fork
+[`StanleyChueh/lerobot`](https://github.com/StanleyChueh/lerobot), branch `update_dev` (commit `1e5f2049e`);
+this machine runs collection and evaluation with official lerobot `3f2c29ef` (pinned in `pyproject.toml`).
+Keep the training lerobot **no newer** than this one: a newer lerobot writes config fields that an older one
+refuses to load (`DecodingError: The fields ... are not valid`). `update_dev` is slightly older, so its
+checkpoints load here (SmolVLA, GR00T N1.7 and pi0.5 checkpoints trained with it were evaluated in Step 5's
+modes). Keep it frozen (no merges from upstream) for the duration of the experiments.
+
+**SmolVLA**:
+
 ```bash
 lerobot-train \
   --policy.path=lerobot/smolvla_base \
@@ -176,9 +186,37 @@ lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B 
   --output_dir=outputs/train/groot_pringles_lerobot_real_v00 --job_name=groot_pringles_lerobot_real_v00
 ```
 
+**pi0.5** (`lerobot/pi05_base`, 4.1B parameters), full fine-tune on the RTX Pro 6000:
+
+```bash
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
+  --policy.path=lerobot/pi05_base \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
+  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
+  --policy.dtype=bfloat16 --policy.gradient_checkpointing=true \
+  --policy.repo_id=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --batch_size=32 --steps=30000 --policy.device=cuda \
+  --output_dir=outputs/train/pi05_pringles_lerobot_real_v00 --job_name=pi05_pringles_lerobot_real_v00 \
+  --wandb.enable=true
+```
+
+- `--rename_map` is required: pi05_base names its cameras `base_0_rgb / left_wrist_0_rgb / right_wrist_0_rgb`.
+- Keep `--policy.dtype=bfloat16`: the checkpoint is then also loaded in bf16 for evaluation (9.5 GB of GPU
+  memory). In fp32 it would not fit the 16 GB GPU of this machine.
+- If batch 32 runs out of memory, use `--batch_size=16 --accelerator.gradient_accumulation.steps=2
+  --steps=60000` (`--steps` counts micro-batches, so this is the same 30000 updates at batch 32).
+- On a 16 GB GPU only the action expert fits (0.69B trainable, the PaliGemma VLM frozen): add
+  `--policy.train_expert_only=true` and use `--batch_size=4 --accelerator.gradient_accumulation.steps=8
+  --steps=240000` (peak 14.7 GB, ~1 s per micro-batch on the RTX 5080).
+- For evaluation (Step 5, Sim Step 6), pi0.5 needs three settings that differ from SmolVLA:
+  - **`lerobot-rollout`** needs this same `--rename_map`. The policy server takes the map from the checkpoint.
+  - **The robot client** needs `--policy_type=pi05 --actions_per_chunk=50`.
+  - **RTC** needs an execution horizon of 20. One inference takes ~0.2 s (~0.25 s RTC-guided) on the
+    RTX 5080, about 7-9 control steps at 30 Hz, and the guided prefix has to cover that delay.
+
 ### Step 5. Evaluate on the real robot: normal, async, RTC
 
-Four ways to run a trained policy, for both SmolVLA and GR00T N1.7: normal, async and RTC are official lerobot
+Four ways to run a trained policy, for SmolVLA, GR00T N1.7 and pi0.5: normal, async and RTC are official lerobot
 tools; async + RTC is the combination the RTC docs recommend ("use both together"), which lerobot's policy
 server does not implement, so our server wrapper adds it. Prepare the terminal as in Step 1 (the Quest is not
 needed).
@@ -190,8 +228,9 @@ needed).
 | **RTC** ([docs](https://huggingface.co/docs/lerobot/main/en/rtc)) | inference in a background thread, and each new chunk is *guided* to continue smoothly from the actions already being executed | `lerobot-rollout --inference.type=rtc` |
 | **async + RTC** | async's server/client split, with every chunk RTC-guided to continue the client's unexecuted actions | `policy_server --rtc=true` + `robot_client` |
 
-The commands use the two checkpoints trained on `openarm_pringles_lerobot_real_v00`: SmolVLA
-`ethanCSL/openarm_pringles_lerobot_real_v00_0` and GR00T N1.7 `ethanCSL/openarm_pringles_lerobot_real_gr00t_v00`.
+The commands use the checkpoints trained on `openarm_pringles_lerobot_real_v00`: SmolVLA
+`ethanCSL/openarm_pringles_lerobot_real_v00_0`, GR00T N1.7 `ethanCSL/openarm_pringles_lerobot_real_gr00t_v00`
+and pi0.5 `ethanCSL/pi05_pringles_lerobot_real_v00` (Step 4's pi0.5 command; replace it with your own pi0.5 checkpoint).
 For a checkpoint you trained in Step 4, pass its `--policy.repo_id`, or the local
 `outputs/train/<job>/checkpoints/last/pretrained_model` folder, instead.
 
@@ -235,6 +274,18 @@ lerobot-rollout --strategy.type=episodic \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.repo_id=ethanCSL/rollout_groot_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --display_data=true
+
+# pi0.5 (its own --rename_map)
+lerobot-rollout --strategy.type=episodic \
+  --policy.path=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_pi05_pringles_v00 --dataset.push_to_hub=false \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
   --display_data=true
@@ -284,6 +335,17 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=weighted_average --fps=30 \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+
+# pi0.5
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=pi05 --pretrained_name_or_path=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=weighted_average --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 ```
 
 - Use **`lerobot_robot_openarm_umeow.policy_server`**, not `lerobot.async_inference.policy_server`: it is
@@ -307,7 +369,7 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   client unchanged (one open-ended run, Ctrl-C stops).
 - An `Error in observation sender: Client not running` line when an episode ends is lerobot's client noticing
   that the episode clock stopped it between two observations: harmless.
-- `--actions_per_chunk` <= the policy's chunk size (SmolVLA 50, our GR00T 16); `--chunk_size_threshold`
+- `--actions_per_chunk` <= the policy's chunk size (SmolVLA 50, our GR00T 16, pi0.5 50); `--chunk_size_threshold`
   0.5-0.6 is the docs' recommendation; add `--debug_visualize_queue_size=true` to plot the action queue when
   tuning.
 
@@ -340,10 +402,24 @@ lerobot-rollout --strategy.type=episodic \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
   --display_data=true
+
+# pi0.5 (execution_horizon 20: one inference is ~7-9 steps; its own --rename_map)
+lerobot-rollout --strategy.type=episodic \
+  --inference.type=rtc --inference.rtc.mode=guided \
+  --inference.rtc.execution_horizon=20 --inference.rtc.max_guidance_weight=10.0 \
+  --policy.path=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_pi05_rtc_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --display_data=true
 ```
 
-- `execution_horizon`: actions of the previous chunk the new one is guided to match; 8-12, and below the
-  chunk size. `max_guidance_weight` 10.0 is the docs' value for 10-step flow matching.
+- `execution_horizon`: actions of the previous chunk the new one is guided to match; 8-12 (pi0.5: 20, above
+  its inference delay), and below the chunk size. `max_guidance_weight` 10.0 is the docs' value for 10-step flow matching.
 
 #### Async + RTC
 
@@ -362,6 +438,10 @@ python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
 # GR00T N1.7
 python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
   --rtc=true --rtc_execution_horizon=8 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
+
+# pi0.5
+python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
+  --rtc=true --rtc_execution_horizon=20 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
 ```
 
 Terminal 2, as for async but with `--aggregate_fn_name=latest_only` (RTC has already blended the overlap;
@@ -389,11 +469,22 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=latest_only --fps=30 \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+
+# pi0.5
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=pi05 --pretrained_name_or_path=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=latest_only --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 ```
 
 - The server log shows each chunk: `RTC chunk @ timestep N: guided by K unexecuted actions, inference_delay D`.
   `K` > 0 means RTC is active; `D` is the estimated latency in steps (measured on the RTX 5080: about 2 for
-  GR00T, 4-5 for SmolVLA; it rises for a while after a slow inference). The first chunk of every episode is
+  GR00T, 4-5 for SmolVLA, ~9 for pi0.5; it rises for a while after a slow inference). The first chunk of every episode is
   guided by 0: the previous episode's chunk is forgotten.
 - RTC needs observations mid-chunk: keep `--chunk_size_threshold` around 0.5. Near 0 the client only asks
   when its queue is empty, and there is nothing left to continue.
@@ -402,11 +493,14 @@ python -m lerobot_robot_openarm_umeow.robot_client \
 
 - The arm goes to the home pose first (type `YES`; `--robot.assume_yes=true` skips it), grippers open. On exit
   it returns to that pose, then to where it was before connecting, then the motors are disabled.
-- `--rename_map` is required for SmolVLA in `lerobot-rollout` (it checks the cameras before loading the policy).
+- `--rename_map` is required for SmolVLA and pi0.5 in `lerobot-rollout` (it checks the cameras before loading the
+  policy); each has its own map (Step 4).
 - `--task` and `--robot.cameras` must match the recording **exactly** (same text, same camera names).
 - GR00T uses relative actions: lerobot's normal mode decodes them one step at a time, which GR00T rejects,
   so the robot plugin decodes each chunk whole instead (same result, still synchronous). GR00T is also loaded
   in bf16 (`--robot.policy_dtype=auto`, the default): in fp32 it ran out of memory on the 16 GB GPU.
+- pi0.5 is loaded in the dtype it was trained with: train it with `--policy.dtype=bfloat16` (Step 4), so
+  it takes ~9.5 GB here.
 - The robot's safety guard applies to every mode: an action that jumps or strays from the measured joints
   triggers a `SAFETY HOLD` (the arm stops) instead of being executed.
 - Checkpoints trained on the old Isaac-mirror datasets cannot drive this robot (different joint order and
@@ -620,7 +714,7 @@ lerobot-train \
   --wandb.enable=true
 ```
 
-(GR00T: the Step 4 GR00T command with the merged `--dataset.repo_id`.) A merge is a plain concatenation:
+(GR00T, pi0.5: their Step 4 commands with the merged `--dataset.repo_id`.) A merge is a plain concatenation:
 500 synthetic episodes next to 50 real ones means ~10 synthetic frames per real one in every batch. To weight
 the real data more, merge fewer synthetic episodes (e.g. generate fewer trials) -- lerobot 0.6 has no
 per-dataset sampling weights.
@@ -653,13 +747,24 @@ lerobot-rollout --strategy.type=episodic \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
   --display_data=true
+
+# pi0.5 (its own --rename_map)
+lerobot-rollout --strategy.type=episodic \
+  --policy.path=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --robot.type=openarm_isaac \
+  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_pi05_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
+  --display_data=true
 ```
 
 **RTC**: the Normal commands plus
 
 ```bash
   --inference.type=rtc --inference.rtc.mode=guided \
-  --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0   # GR00T: execution_horizon=8
+  --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0   # GR00T: 8, pi0.5: 20
 ```
 
 and a different `--dataset.repo_id` (e.g. `ethanCSL/rollout_smolvla_rtc_pringles_sim_v00`).
@@ -686,7 +791,21 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=weighted_average --fps=30 \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+
+# pi0.5
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_isaac \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=pi05 --pretrained_name_or_path=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=weighted_average --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
 ```
 
-**Async + RTC**: the RTC policy server from Step 5 (`--rtc=true ...`), and the async client above with
+**Async + RTC**: the RTC policy server from Step 5 (`--rtc=true ...`, with the policy's own
+`--rtc_execution_horizon`: SmolVLA 10, GR00T 8, pi0.5 20), and the async client above with
 `--aggregate_fn_name=latest_only`.
+
+pi0.5 and Isaac Sim share the 16 GB GPU here (peak ~15.5 GB with both): close other GPU programs first. The sim
+runs in lockstep, so the slower control loop (~11-15 Hz with pi0.5) does not change what the policy sees.

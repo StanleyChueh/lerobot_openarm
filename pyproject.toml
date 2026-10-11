@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "lerobot[dataset,groot,training,viz,async]",
+    "lerobot[dataset,groot,pi,training,viz,async]",
     "matplotlib>=3.10.8",
     "openarm-can>=1.2.3",
     "pin",
@@ -32,7 +32,7 @@ dev = [
 ]
 
 [tool.uv.sources]
-lerobot = { git = "https://github.com/huggingface/lerobot.git", branch = "main" }
+lerobot = { git = "https://github.com/huggingface/lerobot.git", rev = "3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e" }
 lerobot_robot_openarm_umeow = { path = "plugins/lerobot_robot_openarm_umeow", editable = true }
 lerobot_teleoperator_openarm_quest = { path = "plugins/lerobot_teleoperator_openarm_quest", editable = true }
 openarm_control = { git = "https://github.com/enactic/openarm_control", rev = "2f1ee56ef2bf1272329b213a1f0b0768b9d07f2b" }

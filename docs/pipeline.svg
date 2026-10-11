@@ -106,7 +106,7 @@
 <path d="M800,846 L800,864" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#aN)"/>
 <rect x="450" y="866" width="700" height="58" rx="10" fill="#ffffff" stroke="#475569" stroke-width="2"/>
 <text x="800.0" y="890" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#0f172a" text-anchor="middle" >lerobot-train</text>
-<text x="800.0" y="911" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="middle" >SmolVLA (cameras renamed camera1/2/3) · GR00T N1.7 (relative actions)</text>
+<text x="800.0" y="911" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="middle" >SmolVLA · GR00T N1.7 (relative actions) · pi0.5 (bf16)</text>
 <path d="M800,924 L800,944 M410,944 L1190,944" fill="none" stroke="#475569" stroke-width="1.8"/>
 <path d="M410,944 L410,966" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#aR)"/>
 <path d="M1190,944 L1190,966" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#aS)"/>

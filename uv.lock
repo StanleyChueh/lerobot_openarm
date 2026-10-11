@@ -1567,7 +1567,7 @@ wheels = [
 [[package]]
 name = "lerobot"
 version = "0.6.2"
-source = { git = "https://github.com/huggingface/lerobot.git?branch=main#3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e" }
+source = { git = "https://github.com/huggingface/lerobot.git?rev=3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e#3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e" }
 dependencies = [
     { name = "cmake" },
     { name = "draccus" },
@@ -1618,6 +1618,10 @@ groot = [
     { name = "torchcodec", marker = "(platform_machine == 'arm64' and sys_platform == 'darwin') or (platform_machine == 'AMD64' and sys_platform == 'linux') or (platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'arm64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux') or sys_platform == 'win32'" },
     { name = "transformers" },
 ]
+pi = [
+    { name = "scipy" },
+    { name = "transformers" },
+]
 training = [
     { name = "accelerate" },
     { name = "av" },
@@ -1640,7 +1644,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "deepdiff" },
     { name = "h5py" },
-    { name = "lerobot", extra = ["async", "dataset", "groot", "training", "viz"] },
+    { name = "lerobot", extra = ["async", "dataset", "groot", "pi", "training", "viz"] },
     { name = "lerobot-robot-openarm-umeow" },
     { name = "lerobot-teleoperator-openarm-quest" },
     { name = "matplotlib" },
@@ -1665,7 +1669,7 @@ dev = [
 requires-dist = [
     { name = "deepdiff", specifier = ">=8.0.0" },
     { name = "h5py", specifier = ">=3.10" },
-    { name = "lerobot", extras = ["dataset", "groot", "training", "viz", "async"], git = "https://github.com/huggingface/lerobot.git?branch=main" },
+    { name = "lerobot", extras = ["dataset", "groot", "pi", "training", "viz", "async"], git = "https://github.com/huggingface/lerobot.git?rev=3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e" },
     { name = "lerobot-robot-openarm-umeow", editable = "plugins/lerobot_robot_openarm_umeow" },
     { name = "lerobot-teleoperator-openarm-quest", editable = "plugins/lerobot_teleoperator_openarm_quest" },
     { name = "matplotlib", specifier = ">=3.10.8" },
