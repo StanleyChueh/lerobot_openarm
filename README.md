@@ -34,17 +34,11 @@ hf auth login                # only if you push datasets / models to the Hub
 The IK model is read from the dora checkout next to this one
 (`~/Stanley_ws/dora-openarm-data-collection/.../scenes/v1_camera/scene.xml`), so keep that repo there.
 
-### Step 1. Every session: prepare the terminal
+### Step 1. CAN-FD links up (once per boot)
 
 ```bash
-# 1. CAN-FD links up (once per boot)
+# CAN-FD links up (once per boot)
 cd ~/Stanley_ws/openarm_can/setup && sudo ./my_arm
-
-# 2. A terminal for lerobot, with ROS 2 kept out of it
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 ```
 
 ### Step 2. Teleoperate the real arm (no recording)
@@ -53,6 +47,10 @@ Drive the real OpenArm with the Quest through the official `lerobot-teleoperate`
 task and to check tracking before you record.
 
 ```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-teleoperate \
   --robot.type=openarm_umeow \
   --robot.right_port=can0 --robot.left_port=can1 \
@@ -62,17 +60,10 @@ lerobot-teleoperate \
 
 What happens:
 
-1. The terminal shows each joint's current vs. home position. **Type `YES`**, and both arms move slowly
+1. **Type `YES`**, and both arms move slowly
    (0.3 rad/s) to the home pose with the grippers open.
-2. The arms hold home (`HELD`) until you press **X** in the headset. See [Quest controls](#quest-controls-and-safety).
+2. Press **X** in the headset to start recording. See [Quest controls](#quest-controls-and-safety).
 3. **Ctrl-C** stops: the arms ramp back to where they started, then the motors are disabled.
-
-Notes:
-
-- `--fps=30` matches recording. The default of 60 is more than the follower's CAN reads keep up with.
-- To see the cameras while teleoperating, add the `--robot.cameras=...` from Step 3 plus `--display_data=true`.
-- Every 5 s the terminal prints an `[openarm_umeow]` status line; its `bound X%` should stay near 0%.
-- Keep a hand near the power / e-stop for the first run.
 
 ### Step 3. Record a dataset
 
@@ -105,37 +96,11 @@ Useful flags:
 
 | Quest | state | what happens |
 |---|---|---|
-| **1st X** | `HELD` | **Start driving** (`LIVE`). Your current hand poses *and* the headset's pose are captured at this press; the arms follow your hands *relative to that moment* only. |
+| **1st X** | `HELD` | **Start recording** (`LIVE`). Your current hand poses *and* the headset's pose are captured at this press; the arms follow your hands *relative to that moment* only. |
 | **2nd X** | `LIVE` | **Return home slowly** (`RETURNING`, every joint <= 0.3 rad/s), still recording, then **save** the episode on arrival. The grippers open after the save. |
-| **X** | `PAUSED` | **Return home slowly while still recording** (grippers kept, so a held object stays held); the arms then wait at home with the episode open. |
-| **X** | `HELD` (episode open) | **Continue** the same episode from home (hands re-anchored, no jump). |
 | **Y** | `LIVE` / `PAUSED` / `HELD` (episode open) | **Discard** the episode at once and **return home slowly**; grippers open on arrival. |
 | **Triggers** | `LIVE` | close the grippers. |
 | **A** / **B** | any | no function. |
-
-A controller position that jumps faster than 4 m/s or 900 deg/s is never followed. One such jump is a
-tracking snap (the Quest re-finding a controller it lost sight of, e.g. held low or behind the can, since the
-headset hangs at the neck): it is ignored, the arm holds still and follows on from there (terminal: "a tracking
-snap -- IGNORED"). Keep the controllers in front of the headset to avoid them.
-
-Every return home (2nd X, Y, the time limit, recovery) is verified on the MEASURED joints: it ends only
-when each arm joint is within 0.1 rad of home (3 s to settle). If one is not, the terminal and rerun say
-`NOT at the reset pose: RJ7.pos is +0.50 rad from home`, and X is refused until it is -- no episode starts
-from a wrong pose. A motor that trips its protection (OVERCURRENT from twisting a wrist against its stop or
-cable, OVERTEMP, ...) switches itself off and goes limp: `MOTOR FAULT` names it, the arm holds, and the
-hold stays until the motor answers again (Ctrl+C and restart; saved episodes are safe). The 5 s stats line
-also shows the observation read time, which grows when a motor stops answering.
-
-`PAUSED` stops the arms where they are when something is too fast: repeated jumps (3 within 2 s), a joint
-more than 1 rad behind its target (joint speed cap: 2 rad/s), or the IK jumping (e.g. an arm stretched out).
-The terminal and the rerun panel say which joint or limit and why. If `episode_time_s` runs out meanwhile,
-X recovers home and the episode is saved on arrival.
-
-**Rerun window** (`--display_data=true`): top-left the **status** panel (episode, phase, Quest buttons and
-tracking); top-right the **network** panel and a latency plot -- ping to the Quest (median of 3 per second,
-plus Wi-Fi wake-up spikes), how late the Quest's packets arrive vs the best this session (the lag your
-teleop actually feels), and this PC's Wi-Fi (SSID, band, signal, link speed). A line climbing in the plot
-means latency is building up; ✅ < 50 ms, ⚠️ < 150 ms, ❌ above.
 
 Check the recorded data:
 
@@ -147,11 +112,7 @@ lerobot-dataset-viz --repo-id ethanCSL/openarm_pringles_lerobot_real_v00 --episo
 
 Training runs on the training machine (RTX Pro 6000, 96 GB) with the lerobot fork
 [`StanleyChueh/lerobot`](https://github.com/StanleyChueh/lerobot), branch `update_dev` (commit `1e5f2049e`);
-this machine runs collection and evaluation with official lerobot `3f2c29ef` (pinned in `pyproject.toml`).
-Keep the training lerobot **no newer** than this one: a newer lerobot writes config fields that an older one
-refuses to load (`DecodingError: The fields ... are not valid`). `update_dev` is slightly older, so its
-checkpoints load here (SmolVLA, GR00T N1.7 and pi0.5 checkpoints trained with it were evaluated in Step 5's
-modes). Keep it frozen (no merges from upstream) for the duration of the experiments.
+this machine runs collection and evaluation with official lerobot `3f2c29ef`.
 
 **SmolVLA**:
 
@@ -166,12 +127,6 @@ lerobot-train \
   --job_name=smolvla_pringles_lerobot_real_v00 \
   --wandb.enable=true
 ```
-
-- `--rename_map` is required: `smolvla_base` names its three cameras `camera1/2/3`, our datasets name them
-  `right_wrist_cam / wrist_cam / body_cam`. This is the same mapping your earlier SmolVLA checkpoints used.
-- `--policy.repo_id` is where the model is uploaded; to keep it local, use `--policy.push_to_hub=false` instead.
-- Train on datasets recorded with **this** pipeline. Checkpoints trained on the Isaac-mirror datasets are not
-  interchangeable: those store sim-unit joints (grippers 0-0.044) in a different key order.
 
 **GR00T N1.7**, the same recipe as the earlier `openarm_pringles_gr00t_real_v00` checkpoint (does **not**
 fit the 16 GB GPU here, even at batch 1 -- train on a larger GPU):
@@ -200,26 +155,7 @@ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
   --wandb.enable=true
 ```
 
-- `--rename_map` is required: pi05_base names its cameras `base_0_rgb / left_wrist_0_rgb / right_wrist_0_rgb`.
-- Keep `--policy.dtype=bfloat16`: the checkpoint is then also loaded in bf16 for evaluation (9.5 GB of GPU
-  memory). In fp32 it would not fit the 16 GB GPU of this machine.
-- If batch 32 runs out of memory, use `--batch_size=16 --accelerator.gradient_accumulation.steps=2
-  --steps=60000` (`--steps` counts micro-batches, so this is the same 30000 updates at batch 32).
-- On a 16 GB GPU only the action expert fits (0.69B trainable, the PaliGemma VLM frozen): add
-  `--policy.train_expert_only=true` and use `--batch_size=4 --accelerator.gradient_accumulation.steps=8
-  --steps=240000` (peak 14.7 GB, ~1 s per micro-batch on the RTX 5080).
-- For evaluation (Step 5, Sim Step 6), pi0.5 needs three settings that differ from SmolVLA:
-  - **`lerobot-rollout`** needs this same `--rename_map`. The policy server takes the map from the checkpoint.
-  - **The robot client** needs `--policy_type=pi05 --actions_per_chunk=50`.
-  - **RTC** needs an execution horizon of 20. One inference takes ~0.2 s (~0.25 s RTC-guided) on the
-    RTX 5080, about 7-9 control steps at 30 Hz, and the guided prefix has to cover that delay.
-
 ### Step 5. Evaluate on the real robot: normal, async, RTC
-
-Four ways to run a trained policy, for SmolVLA, GR00T N1.7 and pi0.5: normal, async and RTC are official lerobot
-tools; async + RTC is the combination the RTC docs recommend ("use both together"), which lerobot's policy
-server does not implement, so our server wrapper adds it. Prepare the terminal as in Step 1 (the Quest is not
-needed).
 
 | mode | what it does | tool |
 |---|---|---|
@@ -229,34 +165,8 @@ needed).
 | **async + RTC** | async's server/client split, with every chunk RTC-guided to continue the client's unexecuted actions | `policy_server --rtc=true` + `robot_client` |
 
 The commands use the checkpoints trained on `openarm_pringles_lerobot_real_v00`: SmolVLA
-`ethanCSL/openarm_pringles_lerobot_real_v00_0`, GR00T N1.7 `ethanCSL/openarm_pringles_lerobot_real_gr00t_v00`
-and pi0.5 `ethanCSL/pi05_pringles_lerobot_real_v00` (Step 4's pi0.5 command; replace it with your own pi0.5 checkpoint).
-For a checkpoint you trained in Step 4, pass its `--policy.repo_id`, or the local
-`outputs/train/<job>/checkpoints/last/pretrained_model` folder, instead.
-
-Every command below runs a series of **evaluation episodes**: the policy drives for `episode_time_s`, the arm
-returns **slowly** (<= 0.3 rad/s) to the start pose and is checked there, then `reset_time_s` gives you time
-to reset the scene, and the next episode starts -- `num_episodes` times. The three numbers are set by:
-
-| | normal, RTC (`lerobot-rollout`) | async, async + RTC (`robot_client`) |
-|---|---|---|
-| number of episodes | `--dataset.num_episodes=10` | `--num_episodes=10` |
-| episode time (s) | `--dataset.episode_time_s=60` | `--episode_time_s=60` |
-| reset time (s) | `--dataset.reset_time_s=60` | `--reset_time_s=60` |
-
-Same keys in every mode and for every policy: during an episode **Enter** or **Right arrow** (or `n`) ends
-it -- the arm returns to the start pose, and the next episode starts after `reset_time_s` -- **Left arrow**
-(`r`) runs it again (not counted), **Esc** (`q`) stops; during a reset **Right arrow** ends it early (Enter
-is ignored there, so a double press never skips the reset). After the last episode (or Esc) the arm returns
-to the start pose, then disconnects. Enter counts only in the evaluation's own terminal (keep it focused);
-the arrows and Esc are lerobot's and are heard from any window on the desktop.
-
-Every evaluation opens a **rerun window** by default (lerobot-rollout and the robot client alike): the three
-cameras, the joint state and the actions sent, and a status panel (episode, phase, safety holds). Each run
-first closes the rerun windows left open by earlier runs, then opens a fresh one; the window stays open after
-the run until the next one replaces it. `--display_data=false` turns it off. The display costs some control
-rate: in sim, lerobot-rollout ran at ~12-14 Hz with it vs ~13-15 Hz without (SmolVLA RTC, pi0.5 normal); the
-robot client was unchanged (~20 Hz). Use the same setting for every run you compare.
+`ethanCSL/openarm_pringles_lerobot_real_smolvla_v00`, GR00T N1.7 `ethanCSL/openarm_pringles_lerobot_real_gr00t_v00`
+and pi0.5 `ethanCSL/openarm_pringles_lerobot_real_pi05_v00`.
 
 #### Normal
 
@@ -267,14 +177,14 @@ the same command can be run again for the next evaluation.
 ```bash
 # SmolVLA
 lerobot-rollout --strategy.type=episodic \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_v00_0 \
+  --policy.path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_smolvla_v00 --dataset.push_to_hub=false \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
   --display_data=true
 
 # GR00T N1.7 (no --rename_map: GR00T keeps the dataset's camera names)
@@ -283,21 +193,21 @@ lerobot-rollout --strategy.type=episodic \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_groot_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_gr00t_v00 --dataset.push_to_hub=false \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
   --display_data=true
 
 # pi0.5 (its own --rename_map)
 lerobot-rollout --strategy.type=episodic \
-  --policy.path=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --policy.path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_pi05_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_pi05_v00 --dataset.push_to_hub=false \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
+  --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
   --display_data=true
 ```
 
@@ -491,31 +401,6 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --aggregate_fn_name=latest_only --fps=30 \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 ```
-
-- The server log shows each chunk: `RTC chunk @ timestep N: guided by K unexecuted actions, inference_delay D`.
-  `K` > 0 means RTC is active; `D` is the estimated latency in steps (measured on the RTX 5080: about 2 for
-  GR00T, 4-5 for SmolVLA, ~9 for pi0.5; it rises for a while after a slow inference). The first chunk of every episode is
-  guided by 0: the previous episode's chunk is forgotten.
-- RTC needs observations mid-chunk: keep `--chunk_size_threshold` around 0.5. Near 0 the client only asks
-  when its queue is empty, and there is nothing left to continue.
-
-#### Notes for all modes
-
-- The arm goes to the home pose first (type `YES`; `--robot.assume_yes=true` skips it), grippers open. On exit
-  it returns to that pose, then to where it was before connecting, then the motors are disabled.
-- `--rename_map` is required for SmolVLA and pi0.5 in `lerobot-rollout` (it checks the cameras before loading the
-  policy); each has its own map (Step 4).
-- `--task` and `--robot.cameras` must match the recording **exactly** (same text, same camera names).
-- GR00T uses relative actions: lerobot's normal mode decodes them one step at a time, which GR00T rejects,
-  so the robot plugin decodes each chunk whole instead (same result, still synchronous). GR00T is also loaded
-  in bf16 (`--robot.policy_dtype=auto`, the default): in fp32 it ran out of memory on the 16 GB GPU.
-- pi0.5 is loaded in the dtype it was trained with: train it with `--policy.dtype=bfloat16` (Step 4), so
-  it takes ~9.5 GB here.
-- The robot's safety guard applies to every mode: an action that jumps or strays from the measured joints
-  triggers a `SAFETY HOLD` (the arm stops) instead of being executed.
-- Checkpoints trained on the old Isaac-mirror datasets cannot drive this robot (different joint order and
-  units): train on data recorded with Step 3 (real) or the Isaac Sim pipeline below.
-
 
 ## Isaac Sim through the same pipeline (`--robot.type=openarm_isaac`)
 
