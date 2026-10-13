@@ -41,6 +41,9 @@ _PHASE_STYLE = {
     "SHUTDOWN": ("⚫", "returning to rest, then motors off"),
     "TELEOP": ("🟢", "teleoperating (not recording)"),
     "ROLLOUT": ("🟢", "running the policy (lerobot-rollout)"),
+    "CLIENT": ("🟢", "running the policy (async robot client)"),
+    "ASYNC_POLICY": ("🤖", "POLICY RUNNING (async, not recorded)"),
+    "RETURNING": ("↩", "returning to the start pose"),
 }
 _VALID = {0: "OK", 1: "STALE", 2: "LOST"}
 
@@ -263,6 +266,7 @@ class StatusBoard:
         self.retry = False
         self.saved: int | None = None
         self.total: int | None = None
+        self.records = True  # False for the async robot client: nothing is saved, so no "saved" line
         self.last_note = ""
         # Set by the openarm_quest record gate: lerobot's "Recording episode N" then only means "waiting
         # for X"; the gate itself announces RECORDING when it really starts.
@@ -331,7 +335,8 @@ class StatusBoard:
         if episode is not None:
             of = f" of {total}" if total else ""
             lines.append(f"# {icon} {label} · episode {episode}{of}{' (re-record)' if retry else ''} · {since:.0f} s")
-            lines.append(f"saved in the dataset: **{saved if saved is not None else 0}**{of}")
+            if self.records:
+                lines.append(f"saved in the dataset: **{saved if saved is not None else 0}**{of}")
         else:
             lines.append(f"# {icon} {label} · {since:.0f} s")
 
@@ -382,7 +387,8 @@ class StatusBoard:
         self._handler = _LerobotLogHandler(self)
         logging.getLogger().addHandler(self._handler)
         command = sys.argv[0].rsplit("/", 1)[-1] if sys.argv else ""
-        self.set_phase("STARTING" if "record" in command else "ROLLOUT" if "rollout" in command else "TELEOP")
+        self.set_phase("STARTING" if "record" in command else "ROLLOUT" if "rollout" in command
+                       else "CLIENT" if "robot_client" in command else "TELEOP")
         _wrap_dataset(self)
         _wrap_blueprint()
 
@@ -527,6 +533,15 @@ def _patch_spawn() -> None:
 
     rr.spawn = spawn
     rr._openarm_spawn_patched = True
+
+
+def default_display_for_rollout() -> None:
+    """lerobot-rollout shows the rerun window by default (lerobot's default is off): every evaluation run
+    opens a fresh window (old ones are closed, see _patch_spawn). --display_data=false turns it off.
+    Runs when the plugin is imported, which lerobot-rollout does before it parses the command line."""
+    command = sys.argv[0].rsplit("/", 1)[-1] if sys.argv else ""
+    if "rollout" in command and not any(a.split("=", 1)[0] == "--display_data" for a in sys.argv[1:]):
+        sys.argv.append("--display_data=true")
 
 
 _patch_spawn()

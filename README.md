@@ -244,9 +244,19 @@ to reset the scene, and the next episode starts -- `num_episodes` times. The thr
 | episode time (s) | `--dataset.episode_time_s=60` | `--episode_time_s=60` |
 | reset time (s) | `--dataset.reset_time_s=60` | `--reset_time_s=60` |
 
-Same keys in every mode: during an episode **Right arrow** (or `n`) ends it, **Left arrow** (`r`) runs it
-again (not counted), **Esc** (`q`) stops; during a reset **Right arrow** ends it early. After the last
-episode (or Esc) the arm returns to the start pose, then disconnects.
+Same keys in every mode and for every policy: during an episode **Enter** or **Right arrow** (or `n`) ends
+it -- the arm returns to the start pose, and the next episode starts after `reset_time_s` -- **Left arrow**
+(`r`) runs it again (not counted), **Esc** (`q`) stops; during a reset **Right arrow** ends it early (Enter
+is ignored there, so a double press never skips the reset). After the last episode (or Esc) the arm returns
+to the start pose, then disconnects. Enter counts only in the evaluation's own terminal (keep it focused);
+the arrows and Esc are lerobot's and are heard from any window on the desktop.
+
+Every evaluation opens a **rerun window** by default (lerobot-rollout and the robot client alike): the three
+cameras, the joint state and the actions sent, and a status panel (episode, phase, safety holds). Each run
+first closes the rerun windows left open by earlier runs, then opens a fresh one; the window stays open after
+the run until the next one replaces it. `--display_data=false` turns it off. The display costs some control
+rate: in sim, lerobot-rollout ran at ~12-14 Hz with it vs ~13-15 Hz without (SmolVLA RTC, pi0.5 normal); the
+robot client was unchanged (~20 Hz). Use the same setting for every run you compare.
 
 #### Normal
 

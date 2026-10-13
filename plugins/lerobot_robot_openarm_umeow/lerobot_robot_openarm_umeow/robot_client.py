@@ -1,7 +1,7 @@
 """lerobot's async robot client, run as evaluation EPISODES (async, and async + RTC).
 
     python -m lerobot_robot_openarm_umeow.robot_client <lerobot.async_inference.robot_client flags> \
-        --num_episodes=10 --episode_time_s=60 --reset_time_s=30
+        --num_episodes=10 --episode_time_s=60 --reset_time_s=30 [--display_data=false]
 
 lerobot's robot client runs one open-ended session until Ctrl-C. This runs the same client -- same flags,
 same policy server (ours, with or without --rtc=true), same action queue and aggregation -- as a series of
@@ -12,13 +12,21 @@ episodes, the way `lerobot-rollout --strategy.type=episodic` does for normal and
            there, exactly as lerobot-rollout's resets on this robot; then reset_time_s for you to reset the
            scene. After the last episode the arm returns to the start pose and the client disconnects.
 
-  keys     Right arrow / n: end the episode (or the reset) now.  Left arrow / r: run this episode again
-           (not counted).  Esc / q: stop -- the arm returns to the start pose, then disconnects.
+  keys     Enter, Right arrow / n: end the episode now (Right arrow also ends the reset; Enter does not,
+           see episode_keys.py).  Left arrow / r: run this episode again (not counted).  Esc / q: stop --
+           the arm returns to the start pose, then disconnects.
 
 Every episode starts clean: the client's action queue and timesteps are emptied, and the policy server is
 told a new client is ready, so it forgets the last episode's observations and, with --rtc=true, its last
 chunk -- without reloading the policy. Nothing is recorded. Without --num_episodes this is lerobot's client
-unchanged.
+unchanged, apart from the display.
+
+  display  a rerun window, as lerobot-rollout's --display_data=true (on by default here, as in our
+           lerobot-rollout; --display_data=false turns it off): the cameras, the joint state, the actions
+           sent to the arm, and the status panel (episode, phase, safety holds). Every run closes the rerun
+           windows left open and opens a fresh one (rerun_status.py). lerobot's client reads the robot only
+           when it sends an observation to the server; for a live view, the ticks in between read it too, as
+           lerobot-rollout does on every tick. Display errors are reported once and never stop the arm.
 """
 
 import sys
@@ -27,7 +35,17 @@ import time
 import types
 from queue import Queue
 
-_FLAGS = {"num_episodes": int, "episode_time_s": float, "reset_time_s": float}
+from .episode_keys import episode, init_keyboard_listener
+
+def _bool(value: str) -> bool:
+    if value.lower() in ("true", "1", "yes"):
+        return True
+    if value.lower() in ("false", "0", "no"):
+        return False
+    raise SystemExit(f"[openarm] expected true or false, got {value!r}")
+
+
+_FLAGS = {"num_episodes": int, "episode_time_s": float, "reset_time_s": float, "display_data": _bool}
 _DEFAULTS = {"episode_time_s": 60.0, "reset_time_s": 60.0}  # lerobot-record's / lerobot-rollout's defaults
 
 
@@ -88,6 +106,73 @@ def _episode_client_class(rc):
     return EpisodeClient
 
 
+def _display_client_class(base):
+    """`base` that also logs every control tick to rerun: the observation and the last action sent."""
+    from lerobot.utils.rerun_visualization import log_rerun_data
+
+    class DisplayClient(base):
+        _shown_action = None
+        _display_failed = False
+
+        def _show(self, observation) -> None:
+            if self._display_failed:
+                return
+            try:
+                log_rerun_data(observation={k: v for k, v in observation.items() if k != "task"},
+                               action=self._shown_action)
+            except Exception as e:  # display only: never stop the arm for it
+                self._display_failed = True
+                print(f"[openarm] rerun display stopped: {e!r}", flush=True)
+
+        def control_loop_action(self, verbose: bool = False):
+            self._shown_action = super().control_loop_action(verbose)
+            return self._shown_action
+
+        def control_loop_observation(self, task: str, verbose: bool = False):
+            observation = super().control_loop_observation(task, verbose)
+            if observation:
+                self._show(observation)
+            return observation
+
+        def _ready_to_send_observation(self):
+            # Called once per control tick, after the action. A tick that sends no observation to the server
+            # reads the robot for the display only.
+            ready = super()._ready_to_send_observation()
+            if not ready and not self._display_failed:
+                try:
+                    self._show(self.robot.get_observation())
+                except Exception as e:
+                    self._display_failed = True
+                    print(f"[openarm] rerun display stopped: {e!r}", flush=True)
+            return ready
+
+    return DisplayClient
+
+
+def _start_display(rc) -> bool:
+    """Open a fresh rerun window (old ones are closed) and make every client log to it. Before the client
+    is built: the robot connects in its constructor and starts the status panel only if rerun is active.
+    If rerun cannot start, the evaluation runs without it."""
+    from lerobot.utils.rerun_visualization import init_rerun
+
+    try:
+        init_rerun(session_name="robot_client")
+    except Exception as e:  # e.g. RuntimeError: rerun cannot find its viewer (env not activated)
+        print(f"[openarm] rerun window not opened ({e!r}); running without it.", flush=True)
+        return False
+    rc.RobotClient = _display_client_class(rc.RobotClient)
+    return True
+
+
+def _phase(phase: str, episode: int | None = None, total: int | None = None) -> None:
+    from .rerun_status import BOARD
+
+    BOARD.records = False
+    if episode is not None:
+        BOARD.episode, BOARD.total = episode, total
+    BOARD.set_phase(phase)
+
+
 def _run_episode(client, task: str, episode_time_s: float, events: dict) -> tuple[str, float, int]:
     """The policy drives until the time is up or a key ends it. (why it ended, seconds, actions executed)"""
     n0 = len(client.action_queue_size)  # one entry per executed action
@@ -99,14 +184,14 @@ def _run_episode(client, task: str, episode_time_s: float, events: dict) -> tupl
         while not client.shutdown_event.is_set():
             if time.perf_counter() - t0 >= episode_time_s:
                 reason.append(f"episode_time_s ({episode_time_s:g} s) reached")
-            elif events["exit_early"]:
-                events["exit_early"] = False
-                reason.append("ended early (Right arrow)")
-            elif events["rerecord_episode"]:
-                reason.append("to be run again (Left arrow)")
             elif events["stop_recording"]:
                 reason.append("stopped (Esc)")
+            elif events["rerecord_episode"]:
+                reason.append("to be run again (Left arrow)")
+            elif events["exit_early"]:
+                reason.append("ended early (" + ("Enter" if events["end_episode"] else "Right arrow") + ")")
             if reason:
+                events["exit_early"] = False  # used here; must not also end the reset
                 break
             time.sleep(0.02)
         client.shutdown_event.set()  # ends lerobot's control loop (and this episode's receiver)
@@ -115,7 +200,8 @@ def _run_episode(client, task: str, episode_time_s: float, events: dict) -> tupl
     receiver.start()
     watcher.start()
     try:
-        client.control_loop(task=task)
+        with episode(events):
+            client.control_loop(task=task)
     finally:
         client.shutdown_event.set()
         seconds = time.perf_counter() - t0
@@ -136,13 +222,14 @@ def _reset_phase(reset_time_s: float, events: dict) -> None:
         time.sleep(0.05)
 
 
-def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: float) -> None:
+def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: float, display: bool) -> None:
     import lerobot.async_inference.robot_client as rc
     import lerobot.rollout.strategies.core as core  # imported before connecting: the robot slows its returns
 
     from lerobot.async_inference.helpers import visualize_action_queue_size
     from lerobot.transport import services_pb2
 
+    display = display and _start_display(rc)
     client = _episode_client_class(rc)(cfg)  # connects the robot: the arm goes to the start pose
     obs = client.robot.get_observation()
     hw = types.SimpleNamespace(robot_wrapper=client.robot,
@@ -156,8 +243,9 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
         while len([r for r in results if r[1]]) < num_episodes and not events["stop_recording"]:
             number = len([r for r in results if r[1]]) + 1
             client.new_episode(services_pb2)
+            _phase("ASYNC_POLICY", number, num_episodes)
             print(f"[openarm] episode {number}/{num_episodes}: the policy drives for up to {episode_time_s:g} s"
-                  " (Right arrow ends it, Left arrow runs it again, Esc stops).", flush=True)
+                  " (Enter or Right arrow ends it, Left arrow runs it again, Esc stops).", flush=True)
             reason, seconds, actions = _run_episode(client, cfg.task, episode_time_s, events)
             counted = not events["rerecord_episode"]
             events["rerecord_episode"] = False
@@ -165,9 +253,11 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
             print(f"[openarm] episode {number}/{num_episodes} {reason}: {seconds:.1f} s, {actions} actions"
                   f" executed ({actions / seconds if seconds else 0:.0f} Hz)."
                   + ("" if counted else " It will be run again."), flush=True)
+            _phase("RETURNING")
             core.RolloutStrategy.return_to_initial_position(hw, duration_s=3.0)
             more = len([r for r in results if r[1]]) < num_episodes
             if more and not events["stop_recording"]:
+                _phase("RESETTING")
                 _reset_phase(reset_time_s, events)
     finally:
         if listener is not None:
@@ -178,12 +268,10 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
               + ", ".join(f"#{n} {s:.0f} s" for n, _, s, _ in done), flush=True)
         if cfg.debug_visualize_queue_size:
             visualize_action_queue_size(client.action_queue_size)
+        if display:
+            from lerobot.utils.rerun_visualization import shutdown_rerun
 
-
-def init_keyboard_listener():
-    from lerobot.utils.keyboard_input import init_keyboard_listener as lerobot_listener
-
-    return lerobot_listener()
+            shutdown_rerun()  # the window stays open to look at; the next run replaces it
 
 
 def main() -> None:
@@ -193,10 +281,18 @@ def main() -> None:
     register_third_party_plugins()
     import lerobot.async_inference.robot_client as rc
 
+    display = values.get("display_data", True)
     if "num_episodes" not in values:
-        if set(values) - {"num_episodes"}:
+        if set(values) - {"num_episodes", "display_data"}:
             raise SystemExit("[openarm] --episode_time_s / --reset_time_s need --num_episodes.")
-        rc.async_client()  # lerobot's client, unchanged
+        display = display and _start_display(rc)
+        try:
+            rc.async_client()  # lerobot's client, unchanged apart from the display
+        finally:
+            if display:
+                from lerobot.utils.rerun_visualization import shutdown_rerun
+
+                shutdown_rerun()
         return
     import draccus
 
@@ -205,7 +301,7 @@ def main() -> None:
     @draccus.wrap()
     def episodes(cfg: RobotClientConfig):
         run_episodes(cfg, values["num_episodes"], values.get("episode_time_s", _DEFAULTS["episode_time_s"]),
-                     values.get("reset_time_s", _DEFAULTS["reset_time_s"]))
+                     values.get("reset_time_s", _DEFAULTS["reset_time_s"]), display)
 
     episodes()
 
