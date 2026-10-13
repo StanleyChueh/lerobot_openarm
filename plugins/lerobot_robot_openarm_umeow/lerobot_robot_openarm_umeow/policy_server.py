@@ -43,6 +43,7 @@ it with the client's --aggregate_fn_name=latest_only: the overlap is already ble
 """
 
 import sys
+import time
 
 from .policy_loading import load_bf16, wants_bf16
 
@@ -143,14 +144,20 @@ def _patch(server_module) -> None:
         return chunk
 
     def _predict_action_chunk(self, observation_t):
+        start = time.perf_counter()
         if not (relative(self) or _RTC["enabled"]):
-            return original_predict(self, observation_t)
-        self._openarm_obs_timestep = observation_t.get_timestep()
-        self._openarm_postprocessor, self.postprocessor = self.postprocessor, _PassThrough()
-        try:
-            return original_predict(self, observation_t)
-        finally:
-            self.postprocessor = self._openarm_postprocessor
+            chunk = original_predict(self, observation_t)
+        else:
+            self._openarm_obs_timestep = observation_t.get_timestep()
+            self._openarm_postprocessor, self.postprocessor = self.postprocessor, _PassThrough()
+            try:
+                chunk = original_predict(self, observation_t)
+            finally:
+                self.postprocessor = self._openarm_postprocessor
+        if chunk:  # for the client's timing log (eval_metrics.py); pickled with the chunk, ignored otherwise
+            chunk[0]._openarm = {"rtc": _RTC["enabled"], "compute_s": time.perf_counter() - start,
+                                 "guided": getattr(self, "_openarm_guided", None) if _RTC["enabled"] else None}
+        return chunk
 
     def _reset_server(self):
         self._openarm_prev = None  # a new client: no previous chunk to continue
@@ -229,6 +236,7 @@ def _rtc_chunk(server, observation):
     original = chunk.squeeze(0).clone()
     processed = server._openarm_postprocessor(chunk)  # decoded whole, against this observation
     server._openarm_latencies = (latencies + [time.perf_counter() - t0])[-10:]
+    server._openarm_guided = 0 if tail_abs is None else len(tail_abs)
     server._openarm_prev = {"start": t_obs, "original": original, "processed": processed.squeeze(0).to(original.device)}
     server.logger.info(f"RTC chunk @ timestep {t_obs}: guided by {0 if tail_abs is None else len(tail_abs)} unexecuted"
                        f" actions, inference_delay {delay}")

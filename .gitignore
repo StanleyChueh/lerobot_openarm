@@ -208,3 +208,6 @@ __marimo__/
 
 # Per-run attention-visualization dumps (large PNGs, not meant for version control)
 attention_*/
+
+# evaluation timing logs (eval_metrics.py) and local training outputs
+outputs/

@@ -84,6 +84,9 @@ _TELEOP_STYLE = {
 }
 
 
+EVAL_VIEW = False  # set by eval_metrics.py: the rerun layout shows the evaluation timing
+
+
 def _rerun_active() -> bool:
     try:
         import rerun as rr
@@ -267,6 +270,7 @@ class StatusBoard:
         self.saved: int | None = None
         self.total: int | None = None
         self.records = True  # False for the async robot client: nothing is saved, so no "saved" line
+        self.run_info = ""  # evaluations: policy, model and mode (eval_metrics.py)
         self.last_note = ""
         # Set by the openarm_quest record gate: lerobot's "Recording episode N" then only means "waiting
         # for X"; the gate itself announces RECORDING when it really starts.
@@ -329,7 +333,7 @@ class StatusBoard:
     def _render(self) -> str:
         with self._lock:
             phase, since, episode, retry = self.phase, time.perf_counter() - self.phase_t, self.episode, self.retry
-            saved, total, note = self.saved, self.total, self.last_note
+            saved, total, note, run_info = self.saved, self.total, self.last_note, self.run_info
         icon, label = _PHASE_STYLE.get(phase, ("", phase))
         lines = []
         if episode is not None:
@@ -339,6 +343,8 @@ class StatusBoard:
                 lines.append(f"saved in the dataset: **{saved if saved is not None else 0}**{of}")
         else:
             lines.append(f"# {icon} {label} · {since:.0f} s")
+        if run_info:
+            lines.insert(1, run_info)
 
         teleop = TELEOP_STATE.snapshot()
         if teleop["state"]:
@@ -438,15 +444,23 @@ def _wrap_blueprint() -> None:
             views.append(rrb.TimeSeriesView(name="observation", contents=sorted(observation_paths)))
         if action_paths:
             views.append(rrb.TimeSeriesView(name="action", contents=sorted(action_paths)))
-        top = rrb.Horizontal(
-            rrb.TextDocumentView(origin=ENTITY, name="status"),
-            rrb.Vertical(
+        if EVAL_VIEW:  # an evaluation: its timing (eval_metrics.py) in place of the Quest's network panel
+            from .eval_metrics import LIVE
+
+            side = rrb.Vertical(
+                rrb.TimeSeriesView(name="eval timing (ms)",
+                                   contents=[f"{LIVE}/latency_ms", f"{LIVE}/loop_period_ms"]),
+                rrb.TimeSeriesView(name="actions queued / skipped / none",
+                                   contents=[f"{LIVE}/queued_actions", f"{LIVE}/skipped_actions", f"{LIVE}/no_action"]),
+                row_shares=[1, 1],
+            )
+        else:
+            side = rrb.Vertical(
                 rrb.TextDocumentView(origin=NetworkMonitor.ENTITY, name="network"),
                 rrb.TimeSeriesView(origin=NetworkMonitor.PLOT, name="latency (ms)"),
                 row_shares=[1, 1],
-            ),
-            column_shares=[2, 1],
-        )
+            )
+        top = rrb.Horizontal(rrb.TextDocumentView(origin=ENTITY, name="status"), side, column_shares=[2, 1])
         return rrb.Blueprint(rrb.Vertical(top, rrb.Grid(*views), row_shares=[1.4, 5]))
 
     viz._build_blueprint = build_blueprint

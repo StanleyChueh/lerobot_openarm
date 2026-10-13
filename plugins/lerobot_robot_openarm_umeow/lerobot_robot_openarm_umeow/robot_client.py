@@ -25,8 +25,14 @@ unchanged, apart from the display.
            lerobot-rollout; --display_data=false turns it off): the cameras, the joint state, the actions
            sent to the arm, and the status panel (episode, phase, safety holds). Every run closes the rerun
            windows left open and opens a fresh one (rerun_status.py). lerobot's client reads the robot only
-           when it sends an observation to the server; for a live view, the ticks in between read it too, as
-           lerobot-rollout does on every tick. Display errors are reported once and never stop the arm.
+           when it sends an observation to the server, and the display shows those reads; it never reads the
+           robot itself (that would slow the control loop), so the cameras and joints update when the client
+           sends an observation, and the actions on every tick. Display errors are reported once and never
+           stop the arm.
+
+  timing   every tick and chunk is logged as in lerobot-rollout (eval_metrics.py): a line per episode, a
+           summary table and a plot at the end, in outputs/eval_logs/ (mode async, or async_rtc when the
+           policy server runs with --rtc=true).
 """
 
 import sys
@@ -35,6 +41,7 @@ import time
 import types
 from queue import Queue
 
+from . import eval_metrics
 from .episode_keys import episode, init_keyboard_listener
 
 def _bool(value: str) -> bool:
@@ -136,11 +143,12 @@ def _display_client_class(base):
 
         def _ready_to_send_observation(self):
             # Called once per control tick, after the action. A tick that sends no observation to the server
-            # reads the robot for the display only.
+            # shows only the action: the display never reads the robot itself (a read takes 36-53 ms on the
+            # real arm, which would slow the control loop). Observations are shown when the client reads them.
             ready = super()._ready_to_send_observation()
-            if not ready and not self._display_failed:
+            if not ready and not self._display_failed and self._shown_action:
                 try:
-                    self._show(self.robot.get_observation())
+                    log_rerun_data(action=self._shown_action)
                 except Exception as e:
                     self._display_failed = True
                     print(f"[openarm] rerun display stopped: {e!r}", flush=True)
@@ -222,6 +230,13 @@ def _reset_phase(reset_time_s: float, events: dict) -> None:
         time.sleep(0.05)
 
 
+def _eval_log(policy_path: str | None, fps: float, policy_type: str | None) -> "eval_metrics.EvalLog | None":
+    if not eval_metrics._enabled():
+        return None
+    # async_rtc once a chunk says the server runs RTC
+    return eval_metrics.EvalLog("async", policy_path or "policy", fps, policy_type)
+
+
 def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: float, display: bool) -> None:
     import lerobot.async_inference.robot_client as rc
     import lerobot.rollout.strategies.core as core  # imported before connecting: the robot slows its returns
@@ -230,7 +245,11 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
     from lerobot.transport import services_pb2
 
     display = display and _start_display(rc)
-    client = _episode_client_class(rc)(cfg)  # connects the robot: the arm goes to the start pose
+    log = _eval_log(cfg.pretrained_name_or_path, cfg.fps, cfg.policy_type)
+    client_cls = _episode_client_class(rc)
+    if log is not None:
+        client_cls = eval_metrics.client_class(client_cls, log)
+    client = client_cls(cfg)  # connects the robot: the arm goes to the start pose
     obs = client.robot.get_observation()
     hw = types.SimpleNamespace(robot_wrapper=client.robot,
                                initial_position={k: v for k, v in obs.items() if k.endswith(".pos")})
@@ -246,7 +265,11 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
             _phase("ASYNC_POLICY", number, num_episodes)
             print(f"[openarm] episode {number}/{num_episodes}: the policy drives for up to {episode_time_s:g} s"
                   " (Enter or Right arrow ends it, Left arrow runs it again, Esc stops).", flush=True)
+            if log is not None:
+                log.begin_episode()
             reason, seconds, actions = _run_episode(client, cfg.task, episode_time_s, events)
+            if log is not None:
+                log.end_episode()
             counted = not events["rerecord_episode"]
             events["rerecord_episode"] = False
             results.append((number, counted, seconds, actions))
@@ -268,6 +291,8 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
               + ", ".join(f"#{n} {s:.0f} s" for n, _, s, _ in done), flush=True)
         if cfg.debug_visualize_queue_size:
             visualize_action_queue_size(client.action_queue_size)
+        if log is not None:
+            log.finish()
         if display:
             from lerobot.utils.rerun_visualization import shutdown_rerun
 
@@ -286,9 +311,16 @@ def main() -> None:
         if set(values) - {"num_episodes", "display_data"}:
             raise SystemExit("[openarm] --episode_time_s / --reset_time_s need --num_episodes.")
         display = display and _start_display(rc)
+        log = _eval_log(eval_metrics._argv_value("--pretrained_name_or_path"),
+                        float(eval_metrics._argv_value("--fps") or 30), eval_metrics._argv_value("--policy_type"))
+        if log is not None:
+            rc.RobotClient = eval_metrics.client_class(rc.RobotClient, log)
         try:
-            rc.async_client()  # lerobot's client, unchanged apart from the display
+            rc.async_client()  # lerobot's client, unchanged apart from the display and the timing log
         finally:
+            if log is not None:
+                log.end_episode()
+                log.finish()
             if display:
                 from lerobot.utils.rerun_visualization import shutdown_rerun
 
