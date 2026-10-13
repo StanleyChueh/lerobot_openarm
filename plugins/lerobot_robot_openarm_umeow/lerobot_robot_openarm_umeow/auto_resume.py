@@ -1,4 +1,4 @@
-"""lerobot-record: continue an existing local dataset automatically instead of failing.
+"""lerobot-record: continue an existing LOCAL dataset automatically instead of failing.
 
 lerobot-record needs `--resume=true` AND `--dataset.root=<local folder>` to add episodes to a dataset it
 already recorded; without them it fails (the folder exists, or resume() refuses the shared Hub cache). Its
@@ -7,10 +7,15 @@ $HF_LEROBOT_HOME/<repo_id> (by default ~/.cache/huggingface/lerobot/<repo_id>) a
 adds those two flags and says so. Given flags win: `--resume=false` keeps lerobot's own behaviour, and an
 explicit `--dataset.root` is kept. `--dataset.num_episodes` keeps lerobot's meaning: episodes to ADD.
 
-If the local folder is missing (or is an empty stub left by a run stopped before its first save) but the
-Hub already has the dataset, it is downloaded first and then continued. Otherwise a new, local dataset
-would be created under the same repo_id and its push would OVERWRITE the episodes on the Hub. Offline,
-or with --dataset.push_to_hub=false, the Hub is not consulted.
+Only the local copy is continued, never the Hub's. Without local episodes a new dataset is recorded, even
+with `--resume=true` (dropped: lerobot's resume would download the Hub's copy). An empty folder left by a
+run stopped before its first save is removed first.
+
+If the Hub already has episodes under the same repo_id, this run's push at the end replaces that dataset:
+the upload also deletes the Hub's data/, meta/ and videos/ files this recording does not have, in the same
+commit. lerobot's upload only adds and overwrites, and lerobot loads every parquet file under data/ and
+meta/episodes/, so leftover files of the old dataset would mix into the new one. The old dataset stays in
+the Hub repo's commit history.
 """
 
 import json
@@ -41,27 +46,32 @@ def _is_empty_stub(folder: Path) -> bool:
             and not any((folder / d).exists() for d in ("data", "videos", "images")))
 
 
-def _fetch_from_hub(repo_id: str, folder: Path) -> int:
-    """Download the Hub's copy into `folder` if it has episodes; their count, or 0."""
+def _hub_episodes(repo_id: str) -> int:
+    """Episodes the Hub has under `repo_id`; 0 if none, not there or offline. Only for the warning below."""
     try:
-        from huggingface_hub import hf_hub_download, snapshot_download
+        from huggingface_hub import hf_hub_download
 
         info = json.loads(Path(hf_hub_download(repo_id, "meta/info.json", repo_type="dataset",
                                                force_download=True)).read_text())
-        hub_episodes = int(info["total_episodes"])
+        return int(info["total_episodes"])
     except Exception:
-        return 0  # not on the Hub (or offline): a new dataset
-    if hub_episodes <= 0:
         return 0
-    if folder.exists():
-        if not _is_empty_stub(folder):
-            raise SystemExit(f"[openarm] {folder} exists but holds no saved episodes, while the Hub has {hub_episodes}"
-                             f" for {repo_id}. Move that folder away (or use another --dataset.repo_id) and rerun.")
-        shutil.rmtree(folder)  # metadata only, 0 episodes: left by a run stopped before its first save
-    print(f"[openarm] {repo_id}: no local copy, the Hub has {hub_episodes} episode(s) -- downloading it to {folder}"
-          " to continue it (recording a new dataset under this name would overwrite them on the Hub).", flush=True)
-    snapshot_download(repo_id, repo_type="dataset", local_dir=str(folder))
-    return _local_episodes(folder)
+
+
+_REPLACED = ["data/**", "meta/**", "videos/**"]
+
+
+def _replace_on_push(repo_id: str) -> None:
+    """Make lerobot's push of `repo_id` delete the Hub's dataset files that the new recording does not have."""
+    import lerobot.datasets.lerobot_dataset as ds
+
+    class ReplacingHfApi(ds.HfApi):
+        def upload_folder(self, *args, **kwargs):
+            if kwargs.get("repo_id") == repo_id and kwargs.get("delete_patterns") is None:
+                kwargs["delete_patterns"] = _REPLACED  # files uploaded in the same commit are kept
+            return super().upload_folder(*args, **kwargs)
+
+    ds.HfApi = ReplacingHfApi
 
 
 _INSTALLED = [False]
@@ -87,10 +97,22 @@ def install() -> None:
     else:
         folder = Path(root).expanduser()
     episodes = _local_episodes(folder)
-    if episodes <= 0 and root is None and (_value(argv, "--dataset.push_to_hub") or "true").lower() not in ("false", "0", "no"):
-        episodes = _fetch_from_hub(repo_id, folder)
-    if episodes <= 0:
-        return  # nothing anywhere yet: lerobot creates a new dataset as usual
+    if episodes <= 0:  # nothing local: lerobot creates a new dataset
+        if resume in ("true", "1", "yes"):
+            argv[:] = [a for a in argv if not a.startswith("--resume")]
+            print(f"[openarm] {repo_id}: no local episodes in {folder}: recording a new dataset"
+                  " (--resume dropped: only a local dataset is continued, never the Hub's).", flush=True)
+        if root is None and _is_empty_stub(folder):
+            shutil.rmtree(folder)  # metadata only, 0 episodes: left by a run stopped before its first save
+        push = (_value(argv, "--dataset.push_to_hub") or "true").lower() not in ("false", "0", "no")
+        hub = _hub_episodes(repo_id) if push else 0
+        if hub > 0:
+            _replace_on_push(repo_id)
+            print(f"[openarm] WARNING: the Hub already has {hub} episode(s) under {repo_id}. This run records a new"
+                  " dataset, and its push at the end REPLACES the Hub's (its old files are removed; they stay in the"
+                  " repo's history). To keep them: Ctrl-C now and use another --dataset.repo_id, or add"
+                  " --dataset.push_to_hub=false.", flush=True)
+        return
     added = []
     if resume not in ("true", "1", "yes"):
         argv[:] = [a for a in argv if not a.startswith("--resume")] + ["--resume=true"]

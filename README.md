@@ -65,7 +65,7 @@ lerobot-record \
   --display_data=true
 ```
 
-Run the same command again to add episodes to the dataset. `--dataset.push_to_hub=false` keeps it local.
+Run the same command again to add episodes to the local dataset (only a local copy is continued, never the Hub's). `--dataset.push_to_hub=false` keeps it local.
 
 ### Quest controls
 
