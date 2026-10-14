@@ -18,7 +18,12 @@ Quest app (UDP :5006) -> openarm_quest teleop (mink IK) -> lerobot-record (30 Hz
 cd ~/Stanley_ws/lerobot_openarm
 git checkout official-lerobot-quest
 uv sync                      # installs lerobot, both plugins and the IK libraries
-hf auth login                # only if you push datasets / models to the Hub
+```
+
+Link to Quest3 Pro domain
+
+```
+sudo ip addr add 10.100.1.240/24 dev wlp7s0
 ```
 
 Keep `~/Stanley_ws/dora-openarm-data-collection` next to this repo (the IK model is read from it).
@@ -29,18 +34,13 @@ Keep `~/Stanley_ws/dora-openarm-data-collection` next to this repo (the IK model
 cd ~/Stanley_ws/openarm_can/setup && sudo ./my_arm
 ```
 
-Every lerobot terminal below starts with:
+### Step 2. Teleoperate the real arm (no recording)
 
 ```bash
 cd ~/Stanley_ws/lerobot_openarm
 source .venv/bin/activate
 unset PYTHONPATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-```
-
-### Step 2. Teleoperate the real arm (no recording)
-
-```bash
 lerobot-teleoperate \
   --robot.type=openarm_umeow \
   --robot.right_port=can0 --robot.left_port=can1 \
@@ -53,6 +53,10 @@ Type `YES` (the arms go home), press **X** in the headset to start, **Ctrl-C** t
 ### Step 3. Record a dataset
 
 ```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-record \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
@@ -79,6 +83,10 @@ Run the same command again to continue the local dataset (only a local copy is c
 Check the recorded data:
 
 ```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-dataset-viz --repo-id ethanCSL/openarm_pringles_lerobot_real_v00 --episode-index 0
 ```
 
@@ -101,7 +109,7 @@ lerobot-train \
   --batch_size=64 --steps=20000 --policy.device=cuda \
   --output_dir=outputs/train/openarm_pringles_lerobot_real_smolvla_v00 \
   --job_name=openarm_pringles_lerobot_real_smolvla_v00 \
-  --wandb.enable=true
+  --wandb.enable=true --dataset.image_transforms.enable=true --dataset.image_transforms.random_order=true --dataset.image_transforms.max_num_transforms=6
 ```
 
 **GR00T N1.7** (does not fit a 16 GB GPU):
@@ -114,7 +122,7 @@ lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B 
   --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
   --output_dir=outputs/train/openarm_pringles_lerobot_real_gr00t_v00 --job_name=openarm_pringles_lerobot_real_gr00t_v00 \
-  --wandb.enable=true
+  --wandb.enable=true --dataset.image_transforms.enable=true --dataset.image_transforms.random_order=true --dataset.image_transforms.max_num_transforms=6
 ```
 
 **pi0.5**:
@@ -128,7 +136,7 @@ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
   --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
   --batch_size=32 --steps=30000 --policy.device=cuda \
   --output_dir=outputs/train/openarm_pringles_lerobot_real_pi05_v00 --job_name=openarm_pringles_lerobot_real_pi05_v00 \
-  --wandb.enable=true
+  --wandb.enable=true --dataset.image_transforms.enable=true --dataset.image_transforms.random_order=true --dataset.image_transforms.max_num_transforms=6
 ```
 
 ### Step 5. Evaluate on the real robot: normal, RTC, async, async + RTC
