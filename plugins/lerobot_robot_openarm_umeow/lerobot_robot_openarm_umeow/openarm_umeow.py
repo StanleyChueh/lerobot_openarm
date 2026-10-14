@@ -25,6 +25,7 @@ What it adds to the follower, and why:
 
 import logging
 import time
+import types
 
 from .common import (
     MOTOR_KEYS,
@@ -74,7 +75,12 @@ def _slow_down_rollout_returns(speed: float) -> None:
 
     lerobot-rollout calls it with a fixed duration (1 s between episodic episodes, 3 s at shutdown),
     whatever the distance: a 1.5 rad return in 1 s is the fast, dangerous reset the Quest teleop's slow
-    return replaced. A no-op outside lerobot-rollout."""
+    return replaced. A no-op outside lerobot-rollout.
+
+    Every return also goes to the commanded start pose (the keyframe the dataset's episodes start from),
+    not to the pose MEASURED after connecting, and starts from the measured pose with a policy's safety
+    hold cleared (see OpenArmUmeow.prepare_return): an episode that ends with the arm pressing on
+    something -- or held -- otherwise never leaves it."""
     import sys
 
     core = sys.modules.get("lerobot.rollout.strategies.core")
@@ -83,14 +89,20 @@ def _slow_down_rollout_returns(speed: float) -> None:
     original = core.RolloutStrategy.return_to_initial_position
 
     def slow_return(hw, duration_s: float = 3.0, fps: int = 50) -> bool:
+        robot = getattr(hw.robot_wrapper, "_robot", hw.robot_wrapper)  # under lerobot-rollout's ThreadSafeRobot
+        start = getattr(robot, "start_action", None)
+        if start:
+            hw = types.SimpleNamespace(robot_wrapper=hw.robot_wrapper,
+                                       initial_position={k: start.get(k, v) for k, v in hw.initial_position.items()})
         try:
             obs = hw.robot_wrapper.get_observation()
+            if hasattr(robot, "prepare_return"):
+                robot.prepare_return(obs)
             dist = max((abs(hw.initial_position[k] - obs[k]) for k in hw.initial_position
                         if k in obs and k in ARM_KEYS), default=0.0)
         except Exception:
             dist = 0.0
         duration = max(duration_s, dist / speed)
-        robot = getattr(hw.robot_wrapper, "_robot", hw.robot_wrapper)  # under lerobot-rollout's ThreadSafeRobot
         ran = getattr(robot, "steps_since_reset", 0) > 0  # simulation: an episode ran since the last scene reset
         print(f"[openarm_umeow] returning to the start pose slowly: {dist:.2f} rad over {duration:.1f} s"
               f" (<= {speed:g} rad/s)", flush=True)
@@ -143,6 +155,7 @@ class OpenArmUmeow(OpenArmFollower):
         self._last_sent: dict | None = None
         self._last_t: float | None = None
         self._rest_action: dict | None = None
+        self.start_action: dict | None = None  # the pose every episode starts from (set on connect)
         self._last_desired: dict | None = None
         self._measured: dict | None = None
         self._measured_t = 0.0
@@ -215,8 +228,11 @@ class OpenArmUmeow(OpenArmFollower):
                 if approached is None:
                     raise RuntimeError("Start-pose approach refused or not confirmed; not starting.")
                 current = approached
+                self.start_action = dict(target)  # exact keyframe, as the dataset's first frames
             elif cfg.start_pose != "none":
                 raise ValueError(f"start_pose must be 'keyframe' or 'none', got {cfg.start_pose!r}")
+            else:
+                self.start_action = dict(current)
         except BaseException:
             self._hw_disconnect()
             raise
@@ -305,6 +321,28 @@ class OpenArmUmeow(OpenArmFollower):
         self._last_sent, self._last_t = sent, now
         ROBOT_STATE.publish(sent, None)
         return sent
+
+    def prepare_return(self, obs: dict) -> None:
+        """Before a return to the start pose: ramp from where the arm IS, not from the policy's last command.
+
+        At the end of an episode the last command can be far from the measured pose (the arm pressing on
+        the station, or a lagging joint), and a policy request may have put the arm on a safety hold. The
+        hold lets go only for requests within resume_tolerance of the held command, which a blocked arm
+        never reaches, and the ramp's first request (the measured pose) would itself trip "request
+        jumped" -- either way the arm would stay where the episode left it. The return is our own
+        speed-limited ramp, so it starts here with the hold cleared. A motor fault is kept: that joint is off."""
+        measured = {k: float(obs[k]) for k in MOTOR_KEYS if k in obs}
+        if len(measured) != len(MOTOR_KEYS):
+            return
+        if self._fault is not None and self._motor_fault is None:
+            print(f"[openarm_umeow] safety hold cleared for the return to the start pose (was: {self._fault}).",
+                  flush=True)
+            self._fault = None
+        self._measured, self._measured_t = dict(measured), time.perf_counter()
+        self._last_sent = dict(measured)
+        self._last_desired = dict(measured)
+        self._last_t = time.perf_counter()
+        self._lag = {}
 
     def _check_motors(self, now: float) -> None:
         """Every HEALTH_PERIOD_S: a motor reporting a protection fault (or disabled) -> hold, and say so."""
