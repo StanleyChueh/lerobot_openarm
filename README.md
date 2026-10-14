@@ -65,7 +65,7 @@ lerobot-record \
   --display_data=true
 ```
 
-Run the same command again to add episodes to the local dataset (only a local copy is continued, never the Hub's). `--dataset.push_to_hub=false` keeps it local.
+Run the same command again to continue the local dataset (only a local copy is continued, never the Hub's). `--dataset.num_episodes` is the total to reach: with 21 episodes recorded, `--dataset.num_episodes=40` records 19 more. `--dataset.push_to_hub=false` keeps it local.
 
 ### Quest controls
 

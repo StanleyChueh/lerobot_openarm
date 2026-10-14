@@ -5,7 +5,9 @@ already recorded; without them it fails (the folder exists, or resume() refuses 
 plugins are imported before it parses the command line, so this looks first: if
 $HF_LEROBOT_HOME/<repo_id> (by default ~/.cache/huggingface/lerobot/<repo_id>) already holds episodes, it
 adds those two flags and says so. Given flags win: `--resume=false` keeps lerobot's own behaviour, and an
-explicit `--dataset.root` is kept. `--dataset.num_episodes` keeps lerobot's meaning: episodes to ADD.
+explicit `--dataset.root` is kept. `--dataset.num_episodes` is the TOTAL the dataset should end with
+(lerobot's meaning, episodes to add, is what it is turned into); if the dataset already has that many, the
+run stops before connecting to the robot.
 
 Only the local copy is continued, never the Hub's. Without local episodes a new dataset is recorded, even
 with `--resume=true` (dropped: lerobot's resume would download the Hub's copy). An empty folder left by a
@@ -31,6 +33,18 @@ def _value(argv: list[str], flag: str) -> str | None:
         if a == flag and i + 1 < len(argv):
             return argv[i + 1]
     return None
+
+
+def _drop(argv: list[str], flag: str) -> None:
+    """Remove `flag=value` or `flag value` from argv."""
+    i = 0
+    while i < len(argv):
+        if argv[i].startswith(flag + "="):
+            del argv[i]
+        elif argv[i] == flag:
+            del argv[i:i + 2]
+        else:
+            i += 1
 
 
 def _local_episodes(folder: Path) -> int:
@@ -74,6 +88,7 @@ def _replace_on_push(repo_id: str) -> None:
     ds.HfApi = ReplacingHfApi
 
 
+_DEFAULT_EPISODES = 50  # lerobot's DatasetRecordConfig.num_episodes
 _INSTALLED = [False]
 
 
@@ -120,9 +135,16 @@ def install() -> None:
     if root is None:
         argv.append(f"--dataset.root={folder}")
         added.append(f"--dataset.root={folder}")
-    more = _value(argv, "--dataset.num_episodes")
-    total = f" -> {episodes + int(more)} in total" if more and more.isdigit() else ""
+    given = _value(argv, "--dataset.num_episodes")
+    target = int(given) if given and given.isdigit() else _DEFAULT_EPISODES
+    if target <= episodes:
+        print(f"[openarm] {repo_id} already has {episodes} episode(s) in {folder}, and --dataset.num_episodes"
+              f"={target} is the total to reach: nothing to record. Raise --dataset.num_episodes to record more.",
+              flush=True)
+        sys.exit(0)
+    _drop(argv, "--dataset.num_episodes")
+    argv.append(f"--dataset.num_episodes={target - episodes}")  # lerobot counts episodes to add
     print(f"[openarm] {repo_id} already has {episodes} episode(s) in {folder}: continuing it"
           + (f" (added {' '.join(added)})" if added else "")
-          + f". Recording {more or 'the requested number of'} more{total}."
+          + f". Recording {target - episodes} more, episodes {episodes}-{target - 1}, to reach {target} in total."
           " To start a separate dataset instead, use another --dataset.repo_id.", flush=True)
