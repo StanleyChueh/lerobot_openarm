@@ -87,6 +87,8 @@ lerobot-dataset-viz --repo-id ethanCSL/openarm_pringles_lerobot_real_v00 --episo
 Training runs on the training machine with the lerobot fork
 [`StanleyChueh/lerobot`](https://github.com/StanleyChueh/lerobot), branch `update_dev` (commit `1e5f2049e`);
 this machine runs collection and evaluation with official lerobot `3f2c29ef`.
+On a 16 GB GPU, SmolVLA needs `--batch_size=32 --steps=40000` (batch 64 runs out of memory).
+`--dataset.image_transforms.enable=true` turns on image augmentation.
 
 **SmolVLA**:
 
@@ -95,10 +97,10 @@ lerobot-train \
   --policy.path=lerobot/smolvla_base \
   --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --policy.repo_id=ethanCSL/smolvla_pringles_lerobot_real_v00 \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/smolvla_pringles_lerobot_real_v00 \
-  --job_name=smolvla_pringles_lerobot_real_v00 \
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_smolvla_v00 \
+  --job_name=openarm_pringles_lerobot_real_smolvla_v00 \
   --wandb.enable=true
 ```
 
@@ -109,9 +111,10 @@ lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B 
   --policy.chunk_size=16 --policy.n_action_steps=16 \
   --policy.use_relative_actions=true --policy.relative_exclude_joints='["LJ8", "RJ8"]' \
   --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
-  --policy.repo_id=ethanCSL/groot_pringles_lerobot_real_v00 \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/groot_pringles_lerobot_real_v00 --job_name=groot_pringles_lerobot_real_v00
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_gr00t_v00 --job_name=openarm_pringles_lerobot_real_gr00t_v00 \
+  --wandb.enable=true
 ```
 
 **pi0.5**:
@@ -122,9 +125,9 @@ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
   --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
   --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
   --policy.dtype=bfloat16 --policy.gradient_checkpointing=true \
-  --policy.repo_id=ethanCSL/pi05_pringles_lerobot_real_v00 \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
   --batch_size=32 --steps=30000 --policy.device=cuda \
-  --output_dir=outputs/train/pi05_pringles_lerobot_real_v00 --job_name=pi05_pringles_lerobot_real_v00 \
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_pi05_v00 --job_name=openarm_pringles_lerobot_real_pi05_v00 \
   --wandb.enable=true
 ```
 
@@ -297,9 +300,32 @@ python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
   --rtc=true --rtc_execution_horizon=20 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
 ```
 
-Terminal 2: the async client commands above with `--aggregate_fn_name=latest_only`, e.g. pi0.5:
+Terminal 2:
 
 ```bash
+# SmolVLA
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
+  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=latest_only --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+
+# GR00T N1.7
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
+  --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=latest_only --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+
+# pi0.5
 python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
@@ -406,15 +432,36 @@ lerobot-edit-dataset --operation.type=merge \
   --operation.repo_ids='["ethanCSL/openarm_pringles_lerobot_real_v00", "ethanCSL/openarm_pringles_lerobot_mimic_v00", "ethanCSL/openarm_pringles_lerobot_sim_v00"]' \
   --new_repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 --push_to_hub=true
 
-# train (SmolVLA; GR00T / pi0.5: their Step 4 commands with this --dataset.repo_id)
+# SmolVLA
 lerobot-train \
   --policy.path=lerobot/smolvla_base \
   --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --policy.repo_id=ethanCSL/smolvla_pringles_lerobot_real_mimic_v00 \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_smolvla_v00 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/smolvla_pringles_lerobot_real_mimic_v00 \
-  --job_name=smolvla_pringles_lerobot_real_mimic_v00 \
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_smolvla_v00 \
+  --job_name=openarm_pringles_lerobot_real_mimic_smolvla_v00 \
+  --wandb.enable=true
+
+# GR00T N1.7
+lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B \
+  --policy.chunk_size=16 --policy.n_action_steps=16 \
+  --policy.use_relative_actions=true --policy.relative_exclude_joints='["LJ8", "RJ8"]' \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_gr00t_v00 \
+  --batch_size=64 --steps=20000 --policy.device=cuda \
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_gr00t_v00 --job_name=openarm_pringles_lerobot_real_mimic_gr00t_v00 \
+  --wandb.enable=true
+
+# pi0.5
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
+  --policy.path=lerobot/pi05_base \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
+  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
+  --policy.dtype=bfloat16 --policy.gradient_checkpointing=true \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_pi05_v00 \
+  --batch_size=32 --steps=30000 --policy.device=cuda \
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_pi05_v00 --job_name=openarm_pringles_lerobot_real_mimic_pi05_v00 \
   --wandb.enable=true
 ```
 
@@ -458,15 +505,56 @@ lerobot-rollout --strategy.type=episodic \
   --display_data=true
 ```
 
-**RTC**: the Normal commands plus these flags, and another `--dataset.repo_id`:
+**RTC**:
 
 ```bash
+# SmolVLA
+lerobot-rollout --strategy.type=episodic \
   --inference.type=rtc --inference.rtc.mode=guided \
-  --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0
-  # GR00T: --inference.rtc.execution_horizon=8 --inference.queue_threshold=8; pi0.5: --inference.rtc.execution_horizon=20
+  --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0 \
+  --policy.path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
+  --robot.type=openarm_isaac \
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_rtc_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
+  --display_data=true
+
+# GR00T N1.7
+lerobot-rollout --strategy.type=episodic \
+  --inference.type=rtc --inference.rtc.mode=guided \
+  --inference.rtc.execution_horizon=8 --inference.rtc.max_guidance_weight=10.0 \
+  --inference.queue_threshold=8 \
+  --policy.path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
+  --robot.type=openarm_isaac \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_groot_rtc_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
+  --display_data=true
+
+# pi0.5
+lerobot-rollout --strategy.type=episodic \
+  --inference.type=rtc --inference.rtc.mode=guided \
+  --inference.rtc.execution_horizon=20 --inference.rtc.max_guidance_weight=10.0 \
+  --policy.path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
+  --robot.type=openarm_isaac \
+  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_pi05_rtc_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
+  --display_data=true
 ```
 
-**Async**: the policy server as in Step 5 (terminal 2), then the robot client (terminal 3):
+**Async**: terminal 2, the policy server:
+
+```bash
+python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
+```
+
+Terminal 3, the robot client:
 
 ```bash
 # SmolVLA
@@ -500,5 +588,52 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=1
 ```
 
-**Async + RTC**: the RTC policy server from Step 5, and the async client above with
-`--aggregate_fn_name=latest_only`.
+**Async + RTC**: terminal 2, the policy server:
+
+```bash
+# SmolVLA
+python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
+  --rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
+
+# GR00T N1.7
+python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
+  --rtc=true --rtc_execution_horizon=8 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
+
+# pi0.5
+python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
+  --rtc=true --rtc_execution_horizon=20 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
+```
+
+Terminal 3, the robot client:
+
+```bash
+# SmolVLA
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_isaac \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
+  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=latest_only --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+
+# GR00T N1.7
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_isaac \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
+  --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=latest_only --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+
+# pi0.5
+python -m lerobot_robot_openarm_umeow.robot_client \
+  --server_address=127.0.0.1:8080 \
+  --robot.type=openarm_isaac \
+  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
+  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
+  --aggregate_fn_name=latest_only --fps=30 \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+```
