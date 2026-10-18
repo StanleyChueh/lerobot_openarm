@@ -32,6 +32,7 @@ import sys
 import threading
 import time
 
+from lerobot_robot_openarm_umeow.diag_log import DIAG
 from lerobot_robot_openarm_umeow.rerun_status import BOARD
 from lerobot_robot_openarm_umeow.shared import TELEOP_STATE
 
@@ -91,6 +92,7 @@ def _link_dataset(dataset, robot) -> None:
 
 def _decide(events: dict, key: str) -> None:
     """The Quest's decision, applied to lerobot-record's own flags (what its Right / Left keys set)."""
+    DIAG.event("episode saved" if key == "right" else "episode discarded")
     if key == "right":
         print("[openarm_quest] episode SAVED (arms home).", flush=True)
         events["exit_early"] = True
@@ -133,6 +135,8 @@ def _record_episode(original, teleop, events: dict, kw: dict):
             _decide(events, key)
 
     _STATE["x_ok"] = False  # from here until the next episode waits for X
+    dataset = kw.get("dataset")
+    DIAG.event("episode start", dataset_episode=getattr(getattr(dataset, "meta", None), "total_episodes", None))
     teleop.episode_sink = sink
     watcher = threading.Thread(target=enforce_cap, daemon=True, name="openarm-episode-cap")
     watcher.start()
@@ -140,6 +144,7 @@ def _record_episode(original, teleop, events: dict, kw: dict):
         return original(**{**kw, "control_time_s": _FOREVER})
     finally:
         done.set()
+        DIAG.event("episode end")
         if hasattr(kw.get("robot"), "close_episode"):  # simulation: nothing after this belongs to the demo
             kw["robot"].close_episode()
         teleop.episode_sink = None

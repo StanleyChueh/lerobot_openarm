@@ -72,6 +72,7 @@ from openarm_control import (
     register_ik_args,
     setup_from_args,
 )
+from lerobot_robot_openarm_umeow.diag_log import DIAG
 from lerobot_robot_openarm_umeow.shared import ROBOT_STATE, TELEOP_STATE
 from scipy.spatial.transform import Rotation
 
@@ -91,6 +92,13 @@ SETTLE_S = 3.0  # how long a return may take to settle at home before the arm is
 ARM = np.r_[0:7, 8:15]  # driver-vector indices of the 14 arm joints (7 and 15 are the fingers)
 GRIP = {"right": 7, "left": 15}
 VALID_KEY = {"right": "vr", "left": "vl"}
+STATE_CODE = {HELD: 0, LIVE: 1, RETURNING: 2, PAUSED: 3}
+_POSE = ("x", "y", "z", "qw", "qx", "qy", "qz")
+_JOINTS = [f"{s}{i}" for s in ("r", "l") for i in (*range(1, 8), "g")]  # driver16 order
+DIAG_COLUMNS = (["t", "tick_s", "step_s", "state", "new_packet"]
+                + [f"raw_{s}_{k}" for s in ("r", "l") for k in _POSE]  # the EE target before the 1-Euro filter
+                + [f"target_{s}_{k}" for s in ("r", "l") for k in _POSE]
+                + [f"ik_{j}" for j in _JOINTS] + [f"cmd_{j}" for j in _JOINTS])
 
 
 def _joint_name(driver_index: int) -> str:
@@ -234,6 +242,9 @@ class QuestIKDriver:
         self._command = self.home_driver.copy()
         self._solves = 0
         self._failed_solves = 0
+        self._diag_ik = np.full(16, np.nan)  # this tick's raw IK solution (nan: none), for diag_log.py
+        self._diag_raw = {s: np.full(7, np.nan) for s in SIDES}  # this tick's unfiltered EE target
+        self._diag_new_packet = False
 
         self.receiver = JsonUdpReceiver(host, port)
         self._running = True
@@ -280,11 +291,16 @@ class QuestIKDriver:
     def _loop(self) -> None:
         period = 1.0 / self.ik_hz
         next_t = time.perf_counter()
+        prev_t = next_t
         while self._running:
+            t0 = time.perf_counter()
             try:
                 self._step()
             except Exception as e:
                 self._pause(f"internal error {e!r}")
+            if DIAG.enabled and self._state != HELD:
+                self._diag_tick(t0, t0 - prev_t, time.perf_counter() - t0)
+            prev_t = t0
             next_t += period
             remaining = next_t - time.perf_counter()
             if remaining > 0:
@@ -299,6 +315,8 @@ class QuestIKDriver:
         self._last_t = now
         new_packet = count != self._last_count
         self._last_count = count
+        self._diag_new_packet = new_packet
+        self._diag_ik[:] = np.nan
         fresh = msg is not None and msg_t is not None and now - msg_t < self.pose_fresh_s
         if new_packet:
             self._publish_quest(msg, msg_t, count)
@@ -388,6 +406,8 @@ class QuestIKDriver:
                 self._last_raw[side] = pose
                 self._last_raw_t[side] = packet_t
             smoothed = self._smoothers[side].smooth(now, pose)
+            if DIAG.enabled:
+                self._diag_raw[side] = _anchored_pose(self._base[side], self._anchor[side], pose)
             self._last_target[side] = _anchored_pose(self._base[side], self._anchor[side], smoothed)
             self.kin.set_target(side, self._last_target[side])
 
@@ -405,6 +425,7 @@ class QuestIKDriver:
                             " (usually the arm stretched out or the wrist aligned: a pose the IK cannot hold)")
                 return
         self._ik_prev = result.copy()
+        self._diag_ik[:] = result
         self._check_reach(result, now)
 
         with self._lock:
@@ -423,6 +444,17 @@ class QuestIKDriver:
         with self._lock:
             self._command = cmd
             self._solves += 1
+
+    def _diag_tick(self, t0: float, tick_s: float, step_s: float) -> None:
+        nan7 = np.full(7, np.nan)
+        live = self._state == LIVE
+        targets = [self._diag_raw[s] if live else nan7 for s in SIDES]
+        targets += [self._last_target.get(s, nan7) if live else nan7 for s in SIDES]
+        with self._lock:
+            cmd = self._command.copy()
+        DIAG.row("ik", DIAG_COLUMNS, np.concatenate([
+            [t0, tick_s, step_s, STATE_CODE[self._state], float(self._diag_new_packet)],
+            *targets, self._diag_ik, cmd]))
 
     def _check_reach(self, result: np.ndarray, now: float) -> None:
         """Say so (terminal + rerun panel) when an arm cannot follow its target: the IK stops short at a
@@ -672,8 +704,10 @@ class QuestIKDriver:
         with self._lock:
             self._state, self._reason = state, reason
         TELEOP_STATE.publish(state, reason)
+        DIAG.event("state", state=state, reason=reason)
 
     @staticmethod
     def _log(text: str) -> None:
         print(f"[openarm_quest] {text}", flush=True)
         TELEOP_STATE.log(text)
+        DIAG.event(text)

@@ -34,6 +34,7 @@ from .common import (
     sim_joints_to_motor_action,
 )
 from .config_openarm_umeow import OpenArmUmeowConfig
+from .diag_log import DIAG
 from .rerun_status import BOARD
 from .shared import ROBOT_STATE
 
@@ -53,6 +54,10 @@ logger = logging.getLogger(__name__)
 STATS_PERIOD_S = 5.0
 ARM_KEYS = [k for k in MOTOR_KEYS if not k.endswith("8.pos")]
 HEALTH_PERIOD_S = 0.5
+# diag_log.py streams (--teleop.diag=true): one row per read and per command, joints in MOTOR_KEYS order.
+DIAG_OBS = ["t", "read_s", *[f"meas_{k}" for k in MOTOR_KEYS]]
+DIAG_SEND = ["t", "interval_s", "send_s", "hold", *[f"desired_{k}" for k in MOTOR_KEYS],
+             *[f"sent_{k}" for k in MOTOR_KEYS], *[f"vel_{k}" for k in MOTOR_KEYS]]
 LAG_RAD, LAG_S = 0.15, 2.0
 HOME_TOL_RAD = 0.1  # a reset counts as done only with every arm joint this close to the start pose  # a joint this far from a steady command for this long is not following
 
@@ -254,6 +259,8 @@ class OpenArmUmeow(OpenArmFollower):
         # Kept for the tracking guard: lerobot's loops read the observation right before sending.
         self._measured = {k: float(obs[k]) for k in MOTOR_KEYS}
         self._measured_t = time.perf_counter()
+        if DIAG.enabled:
+            DIAG.row("obs", DIAG_OBS, [t0, read, *(self._measured[k] for k in MOTOR_KEYS)])
         return obs
 
     def _check_request(self, desired: dict, now: float) -> str | None:
@@ -287,6 +294,7 @@ class OpenArmUmeow(OpenArmFollower):
             reason = self._check_request(desired, now)
             if reason is not None:
                 self._fault = reason
+                DIAG.event(f"robot SAFETY HOLD: {reason}")
                 print(f"\n[openarm_umeow] SAFETY HOLD: {reason}. The arm holds where it is; it resumes"
                       f" once requests come back within {cfg.resume_tolerance:g} rad of the held pose"
                       " (Quest: X = return home and keep recording, Y = discard).", flush=True)
@@ -300,6 +308,8 @@ class OpenArmUmeow(OpenArmFollower):
             # and squeeze, so a held object is not dropped.
             hold = dict(self._last_sent)
             self._hw_send_action(hold, {k.replace(".pos", ".vel"): 0.0 for k in MOTOR_KEYS})
+            if DIAG.enabled:
+                self._diag_send(now, desired, hold, {}, hold=True)
             self._check_following(now, hold)
             self._last_t = now
             ROBOT_STATE.publish(hold, self._fault)
@@ -316,11 +326,21 @@ class OpenArmUmeow(OpenArmFollower):
         )
         self._apply_squeeze(desired)
         self._hw_send_action(sent, vel)
+        if DIAG.enabled:
+            self._diag_send(now, desired, sent, vel, hold=False)
         self._stats_record(now, desired, sent)
         self._check_following(now, sent)
         self._last_sent, self._last_t = sent, now
         ROBOT_STATE.publish(sent, None)
         return sent
+
+    def _diag_send(self, now: float, desired: dict, sent: dict, vel: dict, hold: bool) -> None:
+        prev = getattr(self, "_diag_prev_send", None)
+        self._diag_prev_send = now
+        DIAG.row("send", DIAG_SEND, [
+            now, float("nan") if prev is None else now - prev, time.perf_counter() - now, float(hold),
+            *(desired[k] for k in MOTOR_KEYS), *(sent[k] for k in MOTOR_KEYS),
+            *(vel.get(k.replace(".pos", ".vel"), 0.0) for k in MOTOR_KEYS)])
 
     def prepare_return(self, obs: dict) -> None:
         """Before a return to the start pose: ramp from where the arm IS, not from the policy's last command.

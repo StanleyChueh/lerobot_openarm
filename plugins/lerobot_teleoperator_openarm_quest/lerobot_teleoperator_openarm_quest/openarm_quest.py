@@ -15,6 +15,7 @@ from lerobot_robot_openarm_umeow.common import (
     sim_joints_to_driver16,
     sim_joints_to_motor_action,
 )
+from lerobot_robot_openarm_umeow.diag_log import DIAG
 from lerobot_robot_openarm_umeow.shared import ROBOT_STATE
 
 from .config_openarm_quest import OpenArmQuestConfig
@@ -61,6 +62,8 @@ class OpenArmQuest(Teleoperator):
         from .record_gate import install
 
         install(type(self))  # lerobot-record only: episodes start on the first X
+        if cfg.diag:
+            DIAG.start(teleop_config=vars(cfg))
         self.driver = QuestIKDriver(
             host=cfg.host,
             port=cfg.port,
@@ -112,3 +115,4 @@ class OpenArmQuest(Teleoperator):
         if self.driver is not None:
             self.driver.close()
             self.driver = None
+        DIAG.stop()

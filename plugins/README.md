@@ -106,6 +106,7 @@ open-ended run: `--strategy.type=base --duration=60`, no `--dataset.*`. For a sl
 ## Keep in step with the dora pipeline
 
 `quest_input.py` copies dora-openarm-vr's frame constants and filter, and `OpenArmQuestConfig.ik_args`
-copies the ik node's arguments in `dataflow-vr-mujoco-ros2.yaml`. The IK model is read in place from
+copies the ik node's arguments in `dataflow-vr-mujoco-ros2.yaml` with its pose shaping turned off
+(posture, null-space and singularity terms; joint limits and speed limits kept). The IK model is read in place from
 the dora checkout (`--teleop.ik_xml` / `--robot.ik_xml` to point elsewhere). If you retune one side,
 retune the other.

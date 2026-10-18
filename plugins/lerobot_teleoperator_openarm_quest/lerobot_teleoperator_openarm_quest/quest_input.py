@@ -18,6 +18,7 @@ import threading
 import time
 
 import numpy as np
+from lerobot_robot_openarm_umeow.diag_log import DIAG
 from scipy.spatial.transform import Rotation
 
 # ── Frame alignment (quest_receiver.py) ─────────────────────────────────────────
@@ -120,6 +121,8 @@ class JsonUdpReceiver:
                         if last is not None:
                             arrival = time.perf_counter()
                             self._measure(last, arrival)
+                            if DIAG.enabled:
+                                _diag_packet(last, arrival, n)
                             with self._lock:
                                 self._latest, self._latest_t = last, arrival
                                 self._count += n
@@ -127,6 +130,23 @@ class JsonUdpReceiver:
                 if self._running:
                     print(f"[openarm_quest] UDP socket error ({e}); retrying in 1 s", flush=True)
                     time.sleep(1.0)
+
+
+_POSE_KEYS = ("x", "y", "z", "qw", "qx", "qy", "qz")
+_DIAG_COLUMNS = (["t", "headset_t", "v", "vr", "vl"]
+                 + [f"{c}_{k}" for c in ("rc", "lc", "rf") for k in _POSE_KEYS] + ["rt", "lt", "drained"])
+
+
+def _diag_packet(msg: dict, arrival: float, drained: int) -> None:
+    """One packet for diag_log.py: raw, before any mapping or filtering (nan where a field is missing)."""
+    def num(v) -> float:
+        return float(v) if isinstance(v, (int, float)) else np.nan
+
+    row = [arrival, num(msg.get("t")), num(msg.get("v")), num(msg.get("vr")), num(msg.get("vl"))]
+    for c in ("rc", "lc", "rf"):
+        pose = msg.get(c) or {}
+        row += [num(pose.get(k)) for k in _POSE_KEYS]
+    DIAG.row("quest", _DIAG_COLUMNS, row + [num(msg.get("rt")), num(msg.get("lt")), float(drained)])
 
 
 def parse_lh_to_rh(c: dict) -> tuple[np.ndarray, Rotation]:

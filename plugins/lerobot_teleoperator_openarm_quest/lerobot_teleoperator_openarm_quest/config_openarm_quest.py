@@ -17,15 +17,25 @@ class OpenArmQuestConfig(TeleoperatorConfig):
     port: int = 5006
     calibration: str = DEFAULT_CALIBRATION
 
-    # The IK, configured exactly like the dora ik node in dataflow-vr-mujoco-ros2.yaml.
+    # The IK, configured like the dora ik node in dataflow-vr-mujoco-ros2.yaml, minus its pose shaping:
+    # no posture pull (--posture-cost 0), no null-space return toward home (--nullspace-cost 0, default
+    # 8.5) and no singularity braking (--singularity-max-approach-rate 0, default 0.25). The arm goes
+    # where the hand goes, bounded only by the joint limits (hardware stops) and the speed limits below.
+    # Replaying recorded insertion poses (wrist at its limit, with hand tremor) gave the same smoothness
+    # either way. dora's own: "--posture-cost 0.01", the other two at their defaults.
     ik_xml: str = DEFAULT_IK_XML
     keyframe: str = "home"
-    ik_args: str = "--mode bimanual --max-iters 10 --dt 0.1 --damping 0.1 --posture-cost 0.01 --lm-damping 0.01"
+    ik_args: str = (
+        "--mode bimanual --max-iters 10 --dt 0.1 --damping 0.1 --posture-cost 0 --lm-damping 0.01"
+        " --nullspace-cost 0 --singularity-max-approach-rate 0"
+    )
     # Solve rate. The dora graph ticks every 2 ms; see ik_driver.py for why the rate matters.
     ik_hz: float = 500.0
-    # 1 Euro filter (min_cutoff, beta, d_cutoff) on each controller pose -- quest_receiver.py's values.
+    # 1 Euro filter (min_cutoff, beta, d_cutoff) on each controller pose. quest_receiver.py's beta 0.04 left it
+    # a fixed 2 Hz low-pass, 64-82 ms behind the hand; 5.0 opens it up while the hand moves (12-14 ms measured
+    # on the real arm, diag_report) and keeps a still hand filtered at 2 Hz.
     smoothing_min_cutoff: float = 2.0
-    smoothing_beta: float = 0.04
+    smoothing_beta: float = 5.0
     smoothing_d_cutoff: float = 1.5
 
     # Safety (see ik_driver.py's module docstring for why each exists).
@@ -51,9 +61,16 @@ class OpenArmQuestConfig(TeleoperatorConfig):
     # at max_joint_speed 2.0 that is ~0.5 s behind the hand.
     max_lead_rad: float = 1.0
     # X anchors only on a packet younger than this (s); LIVE holds the arms when packets get older.
-    pose_fresh_s: float = 0.15
+    # 0.3: the Quest Pro on this lab's Wi-Fi holds its packets back 120-250 ms a few times a second (diag_report);
+    # at 0.15 every such hole re-anchored the hand and the motion made during it was lost (50x in 27 s).
+    pose_fresh_s: float = 0.3
 
     # lerobot-record: the Quest's save (2nd X, applied when the arms are home) and discard (Y) end the
     # episode, straight through lerobot-record's own event flags (record_gate.py) -- no key presses. False:
     # only the keyboard (Right / Left / Esc) ends episodes. No effect in lerobot-teleoperate.
     episode_buttons: bool = True
+
+    # Log the Quest packets, every IK tick and every robot read / command to outputs/teleop_diag/<time>/
+    # (diag_log.py) -- to find where jerky motion comes from. Report:
+    # python -m lerobot_robot_openarm_umeow.diag_report
+    diag: bool = False
