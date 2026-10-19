@@ -361,21 +361,44 @@ Same commands as the real arm, with `--robot.type=openarm_isaac` in place of
 `--robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 --robot.cameras=...`.
 No CAN step, no `YES`.
 
-### Sim Step 1. Start the simulator (terminal 1, keep it running)
+The simulator bridge and the renderer are shared across tasks. Pick a task cfg for the movable objects,
+contacts, reset rules and success condition, and a `profile.json` folder for the dataset-fitted room,
+robot appearance and camera response. A profile lists its source dataset and compatible task IDs; the
+server rejects a mismatched combination. The two profiles currently shipped with IsaacLab are:
+
+| Real dataset | Simulator task | Profile folder |
+| --- | --- | --- |
+| `ethanCSL/openarm_pringles_lerobot_real_v00` | `Isaac-PickUp-RedCube-OpenArm-IK-Abs-v1` | `source/isaaclab_assets/data/real2sim/pringles_v00` |
+| `ethanCSL/openarm_insertbattery_lerobot_real_v01` | `Isaac-InsertBattery-OpenArm-IK-Abs-v0` | `source/isaaclab_assets/data/real2sim/battery_v01` |
+
+The task cfgs already select those profile folders. For a new task, build its object geometry and reset
+logic, fit a profile from that task's real frames, and set `real_look_dir` on the task cfg. The shared
+`lerobot_sim_server.py` and `openarm_real_look.py` do not need a new rendering implementation. An explicit
+`--real_look /path/to/profile` works for a task with no built-in profile. A profile cannot supply a
+new collision shape or success condition; those must be validated separately for each interaction.
+The task-by-task process and current real-to-sim research are summarized in
+[docs/real2sim2real_tasks.md](docs/real2sim2real_tasks.md).
+
+### Pringles Step 1. Start the simulator (terminal 1, keep it running)
 
 ```bash
 cd ~/Stanley_ws/IsaacLab
 conda activate env_isaaclab
 ./isaaclab.sh -p scripts/tools/lerobot_sim_server.py --enable_cameras --headless \
-  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-v0 --task_mode handover \
+  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-v1 --task_mode handover \
   --domain_randomization none \
-  --mimic_hdf5 logs/demos/pringles_sim_src_v00.hdf5
+  --mimic_hdf5 logs/demos/pringles_sim_src_v01.hdf5
 ```
 
 Wait for `[lerobot_sim_server] ready on 127.0.0.1:5710`. Leave out `--mimic_hdf5` for teleoperation and
-evaluation.
+evaluation. The `-v1` task applies the fitted real look (robot colours, photo backdrop, lighting and camera
+sensor response) and fitted contact physics from the Pringles real data. The old `-v0` command rendered the
+plain sim scene; `-v0 --real_look source/isaaclab_assets/data/real2sim/pringles_v00` selects the same
+profile explicitly. Use `--domain_randomization none` while
+recording Mimic **source** demos: the annotation stage replays their states in the unrandomized task. See
+`~/Stanley_ws/IsaacLab/scripts/tools/sysid/README.md` for the look calibration and its measured limits.
 
-### Sim Step 2. Teleoperate in sim (no recording)
+### Pringles Step 2. Teleoperate in sim (no recording)
 
 ```bash
 lerobot-teleoperate \
@@ -384,13 +407,18 @@ lerobot-teleoperate \
   --fps=30 --display_data=true
 ```
 
-### Sim Step 3. Record sim demos (lerobot dataset + Mimic source demos)
+### Pringles Step 3. Record sim demos (lerobot dataset + Mimic source demos)
 
 ```bash
 lerobot-record \
   --robot.type=openarm_isaac \
+  --robot.expected_task=Isaac-PickUp-RedCube-OpenArm-IK-Abs-v1 \
+  --robot.expected_task_mode=handover \
+  --robot.expected_domain_randomization=none \
+  --robot.expected_control_hz=30 \
+  --robot.expected_real_dataset=ethanCSL/openarm_pringles_lerobot_real_v00 \
   --teleop.type=openarm_quest \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_sim_v00 --dataset.no_stamp=true \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_sim_v01 --dataset.no_stamp=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=20 --dataset.fps=30 \
   --dataset.episode_time_s=120 --dataset.reset_time_s=1 \
@@ -399,8 +427,77 @@ lerobot-record \
 ```
 
 End each demo with the can in the LEFT hand, then press X.
+The `expected_*` options stop the recording at connection if an older sim server is still running with a
+different task or randomization profile. Use a new dataset repo ID for the real-look run; an existing
+`..._sim_v00` dataset may contain plain `-v0` frames, and mixing the two appearances under one ID makes
+the source of a training result ambiguous.
+Watch the server's `steps/s` line during actual recording. If it reports slower than real time, the sim
+still advances 1/30 s per command, but the Quest user's command is sampled more slowly in wall time;
+try `--display_data=false` and reduce concurrent GPU work before collecting the full set. Check that
+the recorded grasp and handover durations remain close to the real demonstrations. On this workstation,
+the headless battery server with all three 640 × 480 cameras measured about 21–23 steps/s during replay;
+live Quest timing should be measured again before collecting teleoperated training episodes.
 
-### Sim Step 4. Generate a synthetic dataset with Isaac Lab Mimic
+### Battery insertion example
+
+The battery task uses the **same** robot bridge, cameras and real-look renderer. Start its server from
+`~/Stanley_ws/IsaacLab`:
+
+```bash
+./isaaclab.sh -p scripts/tools/lerobot_sim_server.py --enable_cameras --headless \
+  --task Isaac-InsertBattery-OpenArm-IK-Abs-v0 --domain_randomization none
+```
+
+Then inspect the scene with the same Quest bridge from this repo:
+
+```bash
+lerobot-teleoperate \
+  --robot.type=openarm_isaac \
+  --robot.expected_task=Isaac-InsertBattery-OpenArm-IK-Abs-v0 \
+  --robot.expected_control_hz=30 \
+  --robot.expected_real_dataset=ethanCSL/openarm_insertbattery_lerobot_real_v01 \
+  --teleop.type=openarm_quest \
+  --fps=30 --display_data=true
+```
+
+The leftmost charger bay now has an open compound collider and a success check requiring both objects
+to be lifted and the battery to stay seated for 15 steps. Its slot dimensions were estimated from the
+real image, not measured from CAD. The task is not yet validated for insertion data: image-aligned
+replays of eight real episodes lifted the charger in seven and the battery in only one under the best
+bounded contact fit; none has passed insertion. Do not label a battery sim dataset successful until
+physical replay or teleoperated episodes pass the success check. Its `profile.json` contains no
+Pringles contact fit. Do not apply the Pringles Mimic instructions below to this task.
+
+### Physically validated replay dataset
+
+For Pringles, three real action trajectories have passed the simulator's stageful right-to-left
+handover check. The local LeRobot dataset is
+`~/Stanley_ws/lerobot_openarm/datasets/ethanCSL/openarm_pringles_lerobot_sim_replay_v01`
+(three episodes, 778 frames at 30 Hz). `validation.json` identifies source real episodes 0, 4 and 5,
+their start poses, and final simulated object poses. The three 640 × 480 video streams and 16 motor
+action/state values match the real dataset schema. This is a replay dataset, not evidence that a
+policy trained on it will transfer to the real robot.
+
+To reproduce a new local dataset, start the Pringles `-v1` server above without `--mimic_hdf5`, then
+run from this repo with its Python environment:
+
+```bash
+python collect_validated_sim_replay.py --task pringles --episodes 0,4,5 \
+  --starts artifacts/pringles_real_refs/can_starts_all.json \
+  --repo_id ethanCSL/openarm_pringles_lerobot_sim_replay_v01 \
+  --root datasets/ethanCSL/openarm_pringles_lerobot_sim_replay_v01
+python compare_sim_real_schema.py \
+  --real ethanCSL/openarm_pringles_lerobot_real_v00 \
+  --sim datasets/ethanCSL/openarm_pringles_lerobot_sim_replay_v01
+```
+
+Choose a fresh `--root` for each run. The collector discards failed episodes and records only
+simulated observations paired with the replayed real motor commands. For battery insertion, use
+`--task battery`, the battery task server, and the starts in
+`artifacts/battery_real_refs/object_starts.json` only after a candidate has passed the slot success
+check. The charger geometry and finger pads need measurement and further contact fitting.
+
+### Pringles Step 4. Generate a synthetic dataset with Isaac Lab Mimic
 
 Stop the sim server first (Ctrl-C), then:
 
@@ -412,14 +509,14 @@ cd ~/Stanley_ws/IsaacLab && conda activate env_isaaclab
   --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v0 \
   --task_mode handover --auto --from_states \
   --enable_cameras --headless \
-  --input_file logs/demos/pringles_sim_src_v00.hdf5 \
-  --output_file logs/demos/pringles_sim_src_v00_annotated.hdf5
+  --input_file logs/demos/pringles_sim_src_v01.hdf5 \
+  --output_file logs/demos/pringles_sim_src_v01_annotated.hdf5
 
 # 4b. Generate (with domain randomization)
 ./isaaclab.sh -p scripts/imitation_learning/isaaclab_mimic/generate_dataset.py \
   --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v0 --task_mode handover \
-  --input_file logs/demos/pringles_sim_src_v00_annotated.hdf5 \
-  --output_file logs/demos/pringles_sim_mimic_v00.hdf5 \
+  --input_file logs/demos/pringles_sim_src_v01_annotated.hdf5 \
+  --output_file logs/demos/pringles_sim_mimic_v01.hdf5 \
   --generation_num_trials 500 --num_envs 4 --enable_cameras --headless \
   --enable_domain_randomization --domain_randomization_profile visual
 ```
@@ -428,54 +525,86 @@ Convert to a lerobot dataset (lerobot terminal):
 
 ```bash
 python mimic_to_lerobot.py \
-  --hdf5 ~/Stanley_ws/IsaacLab/logs/demos/pringles_sim_mimic_v00.hdf5 \
-  --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v00 --push_to_hub
+  --hdf5 ~/Stanley_ws/IsaacLab/logs/demos/pringles_sim_mimic_v01.hdf5 \
+  --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v01 --push_to_hub
 ```
 
-### Sim Step 5. Train: synthetic only, or co-train sim + real
+### Pringles Step 5. Train: synthetic only, or co-train sim + real
+
+Before merging, check the real and sim metadata (this downloads only `meta/info.json` if needed):
 
 ```bash
-# merge real + synthetic (+ sim teleop)
+python compare_sim_real_schema.py \
+  --real ethanCSL/openarm_pringles_lerobot_real_v00 \
+  --sim ethanCSL/openarm_pringles_lerobot_sim_v01
+python compare_sim_real_schema.py \
+  --real ethanCSL/openarm_pringles_lerobot_real_v00 \
+  --sim ethanCSL/openarm_pringles_lerobot_mimic_v01
+```
+
+The check requires matching LeRobot version, `fps`, `robot_type`, `action` and `observation.state` names/order, and all
+three `observation.images.*` shapes. Metadata cannot verify physical units; confirm the action/state
+conventions and calibration separately. Run
+`python analyze_dataset_quality.py --root <real-dataset> <sim-dataset>` to
+compare grasp timing, gripper holds and tracking. Keep a real episode holdout for evaluation and compare
+real-only, real + real-look teleop, and real + Mimic training at the same total update count. A larger
+synthetic set can overwhelm the real images; sample or weight it so real frames remain prominent.
+
+For vision, use IsaacLab's `scripts/tools/sysid/eval_realism.py` on paired real frames and sim renders at
+the same recorded states (body and both wrist cameras). It reports paired DINOv2 feature distance and a
+real-vs-sim classifier AUC. The shipped real look improved those distances, but the reported classifier
+AUC is still 1.0, so visual transfer must be checked with real rollouts. Inspect grasp contact and
+handover success as well: the fitted contact parameters improved held-out replay tracking in IsaacLab's
+sysid report, but were not measured physical material constants. If you change camera mounts, lighting,
+can geometry or finger pads, rerun the paired vision and replay checks before collecting more data.
+
+The Mimic `visual` profile above is a separate robustness experiment on the plain Mimic task. It does
+not inherit the `-v1` appearance or fitted contact physics: its random light and pad appearance can
+conflict with the photo backdrop. Keep its dataset separate until a held-out real rollout shows that
+adding it helps.
+
+```bash
+# Optional co-training experiment after separate real-only and real-look baselines
 lerobot-edit-dataset --operation.type=merge \
-  --operation.repo_ids='["ethanCSL/openarm_pringles_lerobot_real_v00", "ethanCSL/openarm_pringles_lerobot_mimic_v00", "ethanCSL/openarm_pringles_lerobot_sim_v00"]' \
-  --new_repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 --push_to_hub=true
+  --operation.repo_ids='["ethanCSL/openarm_pringles_lerobot_real_v00", "ethanCSL/openarm_pringles_lerobot_mimic_v01", "ethanCSL/openarm_pringles_lerobot_sim_v01"]' \
+  --new_repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v01 --push_to_hub=true
 
 # SmolVLA
 lerobot-train \
   --policy.path=lerobot/smolvla_base \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v01 \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_smolvla_v00 \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_smolvla_v01 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_smolvla_v00 \
-  --job_name=openarm_pringles_lerobot_real_mimic_smolvla_v00 \
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_smolvla_v01 \
+  --job_name=openarm_pringles_lerobot_real_mimic_smolvla_v01 \
   --wandb.enable=true
 
 # GR00T N1.7
 lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B \
   --policy.chunk_size=16 --policy.n_action_steps=16 \
   --policy.use_relative_actions=true --policy.relative_exclude_joints='["LJ8", "RJ8"]' \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_gr00t_v00 \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v01 \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_gr00t_v01 \
   --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_gr00t_v00 --job_name=openarm_pringles_lerobot_real_mimic_gr00t_v00 \
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_gr00t_v01 --job_name=openarm_pringles_lerobot_real_mimic_gr00t_v01 \
   --wandb.enable=true
 
 # pi0.5
 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
   --policy.path=lerobot/pi05_base \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
+  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v01 \
   --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
   --policy.dtype=bfloat16 --policy.gradient_checkpointing=true \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_pi05_v00 \
+  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_pi05_v01 \
   --batch_size=32 --steps=30000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_pi05_v00 --job_name=openarm_pringles_lerobot_real_mimic_pi05_v00 \
+  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_pi05_v01 --job_name=openarm_pringles_lerobot_real_mimic_pi05_v01 \
   --wandb.enable=true
 ```
 
-### Sim Step 6. Evaluate in sim: normal, RTC, async, async + RTC
+### Pringles Step 6. Evaluate in sim: normal, RTC, async, async + RTC
 
-The simulator from Sim Step 1 (without `--mimic_hdf5`) in terminal 1, then:
+The simulator from Pringles Step 1 (without `--mimic_hdf5`) in terminal 1, then:
 
 **Normal**:
 

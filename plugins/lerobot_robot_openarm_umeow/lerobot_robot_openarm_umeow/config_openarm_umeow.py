@@ -83,5 +83,12 @@ class OpenArmIsaacConfig(OpenArmUmeowConfig):
     sim_cameras: list[str] = field(default_factory=lambda: ["body_cam", "wrist_cam", "right_wrist_cam"])
     camera_width: int = 640
     camera_height: int = 480
+    # Optional recording guard. The server may have been left running with a different task; in
+    # particular the v0 pick-up task omits the fitted real look and contact physics of v1.
+    expected_task: str | None = None
+    expected_task_mode: str | None = None
+    expected_domain_randomization: str | None = None
+    expected_control_hz: int | None = None
+    expected_real_dataset: str | None = None
     # Nothing physical to confirm before the start-pose approach.
     assume_yes: bool = True

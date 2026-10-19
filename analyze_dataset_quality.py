@@ -166,7 +166,20 @@ def analyze(df, info, args):
     act = {e: np.stack(g["action"].values).astype(np.float64) for e, g in episodes.items()}
     st = {e: np.stack(g["observation.state"].values).astype(np.float64) for e, g in episodes.items()}
 
-    first = np.stack([a[0] for a in act.values()])
+    # Current OpenArm LeRobot recordings store *motor* radians for LJ8/RJ8. Their
+    # open directions are opposite (+1.212 left, -1.298 right), while this audit's
+    # grasp thresholds are in 0..0.044 sim finger radians. Convert each side with
+    # its own calibration before segmenting, while leaving the arm actions raw.
+    calibration = json.load(open(args.calibration))
+    for side, index in (("right", rg), ("left", lg)):
+        grip = calibration[side]["gripper"]
+        first_values = np.array([s[0, index] for s in st.values()])
+        if np.median(np.abs(first_values)) > 0.2:
+            for s in st.values():
+                s[:, index] = np.clip((s[:, index] - grip["closed_raw"])
+                                       / (grip["open_raw"] - grip["closed_raw"]), 0.0, 1.0) * 0.044
+
+    first = np.stack([s[0] for s in st.values()])
     open_val = float(np.median(np.concatenate([first[:, rg], first[:, lg]])))
     start_med = np.median(np.stack([s[0] for s in st.values()]), axis=0)
 
@@ -176,8 +189,8 @@ def analyze(df, info, args):
         n = len(a)
         r = {"episode_index": int(e), "length": n}
 
-        rseg, rtw = gripper_segments(a[:, rg], open_val, args.open_tol, args.close_delta, args.min_hold)
-        lseg, ltw = gripper_segments(a[:, lg], open_val, args.open_tol, args.close_delta, args.min_hold)
+        rseg, rtw = gripper_segments(s[:, rg], open_val, args.open_tol, args.close_delta, args.min_hold)
+        lseg, ltw = gripper_segments(s[:, lg], open_val, args.open_tol, args.close_delta, args.min_hold)
         is_hold = lambda g: not g["blip"] and g["min"] >= args.empty_thresh  # noqa: E731
         rhold = [g for g in rseg if is_hold(g)]
         rmain = max(rhold, key=lambda g: g["len"]) if rhold else None
@@ -208,7 +221,7 @@ def analyze(df, info, args):
         r["handover_frame"] = left_grasp
         r["handover_t"] = left_grasp / n
         r["handover_overlap"] = right_release - left_grasp
-        settled = a[rmain["start"] + args.settle : rmain["end"], rg] if rmain else np.array([])
+        settled = s[rmain["start"] + args.settle : rmain["end"], rg] if rmain else np.array([])
         r["hold_drift"] = float(np.ptp(settled)) if len(settled) > 1 else np.nan
         r["right_hold_value"] = rmain["median"] if rmain else np.nan
         r["left_hold_value"] = lmain["median"] if lmain else np.nan
@@ -235,7 +248,7 @@ def analyze(df, info, args):
         r["path_right"] = float(np.abs(np.diff(a[:, right_arm], axis=0)).sum())
         r["path_left"] = float(np.abs(np.diff(a[:, left_arm], axis=0)).sum())
         rows.append(r)
-        traces[e] = (a[:, rg], a[:, lg])
+        traces[e] = (s[:, rg], s[:, lg])
 
     ep = pd.DataFrame(rows).set_index("episode_index")
 
@@ -275,10 +288,11 @@ def analyze(df, info, args):
     ep["exclude"] = ep[list(EXCLUDE_FLAGS)].any(axis=1)
     ep["reasons"] = ep[FLAGS].apply(lambda row: ",".join(f for f in FLAGS if row[f]), axis=1)
 
+    grasp_poses = [st[e][int(g), right_arm] for e, g in ep["grasp_frame"].dropna().items()]
     ctx = {"open_val": open_val, "right_arm": [names[i] for i in right_arm], "left_arm": [names[i] for i in left_arm],
            "start_std_right": np.stack([s[0, right_arm] for s in st.values()]).std(0),
            "start_std_left": np.stack([s[0, left_arm] for s in st.values()]).std(0),
-           "grasp_pose_std": np.stack([st[e][int(g), right_arm] for e, g in ep["grasp_frame"].dropna().items()]).std(0)}
+           "grasp_pose_std": np.stack(grasp_poses).std(0) if grasp_poses else np.full(len(right_arm), np.nan)}
     return ep, traces, ctx
 
 
@@ -416,12 +430,14 @@ def main():
     ap.add_argument("--revision", type=str, default=None)
     ap.add_argument("--out", type=str, default="outputs/dataset_audit")
     ap.add_argument("--right-gripper", type=str, default="RJ8.pos")
+    ap.add_argument("--calibration", default=os.path.join(os.path.dirname(__file__), "calibration.json"),
+                    help="OpenArm motor-to-sim gripper calibration for LJ8/RJ8 recordings.")
     ap.add_argument("--left-gripper", type=str, default="LJ8.pos")
     ap.add_argument("--right-prefix", type=str, default="RJ")
     ap.add_argument("--left-prefix", type=str, default="LJ")
     ap.add_argument("--open-tol", type=float, default=0.0015, help="Gripper counts as open within this of the open value")
     ap.add_argument("--close-delta", type=float, default=0.004, help="Gripper counts as closed this far below the open value (can stalls ~0.008 below)")
-    ap.add_argument("--empty-thresh", type=float, default=0.016, help="A close that goes below this never touched the can (air grab); real holds sit ~0.018-0.038")
+    ap.add_argument("--empty-thresh", type=float, default=0.012, help="Measured finger opening below this is treated as an empty close; calibrate from actual pad contact.")
     ap.add_argument("--min-hold", type=int, default=10, help="Closed segments shorter than this (frames) are blips, not grasps")
     ap.add_argument("--min-overlap", type=int, default=3, help="Frames both grippers must hold the can during handover")
     ap.add_argument("--settle", type=int, default=15, help="Frames after the grasp ignored by the slip check (gripper tightening in)")

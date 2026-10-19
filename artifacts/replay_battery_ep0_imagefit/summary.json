@@ -1,0 +1,29 @@
+{
+  "source": "ethanCSL/openarm_insertbattery_lerobot_real_v01",
+  "episode": 0,
+  "steps": 753,
+  "starts": {
+    "charger": [
+      0.3007651725181532,
+      0.05389445524630294,
+      3.710973032584235
+    ],
+    "battery": [
+      0.31012793697363555,
+      -0.09183412996127359,
+      -7.19859652015225
+    ]
+  },
+  "any_sim_success": false,
+  "charger_lift_m": 0.0006590485572814941,
+  "charger_end_z": 0.29875001311302185,
+  "battery_lift_m": 8.940696716308594e-08,
+  "battery_end_z": 0.28725001215934753,
+  "battery_final_local_xyz": [
+    -0.039654066286769984,
+    -0.09536701783879636,
+    -0.011499889207853184
+  ],
+  "battery_final_axis_parallel": 0.8783581497069427,
+  "battery_inserted": false
+}

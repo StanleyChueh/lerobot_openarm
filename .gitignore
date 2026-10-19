@@ -211,3 +211,9 @@ attention_*/
 
 # evaluation timing logs (eval_metrics.py) and local training outputs
 outputs/
+
+# Regenerable real-dataset frame samples and replay traces.
+artifacts/battery_real_refs/*.png
+artifacts/pringles_real_refs/*.png
+artifacts/replay_*/body_*.png
+artifacts/replay_*/trace.json

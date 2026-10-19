@@ -51,6 +51,7 @@ class OpenArmIsaac(OpenArmUmeow):
         self._sim = SimClient(config.host, config.port)
         self._latest: dict | None = None
         self.episode_success = False  # the task's success condition was met since the last scene reset
+        self.has_success_term = True
         self._results: list[bool] = []
         self.steps_since_reset = 0
         self._init_umeow(config)
@@ -63,6 +64,18 @@ class OpenArmIsaac(OpenArmUmeow):
     def _hw_connect(self) -> None:
         cfg = self.config
         hello = self._sim.connect()
+        expected = {
+            "task": cfg.expected_task,
+            "task_mode": cfg.expected_task_mode,
+            "domain_randomization": cfg.expected_domain_randomization,
+            "control_hz": cfg.expected_control_hz,
+            "real_dataset": cfg.expected_real_dataset,
+        }
+        mismatches = [f"{key}={hello.get(key)!r} (expected {value!r})"
+                      for key, value in expected.items() if value is not None and hello.get(key) != value]
+        if mismatches:
+            self._sim.close()
+            raise ValueError("Isaac server configuration mismatch: " + ", ".join(mismatches))
         served = hello["cameras"]
         wrong = {c: served.get(c) for c in cfg.sim_cameras if served.get(c) != [cfg.camera_height, cfg.camera_width]}
         if wrong:
@@ -74,6 +87,10 @@ class OpenArmIsaac(OpenArmUmeow):
         if hello["control_hz"] != 30:
             print(f"[openarm_isaac] WARNING: the simulator steps at {hello['control_hz']} Hz; the real pipeline"
                   " records at 30 (unset OPENARM_CONTROL_HZ on the server).", flush=True)
+        self.has_success_term = bool(hello.get("has_success_term", True))
+        if not self.has_success_term:
+            print("[openarm_isaac] WARNING: this task has no simulator success term;"
+                  " episode_success cannot validate task completion.", flush=True)
         # Start where the real arm's connect-time approach ends: the IK model's keyframe, grippers open.
         start = None
         if cfg.start_pose == "keyframe":
@@ -85,7 +102,8 @@ class OpenArmIsaac(OpenArmUmeow):
         self.episode_success = False
         self._is_connected = True
         print(f"[openarm_isaac] connected to Isaac Sim at {cfg.host}:{cfg.port}: {hello['task']}"
-              f" ({hello['task_mode']}), randomization {hello['domain_randomization']}, cameras {list(served)}.",
+              f" ({hello['task_mode']}), randomization {hello['domain_randomization']},"
+              f" real dataset {hello.get('real_dataset')}, cameras {list(served)}.",
               flush=True)
 
     def _hw_get_observation(self):
@@ -129,12 +147,15 @@ class OpenArmIsaac(OpenArmUmeow):
     def reset_scene(self, report: bool = False) -> None:
         """Re-randomize the scene, leaving the robot where it is. With `report`, first print whether the episode
         that just ended met the task's success condition, and the running tally."""
-        if report:
+        if report and self.has_success_term:
             self._results.append(self.episode_success)
             n, ok = len(self._results), sum(self._results)
             verdict = "SUCCESS" if self.episode_success else "no success"
             print(f"[openarm_isaac] episode {n}: {verdict} (task success condition) -- {ok}/{n} so far.", flush=True)
             BOARD.note(f"sim episode {n}: {verdict} ({ok}/{n})")
+        elif report:
+            print("[openarm_isaac] episode outcome unavailable: this task has no simulator success term.", flush=True)
+            BOARD.note("sim episode outcome unavailable")
         t0 = time.perf_counter()
         self._latest = self._sim.request("reset", joints=None)
         self.episode_success = False

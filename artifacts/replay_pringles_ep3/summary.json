@@ -1,0 +1,15 @@
+{
+  "source": "ethanCSL/openarm_pringles_lerobot_real_v00",
+  "episode": 3,
+  "steps": 250,
+  "starts": {
+    "can": [
+      0.24738939855292277,
+      0.011160912630905753,
+      0.0
+    ]
+  },
+  "any_sim_success": false,
+  "can_lift_m": 0.004130661487579346,
+  "can_end_z": 0.3532968759536743
+}

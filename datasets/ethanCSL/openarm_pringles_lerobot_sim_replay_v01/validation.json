@@ -1,0 +1,83 @@
+{
+  "task": "pringles",
+  "source": "ethanCSL/openarm_pringles_lerobot_real_v00",
+  "sim_task": "Isaac-PickUp-RedCube-OpenArm-IK-Abs-v1",
+  "repo_id": "ethanCSL/openarm_pringles_lerobot_sim_replay_v01",
+  "episodes": [
+    {
+      "real_episode": 0,
+      "frames": 273,
+      "accepted": true,
+      "start_poses": {
+        "can": [
+          0.24859969181453892,
+          -0.005624606201977066,
+          0.0
+        ]
+      },
+      "final_success_term": true,
+      "final_object_poses": {
+        "can": [
+          0.3470958471298218,
+          0.15376611053943634,
+          0.4322742819786072,
+          0.8220779299736023,
+          0.04097369313240051,
+          0.05916237458586693,
+          0.5648085474967957
+        ]
+      },
+      "sim_episode": 0
+    },
+    {
+      "real_episode": 4,
+      "frames": 250,
+      "accepted": true,
+      "start_poses": {
+        "can": [
+          0.3056450072650306,
+          -0.02008943699979878,
+          0.0
+        ]
+      },
+      "final_success_term": true,
+      "final_object_poses": {
+        "can": [
+          0.3495522737503052,
+          0.15416426956653595,
+          0.4462940990924835,
+          0.8112695813179016,
+          0.05303448811173439,
+          0.05728724226355553,
+          0.5794368982315063
+        ]
+      },
+      "sim_episode": 1
+    },
+    {
+      "real_episode": 5,
+      "frames": 255,
+      "accepted": true,
+      "start_poses": {
+        "can": [
+          0.3162018068495283,
+          0.01753896522461483,
+          0.0
+        ]
+      },
+      "final_success_term": true,
+      "final_object_poses": {
+        "can": [
+          0.34778130054473877,
+          0.15465958416461945,
+          0.4466840326786041,
+          0.7325369715690613,
+          0.06566951423883438,
+          0.05495569109916687,
+          0.6753197908401489
+        ]
+      },
+      "sim_episode": 2
+    }
+  ]
+}

@@ -1,0 +1,3216 @@
+{
+ "best": {
+  "charger_dx": 0.015,
+  "charger_dy": -0.0051999879801373165,
+  "charger_yaw": 4.709952516054052,
+  "battery_dx": -0.012873814124548438,
+  "battery_dy": -0.00022842552405131708,
+  "battery_yaw": 8.0,
+  "grip_effort": 37.331455116326936,
+  "finger_friction": 2.4925698369905214,
+  "object_friction": 0.772977051563514
+ },
+ "best_score": 0.4077121913433075,
+ "log": [
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": 0.0,
+    "charger_dy": 0.0,
+    "charger_yaw": 0.0,
+    "battery_dx": 0.0,
+    "battery_dy": 0.0,
+    "battery_yaw": 0.0,
+    "grip_effort": 24.999999999999996,
+    "finger_friction": 0.5,
+    "object_friction": 1.0
+   },
+   "score": 0.11782079935073853,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 1.1782079935073853,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": 0.013052172713633046,
+    "charger_dy": 0.009475606623645966,
+    "charger_yaw": -7.9561839972776305,
+    "battery_dx": 0.01072212829762708,
+    "battery_dy": -0.013992432740836069,
+    "battery_yaw": 3.674487142879105,
+    "grip_effort": 8.137302241461057,
+    "finger_friction": 1.7695367990900082,
+    "object_friction": 0.9456031295297697
+   },
+   "score": 0.005923807621002197,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.05923807621002197,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": -0.0060086432838784565,
+    "charger_dy": -0.0023193833640702457,
+    "charger_yaw": -7.5468852616725925,
+    "battery_dx": -0.01127150170501308,
+    "battery_dy": 0.005118732440808911,
+    "battery_yaw": 2.3550321851880014,
+    "grip_effort": 27.540226904668792,
+    "finger_friction": 0.5270960318291629,
+    "object_friction": 2.4852544793049236
+   },
+   "score": 0.07797032594680786,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.7797032594680786,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": 0.014425060163286901,
+    "charger_dy": 0.005566259534420841,
+    "charger_yaw": 2.407348420285061,
+    "battery_dx": 0.005653401917128202,
+    "battery_dy": -0.0033323572806268856,
+    "battery_yaw": -5.8384559196414205,
+    "grip_effort": 36.95970805079503,
+    "finger_friction": 0.7538699154808106,
+    "object_friction": 0.5791589765631909
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": -0.00042493923504632707,
+    "charger_dy": 0.011684635030470007,
+    "charger_yaw": 6.944696255299995,
+    "battery_dx": -0.004266144098727893,
+    "battery_dy": 0.0021458949218928283,
+    "battery_yaw": -2.8500897427849257,
+    "grip_effort": 25.976375069963886,
+    "finger_friction": 0.4695568736960748,
+    "object_friction": 0.6882264743215597
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": 0.011708230560143768,
+    "charger_dy": -0.00818527219399861,
+    "charger_yaw": 1.9709943149766787,
+    "battery_dx": -0.012479539692528454,
+    "battery_dy": 0.009979324429601932,
+    "battery_yaw": 4.593572919818934,
+    "grip_effort": 9.709559644220613,
+    "finger_friction": 1.8300136312736137,
+    "object_friction": 0.3396657830881393
+   },
+   "score": 0.1953074336051941,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 1.953074336051941,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": -0.004916488183630189,
+    "charger_dy": -0.010491615993154828,
+    "charger_yaw": -0.7945701336114084,
+    "battery_dx": 0.008889728108618829,
+    "battery_dy": -0.008080733730187577,
+    "battery_yaw": -7.167659182969446,
+    "grip_effort": 15.349667016850965,
+    "finger_friction": 0.3302029446864984,
+    "object_friction": 0.36365399343748483
+   },
+   "score": 0.011563003063201904,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.11563003063201904,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": 0.00240997157960552,
+    "charger_dy": -0.006039116015432321,
+    "charger_yaw": 2.75191804730175,
+    "battery_dx": -0.009014536680953601,
+    "battery_dy": 0.013263393315194934,
+    "battery_yaw": -2.158237308082743,
+    "grip_effort": 6.698830338544469,
+    "finger_friction": 0.9797268861869637,
+    "object_friction": 2.142212528944754
+   },
+   "score": 0.03382056951522827,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.13601481914520264,
+   "battery_lift_cm": 0.10109543800354004
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": -0.001788685358526481,
+    "charger_dy": 0.013637714810722117,
+    "charger_yaw": -0.0016669809976477268,
+    "battery_dx": -0.0022431412545277345,
+    "battery_dy": 0.0036064035604613347,
+    "battery_yaw": 7.921544083765186,
+    "grip_effort": 69.44037311984532,
+    "finger_friction": 0.6392314226450259,
+    "object_friction": 1.4957264921105404
+   },
+   "score": 0.002588331699371338,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.02588331699371338,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": -7.731913537143038e-05,
+    "charger_dy": 0.0008793648059031121,
+    "charger_yaw": 4.57257121142092,
+    "battery_dx": -0.002560324519329877,
+    "battery_dy": 0.007034507153661881,
+    "battery_yaw": 3.3782860478359975,
+    "grip_effort": 66.26461789458524,
+    "finger_friction": 0.2673626591074226,
+    "object_friction": 1.407382175672354
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": 0.012822717858736798,
+    "charger_dy": 0.014037785697739391,
+    "charger_yaw": -7.764699120554091,
+    "battery_dx": 0.010909202707367272,
+    "battery_dy": 0.014435851201990327,
+    "battery_yaw": 7.315362873775417,
+    "grip_effort": 7.55265634400521,
+    "finger_friction": 2.3330082818819533,
+    "object_friction": 1.97965998267125
+   },
+   "score": 0.0682249665260315,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.6822496652603149,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": 0.009671214826292112,
+    "charger_dy": -0.000600362285765035,
+    "charger_yaw": -4.2820332857711385,
+    "battery_dx": 0.009056417361549236,
+    "battery_dy": 0.012705904793504086,
+    "battery_yaw": -3.7419156433233187,
+    "grip_effort": 22.27982082440947,
+    "finger_friction": 0.6119134610724513,
+    "object_friction": 2.159829454480389
+   },
+   "score": 0.004624724388122559,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.046247243881225586,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": -0.013784678664346961,
+    "charger_dy": 0.006960185869696822,
+    "charger_yaw": 1.8299719511839463,
+    "battery_dx": -0.014149039046594368,
+    "battery_dy": 0.00657659318480221,
+    "battery_yaw": -7.744132327622848,
+    "grip_effort": 40.89158571228809,
+    "finger_friction": 0.730264473875265,
+    "object_friction": 2.151086355938505
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": -0.013017525098277758,
+    "charger_dy": 0.010239518388371498,
+    "charger_yaw": -6.9329598597263775,
+    "battery_dx": -0.004670700635876244,
+    "battery_dy": -0.0020910380415650014,
+    "battery_yaw": 7.456993292545123,
+    "grip_effort": 23.766465571302273,
+    "finger_friction": 0.3845750984801514,
+    "object_friction": 0.50079592302867
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": 0.011643549619775394,
+    "charger_dy": -0.008223917147480268,
+    "charger_yaw": -6.007124706635464,
+    "battery_dx": -0.006350077289772672,
+    "battery_dy": 0.002583691944381985,
+    "battery_yaw": 0.8654480347722853,
+    "grip_effort": 47.20184014742799,
+    "finger_friction": 0.8237997948524225,
+    "object_friction": 0.5529742624078318
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 0,
+   "params": {
+    "charger_dx": -0.0026131097195732193,
+    "charger_dy": 0.009543629129127311,
+    "charger_yaw": 2.024103398716056,
+    "battery_dx": 0.013772329280923267,
+    "battery_dy": -0.0039178676672495735,
+    "battery_yaw": 0.8417841683405953,
+    "grip_effort": 25.949321314654775,
+    "finger_friction": 1.7042335707007192,
+    "object_friction": 0.4083908629137178
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": -0.0028046898975562003,
+    "charger_dy": 0.01229876884986891,
+    "charger_yaw": -7.310929782908733,
+    "battery_dx": 0.009681188405445056,
+    "battery_dy": -0.00253847887886326,
+    "battery_yaw": 5.276863764449644,
+    "grip_effort": 5.139921543619117,
+    "finger_friction": 0.5028665886928465,
+    "object_friction": 0.354425750426573
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.004578437290099154,
+    "charger_dy": -0.006784527042013284,
+    "charger_yaw": 3.242433130556581,
+    "battery_dx": 0.013314042808262722,
+    "battery_dy": -0.011195486932162567,
+    "battery_yaw": 5.836452726412386,
+    "grip_effort": 5.896196892257998,
+    "finger_friction": 0.5232400504804389,
+    "object_friction": 0.7462172259204112
+   },
+   "score": 0.002238452434539795,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.02238452434539795,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": -0.00033451359499607133,
+    "charger_dy": 0.014293869658081337,
+    "charger_yaw": 4.411059009629254,
+    "battery_dx": -0.00573427911842217,
+    "battery_dy": -0.006904896434975995,
+    "battery_yaw": 5.809923267029085,
+    "grip_effort": 57.566467711494056,
+    "finger_friction": 0.7264890542148901,
+    "object_friction": 0.622522740555813
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.014847520444827535,
+    "charger_dy": -0.005521693638968993,
+    "charger_yaw": -5.076601937175001,
+    "battery_dx": 0.01140294363912209,
+    "battery_dy": 0.009370061943337619,
+    "battery_yaw": 2.6862304891416198,
+    "grip_effort": 71.28776680536421,
+    "finger_friction": 2.0723141126778812,
+    "object_friction": 1.4659613124429942
+   },
+   "score": 0.00040709972381591797,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.00407099723815918,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.01082104228643033,
+    "charger_dy": -0.0075855977903367755,
+    "charger_yaw": -5.740055089583494,
+    "battery_dx": 0.005101855479448077,
+    "battery_dy": 0.0064385560996425804,
+    "battery_yaw": -5.327153139483645,
+    "grip_effort": 14.971607092001406,
+    "finger_friction": 1.9929603570610592,
+    "object_friction": 0.9864375820011189
+   },
+   "score": 0.0058904290199279785,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.058904290199279785,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.0023500774477881806,
+    "charger_dy": -0.009176106813276193,
+    "charger_yaw": 0.41635597788600265,
+    "battery_dx": 0.0007030418218475984,
+    "battery_dy": -0.01233193079261184,
+    "battery_yaw": 7.7110830900273,
+    "grip_effort": 24.37804446457554,
+    "finger_friction": 0.2032637638737825,
+    "object_friction": 1.5438003300224308
+   },
+   "score": 0.0011721253395080566,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.011721253395080566,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.014347971415204372,
+    "charger_dy": 0.0026961008496285133,
+    "charger_yaw": -2.88509381947736,
+    "battery_dx": -0.009374768528166454,
+    "battery_dy": 0.005175799017506078,
+    "battery_yaw": -4.87828162469112,
+    "grip_effort": 24.80707384547449,
+    "finger_friction": 0.9154448344927927,
+    "object_friction": 2.3085457629056583
+   },
+   "score": 0.011364519596099854,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.11364519596099854,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": -0.012832042034103696,
+    "charger_dy": -8.152902414449575e-07,
+    "charger_yaw": 3.905559668522372,
+    "battery_dx": -0.009683197785760236,
+    "battery_dy": -0.0033579980464644235,
+    "battery_yaw": -6.993672024720459,
+    "grip_effort": 37.41257990756121,
+    "finger_friction": 0.24963384697932456,
+    "object_friction": 0.6933126260745369
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.011205678933621965,
+    "charger_dy": -0.0008309898974996552,
+    "charger_yaw": 6.60195093825417,
+    "battery_dx": 0.00797751353216617,
+    "battery_dy": 0.012459718803352976,
+    "battery_yaw": -5.961551855217499,
+    "grip_effort": 6.131243560949101,
+    "finger_friction": 0.23887547705159007,
+    "object_friction": 1.8931219169541347
+   },
+   "score": 0.00037103891372680664,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0037103891372680664,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.004022099380423298,
+    "charger_dy": -0.00010284918603440871,
+    "charger_yaw": -5.383305340856316,
+    "battery_dx": 0.005212003131818209,
+    "battery_dy": -0.005459478364626059,
+    "battery_yaw": 3.374077812255118,
+    "grip_effort": 17.918145338849286,
+    "finger_friction": 0.7205742974738931,
+    "object_friction": 1.600516923084545
+   },
+   "score": 0.0003299117088317871,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.003299117088317871,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": -0.012217635734298578,
+    "charger_dy": 0.002362755099705075,
+    "charger_yaw": -4.844240843266103,
+    "battery_dx": 0.009244102554407045,
+    "battery_dy": -0.00033461891612220247,
+    "battery_yaw": 7.819125333885115,
+    "grip_effort": 8.303395364721624,
+    "finger_friction": 2.2770645031167125,
+    "object_friction": 1.6391574894961092
+   },
+   "score": 0.007395446300506592,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.07395446300506592,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": -0.0005621851027419415,
+    "charger_dy": 0.009406021925389065,
+    "charger_yaw": 1.6455824838578614,
+    "battery_dx": 0.004653631919741406,
+    "battery_dy": 0.012410722881221668,
+    "battery_yaw": -6.955673337419338,
+    "grip_effort": 50.628607894157355,
+    "finger_friction": 0.5246219422191222,
+    "object_friction": 0.5982597198801128
+   },
+   "score": 0.01103907823562622,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.11039078235626221,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.014820803136299528,
+    "charger_dy": 0.008435715062291346,
+    "charger_yaw": -0.23143777952659583,
+    "battery_dx": -0.0023211481072565633,
+    "battery_dy": 0.011325867176153883,
+    "battery_yaw": -6.610962044561694,
+    "grip_effort": 35.64438990208692,
+    "finger_friction": 1.4677821579976151,
+    "object_friction": 1.6331883347244436
+   },
+   "score": 0.0009554624557495117,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.009554624557495117,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": -0.005331398257805046,
+    "charger_dy": 0.008899175482381637,
+    "charger_yaw": -4.394744929989358,
+    "battery_dx": -0.004130761485462927,
+    "battery_dy": -0.0024765566338686047,
+    "battery_yaw": 0.6625597380826331,
+    "grip_effort": 6.832354145868865,
+    "finger_friction": 0.5590042541212734,
+    "object_friction": 0.300191323662802
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.007331421790421972,
+    "charger_dy": 0.01055627736702771,
+    "charger_yaw": -5.777093134076839,
+    "battery_dx": 0.006113573078003934,
+    "battery_dy": 0.009633092651839162,
+    "battery_yaw": 7.7092531659487005,
+    "grip_effort": 51.879416360636995,
+    "finger_friction": 0.5837631088884254,
+    "object_friction": 2.39462212346065
+   },
+   "score": 0.026816725730895996,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.26816725730895996,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 1,
+   "params": {
+    "charger_dx": 0.014219532145570653,
+    "charger_dy": 0.00011030937601736943,
+    "charger_yaw": 4.055144617342483,
+    "battery_dx": 0.012415130030194885,
+    "battery_dy": -0.0007155878409374084,
+    "battery_yaw": 5.8205798575533585,
+    "grip_effort": 34.97379289450789,
+    "finger_friction": 0.42018297834072077,
+    "object_friction": 1.5275303977626997
+   },
+   "score": 0.05249440670013428,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.5249440670013428,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.0021205435757849743,
+    "charger_dy": -0.012184645397000812,
+    "charger_yaw": -1.737913179125373,
+    "battery_dx": -0.012787769598065822,
+    "battery_dy": -0.000714991103490133,
+    "battery_yaw": -1.1433662697132192,
+    "grip_effort": 16.188280718397333,
+    "finger_friction": 0.8793235896451832,
+    "object_friction": 0.38913215175443344
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.013013067298705279,
+    "charger_dy": 0.0055215134422509915,
+    "charger_yaw": 5.180501734284347,
+    "battery_dx": 0.011904036967912795,
+    "battery_dy": 0.002499601407704277,
+    "battery_yaw": -7.356508465526389,
+    "grip_effort": 35.9488917806128,
+    "finger_friction": 0.8417830039572605,
+    "object_friction": 1.7285349090063418
+   },
+   "score": 0.0024896860122680664,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.024896860122680664,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.000964814204230325,
+    "charger_dy": 0.009397322860925771,
+    "charger_yaw": 7.9521646891598685,
+    "battery_dx": -0.004483355658963356,
+    "battery_dy": -0.009869356799379777,
+    "battery_yaw": -1.7332032087375548,
+    "grip_effort": 40.33968894318628,
+    "finger_friction": 0.6064913469851407,
+    "object_friction": 1.044510220595064
+   },
+   "score": 0.0006628036499023438,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0066280364990234375,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": -0.011179245842349868,
+    "charger_dy": 0.006783705328019408,
+    "charger_yaw": -3.5186815701360086,
+    "battery_dx": -0.009281473187879453,
+    "battery_dy": 0.010888499957495835,
+    "battery_yaw": 1.0306051379295056,
+    "grip_effort": 19.158648182807138,
+    "finger_friction": 1.9362381983793353,
+    "object_friction": 0.3600170914222399
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.005884633510226781,
+    "charger_dy": -0.005160531307061924,
+    "charger_yaw": -5.193444000238703,
+    "battery_dx": 0.005243959499018368,
+    "battery_dy": -0.004115341474111916,
+    "battery_yaw": -2.7216666800970266,
+    "grip_effort": 68.43389492558988,
+    "finger_friction": 0.3308585340242766,
+    "object_friction": 0.8886696823632084
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": -0.014279603979859522,
+    "charger_dy": -0.010098957265891315,
+    "charger_yaw": 6.134699738136991,
+    "battery_dx": 0.008677426447580287,
+    "battery_dy": 0.001705064701619706,
+    "battery_yaw": -4.440745664138236,
+    "grip_effort": 23.472806241035958,
+    "finger_friction": 0.20623085475625508,
+    "object_friction": 1.3603766268197732
+   },
+   "score": 0.002211630344390869,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.02211630344390869,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.006502520416911843,
+    "charger_dy": 0.004381350706990646,
+    "charger_yaw": 1.7814189484032195,
+    "battery_dx": -0.012788507021263874,
+    "battery_dy": -0.007607820928470733,
+    "battery_yaw": 1.1900487695669106,
+    "grip_effort": 14.914825143758886,
+    "finger_friction": 2.450136094558416,
+    "object_friction": 2.1267836045678155
+   },
+   "score": 0.0059092044830322266,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.059092044830322266,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": -0.010439762924323888,
+    "charger_dy": 0.002698817779485923,
+    "charger_yaw": 3.1394416976553057,
+    "battery_dx": -0.010903697570973415,
+    "battery_dy": -0.005622130586964862,
+    "battery_yaw": 3.454685550807909,
+    "grip_effort": 60.81521776107682,
+    "finger_friction": 0.4741228982779576,
+    "object_friction": 0.49790341566117874
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.009653760081906437,
+    "charger_dy": 0.00254948040677035,
+    "charger_yaw": -0.3745852527076732,
+    "battery_dx": -0.007315499357163229,
+    "battery_dy": -0.01282024954055037,
+    "battery_yaw": -7.713737265648396,
+    "grip_effort": 24.96454689807228,
+    "finger_friction": 0.32408637133066087,
+    "object_friction": 2.3736152105490427
+   },
+   "score": 0.08645236492156982,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.8645236492156982,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": -0.011775683148415582,
+    "charger_dy": -0.0014373363501867468,
+    "charger_yaw": -1.68544324686464,
+    "battery_dx": -0.008030655741434072,
+    "battery_dy": 0.007462671750118052,
+    "battery_yaw": 2.2992761932849657,
+    "grip_effort": 37.39980479746566,
+    "finger_friction": 0.24652646694294456,
+    "object_friction": 0.6337733995508343
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.0005949922300269531,
+    "charger_dy": -0.0021983656880927675,
+    "charger_yaw": -7.350119010036076,
+    "battery_dx": -0.009179176352976205,
+    "battery_dy": 0.013350739449138796,
+    "battery_yaw": -5.398884403946909,
+    "grip_effort": 53.08150700051715,
+    "finger_friction": 1.5952930659484656,
+    "object_friction": 0.6877520356927834
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": -0.000996494404672095,
+    "charger_dy": 0.009720054229497576,
+    "charger_yaw": 2.8909812091233995,
+    "battery_dx": 0.010108312092872128,
+    "battery_dy": 0.007727897574963713,
+    "battery_yaw": 3.060343671049674,
+    "grip_effort": 62.84928900770614,
+    "finger_friction": 1.597994862470178,
+    "object_friction": 0.43853628738521594
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.007446728252437345,
+    "charger_dy": -0.012399560306563716,
+    "charger_yaw": -1.1863001552956547,
+    "battery_dx": -0.003097443385397242,
+    "battery_dy": -0.008934957180735462,
+    "battery_yaw": 7.006481738175829,
+    "grip_effort": 6.502681706116047,
+    "finger_friction": 0.20249029497020385,
+    "object_friction": 0.594939476227308
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.014722341547236659,
+    "charger_dy": -0.007059146148346802,
+    "charger_yaw": 5.291108248283695,
+    "battery_dx": -0.009806590889386036,
+    "battery_dy": 0.0025913506439513324,
+    "battery_yaw": 7.334549362870272,
+    "grip_effort": 36.45338882188204,
+    "finger_friction": 2.379901657488978,
+    "object_friction": 1.0143405614701628
+   },
+   "score": 0.2638718783855438,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.638718605041504,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": 0.014500041196602642,
+    "charger_dy": 0.010111410951600116,
+    "charger_yaw": 4.451971617630852,
+    "battery_dx": 0.011654696607345007,
+    "battery_dy": 0.0039447455178485,
+    "battery_yaw": -2.298167257974857,
+    "grip_effort": 21.631440777475756,
+    "finger_friction": 0.3543892565761798,
+    "object_friction": 1.5599061346064649
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 2,
+   "params": {
+    "charger_dx": -0.009897644951554006,
+    "charger_dy": 0.002315938469597722,
+    "charger_yaw": 0.5743828732658294,
+    "battery_dx": 0.0051570841043307135,
+    "battery_dy": 0.007814597959957502,
+    "battery_yaw": -6.242753822977457,
+    "grip_effort": 28.27964180190804,
+    "finger_friction": 0.5689870054651881,
+    "object_friction": 1.1032894247198775
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.005819536294394859,
+    "charger_dy": 0.002564387572818655,
+    "charger_yaw": 3.7261772297394433,
+    "battery_dx": 0.0006007577161394398,
+    "battery_dy": -0.0011139657261218482,
+    "battery_yaw": -3.411698152823437,
+    "grip_effort": 9.438350675831103,
+    "finger_friction": 1.1580140746712042,
+    "object_friction": 1.3114306083222158
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": -0.00913552461070211,
+    "charger_dy": 0.014155122498333363,
+    "charger_yaw": 2.738412484630336,
+    "battery_dx": 0.0009364836962947876,
+    "battery_dy": 0.010235260546349028,
+    "battery_yaw": -0.21567306714952217,
+    "grip_effort": 18.70960992668814,
+    "finger_friction": 0.38400225190843024,
+    "object_friction": 0.41772814183671825
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.006348617366427525,
+    "charger_dy": 0.010323329047171276,
+    "charger_yaw": 2.844780449535344,
+    "battery_dx": -0.003935354499121494,
+    "battery_dy": 0.002271662736571565,
+    "battery_yaw": 1.014599578783839,
+    "grip_effort": 67.09774743240486,
+    "finger_friction": 0.5324437341028437,
+    "object_friction": 0.42545752667467185
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.011307986799870325,
+    "charger_dy": 0.011841854906606053,
+    "charger_yaw": -7.227750479969675,
+    "battery_dx": -0.00905327907481553,
+    "battery_dy": 0.004088509607983796,
+    "battery_yaw": 4.621522490157407,
+    "grip_effort": 26.88441402707425,
+    "finger_friction": 0.324478632703253,
+    "object_friction": 0.3849885590241266
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.00017917902195550665,
+    "charger_dy": 0.009465312199770343,
+    "charger_yaw": -4.526925102845981,
+    "battery_dx": -0.012746019153816492,
+    "battery_dy": 0.001531349873799142,
+    "battery_yaw": -4.930925629835926,
+    "grip_effort": 6.02776418139219,
+    "finger_friction": 1.410040789180184,
+    "object_friction": 1.711284098498306
+   },
+   "score": 0.04713296890258789,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.4713296890258789,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": -0.003049933467052939,
+    "charger_dy": -0.006177709194951466,
+    "charger_yaw": -3.5660657690086754,
+    "battery_dx": -0.004170857225149474,
+    "battery_dy": 0.0023072292934878634,
+    "battery_yaw": 0.4451212497996373,
+    "grip_effort": 13.39223477538242,
+    "finger_friction": 1.0005146456954694,
+    "object_friction": 1.2571311523897928
+   },
+   "score": 0.004372298717498779,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.04372298717498779,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.001748368439251028,
+    "charger_dy": -0.00338115254844378,
+    "charger_yaw": 1.9824445110261486,
+    "battery_dx": 0.002757083496423316,
+    "battery_dy": -0.004790284278580009,
+    "battery_yaw": -3.148783797372076,
+    "grip_effort": 22.704771475962204,
+    "finger_friction": 0.9391041950066084,
+    "object_friction": 1.0953575653769556
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": -0.0035148597330643527,
+    "charger_dy": 0.001973217216487657,
+    "charger_yaw": 7.772314163142706,
+    "battery_dx": -0.0021592644286814507,
+    "battery_dy": 0.010290441437699718,
+    "battery_yaw": -6.698820939088689,
+    "grip_effort": 56.6043534332915,
+    "finger_friction": 2.157729041857712,
+    "object_friction": 0.522697654752471
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": -0.014636957529834219,
+    "charger_dy": -0.000509747596986021,
+    "charger_yaw": -5.076603877403553,
+    "battery_dx": 0.014148937628558036,
+    "battery_dy": 0.011930953053526448,
+    "battery_yaw": 7.370638174884347,
+    "grip_effort": 26.674821758274604,
+    "finger_friction": 0.7347076475469123,
+    "object_friction": 1.753490701319069
+   },
+   "score": 0.009591877460479736,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.09591877460479736,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.004570468970670632,
+    "charger_dy": -0.007543269708982646,
+    "charger_yaw": 6.948576612125795,
+    "battery_dx": -0.0018090165010340598,
+    "battery_dy": 0.008206686849278971,
+    "battery_yaw": 0.015007311815788071,
+    "grip_effort": 8.312906975312865,
+    "finger_friction": 0.4223136484158528,
+    "object_friction": 1.0140268697319241
+   },
+   "score": 0.003510713577270508,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.03510713577270508,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": -0.010709937472071584,
+    "charger_dy": -0.014587864241505643,
+    "charger_yaw": -1.057740410401097,
+    "battery_dx": 0.00786591515577659,
+    "battery_dy": 0.00342471821228664,
+    "battery_yaw": -2.8136579870819833,
+    "grip_effort": 36.52701237169908,
+    "finger_friction": 0.6799843981297845,
+    "object_friction": 2.4973582352012325
+   },
+   "score": 0.023122429847717285,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.23122429847717285,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.008280949573343417,
+    "charger_dy": 0.009918943238152771,
+    "charger_yaw": -3.84721750177955,
+    "battery_dx": -0.010431151114535582,
+    "battery_dy": -0.009020882726789999,
+    "battery_yaw": -1.0837605704597433,
+    "grip_effort": 20.685165184588254,
+    "finger_friction": 0.32696324715706704,
+    "object_friction": 1.5678663053550805
+   },
+   "score": 0.143548846244812,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 1.4354884624481201,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.01105293463251689,
+    "charger_dy": -0.005519850427192776,
+    "charger_yaw": 0.12902714810063998,
+    "battery_dx": 0.002831238075382766,
+    "battery_dy": 0.006671345217933711,
+    "battery_yaw": -5.640440728554298,
+    "grip_effort": 10.89362602327041,
+    "finger_friction": 1.2663353168382208,
+    "object_friction": 1.0007449185319626
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.011998373803168452,
+    "charger_dy": -0.0015642491403376983,
+    "charger_yaw": -1.4941944794584323,
+    "battery_dx": -0.005804783474078933,
+    "battery_dy": -0.008058822820357633,
+    "battery_yaw": 2.4122613562143727,
+    "grip_effort": 10.415585978022321,
+    "finger_friction": 1.7655037657335175,
+    "object_friction": 0.5325242301025769
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": 0.005200788936754432,
+    "charger_dy": 0.0020455242570519595,
+    "charger_yaw": 2.0553407660625336,
+    "battery_dx": 0.011862503268955143,
+    "battery_dy": -0.009900346455917617,
+    "battery_yaw": -5.602951265992607,
+    "grip_effort": 7.010595422985633,
+    "finger_friction": 0.24259213860501808,
+    "object_friction": 0.9312176528632277
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 3,
+   "params": {
+    "charger_dx": -0.010028065441431835,
+    "charger_dy": 0.009215037902804694,
+    "charger_yaw": -7.638231511249918,
+    "battery_dx": -0.0037617908479542685,
+    "battery_dy": -0.0008038808583429348,
+    "battery_yaw": -4.535547189170808,
+    "grip_effort": 13.412934235186505,
+    "finger_friction": 0.3510849008459011,
+    "object_friction": 0.5452979442566978
+   },
+   "score": 0.0,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.0,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.014722341547236659,
+    "charger_dy": -0.007059146148346802,
+    "charger_yaw": 5.291108248283695,
+    "battery_dx": -0.009806590889386036,
+    "battery_dy": 0.0025913506439513324,
+    "battery_yaw": 7.334549362870272,
+    "grip_effort": 36.45338882188204,
+    "finger_friction": 2.379901657488978,
+    "object_friction": 1.0143405614701628
+   },
+   "score": 0.2573547065258026,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.573546886444092,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.013457118526123319,
+    "charger_dy": -0.005011865614809678,
+    "charger_yaw": 5.209008434585003,
+    "battery_dx": -0.0069538276017452345,
+    "battery_dy": -7.328818710754768e-05,
+    "battery_yaw": 6.2306176285032215,
+    "grip_effort": 49.767904166073635,
+    "finger_friction": 2.2778363244714375,
+    "object_friction": 0.9482637319494271
+   },
+   "score": 0.20469725131988525,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.0469725131988525,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.014928310865440175,
+    "charger_dy": -0.008889891178391902,
+    "charger_yaw": 7.177270420259822,
+    "battery_dx": -0.013123351947582752,
+    "battery_dy": 0.0021914847211797657,
+    "battery_yaw": 7.825869202703387,
+    "grip_effort": 35.530945117458785,
+    "finger_friction": 1.9891622805470313,
+    "object_friction": 0.8618101864813387
+   },
+   "score": 0.2235725373029709,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.2357254028320312,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0097952649586238,
+    "charger_yaw": 6.206252543846764,
+    "battery_dx": -0.013853490572682469,
+    "battery_dy": 0.0011177664628379026,
+    "battery_yaw": 7.385962321148069,
+    "grip_effort": 26.809788656298114,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 1.0108178726021742
+   },
+   "score": 0.25845885276794434,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.5845885276794434,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.01197137165880113,
+    "charger_dy": -0.011092079189877181,
+    "charger_yaw": 3.074077139482899,
+    "battery_dx": -0.009671086196200301,
+    "battery_dy": -0.0004802501959553906,
+    "battery_yaw": 5.401743360273047,
+    "grip_effort": 34.442579076228824,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 1.0685696534517184
+   },
+   "score": 0.24328799545764923,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.43287992477417,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.006494339054313642,
+    "charger_yaw": 6.399889293710064,
+    "battery_dx": -0.013372743085492448,
+    "battery_dy": 0.0014482606420956091,
+    "battery_yaw": 7.704648295338648,
+    "grip_effort": 36.29346845831829,
+    "finger_friction": 2.2799202631299096,
+    "object_friction": 0.8951917695422804
+   },
+   "score": 0.22667737305164337,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.2667737007141113,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.014036285962725242,
+    "charger_dy": -0.009114786532870268,
+    "charger_yaw": 1.8615505159407597,
+    "battery_dx": -0.012978234772447188,
+    "battery_dy": 0.0038542983815890094,
+    "battery_yaw": 8.0,
+    "grip_effort": 56.887262513890526,
+    "finger_friction": 2.431935200732361,
+    "object_friction": 1.1994798671626967
+   },
+   "score": 0.2729526162147522,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.7295260429382324,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.008897224080113517,
+    "charger_yaw": 2.8866556543684343,
+    "battery_dx": -0.00972457926512663,
+    "battery_dy": -0.002087623416409279,
+    "battery_yaw": 6.881497037964941,
+    "grip_effort": 42.32005756687418,
+    "finger_friction": 1.7325822025446318,
+    "object_friction": 1.0205065782408744
+   },
+   "score": 0.21271884441375732,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1271884441375732,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.006099262746232266,
+    "charger_yaw": 6.030768008715315,
+    "battery_dx": -0.007399025076874987,
+    "battery_dy": 0.00719269253103564,
+    "battery_yaw": 7.548979588898476,
+    "grip_effort": 49.291093289844156,
+    "finger_friction": 2.3460066903179126,
+    "object_friction": 0.9155287966158904
+   },
+   "score": 0.22740812599658966,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.274081230163574,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.008667692849673687,
+    "charger_yaw": 4.479499965836663,
+    "battery_dx": -0.011420256214578409,
+    "battery_dy": -0.003503430987225886,
+    "battery_yaw": 7.483947173185442,
+    "grip_effort": 26.73303480484799,
+    "finger_friction": 2.3235122226779965,
+    "object_friction": 1.3315382899247095
+   },
+   "score": 0.230446457862854,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.30446457862854,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.013338988001826223,
+    "charger_dy": -0.008498282090742063,
+    "charger_yaw": 7.222540327676688,
+    "battery_dx": -0.0083560466497473,
+    "battery_dy": 0.005184213186253353,
+    "battery_yaw": 6.83142144642129,
+    "grip_effort": 43.798853259046254,
+    "finger_friction": 2.0414720459237095,
+    "object_friction": 0.8934923912965113
+   },
+   "score": 0.24918019771575928,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.4918019771575928,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0086479391130455,
+    "charger_yaw": 6.377424817371459,
+    "battery_dx": -0.0034562200069708574,
+    "battery_dy": -0.0018857004952443877,
+    "battery_yaw": 6.2693527458449765,
+    "grip_effort": 47.985971125370725,
+    "finger_friction": 2.3039567949180486,
+    "object_friction": 1.261277192274335
+   },
+   "score": 0.24931935966014862,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.4931936264038086,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.012040431515017578,
+    "charger_dy": -0.006179365229233302,
+    "charger_yaw": 5.077905446614764,
+    "battery_dx": -0.009433880300646773,
+    "battery_dy": 0.003470525758796892,
+    "battery_yaw": 5.606898352713172,
+    "grip_effort": 28.00688272948696,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 1.0717171647239923
+   },
+   "score": 0.20354390144348145,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.0354390144348145,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.007176172800896278,
+    "charger_yaw": 5.796008080701428,
+    "battery_dx": -0.012875819670646134,
+    "battery_dy": -6.125423985568236e-05,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.832028891866564,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.9053640738081878
+   },
+   "score": 0.34402939677238464,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 3.440293788909912,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.006142367242522484,
+    "charger_yaw": 5.972600452923741,
+    "battery_dx": -0.008349611610999817,
+    "battery_dy": 0.0004751416741859433,
+    "battery_yaw": 4.692502048209446,
+    "grip_effort": 28.00231154203864,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 1.2947538588858045
+   },
+   "score": 0.2318030595779419,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.318030595779419,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 4,
+   "params": {
+    "charger_dx": 0.013801200267498651,
+    "charger_dy": -0.007860153360939088,
+    "charger_yaw": 6.759045831037387,
+    "battery_dx": -0.010253750678397948,
+    "battery_dy": -0.0008584279224715333,
+    "battery_yaw": 8.0,
+    "grip_effort": 40.98187762371184,
+    "finger_friction": 1.3560141359655642,
+    "object_friction": 0.9564435833895132
+   },
+   "score": 0.2360108494758606,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.590941309928894,
+   "battery_lift_cm": 0.884583592414856
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.007176172800896278,
+    "charger_yaw": 5.796008080701428,
+    "battery_dx": -0.012875819670646134,
+    "battery_dy": -6.125423985568236e-05,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.832028891866564,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.9053640738081878
+   },
+   "score": 0.2182200402021408,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1822004318237305,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.012863592240668773,
+    "charger_dy": -0.00796488018506428,
+    "charger_yaw": 3.3510000387294347,
+    "battery_dx": -0.011654899488539237,
+    "battery_dy": 0.0018080635845520651,
+    "battery_yaw": 8.0,
+    "grip_effort": 45.81294480596311,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.9562038567193951
+   },
+   "score": 0.2391645461320877,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3916454315185547,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0077794637069881776,
+    "charger_yaw": 7.226380503990779,
+    "battery_dx": -0.013662515232039693,
+    "battery_dy": -0.0033616500092877345,
+    "battery_yaw": 8.0,
+    "grip_effort": 55.65548756501675,
+    "finger_friction": 2.0830873924748623,
+    "object_friction": 0.8908055512295248
+   },
+   "score": 0.23376135528087616,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.337613582611084,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.013453019499991635,
+    "charger_dy": -0.00803511470607704,
+    "charger_yaw": 5.851489499438026,
+    "battery_dx": -0.015,
+    "battery_dy": -0.0006878934135419908,
+    "battery_yaw": 6.235437046522318,
+    "grip_effort": 33.60361347203095,
+    "finger_friction": 1.99555863673355,
+    "object_friction": 0.7646425017467714
+   },
+   "score": 0.2096375972032547,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.0963759422302246,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.011118317460659877,
+    "charger_dy": -0.004424199998136327,
+    "charger_yaw": 6.408754865116155,
+    "battery_dx": -0.015,
+    "battery_dy": -0.001408240032121028,
+    "battery_yaw": 7.193003113875669,
+    "grip_effort": 32.75439220329552,
+    "finger_friction": 1.899074068149836,
+    "object_friction": 1.0211326982709132
+   },
+   "score": 0.0642096996307373,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 0.642096996307373,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.01410657131126401,
+    "charger_dy": -0.006119603138173368,
+    "charger_yaw": 6.430056093895779,
+    "battery_dx": -0.009771564251936314,
+    "battery_dy": -0.004157256497921787,
+    "battery_yaw": 8.0,
+    "grip_effort": 49.29432707576912,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 1.324167705603075
+   },
+   "score": 0.2234146147966385,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.2341461181640625,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.005322169333852565,
+    "charger_yaw": 4.907190247658905,
+    "battery_dx": -0.010315677802038955,
+    "battery_dy": 0.0003175137645793011,
+    "battery_yaw": 7.45689715363895,
+    "grip_effort": 58.83359272614808,
+    "finger_friction": 2.359324465311116,
+    "object_friction": 0.9066446685788829
+   },
+   "score": 0.2386006861925125,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3860068321228027,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.01455475701481106,
+    "charger_dy": -0.008881653569394504,
+    "charger_yaw": 6.435492700133896,
+    "battery_dx": -0.0112092961133917,
+    "battery_dy": 0.0007385324402402922,
+    "battery_yaw": 5.158607355372654,
+    "grip_effort": 46.68424874149942,
+    "finger_friction": 2.339042057419458,
+    "object_friction": 0.7457002665384158
+   },
+   "score": 0.27757078409194946,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.775707721710205,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0059058726673411905,
+    "charger_yaw": 4.540475911370919,
+    "battery_dx": -0.007295756408004431,
+    "battery_dy": -0.0027912717393904878,
+    "battery_yaw": 5.914010639772997,
+    "grip_effort": 29.737707644739046,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.8803209740005098
+   },
+   "score": 0.24234414100646973,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.4234414100646973,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.014160301773163967,
+    "charger_dy": -0.007316457144450719,
+    "charger_yaw": 5.077872868951191,
+    "battery_dx": -0.0144336816394035,
+    "battery_dy": -0.001508419499220431,
+    "battery_yaw": 8.0,
+    "grip_effort": 46.805725221290295,
+    "finger_friction": 2.0458455262422324,
+    "object_friction": 0.9405792893998178
+   },
+   "score": 0.23942887783050537,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3942887783050537,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.009617588917161156,
+    "charger_yaw": 5.191076212389211,
+    "battery_dx": -0.015,
+    "battery_dy": -0.0029749886619838736,
+    "battery_yaw": 8.0,
+    "grip_effort": 32.44711650839784,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.9011251234042824
+   },
+   "score": 0.26880383491516113,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.6880383491516113,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.007835828846540372,
+    "charger_yaw": 5.031671256239759,
+    "battery_dx": -0.01308046071932927,
+    "battery_dy": -7.25300531156537e-05,
+    "battery_yaw": 7.150372329082762,
+    "grip_effort": 41.35265005026688,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.9284835133740239
+   },
+   "score": 0.23284702003002167,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.328470230102539,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.008603304639955192,
+    "charger_yaw": 6.422642180343823,
+    "battery_dx": -0.013798297073848926,
+    "battery_dy": 0.000468283286640607,
+    "battery_yaw": 7.001002429185139,
+    "grip_effort": 47.739136431981784,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 1.0950001676419154
+   },
+   "score": 0.2397686243057251,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.397686243057251,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.012142537023020428,
+    "charger_dy": -0.008289991903246592,
+    "charger_yaw": 4.721640015393719,
+    "battery_dx": -0.01407636425337751,
+    "battery_dy": -0.0016244115586502798,
+    "battery_yaw": 7.8549066855124,
+    "grip_effort": 37.696174341335166,
+    "finger_friction": 2.4806066375768254,
+    "object_friction": 0.8285909463759911
+   },
+   "score": 0.23771584033966064,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3771584033966064,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0051999879801373165,
+    "charger_yaw": 4.709952516054052,
+    "battery_dx": -0.012873814124548438,
+    "battery_dy": -0.00022842552405131708,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.331455116326936,
+    "finger_friction": 2.4925698369905214,
+    "object_friction": 0.772977051563514
+   },
+   "score": 0.4077121913433075,
+   "charger_lifted": 1,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 4.077121734619141,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 5,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.009256782547462525,
+    "charger_yaw": 6.416753548652807,
+    "battery_dx": -0.013108775451114893,
+    "battery_dy": 2.8702596531517133e-05,
+    "battery_yaw": 6.9272875229889195,
+    "grip_effort": 44.7372285325122,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 1.0387332172349582
+   },
+   "score": 0.2538493275642395,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.5384931564331055,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0051999879801373165,
+    "charger_yaw": 4.709952516054052,
+    "battery_dx": -0.012873814124548438,
+    "battery_dy": -0.00022842552405131708,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.331455116326936,
+    "finger_friction": 2.4925698369905214,
+    "object_friction": 0.772977051563514
+   },
+   "score": 0.29802829027175903,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.980282783508301,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004173064422765691,
+    "charger_yaw": 6.498238209471708,
+    "battery_dx": -0.014489768388370588,
+    "battery_dy": -0.003693261520971502,
+    "battery_yaw": 7.5047165222497,
+    "grip_effort": 37.931433991783784,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7827023012637353
+   },
+   "score": 0.22039981186389923,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.20399808883667,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.003327560441506682,
+    "charger_yaw": 4.659544933608446,
+    "battery_dx": -0.01377458063239057,
+    "battery_dy": -0.0008921996090429408,
+    "battery_yaw": 7.63545373027457,
+    "grip_effort": 35.86774930341329,
+    "finger_friction": 1.9334693822263498,
+    "object_friction": 0.726138372290212
+   },
+   "score": 0.191766619682312,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 1.9176661968231201,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.014184921652183893,
+    "charger_dy": -0.005562331006387358,
+    "charger_yaw": 4.449769972171623,
+    "battery_dx": -0.011584653789243218,
+    "battery_dy": -0.0012488912790368806,
+    "battery_yaw": 7.551277009535193,
+    "grip_effort": 41.09635661485089,
+    "finger_friction": 2.3996157546920602,
+    "object_friction": 0.7959980199956758
+   },
+   "score": 0.2455449104309082,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.455449104309082,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004390493107718002,
+    "charger_yaw": 4.965901784325753,
+    "battery_dx": -0.013250662298732873,
+    "battery_dy": 0.001079701690872719,
+    "battery_yaw": 8.0,
+    "grip_effort": 34.135170566418246,
+    "finger_friction": 2.4325913832915576,
+    "object_friction": 0.655299966875257
+   },
+   "score": 0.2344086617231369,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3440866470336914,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.013155377011256492,
+    "charger_dy": -0.008812107860535386,
+    "charger_yaw": 4.014292791744964,
+    "battery_dx": -0.01031173988915393,
+    "battery_dy": -0.0012959786721054162,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.30862857583761,
+    "finger_friction": 2.2259167311032138,
+    "object_friction": 0.9267610884001205
+   },
+   "score": 0.23801593482494354,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.380159378051758,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.00856059483121165,
+    "charger_yaw": 5.7754446902397465,
+    "battery_dx": -0.01493566507602712,
+    "battery_dy": -0.000569730829939068,
+    "battery_yaw": 8.0,
+    "grip_effort": 35.39865104471408,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.8570214339954552
+   },
+   "score": 0.23498713970184326,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3498713970184326,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.011974964453760634,
+    "charger_dy": -0.0061062928953540905,
+    "charger_yaw": 4.998551249390728,
+    "battery_dx": -0.01397687605175419,
+    "battery_dy": -0.0006433245272849039,
+    "battery_yaw": 8.0,
+    "grip_effort": 39.48812964815153,
+    "finger_friction": 2.14818947215371,
+    "object_friction": 0.7914944122647394
+   },
+   "score": 0.1975986361503601,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 1.975986361503601,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.013825438482418795,
+    "charger_dy": -0.0075311801539133605,
+    "charger_yaw": 3.553755931615777,
+    "battery_dx": -0.012323326378940899,
+    "battery_dy": -0.00028235809768075056,
+    "battery_yaw": 8.0,
+    "grip_effort": 30.46622780708541,
+    "finger_friction": 2.419613565445456,
+    "object_friction": 0.6715767001435712
+   },
+   "score": 0.22519946098327637,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.2519946098327637,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.013222831111269092,
+    "charger_dy": -0.005516762686781449,
+    "charger_yaw": 3.294561130965997,
+    "battery_dx": -0.011589909891880565,
+    "battery_dy": 0.004542343314278559,
+    "battery_yaw": 8.0,
+    "grip_effort": 31.02937815391489,
+    "finger_friction": 2.385753872080583,
+    "object_friction": 0.626006132625916
+   },
+   "score": 0.20630626380443573,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.0630626678466797,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.014275590941571808,
+    "charger_dy": -0.004226770639470832,
+    "charger_yaw": 5.312971077997425,
+    "battery_dx": -0.014853081534254138,
+    "battery_dy": 0.00034544741131647787,
+    "battery_yaw": 8.0,
+    "grip_effort": 50.958204452306624,
+    "finger_friction": 2.225828272700773,
+    "object_friction": 0.6875121502713212
+   },
+   "score": 0.2118876427412033,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1188764572143555,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.010817157017255021,
+    "charger_yaw": 4.1666345036300445,
+    "battery_dx": -0.013393645180884668,
+    "battery_dy": -0.001109614776355898,
+    "battery_yaw": 6.3794882203553165,
+    "grip_effort": 35.74109733571661,
+    "finger_friction": 2.198739965675932,
+    "object_friction": 0.8565822419462524
+   },
+   "score": 0.23796705901622772,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3796706199645996,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.01323802273777858,
+    "charger_dy": -0.005741631244929492,
+    "charger_yaw": 4.471615981294828,
+    "battery_dx": -0.011785000452044461,
+    "battery_dy": -0.005112420090409872,
+    "battery_yaw": 7.651495643032932,
+    "grip_effort": 42.71339085744627,
+    "finger_friction": 2.3511347877697015,
+    "object_friction": 0.6284298353362652
+   },
+   "score": 0.23089976608753204,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.308997631072998,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004554096920267705,
+    "charger_yaw": 4.433206095859619,
+    "battery_dx": -0.015,
+    "battery_dy": -0.0016493167018554432,
+    "battery_yaw": 7.678985597059729,
+    "grip_effort": 31.963940374665558,
+    "finger_friction": 1.8279349821446271,
+    "object_friction": 0.6964165787148823
+   },
+   "score": 0.1949557662010193,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 1.9495576620101929,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.014881552105125075,
+    "charger_dy": -0.00617271830676199,
+    "charger_yaw": 4.63263150710749,
+    "battery_dx": -0.012713326919085707,
+    "battery_dy": 0.0014915406802911008,
+    "battery_yaw": 8.0,
+    "grip_effort": 42.503109045627376,
+    "finger_friction": 1.986752957755852,
+    "object_friction": 0.5391618383526431
+   },
+   "score": 0.19176334142684937,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 1.9176334142684937,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 6,
+   "params": {
+    "charger_dx": 0.014818786329055283,
+    "charger_dy": -0.005063038335657081,
+    "charger_yaw": 3.5212024664405845,
+    "battery_dx": -0.012351955025908686,
+    "battery_dy": -0.0016997016980830806,
+    "battery_yaw": 8.0,
+    "grip_effort": 35.237942959404215,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.6102713458243187
+   },
+   "score": 0.21727561950683594,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1727561950683594,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0051999879801373165,
+    "charger_yaw": 4.709952516054052,
+    "battery_dx": -0.012873814124548438,
+    "battery_dy": -0.00022842552405131708,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.331455116326936,
+    "finger_friction": 2.4925698369905214,
+    "object_friction": 0.772977051563514
+   },
+   "score": 0.2939877212047577,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.9398770332336426,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004942085668248478,
+    "charger_yaw": 4.900419239007757,
+    "battery_dx": -0.014708374363126208,
+    "battery_dy": -0.0007515417216483571,
+    "battery_yaw": 7.315000724298908,
+    "grip_effort": 38.25738570900604,
+    "finger_friction": 2.343889144356175,
+    "object_friction": 0.7697515710815142
+   },
+   "score": 0.21793901920318604,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1793901920318604,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.014896206825168366,
+    "charger_dy": -0.005248828354422683,
+    "charger_yaw": 4.685066885338395,
+    "battery_dx": -0.013749867291831861,
+    "battery_dy": -0.0016438048544391275,
+    "battery_yaw": 7.524192944086531,
+    "grip_effort": 42.64121937951575,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.8172587208691737
+   },
+   "score": 0.22662878036499023,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.2662878036499023,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.006783799874632205,
+    "charger_yaw": 5.075176653922604,
+    "battery_dx": -0.014317489296525265,
+    "battery_dy": -0.0006773877582180385,
+    "battery_yaw": 8.0,
+    "grip_effort": 45.612753599328734,
+    "finger_friction": 2.2816188432493942,
+    "object_friction": 0.7660538771518277
+   },
+   "score": 0.2351054698228836,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3510546684265137,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.007200593317507677,
+    "charger_yaw": 4.969295096878499,
+    "battery_dx": -0.013287788853954121,
+    "battery_dy": -0.0014124193840169864,
+    "battery_yaw": 8.0,
+    "grip_effort": 40.19210434353626,
+    "finger_friction": 2.2483468227688594,
+    "object_friction": 0.8013623122128077
+   },
+   "score": 0.2493724375963211,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.4937243461608887,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.006867570735066091,
+    "charger_yaw": 5.8224952772660306,
+    "battery_dx": -0.011410226250302441,
+    "battery_dy": -0.0013831876838302209,
+    "battery_yaw": 7.579859317522473,
+    "grip_effort": 41.07892743591502,
+    "finger_friction": 2.3567896592247113,
+    "object_friction": 0.6491388328152589
+   },
+   "score": 0.24559645354747772,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.4559645652770996,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.005188195749026027,
+    "charger_yaw": 6.075750514353658,
+    "battery_dx": -0.01239378543813549,
+    "battery_dy": 2.8050856155334078e-05,
+    "battery_yaw": 8.0,
+    "grip_effort": 36.54361139484572,
+    "finger_friction": 2.238274011553406,
+    "object_friction": 0.7899754941710714
+   },
+   "score": 0.2260124683380127,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.260124683380127,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0067645824731046595,
+    "charger_yaw": 4.059459788637922,
+    "battery_dx": -0.012269825965306732,
+    "battery_dy": -0.004522016203865593,
+    "battery_yaw": 7.217431658292108,
+    "grip_effort": 41.20506514037127,
+    "finger_friction": 2.332590213132911,
+    "object_friction": 0.6624096806870382
+   },
+   "score": 0.25670289993286133,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.5670289993286133,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.007094140742166513,
+    "charger_yaw": 4.335121997310553,
+    "battery_dx": -0.013374340747537088,
+    "battery_dy": -0.0001167741535143714,
+    "battery_yaw": 7.735363117972517,
+    "grip_effort": 36.95821543651331,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7666444493554844
+   },
+   "score": 0.2168440818786621,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.168440818786621,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.00839455469405765,
+    "charger_yaw": 5.0258397776898,
+    "battery_dx": -0.01475980436017913,
+    "battery_dy": -0.0031379294511750654,
+    "battery_yaw": 8.0,
+    "grip_effort": 31.82637002676523,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.718328960290883
+   },
+   "score": 0.27120471000671387,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.7120471000671387,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.014088914125884821,
+    "charger_dy": -0.004550506816158782,
+    "charger_yaw": 3.9592215833514164,
+    "battery_dx": -0.012373364345275221,
+    "battery_dy": 0.00028279158503044695,
+    "battery_yaw": 8.0,
+    "grip_effort": 35.805802214225956,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.9101012627593263
+   },
+   "score": 0.20458877086639404,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.0458877086639404,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004412968046076205,
+    "charger_yaw": 5.031641921711522,
+    "battery_dx": -0.009047391963919373,
+    "battery_dy": 0.0027690766905442733,
+    "battery_yaw": 7.45095439325463,
+    "grip_effort": 41.865510785599895,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7782969002258187
+   },
+   "score": 0.28793904185295105,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.879390239715576,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.00454496033812285,
+    "charger_yaw": 5.381281697630817,
+    "battery_dx": -0.012580036592269667,
+    "battery_dy": 0.00022787022982251152,
+    "battery_yaw": 8.0,
+    "grip_effort": 38.8328868949312,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.849144555966996
+   },
+   "score": 0.29873520135879517,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.987351894378662,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.003552242475047771,
+    "charger_yaw": 4.980111064447648,
+    "battery_dx": -0.012594746839971104,
+    "battery_dy": -0.001871555143802472,
+    "battery_yaw": 8.0,
+    "grip_effort": 32.822574943177464,
+    "finger_friction": 2.2200720796925677,
+    "object_friction": 0.8222030752931595
+   },
+   "score": 0.2192622423171997,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.192622423171997,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.014864938814828685,
+    "charger_dy": -0.0045658762271984545,
+    "charger_yaw": 4.260926186589076,
+    "battery_dx": -0.011260764016020927,
+    "battery_dy": -3.535945933661952e-05,
+    "battery_yaw": 8.0,
+    "grip_effort": 40.58565827126154,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7386569538939007
+   },
+   "score": 0.2526727318763733,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.5267271995544434,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 7,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004088084926897948,
+    "charger_yaw": 5.209609805146442,
+    "battery_dx": -0.014479318219999315,
+    "battery_dy": 0.0011489229831125672,
+    "battery_yaw": 7.846800720581992,
+    "grip_effort": 41.306339008813026,
+    "finger_friction": 2.303566285309988,
+    "object_friction": 0.8212162654109996
+   },
+   "score": 0.2324312925338745,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.324312925338745,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0051999879801373165,
+    "charger_yaw": 4.709952516054052,
+    "battery_dx": -0.012873814124548438,
+    "battery_dy": -0.00022842552405131708,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.331455116326936,
+    "finger_friction": 2.4925698369905214,
+    "object_friction": 0.772977051563514
+   },
+   "score": 0.30040085315704346,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 3.0040085315704346,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.014583791339820185,
+    "charger_dy": -0.006496961129283595,
+    "charger_yaw": 4.3857346519937845,
+    "battery_dx": -0.011983054044251085,
+    "battery_dy": 0.00035956572604180573,
+    "battery_yaw": 7.849422306856614,
+    "grip_effort": 40.3578833723376,
+    "finger_friction": 2.295364687321704,
+    "object_friction": 0.7421480808960395
+   },
+   "score": 0.23867817223072052,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.386781692504883,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.005290146774270758,
+    "charger_yaw": 4.414553166540154,
+    "battery_dx": -0.015,
+    "battery_dy": 0.00040251967947522484,
+    "battery_yaw": 8.0,
+    "grip_effort": 32.08601981344692,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7722397838406478
+   },
+   "score": 0.3878858685493469,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 3.8788585662841797,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004311503762243965,
+    "charger_yaw": 4.339021510822425,
+    "battery_dx": -0.01220306179751723,
+    "battery_dy": 0.000414399262617611,
+    "battery_yaw": 8.0,
+    "grip_effort": 43.03266340585681,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7446707746127721
+   },
+   "score": 0.2299216240644455,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.2992162704467773,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.006240864823305839,
+    "charger_yaw": 4.4779730742644865,
+    "battery_dx": -0.013780418309705224,
+    "battery_dy": -0.0003250209586945444,
+    "battery_yaw": 8.0,
+    "grip_effort": 41.786822524633585,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7423081050738121
+   },
+   "score": 0.2945655584335327,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.945655584335327,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.014479595112686757,
+    "charger_dy": -0.005766994010212285,
+    "charger_yaw": 5.187644711340763,
+    "battery_dx": -0.013725963587854682,
+    "battery_dy": 0.0005842315563358586,
+    "battery_yaw": 7.9836594575395825,
+    "grip_effort": 37.89363505527424,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7489486993212244
+   },
+   "score": 0.22113175690174103,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.211317539215088,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.006524877362550188,
+    "charger_yaw": 4.296469772445226,
+    "battery_dx": -0.014357506391439043,
+    "battery_dy": -0.0009304025522089317,
+    "battery_yaw": 8.0,
+    "grip_effort": 39.80236227114531,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7868153902284434
+   },
+   "score": 0.23941130936145782,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.394113063812256,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.013897069409745822,
+    "charger_dy": -0.006447213558095074,
+    "charger_yaw": 4.862303152939271,
+    "battery_dx": -0.011606871853093769,
+    "battery_dy": -0.0005707132018716275,
+    "battery_yaw": 7.36402691515722,
+    "grip_effort": 32.6757426811327,
+    "finger_friction": 2.3618557594276353,
+    "object_friction": 0.8584998813746588
+   },
+   "score": 0.28198421001434326,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.8198421001434326,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.014804724262462026,
+    "charger_dy": -0.006175657610960016,
+    "charger_yaw": 4.4044035707653695,
+    "battery_dx": -0.013328347729588689,
+    "battery_dy": 2.1251817939039325e-05,
+    "battery_yaw": 7.669110781599963,
+    "grip_effort": 34.55399031014994,
+    "finger_friction": 2.455755929302903,
+    "object_friction": 0.7974232002153935
+   },
+   "score": 0.2942100167274475,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.9421000480651855,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004682486368302489,
+    "charger_yaw": 4.48059338317327,
+    "battery_dx": -0.014467191190901098,
+    "battery_dy": -0.0009790328980181211,
+    "battery_yaw": 8.0,
+    "grip_effort": 33.24741783590512,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7432661855475965
+   },
+   "score": 0.2168455570936203,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1684556007385254,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.014452764280027335,
+    "charger_dy": -0.004147648308704498,
+    "charger_yaw": 4.819610795854533,
+    "battery_dx": -0.011585769547463997,
+    "battery_dy": -0.0011113259200847322,
+    "battery_yaw": 8.0,
+    "grip_effort": 40.399296077848064,
+    "finger_friction": 1.966569258890592,
+    "object_friction": 0.7684573666811252
+   },
+   "score": 0.2020871639251709,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.020871639251709,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0044686118985344594,
+    "charger_yaw": 4.488702861186985,
+    "battery_dx": -0.013092637733044732,
+    "battery_dy": -0.001453294967906471,
+    "battery_yaw": 8.0,
+    "grip_effort": 31.946255755006405,
+    "finger_friction": 2.300124243283331,
+    "object_friction": 0.8326398351656178
+   },
+   "score": 0.21410226821899414,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1410226821899414,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.014980668802106929,
+    "charger_dy": -0.005541609467209481,
+    "charger_yaw": 4.656855584096503,
+    "battery_dx": -0.010296426199749305,
+    "battery_dy": 0.0007446540388807953,
+    "battery_yaw": 7.611143984656277,
+    "grip_effort": 43.147939249475556,
+    "finger_friction": 2.475115431572428,
+    "object_friction": 0.8119124734315435
+   },
+   "score": 0.2086395025253296,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.086395025253296,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.014448565758415778,
+    "charger_dy": -0.006081575192656412,
+    "charger_yaw": 5.111979241706962,
+    "battery_dx": -0.013596569786995642,
+    "battery_dy": -0.0009628667049068219,
+    "battery_yaw": 8.0,
+    "grip_effort": 33.74667426708643,
+    "finger_friction": 2.2277564925103426,
+    "object_friction": 0.801480076708889
+   },
+   "score": 0.20520897209644318,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.0520896911621094,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.013157705873927342,
+    "charger_dy": -0.005906612168174471,
+    "charger_yaw": 4.526641394709374,
+    "battery_dx": -0.014138406400989609,
+    "battery_dy": -0.0012787756922340958,
+    "battery_yaw": 8.0,
+    "grip_effort": 38.29207840803061,
+    "finger_friction": 2.3128277071934726,
+    "object_friction": 0.8006515207353954
+   },
+   "score": 0.22109417617321014,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.210941791534424,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 8,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.00640546425413553,
+    "charger_yaw": 4.740662177863181,
+    "battery_dx": -0.011015756412810912,
+    "battery_dy": 0.00034606645520870484,
+    "battery_yaw": 8.0,
+    "grip_effort": 36.68793918654323,
+    "finger_friction": 2.340029662448489,
+    "object_friction": 0.8339799781499644
+   },
+   "score": 0.23272661864757538,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.327266216278076,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0051999879801373165,
+    "charger_yaw": 4.709952516054052,
+    "battery_dx": -0.012873814124548438,
+    "battery_dy": -0.00022842552405131708,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.331455116326936,
+    "finger_friction": 2.4925698369905214,
+    "object_friction": 0.772977051563514
+   },
+   "score": 0.21962790191173553,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1962790489196777,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0037161513011479772,
+    "charger_yaw": 5.1188326434549865,
+    "battery_dx": -0.013364735002855434,
+    "battery_dy": -0.0007668697676617466,
+    "battery_yaw": 8.0,
+    "grip_effort": 35.855532858554234,
+    "finger_friction": 2.486482944644343,
+    "object_friction": 0.8383144805683881
+   },
+   "score": 0.23174495995044708,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3174495697021484,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.005235935960672273,
+    "charger_yaw": 4.794858656953727,
+    "battery_dx": -0.013949719198268125,
+    "battery_dy": -0.0008261207205466185,
+    "battery_yaw": 7.8718180203016,
+    "grip_effort": 37.318607546801374,
+    "finger_friction": 2.448322251853469,
+    "object_friction": 0.7784709916899845
+   },
+   "score": 0.22125422954559326,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.2125422954559326,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.0048944507982859806,
+    "charger_yaw": 4.818288475956411,
+    "battery_dx": -0.012872612378850158,
+    "battery_dy": -0.00034154105962737845,
+    "battery_yaw": 8.0,
+    "grip_effort": 35.147566835502374,
+    "finger_friction": 2.4752896279500027,
+    "object_friction": 0.7345739690852665
+   },
+   "score": 0.22757947444915771,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.275794744491577,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.005121652638545084,
+    "charger_yaw": 5.032989879965433,
+    "battery_dx": -0.012085750468622742,
+    "battery_dy": 0.00020787208583471044,
+    "battery_yaw": 8.0,
+    "grip_effort": 41.11762224643994,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7865149266345445
+   },
+   "score": 0.23644237220287323,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3644237518310547,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.013725922913164535,
+    "charger_dy": -0.004989267333907619,
+    "charger_yaw": 4.708165714843615,
+    "battery_dx": -0.013984847229861432,
+    "battery_dy": -0.0005122783648368167,
+    "battery_yaw": 8.0,
+    "grip_effort": 34.622493338992705,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7902344748714071
+   },
+   "score": 0.3030306100845337,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 3.030306100845337,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.014849720196223274,
+    "charger_dy": -0.005293639609547953,
+    "charger_yaw": 5.001202454682893,
+    "battery_dx": -0.013815674320597186,
+    "battery_dy": 0.0011143997675638548,
+    "battery_yaw": 7.714543136567833,
+    "grip_effort": 35.633907587687496,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.8019052150630431
+   },
+   "score": 0.22052498161792755,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.205249786376953,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004511730416588797,
+    "charger_yaw": 4.8420427810921165,
+    "battery_dx": -0.013713677354254047,
+    "battery_dy": -0.0005395550966250922,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.292467423484794,
+    "finger_friction": 2.2246388045183627,
+    "object_friction": 0.8114469374229829
+   },
+   "score": 0.2127709835767746,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.1277098655700684,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004236610516210687,
+    "charger_yaw": 4.352750597685295,
+    "battery_dx": -0.01258694714281391,
+    "battery_dy": -0.0016276653641945794,
+    "battery_yaw": 8.0,
+    "grip_effort": 33.17736655350262,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.8159186402983968
+   },
+   "score": 0.2800959348678589,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.800959348678589,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004973654718184329,
+    "charger_yaw": 4.209642925991922,
+    "battery_dx": -0.012940387991466962,
+    "battery_dy": -0.0004049795974584956,
+    "battery_yaw": 8.0,
+    "grip_effort": 39.642563149115844,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.8531319751347806
+   },
+   "score": 0.20937621593475342,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.093762159347534,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.005455830650352099,
+    "charger_yaw": 5.281968349856935,
+    "battery_dx": -0.013080774197780596,
+    "battery_dy": -4.295879033120592e-05,
+    "battery_yaw": 8.0,
+    "grip_effort": 32.4720467625675,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.7834518814493638
+   },
+   "score": 0.2078336477279663,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.078336477279663,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.014862013669457847,
+    "charger_dy": -0.005292955082298894,
+    "charger_yaw": 4.259211195825493,
+    "battery_dx": -0.012819553108320579,
+    "battery_dy": 0.0007605023440641415,
+    "battery_yaw": 7.937790017292368,
+    "grip_effort": 36.16473992450896,
+    "finger_friction": 2.410049751578033,
+    "object_friction": 0.8489949117346041
+   },
+   "score": 0.23254990577697754,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.3254990577697754,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.014108247171028283,
+    "charger_dy": -0.0046440094039288705,
+    "charger_yaw": 4.749050746784619,
+    "battery_dx": -0.011609860573885186,
+    "battery_dy": 0.0006343896513789013,
+    "battery_yaw": 7.969006169928001,
+    "grip_effort": 33.991008469081216,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.8272070890601699
+   },
+   "score": 0.21313218772411346,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.131321907043457,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.014272972357045055,
+    "charger_dy": -0.004709622901956562,
+    "charger_yaw": 4.4289360183193285,
+    "battery_dx": -0.013384548842849564,
+    "battery_dy": -0.0012873568572491258,
+    "battery_yaw": 8.0,
+    "grip_effort": 37.95207625734533,
+    "finger_friction": 2.5000000000000004,
+    "object_friction": 0.8269928937275562
+   },
+   "score": 0.20921139419078827,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.092113971710205,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.004815344558937734,
+    "charger_yaw": 4.972898466580258,
+    "battery_dx": -0.013574304450829501,
+    "battery_dy": -0.0002511036490869152,
+    "battery_yaw": 7.576681371216656,
+    "grip_effort": 35.34335842300052,
+    "finger_friction": 2.4799237361547704,
+    "object_friction": 0.8121069162164064
+   },
+   "score": 0.2329927682876587,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.329927682876587,
+   "battery_lift_cm": 0.0
+  },
+  {
+   "batch": 9,
+   "params": {
+    "charger_dx": 0.015,
+    "charger_dy": -0.005914047173878228,
+    "charger_yaw": 4.770780115090679,
+    "battery_dx": -0.012920473328307341,
+    "battery_dy": 0.00011849653216151022,
+    "battery_yaw": 8.0,
+    "grip_effort": 38.16336153466763,
+    "finger_friction": 2.362534015530198,
+    "object_friction": 0.7872954387842983
+   },
+   "score": 0.264621376991272,
+   "charger_lifted": 0,
+   "battery_lifted": 0,
+   "both": 0,
+   "charger_lift_cm": 2.6462137699127197,
+   "battery_lift_cm": 0.0
+  }
+ ]
+}
