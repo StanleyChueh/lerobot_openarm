@@ -378,6 +378,10 @@ evaluation.
 ### Sim Step 2. Teleoperate in sim (no recording)
 
 ```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-teleoperate \
   --robot.type=openarm_isaac \
   --teleop.type=openarm_quest \
@@ -387,6 +391,10 @@ lerobot-teleoperate \
 ### Sim Step 3. Record sim demos (lerobot dataset + Mimic source demos)
 
 ```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-record \
   --robot.type=openarm_isaac \
   --teleop.type=openarm_quest \
