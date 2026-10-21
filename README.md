@@ -85,8 +85,9 @@ lerobot-dataset-viz --repo-id ethanCSL/openarm_pringles_lerobot_real_v00 --episo
 ### Step 4. Train
 
 Training runs on the training machine with the lerobot fork
-[`StanleyChueh/lerobot`](https://github.com/StanleyChueh/lerobot), branch `update_dev` (commit `1e5f2049e`);
-this machine runs collection and evaluation with official lerobot `3f2c29ef`.
+[`StanleyChueh/lerobot`](https://github.com/StanleyChueh/lerobot), branch `update_dev` (commit `1e5f2049e`)
+or `update_dev_v2`; this machine runs collection and evaluation with official lerobot `3f2c29ef` (`.venv`).
+The training branch decides the evaluation venv: see [Step 5](#which-venv).
 On a 16 GB GPU, SmolVLA needs `--batch_size=32 --steps=40000` (batch 64 runs out of memory).
 `--dataset.image_transforms.enable=true` turns on image augmentation.
 
@@ -145,6 +146,26 @@ Models: SmolVLA `ethanCSL/openarm_pringles_lerobot_real_smolvla_v00`, GR00T N1.7
 
 During an episode: **Enter** ends it, **Left arrow** reruns it, **Esc** stops. `--display_data=false` turns
 off the rerun window.
+
+<a id="which-venv"></a>
+#### Which venv: the lerobot branch the model was trained on
+
+| trained on | venv | normal / RTC | async / async + RTC |
+|---|---|---|---|
+| `update_dev` | `.venv` | commands below | `policy_server` + `robot_client` (below) |
+| `update_dev_v2` | `.venv-v2` | same commands below, only the venv differs | [remote inference](#async-on-venv-v2-remote-inference) |
+
+For `update_dev_v2` models, start every terminal with:
+
+```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv-v2/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+```
+
+`.venv-v2` has the fork (`~/Stanley_ws/lerobot_experiment/lerobot`, branch `update_dev_v2`) installed editable,
+plus both plugins. Never run `uv sync` / `uv run` in it. Our `policy_server` / `robot_client` do not run there.
 
 #### Normal
 
@@ -389,6 +410,58 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 ```
 
+<a id="async-on-venv-v2-remote-inference"></a>
+#### Async on `.venv-v2` (remote inference)
+
+For `update_dev_v2` models: `lerobot-policy-server` replaces `policy_server`, and `lerobot-rollout
+--inference.type=remote` replaces `robot_client`. Details: [`remote_inference/README.md`](remote_inference/README.md).
+
+Once per SmolVLA checkpoint (fixes its input features; weights unchanged):
+
+```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv-v2/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+python remote_inference/fix_checkpoint_features.py ethanCSL/openarm_pringles_lerobot_real_smolvla_20_v00 \
+  outputs/remote_checkpoints/openarm_pringles_lerobot_real_smolvla_20_v00
+```
+
+Terminal 1, the policy server (async + RTC; wait for `Policy server ready`):
+
+```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv-v2/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+lerobot-policy-server --config_path=remote_inference/openarm_pringles_smolvla.yaml
+```
+
+Terminal 2, the robot:
+
+```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv-v2/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+lerobot-rollout --strategy.type=episodic \
+  --inference.type=remote --inference.endpoint=tcp/127.0.0.1:7447 --inference.deployment=openarm \
+  --inference.mode=rtc_guided --inference.semantics=openarm-umeow-rad-v1 \
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
+  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
+  --fps=30 --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_remote_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
+  --display_data=true
+```
+
+- Async without RTC: add `--execution.supported_modes='[chunk]' --execution.rtc.enabled=false` to the server
+  and use `--inference.mode=chunk` on the robot.
+- Another checkpoint with the same cameras and joints: add `--model.repo_or_path=...` to the server.
+  GR00T / pi0.5 use other camera names, so copy the YAML and edit its `features` and the `--rename_map`.
+
 #### Timing report
 
 Every evaluation saves a timing report to `outputs/eval_logs/<date>_<mode>_<policy>/` (table + `report.png`).
@@ -532,7 +605,26 @@ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
 
 ### Sim Step 6. Evaluate in sim: normal, RTC, async, async + RTC
 
-The simulator from Sim Step 1 (without `--mimic_hdf5`) in terminal 1, then:
+The simulator from Sim Step 1 (without `--mimic_hdf5`) in terminal 1, then the commands below.
+Models trained on `update_dev_v2`: run them in `.venv-v2` ([which venv](#which-venv)). For async there, use
+[remote inference](#async-on-venv-v2-remote-inference) with the robot flags swapped for the sim:
+
+```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv-v2/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+lerobot-rollout --strategy.type=episodic \
+  --inference.type=remote --inference.endpoint=tcp/127.0.0.1:7447 --inference.deployment=openarm \
+  --inference.mode=rtc_guided --inference.semantics=openarm-umeow-rad-v1 \
+  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
+  --robot.type=openarm_isaac \
+  --fps=30 --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_sim_remote_v00 --dataset.push_to_hub=false \
+  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
+  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
+  --display_data=true
+```
 
 **Normal**:
 
