@@ -367,7 +367,7 @@ No CAN step, no `YES`.
 cd ~/Stanley_ws/IsaacLab
 conda activate env_isaaclab
 ./isaaclab.sh -p scripts/tools/lerobot_sim_server.py --enable_cameras --headless \
-  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-v0 --task_mode handover \
+  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-v1 --task_mode handover \
   --domain_randomization none \
   --mimic_hdf5 logs/demos/pringles_sim_src_v00.hdf5
 ```
@@ -407,6 +407,7 @@ lerobot-record \
 ```
 
 End each demo with the can in the LEFT hand, then press X.
+If the arm stops with `SAFETY HOLD` in sim, add `--robot.max_tracking_error=1.0`.
 
 ### Sim Step 4. Generate a synthetic dataset with Isaac Lab Mimic
 
@@ -417,7 +418,7 @@ cd ~/Stanley_ws/IsaacLab && conda activate env_isaaclab
 
 # 4a. Annotate
 ./isaaclab.sh -p scripts/imitation_learning/isaaclab_mimic/annotate_demos.py \
-  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v0 \
+  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v1 \
   --task_mode handover --auto --from_states \
   --enable_cameras --headless \
   --input_file logs/demos/pringles_sim_src_v00.hdf5 \
@@ -425,16 +426,20 @@ cd ~/Stanley_ws/IsaacLab && conda activate env_isaaclab
 
 # 4b. Generate (with domain randomization)
 ./isaaclab.sh -p scripts/imitation_learning/isaaclab_mimic/generate_dataset.py \
-  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v0 --task_mode handover \
+  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v1 --task_mode handover \
   --input_file logs/demos/pringles_sim_src_v00_annotated.hdf5 \
   --output_file logs/demos/pringles_sim_mimic_v00.hdf5 \
   --generation_num_trials 500 --num_envs 4 --enable_cameras --headless \
   --enable_domain_randomization --domain_randomization_profile visual
 ```
 
-Convert to a lerobot dataset (lerobot terminal):
+Convert to a lerobot dataset:
 
 ```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python mimic_to_lerobot.py \
   --hdf5 ~/Stanley_ws/IsaacLab/logs/demos/pringles_sim_mimic_v00.hdf5 \
   --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v00 --push_to_hub
