@@ -18,6 +18,12 @@
    postprocess the full chunk before queuing actions"). For relative-action policies only, the sync
    engine here does exactly that: predict a chunk, decode it whole, execute its n_action_steps absolute
    actions one per tick, then predict the next. Every other policy goes through lerobot's code unchanged.
+
+3. Checkpoints trained on the update_dev_v2 fork (every mode, including the async policy server). The fork
+   adds a `dtype` field to PreTrainedConfig and lerobot-train writes it to config.json ("dtype": null);
+   the lerobot evaluated here (3f2c29ef, the fork's base) has no such field, and draccus refuses the whole
+   config ("The fields `dtype` are not valid for SmolVLAConfig"). A null dtype is the fork's default and
+   means nothing changes, so it is dropped before parsing; a non-null one is left in and still refused.
 """
 
 import sys
@@ -70,11 +76,33 @@ def _install_bf16(context) -> None:
     context._load_pretrained_policy = load
 
 
+def sync_module():
+    """lerobot's synchronous inference engine module: lerobot.inference.sync on update_dev_v2, where
+    lerobot.rollout.inference was removed; lerobot.rollout.inference.sync before (3f2c29ef)."""
+    try:
+        import lerobot.inference.sync as sync
+    except ModuleNotFoundError:
+        import lerobot.rollout.inference.sync as sync
+    return sync
+
+
+def require_async_inference() -> None:
+    """Our policy_server / robot_client wrap lerobot.async_inference, which update_dev_v2 removed."""
+    try:
+        import lerobot.async_inference  # noqa: F401
+    except ModuleNotFoundError:
+        raise SystemExit(
+            "[openarm] this lerobot has no lerobot.async_inference (update_dev_v2 / .venv-v2): use\n"
+            "  lerobot-policy-server + lerobot-rollout --inference.type=remote instead -- see\n"
+            "  remote_inference/README.md in the lerobot_openarm repo.") from None
+
+
 def _install_chunked_sync() -> None:
     import torch
 
-    import lerobot.rollout.inference.sync as sync
     from lerobot.policies.utils import make_robot_action, prepare_observation_for_inference
+
+    sync = sync_module()
 
     engine = sync.SyncInferenceEngine
     original_get, original_reset = engine.get_action, engine.reset
@@ -109,7 +137,37 @@ def _install_chunked_sync() -> None:
     engine.get_action, engine.reset = get_action, reset
 
 
+def _install_fork_config_compat() -> None:
+    import dataclasses
+    import json
+
+    import lerobot.configs.policies as policies
+
+    if getattr(policies, "_openarm_fork_compat", False):
+        return
+    draccus = policies.draccus
+
+    class _Draccus:  # policies.py's draccus, with parse() dropping a null `dtype` its config class lacks
+        def __getattr__(self, name):
+            return getattr(draccus, name)
+
+        @staticmethod
+        def parse(config_class, config_path=None, args=None, **kwargs):
+            if config_path is not None and "dtype" not in {f.name for f in dataclasses.fields(config_class)}:
+                with open(config_path) as f:
+                    config = json.load(f)
+                if "dtype" in config and config["dtype"] is None:
+                    del config["dtype"]
+                    with open(config_path, "w") as f:  # from_pretrained's own temporary copy
+                        json.dump(config, f)
+            return draccus.parse(config_class, config_path, args=args, **kwargs)
+
+    policies.draccus = _Draccus()
+    policies._openarm_fork_compat = True
+
+
 def install() -> None:
+    _install_fork_config_compat()
     command = sys.argv[0].rsplit("/", 1)[-1] if sys.argv else ""
     if "rollout" not in command:
         return

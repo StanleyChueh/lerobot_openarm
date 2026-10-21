@@ -549,13 +549,16 @@ def install() -> None:
     if "rollout" not in command or not _enabled():
         return
     import lerobot.policies.rtc.action_queue as action_queue
-    import lerobot.rollout.inference.sync as sync
     import lerobot.rollout.strategies.episodic as episodic
 
+    from .policy_loading import sync_module
+
+    sync = sync_module()
     strategy = episodic.EpisodicStrategy
     if getattr(strategy, "_openarm_eval_metrics", False):
         return
-    mode = "rtc" if (_argv_value("--inference.type") or "").lower() == "rtc" else "normal"
+    inference_type = (_argv_value("--inference.type") or "").lower()
+    mode = inference_type if inference_type in ("rtc", "remote") else "normal"
     model = _argv_value("--policy.path") or "policy"
     setup0, loop0, teardown0 = strategy.setup, strategy._policy_loop, strategy.teardown
     send0, get0, merge0 = episodic.send_next_action, sync.SyncInferenceEngine.get_action, action_queue.ActionQueue.merge
@@ -604,8 +607,9 @@ def install() -> None:
                       n_actions=getattr(policy.config, "n_action_steps", 0) or 0, dropped=0)
         return out
 
-    def merge(self, original_actions, processed_actions, real_delay, action_index_before_inference=None, *, task=None):
-        out = merge0(self, original_actions, processed_actions, real_delay, action_index_before_inference, task=task)
+    def merge(self, original_actions, processed_actions, real_delay, action_index_before_inference=None, **kwargs):
+        # kwargs: task, and on update_dev_v2 also provenance / snapshot; its merge returns whether it merged
+        out = merge0(self, original_actions, processed_actions, real_delay, action_index_before_inference, **kwargs)
         if LOG is not None:  # RTC: the inference thread merges each new chunk, skipping real_delay actions
             policy = getattr(getattr(LOG, "engine", None), "_policy", None)
             last = getattr(policy, "_openarm_last", None) or {}

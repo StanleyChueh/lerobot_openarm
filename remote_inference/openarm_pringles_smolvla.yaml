@@ -1,0 +1,67 @@
+# lerobot-policy-server deployment for the OpenArm (openarm_umeow) -- .venv-v2 / update_dev_v2 only.
+#
+#   lerobot-policy-server --config_path=remote_inference/openarm_pringles_smolvla.yaml
+#
+# Replaces `python -m lerobot_robot_openarm_umeow.policy_server` (lerobot.async_inference no longer exists on the
+# fork). Pair it with `lerobot-rollout --inference.type=remote` (README in this folder). For another checkpoint
+# trained on the same dataset schema, override --model.repo_or_path; for another task, copy this file.
+deployment: openarm
+model:
+  # ethanCSL/openarm_pringles_lerobot_real_smolvla_20_v00 with its input features corrected from the dataset
+  # (smolvla_base's state [6] -> 16); made by fix_checkpoint_features.py in this folder.
+  repo_or_path: outputs/remote_checkpoints/openarm_pringles_lerobot_real_smolvla_20_v00
+  revision: null
+  device: cuda
+execution:
+  # Guided RTC, as the old server's --rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0
+  # --rtc_prefix_attention_schedule=EXP. Use [chunk] and rtc.enabled=false for plain chunks.
+  supported_modes: [rtc_guided]
+  action_fps: 30.0
+  rtc:
+    enabled: true
+    mode: guided
+    execution_horizon: 10
+    max_guidance_weight: 10.0
+    prefix_attention_schedule: EXP
+  action_deadline_s: 5.0
+  idle_timeout_s: 10.0
+  warmup_calls: 2
+language:
+  enabled: false
+zenoh:
+  mode: peer
+  listen_endpoints: [tcp/127.0.0.1:7447]
+semantics: openarm-umeow-rad-v1
+robot_type: openarm_umeow
+# Checkpoint-facing names. The robot's cameras are renamed by the client's --rename_map
+# (right_wrist_cam -> camera1, wrist_cam -> camera2, body_cam -> camera3, as in training).
+# Joint order and units (rad) are the dataset's: right/left interleaved, J8 = gripper.
+features:
+  - name: observation.state
+    shape: [16]
+    dtype: float32
+    names: [RJ1.pos, LJ1.pos, RJ2.pos, LJ2.pos, RJ3.pos, LJ3.pos, RJ4.pos, LJ4.pos,
+            RJ5.pos, LJ5.pos, RJ6.pos, LJ6.pos, RJ7.pos, LJ7.pos, RJ8.pos, LJ8.pos]
+    semantics: openarm-umeow-rad-v1
+  - name: observation.images.camera1
+    shape: [480, 640, 3]
+    dtype: uint8
+    kind: rgb
+    semantics: rgb-right-wrist-v1
+  - name: observation.images.camera2
+    shape: [480, 640, 3]
+    dtype: uint8
+    kind: rgb
+    semantics: rgb-left-wrist-v1
+  - name: observation.images.camera3
+    shape: [480, 640, 3]
+    dtype: uint8
+    kind: rgb
+    semantics: rgb-body-v1
+action_feature:
+  name: action
+  shape: [16]
+  dtype: float32
+  names: [RJ1.pos, LJ1.pos, RJ2.pos, LJ2.pos, RJ3.pos, LJ3.pos, RJ4.pos, LJ4.pos,
+          RJ5.pos, LJ5.pos, RJ6.pos, LJ6.pos, RJ7.pos, LJ7.pos, RJ8.pos, LJ8.pos]
+  semantics: openarm-umeow-rad-v1

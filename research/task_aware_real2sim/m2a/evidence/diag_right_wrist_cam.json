@@ -1,0 +1,41 @@
+{
+ "frames": 235,
+ "composition_err_mm_max": 478.8093,
+ "composition_err_deg_max": 108.31349,
+ "own_links": [
+  "openarm_right_camera_link",
+  "openarm_right_ee_tcp",
+  "openarm_right_left_finger",
+  "openarm_right_link7",
+  "openarm_right_right_finger"
+ ],
+ "sim_own_hand_area_p10_50_90": [
+  0.032,
+  0.0605,
+  0.067
+ ],
+ "sim_other_robot_area_p10_50_90": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "frames_other_robot_ge_1pct": 1,
+ "frames_other_robot_ge_5pct": 1,
+ "real_mask_area_p10_50_90": [
+  0.0,
+  0.0282,
+  0.112
+ ],
+ "iou_real_vs_sim_other_p10_50_90": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "real_mask_unexplained_share_p10_50_90": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "frames_real_mask_mostly_unexplained_gt_50pct": 121,
+ "frames_with_real_mask": 121
+}

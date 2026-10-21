@@ -1,0 +1,21 @@
+{
+ "camera": "right_wrist_cam",
+ "episodes": 39,
+ "frames": 3114,
+ "every": 3,
+ "cfg_mount": {
+  "area_p50_p90_p99": [
+   0.0,
+   0.0,
+   0.0476
+  ],
+  "frames_ge_1pct": 71,
+  "frames_ge_5pct": 30
+ },
+ "perturbed_mounts_frames_ge_5pct_min_median_max": [
+  5,
+  38,
+  729
+ ],
+ "note": "area = share of a 160x120 grid hit by projected non-own robot surface points (point splat, no hole filling: a lower bound on silhouette area)"
+}

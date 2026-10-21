@@ -139,6 +139,10 @@ def _slow_down_rollout_returns(speed: float) -> None:
 class OpenArmUmeow(OpenArmFollower):
     config_class = OpenArmUmeowConfig
     name = "openarm_umeow"
+    # lerobot-rollout's remote and RTC inference (update_dev_v2) refuse a robot without it: while waiting for
+    # actions they re-send the last target send_action returned. Ours is position-controlled and returns the
+    # applied target for every motor, so re-sending it holds the pose (grippers keep their squeeze).
+    supports_position_hold = True
 
     def __init__(self, config: OpenArmUmeowConfig):
         follower_cfg = OpenArmFollowerConfig(

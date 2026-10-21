@@ -1,0 +1,310 @@
+{
+ "real": {
+  "md5": {
+   "data/chunk-000/file-000.parquet": "7c4fa5e34f",
+   "meta/info.json": "d4ae42b3b8"
+  },
+  "fps": 30,
+  "episodes": 50,
+  "frames": 12115,
+  "state_names": [
+   "RJ1.pos",
+   "LJ1.pos",
+   "RJ2.pos",
+   "LJ2.pos",
+   "RJ3.pos",
+   "LJ3.pos",
+   "RJ4.pos",
+   "LJ4.pos",
+   "RJ5.pos",
+   "LJ5.pos",
+   "RJ6.pos",
+   "LJ6.pos",
+   "RJ7.pos",
+   "LJ7.pos",
+   "RJ8.pos",
+   "LJ8.pos"
+  ],
+  "action_names_equal_state": true,
+  "ep_len": [
+   188,
+   248.5,
+   282
+  ],
+  "dt_median_max": [
+   0.0333,
+   0.0333
+  ],
+  "ranges": {
+   "RJ1.pos": [
+    -0.876,
+    0.558,
+    -0.877,
+    0.553
+   ],
+   "LJ1.pos": [
+    -0.086,
+    0.688,
+    -0.083,
+    0.698
+   ],
+   "RJ2.pos": [
+    -0.192,
+    0.66,
+    -0.175,
+    0.683
+   ],
+   "LJ2.pos": [
+    -0.45,
+    0.006,
+    -0.462,
+    0.022
+   ],
+   "RJ3.pos": [
+    -0.855,
+    0.197,
+    -0.866,
+    0.201
+   ],
+   "LJ3.pos": [
+    -0.06,
+    0.369,
+    -0.068,
+    0.377
+   ],
+   "RJ4.pos": [
+    0.201,
+    1.899,
+    0.197,
+    1.898
+   ],
+   "LJ4.pos": [
+    1.346,
+    2.206,
+    1.338,
+    2.2
+   ],
+   "RJ5.pos": [
+    -0.294,
+    0.288,
+    -0.335,
+    0.29
+   ],
+   "LJ5.pos": [
+    -0.626,
+    0.065,
+    -0.617,
+    0.064
+   ],
+   "RJ6.pos": [
+    0.001,
+    0.779,
+    -0.012,
+    0.785
+   ],
+   "LJ6.pos": [
+    -0.619,
+    0.031,
+    -0.625,
+    0.036
+   ],
+   "RJ7.pos": [
+    -0.084,
+    0.641,
+    -0.093,
+    0.642
+   ],
+   "LJ7.pos": [
+    -0.281,
+    0.186,
+    -0.276,
+    0.199
+   ],
+   "RJ8.pos": [
+    -1.277,
+    -0.51,
+    -1.298,
+    0.0
+   ],
+   "LJ8.pos": [
+    0.404,
+    1.19,
+    0.0,
+    1.212
+   ]
+  },
+  "gripper_action_unique": {
+   "RJ8.pos": 82,
+   "LJ8.pos": 27
+  },
+  "start_dev_from_home_max_rad": 0.032,
+  "end_dev_from_home_median_max_rad": [
+   0.03,
+   0.038
+  ],
+  "action_state_lag_frames": 2,
+  "action_state_err_rad_k0_kbest": [
+   0.0137,
+   0.0086
+  ],
+  "abs_action_minus_state_p95_max": [
+   0.034,
+   0.268
+  ],
+  "state_speed_p99_rad_s": 0.95
+ },
+ "sim": {
+  "md5": {
+   "data/chunk-000/file-000.parquet": "bd540af02f",
+   "meta/info.json": "907174076f"
+  },
+  "fps": 30,
+  "episodes": 8,
+  "frames": 2031,
+  "state_names": [
+   "RJ1.pos",
+   "LJ1.pos",
+   "RJ2.pos",
+   "LJ2.pos",
+   "RJ3.pos",
+   "LJ3.pos",
+   "RJ4.pos",
+   "LJ4.pos",
+   "RJ5.pos",
+   "LJ5.pos",
+   "RJ6.pos",
+   "LJ6.pos",
+   "RJ7.pos",
+   "LJ7.pos",
+   "RJ8.pos",
+   "LJ8.pos"
+  ],
+  "action_names_equal_state": true,
+  "ep_len": [
+   229,
+   251.5,
+   280
+  ],
+  "dt_median_max": [
+   0.0333,
+   0.0333
+  ],
+  "ranges": {
+   "RJ1.pos": [
+    -0.723,
+    0.387,
+    -0.725,
+    0.376
+   ],
+   "LJ1.pos": [
+    -0.075,
+    0.598,
+    -0.076,
+    0.602
+   ],
+   "RJ2.pos": [
+    -0.175,
+    0.612,
+    -0.175,
+    0.612
+   ],
+   "LJ2.pos": [
+    -0.369,
+    0.013,
+    -0.37,
+    0.013
+   ],
+   "RJ3.pos": [
+    -0.711,
+    0.085,
+    -0.714,
+    0.086
+   ],
+   "LJ3.pos": [
+    -0.029,
+    0.371,
+    -0.029,
+    0.374
+   ],
+   "RJ4.pos": [
+    0.327,
+    1.843,
+    0.31,
+    1.838
+   ],
+   "LJ4.pos": [
+    1.338,
+    2.152,
+    1.338,
+    2.153
+   ],
+   "RJ5.pos": [
+    -0.288,
+    0.144,
+    -0.294,
+    0.14
+   ],
+   "LJ5.pos": [
+    -0.618,
+    0.056,
+    -0.617,
+    0.055
+   ],
+   "RJ6.pos": [
+    -0.008,
+    0.785,
+    -0.009,
+    0.785
+   ],
+   "LJ6.pos": [
+    -0.639,
+    0.024,
+    -0.61,
+    0.024
+   ],
+   "RJ7.pos": [
+    -0.098,
+    0.61,
+    -0.042,
+    0.581
+   ],
+   "LJ7.pos": [
+    -0.244,
+    0.204,
+    -0.25,
+    0.199
+   ],
+   "RJ8.pos": [
+    -1.298,
+    -0.803,
+    -1.298,
+    0.0
+   ],
+   "LJ8.pos": [
+    0.628,
+    1.212,
+    0.0,
+    1.212
+   ]
+  },
+  "gripper_action_unique": {
+   "RJ8.pos": 15,
+   "LJ8.pos": 6
+  },
+  "start_dev_from_home_max_rad": 0.023,
+  "end_dev_from_home_median_max_rad": [
+   0.019,
+   0.024
+  ],
+  "action_state_lag_frames": 2,
+  "action_state_err_rad_k0_kbest": [
+   0.0099,
+   0.0038
+  ],
+  "abs_action_minus_state_p95_max": [
+   0.037,
+   0.163
+  ],
+  "state_speed_p99_rad_s": 0.861
+ }
+}

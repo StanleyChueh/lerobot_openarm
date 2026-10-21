@@ -45,7 +45,7 @@ it with the client's --aggregate_fn_name=latest_only: the overlap is already ble
 import sys
 import time
 
-from .policy_loading import load_bf16, wants_bf16
+from .policy_loading import load_bf16, require_async_inference, wants_bf16
 
 _POLICY_DTYPE = "auto"  # --policy_dtype, taken off the command line in main()
 _OBS_ATOL = 0.0175  # --obs_similarity_atol (rad): ~1 degree, lerobot's intent for its degree-based robots
@@ -262,6 +262,7 @@ def main() -> None:
         else:
             rest.append(arg)
     sys.argv = sys.argv[:1] + rest
+    require_async_inference()
     import lerobot.async_inference.policy_server as server_module
 
     _patch(server_module)

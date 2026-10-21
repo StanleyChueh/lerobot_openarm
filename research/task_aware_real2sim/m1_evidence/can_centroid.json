@@ -1,0 +1,77 @@
+{
+ "body_cam": {
+  "frames_both_visible": 240,
+  "real_only": 143,
+  "sim_only": 52,
+  "dx_px_q25_50_75": [
+   -14.0,
+   -2.85,
+   9.88
+  ],
+  "dy_px_q25_50_75": [
+   -32.25,
+   -23.29,
+   -13.58
+  ],
+  "area_sim_over_real_q": [
+   0.87,
+   0.98,
+   1.12
+  ],
+  "mask_iou_q": [
+   0.06,
+   0.11,
+   0.16
+  ]
+ },
+ "wrist_cam": {
+  "frames_both_visible": 245,
+  "real_only": 4,
+  "sim_only": 65,
+  "dx_px_q25_50_75": [
+   -157.92,
+   -132.63,
+   -39.88
+  ],
+  "dy_px_q25_50_75": [
+   1.16,
+   82.6,
+   121.95
+  ],
+  "area_sim_over_real_q": [
+   0.08,
+   0.12,
+   0.18
+  ],
+  "mask_iou_q": [
+   0.04,
+   0.06,
+   0.11
+  ]
+ },
+ "right_wrist_cam": {
+  "frames_both_visible": 362,
+  "real_only": 18,
+  "sim_only": 33,
+  "dx_px_q25_50_75": [
+   46.25,
+   147.85,
+   207.86
+  ],
+  "dy_px_q25_50_75": [
+   -48.23,
+   13.12,
+   154.09
+  ],
+  "area_sim_over_real_q": [
+   0.08,
+   0.14,
+   0.46
+  ],
+  "mask_iou_q": [
+   0.02,
+   0.04,
+   0.06
+  ]
+ }
+}

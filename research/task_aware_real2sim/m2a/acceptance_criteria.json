@@ -1,0 +1,13 @@
+{
+  "frozen": "2026-10-19, written before any wrist fit was run",
+  "per_camera_PASS_requires_all": {
+    "data":        "at least 40 informative train frames and 20 informative val frames (real robot mask outside the static ignore region >= 0.5% of the image)",
+    "mask_quality":"segmentation previews of val frames show the other arm/gripper masked without large background or can inclusions (visual check, documented)",
+    "heldout":     "on camera_cal_val, median per-frame symmetric chamfer distance (px) of fitted mount <= 0.75 x that of the current cfg mount AND median IoU of fitted mount > cfg",
+    "stability":   "all multi-start solutions whose train cost is within 5% of the best agree within 1.5 cm and 2 deg",
+    "uncertainty": "episode-bootstrap (8 resamples of train episodes) std <= 1.0 cm per axis and <= 1.5 deg",
+    "identifiability": "each of the 6 parameters raises the train cost by >= 1% for a 1 cm / 1 deg perturbation from the optimum"
+  },
+  "BLOCK_if": "any criterion fails for a camera -> stop and hand over a ChArUco capture protocol; no manual GUI fallback",
+  "caveat": "Silhouettes are compared at matched JOINT states only; this validates camera-vs-robot-kinematics alignment, not object pose or contact."
+}

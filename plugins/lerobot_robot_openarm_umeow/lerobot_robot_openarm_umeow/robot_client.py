@@ -43,6 +43,7 @@ from queue import Queue
 
 from . import eval_metrics
 from .episode_keys import episode, init_keyboard_listener
+from .policy_loading import require_async_inference
 
 def _bool(value: str) -> bool:
     if value.lower() in ("true", "1", "yes"):
@@ -304,6 +305,7 @@ def main() -> None:
     from lerobot.utils.import_utils import register_third_party_plugins
 
     register_third_party_plugins()
+    require_async_inference()
     import lerobot.async_inference.robot_client as rc
 
     display = values.get("display_data", True)
