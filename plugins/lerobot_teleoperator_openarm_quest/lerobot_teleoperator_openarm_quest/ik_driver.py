@@ -89,6 +89,8 @@ HELD, LIVE, RETURNING, PAUSED = "HELD", "LIVE", "RETURNING", "PAUSED"
 SIDES = ("right", "left")
 HOME_TOL_RAD = 0.1  # measured arm joints this close to home = at home
 SETTLE_S = 3.0  # how long a return may take to settle at home before the arm is reported not there
+RETURN_LEAD_RAD = 0.05  # a return waits while its command leads what the robot last executed by more than this
+RETURN_LAG_WAIT_S = 1.0  # ... but only this long: a robot that runs and still cannot follow (blocked arm, guard hold)
 ARM = np.r_[0:7, 8:15]  # driver-vector indices of the 14 arm joints (7 and 15 are the fingers)
 GRIP = {"right": 7, "left": 15}
 VALID_KEY = {"right": "vr", "left": "vl"}
@@ -219,7 +221,9 @@ class QuestIKDriver:
         self._lost = {s: False for s in SIDES}
         self._gripper = {s: self.grip[s][0] for s in SIDES}
         self._ik_prev: np.ndarray | None = None
-        self._return: tuple[np.ndarray, float, float] | None = None  # (start, t0, duration)
+        self._return: tuple[np.ndarray, float, float, float] | None = None  # (start, progress 0..1, last tick, duration)
+        self._return_robot = False  # a robot was executing commands when the return started
+        self._return_lag_t0: float | None = None  # since when a running robot has lagged the return ramp
         self._buttons_prev = {"x": False, "y": False, "a": False, "b": False}
         self._last_count = 0
         self._last_t = time.perf_counter()
@@ -606,7 +610,9 @@ class QuestIKDriver:
         duration = max(dist / self.return_speed, 0.5)
         with self._lock:
             self._command = start.copy()
-        self._return = (start, time.perf_counter(), duration)
+        self._return = (start, 0.0, time.perf_counter(), duration)
+        self._return_robot = held is not None
+        self._return_lag_t0 = None
         self._settle_t0 = None
         self._save_on_arrival = save
         self._recover = recover
@@ -618,8 +624,29 @@ class QuestIKDriver:
                      else "; grippers open on arrival."))
 
     def _advance_return(self, now: float) -> None:
-        start, t0, duration = self._return
-        a = min((now - t0) / duration, 1.0)
+        start, a, last_t, duration = self._return
+        # The ramp advances only while the robot executes it. lerobot stops sending commands between phases --
+        # after a discarded (Y) episode, its clear_episode_buffer and the next scene reset took >1 s -- and a ramp
+        # that ran on by the clock meanwhile arrived as one 0.4 rad jump: the robot's guard refused it, the
+        # teleop paused, and the arm stayed where Y was pressed.
+        # A robot that IS running but cannot follow (an arm blocked by the can or the other arm, a guard hold) is
+        # waited for only RETURN_LAG_WAIT_S: waiting on it for good left the teleop in RETURNING forever, where X and
+        # Y are ignored -- the session looked frozen. The ramp then carries on and ends in the "NOT at the reset pose"
+        # report below, as before.
+        if a < 1.0:
+            held = self._held_command()
+            with self._lock:
+                lead = None if held is None else float(np.abs(self._command[ARM] - held[ARM]).max())
+            stalled = held is None if self._return_robot else False
+            lagging = lead is not None and lead > RETURN_LEAD_RAD
+            if lagging and not stalled:
+                self._return_lag_t0 = now if self._return_lag_t0 is None else self._return_lag_t0
+                lagging = now - self._return_lag_t0 < RETURN_LAG_WAIT_S
+            else:
+                self._return_lag_t0 = None
+            if not stalled and not lagging:
+                a = min(a + (now - last_t) / duration, 1.0)
+        self._return = (start, a, now, duration)
         cmd = start.copy()
         cmd[ARM] = start[ARM] + a * (self.home_driver[ARM] - start[ARM])
         if a >= 1.0:
