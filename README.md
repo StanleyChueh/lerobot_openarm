@@ -20,14 +20,6 @@ git checkout official-lerobot-quest
 uv sync                      # installs lerobot, both plugins and the IK libraries
 ```
 
-Link to Quest3 Pro domain
-
-```
-sudo ip addr add 10.100.1.240/24 dev wlp7s0
-```
-
-Keep `~/Stanley_ws/dora-openarm-data-collection` next to this repo (the IK model is read from it).
-
 ### Step 1. CAN-FD links up (once per boot)
 
 ```bash
@@ -201,6 +193,10 @@ pi0.5 on the real arm: use async + RTC instead (here it gets no actions through)
 
 ```bash
 # SmolVLA
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-rollout --strategy.type=episodic \
   --inference.type=rtc --inference.rtc.mode=guided \
   --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0 \
@@ -215,6 +211,10 @@ lerobot-rollout --strategy.type=episodic \
   --display_data=true
 
 # GR00T N1.7
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-rollout --strategy.type=episodic \
   --inference.type=rtc --inference.rtc.mode=guided \
   --inference.rtc.execution_horizon=8 --inference.rtc.max_guidance_weight=10.0 \
@@ -229,6 +229,10 @@ lerobot-rollout --strategy.type=episodic \
   --display_data=true
 
 # pi0.5
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-rollout --strategy.type=episodic \
   --inference.type=rtc --inference.rtc.mode=guided \
   --inference.rtc.execution_horizon=20 --inference.rtc.max_guidance_weight=10.0 \
@@ -248,6 +252,10 @@ lerobot-rollout --strategy.type=episodic \
 Terminal 1, the policy server (keep it running across episodes and evaluations):
 
 ```bash
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
 ```
 
@@ -255,6 +263,10 @@ Terminal 2, the robot client:
 
 ```bash
 # SmolVLA
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
@@ -266,6 +278,10 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 
 # GR00T N1.7
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
@@ -277,6 +293,10 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 
 # pi0.5
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
@@ -296,14 +316,26 @@ Terminal 1:
 
 ```bash
 # SmolVLA
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
   --rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
 
 # GR00T N1.7
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
   --rtc=true --rtc_execution_horizon=8 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
 
 # pi0.5
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
   --rtc=true --rtc_execution_horizon=20 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
 ```
@@ -312,6 +344,10 @@ Terminal 2:
 
 ```bash
 # SmolVLA
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
@@ -323,6 +359,10 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 
 # GR00T N1.7
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
@@ -334,6 +374,10 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --num_episodes=10 --episode_time_s=60 --reset_time_s=60
 
 # pi0.5
+cd ~/Stanley_ws/lerobot_openarm
+source .venv/bin/activate
+unset PYTHONPATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python -m lerobot_robot_openarm_umeow.robot_client \
   --server_address=127.0.0.1:8080 \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
