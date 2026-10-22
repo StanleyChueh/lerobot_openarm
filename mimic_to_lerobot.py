@@ -21,12 +21,22 @@ lerobot-record builds them for --robot.type=openarm_isaac, so the result merges 
 lerobot-recorded sim datasets (lerobot-edit-dataset --operation.type=merge).
 
 Refuses an HDF5 generated at another control rate than --fps (default 30, the real datasets' rate).
+
+--push_to_hub uploads at most 4 files' data at a time: hf_xet's default ramps up to 64 parallel uploads, which on
+this machine's Wi-Fi timed out and stalled a 2.8 GB push for hours (with 4: ~7.5 MB/s, minutes). Set
+HF_XET_FIXED_UPLOAD_CONCURRENCY to override. A push that fails or is interrupted can be redone from the converted
+dataset, without converting again (blocks already uploaded are not sent twice):
+
+    python mimic_to_lerobot.py --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v00 --push_only
 """
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
+
+os.environ.setdefault("HF_XET_FIXED_UPLOAD_CONCURRENCY", "4")  # before huggingface_hub / hf_xet load
 
 import h5py
 import numpy as np
@@ -93,7 +103,7 @@ def _episode_frames(ep: h5py.Group, cameras: list[str], calib: dict):
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("--hdf5", nargs="+", required=True, help="generate_dataset.py output file(s)")
+    ap.add_argument("--hdf5", nargs="+", help="generate_dataset.py output file(s)")
     ap.add_argument("--repo_id", required=True)
     ap.add_argument("--root", default=None, help="Local dataset directory (default: lerobot's cache for repo_id).")
     ap.add_argument("--task", default=TASK, help="The task string: use the real datasets' exactly.")
@@ -103,7 +113,17 @@ def main() -> None:
     ap.add_argument("--max_episodes", type=int, default=None)
     ap.add_argument("--include_failed", action="store_true", help="Also convert episodes not marked successful.")
     ap.add_argument("--push_to_hub", action="store_true")
+    ap.add_argument("--push_only", action="store_true",
+                    help="Only push the already converted dataset (repo_id / --root) to the Hub; no --hdf5.")
     args = ap.parse_args()
+    if args.push_only:
+        dataset = LeRobotDataset(args.repo_id, root=args.root)
+        print(f"[mimic_to_lerobot] pushing {dataset.num_episodes} episodes ({dataset.num_frames} frames) "
+              f"from {dataset.root}", flush=True)
+        dataset.push_to_hub()
+        return
+    if not args.hdf5:
+        ap.error("--hdf5 is required (unless --push_only)")
 
     calib = load_calibration(args.calibration)
     robot = OpenArmIsaac(OpenArmIsaacConfig(sim_cameras=args.cameras, calibration=args.calibration))  # features only

@@ -548,9 +548,12 @@ cd ~/Stanley_ws/IsaacLab && conda activate env_isaaclab
   --output_file logs/demos/pringles_sim_mimic_v00.hdf5 \
   --generation_num_trials 500 --num_envs 4 --enable_cameras --headless \
   --enable_domain_randomization --domain_randomization_profile visual
+
+# 4c. Check for jolts no source demo has (~15% of episodes), then run the remove command it prints
+./isaaclab.sh -p scripts/tools/check_mimic_demos.py --dataset_file logs/demos/pringles_sim_mimic_v00.hdf5
 ```
 
-Convert to a lerobot dataset:
+Convert to a lerobot dataset (if 4c flagged nothing, use `pringles_sim_mimic_v00.hdf5`):
 
 ```bash
 cd ~/Stanley_ws/lerobot_openarm
@@ -558,8 +561,14 @@ source .venv/bin/activate
 unset PYTHONPATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 python mimic_to_lerobot.py \
-  --hdf5 ~/Stanley_ws/IsaacLab/logs/demos/pringles_sim_mimic_v00.hdf5 \
+  --hdf5 ~/Stanley_ws/IsaacLab/logs/demos/pringles_sim_mimic_v00_clean.hdf5 \
   --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v00 --push_to_hub
+```
+
+If the push fails or you stop it, push the converted dataset again without converting:
+
+```bash
+python mimic_to_lerobot.py --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v00 --push_only
 ```
 
 ### Sim Step 5. Train: synthetic only, or co-train sim + real
