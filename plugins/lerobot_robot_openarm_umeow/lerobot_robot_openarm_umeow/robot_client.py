@@ -243,6 +243,7 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
     import lerobot.rollout.strategies.core as core  # imported before connecting: the robot slows its returns
 
     from lerobot.async_inference.helpers import visualize_action_queue_size
+    from lerobot.rollout.robot_wrapper import ThreadSafeRobot
     from lerobot.transport import services_pb2
 
     display = display and _start_display(rc)
@@ -252,7 +253,8 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
         client_cls = eval_metrics.client_class(client_cls, log)
     client = client_cls(cfg)  # connects the robot: the arm goes to the start pose
     obs = client.robot.get_observation()
-    hw = types.SimpleNamespace(robot_wrapper=client.robot,
+    # Wrapped as lerobot-rollout wraps it: update_dev_v2's return_to_initial_position reads hardware_failure off it.
+    hw = types.SimpleNamespace(robot_wrapper=ThreadSafeRobot(client.robot),
                                initial_position={k: v for k, v in obs.items() if k.endswith(".pos")})
     if not client.start():  # handshake + the policy is loaded on the server
         client.stop()

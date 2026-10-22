@@ -1,10 +1,11 @@
-# Async (server/client) evaluation on update_dev_v2 (`.venv-v2`)
+# Alternative async evaluation on update_dev_v2 (`.venv-v2`): lerobot's remote inference
 
-The fork's lerobot (`update_dev_v2`, installed editable in `.venv-v2`) removed `lerobot.async_inference`, so
-`python -m lerobot_robot_openarm_umeow.policy_server` / `.robot_client` only run in `.venv` (lerobot 3f2c29ef).
-In `.venv-v2` the same job is done by lerobot's own **remote inference**: `lerobot-policy-server` on the GPU
-and `lerobot-rollout --inference.type=remote` on the robot. It is needed for the policies only the fork has
-(LaWAM, DM05, FineART-VLA, FLUX 3) and works for the others too. lerobot's guide:
+Not needed for the usual workflow. `python -m lerobot_robot_openarm_umeow.policy_server` / `.robot_client` run in
+`.venv-v2` too, with the same commands as in `.venv` (main README, Step 5). The fork removed
+`lerobot.async_inference`, so the plugin brings lerobot 3f2c29ef's copy (`_lerobot_compat/`).
+
+This folder is the fork's own replacement for it: `lerobot-policy-server` on the GPU and
+`lerobot-rollout --inference.type=remote` on the robot. lerobot's guide:
 `~/Stanley_ws/lerobot_experiment/lerobot/docs/source/remote_inference.mdx`.
 
 What our old server patched is built in here: server-side guided RTC, the checkpoint's camera names

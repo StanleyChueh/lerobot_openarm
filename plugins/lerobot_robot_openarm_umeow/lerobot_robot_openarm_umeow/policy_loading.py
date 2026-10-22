@@ -87,14 +87,37 @@ def sync_module():
 
 
 def require_async_inference() -> None:
-    """Our policy_server / robot_client wrap lerobot.async_inference, which update_dev_v2 removed."""
+    """Make lerobot.async_inference importable: our policy_server / robot_client wrap it.
+
+    update_dev_v2 (.venv-v2) deleted it, and the AsyncInference service from lerobot/transport/services.proto with
+    it. _lerobot_compat/ is lerobot 3f2c29ef's copy of both, unchanged; on a lerobot without async_inference it is
+    put in place: its services_pb2 / services_pb2_grpc (a superset of the fork's: the same messages plus
+    AsyncInference) as lerobot.transport's, and its async_inference as lerobot.async_inference. Both run on the
+    fork's policies, processors and transport utils. Server and client must both come from this package -- they
+    then speak the same protocol in either venv.
+    """
     try:
         import lerobot.async_inference  # noqa: F401
+        return
     except ModuleNotFoundError:
-        raise SystemExit(
-            "[openarm] this lerobot has no lerobot.async_inference (update_dev_v2 / .venv-v2): use\n"
-            "  lerobot-policy-server + lerobot-rollout --inference.type=remote instead -- see\n"
-            "  remote_inference/README.md in the lerobot_openarm repo.") from None
+        pass
+    import importlib.util
+    from pathlib import Path
+
+    import lerobot
+
+    compat = Path(__file__).parent / "_lerobot_compat"
+    for name in ("services_pb2", "services_pb2_grpc"):
+        module_name = f"lerobot.transport.{name}"
+        if module_name in sys.modules and not hasattr(sys.modules[module_name], "AsyncInferenceStub" if
+                                                      name.endswith("grpc") else "Observation"):
+            raise RuntimeError(f"{module_name} was imported before require_async_inference(): call it earlier.")
+        spec = importlib.util.spec_from_file_location(module_name, compat / "transport" / f"{name}.py")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[module_name] = module
+        spec.loader.exec_module(module)
+    lerobot.__path__.append(str(compat))
+    print("[openarm] lerobot has no async_inference (update_dev_v2): using lerobot 3f2c29ef's copy.", flush=True)
 
 
 def _install_chunked_sync() -> None:

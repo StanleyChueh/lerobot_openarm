@@ -175,7 +175,11 @@ def _enable_rtc(server) -> None:
     from lerobot.policies.rtc.configuration_rtc import RTCConfig
     from lerobot.processor import NormalizerProcessorStep
     from lerobot.processor.relative_action_processor import RelativeActionsProcessorStep
-    from lerobot.rollout.inference.rtc import supports_rtc_inference
+
+    try:  # update_dev_v2 moved lerobot.rollout.inference to lerobot.inference
+        from lerobot.inference.rtc import supports_rtc_inference
+    except ModuleNotFoundError:
+        from lerobot.rollout.inference.rtc import supports_rtc_inference
 
     policy = server.policy
     if not supports_rtc_inference(policy):
@@ -199,6 +203,23 @@ def _enable_rtc(server) -> None:
     server.logger.info(f"RTC on: {policy.config.rtc_config}")
 
 
+def _normalize_prev_actions_length(prev_actions, target_steps: int):
+    """Pad or truncate the RTC prefix to a fixed length. lerobot 3f2c29ef's helper of the same name
+    (rollout/inference/rtc.py), kept here because update_dev_v2 deleted it."""
+    import torch
+
+    if prev_actions.ndim != 2:
+        raise ValueError(f"Expected 2D [T, A] tensor, got shape={tuple(prev_actions.shape)}")
+    steps, action_dim = prev_actions.shape
+    if steps == target_steps:
+        return prev_actions
+    if steps > target_steps:
+        return prev_actions[:target_steps]
+    padded = torch.zeros((target_steps, action_dim), dtype=prev_actions.dtype, device=prev_actions.device)
+    padded[:steps] = prev_actions
+    return padded
+
+
 def _rtc_chunk(server, observation):
     """One RTC chunk: guided by the unexecuted tail of the previous chunk, decoded whole."""
     import math
@@ -206,7 +227,6 @@ def _rtc_chunk(server, observation):
 
     import torch
     from lerobot.policies.rtc.relative import reanchor_relative_rtc_prefix
-    from lerobot.rollout.inference.rtc import _normalize_prev_actions_length
 
     if not getattr(server, "_openarm_rtc_ready", False):
         _enable_rtc(server)
