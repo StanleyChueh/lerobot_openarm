@@ -1,0 +1,76 @@
+{
+  "tool": "tools/dataset_diagnostics",
+  "tool_version": "0.1.0",
+  "run_at": "2026-10-24T13:13:41",
+  "argv": [
+    "/home/csl/Stanley_ws/lerobot_openarm/tools/dataset_diagnostics/__main__.py",
+    "analyze",
+    "--manifest",
+    "research/dataset_diagnostics/pringles_manifest.json"
+  ],
+  "repo": {
+    "sha": "249096010cdd0c1a3135fbfe73e6f24d4676a09b",
+    "branch": "official-lerobot-quest",
+    "dirty": true
+  },
+  "dataset": {
+    "label": "sim_10",
+    "repo_id": "ethanCSL/openarm_pringles_lerobot_sim_10_v00",
+    "root": "/home/csl/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_sim_10_v00/snapshots/b6d39dae630b8ce0b5822bee7a40bffc68a28819",
+    "codebase_version": "v3.0",
+    "requested_revision": "b6d39dae630b8ce0b5822bee7a40bffc68a28819",
+    "resolved_revision": "b6d39dae630b8ce0b5822bee7a40bffc68a28819",
+    "hub_main_sha": "b6d39dae630b8ce0b5822bee7a40bffc68a28819",
+    "hub_codebase_tag_sha": "b6d39dae630b8ce0b5822bee7a40bffc68a28819",
+    "robot_type": "openarm_umeow",
+    "fps": 30.0,
+    "total_episodes_info": 10,
+    "total_frames_info": 2364,
+    "episodes_loaded": 10,
+    "frames_loaded": 2364,
+    "episode_filter": null,
+    "loader_notes": [
+      "v3 metadata readable by LeRobotDatasetMetadata (lerobot.datasets.dataset_metadata)"
+    ],
+    "user": "csl"
+  },
+  "role": "sim",
+  "spec": {
+    "label": "sim_10",
+    "repo_id": "ethanCSL/openarm_pringles_lerobot_sim_10_v00",
+    "revision": "b6d39dae630b8ce0b5822bee7a40bffc68a28819",
+    "role": "sim",
+    "adapter": "openarm",
+    "policy_checkpoint": "ethanCSL/openarm_pringles_lerobot_sim_smolvla_10_v00",
+    "checkpoint_revision": "9ce7ce4811de11adcc4f407eb5a93586d94a6aee",
+    "object_pose_source": [
+      "isaac-hdf5:/home/csl/Stanley_ws/IsaacLab/logs/demos/openarm_pringles_lerobot_sim_10_v00.hdf5",
+      "detect:tools/dataset_diagnostics/configs/pringles_can_detect_sim.json"
+    ],
+    "workspace_config": [
+      "tools/dataset_diagnostics/configs/openarm_pringles_sim_spawn_metric.json",
+      "tools/dataset_diagnostics/configs/openarm_pringles_sim_spawn_uniform.json"
+    ],
+    "grasp_workspace_config": [
+      "tools/dataset_diagnostics/configs/openarm_grasp_metric.json"
+    ]
+  },
+  "checkpoint": {
+    "checkpoint": "ethanCSL/openarm_pringles_lerobot_sim_smolvla_10_v00",
+    "checkpoint_revision": "9ce7ce4811de11adcc4f407eb5a93586d94a6aee",
+    "train_dataset_repo_id": "ethanCSL/openarm_pringles_lerobot_sim_10_v00",
+    "train_dataset_revision": null,
+    "train_episodes_arg": null,
+    "steps": 20000,
+    "batch_size": 8,
+    "seed": 1000,
+    "pretrained_path": "lerobot/smolvla_base",
+    "image_transforms_enabled": true,
+    "normalizer_frame_count": 2364.0,
+    "normalizer_episode_index_max": 9.0,
+    "dataset_frames": 2364,
+    "frame_count_matches_dataset": true,
+    "same_repo": true,
+    "source_code_sha": "not recorded by lerobot-train"
+  }
+}

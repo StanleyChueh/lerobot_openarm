@@ -1,0 +1,261 @@
+{
+  "datasets": {
+    "real_10": {
+      "dataset": "real_10",
+      "role": "real",
+      "technical": "WARN",
+      "coverage": "UNKNOWN",
+      "quality": "WARN",
+      "real_sim": "WARN",
+      "coverage_metrics": {
+        "real_body_cam_image": {
+          "n_with_position": 10,
+          "n_inside_reachable": 10,
+          "n_independent_groups": 10,
+          "kernel_effective_n": 3.01,
+          "target_covered_fraction": 0.1296,
+          "reachable_area_covered_fraction": 0.1296,
+          "target_mean_nn_distance": 138.278,
+          "covering_radius_reachable": 322.0162,
+          "bbox": [
+            292.5768325791855,
+            404.64621513944223,
+            121.68831849135672,
+            352.6008604206501
+          ],
+          "spread_std": [
+            32.7096,
+            71.4438
+          ],
+          "units": "px",
+          "frame_id": "image:observation.images.body_cam",
+          "coverage_radius": 48,
+          "duplicate_radius": 12
+        },
+        "grasp:grasp_proxy": {
+          "n_with_position": 10,
+          "n_inside_reachable": 10,
+          "n_independent_groups": 10,
+          "kernel_effective_n": 3.37,
+          "target_covered_fraction": 0.15,
+          "reachable_area_covered_fraction": 0.15,
+          "target_mean_nn_distance": 0.1166,
+          "covering_radius_reachable": 0.2901,
+          "bbox": [
+            0.12641080675000657,
+            0.33416692162976824,
+            0.0061094667676569875,
+            0.09306777752073278
+          ],
+          "spread_std": [
+            0.0673,
+            0.0294
+          ],
+          "units": "m",
+          "frame_id": "openarm_world",
+          "coverage_radius": 0.04,
+          "duplicate_radius": 0.01
+        }
+      }
+    },
+    "real_20": {
+      "dataset": "real_20",
+      "role": "real",
+      "technical": "WARN",
+      "coverage": "UNKNOWN",
+      "quality": "WARN",
+      "real_sim": "WARN",
+      "coverage_metrics": {
+        "real_body_cam_image": {
+          "n_with_position": 20,
+          "n_inside_reachable": 20,
+          "n_independent_groups": 19,
+          "kernel_effective_n": 3.79,
+          "target_covered_fraction": 0.2037,
+          "reachable_area_covered_fraction": 0.2037,
+          "target_mean_nn_distance": 108.2804,
+          "covering_radius_reachable": 275.6058,
+          "bbox": [
+            267.12249309475203,
+            449.4425165962583,
+            121.68831849135672,
+            365.84195500742265
+          ],
+          "spread_std": [
+            48.471,
+            75.0952
+          ],
+          "units": "px",
+          "frame_id": "image:observation.images.body_cam",
+          "coverage_radius": 48,
+          "duplicate_radius": 12
+        },
+        "grasp:grasp_proxy": {
+          "n_with_position": 20,
+          "n_inside_reachable": 20,
+          "n_independent_groups": 19,
+          "kernel_effective_n": 4.78,
+          "target_covered_fraction": 0.246,
+          "reachable_area_covered_fraction": 0.246,
+          "target_mean_nn_distance": 0.0889,
+          "covering_radius_reachable": 0.2456,
+          "bbox": [
+            0.12641080675000657,
+            0.4032371508225467,
+            -0.03719856022006976,
+            0.11185797676222917
+          ],
+          "spread_std": [
+            0.078,
+            0.0382
+          ],
+          "units": "m",
+          "frame_id": "openarm_world",
+          "coverage_radius": 0.04,
+          "duplicate_radius": 0.01
+        }
+      }
+    },
+    "sim_10": {
+      "dataset": "sim_10",
+      "role": "sim",
+      "technical": "WARN",
+      "coverage": "WARN",
+      "quality": "WARN",
+      "real_sim": "WARN",
+      "coverage_metrics": {
+        "sim_spawn_metric": {
+          "n_with_position": 10,
+          "n_inside_reachable": 10,
+          "n_independent_groups": 10,
+          "kernel_effective_n": 2.8,
+          "target_covered_fraction": 0.7495,
+          "reachable_area_covered_fraction": 0.5541,
+          "target_mean_nn_distance": 0.0287,
+          "covering_radius_reachable": 0.0954,
+          "bbox": [
+            0.13440777361392975,
+            0.3320339322090149,
+            -0.008683432824909687,
+            0.04080262407660484
+          ],
+          "spread_std": [
+            0.0639,
+            0.0156
+          ],
+          "units": "m",
+          "frame_id": "openarm_world",
+          "coverage_radius": 0.04,
+          "duplicate_radius": 0.01
+        },
+        "sim_spawn_uniform": {
+          "n_with_position": 10,
+          "n_inside_reachable": 10,
+          "n_independent_groups": 10,
+          "kernel_effective_n": 2.8,
+          "target_covered_fraction": 0.5541,
+          "reachable_area_covered_fraction": 0.5541,
+          "target_mean_nn_distance": 0.0382,
+          "covering_radius_reachable": 0.0954,
+          "bbox": [
+            0.13440777361392975,
+            0.3320339322090149,
+            -0.008683432824909687,
+            0.04080262407660484
+          ],
+          "spread_std": [
+            0.0639,
+            0.0156
+          ],
+          "units": "m",
+          "frame_id": "openarm_world",
+          "coverage_radius": 0.04,
+          "duplicate_radius": 0.01
+        },
+        "grasp:grasp_proxy": {
+          "n_with_position": 10,
+          "n_inside_reachable": 10,
+          "n_independent_groups": 10,
+          "kernel_effective_n": 3.12,
+          "target_covered_fraction": 0.122,
+          "reachable_area_covered_fraction": 0.122,
+          "target_mean_nn_distance": 0.1124,
+          "covering_radius_reachable": 0.236,
+          "bbox": [
+            0.1326016526964151,
+            0.364383516398062,
+            0.0043086699201631,
+            0.046198174102690004
+          ],
+          "spread_std": [
+            0.0765,
+            0.0138
+          ],
+          "units": "m",
+          "frame_id": "openarm_world",
+          "coverage_radius": 0.04,
+          "duplicate_radius": 0.01
+        }
+      }
+    },
+    "real_v00_pool": {
+      "dataset": "real_v00_pool",
+      "role": "real",
+      "technical": "PASS",
+      "coverage": "UNKNOWN",
+      "quality": "FAIL",
+      "real_sim": "UNKNOWN",
+      "coverage_metrics": {
+        "real_body_cam_image": {
+          "n_with_position": 50,
+          "n_inside_reachable": 50,
+          "n_independent_groups": 38,
+          "kernel_effective_n": 4.17,
+          "target_covered_fraction": 0.3074,
+          "reachable_area_covered_fraction": 0.3074,
+          "target_mean_nn_distance": 93.0395,
+          "covering_radius_reachable": 274.7998,
+          "bbox": [
+            247.56574465185992,
+            462.1027372262774,
+            115.70429549699108,
+            410.6113430404236
+          ],
+          "spread_std": [
+            49.2055,
+            76.8042
+          ],
+          "units": "px",
+          "frame_id": "image:observation.images.body_cam",
+          "coverage_radius": 48,
+          "duplicate_radius": 12
+        },
+        "grasp:grasp_proxy": {
+          "n_with_position": 50,
+          "n_inside_reachable": 50,
+          "n_independent_groups": 46,
+          "kernel_effective_n": 4.68,
+          "target_covered_fraction": 0.322,
+          "reachable_area_covered_fraction": 0.322,
+          "target_mean_nn_distance": 0.074,
+          "covering_radius_reachable": 0.2201,
+          "bbox": [
+            0.09055331763903737,
+            0.4032371508225467,
+            -0.07569927047922323,
+            0.11915983996360299
+          ],
+          "spread_std": [
+            0.0731,
+            0.0393
+          ],
+          "units": "m",
+          "frame_id": "openarm_world",
+          "coverage_radius": 0.04,
+          "duplicate_radius": 0.01
+        }
+      }
+    }
+  },
+  "caveat": "These statuses describe the dataset, not the policy. Even coverage and quality marked PASS do not guarantee that a policy will train or succeed. No success prediction is made without empirical validation."
+}

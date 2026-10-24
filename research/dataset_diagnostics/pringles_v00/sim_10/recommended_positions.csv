@@ -1,0 +1,11 @@
+dataset,workspace,provisional,rank,x,y,units,frame_id,nearest_demo_distance,target_weight_rel,regions,reason
+sim_10,sim_spawn_metric,False,1,0.21,-0.01,m,openarm_world,0.0448,0.83,[],nearest demonstration 0.0448 m away (outside coverage radius); target-weight percentile 89
+sim_10,sim_spawn_metric,False,2,0.25,-0.03,m,openarm_world,0.0409,0.594,[],nearest demonstration 0.0409 m away (outside coverage radius); target-weight percentile 74
+sim_10,sim_spawn_metric,False,3,0.17,-0.03,m,openarm_world,0.0415,0.395,[],nearest demonstration 0.0415 m away (outside coverage radius); target-weight percentile 55
+sim_10,sim_spawn_metric,False,4,0.25,0.07,m,openarm_world,0.046,0.318,[],nearest demonstration 0.046 m away (outside coverage radius); target-weight percentile 47
+sim_10,sim_spawn_metric,False,5,0.21,-0.05,m,openarm_world,0.04,0.305,[],nearest demonstration 0.04 m away (outside coverage radius); target-weight percentile 45
+sim_10,sim_spawn_uniform,False,1,0.21,-0.07,m,openarm_world,0.0954,1.0,[],nearest demonstration 0.0954 m away (outside coverage radius); target-weight percentile 100
+sim_10,sim_spawn_uniform,False,2,0.39,-0.05,m,openarm_world,0.0796,1.0,[],nearest demonstration 0.0796 m away (outside coverage radius); target-weight percentile 100
+sim_10,sim_spawn_uniform,False,3,0.39,0.05,m,openarm_world,0.0737,1.0,[],nearest demonstration 0.0737 m away (outside coverage radius); target-weight percentile 100
+sim_10,sim_spawn_uniform,False,4,0.13,0.07,m,openarm_world,0.0638,1.0,[],nearest demonstration 0.0638 m away (outside coverage radius); target-weight percentile 100
+sim_10,sim_spawn_uniform,False,5,0.13,-0.07,m,openarm_world,0.0615,1.0,[],nearest demonstration 0.0615 m away (outside coverage radius); target-weight percentile 100

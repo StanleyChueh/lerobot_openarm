@@ -1,0 +1,28 @@
+{
+  "_comment": "Phase G first analysis (2026-10-24). Training sets = whole datasets (episodes=null in each train_config.json; normalizer counts equal total_frames). real_20 is read from the local LeRobot copy, whose stats equal the real_20 checkpoint normalizer exactly; real_10 = real_20 eps 0-9 = real_v00 eps 0-9 and real_20 = real_v00 eps 0-19 (identical state arrays, SHA-1 per episode).",
+  "title": "OpenArm Pringles hand-over: dataset readiness (real_10 / real_20 / sim_10 / real_v00 pool)",
+  "output": "research/dataset_diagnostics/pringles_v00",
+  "datasets": [
+    {"label": "real_10", "repo_id": "ethanCSL/openarm_pringles_lerobot_real_10_v00", "revision": "cebdee98115ab6827a4ec2655335c536b5dd085b", "role": "real",
+     "adapter": "openarm", "policy_checkpoint": "ethanCSL/openarm_pringles_lerobot_real_smolvla_10_v00", "checkpoint_revision": "8593bf2539eb663a536aac77c2ab6f33219a54ba",
+     "object_pose_source": ["detect:tools/dataset_diagnostics/configs/pringles_can_detect_real.json"],
+     "workspace_config": ["tools/dataset_diagnostics/configs/openarm_pringles_sim_spawn_metric.json", "tools/dataset_diagnostics/configs/pringles_body_cam_image.json"],
+     "grasp_workspace_config": ["tools/dataset_diagnostics/configs/openarm_grasp_metric.json"]},
+    {"label": "real_20", "root": "/home/csl/.cache/huggingface/lerobot/ethanCSL/openarm_pringles_lerobot_real_20_v00", "role": "real",
+     "adapter": "openarm", "policy_checkpoint": "ethanCSL/openarm_pringles_lerobot_real_smolvla_20_v00", "checkpoint_revision": "cd6907a4d40c50d833228ea93821dc1e2b008ca2",
+     "object_pose_source": ["detect:tools/dataset_diagnostics/configs/pringles_can_detect_real.json"],
+     "workspace_config": ["tools/dataset_diagnostics/configs/openarm_pringles_sim_spawn_metric.json", "tools/dataset_diagnostics/configs/pringles_body_cam_image.json"],
+     "grasp_workspace_config": ["tools/dataset_diagnostics/configs/openarm_grasp_metric.json"]},
+    {"label": "sim_10", "repo_id": "ethanCSL/openarm_pringles_lerobot_sim_10_v00", "revision": "b6d39dae630b8ce0b5822bee7a40bffc68a28819", "role": "sim",
+     "adapter": "openarm", "policy_checkpoint": "ethanCSL/openarm_pringles_lerobot_sim_smolvla_10_v00", "checkpoint_revision": "9ce7ce4811de11adcc4f407eb5a93586d94a6aee",
+     "object_pose_source": ["isaac-hdf5:/home/csl/Stanley_ws/IsaacLab/logs/demos/openarm_pringles_lerobot_sim_10_v00.hdf5", "detect:tools/dataset_diagnostics/configs/pringles_can_detect_sim.json"],
+     "workspace_config": ["tools/dataset_diagnostics/configs/openarm_pringles_sim_spawn_metric.json", "tools/dataset_diagnostics/configs/openarm_pringles_sim_spawn_uniform.json"],
+     "grasp_workspace_config": ["tools/dataset_diagnostics/configs/openarm_grasp_metric.json"]},
+    {"label": "real_v00_pool", "root": "/home/csl/.cache/huggingface/lerobot/ethanCSL/openarm_pringles_lerobot_real_v00", "role": "real",
+     "adapter": "openarm",
+     "object_pose_source": ["detect:tools/dataset_diagnostics/configs/pringles_can_detect_real.json"],
+     "workspace_config": ["tools/dataset_diagnostics/configs/pringles_body_cam_image.json"],
+     "grasp_workspace_config": ["tools/dataset_diagnostics/configs/openarm_grasp_metric.json"]}
+  ],
+  "compare": [["real_10", "sim_10"], ["real_20", "sim_10"]]
+}

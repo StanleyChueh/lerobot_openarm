@@ -1,0 +1,815 @@
+{
+  "dataset": "real_20",
+  "technical": {
+    "status": "WARN",
+    "checks": [
+      {
+        "name": "codebase_version",
+        "status": "PASS",
+        "detail": "v3.0",
+        "evidence": {
+          "version": "v3.0"
+        }
+      },
+      {
+        "name": "fps",
+        "status": "PASS",
+        "detail": "info.fps = 30",
+        "evidence": {
+          "fps": 30.0
+        }
+      },
+      {
+        "name": "required_columns",
+        "status": "PASS",
+        "detail": "all index/timestamp columns present",
+        "evidence": {
+          "missing": []
+        }
+      },
+      {
+        "name": "feature_schema",
+        "status": "PASS",
+        "detail": "info.json features match parquet columns and shapes",
+        "evidence": {
+          "problems": [],
+          "dims": {
+            "observation.state": 16,
+            "action": 16
+          }
+        }
+      },
+      {
+        "name": "finite_state_action",
+        "status": "PASS",
+        "detail": "no NaN/inf in state or action",
+        "evidence": {}
+      },
+      {
+        "name": "empty_episodes",
+        "status": "PASS",
+        "detail": "no empty episodes",
+        "evidence": {
+          "episodes": []
+        }
+      },
+      {
+        "name": "episode_lengths_match_metadata",
+        "status": "PASS",
+        "detail": "episode metadata lengths match parquet",
+        "evidence": {
+          "mismatch": {}
+        }
+      },
+      {
+        "name": "total_episodes",
+        "status": "PASS",
+        "detail": "info.json 20, parquet 20",
+        "evidence": {
+          "info": 20,
+          "data": 20
+        }
+      },
+      {
+        "name": "missing_frames",
+        "status": "PASS",
+        "detail": "frame_index contiguous from 0 in every episode",
+        "evidence": {
+          "gaps": {},
+          "nonzero_start": {}
+        }
+      },
+      {
+        "name": "timestamps",
+        "status": "PASS",
+        "detail": "timestamps on a 1/30 s grid, monotonic",
+        "evidence": {
+          "episodes": {},
+          "note": "timestamps are written as frame_index/fps by lerobot-record, so a wrong control rate is not visible here; see the real/sim joint-speed comparison"
+        }
+      },
+      {
+        "name": "episode_durations",
+        "status": "PASS",
+        "detail": "20 episodes, 7.6-9.3 s (mean 8.5 s)",
+        "evidence": {
+          "min_frames": 229,
+          "max_frames": 280,
+          "mean_frames": 254.0
+        }
+      },
+      {
+        "name": "camera_streams",
+        "status": "PASS",
+        "detail": "3 camera streams with complete episode coverage",
+        "evidence": {
+          "cameras": [
+            "observation.images.body_cam",
+            "observation.images.wrist_cam",
+            "observation.images.right_wrist_cam"
+          ],
+          "problems": [],
+          "shapes": {
+            "observation.images.body_cam": [
+              480,
+              640,
+              3
+            ],
+            "observation.images.wrist_cam": [
+              480,
+              640,
+              3
+            ],
+            "observation.images.right_wrist_cam": [
+              480,
+              640,
+              3
+            ]
+          },
+          "remote_videos_not_checked": false
+        }
+      },
+      {
+        "name": "camera_fps",
+        "status": "PASS",
+        "detail": "video fps == fps",
+        "evidence": {}
+      },
+      {
+        "name": "stats_observation.state",
+        "status": "PASS",
+        "detail": "stats.json mean/std match a recomputation from parquet",
+        "evidence": {
+          "max_mean_diff_in_std": 5.591220654507165e-06,
+          "max_std_rel_diff": 4.691111762174725e-05,
+          "constant_dims": [],
+          "count_in_stats": 5080.0,
+          "frames": 5080
+        }
+      },
+      {
+        "name": "stats_action",
+        "status": "PASS",
+        "detail": "stats.json mean/std match a recomputation from parquet",
+        "evidence": {
+          "max_mean_diff_in_std": 1.9471109785904275e-06,
+          "max_std_rel_diff": 4.656296334247955e-06,
+          "constant_dims": [],
+          "count_in_stats": 5080.0,
+          "frames": 5080
+        }
+      },
+      {
+        "name": "ckpt_state_dim",
+        "status": "WARN",
+        "detail": "config declares state [6] but normalizer stats are [16] = dataset [16]: stale input_features inherited from the pretrained base (metadata only; strict servers such as lerobot-policy-server refuse it)",
+        "evidence": {
+          "dataset": 16,
+          "declared": 6,
+          "normalizer": 16,
+          "max_state_dim": 32,
+          "policy_type": "smolvla"
+        }
+      },
+      {
+        "name": "ckpt_action_dim",
+        "status": "PASS",
+        "detail": "action [16] matches checkpoint",
+        "evidence": {
+          "dataset": 16,
+          "declared": 16,
+          "normalizer": 16,
+          "max_action_dim": 32
+        }
+      },
+      {
+        "name": "ckpt_cameras",
+        "status": "PASS",
+        "detail": "all 3 checkpoint cameras present",
+        "evidence": {
+          "checkpoint_cameras": [
+            "observation.images.camera1",
+            "observation.images.camera2",
+            "observation.images.camera3"
+          ],
+          "dataset_cameras_after_rename": {
+            "observation.images.camera3": "observation.images.body_cam",
+            "observation.images.camera2": "observation.images.wrist_cam",
+            "observation.images.camera1": "observation.images.right_wrist_cam"
+          },
+          "rename_map": {
+            "observation.images.right_wrist_cam": "observation.images.camera1",
+            "observation.images.wrist_cam": "observation.images.camera2",
+            "observation.images.body_cam": "observation.images.camera3"
+          },
+          "empty_cameras": 0
+        }
+      },
+      {
+        "name": "ckpt_image_shapes",
+        "status": "PASS",
+        "detail": "policy resizes to [512, 512]; declared image shapes are not used for slicing",
+        "evidence": {
+          "observation.images.camera1": [
+            [
+              3,
+              256,
+              256
+            ],
+            [
+              480,
+              640,
+              3
+            ]
+          ],
+          "observation.images.camera2": [
+            [
+              3,
+              256,
+              256
+            ],
+            [
+              480,
+              640,
+              3
+            ]
+          ],
+          "observation.images.camera3": [
+            [
+              3,
+              256,
+              256
+            ],
+            [
+              480,
+              640,
+              3
+            ]
+          ]
+        }
+      },
+      {
+        "name": "ckpt_normalizer_observation.state",
+        "status": "PASS",
+        "detail": "checkpoint statistics equal this dataset's (it was trained on exactly these frames)",
+        "evidence": {
+          "max_mean_shift_in_ckpt_std": 5.88104586028734e-06,
+          "worst_dims": {
+            "LJ4.pos": 0.0,
+            "LJ8.pos": 0.0,
+            "RJ4.pos": 0.0
+          },
+          "frac_frames_any_dim_|z|>4": 0.0124,
+          "ckpt_count": 5080.0,
+          "dataset_frames": 5080
+        }
+      },
+      {
+        "name": "ckpt_normalizer_action",
+        "status": "PASS",
+        "detail": "checkpoint statistics equal this dataset's (it was trained on exactly these frames)",
+        "evidence": {
+          "max_mean_shift_in_ckpt_std": 1.9552514439531915e-06,
+          "worst_dims": {
+            "LJ8.pos": 0.0,
+            "RJ8.pos": 0.0,
+            "RJ4.pos": 0.0
+          },
+          "frac_frames_any_dim_|z|>4": 0.0126,
+          "ckpt_count": 5080.0,
+          "dataset_frames": 5080
+        }
+      },
+      {
+        "name": "ckpt_chunk_vs_episode_length",
+        "status": "PASS",
+        "detail": "every episode >= chunk_size 50",
+        "evidence": {
+          "short_episodes": []
+        }
+      }
+    ]
+  },
+  "coverage": {
+    "status": "UNKNOWN",
+    "checks": [
+      {
+        "name": "detect_positions",
+        "status": "PASS",
+        "detail": "colour proposals for 20 episodes (UNVERIFIED: image-space only, a person must confirm them); misses []",
+        "evidence": {
+          "config": {
+            "_comment": "Colour-blob PROPOSALS for the Pringles can in the real body_cam start frame. Unverified: a person must confirm them (annotate --interactive). ROI drops the left image edge where the orange gripper bracket sits. Tuned 2026-10-24 by eye on real_20 episode start frames.",
+            "camera": "observation.images.body_cam",
+            "frame_index": 0,
+            "hsv_ranges": [
+              {
+                "h": [
+                  0,
+                  12
+                ],
+                "s": [
+                  100,
+                  255
+                ],
+                "v": [
+                  70,
+                  255
+                ]
+              },
+              {
+                "h": [
+                  168,
+                  179
+                ],
+                "s": [
+                  100,
+                  255
+                ],
+                "v": [
+                  70,
+                  255
+                ]
+              },
+              {
+                "h": [
+                  8,
+                  30
+                ],
+                "s": [
+                  70,
+                  255
+                ],
+                "v": [
+                  120,
+                  255
+                ]
+              }
+            ],
+            "roi": [
+              80,
+              0,
+              640,
+              480
+            ],
+            "min_area": 300,
+            "reference_point": "centroid"
+          }
+        }
+      },
+      {
+        "name": "coverage[sim_spawn_metric]",
+        "status": "UNKNOWN",
+        "detail": "no verified positions in frame openarm_world; inputs needed: recorded object poses or a validated image->workspace transform plus image annotations",
+        "evidence": {}
+      },
+      {
+        "name": "recommendations[real_body_cam_image]",
+        "status": "UNKNOWN",
+        "detail": "no positions recommended: the workspace boundary is declared unmeasured, so under-covered cells may be unreachable",
+        "evidence": {}
+      },
+      {
+        "name": "positions_available[real_body_cam_image]",
+        "status": "PASS",
+        "detail": "20/20 episodes have a position",
+        "evidence": {
+          "missing": []
+        }
+      },
+      {
+        "name": "target_coverage[real_body_cam_image]",
+        "status": "UNKNOWN",
+        "detail": "20% of the target distribution lies within 48 px of a demo (pass >= 80%); leave-one-out range 0.1852-0.2037 [PROVISIONAL: unverified positions]",
+        "evidence": {
+          "target_covered_fraction": 0.2037,
+          "reachable_area_covered_fraction": 0.2037,
+          "target_mean_nn_distance": 108.2804,
+          "covering_radius_reachable": 275.6058,
+          "fragility": {
+            "loo_min": 0.1852,
+            "loo_max": 0.2037,
+            "most_critical_index": 14
+          }
+        }
+      },
+      {
+        "name": "start_diversity[real_body_cam_image]",
+        "status": "UNKNOWN",
+        "detail": "19 independent start positions out of 20 (near-duplicate radius 12 px); kernel effective n = 3.79",
+        "evidence": {
+          "duplicate_groups": [
+            [
+              2,
+              16
+            ]
+          ]
+        }
+      },
+      {
+        "name": "grasp_proxy_spread[grasp_proxy]",
+        "status": "PASS",
+        "detail": "grasp positions span x 0.126..0.403, y -0.037..0.112 m; 19 independent at 0.01 m (informational, not a coverage verdict)",
+        "evidence": {
+          "n_with_position": 20,
+          "n_inside_reachable": 20,
+          "n_independent_groups": 19,
+          "kernel_effective_n": 4.78,
+          "target_covered_fraction": 0.246,
+          "reachable_area_covered_fraction": 0.246,
+          "target_mean_nn_distance": 0.0889,
+          "covering_radius_reachable": 0.2456,
+          "bbox": [
+            0.12641080675000657,
+            0.4032371508225467,
+            -0.03719856022006976,
+            0.11185797676222917
+          ],
+          "spread_std": [
+            0.078,
+            0.0382
+          ],
+          "units": "m",
+          "frame_id": "openarm_world",
+          "coverage_radius": 0.04,
+          "duplicate_radius": 0.01
+        }
+      }
+    ]
+  },
+  "quality": {
+    "status": "WARN",
+    "checks": [
+      {
+        "name": "openarm_gripper_mapping",
+        "status": "PASS",
+        "detail": "gripper openness from hybrid: right open/closed (-1.2979999780654907, 0.0), left (1.2121000289916992, 0.0)",
+        "evidence": {
+          "endpoints": {
+            "right_gripper": [
+              -1.2979999780654907,
+              0.0
+            ],
+            "left_gripper": [
+              1.2121000289916992,
+              0.0
+            ]
+          },
+          "signal": "hybrid",
+          "thresholds_openness": {
+            "right_gripper": "RJ8.pos",
+            "left_gripper": "LJ8.pos",
+            "right_prefix": "RJ",
+            "left_prefix": "LJ",
+            "open_tol": 0.06,
+            "close_delta": 0.12,
+            "empty_thresh": 0.12,
+            "min_hold": 10,
+            "min_overlap": 1,
+            "settle": 15,
+            "slip_thresh": 0.06,
+            "static_eps": 0.0001,
+            "pause_frames": 30,
+            "spike_floor": 0.05,
+            "track_mult": 3.0,
+            "dup_thresh": 0.01,
+            "z_thresh": 3.0
+          }
+        }
+      },
+      {
+        "name": "openarm_exclude_flags",
+        "status": "WARN",
+        "detail": "1/20 episodes carry a severe flag ['drop_risk', 'left_abnormal', 'left_early_close', 'no_handover', 'right_post_release_close', 'right_regrasp', 'tracking_error']: [16]",
+        "evidence": {
+          "excluded": [
+            16
+          ],
+          "reasons": {
+            "16": "drop_risk"
+          }
+        }
+      },
+      {
+        "name": "openarm_minor_flags",
+        "status": "WARN",
+        "detail": "non-severe flags: {'timing_outlier': 1, 'action_spike': 3, 'length_outlier': 4}",
+        "evidence": {
+          "timing_outlier": 1,
+          "action_spike": 3,
+          "length_outlier": 4
+        }
+      },
+      {
+        "name": "openarm_trajectory_duplicates",
+        "status": "PASS",
+        "detail": "0 episodes have a near-duplicate arm trajectory (nn_dist < 0.01)",
+        "evidence": {
+          "nn_dist_median": 0.2221531834334667
+        }
+      },
+      {
+        "name": "openarm_handover_overlap",
+        "status": "PASS",
+        "detail": "both-hold overlap 0-8 frames (median 3); drop_risk below 1",
+        "evidence": {
+          "per_episode": {
+            "0": 3,
+            "1": 2,
+            "2": 8,
+            "3": 7,
+            "4": 3,
+            "5": 3,
+            "6": 3,
+            "7": 7,
+            "8": 2,
+            "9": 7,
+            "10": 1,
+            "11": 8,
+            "12": 7,
+            "13": 4,
+            "14": 2,
+            "15": 3,
+            "16": 0,
+            "17": 2,
+            "18": 8,
+            "19": 3
+          }
+        }
+      },
+      {
+        "name": "grasp_proxy",
+        "status": "PASS",
+        "detail": "right TCP at first commanded close for 20/20 episodes (FK, openarm_description.urdf)",
+        "evidence": {
+          "episodes_without_close": []
+        }
+      }
+    ]
+  },
+  "real_sim": {
+    "status": "WARN",
+    "checks": [
+      {
+        "name": "schema_observation.state[real_20_vs_sim_10]",
+        "status": "PASS",
+        "detail": "identical names and order",
+        "evidence": {
+          "real_20": [
+            "RJ1.pos",
+            "LJ1.pos",
+            "RJ2.pos",
+            "LJ2.pos",
+            "RJ3.pos",
+            "LJ3.pos",
+            "RJ4.pos",
+            "LJ4.pos",
+            "RJ5.pos",
+            "LJ5.pos",
+            "RJ6.pos",
+            "LJ6.pos",
+            "RJ7.pos",
+            "LJ7.pos",
+            "RJ8.pos",
+            "LJ8.pos"
+          ],
+          "sim_10": [
+            "RJ1.pos",
+            "LJ1.pos",
+            "RJ2.pos",
+            "LJ2.pos",
+            "RJ3.pos",
+            "LJ3.pos",
+            "RJ4.pos",
+            "LJ4.pos",
+            "RJ5.pos",
+            "LJ5.pos",
+            "RJ6.pos",
+            "LJ6.pos",
+            "RJ7.pos",
+            "LJ7.pos",
+            "RJ8.pos",
+            "LJ8.pos"
+          ]
+        }
+      },
+      {
+        "name": "schema_action[real_20_vs_sim_10]",
+        "status": "PASS",
+        "detail": "identical names and order",
+        "evidence": {
+          "real_20": [
+            "RJ1.pos",
+            "LJ1.pos",
+            "RJ2.pos",
+            "LJ2.pos",
+            "RJ3.pos",
+            "LJ3.pos",
+            "RJ4.pos",
+            "LJ4.pos",
+            "RJ5.pos",
+            "LJ5.pos",
+            "RJ6.pos",
+            "LJ6.pos",
+            "RJ7.pos",
+            "LJ7.pos",
+            "RJ8.pos",
+            "LJ8.pos"
+          ],
+          "sim_10": [
+            "RJ1.pos",
+            "LJ1.pos",
+            "RJ2.pos",
+            "LJ2.pos",
+            "RJ3.pos",
+            "LJ3.pos",
+            "RJ4.pos",
+            "LJ4.pos",
+            "RJ5.pos",
+            "LJ5.pos",
+            "RJ6.pos",
+            "LJ6.pos",
+            "RJ7.pos",
+            "LJ7.pos",
+            "RJ8.pos",
+            "LJ8.pos"
+          ]
+        }
+      },
+      {
+        "name": "schema_cameras[real_20_vs_sim_10]",
+        "status": "PASS",
+        "detail": "same camera keys and shapes",
+        "evidence": {
+          "real_20": {
+            "observation.images.body_cam": [
+              480,
+              640,
+              3
+            ],
+            "observation.images.wrist_cam": [
+              480,
+              640,
+              3
+            ],
+            "observation.images.right_wrist_cam": [
+              480,
+              640,
+              3
+            ]
+          },
+          "sim_10": {
+            "observation.images.body_cam": [
+              480,
+              640,
+              3
+            ],
+            "observation.images.wrist_cam": [
+              480,
+              640,
+              3
+            ],
+            "observation.images.right_wrist_cam": [
+              480,
+              640,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "name": "schema_meta[real_20_vs_sim_10]",
+        "status": "PASS",
+        "detail": "fps, robot_type and version agree",
+        "evidence": {}
+      },
+      {
+        "name": "distribution_observation.state[real_20_vs_sim_10]",
+        "status": "WARN",
+        "detail": "large shift (|SMD|>1 or std ratio outside 0.5-2) in ['LJ2.pos', 'RJ4.pos', 'RJ5.pos', 'LJ5.pos', 'RJ7.pos', 'LJ7.pos']",
+        "evidence": {
+          "shifted_dims": [
+            "LJ2.pos",
+            "RJ4.pos",
+            "RJ5.pos",
+            "LJ5.pos",
+            "RJ7.pos",
+            "LJ7.pos"
+          ]
+        }
+      },
+      {
+        "name": "distribution_action[real_20_vs_sim_10]",
+        "status": "WARN",
+        "detail": "large shift (|SMD|>1 or std ratio outside 0.5-2) in ['LJ2.pos', 'RJ4.pos', 'RJ5.pos', 'LJ5.pos', 'RJ7.pos', 'LJ7.pos']",
+        "evidence": {
+          "shifted_dims": [
+            "LJ2.pos",
+            "RJ4.pos",
+            "RJ5.pos",
+            "LJ5.pos",
+            "RJ7.pos",
+            "LJ7.pos"
+          ]
+        }
+      },
+      {
+        "name": "gripper_semantics[real_20_vs_sim_10]",
+        "status": "WARN",
+        "detail": "right hold openness real_20 0.43 vs sim_10 0.76; left hold openness real_20 0.35 vs sim_10 0.46 -- the policy sees a different gripper state while holding",
+        "evidence": {
+          "real_20_state_q01_q50_q99": {
+            "RJ8.pos": [
+              -1.265,
+              -1.232,
+              -0.526
+            ],
+            "LJ8.pos": [
+              0.407,
+              1.15,
+              1.19
+            ]
+          },
+          "sim_10_state_q01_q50_q99": {
+            "RJ8.pos": [
+              -1.298,
+              -1.298,
+              -0.895
+            ],
+            "LJ8.pos": [
+              0.526,
+              1.212,
+              1.212
+            ]
+          },
+          "hold_openness": {
+            "real_20": {
+              "endpoints": {
+                "right_gripper": [
+                  -1.2979999780654907,
+                  0.0
+                ],
+                "left_gripper": [
+                  1.2121000289916992,
+                  0.0
+                ]
+              },
+              "right_hold_openness_median": 0.426000648579366,
+              "left_hold_openness_median": 0.3518601236723817,
+              "handover_overlap_frames_median": 3.0,
+              "handover_overlap_frames_min": 0.0
+            },
+            "sim_10": {
+              "endpoints": {
+                "right_gripper": [
+                  -1.2979999780654907,
+                  0.0
+                ],
+                "left_gripper": [
+                  1.2121000289916992,
+                  0.0
+                ]
+              },
+              "right_hold_openness_median": 0.7597265092718286,
+              "left_hold_openness_median": 0.46398419790964285,
+              "handover_overlap_frames_median": 1.0,
+              "handover_overlap_frames_min": 1.0
+            }
+          }
+        }
+      },
+      {
+        "name": "joint_speed_per_frame[real_20_vs_sim_10]",
+        "status": "PASS",
+        "detail": "median moving arm step real_20 0.0168 vs sim_10 0.0190 rad/frame (ratio 1.13); a ~1.5x ratio is the signature of data recorded at 20 Hz but labelled 30 fps",
+        "evidence": {
+          "ratio": 1.1337054871379668
+        }
+      },
+      {
+        "name": "episode_duration[real_20_vs_sim_10]",
+        "status": "PASS",
+        "detail": "real_20 8.5\u00b10.4 s, sim_10 7.9\u00b10.7 s",
+        "evidence": {}
+      },
+      {
+        "name": "action_state_lead[real_20_vs_sim_10]",
+        "status": "PASS",
+        "detail": "action leads state by 2 frames in real_20, 2 in sim_10",
+        "evidence": {
+          "real_20": 2,
+          "sim_10": 2
+        }
+      },
+      {
+        "name": "start_pose[real_20_vs_sim_10]",
+        "status": "PASS",
+        "detail": "median start arm pose differs by up to 0.017 rad",
+        "evidence": {
+          "max_abs_rad": 0.016975661004155457
+        }
+      }
+    ]
+  },
+  "caveat": "These statuses describe the dataset, not the policy. Even coverage and quality marked PASS do not guarantee that a policy will train or succeed. No success prediction is made without empirical validation."
+}

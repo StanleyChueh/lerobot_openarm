@@ -1,0 +1,18 @@
+{
+  "_comment": "Metric workspace for OpenArm Pringles hand-over in the robot base frame (URDF `world` == IsaacLab env frame; checked: FK of the right TCP matches the sim can position at grasp to a few mm). Bounds = the sim RECORDING spawn box and its keep-out boxes, from IsaacLab openarm_task_modes.py (_RECORD_SPAWN_X/Y_RANGE, _HAND_KEEP_OUT_BOXES_AT_HOME with _CAN_GROWTH = max(0, 0.8*0.036625-0.030) = 0). Target = the truncated Gaussian the same env samples (_RECORD_SPAWN_GAUSSIAN), i.e. the randomized sim evaluation distribution if evaluation ran through lerobot_sim_server.py. These are sim spawn limits, not measured real-robot reachability.",
+  "name": "sim_spawn_metric",
+  "frame_type": "metric",
+  "frame_id": "openarm_world",
+  "units": "m",
+  "x_range": [0.12, 0.40],
+  "y_range": [-0.08, 0.08],
+  "keep_out": [[0.265, 0.377, 0.029, 0.278], [0.265, 0.377, -0.278, -0.029], [0.265, 0.440, 0.060, 0.278], [0.265, 0.440, -0.278, -0.060]],
+  "cell_size": 0.02,
+  "coverage_radius": 0.04,
+  "duplicate_radius": 0.01,
+  "min_separation": 0.04,
+  "eval_distribution": {"type": "gaussian", "mean": [0.235, 0.01], "std": [0.07, 0.04]},
+  "regions": {},
+  "thresholds": {"target_covered_pass": 0.8, "target_covered_fail": 0.5},
+  "provenance": {"source": "IsaacLab openarm_task_modes.py @ 4aa5e026", "measured_real_reachability": false}
+}

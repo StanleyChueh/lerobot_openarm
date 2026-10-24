@@ -1,0 +1,20 @@
+dataset,source_kind,episode_index,source,x,y,z,frame_id,u,v,camera,image_size,verified,notes,extra_demo,extra_match_err,extra_shift,extra_robot_root_xyz,extra_frame_index
+sim_10,isaac-hdf5,0,recorded_pose,0.19743220508098602,0.04080262407660484,0.38008490204811096,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_0,demo_0,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,0,auto_detect,,,,,317.58942632170977,329.44319460067493,observation.images.body_cam,640x480,False,"hsv blob centroid, area 889",,,,,0.0
+sim_10,isaac-hdf5,1,recorded_pose,0.13440777361392975,-0.008683432824909687,0.3800887167453766,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_1,demo_1,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,isaac-hdf5,2,recorded_pose,0.1404724270105362,0.0035552671179175377,0.38008490204811096,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_2,demo_2,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,2,auto_detect,,,,,375.078431372549,424.96078431372547,observation.images.body_cam,640x480,False,"hsv blob centroid, area 306",,,,,0.0
+sim_10,isaac-hdf5,3,recorded_pose,0.1753547340631485,0.025135355070233345,0.38008493185043335,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_3,demo_3,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,3,auto_detect,,,,,340.3135048231511,365.40353697749197,observation.images.body_cam,640x480,False,"hsv blob centroid, area 622",,,,,0.0
+sim_10,isaac-hdf5,4,recorded_pose,0.29486796259880066,0.025210190564393997,0.38008493185043335,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_4,demo_4,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,4,auto_detect,,,,,334.8393113342898,194.48421807747488,observation.images.body_cam,640x480,False,"hsv blob centroid, area 1394",,,,,0.0
+sim_10,isaac-hdf5,5,recorded_pose,0.2071257084608078,0.03472888842225075,0.38008490204811096,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_5,demo_5,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,5,auto_detect,,,,,326.059375,314.8020833333333,observation.images.body_cam,640x480,False,"hsv blob centroid, area 960",,,,,0.0
+sim_10,isaac-hdf5,6,recorded_pose,0.3320339322090149,0.004518819972872734,0.38008490204811096,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_6,demo_6,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,6,auto_detect,,,,,360.42151556156966,149.62652232746956,observation.images.body_cam,640x480,False,"hsv blob centroid, area 1478",,,,,0.0
+sim_10,isaac-hdf5,7,recorded_pose,0.2646874785423279,0.00818856805562973,0.38008567690849304,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_7,demo_7,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,7,auto_detect,,,,,358.2657120127287,232.4359586316627,observation.images.body_cam,640x480,False,"hsv blob centroid, area 1257",,,,,0.0
+sim_10,isaac-hdf5,8,recorded_pose,0.2828691899776459,-0.0008368715643882751,0.38008490204811096,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_8,demo_8,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,8,auto_detect,,,,,370.25801526717555,208.47862595419846,observation.images.body_cam,640x480,False,"hsv blob centroid, area 1310",,,,,0.0
+sim_10,isaac-hdf5,9,recorded_pose,0.25371623039245605,0.02411303110420704,0.38008490204811096,openarm_world,,,,,True,openarm_pringles_lerobot_sim_10_v00.hdf5:demo_9,demo_9,0.0,1.0,"[0.0, 0.0, 0.0]",
+sim_10,detect,9,auto_detect,,,,,338.32639467110744,248.08825978351373,observation.images.body_cam,640x480,False,"hsv blob centroid, area 1201",,,,,0.0

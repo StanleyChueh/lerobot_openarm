@@ -1,0 +1,53 @@
+{
+  "tool": "tools/dataset_diagnostics",
+  "tool_version": "0.1.0",
+  "run_at": "2026-10-24T13:13:42",
+  "argv": [
+    "/home/csl/Stanley_ws/lerobot_openarm/tools/dataset_diagnostics/__main__.py",
+    "analyze",
+    "--manifest",
+    "research/dataset_diagnostics/pringles_manifest.json"
+  ],
+  "repo": {
+    "sha": "249096010cdd0c1a3135fbfe73e6f24d4676a09b",
+    "branch": "official-lerobot-quest",
+    "dirty": true
+  },
+  "dataset": {
+    "label": "real_v00_pool",
+    "repo_id": null,
+    "root": "/home/csl/.cache/huggingface/lerobot/ethanCSL/openarm_pringles_lerobot_real_v00",
+    "codebase_version": "v3.0",
+    "requested_revision": null,
+    "resolved_revision": null,
+    "hub_main_sha": null,
+    "hub_codebase_tag_sha": null,
+    "robot_type": "openarm_umeow",
+    "fps": 30.0,
+    "total_episodes_info": 50,
+    "total_frames_info": 12115,
+    "episodes_loaded": 50,
+    "frames_loaded": 12115,
+    "episode_filter": null,
+    "loader_notes": [
+      "v3 metadata readable by LeRobotDatasetMetadata (lerobot.datasets.dataset_metadata)"
+    ],
+    "user": "csl"
+  },
+  "role": "real",
+  "spec": {
+    "label": "real_v00_pool",
+    "root": "/home/csl/.cache/huggingface/lerobot/ethanCSL/openarm_pringles_lerobot_real_v00",
+    "role": "real",
+    "adapter": "openarm",
+    "object_pose_source": [
+      "detect:tools/dataset_diagnostics/configs/pringles_can_detect_real.json"
+    ],
+    "workspace_config": [
+      "tools/dataset_diagnostics/configs/pringles_body_cam_image.json"
+    ],
+    "grasp_workspace_config": [
+      "tools/dataset_diagnostics/configs/openarm_grasp_metric.json"
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "metrics": {
+    "n_with_position": 10,
+    "n_inside_reachable": 10,
+    "n_independent_groups": 10,
+    "kernel_effective_n": 2.8,
+    "target_covered_fraction": 0.5541,
+    "reachable_area_covered_fraction": 0.5541,
+    "target_mean_nn_distance": 0.0382,
+    "covering_radius_reachable": 0.0954,
+    "bbox": [
+      0.13440777361392975,
+      0.3320339322090149,
+      -0.008683432824909687,
+      0.04080262407660484
+    ],
+    "spread_std": [
+      0.0639,
+      0.0156
+    ],
+    "units": "m",
+    "frame_id": "openarm_world",
+    "coverage_radius": 0.04,
+    "duplicate_radius": 0.01
+  },
+  "fragility": {
+    "loo_min": 0.5,
+    "loo_max": 0.5541,
+    "most_critical_index": 6
+  },
+  "regions": {},
+  "duplicates": [],
+  "outside": [],
+  "episodes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "points": [
+    [
+      0.19743220508098602,
+      0.04080262407660484
+    ],
+    [
+      0.13440777361392975,
+      -0.008683432824909687
+    ],
+    [
+      0.1404724270105362,
+      0.0035552671179175377
+    ],
+    [
+      0.1753547340631485,
+      0.025135355070233345
+    ],
+    [
+      0.29486796259880066,
+      0.025210190564393997
+    ],
+    [
+      0.2071257084608078,
+      0.03472888842225075
+    ],
+    [
+      0.3320339322090149,
+      0.004518819972872734
+    ],
+    [
+      0.2646874785423279,
+      0.00818856805562973
+    ],
+    [
+      0.2828691899776459,
+      -0.0008368715643882751
+    ],
+    [
+      0.25371623039245605,
+      0.02411303110420704
+    ]
+  ],
+  "config": {
+    "name": "sim_spawn_uniform",
+    "frame_type": "metric",
+    "frame_id": "openarm_world",
+    "units": "m",
+    "x_range": [
+      0.12,
+      0.4
+    ],
+    "y_range": [
+      -0.08,
+      0.08
+    ],
+    "cell_size": 0.02,
+    "coverage_radius": 0.04,
+    "duplicate_radius": 0.01,
+    "min_separation": 0.04,
+    "polygon": null,
+    "keep_out": [
+      [
+        0.265,
+        0.377,
+        0.029,
+        0.278
+      ],
+      [
+        0.265,
+        0.377,
+        -0.278,
+        -0.029
+      ],
+      [
+        0.265,
+        0.44,
+        0.06,
+        0.278
+      ],
+      [
+        0.265,
+        0.44,
+        -0.278,
+        -0.06
+      ]
+    ],
+    "eval_distribution": {
+      "type": "uniform"
+    },
+    "regions": {},
+    "kde_bandwidth": null,
+    "thresholds": {
+      "target_covered_pass": 0.8,
+      "target_covered_fail": 0.5
+    },
+    "provenance": {
+      "source": "IsaacLab openarm_task_modes.py @ 4aa5e026",
+      "measured_real_reachability": false
+    }
+  }
+}

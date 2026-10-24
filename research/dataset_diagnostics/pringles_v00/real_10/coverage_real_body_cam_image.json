@@ -1,0 +1,135 @@
+{
+  "metrics": {
+    "n_with_position": 10,
+    "n_inside_reachable": 10,
+    "n_independent_groups": 10,
+    "kernel_effective_n": 3.01,
+    "target_covered_fraction": 0.1296,
+    "reachable_area_covered_fraction": 0.1296,
+    "target_mean_nn_distance": 138.278,
+    "covering_radius_reachable": 322.0162,
+    "bbox": [
+      292.5768325791855,
+      404.64621513944223,
+      121.68831849135672,
+      352.6008604206501
+    ],
+    "spread_std": [
+      32.7096,
+      71.4438
+    ],
+    "units": "px",
+    "frame_id": "image:observation.images.body_cam",
+    "coverage_radius": 48,
+    "duplicate_radius": 12
+  },
+  "fragility": {
+    "loo_min": 0.1148,
+    "loo_max": 0.1296,
+    "most_critical_index": 9
+  },
+  "regions": {},
+  "duplicates": [],
+  "outside": [],
+  "episodes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "points": [
+    [
+      371.85051643192486,
+      205.4863849765258
+    ],
+    [
+      404.64621513944223,
+      138.8894422310757
+    ],
+    [
+      321.7006821662258,
+      291.2285952944452
+    ],
+    [
+      346.3229218311023,
+      207.72665675095027
+    ],
+    [
+      388.7657968514126,
+      130.45201638990727
+    ],
+    [
+      334.5358826610791,
+      121.68831849135672
+    ],
+    [
+      346.8814655172414,
+      143.2939655172414
+    ],
+    [
+      321.2479282935904,
+      237.2494503636056
+    ],
+    [
+      321.86651529636714,
+      352.6008604206501
+    ],
+    [
+      292.5768325791855,
+      215.0316742081448
+    ]
+  ],
+  "config": {
+    "name": "real_body_cam_image",
+    "frame_type": "image",
+    "frame_id": "image:observation.images.body_cam",
+    "units": "px",
+    "x_range": [
+      0,
+      640
+    ],
+    "y_range": [
+      0,
+      480
+    ],
+    "cell_size": 32,
+    "coverage_radius": 48,
+    "duplicate_radius": 12,
+    "min_separation": 48,
+    "polygon": [
+      [
+        80,
+        0
+      ],
+      [
+        640,
+        0
+      ],
+      [
+        640,
+        480
+      ],
+      [
+        80,
+        480
+      ]
+    ],
+    "keep_out": [],
+    "eval_distribution": {
+      "type": "uniform"
+    },
+    "regions": {},
+    "kde_bandwidth": null,
+    "thresholds": {},
+    "provenance": {
+      "boundary_measured": false,
+      "eval_regions_known": false
+    }
+  }
+}

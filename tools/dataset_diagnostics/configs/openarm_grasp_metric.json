@@ -1,0 +1,13 @@
+{
+  "_comment": "Frame for the FK grasp-position PROXY (right TCP at the first commanded close), robot base frame. Wide bounds: informational spread only, no coverage verdict is derived from it.",
+  "name": "grasp_proxy",
+  "frame_type": "metric",
+  "frame_id": "openarm_world",
+  "units": "m",
+  "x_range": [0.0, 0.5],
+  "y_range": [-0.2, 0.2],
+  "cell_size": 0.02,
+  "coverage_radius": 0.04,
+  "duplicate_radius": 0.01,
+  "min_separation": 0.04
+}

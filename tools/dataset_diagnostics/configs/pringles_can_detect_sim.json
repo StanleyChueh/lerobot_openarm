@@ -1,0 +1,37 @@
+{
+  "_comment": "Colour-blob proposals for the sim (Isaac real-look) Pringles can in body_cam: red body only. Adding lid hues found every can but merged inconsistent blobs (held-out error 5.2 cm vs 0.6 cm), so consistency wins over recall. Used to test detector + homography against recorded can poses; the result does NOT transfer to the real camera.",
+  "camera": "observation.images.body_cam",
+  "frame_index": 0,
+  "hsv_ranges": [
+    {
+      "h": [
+        0,
+        12
+      ],
+      "s": [
+        110,
+        255
+      ],
+      "v": [
+        70,
+        255
+      ]
+    },
+    {
+      "h": [
+        168,
+        179
+      ],
+      "s": [
+        110,
+        255
+      ],
+      "v": [
+        70,
+        255
+      ]
+    }
+  ],
+  "min_area": 300,
+  "reference_point": "centroid"
+}

@@ -1,0 +1,494 @@
+{
+  "dataset": "real_v00_pool",
+  "technical": {
+    "status": "PASS",
+    "checks": [
+      {
+        "name": "codebase_version",
+        "status": "PASS",
+        "detail": "v3.0",
+        "evidence": {
+          "version": "v3.0"
+        }
+      },
+      {
+        "name": "fps",
+        "status": "PASS",
+        "detail": "info.fps = 30",
+        "evidence": {
+          "fps": 30.0
+        }
+      },
+      {
+        "name": "required_columns",
+        "status": "PASS",
+        "detail": "all index/timestamp columns present",
+        "evidence": {
+          "missing": []
+        }
+      },
+      {
+        "name": "feature_schema",
+        "status": "PASS",
+        "detail": "info.json features match parquet columns and shapes",
+        "evidence": {
+          "problems": [],
+          "dims": {
+            "observation.state": 16,
+            "action": 16
+          }
+        }
+      },
+      {
+        "name": "finite_state_action",
+        "status": "PASS",
+        "detail": "no NaN/inf in state or action",
+        "evidence": {}
+      },
+      {
+        "name": "empty_episodes",
+        "status": "PASS",
+        "detail": "no empty episodes",
+        "evidence": {
+          "episodes": []
+        }
+      },
+      {
+        "name": "episode_lengths_match_metadata",
+        "status": "PASS",
+        "detail": "episode metadata lengths match parquet",
+        "evidence": {
+          "mismatch": {}
+        }
+      },
+      {
+        "name": "total_episodes",
+        "status": "PASS",
+        "detail": "info.json 50, parquet 50",
+        "evidence": {
+          "info": 50,
+          "data": 50
+        }
+      },
+      {
+        "name": "missing_frames",
+        "status": "PASS",
+        "detail": "frame_index contiguous from 0 in every episode",
+        "evidence": {
+          "gaps": {},
+          "nonzero_start": {}
+        }
+      },
+      {
+        "name": "timestamps",
+        "status": "PASS",
+        "detail": "timestamps on a 1/30 s grid, monotonic",
+        "evidence": {
+          "episodes": {},
+          "note": "timestamps are written as frame_index/fps by lerobot-record, so a wrong control rate is not visible here; see the real/sim joint-speed comparison"
+        }
+      },
+      {
+        "name": "episode_durations",
+        "status": "PASS",
+        "detail": "50 episodes, 6.3-9.4 s (mean 8.1 s)",
+        "evidence": {
+          "min_frames": 188,
+          "max_frames": 282,
+          "mean_frames": 242.3
+        }
+      },
+      {
+        "name": "camera_streams",
+        "status": "PASS",
+        "detail": "3 camera streams with complete episode coverage",
+        "evidence": {
+          "cameras": [
+            "observation.images.body_cam",
+            "observation.images.wrist_cam",
+            "observation.images.right_wrist_cam"
+          ],
+          "problems": [],
+          "shapes": {
+            "observation.images.body_cam": [
+              480,
+              640,
+              3
+            ],
+            "observation.images.wrist_cam": [
+              480,
+              640,
+              3
+            ],
+            "observation.images.right_wrist_cam": [
+              480,
+              640,
+              3
+            ]
+          },
+          "remote_videos_not_checked": false
+        }
+      },
+      {
+        "name": "camera_fps",
+        "status": "PASS",
+        "detail": "video fps == fps",
+        "evidence": {}
+      },
+      {
+        "name": "stats_observation.state",
+        "status": "PASS",
+        "detail": "stats.json mean/std match a recomputation from parquet",
+        "evidence": {
+          "max_mean_diff_in_std": 5.472272759948966e-06,
+          "max_std_rel_diff": 4.6455037512639006e-05,
+          "constant_dims": [],
+          "count_in_stats": 12115.0,
+          "frames": 12115
+        }
+      },
+      {
+        "name": "stats_action",
+        "status": "PASS",
+        "detail": "stats.json mean/std match a recomputation from parquet",
+        "evidence": {
+          "max_mean_diff_in_std": 1.8555069366903374e-06,
+          "max_std_rel_diff": 4.319155151935766e-06,
+          "constant_dims": [],
+          "count_in_stats": 12115.0,
+          "frames": 12115
+        }
+      }
+    ]
+  },
+  "coverage": {
+    "status": "UNKNOWN",
+    "checks": [
+      {
+        "name": "detect_positions",
+        "status": "PASS",
+        "detail": "colour proposals for 50 episodes (UNVERIFIED: image-space only, a person must confirm them); misses []",
+        "evidence": {
+          "config": {
+            "_comment": "Colour-blob PROPOSALS for the Pringles can in the real body_cam start frame. Unverified: a person must confirm them (annotate --interactive). ROI drops the left image edge where the orange gripper bracket sits. Tuned 2026-10-24 by eye on real_20 episode start frames.",
+            "camera": "observation.images.body_cam",
+            "frame_index": 0,
+            "hsv_ranges": [
+              {
+                "h": [
+                  0,
+                  12
+                ],
+                "s": [
+                  100,
+                  255
+                ],
+                "v": [
+                  70,
+                  255
+                ]
+              },
+              {
+                "h": [
+                  168,
+                  179
+                ],
+                "s": [
+                  100,
+                  255
+                ],
+                "v": [
+                  70,
+                  255
+                ]
+              },
+              {
+                "h": [
+                  8,
+                  30
+                ],
+                "s": [
+                  70,
+                  255
+                ],
+                "v": [
+                  120,
+                  255
+                ]
+              }
+            ],
+            "roi": [
+              80,
+              0,
+              640,
+              480
+            ],
+            "min_area": 300,
+            "reference_point": "centroid"
+          }
+        }
+      },
+      {
+        "name": "recommendations[real_body_cam_image]",
+        "status": "UNKNOWN",
+        "detail": "no positions recommended: the workspace boundary is declared unmeasured, so under-covered cells may be unreachable",
+        "evidence": {}
+      },
+      {
+        "name": "positions_available[real_body_cam_image]",
+        "status": "PASS",
+        "detail": "50/50 episodes have a position",
+        "evidence": {
+          "missing": []
+        }
+      },
+      {
+        "name": "target_coverage[real_body_cam_image]",
+        "status": "UNKNOWN",
+        "detail": "31% of the target distribution lies within 48 px of a demo (pass >= 80%); leave-one-out range 0.2852-0.3074 [PROVISIONAL: unverified positions]",
+        "evidence": {
+          "target_covered_fraction": 0.3074,
+          "reachable_area_covered_fraction": 0.3074,
+          "target_mean_nn_distance": 93.0395,
+          "covering_radius_reachable": 274.7998,
+          "fragility": {
+            "loo_min": 0.2852,
+            "loo_max": 0.3074,
+            "most_critical_index": 22
+          }
+        }
+      },
+      {
+        "name": "start_diversity[real_body_cam_image]",
+        "status": "UNKNOWN",
+        "detail": "38 independent start positions out of 50 (near-duplicate radius 12 px); kernel effective n = 4.17",
+        "evidence": {
+          "duplicate_groups": [
+            [
+              2,
+              16,
+              21,
+              35,
+              46,
+              49
+            ],
+            [
+              3,
+              7,
+              26,
+              36,
+              42,
+              43
+            ],
+            [
+              0,
+              41
+            ],
+            [
+              10,
+              32
+            ]
+          ]
+        }
+      },
+      {
+        "name": "grasp_proxy_spread[grasp_proxy]",
+        "status": "PASS",
+        "detail": "grasp positions span x 0.091..0.403, y -0.076..0.119 m; 46 independent at 0.01 m (informational, not a coverage verdict)",
+        "evidence": {
+          "n_with_position": 50,
+          "n_inside_reachable": 50,
+          "n_independent_groups": 46,
+          "kernel_effective_n": 4.68,
+          "target_covered_fraction": 0.322,
+          "reachable_area_covered_fraction": 0.322,
+          "target_mean_nn_distance": 0.074,
+          "covering_radius_reachable": 0.2201,
+          "bbox": [
+            0.09055331763903737,
+            0.4032371508225467,
+            -0.07569927047922323,
+            0.11915983996360299
+          ],
+          "spread_std": [
+            0.0731,
+            0.0393
+          ],
+          "units": "m",
+          "frame_id": "openarm_world",
+          "coverage_radius": 0.04,
+          "duplicate_radius": 0.01
+        }
+      }
+    ]
+  },
+  "quality": {
+    "status": "FAIL",
+    "checks": [
+      {
+        "name": "openarm_gripper_mapping",
+        "status": "PASS",
+        "detail": "gripper openness from hybrid: right open/closed (-1.2979999780654907, 0.0), left (1.2121000289916992, 0.0)",
+        "evidence": {
+          "endpoints": {
+            "right_gripper": [
+              -1.2979999780654907,
+              0.0
+            ],
+            "left_gripper": [
+              1.2121000289916992,
+              0.0
+            ]
+          },
+          "signal": "hybrid",
+          "thresholds_openness": {
+            "right_gripper": "RJ8.pos",
+            "left_gripper": "LJ8.pos",
+            "right_prefix": "RJ",
+            "left_prefix": "LJ",
+            "open_tol": 0.06,
+            "close_delta": 0.12,
+            "empty_thresh": 0.12,
+            "min_hold": 10,
+            "min_overlap": 1,
+            "settle": 15,
+            "slip_thresh": 0.06,
+            "static_eps": 0.0001,
+            "pause_frames": 30,
+            "spike_floor": 0.05,
+            "track_mult": 3.0,
+            "dup_thresh": 0.01,
+            "z_thresh": 3.0
+          }
+        }
+      },
+      {
+        "name": "openarm_exclude_flags",
+        "status": "FAIL",
+        "detail": "14/50 episodes carry a severe flag ['drop_risk', 'left_abnormal', 'left_early_close', 'no_handover', 'right_post_release_close', 'right_regrasp', 'tracking_error']: [16, 28, 32, 35, 36, 39, 40, 41, 42, 43, 44, 45, 46, 47]",
+        "evidence": {
+          "excluded": [
+            16,
+            28,
+            32,
+            35,
+            36,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "reasons": {
+            "16": "drop_risk",
+            "28": "drop_risk",
+            "32": "drop_risk",
+            "35": "drop_risk",
+            "36": "drop_risk",
+            "39": "drop_risk",
+            "40": "drop_risk",
+            "41": "drop_risk",
+            "42": "drop_risk",
+            "43": "drop_risk",
+            "44": "drop_risk",
+            "45": "drop_risk",
+            "46": "drop_risk",
+            "47": "drop_risk"
+          }
+        }
+      },
+      {
+        "name": "openarm_minor_flags",
+        "status": "WARN",
+        "detail": "non-severe flags: {'action_spike': 4}",
+        "evidence": {
+          "action_spike": 4
+        }
+      },
+      {
+        "name": "openarm_trajectory_duplicates",
+        "status": "PASS",
+        "detail": "0 episodes have a near-duplicate arm trajectory (nn_dist < 0.01)",
+        "evidence": {
+          "nn_dist_median": 0.20586898625942476
+        }
+      },
+      {
+        "name": "openarm_handover_overlap",
+        "status": "PASS",
+        "detail": "both-hold overlap -2-12 frames (median 2); drop_risk below 1",
+        "evidence": {
+          "per_episode": {
+            "0": 3,
+            "1": 2,
+            "2": 8,
+            "3": 7,
+            "4": 3,
+            "5": 3,
+            "6": 3,
+            "7": 7,
+            "8": 2,
+            "9": 7,
+            "10": 1,
+            "11": 8,
+            "12": 7,
+            "13": 4,
+            "14": 2,
+            "15": 3,
+            "16": 0,
+            "17": 2,
+            "18": 8,
+            "19": 3,
+            "20": 1,
+            "21": 3,
+            "22": 2,
+            "23": 2,
+            "24": 1,
+            "25": 11,
+            "26": 12,
+            "27": 2,
+            "28": 0,
+            "29": 3,
+            "30": 3,
+            "31": 2,
+            "32": 0,
+            "33": 12,
+            "34": 1,
+            "35": -1,
+            "36": 0,
+            "37": 4,
+            "38": 2,
+            "39": -1,
+            "40": -2,
+            "41": -2,
+            "42": 0,
+            "43": -1,
+            "44": -1,
+            "45": -1,
+            "46": -1,
+            "47": -1,
+            "48": 1,
+            "49": 1
+          }
+        }
+      },
+      {
+        "name": "grasp_proxy",
+        "status": "PASS",
+        "detail": "right TCP at first commanded close for 50/50 episodes (FK, openarm_description.urdf)",
+        "evidence": {
+          "episodes_without_close": []
+        }
+      }
+    ]
+  },
+  "real_sim": {
+    "status": "UNKNOWN",
+    "checks": []
+  },
+  "caveat": "These statuses describe the dataset, not the policy. Even coverage and quality marked PASS do not guarantee that a policy will train or succeed. No success prediction is made without empirical validation."
+}

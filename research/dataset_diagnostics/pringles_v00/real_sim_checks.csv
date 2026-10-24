@@ -1,0 +1,23 @@
+pair,check,status,detail
+real_10_vs_sim_10,schema_observation.state,PASS,identical names and order
+real_10_vs_sim_10,schema_action,PASS,identical names and order
+real_10_vs_sim_10,schema_cameras,PASS,same camera keys and shapes
+real_10_vs_sim_10,schema_meta,PASS,"fps, robot_type and version agree"
+real_10_vs_sim_10,distribution_observation.state,WARN,"large shift (|SMD|>1 or std ratio outside 0.5-2) in ['LJ2.pos', 'RJ4.pos', 'RJ5.pos', 'LJ5.pos', 'RJ7.pos', 'LJ7.pos']"
+real_10_vs_sim_10,distribution_action,WARN,"large shift (|SMD|>1 or std ratio outside 0.5-2) in ['LJ2.pos', 'RJ4.pos', 'RJ5.pos', 'LJ5.pos', 'RJ7.pos', 'LJ7.pos']"
+real_10_vs_sim_10,gripper_semantics,WARN,right hold openness real_10 0.42 vs sim_10 0.76; left hold openness real_10 0.35 vs sim_10 0.46 -- the policy sees a different gripper state while holding
+real_10_vs_sim_10,joint_speed_per_frame,PASS,median moving arm step real_10 0.0160 vs sim_10 0.0190 rad/frame (ratio 1.19); a ~1.5x ratio is the signature of data recorded at 20 Hz but labelled 30 fps
+real_10_vs_sim_10,episode_duration,PASS,"real_10 8.6±0.4 s, sim_10 7.9±0.7 s"
+real_10_vs_sim_10,action_state_lead,PASS,"action leads state by 2 frames in real_10, 2 in sim_10"
+real_10_vs_sim_10,start_pose,PASS,median start arm pose differs by up to 0.017 rad
+real_20_vs_sim_10,schema_observation.state,PASS,identical names and order
+real_20_vs_sim_10,schema_action,PASS,identical names and order
+real_20_vs_sim_10,schema_cameras,PASS,same camera keys and shapes
+real_20_vs_sim_10,schema_meta,PASS,"fps, robot_type and version agree"
+real_20_vs_sim_10,distribution_observation.state,WARN,"large shift (|SMD|>1 or std ratio outside 0.5-2) in ['LJ2.pos', 'RJ4.pos', 'RJ5.pos', 'LJ5.pos', 'RJ7.pos', 'LJ7.pos']"
+real_20_vs_sim_10,distribution_action,WARN,"large shift (|SMD|>1 or std ratio outside 0.5-2) in ['LJ2.pos', 'RJ4.pos', 'RJ5.pos', 'LJ5.pos', 'RJ7.pos', 'LJ7.pos']"
+real_20_vs_sim_10,gripper_semantics,WARN,right hold openness real_20 0.43 vs sim_10 0.76; left hold openness real_20 0.35 vs sim_10 0.46 -- the policy sees a different gripper state while holding
+real_20_vs_sim_10,joint_speed_per_frame,PASS,median moving arm step real_20 0.0168 vs sim_10 0.0190 rad/frame (ratio 1.13); a ~1.5x ratio is the signature of data recorded at 20 Hz but labelled 30 fps
+real_20_vs_sim_10,episode_duration,PASS,"real_20 8.5±0.4 s, sim_10 7.9±0.7 s"
+real_20_vs_sim_10,action_state_lead,PASS,"action leads state by 2 frames in real_20, 2 in sim_10"
+real_20_vs_sim_10,start_pose,PASS,median start arm pose differs by up to 0.017 rad

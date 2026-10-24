@@ -1,0 +1,17 @@
+{
+  "_comment": "IMAGE-space workspace for the real body_cam (640x480 px). The safe boundary is NOT measured: it is the whole frame minus the left strip under the parked right arm/bracket (x<80). Replace `polygon` with the outline of the reachable mat area and `eval_distribution` with the 5 evaluation regions (4 corners + centre) clicked in a body_cam frame -- both are missing inputs. Image-space coverage is valid only for this exact camera pose.",
+  "name": "real_body_cam_image",
+  "frame_type": "image",
+  "frame_id": "image:observation.images.body_cam",
+  "units": "px",
+  "x_range": [0, 640],
+  "y_range": [0, 480],
+  "polygon": [[80, 0], [640, 0], [640, 480], [80, 480]],
+  "cell_size": 32,
+  "coverage_radius": 48,
+  "duplicate_radius": 12,
+  "min_separation": 48,
+  "eval_distribution": {"type": "uniform"},
+  "regions": {},
+  "provenance": {"boundary_measured": false, "eval_regions_known": false}
+}

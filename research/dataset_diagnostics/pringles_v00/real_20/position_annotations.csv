@@ -1,0 +1,21 @@
+dataset,source_kind,episode_index,source,x,y,z,frame_id,u,v,camera,image_size,verified,notes,extra_frame_index
+real_20,detect,0,auto_detect,,,,,371.85051643192486,205.4863849765258,observation.images.body_cam,640x480,False,"hsv blob centroid, area 5325",0
+real_20,detect,1,auto_detect,,,,,404.64621513944223,138.8894422310757,observation.images.body_cam,640x480,False,"hsv blob centroid, area 5020",0
+real_20,detect,2,auto_detect,,,,,321.7006821662258,291.2285952944452,observation.images.body_cam,640x480,False,"hsv blob centroid, area 7183",0
+real_20,detect,3,auto_detect,,,,,346.3229218311023,207.72665675095027,observation.images.body_cam,640x480,False,"hsv blob centroid, area 6051",0
+real_20,detect,4,auto_detect,,,,,388.7657968514126,130.45201638990727,observation.images.body_cam,640x480,False,"hsv blob centroid, area 4637",0
+real_20,detect,5,auto_detect,,,,,334.5358826610791,121.68831849135672,observation.images.body_cam,640x480,False,"hsv blob centroid, area 3818",0
+real_20,detect,6,auto_detect,,,,,346.8814655172414,143.2939655172414,observation.images.body_cam,640x480,False,"hsv blob centroid, area 4640",0
+real_20,detect,7,auto_detect,,,,,321.2479282935904,237.2494503636056,observation.images.body_cam,640x480,False,"hsv blob centroid, area 5913",0
+real_20,detect,8,auto_detect,,,,,321.86651529636714,352.6008604206501,observation.images.body_cam,640x480,False,"hsv blob centroid, area 8368",0
+real_20,detect,9,auto_detect,,,,,292.5768325791855,215.0316742081448,observation.images.body_cam,640x480,False,"hsv blob centroid, area 5525",0
+real_20,detect,10,auto_detect,,,,,447.4673189823875,292.5214611872146,observation.images.body_cam,640x480,False,"hsv blob centroid, area 7665",0
+real_20,detect,11,auto_detect,,,,,349.10232376488966,182.23276703768795,observation.images.body_cam,640x480,False,"hsv blob centroid, area 5121",0
+real_20,detect,12,auto_detect,,,,,346.2315959161741,130.54092781658608,observation.images.body_cam,640x480,False,"hsv blob centroid, area 5583",0
+real_20,detect,13,auto_detect,,,,,267.12249309475203,348.925903686802,observation.images.body_cam,640x480,False,"hsv blob centroid, area 8327",0
+real_20,detect,14,auto_detect,,,,,441.00468196871077,365.84195500742265,observation.images.body_cam,640x480,False,"hsv blob centroid, area 8757",0
+real_20,detect,15,auto_detect,,,,,323.06401384083046,188.3433294886582,observation.images.body_cam,640x480,False,"hsv blob centroid, area 5202",0
+real_20,detect,16,auto_detect,,,,,318.5718971398583,294.7542639727106,observation.images.body_cam,640x480,False,"hsv blob centroid, area 7622",0
+real_20,detect,17,auto_detect,,,,,449.4425165962583,253.68799034399518,observation.images.body_cam,640x480,False,"hsv blob centroid, area 6628",0
+real_20,detect,18,auto_detect,,,,,341.9460309143306,230.3966465810846,observation.images.body_cam,640x480,False,"hsv blob centroid, area 3817",0
+real_20,detect,19,auto_detect,,,,,363.9297161936561,237.3188647746244,observation.images.body_cam,640x480,False,"hsv blob centroid, area 5990",0

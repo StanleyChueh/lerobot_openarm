@@ -1,0 +1,57 @@
+{
+  "_comment": "Same workspace as openarm_pringles_sim_spawn_metric.json, but the target is uniform over the reachable cells (grid-uniform coverage instead of the evaluation distribution).",
+  "name": "sim_spawn_uniform",
+  "frame_type": "metric",
+  "frame_id": "openarm_world",
+  "units": "m",
+  "x_range": [
+    0.12,
+    0.4
+  ],
+  "y_range": [
+    -0.08,
+    0.08
+  ],
+  "keep_out": [
+    [
+      0.265,
+      0.377,
+      0.029,
+      0.278
+    ],
+    [
+      0.265,
+      0.377,
+      -0.278,
+      -0.029
+    ],
+    [
+      0.265,
+      0.44,
+      0.06,
+      0.278
+    ],
+    [
+      0.265,
+      0.44,
+      -0.278,
+      -0.06
+    ]
+  ],
+  "cell_size": 0.02,
+  "coverage_radius": 0.04,
+  "duplicate_radius": 0.01,
+  "min_separation": 0.04,
+  "eval_distribution": {
+    "type": "uniform"
+  },
+  "regions": {},
+  "thresholds": {
+    "target_covered_pass": 0.8,
+    "target_covered_fail": 0.5
+  },
+  "provenance": {
+    "source": "IsaacLab openarm_task_modes.py @ 4aa5e026",
+    "measured_real_reachability": false
+  }
+}

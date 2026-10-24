@@ -1,0 +1,13 @@
+{
+  "_comment": "Colour-blob PROPOSALS for the Pringles can in the real body_cam start frame. Unverified: a person must confirm them (annotate --interactive). ROI drops the left image edge where the orange gripper bracket sits. Tuned 2026-10-24 by eye on real_20 episode start frames.",
+  "camera": "observation.images.body_cam",
+  "frame_index": 0,
+  "hsv_ranges": [
+    {"h": [0, 12], "s": [100, 255], "v": [70, 255]},
+    {"h": [168, 179], "s": [100, 255], "v": [70, 255]},
+    {"h": [8, 30], "s": [70, 255], "v": [120, 255]}
+  ],
+  "roi": [80, 0, 640, 480],
+  "min_area": 300,
+  "reference_point": "centroid"
+}
