@@ -18,8 +18,13 @@ episodes, the way `lerobot-rollout --strategy.type=episodic` does for normal and
 
 Every episode starts clean: the client's action queue and timesteps are emptied, and the policy server is
 told a new client is ready, so it forgets the last episode's observations and, with --rtc=true, its last
-chunk -- without reloading the policy. Nothing is recorded. Without --num_episodes this is lerobot's client
-unchanged, apart from the display.
+chunk -- without reloading the policy. Without --num_episodes this is lerobot's client unchanged, apart from
+the display.
+
+  record   --record_repo_id=<user>/eval_<name> (needs --num_episodes) saves the episodes as a LeRobot dataset
+           and pushes it to the Hub once every episode has been run (eval_recording.py). The name must start
+           with eval_, and a dataset that already exists, locally or on the Hub, is refused before connecting.
+           --record_root=<dir> stores it there instead of the LeRobot cache.
 
   display  a rerun window, as lerobot-rollout's --display_data=true (on by default here, as in our
            lerobot-rollout; --display_data=false turns it off): the cameras, the joint state, the actions
@@ -39,9 +44,10 @@ import sys
 import threading
 import time
 import types
+from pathlib import Path
 from queue import Queue
 
-from . import eval_metrics
+from . import eval_metrics, eval_recording
 from .episode_keys import episode, init_keyboard_listener
 from .policy_loading import require_async_inference
 
@@ -53,7 +59,8 @@ def _bool(value: str) -> bool:
     raise SystemExit(f"[openarm] expected true or false, got {value!r}")
 
 
-_FLAGS = {"num_episodes": int, "episode_time_s": float, "reset_time_s": float, "display_data": _bool}
+_FLAGS = {"num_episodes": int, "episode_time_s": float, "reset_time_s": float, "display_data": _bool,
+          "record_repo_id": str, "record_root": str}
 _DEFAULTS = {"episode_time_s": 60.0, "reset_time_s": 60.0}  # lerobot-record's / lerobot-rollout's defaults
 
 
@@ -238,7 +245,8 @@ def _eval_log(policy_path: str | None, fps: float, policy_type: str | None) -> "
     return eval_metrics.EvalLog("async", policy_path or "policy", fps, policy_type)
 
 
-def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: float, display: bool) -> None:
+def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: float, display: bool,
+                 record: tuple[str, Path] | None = None) -> None:
     import lerobot.async_inference.robot_client as rc
     import lerobot.rollout.strategies.core as core  # imported before connecting: the robot slows its returns
 
@@ -251,16 +259,29 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
     client_cls = _episode_client_class(rc)
     if log is not None:
         client_cls = eval_metrics.client_class(client_cls, log)
+    if record is not None:
+        client_cls = eval_recording.client_class(client_cls)
     client = client_cls(cfg)  # connects the robot: the arm goes to the start pose
+    recorder = None
+    if record is not None:
+        try:  # needs the robot's features, so after the client has built it
+            recorder = client.recorder = eval_recording.EvalRecorder(
+                record[0], record[1], client.robot, cfg.fps, cfg.task, cfg.pretrained_name_or_path)
+        except BaseException:
+            client.stop()
+            raise
     obs = client.robot.get_observation()
     # Wrapped as lerobot-rollout wraps it: update_dev_v2's return_to_initial_position reads hardware_failure off it.
     hw = types.SimpleNamespace(robot_wrapper=ThreadSafeRobot(client.robot),
                                initial_position={k: v for k, v in obs.items() if k.endswith(".pos")})
     if not client.start():  # handshake + the policy is loaded on the server
         client.stop()
+        if recorder is not None:
+            recorder.finish(push=False)  # nothing saved: removes the empty dataset
         return
     listener, events = init_keyboard_listener()
     results = []
+    finished = False  # every episode run, without an error or Ctrl-C
     try:
         while len([r for r in results if r[1]]) < num_episodes and not events["stop_recording"]:
             number = len([r for r in results if r[1]]) + 1
@@ -279,12 +300,21 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
             print(f"[openarm] episode {number}/{num_episodes} {reason}: {seconds:.1f} s, {actions} actions"
                   f" executed ({actions / seconds if seconds else 0:.0f} Hz)."
                   + ("" if counted else " It will be run again."), flush=True)
+            sim_results = list(getattr(client.robot, "_results", []))
             _phase("RETURNING")
-            core.RolloutStrategy.return_to_initial_position(hw, duration_s=3.0)
+            core.RolloutStrategy.return_to_initial_position(hw, duration_s=3.0)  # in simulation, reports success
+            if recorder is not None:
+                if counted:
+                    new = getattr(client.robot, "_results", [])[len(sim_results):]
+                    recorder.save({"success": bool(new[-1]) if new else None, "seconds": round(seconds, 2),
+                                   "actions": actions, "ended": reason})
+                else:
+                    recorder.discard()
             more = len([r for r in results if r[1]]) < num_episodes
             if more and not events["stop_recording"]:
                 _phase("RESETTING")
                 _reset_phase(reset_time_s, events)
+        finished = len([r for r in results if r[1]]) == num_episodes
     finally:
         if listener is not None:
             listener.stop()
@@ -300,6 +330,8 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
             from lerobot.utils.rerun_visualization import shutdown_rerun
 
             shutdown_rerun()  # the window stays open to look at; the next run replaces it
+        if recorder is not None:
+            recorder.finish(push=finished)  # last: the arm is disconnected, the upload may take minutes
 
 
 def main() -> None:
@@ -313,7 +345,7 @@ def main() -> None:
     display = values.get("display_data", True)
     if "num_episodes" not in values:
         if set(values) - {"num_episodes", "display_data"}:
-            raise SystemExit("[openarm] --episode_time_s / --reset_time_s need --num_episodes.")
+            raise SystemExit("[openarm] --episode_time_s / --reset_time_s / --record_repo_id need --num_episodes.")
         display = display and _start_display(rc)
         log = _eval_log(eval_metrics._argv_value("--pretrained_name_or_path"),
                         float(eval_metrics._argv_value("--fps") or 30), eval_metrics._argv_value("--policy_type"))
@@ -330,6 +362,12 @@ def main() -> None:
 
                 shutdown_rerun()
         return
+    if "record_root" in values and "record_repo_id" not in values:
+        raise SystemExit("[openarm] --record_root needs --record_repo_id.")
+    record = None
+    if "record_repo_id" in values:  # checked before anything connects: never a name that could overwrite a dataset
+        record = (values["record_repo_id"],
+                  eval_recording.check_repo_id(values["record_repo_id"], values.get("record_root")))
     import draccus
 
     from lerobot.async_inference.configs import RobotClientConfig
@@ -337,7 +375,7 @@ def main() -> None:
     @draccus.wrap()
     def episodes(cfg: RobotClientConfig):
         run_episodes(cfg, values["num_episodes"], values.get("episode_time_s", _DEFAULTS["episode_time_s"]),
-                     values.get("reset_time_s", _DEFAULTS["reset_time_s"]), display)
+                     values.get("reset_time_s", _DEFAULTS["reset_time_s"]), display, record)
 
     episodes()
 
