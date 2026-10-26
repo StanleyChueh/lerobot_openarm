@@ -417,11 +417,17 @@ python -m lerobot_robot_openarm_umeow.eval_report outputs/eval_logs/RUN_A output
 
 Add `--record_repo_id=<user>/eval_<name>` (with `--num_episodes`) to save every evaluation episode as a LeRobot
 dataset (same features as lerobot-record's) and push it to the Hub once all episodes have run. The name must start
-with `eval_`, and a name that already exists locally or on the Hub is refused before connecting, so a training
-dataset is never overwritten. A rerun episode (Left arrow) is discarded; a run stopped early stays local and is
-not pushed. `meta/openarm_eval.json` lists each episode's outcome (in Isaac, the task success condition).
-`--record_root=<dir>` stores it outside `~/.cache/huggingface/lerobot`. On the real arm, recording reads the robot
-every tick (36-53 ms), which slows the control loop; in Isaac the read is free.
+with `eval_`, so a training dataset is never written over. If that eval dataset already exists:
+
+- `--resume=true` adds `--num_episodes` more episodes to it (from the local copy, or downloaded from the Hub);
+  a local copy with fewer episodes than the Hub's is refused as stale, and so is a run whose cameras/joints/fps differ.
+- without it, a fresh evaluation replaces it: the local copy is deleted at start, the Hub copy only when the new one
+  is pushed (it is kept if the run stops early).
+
+A rerun episode (Left arrow) is discarded; a run stopped early stays local, not pushed (`--resume=true` continues
+it). `meta/openarm_eval.json` lists each episode's outcome (in Isaac, the task success condition).
+`--record_root=<dir>` (named `eval_...`) stores it outside `~/.cache/huggingface/lerobot`. On the real arm,
+recording reads the robot every tick (36-53 ms), which slows the control loop; in Isaac the read is free.
 
 ## Isaac Sim (`--robot.type=openarm_isaac`)
 

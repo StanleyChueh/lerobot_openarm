@@ -23,8 +23,9 @@ the display.
 
   record   --record_repo_id=<user>/eval_<name> (needs --num_episodes) saves the episodes as a LeRobot dataset
            and pushes it to the Hub once every episode has been run (eval_recording.py). The name must start
-           with eval_, and a dataset that already exists, locally or on the Hub, is refused before connecting.
-           --record_root=<dir> stores it there instead of the LeRobot cache.
+           with eval_. If it exists, --resume=true adds --num_episodes more episodes to it; without it, a fresh
+           evaluation replaces it (the local copy at once, the Hub's when the new one is pushed).
+           --record_root=<dir> (named eval_...) stores it there instead of the LeRobot cache.
 
   display  a rerun window, as lerobot-rollout's --display_data=true (on by default here, as in our
            lerobot-rollout; --display_data=false turns it off): the cameras, the joint state, the actions
@@ -44,7 +45,6 @@ import sys
 import threading
 import time
 import types
-from pathlib import Path
 from queue import Queue
 
 from . import eval_metrics, eval_recording
@@ -60,7 +60,7 @@ def _bool(value: str) -> bool:
 
 
 _FLAGS = {"num_episodes": int, "episode_time_s": float, "reset_time_s": float, "display_data": _bool,
-          "record_repo_id": str, "record_root": str}
+          "record_repo_id": str, "record_root": str, "resume": _bool}
 _DEFAULTS = {"episode_time_s": 60.0, "reset_time_s": 60.0}  # lerobot-record's / lerobot-rollout's defaults
 
 
@@ -246,7 +246,7 @@ def _eval_log(policy_path: str | None, fps: float, policy_type: str | None) -> "
 
 
 def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: float, display: bool,
-                 record: tuple[str, Path] | None = None) -> None:
+                 record: "eval_recording.Target | None" = None) -> None:
     import lerobot.async_inference.robot_client as rc
     import lerobot.rollout.strategies.core as core  # imported before connecting: the robot slows its returns
 
@@ -266,7 +266,7 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
     if record is not None:
         try:  # needs the robot's features, so after the client has built it
             recorder = client.recorder = eval_recording.EvalRecorder(
-                record[0], record[1], client.robot, cfg.fps, cfg.task, cfg.pretrained_name_or_path)
+                record, client.robot, cfg.fps, cfg.task, cfg.pretrained_name_or_path)
         except BaseException:
             client.stop()
             raise
@@ -345,7 +345,8 @@ def main() -> None:
     display = values.get("display_data", True)
     if "num_episodes" not in values:
         if set(values) - {"num_episodes", "display_data"}:
-            raise SystemExit("[openarm] --episode_time_s / --reset_time_s / --record_repo_id need --num_episodes.")
+            raise SystemExit("[openarm] --episode_time_s / --reset_time_s / --record_repo_id / --resume need"
+                             " --num_episodes.")
         display = display and _start_display(rc)
         log = _eval_log(eval_metrics._argv_value("--pretrained_name_or_path"),
                         float(eval_metrics._argv_value("--fps") or 30), eval_metrics._argv_value("--policy_type"))
@@ -362,12 +363,12 @@ def main() -> None:
 
                 shutdown_rerun()
         return
-    if "record_root" in values and "record_repo_id" not in values:
-        raise SystemExit("[openarm] --record_root needs --record_repo_id.")
+    if {"record_root", "resume"} & set(values) and "record_repo_id" not in values:
+        raise SystemExit("[openarm] --record_root / --resume need --record_repo_id.")
     record = None
     if "record_repo_id" in values:  # checked before anything connects: never a name that could overwrite a dataset
-        record = (values["record_repo_id"],
-                  eval_recording.check_repo_id(values["record_repo_id"], values.get("record_root")))
+        record = eval_recording.check_repo_id(values["record_repo_id"], values.get("record_root"),
+                                              values.get("resume", False))
     import draccus
 
     from lerobot.async_inference.configs import RobotClientConfig
