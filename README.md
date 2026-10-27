@@ -147,6 +147,20 @@ Models: SmolVLA `ethanCSL/openarm_pringles_lerobot_real_smolvla_v00`, GR00T N1.7
 During an episode: **Enter** ends it, **Left arrow** reruns it, **Esc** stops. `--display_data=false` turns
 off the rerun window.
 
+**Record the evaluation (async and async + RTC, real arm and Isaac):** add `--record_repo_id=<user>/eval_<name>`
+to any `robot_client` command below (it needs `--num_episodes`). The dataset name must start with `eval_`, or the
+client refuses to start. Once all `--num_episodes` episodes have run, the dataset is pushed to the Hugging Face Hub;
+a run stopped early (Esc, Ctrl-C, an error) stays local and is not pushed. Log in first with `hf auth login`.
+
+```bash
+python -m lerobot_robot_openarm_umeow.robot_client ... \
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_smolvla_v00
+```
+
+Details (resume, overwrite, `--record_root`): [Recording the evaluation](#recording-the-evaluation). Normal and RTC
+(`lerobot-rollout`) do not take `--record_repo_id`; they record with `--dataset.repo_id=<user>/rollout_<name>`.
+
 <a id="which-venv"></a>
 #### Which venv: the lerobot branch the model was trained on
 
@@ -573,6 +587,10 @@ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
 
 The simulator from Sim Step 1 (without `--mimic_hdf5`) in terminal 1, then the commands below. Models trained on
 `update_dev_v2`: the same commands in `.venv-v2` ([which venv](#which-venv)).
+
+To record an async / async + RTC evaluation, add `--record_repo_id=<user>/eval_<name>` to the `robot_client`
+command; it is pushed to the Hub once all episodes have run ([Recording the evaluation](#recording-the-evaluation)).
+In Isaac, `meta/openarm_eval.json` also stores each episode's task success.
 
 **Normal**:
 
