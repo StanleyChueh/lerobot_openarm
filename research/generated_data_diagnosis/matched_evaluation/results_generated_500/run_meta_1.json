@@ -1,0 +1,104 @@
+{
+ "started": "2026-10-27 18:41:33",
+ "argv": [
+  "/home/csl/Stanley_ws/lerobot_openarm/plugins/lerobot_robot_openarm_umeow/lerobot_robot_openarm_umeow/robot_client.py",
+  "--server_address=127.0.0.1:8080",
+  "--robot.type=openarm_isaac",
+  "--task=Pick up the Pringles can with the right arm, hand it to the left arm",
+  "--policy_type=smolvla",
+  "--pretrained_name_or_path=/home/csl/.cache/huggingface/hub/models--ethanCSL--openarm_pringles_lerobot_sim_10_generated_500_smolvla_v00/snapshots/733c6856a507a25875ee2a75b3458756bc60547b",
+  "--policy_device=cuda",
+  "--actions_per_chunk=50",
+  "--chunk_size_threshold=0.5",
+  "--aggregate_fn_name=latest_only",
+  "--fps=30",
+  "--num_episodes=100",
+  "--reset_time_s=1.0",
+  "--display_data=False",
+  "--episode_steps=330",
+  "--poses=research/generated_data_diagnosis/protocol/eval_poses_100.json",
+  "--results_dir=research/generated_data_diagnosis/matched_evaluation/results_generated_500",
+  "--record_repo_id=ethanCSL/eval_matched_matched_evaluation_results_generated_500",
+  "--record_root=outputs/matched_eval/eval_matched_matched_evaluation_results_generated_500",
+  "--push_to_hub=False",
+  "--resume=True"
+ ],
+ "episode_steps": 330,
+ "poses_file": "/home/csl/Stanley_ws/lerobot_openarm/research/generated_data_diagnosis/protocol/eval_poses_100.json",
+ "poses_sha256": "2b95ecf0dc6e4253023277d23bd32bfe2dd3b2587afede68066a1e6d3ce3b3c1",
+ "poses_total": 100,
+ "checkpoint": {
+  "pretrained_name_or_path": "/home/csl/.cache/huggingface/hub/models--ethanCSL--openarm_pringles_lerobot_sim_10_generated_500_smolvla_v00/snapshots/733c6856a507a25875ee2a75b3458756bc60547b",
+  "resolved": "/home/csl/.cache/huggingface/hub/models--ethanCSL--openarm_pringles_lerobot_sim_10_generated_500_smolvla_v00/snapshots/733c6856a507a25875ee2a75b3458756bc60547b",
+  "hub_repo": "ethanCSL/openarm_pringles_lerobot_sim_10_generated_500_smolvla_v00",
+  "hub_revision": "733c6856a507a25875ee2a75b3458756bc60547b",
+  "sha256_config.json": "e1c24538201a48d51b73c961ba19f67569fa19984e477f7d43269dfaec375ce5",
+  "sha256_model.safetensors": "5c1d74a415a3761ff83c2dcdb8057f1fae9513ac143af13e184336ad62cc4695",
+  "sha256_train_config.json": "fff5860a7dfe93544498ac1d7bf6ab38406d6527233b26a4b3f900c4557c6c09"
+ },
+ "simulator": {
+  "protocol": 1,
+  "cameras": {
+   "wrist_cam": [
+    480,
+    640
+   ],
+   "right_wrist_cam": [
+    480,
+    640
+   ],
+   "body_cam": [
+    480,
+    640
+   ]
+  },
+  "control_hz": 30,
+  "task": "Isaac-PickUp-RedCube-OpenArm-IK-Abs-v1",
+  "task_mode": "handover",
+  "domain_randomization": "none"
+ },
+ "git": {
+  "lerobot_openarm": {
+   "path": "/home/csl/Stanley_ws/lerobot_openarm",
+   "commit": "149bd6e1f73ed0877276468627a8820810a8f551",
+   "branch": "official-lerobot-quest",
+   "dirty": [
+    "M README.md",
+    " M plugins/lerobot_robot_openarm_umeow/lerobot_robot_openarm_umeow/eval_recording.py",
+    " M plugins/lerobot_robot_openarm_umeow/lerobot_robot_openarm_umeow/openarm_isaac.py",
+    " M plugins/lerobot_robot_openarm_umeow/lerobot_robot_openarm_umeow/openarm_umeow.py",
+    " M plugins/lerobot_robot_openarm_umeow/lerobot_robot_openarm_umeow/robot_client.py",
+    "?? plugins/lerobot_robot_openarm_umeow/lerobot_robot_openarm_umeow/matched_eval.py",
+    "?? research/generated_data_diagnosis/matched_evaluation/"
+   ],
+   "worktree_sha256": "a37d585a6fe6c11cc2f53fc636aad332a39369063ca8f8742fabfd12ac3c0cad"
+  },
+  "IsaacLab": {
+   "path": "/home/csl/Stanley_ws/IsaacLab",
+   "commit": "e684cb6585e9c485e2d9be507a83e31400ab6731",
+   "branch": "openarm-dev",
+   "dirty": [
+    "M scripts/tools/lerobot_sim_server.py"
+   ],
+   "worktree_sha256": "f932b46c23b369e32c5324e0bd7cb8d8db497750533c7250330ac70403a4c179"
+  },
+  "lerobot_fork": {
+   "path": "/home/csl/Stanley_ws/lerobot_experiment/lerobot",
+   "commit": "f10cbf97a0577fd4652dc55aff43eaf3c607a2df",
+   "branch": "update_dev_v2",
+   "dirty": [],
+   "worktree_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+ },
+ "python": "3.12.12 (main, Oct 31 2025, 23:02:31) [Clang 21.1.4 ]",
+ "executable": "/home/csl/Stanley_ws/lerobot_openarm/.venv-v2/bin/python",
+ "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+ "lerobot": {
+  "version": "0.6.2",
+  "file": "/home/csl/Stanley_ws/lerobot_experiment/lerobot/src/lerobot/__init__.py"
+ },
+ "env": {
+  "OPENARM_EVAL_OPEN": "0",
+  "OPENARM_EVAL_LOG_DIR": "research/generated_data_diagnosis/matched_evaluation/results_generated_500/eval_logs"
+ }
+}

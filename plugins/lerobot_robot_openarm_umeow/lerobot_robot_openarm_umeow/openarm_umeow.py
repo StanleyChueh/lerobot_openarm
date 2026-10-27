@@ -127,8 +127,9 @@ def _slow_down_rollout_returns(speed: float) -> None:
                 BOARD.note(f"NOT at the start pose: {key} {off:+.2f} rad off")
         except Exception:
             logger.debug("start-pose check failed", exc_info=True)
-        # In simulation (openarm_isaac) the table is reset here, where a person would reset it.
-        if hasattr(robot, "reset_scene"):
+        # In simulation (openarm_isaac) the table is reset here, where a person would reset it -- unless a matched
+        # evaluation places the can itself before each episode (robot_client.py --poses).
+        if hasattr(robot, "reset_scene") and getattr(robot, "auto_scene_reset", True):
             robot.reset_scene(report=ran)
         return result
 

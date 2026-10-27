@@ -26,9 +26,9 @@ import time
 
 from lerobot.robots.robot import Robot
 
-from .common import keyframe_sim_joints, motor_action_to_sim_joints, sim_joints_to_motor_action
+from .common import MOTOR_KEYS, keyframe_sim_joints, motor_action_to_sim_joints, sim_joints_to_motor_action
 from .config_openarm_umeow import OpenArmIsaacConfig
-from .openarm_umeow import OpenArmUmeow
+from .openarm_umeow import ARM_KEYS, HOME_TOL_RAD, OpenArmUmeow
 from .rerun_status import BOARD
 from .sim_link import SimClient
 
@@ -53,6 +53,14 @@ class OpenArmIsaac(OpenArmUmeow):
         self.episode_success = False  # the task's success condition was met since the last scene reset
         self._results: list[bool] = []
         self.steps_since_reset = 0
+        self.sim_steps = 0  # every simulation step this robot has asked for
+        self.scene_resets = 0
+        self.last_reset: dict | None = None  # matched_eval.check_reset() of the last reset that placed the can
+        self.step_log: list[dict] | None = None  # set to a list to keep each step's ground truth (matched_eval)
+        # lerobot-rollout's and robot_client's returns to the start pose reset the scene (see openarm_umeow's
+        # slow_return); a matched evaluation places the can itself and turns this off.
+        self.auto_scene_reset = True
+        self._start_sim_joints: dict | None = None  # the start pose in sim joints (set on connect)
         self._init_umeow(config)
 
     @property
@@ -81,6 +89,7 @@ class OpenArmIsaac(OpenArmUmeow):
             for side in ("left", "right"):
                 start[f"openarm_{side}_finger_joint1"] = GRIPPER_SIM_OPEN
             start = {k: v for k, v in start.items() if k in hello["joint_names"]}
+        self._start_sim_joints = start
         self._latest = self._sim.request("reset", joints=start)
         self.episode_success = False
         self._is_connected = True
@@ -101,6 +110,13 @@ class OpenArmIsaac(OpenArmUmeow):
         self._latest = self._sim.request("step", joints=joints)
         self.episode_success = self.episode_success or bool(self._latest["success"])
         self.steps_since_reset += 1
+        self.sim_steps += 1
+        if self.step_log is not None:
+            from .matched_eval import step_record
+
+            state = sim_joints_to_motor_action(self._latest["joints"], self.calib)
+            self.step_log.append(step_record(self._latest, [float(action[k]) for k in MOTOR_KEYS],
+                                             [float(state[k]) for k in MOTOR_KEYS], time.perf_counter()))
         return action
 
     def _hw_disconnect(self) -> None:
@@ -125,10 +141,19 @@ class OpenArmIsaac(OpenArmUmeow):
         if reply.get("saved"):
             print(f"[openarm_isaac] also saved as Mimic source demo {reply['saved']} ({reply['steps']} steps).", flush=True)
 
+    def _home_error(self) -> float | None:
+        """Largest arm-joint distance (rad) from the start pose, measured on the latest simulator reply."""
+        if not self.start_action or not self._latest:
+            return None
+        now = sim_joints_to_motor_action(self._latest["joints"], self.calib)
+        return max(abs(now[k] - self.start_action[k]) for k in ARM_KEYS if k in now and k in self.start_action)
+
     # -- the table --------------------------------------------------------------------------------------
-    def reset_scene(self, report: bool = False) -> None:
+    def reset_scene(self, report: bool = False, object_xy: tuple[float, float] | None = None) -> None:
         """Re-randomize the scene, leaving the robot where it is. With `report`, first print whether the episode
-        that just ended met the task's success condition, and the running tally."""
+        that just ended met the task's success condition, and the running tally. With `object_xy`, the can is
+        placed there (env-local m, upright, at the task's resting height) instead of at a random spot, and
+        checked: matched_eval.PoseNotApplied if the simulator did not put it there."""
         if report:
             self._results.append(self.episode_success)
             n, ok = len(self._results), sum(self._results)
@@ -136,7 +161,29 @@ class OpenArmIsaac(OpenArmUmeow):
             print(f"[openarm_isaac] episode {n}: {verdict} (task success condition) -- {ok}/{n} so far.", flush=True)
             BOARD.note(f"sim episode {n}: {verdict} ({ok}/{n})")
         t0 = time.perf_counter()
-        self._latest = self._sim.request("reset", joints=None)
+        rehome, home_error = False, None
+        if object_xy is None:
+            self._latest = self._sim.request("reset", joints=None)
+        else:
+            # A trial starts from the start pose. The return before it normally gets there (within HOME_TOL_RAD);
+            # when it did not (an arm blocked by a dropped can), the reset also puts the arm back at the start
+            # joints -- otherwise it would sit where the can is placed. Recorded in last_reset.
+            home_error = self._home_error()
+            rehome = home_error is not None and home_error > HOME_TOL_RAD and self._start_sim_joints is not None
+            self._latest = self._sim.request("reset", joints=self._start_sim_joints if rehome else None,
+                                             object_xy=[float(v) for v in object_xy], object_at_rest=True)
+            if rehome:
+                self.prepare_return(self.get_observation())  # the guard's last command = the new measured pose
+                print(f"[openarm_isaac] the arm was {home_error:.2f} rad from the start pose: put back there with"
+                      " the scene reset.", flush=True)
         self.episode_success = False
         self.steps_since_reset = 0
-        print(f"[openarm_isaac] scene reset ({time.perf_counter() - t0:.1f} s).", flush=True)
+        self.scene_resets += 1
+        self.last_reset = None
+        if object_xy is not None:
+            from .matched_eval import check_reset
+
+            self.last_reset = {**check_reset(object_xy, self._latest.get("handover")), "reset": self.scene_resets,
+                               "home_error_rad_before": home_error, "rehomed": rehome}
+        where = "" if object_xy is None else f", can at ({object_xy[0]:.4f}, {object_xy[1]:.4f})"
+        print(f"[openarm_isaac] scene reset ({time.perf_counter() - t0:.1f} s{where}).", flush=True)

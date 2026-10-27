@@ -1,0 +1,2087 @@
+{
+ "checks": {
+  "same_pose_file_sha256": true,
+  "same_episode_steps": true,
+  "different_checkpoints": true,
+  "same_client_settings": true,
+  "same_simulator": true,
+  "same_source_commits": true,
+  "same_uncommitted_code": false,
+  "a_all_trials_complete": true,
+  "a_exactly_330_steps": true,
+  "a_no_reset_during_trial": true,
+  "a_pose_applied": true,
+  "a_stable_matches_task_stage": true,
+  "a_rehomed_trials": [],
+  "a_code_versions": [
+   {
+    "started": "2026-10-27 17:26:45",
+    "lerobot_openarm": "2e2e4cdb10bc",
+    "IsaacLab": "f932b46c23b3",
+    "lerobot_fork": "e3b0c44298fc"
+   }
+  ],
+  "b_all_trials_complete": true,
+  "b_exactly_330_steps": true,
+  "b_no_reset_during_trial": true,
+  "b_pose_applied": true,
+  "b_stable_matches_task_stage": true,
+  "b_rehomed_trials": [],
+  "b_code_versions": [
+   {
+    "started": "2026-10-27 18:22:58",
+    "lerobot_openarm": "f8d3f26bf0ac",
+    "IsaacLab": "f932b46c23b3",
+    "lerobot_fork": "e3b0c44298fc"
+   },
+   {
+    "started": "2026-10-27 18:41:33",
+    "lerobot_openarm": "a37d585a6fe6",
+    "IsaacLab": "f932b46c23b3",
+    "lerobot_fork": "e3b0c44298fc"
+   }
+  ],
+  "same_requested_pose_per_trial": true,
+  "max_pose_error_mm": 1.6580347397649455,
+  "max_pair_actual_pose_diff_mm": 2.6529773794078686
+ },
+ "n_paired": 100,
+ "names": {
+  "a": "manual-10",
+  "b": "generated-500"
+ },
+ "metrics": {
+  "success_any": {
+   "label": "any-step success (original)",
+   "a": 53,
+   "b": 34,
+   "a_ci95": [
+    0.4328868313724773,
+    0.6248934801789626
+   ],
+   "b_ci95": [
+    0.25461379497543,
+    0.43722454341689065
+   ],
+   "mcnemar": {
+    "both": 22,
+    "neither": 35,
+    "only_a": 31,
+    "only_b": 12,
+    "p_exact": 0.005401572654591291,
+    "diff_b_minus_a": -0.19,
+    "diff_ci95": [
+     -0.3130124481505835,
+     -0.06698755184941649
+    ]
+   }
+  },
+  "stable": {
+   "label": "stable hand-over",
+   "a": 53,
+   "b": 34,
+   "a_ci95": [
+    0.4328868313724773,
+    0.6248934801789626
+   ],
+   "b_ci95": [
+    0.25461379497543,
+    0.43722454341689065
+   ],
+   "mcnemar": {
+    "both": 22,
+    "neither": 35,
+    "only_a": 31,
+    "only_b": 12,
+    "p_exact": 0.005401572654591291,
+    "diff_b_minus_a": -0.19,
+    "diff_ci95": [
+     -0.3130124481505835,
+     -0.06698755184941649
+    ]
+   }
+  },
+  "holding_end": {
+   "label": "holding at step 330",
+   "a": 0,
+   "b": 33,
+   "a_ci95": [
+    0.0,
+    0.03699480747600191
+   ],
+   "b_ci95": [
+    0.24562983793895452,
+    0.4269483966028862
+   ],
+   "mcnemar": {
+    "both": 0,
+    "neither": 67,
+    "only_a": 0,
+    "only_b": 33,
+    "p_exact": 2.3283064365386963e-10,
+    "diff_b_minus_a": 0.33,
+    "diff_ci95": [
+     0.23783830730721142,
+     0.4221616926927886
+    ]
+   }
+  },
+  "holding_at_240": {
+   "label": "holding at step 240",
+   "a": 34,
+   "b": 34,
+   "a_ci95": [
+    0.25461379497543,
+    0.43722454341689065
+   ],
+   "b_ci95": [
+    0.25461379497543,
+    0.43722454341689065
+   ],
+   "mcnemar": {
+    "both": 9,
+    "neither": 41,
+    "only_a": 25,
+    "only_b": 25,
+    "p_exact": 1.0,
+    "diff_b_minus_a": 0.0,
+    "diff_ci95": [
+     -0.13859292911256332,
+     0.13859292911256332
+    ]
+   }
+  },
+  "holding_at_270": {
+   "label": "holding at step 270",
+   "a": 11,
+   "b": 33,
+   "a_ci95": [
+    0.06254131955225126,
+    0.18631463027903022
+   ],
+   "b_ci95": [
+    0.24562983793895452,
+    0.4269483966028862
+   ],
+   "mcnemar": {
+    "both": 1,
+    "neither": 57,
+    "only_a": 10,
+    "only_b": 32,
+    "p_exact": 0.0009406740282429382,
+    "diff_b_minus_a": 0.22,
+    "diff_ci95": [
+     0.10052035487163515,
+     0.33947964512836487
+    ]
+   }
+  },
+  "holding_at_300": {
+   "label": "holding at step 300",
+   "a": 0,
+   "b": 33,
+   "a_ci95": [
+    0.0,
+    0.03699480747600191
+   ],
+   "b_ci95": [
+    0.24562983793895452,
+    0.4269483966028862
+   ],
+   "mcnemar": {
+    "both": 0,
+    "neither": 67,
+    "only_a": 0,
+    "only_b": 33,
+    "p_exact": 2.3283064365386963e-10,
+    "diff_b_minus_a": 0.33,
+    "diff_ci95": [
+     0.23783830730721142,
+     0.4221616926927886
+    ]
+   }
+  }
+ },
+ "regions": {
+  "x<0.203": {
+   "success_any": {
+    "n": 35,
+    "a": 21,
+    "b": 1,
+    "mcnemar": {
+     "both": 1,
+     "neither": 14,
+     "only_a": 20,
+     "only_b": 0,
+     "p_exact": 1.9073486328125e-06,
+     "diff_b_minus_a": -0.5714285714285714,
+     "diff_ci95": [
+      -0.735379783683925,
+      -0.4074773591732178
+     ]
+    }
+   },
+   "stable": {
+    "n": 35,
+    "a": 21,
+    "b": 1,
+    "mcnemar": {
+     "both": 1,
+     "neither": 14,
+     "only_a": 20,
+     "only_b": 0,
+     "p_exact": 1.9073486328125e-06,
+     "diff_b_minus_a": -0.5714285714285714,
+     "diff_ci95": [
+      -0.735379783683925,
+      -0.4074773591732178
+     ]
+    }
+   },
+   "holding_end": {
+    "n": 35,
+    "a": 0,
+    "b": 1,
+    "mcnemar": {
+     "both": 0,
+     "neither": 34,
+     "only_a": 0,
+     "only_b": 1,
+     "p_exact": 1.0,
+     "diff_b_minus_a": 0.02857142857142857,
+     "diff_ci95": [
+      -0.02662277402268452,
+      0.08376563116554166
+     ]
+    }
+   }
+  },
+  "0.203-0.27": {
+   "success_any": {
+    "n": 44,
+    "a": 20,
+    "b": 22,
+    "mcnemar": {
+     "both": 15,
+     "neither": 17,
+     "only_a": 5,
+     "only_b": 7,
+     "p_exact": 0.7744140625,
+     "diff_b_minus_a": 0.045454545454545456,
+     "diff_ci95": [
+      -0.10826981684446495,
+      0.19917890775355584
+     ]
+    }
+   },
+   "stable": {
+    "n": 44,
+    "a": 20,
+    "b": 22,
+    "mcnemar": {
+     "both": 15,
+     "neither": 17,
+     "only_a": 5,
+     "only_b": 7,
+     "p_exact": 0.7744140625,
+     "diff_b_minus_a": 0.045454545454545456,
+     "diff_ci95": [
+      -0.10826981684446495,
+      0.19917890775355584
+     ]
+    }
+   },
+   "holding_end": {
+    "n": 44,
+    "a": 0,
+    "b": 22,
+    "mcnemar": {
+     "both": 0,
+     "neither": 22,
+     "only_a": 0,
+     "only_b": 22,
+     "p_exact": 4.76837158203125e-07,
+     "diff_b_minus_a": 0.5,
+     "diff_ci95": [
+      0.35225944115689584,
+      0.6477405588431042
+     ]
+    }
+   }
+  },
+  "x>=0.27": {
+   "success_any": {
+    "n": 21,
+    "a": 12,
+    "b": 11,
+    "mcnemar": {
+     "both": 6,
+     "neither": 4,
+     "only_a": 6,
+     "only_b": 5,
+     "p_exact": 1.0,
+     "diff_b_minus_a": -0.047619047619047616,
+     "diff_ci95": [
+      -0.35649994279938635,
+      0.2612618475612911
+     ]
+    }
+   },
+   "stable": {
+    "n": 21,
+    "a": 12,
+    "b": 11,
+    "mcnemar": {
+     "both": 6,
+     "neither": 4,
+     "only_a": 6,
+     "only_b": 5,
+     "p_exact": 1.0,
+     "diff_b_minus_a": -0.047619047619047616,
+     "diff_ci95": [
+      -0.35649994279938635,
+      0.2612618475612911
+     ]
+    }
+   },
+   "holding_end": {
+    "n": 21,
+    "a": 0,
+    "b": 10,
+    "mcnemar": {
+     "both": 0,
+     "neither": 11,
+     "only_a": 0,
+     "only_b": 10,
+     "p_exact": 0.001953125,
+     "diff_b_minus_a": 0.47619047619047616,
+     "diff_ci95": [
+      0.26257954568917985,
+      0.6898014066917725
+     ]
+    }
+   }
+  },
+  "y<-0.01": {
+   "success_any": {
+    "n": 31,
+    "a": 3,
+    "b": 7,
+    "mcnemar": {
+     "both": 0,
+     "neither": 21,
+     "only_a": 3,
+     "only_b": 7,
+     "p_exact": 0.34375,
+     "diff_b_minus_a": 0.12903225806451613,
+     "diff_ci95": [
+      -0.06567726626706133,
+      0.3237417823960936
+     ]
+    }
+   },
+   "stable": {
+    "n": 31,
+    "a": 3,
+    "b": 7,
+    "mcnemar": {
+     "both": 0,
+     "neither": 21,
+     "only_a": 3,
+     "only_b": 7,
+     "p_exact": 0.34375,
+     "diff_b_minus_a": 0.12903225806451613,
+     "diff_ci95": [
+      -0.06567726626706133,
+      0.3237417823960936
+     ]
+    }
+   },
+   "holding_end": {
+    "n": 31,
+    "a": 0,
+    "b": 7,
+    "mcnemar": {
+     "both": 0,
+     "neither": 24,
+     "only_a": 0,
+     "only_b": 7,
+     "p_exact": 0.015625,
+     "diff_b_minus_a": 0.22580645161290322,
+     "diff_ci95": [
+      0.07861988610517925,
+      0.37299301712062716
+     ]
+    }
+   }
+  },
+  "-0.01..0.03": {
+   "success_any": {
+    "n": 47,
+    "a": 36,
+    "b": 19,
+    "mcnemar": {
+     "both": 15,
+     "neither": 7,
+     "only_a": 21,
+     "only_b": 4,
+     "p_exact": 0.0009105205535888672,
+     "diff_b_minus_a": -0.3617021276595745,
+     "diff_ci95": [
+      -0.5427636407688763,
+      -0.18064061455027264
+     ]
+    }
+   },
+   "stable": {
+    "n": 47,
+    "a": 36,
+    "b": 19,
+    "mcnemar": {
+     "both": 15,
+     "neither": 7,
+     "only_a": 21,
+     "only_b": 4,
+     "p_exact": 0.0009105205535888672,
+     "diff_b_minus_a": -0.3617021276595745,
+     "diff_ci95": [
+      -0.5427636407688763,
+      -0.18064061455027264
+     ]
+    }
+   },
+   "holding_end": {
+    "n": 47,
+    "a": 0,
+    "b": 18,
+    "mcnemar": {
+     "both": 0,
+     "neither": 29,
+     "only_a": 0,
+     "only_b": 18,
+     "p_exact": 7.62939453125e-06,
+     "diff_b_minus_a": 0.3829787234042553,
+     "diff_ci95": [
+      0.24400121032978744,
+      0.5219562364787231
+     ]
+    }
+   }
+  },
+  "y>=0.03": {
+   "success_any": {
+    "n": 22,
+    "a": 14,
+    "b": 8,
+    "mcnemar": {
+     "both": 7,
+     "neither": 7,
+     "only_a": 7,
+     "only_b": 1,
+     "p_exact": 0.0703125,
+     "diff_b_minus_a": -0.2727272727272727,
+     "diff_ci95": [
+      -0.4974702179669649,
+      -0.047984327487580525
+     ]
+    }
+   },
+   "stable": {
+    "n": 22,
+    "a": 14,
+    "b": 8,
+    "mcnemar": {
+     "both": 7,
+     "neither": 7,
+     "only_a": 7,
+     "only_b": 1,
+     "p_exact": 0.0703125,
+     "diff_b_minus_a": -0.2727272727272727,
+     "diff_ci95": [
+      -0.4974702179669649,
+      -0.047984327487580525
+     ]
+    }
+   },
+   "holding_end": {
+    "n": 22,
+    "a": 0,
+    "b": 8,
+    "mcnemar": {
+     "both": 0,
+     "neither": 14,
+     "only_a": 0,
+     "only_b": 8,
+     "p_exact": 0.0078125,
+     "diff_b_minus_a": 0.36363636363636365,
+     "diff_ci95": [
+      0.16262016242857788,
+      0.5646525648441494
+     ]
+    }
+   }
+  }
+ },
+ "historical": {
+  "success_any": {
+   "a": 49,
+   "b": 47,
+   "n": 100
+  },
+  "holding_last_frame": {
+   "a": 3,
+   "b": 47,
+   "n": 100
+  },
+  "x<0.203": {
+   "a": [
+    25,
+    43
+   ],
+   "b": [
+    6,
+    37
+   ]
+  },
+  "0.203-0.27": {
+   "a": [
+    16,
+    46
+   ],
+   "b": [
+    30,
+    47
+   ]
+  },
+  "x>=0.27": {
+   "a": [
+    8,
+    11
+   ],
+   "b": [
+    11,
+    16
+   ]
+  }
+ },
+ "interaction": {
+  "success_any": {
+   "discordant": 43,
+   "coef_names": [
+    "policy (generated) at mean pose",
+    "policy x x (per sd)",
+    "policy x y (per sd)"
+   ],
+   "full": {
+    "beta": [
+     -1.089432404874099,
+     0.5061915829755375,
+     -0.9442389983453883
+    ],
+    "se": [
+     0.40467097994439555,
+     0.3160447639687607,
+     0.4679518940901706
+    ],
+    "p": [
+     0.007099436127887548,
+     0.10923408694565229,
+     0.043610833287295536
+    ],
+    "deviance": 41.17762165812227
+   },
+   "lr_stat": 9.74062201853301,
+   "lr_p": 0.007670979171257142,
+   "x_sd_m": 0.0561253074735453,
+   "y_sd_m": 0.031088343072605207
+  },
+  "stable": {
+   "discordant": 43,
+   "coef_names": [
+    "policy (generated) at mean pose",
+    "policy x x (per sd)",
+    "policy x y (per sd)"
+   ],
+   "full": {
+    "beta": [
+     -1.089432404874099,
+     0.5061915829755375,
+     -0.9442389983453883
+    ],
+    "se": [
+     0.40467097994439555,
+     0.3160447639687607,
+     0.4679518940901706
+    ],
+    "p": [
+     0.007099436127887548,
+     0.10923408694565229,
+     0.043610833287295536
+    ],
+    "deviance": 41.17762165812227
+   },
+   "lr_stat": 9.74062201853301,
+   "lr_p": 0.007670979171257142,
+   "x_sd_m": 0.0561253074735453,
+   "y_sd_m": 0.031088343072605207
+  },
+  "holding_end": {
+   "discordant": 33,
+   "coef_names": [
+    "policy (generated) at mean pose",
+    "policy x x (per sd)",
+    "policy x y (per sd)"
+   ],
+   "full": {
+    "beta": [
+     25.10581884737858,
+     0.037064502006368336,
+     0.011425277218107497
+    ],
+    "se": [
+     60660.75115900164,
+     87625.48661879226,
+     56271.910712412675
+    ],
+    "p": [
+     0.9996697775037393,
+     0.9999996625046543,
+     0.9999998379999508
+    ],
+    "deviance": 8.121476824435346e-10
+   },
+   "lr_stat": -2.3781442610899546e-24,
+   "lr_p": 1.0,
+   "x_sd_m": 0.0561253074735453,
+   "y_sd_m": 0.031088343072605207
+  }
+ },
+ "per_pose": [
+  {
+   "trial": 0,
+   "x": 0.1402,
+   "y": -0.0003,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 1,
+   "x": 0.2954,
+   "y": 0.0256,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "pass_not_secured",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 2,
+   "x": 0.1829,
+   "y": 0.0543,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 3,
+   "x": 0.2283,
+   "y": -0.0027,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 4,
+   "x": 0.2483,
+   "y": 0.0044,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "pass_not_secured",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 5,
+   "x": 0.1836,
+   "y": 0.0104,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 6,
+   "x": 0.3544,
+   "y": -0.0093,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 7,
+   "x": 0.2328,
+   "y": -0.0329,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 8,
+   "x": 0.1627,
+   "y": -0.0038,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 9,
+   "x": 0.1974,
+   "y": 0.0397,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 10,
+   "x": 0.1735,
+   "y": -0.0729,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 11,
+   "x": 0.2197,
+   "y": -0.0695,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 12,
+   "x": 0.2562,
+   "y": -0.0206,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "pass_not_secured",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 13,
+   "x": 0.2264,
+   "y": -0.0232,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 14,
+   "x": 0.3824,
+   "y": 0.0162,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 15,
+   "x": 0.2049,
+   "y": 0.0438,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 16,
+   "x": 0.2876,
+   "y": -0.0193,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 17,
+   "x": 0.1573,
+   "y": 0.0041,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 18,
+   "x": 0.238,
+   "y": -0.0424,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 19,
+   "x": 0.2444,
+   "y": 0.0061,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 20,
+   "x": 0.2533,
+   "y": 0.0229,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 21,
+   "x": 0.222,
+   "y": 0.0506,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 22,
+   "x": 0.1888,
+   "y": -0.0612,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 23,
+   "x": 0.2949,
+   "y": 0.0186,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 24,
+   "x": 0.1319,
+   "y": -0.0356,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 25,
+   "x": 0.3475,
+   "y": 0.0041,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 26,
+   "x": 0.2746,
+   "y": 0.0234,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 27,
+   "x": 0.2332,
+   "y": 0.0163,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 28,
+   "x": 0.1506,
+   "y": -0.0433,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 29,
+   "x": 0.3636,
+   "y": -0.0229,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 30,
+   "x": 0.2126,
+   "y": 0.0195,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 31,
+   "x": 0.2029,
+   "y": -0.0129,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 32,
+   "x": 0.2633,
+   "y": 0.048,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 33,
+   "x": 0.3141,
+   "y": 0.0253,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 34,
+   "x": 0.2488,
+   "y": -0.0064,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 35,
+   "x": 0.135,
+   "y": 0.0443,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 36,
+   "x": 0.3397,
+   "y": -0.0041,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 37,
+   "x": 0.2744,
+   "y": 0.0143,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 38,
+   "x": 0.2193,
+   "y": 0.0368,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 39,
+   "x": 0.2473,
+   "y": 0.0233,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 40,
+   "x": 0.2853,
+   "y": 0.0173,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "pass_not_secured",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 41,
+   "x": 0.1828,
+   "y": 0.0403,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 42,
+   "x": 0.2043,
+   "y": 0.013,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 43,
+   "x": 0.2471,
+   "y": -0.0424,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 44,
+   "x": 0.2177,
+   "y": -0.0218,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 45,
+   "x": 0.2985,
+   "y": -0.0083,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 46,
+   "x": 0.1985,
+   "y": 0.0272,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 47,
+   "x": 0.2662,
+   "y": 0.0283,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 48,
+   "x": 0.1799,
+   "y": 0.0041,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 49,
+   "x": 0.2207,
+   "y": 0.0415,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 50,
+   "x": 0.2173,
+   "y": 0.0127,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 51,
+   "x": 0.3405,
+   "y": 0.0066,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 52,
+   "x": 0.2154,
+   "y": 0.0622,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 53,
+   "x": 0.1867,
+   "y": 0.0572,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 54,
+   "x": 0.168,
+   "y": 0.0259,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 55,
+   "x": 0.3011,
+   "y": -0.0151,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 56,
+   "x": 0.2615,
+   "y": -0.044,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 57,
+   "x": 0.1821,
+   "y": 0.0069,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 58,
+   "x": 0.2459,
+   "y": 0.0604,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 59,
+   "x": 0.229,
+   "y": 0.0367,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 60,
+   "x": 0.3046,
+   "y": -0.0099,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 61,
+   "x": 0.2126,
+   "y": -0.0268,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 62,
+   "x": 0.1916,
+   "y": 0.0277,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 63,
+   "x": 0.2169,
+   "y": 0.0215,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 64,
+   "x": 0.1642,
+   "y": -0.0085,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 65,
+   "x": 0.2394,
+   "y": 0.0195,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 66,
+   "x": 0.3007,
+   "y": 0.0053,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 67,
+   "x": 0.2019,
+   "y": 0.0464,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 68,
+   "x": 0.2195,
+   "y": -0.0225,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 69,
+   "x": 0.2641,
+   "y": -0.0621,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 70,
+   "x": 0.1326,
+   "y": 0.0104,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 71,
+   "x": 0.2198,
+   "y": 0.0185,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "pass_not_secured",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 72,
+   "x": 0.1467,
+   "y": 0.0262,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 73,
+   "x": 0.21,
+   "y": 0.0094,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 74,
+   "x": 0.2151,
+   "y": 0.0367,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 75,
+   "x": 0.1882,
+   "y": -0.0316,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 76,
+   "x": 0.2132,
+   "y": 0.0326,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 77,
+   "x": 0.1514,
+   "y": 0.0659,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 78,
+   "x": 0.1422,
+   "y": -0.0217,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 79,
+   "x": 0.1827,
+   "y": -0.0284,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 80,
+   "x": 0.2387,
+   "y": -0.0323,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 81,
+   "x": 0.1945,
+   "y": 0.0521,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 82,
+   "x": 0.1761,
+   "y": 0.0112,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "no_right_grasp"
+  },
+  {
+   "trial": 83,
+   "x": 0.1754,
+   "y": -0.0377,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 84,
+   "x": 0.2724,
+   "y": -0.0217,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 85,
+   "x": 0.308,
+   "y": -0.0238,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 86,
+   "x": 0.2299,
+   "y": 0.0016,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 87,
+   "x": 0.1937,
+   "y": 0.061,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 88,
+   "x": 0.2497,
+   "y": -0.0132,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 89,
+   "x": 0.1291,
+   "y": -0.0126,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 90,
+   "x": 0.2545,
+   "y": 0.0398,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 91,
+   "x": 0.3612,
+   "y": -0.0105,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "pass_not_secured"
+  },
+  {
+   "trial": 92,
+   "x": 0.243,
+   "y": 0.015,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 93,
+   "x": 0.1913,
+   "y": -0.0056,
+   "success_any_a": true,
+   "success_any_b": false,
+   "stable_a": true,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 94,
+   "x": 0.1768,
+   "y": 0.0413,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 95,
+   "x": 0.1804,
+   "y": -0.0132,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "right_grasp_no_pass"
+  },
+  {
+   "trial": 96,
+   "x": 0.2758,
+   "y": 0.0239,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_then_lost"
+  },
+  {
+   "trial": 97,
+   "x": 0.2432,
+   "y": 0.0407,
+   "success_any_a": true,
+   "success_any_b": true,
+   "stable_a": true,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "stable_then_lost",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 98,
+   "x": 0.2315,
+   "y": -0.0129,
+   "success_any_a": false,
+   "success_any_b": true,
+   "stable_a": false,
+   "stable_b": true,
+   "holding_end_a": false,
+   "holding_end_b": true,
+   "outcome_a": "right_grasp_no_pass",
+   "outcome_b": "stable_held_to_end"
+  },
+  {
+   "trial": 99,
+   "x": 0.2228,
+   "y": 0.0074,
+   "success_any_a": false,
+   "success_any_b": false,
+   "stable_a": false,
+   "stable_b": false,
+   "holding_end_a": false,
+   "holding_end_b": false,
+   "outcome_a": "no_right_grasp",
+   "outcome_b": "no_right_grasp"
+  }
+ ],
+ "outcomes": {
+  "a": {
+   "no_right_grasp": 13,
+   "pass_not_secured": 5,
+   "right_grasp_no_pass": 29,
+   "stable_then_lost": 53
+  },
+  "b": {
+   "no_right_grasp": 11,
+   "pass_not_secured": 11,
+   "right_grasp_no_pass": 44,
+   "stable_held_to_end": 33,
+   "stable_then_lost": 1
+  }
+ },
+ "timing_steps": {
+  "right_grasp_step_a": {
+   "n": 87,
+   "median": 78.0,
+   "min": 42.0,
+   "max": 153.0
+  },
+  "left_grasp_step_a": {
+   "n": 58,
+   "median": 164.5,
+   "min": 144.0,
+   "max": 195.0
+  },
+  "right_release_step_a": {
+   "n": 58,
+   "median": 168.0,
+   "min": 154.0,
+   "max": 200.0
+  },
+  "stable_completion_step_a": {
+   "n": 53,
+   "median": 197.0,
+   "min": 183.0,
+   "max": 229.0
+  },
+  "right_grasp_step_b": {
+   "n": 89,
+   "median": 100.0,
+   "min": 91.0,
+   "max": 184.0
+  },
+  "left_grasp_step_b": {
+   "n": 45,
+   "median": 195.0,
+   "min": 173.0,
+   "max": 219.0
+  },
+  "right_release_step_b": {
+   "n": 45,
+   "median": 206.0,
+   "min": 179.0,
+   "max": 232.0
+  },
+  "stable_completion_step_b": {
+   "n": 34,
+   "median": 238.0,
+   "min": 208.0,
+   "max": 261.0
+  }
+ },
+ "runtime": {
+  "a": {
+   "steps_min": 330,
+   "steps_max": 330,
+   "wall_median_s": 17.01233974774368,
+   "wall_min_s": 14.692295752000064,
+   "wall_max_s": 18.18756931880489,
+   "latency_mean_ms": 134.2654149073309,
+   "guided_mean": 32.20285818222698,
+   "chunks_mean": 22.17,
+   "dropped_whole_total": 0,
+   "starved_pct_mean": 2.0319218939150674
+  },
+  "b": {
+   "steps_min": 330,
+   "steps_max": 330,
+   "wall_median_s": 15.850606456631795,
+   "wall_min_s": 15.130311262793839,
+   "wall_max_s": 17.646304271183908,
+   "latency_mean_ms": 130.1481229309499,
+   "guided_mean": 31.991008164520228,
+   "chunks_mean": 20.56,
+   "dropped_whole_total": 0,
+   "starved_pct_mean": 1.3947986750250119
+  }
+ },
+ "return_contamination": {
+  "a": {
+   "success_incl_return": 53,
+   "success_policy_steps_only": 53,
+   "only_during_return": 0
+  },
+  "b": {
+   "success_incl_return": 34,
+   "success_policy_steps_only": 34,
+   "only_during_return": 0
+  }
+ },
+ "detector_agreement": {
+  "a": {
+   "agree": 100,
+   "detector_only": 0,
+   "truth_only": 0
+  },
+  "b": {
+   "agree": 99,
+   "detector_only": 0,
+   "truth_only": 1
+  }
+ },
+ "figures": [
+  "success_metrics.png",
+  "overall_success.png",
+  "success_vs_x.png",
+  "success_vs_y.png",
+  "xy_paired_outcomes.png",
+  "xy_paired_outcomes_holding_end.png",
+  "stagewise_outcomes.png",
+  "handover_timing.png",
+  "episode_steps_and_wallclock.png"
+ ]
+}

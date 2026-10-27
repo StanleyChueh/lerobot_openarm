@@ -17,7 +17,8 @@ directory of --record_root: only an evaluation dataset is ever written over. If 
                   until this evaluation is pushed, then every file of the old one is removed from it.
 
 A rerun episode (Left arrow) is discarded. The dataset is pushed once every episode has been run; a run stopped
-early (Esc, Ctrl-C, an error) keeps it local, not pushed (--resume=true continues it).
+early (Esc, Ctrl-C, an error) keeps it local, not pushed (--resume=true continues it). --push_to_hub=false keeps it
+local only: the Hub is neither checked nor written, and the rules above apply to the local copy alone.
 
 meta/openarm_eval.json, pushed with it, lists each saved episode's outcome: the simulator's task success
 condition (null on the real arm), seconds, executed actions and why it ended.
@@ -40,6 +41,7 @@ class Target:
     root: Path
     mode: str  # "new", "overwrite" or "resume"
     on_hub: bool
+    push: bool = True  # False: local only (--push_to_hub=false)
 
 
 def _episodes_in(info_json: Path) -> int:
@@ -58,8 +60,9 @@ def _delete_local(root: Path) -> None:
     shutil.rmtree(root)
 
 
-def check_repo_id(repo_id: str, root: str | None = None, resume: bool = False) -> Target:
-    """Check the name and what already exists, before anything connects. Deletes the local copy to overwrite."""
+def check_repo_id(repo_id: str, root: str | None = None, resume: bool = False, push: bool = True) -> Target:
+    """Check the name and what already exists, before anything connects. Deletes the local copy to overwrite.
+    push=False: local only, the Hub is not contacted."""
     owner, _, name = repo_id.partition("/")
     if not owner or not name or "/" in name:
         raise SystemExit(f"[openarm] --record_repo_id must be <user>/{PREFIX}<name>, got {repo_id!r}.")
@@ -71,6 +74,8 @@ def check_repo_id(repo_id: str, root: str | None = None, resume: bool = False) -
     local = Path(root).expanduser().resolve() if root else HF_LEROBOT_HOME / repo_id
     if root and not local.name.startswith(PREFIX):
         raise SystemExit(f"[openarm] --record_root {local}: the directory name must start with {PREFIX!r} too.")
+    if not push:
+        return _check_local_only(repo_id, local, resume)
     from huggingface_hub import HfApi, hf_hub_download
 
     api = HfApi()
@@ -116,6 +121,25 @@ def check_repo_id(repo_id: str, root: str | None = None, resume: bool = False) -
                   " is pushed, and kept if it stops early. --resume=true would add to it instead.", flush=True)
         print(f"[openarm] recording a fresh evaluation to {where}.", flush=True)
     return Target(repo_id, local, mode, on_hub)
+
+
+def _check_local_only(repo_id: str, local: Path, resume: bool) -> Target:
+    local_n = _episodes_in(local / "meta" / "info.json") if local.exists() else 0
+    if local.exists() and local_n == 0:
+        _delete_local(local)
+    where = f"{local} (local only: --push_to_hub=false, never pushed)"
+    if not local_n:
+        mode = "new"
+        print(f"[openarm] recording the evaluation to {where}.", flush=True)
+    elif resume:
+        mode = "resume"
+        print(f"[openarm] --resume=true: adding to {repo_id} ({local_n} episodes) in {where}.", flush=True)
+    else:
+        mode = "overwrite"
+        _delete_local(local)
+        print(f"[openarm] OVERWRITING: deleted the local {repo_id} ({local_n} episodes); recording a fresh evaluation"
+              f" to {where}.", flush=True)
+    return Target(repo_id, local, mode, on_hub=False, push=False)
 
 
 def _check_compatible(meta, features: dict, fps: int, robot_type: str) -> None:
@@ -206,6 +230,9 @@ class EvalRecorder:
             "episodes": self.episodes}, indent=2) + "\n")
         if sims:
             print(f"[openarm] {repo_id}: {sum(sims)}/{len(sims)} episodes met the task success condition.", flush=True)
+        if not self.target.push:
+            print(f"[openarm] {self.dataset.num_episodes} episode(s) kept in {root} (local only, not pushed).", flush=True)
+            return
         if not push:
             print(f"[openarm] the evaluation stopped early: {self.dataset.num_episodes} episode(s) kept in {root},"
                   " NOT pushed. Run again with --resume=true to continue it.", flush=True)

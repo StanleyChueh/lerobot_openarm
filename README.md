@@ -444,6 +444,15 @@ A rerun episode (Left arrow) is discarded; a run stopped early stays local, not 
 it). `meta/openarm_eval.json` lists each episode's outcome (in Isaac, the task success condition).
 `--record_root=<dir>` (named `eval_...`) stores it outside `~/.cache/huggingface/lerobot`. On the real arm,
 recording reads the robot every tick (36-53 ms), which slows the control loop; in Isaac the read is free.
+`--push_to_hub=false` records locally only (the Hub is neither checked nor written).
+
+**Matched evaluation (Isaac only).** To compare policies on the same can poses for the same simulated time, replace
+`--episode_time_s` with `--episode_steps=330 --poses=<poses.json> --results_dir=<dir>`: trial i places the can at
+`poses[i]` (checked against the simulator's ground truth; a pose that cannot be applied stops the run), the policy
+runs exactly 330 simulation steps, and `<dir>/trials.jsonl` gets each trial's any-step success, stable hand-over and
+holding-at-the-end, measured before the return home (`matched_eval.py`). An existing `<dir>` needs `--resume=true`,
+which runs only the trials not yet complete. Needs `lerobot_sim_server.py` with its `handover` reply. Example:
+`research/generated_data_diagnosis/matched_evaluation/run_eval.sh`.
 
 ## Isaac Sim (`--robot.type=openarm_isaac`)
 
