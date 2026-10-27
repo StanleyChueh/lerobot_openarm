@@ -1,0 +1,150 @@
+{
+ "ckpt_vs_dataset": {
+  "manual": {
+   "observation.state.mean max|ckpt-dataset|": 3.444160090460002e-08,
+   "observation.state.std max|ckpt-dataset|": 1.1855796011595032e-08,
+   "action.mean max|ckpt-dataset|": 2.559167278093355e-08,
+   "action.std max|ckpt-dataset|": 1.9774488380086552e-08
+  },
+  "generated": {
+   "observation.state.mean max|ckpt-dataset|": 5.3541215905283934e-08,
+   "observation.state.std max|ckpt-dataset|": 1.4463570230383027e-08,
+   "action.mean max|ckpt-dataset|": 2.3160221074292053e-08,
+   "action.std max|ckpt-dataset|": 1.8703821158538858e-08
+  }
+ },
+ "generated_vs_manual_normalizer": {
+  "observation.state": {
+   "RJ1.pos": {
+    "mean_shift_in_manual_std": 0.23,
+    "std_ratio_gen/manual": 1.18
+   },
+   "LJ1.pos": {
+    "mean_shift_in_manual_std": 0.12,
+    "std_ratio_gen/manual": 1.01
+   },
+   "RJ2.pos": {
+    "mean_shift_in_manual_std": -0.49,
+    "std_ratio_gen/manual": 0.86
+   },
+   "LJ2.pos": {
+    "mean_shift_in_manual_std": 0.19,
+    "std_ratio_gen/manual": 0.86
+   },
+   "RJ3.pos": {
+    "mean_shift_in_manual_std": 0.11,
+    "std_ratio_gen/manual": 1.14
+   },
+   "LJ3.pos": {
+    "mean_shift_in_manual_std": -0.16,
+    "std_ratio_gen/manual": 0.8
+   },
+   "RJ4.pos": {
+    "mean_shift_in_manual_std": -0.46,
+    "std_ratio_gen/manual": 1.21
+   },
+   "LJ4.pos": {
+    "mean_shift_in_manual_std": -0.14,
+    "std_ratio_gen/manual": 0.94
+   },
+   "RJ5.pos": {
+    "mean_shift_in_manual_std": -0.27,
+    "std_ratio_gen/manual": 0.92
+   },
+   "LJ5.pos": {
+    "mean_shift_in_manual_std": 0.15,
+    "std_ratio_gen/manual": 0.92
+   },
+   "RJ6.pos": {
+    "mean_shift_in_manual_std": -0.44,
+    "std_ratio_gen/manual": 1.08
+   },
+   "LJ6.pos": {
+    "mean_shift_in_manual_std": 0.16,
+    "std_ratio_gen/manual": 1.02
+   },
+   "RJ7.pos": {
+    "mean_shift_in_manual_std": 0.16,
+    "std_ratio_gen/manual": 0.94
+   },
+   "LJ7.pos": {
+    "mean_shift_in_manual_std": -0.11,
+    "std_ratio_gen/manual": 0.94
+   },
+   "RJ8.pos": {
+    "mean_shift_in_manual_std": 0.1,
+    "std_ratio_gen/manual": 1.11
+   },
+   "LJ8.pos": {
+    "mean_shift_in_manual_std": 0.13,
+    "std_ratio_gen/manual": 0.85
+   }
+  },
+  "action": {
+   "RJ1.pos": {
+    "mean_shift_in_manual_std": 0.23,
+    "std_ratio_gen/manual": 1.18
+   },
+   "LJ1.pos": {
+    "mean_shift_in_manual_std": 0.12,
+    "std_ratio_gen/manual": 1.01
+   },
+   "RJ2.pos": {
+    "mean_shift_in_manual_std": -0.49,
+    "std_ratio_gen/manual": 0.86
+   },
+   "LJ2.pos": {
+    "mean_shift_in_manual_std": 0.19,
+    "std_ratio_gen/manual": 0.86
+   },
+   "RJ3.pos": {
+    "mean_shift_in_manual_std": 0.1,
+    "std_ratio_gen/manual": 1.15
+   },
+   "LJ3.pos": {
+    "mean_shift_in_manual_std": -0.15,
+    "std_ratio_gen/manual": 0.8
+   },
+   "RJ4.pos": {
+    "mean_shift_in_manual_std": -0.46,
+    "std_ratio_gen/manual": 1.21
+   },
+   "LJ4.pos": {
+    "mean_shift_in_manual_std": -0.14,
+    "std_ratio_gen/manual": 0.94
+   },
+   "RJ5.pos": {
+    "mean_shift_in_manual_std": -0.27,
+    "std_ratio_gen/manual": 0.92
+   },
+   "LJ5.pos": {
+    "mean_shift_in_manual_std": 0.15,
+    "std_ratio_gen/manual": 0.92
+   },
+   "RJ6.pos": {
+    "mean_shift_in_manual_std": -0.44,
+    "std_ratio_gen/manual": 1.08
+   },
+   "LJ6.pos": {
+    "mean_shift_in_manual_std": 0.16,
+    "std_ratio_gen/manual": 1.01
+   },
+   "RJ7.pos": {
+    "mean_shift_in_manual_std": 0.16,
+    "std_ratio_gen/manual": 0.94
+   },
+   "LJ7.pos": {
+    "mean_shift_in_manual_std": -0.1,
+    "std_ratio_gen/manual": 0.95
+   },
+   "RJ8.pos": {
+    "mean_shift_in_manual_std": 0.03,
+    "std_ratio_gen/manual": 1.0
+   },
+   "LJ8.pos": {
+    "mean_shift_in_manual_std": 0.04,
+    "std_ratio_gen/manual": 0.98
+   }
+  }
+ }
+}

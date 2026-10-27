@@ -1,0 +1,147 @@
+{
+ "generated-data policy": {
+  "success_any_step": "47/100",
+  "stable_success_held_at_end": "47/100",
+  "successes_released_afterwards": 0,
+  "release_step_after_success_median": NaN,
+  "failure_subclasses": {
+   "dropped during/after transfer (left lost it within 1 s)": 51,
+   "left never took it": 1,
+   "other": 1
+  },
+  "L_hold_longest_failures_median": 2.0,
+  "sim_steps_median": 299.0,
+  "stable_handover_step_success": [
+   227.0,
+   243.0,
+   251.4,
+   278.0
+  ],
+  "successes_within_last_20_steps_of_budget": 1
+ },
+ "manual-data policy": {
+  "success_any_step": "49/100",
+  "stable_success_held_at_end": "3/100",
+  "successes_released_afterwards": 43,
+  "release_step_after_success_median": 56.0,
+  "failure_subclasses": {
+   "dropped during/after transfer (left lost it within 1 s)": 39,
+   "other": 12
+  },
+  "L_hold_longest_failures_median": 3.0,
+  "sim_steps_median": 290.5,
+  "stable_handover_step_success": [
+   181.0,
+   197.0,
+   219.2,
+   227.0
+  ],
+  "successes_within_last_20_steps_of_budget": 0
+ },
+ "manual_train_episode_length": [
+  210,
+  233,
+  265
+ ],
+ "generated_train_episode_length": [
+  256,
+  265,
+  311
+ ],
+ "logit[success] success ~ gen + x + x^2 + y": {
+  "1": {
+   "coef": 0.191,
+   "p": 0.4177
+  },
+  "gen": {
+   "coef": -0.146,
+   "p": 0.6193
+  },
+  "x": {
+   "coef": 0.66,
+   "p": 0.002
+  },
+  "x^2": {
+   "coef": -0.169,
+   "p": 0.3747
+  },
+  "y": {
+   "coef": 0.347,
+   "p": 0.0577
+  }
+ },
+ "logit[stable_success] success ~ gen + x + x^2 + y": {
+  "1": {
+   "coef": -3.132,
+   "p": 0.0
+  },
+  "gen": {
+   "coef": 3.546,
+   "p": 0.0
+  },
+  "x": {
+   "coef": 1.189,
+   "p": 0.0005
+  },
+  "x^2": {
+   "coef": -0.766,
+   "p": 0.0098
+  },
+  "y": {
+   "coef": 0.253,
+   "p": 0.3294
+  }
+ },
+ "logit[success] success ~ gen*x + gen*y": {
+  "1": {
+   "coef": -0.026,
+   "p": 0.9047
+  },
+  "gen": {
+   "coef": 0.068,
+   "p": 0.8259
+  },
+  "x": {
+   "coef": 0.007,
+   "p": 0.9798
+  },
+  "y": {
+   "coef": 0.559,
+   "p": 0.0303
+  },
+  "gen:x": {
+   "coef": 1.241,
+   "p": 0.0063
+  },
+  "gen:y": {
+   "coef": -0.329,
+   "p": 0.379
+  }
+ },
+ "logit[stable_success] success ~ gen*x + gen*y": {
+  "1": {
+   "coef": -5.893,
+   "p": 0.0009
+  },
+  "gen": {
+   "coef": 5.935,
+   "p": 0.001
+  },
+  "x": {
+   "coef": -3.46,
+   "p": 0.0381
+  },
+  "y": {
+   "coef": 0.458,
+   "p": 0.5368
+  },
+  "gen:x": {
+   "coef": 4.708,
+   "p": 0.0057
+  },
+  "gen:y": {
+   "coef": -0.228,
+   "p": 0.7725
+  }
+ }
+}

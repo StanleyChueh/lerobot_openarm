@@ -1,0 +1,148 @@
+{
+ "classifier_validation": {
+  "generated_L": {
+   "precision": 0.9864945167738102,
+   "recall": 1.0,
+   "frames": 134418
+  },
+  "generated_R": {
+   "precision": 0.9458393314513265,
+   "recall": 0.9979288715308599,
+   "frames": 134418
+  },
+  "manual_L": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "frames": 2364
+  },
+  "manual_R": {
+   "precision": 0.9632925472747497,
+   "recall": 1.0,
+   "frames": 2364
+  },
+  "generated_episodes_classified_complete": "500/500 (all are successful demos)",
+  "manual_episodes_classified_complete": "10/10 (all are successful demos)"
+ },
+ "crosstab_success_vs_stage": {
+  "generated-data policy|success=False": {
+   "complete": 1,
+   "release/hold": 51,
+   "transfer": 1
+  },
+  "generated-data policy|success=True": {
+   "complete": 47,
+   "release/hold": 0,
+   "transfer": 0
+  },
+  "manual-data policy|success=False": {
+   "complete": 0,
+   "release/hold": 51,
+   "transfer": 0
+  },
+  "manual-data policy|success=True": {
+   "complete": 49,
+   "release/hold": 0,
+   "transfer": 0
+  }
+ },
+ "generated-data policy": {
+  "success": "47/100",
+  "sim_steps_success_median": 285.0,
+  "sim_steps_failure_median": 308.0,
+  "failure_stage_counts": {
+   "release/hold": 51,
+   "transfer": 1,
+   "complete": 1
+  },
+  "failure_end_holder": {
+   "none": 52,
+   "left": 1
+  },
+  "success_end_holder": {
+   "left": 47
+  },
+  "t_R_hold_median_all": 101.0,
+  "t_L_hold_median_all": 206.0,
+  "t_stable_handover_median_success": 243.0,
+  "t_stable_handover_max_success": 278.0,
+  "margin_steps_success_min": 3.0,
+  "success_without_stable_handover_in_recorded_frames": 0,
+  "gripper_cmd_intermediate_frac_median": {
+   "R": 0.013793759512937594,
+   "L": 0.0070672260513435226
+  }
+ },
+ "manual-data policy": {
+  "success": "49/100",
+  "sim_steps_success_median": 283.0,
+  "sim_steps_failure_median": 314.0,
+  "failure_stage_counts": {
+   "release/hold": 51
+  },
+  "failure_end_holder": {
+   "none": 51
+  },
+  "success_end_holder": {
+   "none": 46,
+   "left": 3
+  },
+  "t_R_hold_median_all": 79.0,
+  "t_L_hold_median_all": 161.0,
+  "t_stable_handover_median_success": 197.0,
+  "t_stable_handover_max_success": 227.0,
+  "margin_steps_success_min": 57.0,
+  "success_without_stable_handover_in_recorded_frames": 0,
+  "gripper_cmd_intermediate_frac_median": {
+   "R": 0.18877907320826182,
+   "L": 0.1512281035795887
+  }
+ },
+ "success_by_region": {
+  "x_region": {
+   "x<0.203 (no generated starts)": {
+    "manual-data policy": "25/43",
+    "generated-data policy": "6/37",
+    "fisher_p": 0.0001837461374279579
+   },
+   "0.203-0.27": {
+    "manual-data policy": "16/46",
+    "generated-data policy": "30/47",
+    "fisher_p": 0.006990313157969631
+   },
+   "x>0.27": {
+    "manual-data policy": "8/11",
+    "generated-data policy": "11/16",
+    "fisher_p": 1.0
+   }
+  },
+  "y_region": {
+   "y<-0.01": {
+    "manual-data policy": "3/27",
+    "generated-data policy": "10/27",
+    "fisher_p": 0.05367713169683396
+   },
+   "-0.01..0.03": {
+    "manual-data policy": "33/46",
+    "generated-data policy": "24/43",
+    "fisher_p": 0.12892700281330083
+   },
+   "y>0.03": {
+    "manual-data policy": "13/27",
+    "generated-data policy": "13/30",
+    "fisher_p": 0.7931404638071531
+   }
+  }
+ },
+ "overall_fisher_p": 0.8874952851657083,
+ "wilson95": {
+  "manual-data policy": [
+   0.3942183009238615,
+   0.5865215952256586
+  ],
+  "generated-data policy": [
+   0.3751065198210374,
+   0.5671131686275227
+  ]
+ },
+ "logit": "skipped: ModuleNotFoundError(\"No module named 'statsmodels'\")"
+}

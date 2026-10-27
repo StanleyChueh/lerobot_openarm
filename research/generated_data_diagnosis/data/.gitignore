@@ -1,0 +1,4 @@
+# regenerable intermediates (scripts/extract_hdf5.py, scripts/eval_positions.py)
+*.pkl
+*.npz
+*.npy

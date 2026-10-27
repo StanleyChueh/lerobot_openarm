@@ -1,0 +1,132 @@
+{
+ "eval_manual": {
+  "held>=30_steps_after_success": 49,
+  "held>=60_steps_after_success": 12,
+  "held>=90_steps_after_success": 3,
+  "held_until_end": 3,
+  "hold_after_success_median": 55.0,
+  "steps_remaining_after_success_median": 85.0,
+  "other_failures": [
+   {
+    "episode": 21,
+    "t_R_hold": 72,
+    "t_L_hold": 137.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 25,
+    "t_R_hold": 76,
+    "t_L_hold": 158.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 30,
+    "t_R_hold": 77,
+    "t_L_hold": 160.0,
+    "L_hold_longest": 23,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 44,
+    "t_R_hold": 79,
+    "t_L_hold": 167.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 48,
+    "t_R_hold": 76,
+    "t_L_hold": 165.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 53,
+    "t_R_hold": 77,
+    "t_L_hold": 133.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 54,
+    "t_R_hold": 79,
+    "t_L_hold": 136.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 60,
+    "t_R_hold": 75,
+    "t_L_hold": 162.0,
+    "L_hold_longest": 4,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 64,
+    "t_R_hold": 77,
+    "t_L_hold": 162.0,
+    "L_hold_longest": 2,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 75,
+    "t_R_hold": 75,
+    "t_L_hold": 138.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 87,
+    "t_R_hold": 76,
+    "t_L_hold": 163.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   },
+   {
+    "episode": 94,
+    "t_R_hold": 79,
+    "t_L_hold": 136.0,
+    "L_hold_longest": 3,
+    "end_holder": "none",
+    "stage_reached": "release/hold"
+   }
+  ],
+  "stable x<0.203": "3/43",
+  "stable 0.203-0.27": "0/46",
+  "stable x>0.27": "0/11"
+ },
+ "eval_generated": {
+  "held>=30_steps_after_success": 47,
+  "held>=60_steps_after_success": 47,
+  "held>=90_steps_after_success": 47,
+  "held_until_end": 47,
+  "hold_after_success_median": 42.0,
+  "steps_remaining_after_success_median": 42.0,
+  "other_failures": [
+   {
+    "episode": 42,
+    "t_R_hold": 102,
+    "t_L_hold": 199.0,
+    "L_hold_longest": 70,
+    "end_holder": "left",
+    "stage_reached": "complete"
+   }
+  ],
+  "stable x<0.203": "6/37",
+  "stable 0.203-0.27": "30/47",
+  "stable x>0.27": "11/16"
+ }
+}

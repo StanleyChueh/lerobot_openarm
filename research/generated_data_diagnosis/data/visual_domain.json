@@ -1,0 +1,74 @@
+{
+ "observation.images.body_cam": {
+  "eval_manual": {
+   "min": 0.9996933341026306,
+   "median": 0.9999536275863647,
+   "max": 0.9999687075614929
+  },
+  "eval_generated": {
+   "min": 0.9998397827148438,
+   "median": 0.9999651908874512,
+   "max": 0.9999715685844421
+  },
+  "manual": {
+   "min": 0.999936580657959,
+   "median": 0.9999539256095886,
+   "max": 0.9999604225158691
+  },
+  "generated": {
+   "min": -0.2489672154188156,
+   "median": 0.40267714858055115,
+   "max": 0.8763266801834106
+  },
+  "nominal_threshold(min of manual+eval)": 0.9996933341026306,
+  "generated_frac_within_nominal": 0.0
+ },
+ "observation.images.wrist_cam": {
+  "eval_manual": {
+   "min": 0.9998944401741028,
+   "median": 0.9999812841415405,
+   "max": 0.9999865889549255
+  },
+  "eval_generated": {
+   "min": 0.9999797940254211,
+   "median": 0.9999847412109375,
+   "max": 0.9999885559082031
+  },
+  "manual": {
+   "min": 0.9999701976776123,
+   "median": 0.9999790191650391,
+   "max": 0.999981701374054
+  },
+  "generated": {
+   "min": -0.027304433286190033,
+   "median": 0.5454387068748474,
+   "max": 0.9802877306938171
+  },
+  "nominal_threshold(min of manual+eval)": 0.9998944401741028,
+  "generated_frac_within_nominal": 0.0
+ },
+ "observation.images.right_wrist_cam": {
+  "eval_manual": {
+   "min": 0.9999736547470093,
+   "median": 0.9999779462814331,
+   "max": 0.9999826550483704
+  },
+  "eval_generated": {
+   "min": 0.9999754428863525,
+   "median": 0.9999790191650391,
+   "max": 0.9999817609786987
+  },
+  "manual": {
+   "min": 0.9999722838401794,
+   "median": 0.9999740123748779,
+   "max": 0.999976396560669
+  },
+  "generated": {
+   "min": -0.044076643884181976,
+   "median": 0.5098190307617188,
+   "max": 0.9565095901489258
+  },
+  "nominal_threshold(min of manual+eval)": 0.9999722838401794,
+  "generated_frac_within_nominal": 0.0
+ }
+}
