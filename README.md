@@ -147,19 +147,15 @@ Models: SmolVLA `ethanCSL/openarm_pringles_lerobot_real_smolvla_v00`, GR00T N1.7
 During an episode: **Enter** ends it, **Left arrow** reruns it, **Esc** stops. `--display_data=false` turns
 off the rerun window.
 
-**Record the evaluation (async and async + RTC, real arm and Isaac):** add `--record_repo_id=<user>/eval_<name>`
-to any `robot_client` command below (it needs `--num_episodes`). The dataset name must start with `eval_`, or the
-client refuses to start. Once all `--num_episodes` episodes have run, the dataset is pushed to the Hugging Face Hub;
-a run stopped early (Esc, Ctrl-C, an error) stays local and is not pushed. Log in first with `hf auth login`.
+Every evaluation command below (real arm and Isaac) records the episodes as a LeRobot dataset and pushes it to the
+Hugging Face Hub (log in once with `hf auth login`):
 
-```bash
-python -m lerobot_robot_openarm_umeow.robot_client ... \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_smolvla_v00
-```
+| mode | dataset flag | name | pushed |
+|---|---|---|---|
+| normal, RTC (`lerobot-rollout`, native) | `--dataset.repo_id=<user>/rollout_<name> --dataset.push_to_hub=true` | must start with `rollout_` (lerobot's rule); a date-time suffix is added, so every run is a new dataset | when the run ends, also after Esc |
+| async, async + RTC (`robot_client`, ours) | `--record_repo_id=<user>/eval_<name>` | must start with `eval_`; a rerun replaces it (`--resume=true` adds to it) | only once all `--num_episodes` episodes have run; stopped early, it stays local |
 
-Details (resume, overwrite, `--record_root`): [Recording the evaluation](#recording-the-evaluation). Normal and RTC
-(`lerobot-rollout`) do not take `--record_repo_id`; they record with `--dataset.repo_id=<user>/rollout_<name>`.
+Details of `--record_repo_id`: [Recording the evaluation](#recording-the-evaluation).
 
 <a id="which-venv"></a>
 #### Which venv: the lerobot branch the model was trained on
@@ -176,7 +172,7 @@ plus both plugins. Never run `uv sync` / `uv run` in it. Run the policy server a
 
 #### Normal
 
-`--dataset.repo_id` must start with `rollout_`.
+`--dataset.repo_id` must start with `rollout_`; `--dataset.push_to_hub=true` pushes it when the run ends.
 
 ```bash
 # SmolVLA
@@ -186,7 +182,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_smolvla_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_smolvla_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
   --display_data=true
@@ -197,7 +193,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_gr00t_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_gr00t_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
   --display_data=true
@@ -209,7 +205,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_pi05_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_pi05_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
   --display_data=true
@@ -233,7 +229,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_rtc_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_rtc_pringles_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
   --display_data=true
@@ -251,7 +247,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_groot_rtc_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_groot_rtc_pringles_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
   --display_data=true
@@ -269,7 +265,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
   --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_pi05_rtc_pringles_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_pi05_rtc_pringles_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
   --display_data=true
@@ -303,7 +299,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_smolvla_v00
 
 # GR00T N1.7
 cd ~/Stanley_ws/lerobot_openarm
@@ -318,7 +315,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
   --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_groot_v00
 
 # pi0.5
 cd ~/Stanley_ws/lerobot_openarm
@@ -333,7 +331,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_pi05_v00
 ```
 
 Use our `lerobot_robot_openarm_umeow.policy_server` / `robot_client`, not lerobot's own.
@@ -384,7 +383,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_rtc_smolvla_v00
 
 # GR00T N1.7
 cd ~/Stanley_ws/lerobot_openarm
@@ -399,7 +399,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
   --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_rtc_groot_v00
 
 # pi0.5
 cd ~/Stanley_ws/lerobot_openarm
@@ -414,7 +415,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_rtc_pi05_v00
 ```
 
 #### Timing report
@@ -429,9 +431,9 @@ python -m lerobot_robot_openarm_umeow.eval_report outputs/eval_logs/RUN_A output
 
 #### Recording the evaluation
 
-Add `--record_repo_id=<user>/eval_<name>` (with `--num_episodes`) to save every evaluation episode as a LeRobot
-dataset (same features as lerobot-record's) and push it to the Hub once all episodes have run. The name must start
-with `eval_`, so a training dataset is never written over. If that eval dataset already exists:
+The async / async + RTC commands above carry `--record_repo_id=<user>/eval_<name>` (it needs `--num_episodes`):
+every evaluation episode is saved as a LeRobot dataset (same features as lerobot-record's), pushed to the Hub once
+all episodes have run. The name must start with `eval_`, so a training dataset is never written over. If that eval dataset already exists:
 
 - `--resume=true` adds `--num_episodes` more episodes to it (from the local copy, or downloaded from the Hub);
   a local copy with fewer episodes than the Hub's is refused as stale, and so is a run whose cameras/joints/fps differ.
@@ -588,9 +590,8 @@ PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
 The simulator from Sim Step 1 (without `--mimic_hdf5`) in terminal 1, then the commands below. Models trained on
 `update_dev_v2`: the same commands in `.venv-v2` ([which venv](#which-venv)).
 
-To record an async / async + RTC evaluation, add `--record_repo_id=<user>/eval_<name>` to the `robot_client`
-command; it is pushed to the Hub once all episodes have run ([Recording the evaluation](#recording-the-evaluation)).
-In Isaac, `meta/openarm_eval.json` also stores each episode's task success.
+Every command records the evaluation and pushes it to the Hub, as on the real arm (see the table in Step 5). In
+Isaac, the `robot_client` dataset's `meta/openarm_eval.json` also stores each episode's task success.
 
 **Normal**:
 
@@ -601,7 +602,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.type=openarm_isaac \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_sim_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
   --display_data=true
@@ -611,7 +612,7 @@ lerobot-rollout --strategy.type=episodic \
   --policy.path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
   --robot.type=openarm_isaac \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_groot_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_groot_pringles_sim_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
   --display_data=true
@@ -622,7 +623,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.type=openarm_isaac \
   --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_pi05_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_pi05_pringles_sim_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
   --display_data=true
@@ -639,7 +640,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.type=openarm_isaac \
   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_rtc_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_smolvla_rtc_pringles_sim_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
   --display_data=true
@@ -652,7 +653,7 @@ lerobot-rollout --strategy.type=episodic \
   --policy.path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
   --robot.type=openarm_isaac \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_groot_rtc_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_groot_rtc_pringles_sim_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
   --display_data=true
@@ -665,7 +666,7 @@ lerobot-rollout --strategy.type=episodic \
   --robot.type=openarm_isaac \
   --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
   --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_pi05_rtc_pringles_sim_v00 --dataset.push_to_hub=false \
+  --dataset.repo_id=ethanCSL/rollout_pi05_rtc_pringles_sim_v00 --dataset.push_to_hub=true \
   --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
   --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
   --display_data=true
@@ -688,7 +689,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_smolvla_v00
 
 # GR00T N1.7
 python -m lerobot_robot_openarm_umeow.robot_client \
@@ -698,7 +700,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
   --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_groot_v00
 
 # pi0.5
 python -m lerobot_robot_openarm_umeow.robot_client \
@@ -708,7 +711,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_pi05_v00
 ```
 
 **Async + RTC**: terminal 2, the policy server:
@@ -738,7 +742,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_rtc_smolvla_v00
 
 # GR00T N1.7
 python -m lerobot_robot_openarm_umeow.robot_client \
@@ -748,7 +753,8 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
   --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_rtc_groot_v00
 
 # pi0.5
 python -m lerobot_robot_openarm_umeow.robot_client \
@@ -758,5 +764,6 @@ python -m lerobot_robot_openarm_umeow.robot_client \
   --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
   --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
   --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1
+  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
+  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_rtc_pi05_v00
 ```
