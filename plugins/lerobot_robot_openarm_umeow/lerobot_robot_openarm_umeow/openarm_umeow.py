@@ -37,6 +37,7 @@ from .config_openarm_umeow import OpenArmUmeowConfig
 from .diag_log import DIAG
 from .rerun_status import BOARD
 from .shared import ROBOT_STATE
+from .telemetry import MotorTelemetry
 
 from robots.umeow_openarm_follower import OpenArmFollower, OpenArmFollowerConfig  # noqa: E402  (after common's sys.path)
 from robots.umeow_openarm_follower.can_monitor import is_fault, status_name  # noqa: E402
@@ -174,6 +175,7 @@ class OpenArmUmeow(OpenArmFollower):
         self._health_t = 0.0
         self._seen_enabled: set[str] = set()
         self._lag: dict[str, tuple[float, float, bool]] = {}  # key -> (since, command then, told)
+        self._telemetry: MotorTelemetry | None = None  # --robot.telemetry_dir (real arm only, see _hw_connect)
         self._stats_reset(time.perf_counter())
 
     # The hardware layer: the follower's CAN bus and cameras. openarm_isaac (openarm_isaac.py) overrides
@@ -181,6 +183,8 @@ class OpenArmUmeow(OpenArmFollower):
     # squeeze, slow returns -- is the same code on the real arm and in simulation.
     def _hw_connect(self) -> None:
         OpenArmFollower.connect(self, calibrate=False)
+        if self.umeow_config.telemetry_dir:
+            self._telemetry = MotorTelemetry.for_robot(self, self.umeow_config.telemetry_dir)
 
     def _hw_get_observation(self):
         return OpenArmFollower.get_observation(self)
@@ -189,7 +193,15 @@ class OpenArmUmeow(OpenArmFollower):
         return OpenArmFollower.send_action(self, action, target_vel)
 
     def _hw_disconnect(self) -> None:
-        OpenArmFollower.disconnect(self)
+        try:
+            OpenArmFollower.disconnect(self)
+        finally:
+            if self._telemetry is not None:
+                try:
+                    self._telemetry.close(self)  # after the disable frames, so its last row shows them
+                except Exception:  # never mask a disconnect error with a telemetry one
+                    logger.exception("telemetry close failed")
+                self._telemetry = None
 
     def _hw_feedback_status(self) -> dict:
         return self.get_feedback_status()
@@ -266,6 +278,8 @@ class OpenArmUmeow(OpenArmFollower):
         self._measured_t = time.perf_counter()
         if DIAG.enabled:
             DIAG.row("obs", DIAG_OBS, [t0, read, *(self._measured[k] for k in MOTOR_KEYS)])
+        if self._telemetry is not None:
+            self._telemetry.snapshot(obs, t0, read, self)
         return obs
 
     def _check_request(self, desired: dict, now: float) -> str | None:

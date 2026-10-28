@@ -64,6 +64,9 @@ class OpenArmUmeowConfig(RobotConfig):
     # On disconnect, ramp back to the pose read at connect (arms hanging) before de-energising,
     # so the arms do not drop.
     return_to_rest: bool = True
+    # Read-only motor telemetry sidecar (telemetry.py; docs/force_aware/TELEMETRY_SCHEMA.md): one row per
+    # observation into <telemetry_dir>/<session>/. Empty = off. Real arm only; sends nothing on the bus.
+    telemetry_dir: str = ""
 
 
 @RobotConfig.register_subclass("openarm_isaac")
