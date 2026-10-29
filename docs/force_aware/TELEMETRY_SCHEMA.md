@@ -14,6 +14,7 @@ separate sidecar on disk.
 <telemetry_dir>/<YYYYmmdd_HHMMSS>_<pid>[_n]/     one folder per robot connect; never reused or overwritten
     meta.json                                   written at start, rewritten at close ("closed": true)
     part-00001.parquet, part-00002.parquet ...  row groups flushed every 5 s; concatenate, sort by `tick`
+    frames-00001.parquet ...                    every raw CAN frame the tap saw (§9, `openarm_frames/1`)
 ```
 
 A session with `"closed": false` in `meta.json` ended in a crash. Its parts up to the last flush are valid,
@@ -82,7 +83,7 @@ There are 340 columns in total (1 + 9 row + 2×5 side + 16×20 joint). J1–J7 a
 | column | unit | meaning |
 |---|---|---|
 | `tap_ok` | 0/1 | the receive-only tap on this arm's interface is open. 0 makes every wire column of that arm NaN |
-| `rx_dropped` | frames | cumulative frames the kernel dropped from the tap's queue (SO_RXQ_OVFL). Must stay 0 |
+| `rx_dropped` | frames | cumulative frames lost before telemetry read them: kernel queue overflow (SO_RXQ_OVFL) + host buffer overflow (`MAX_PENDING`). Must stay 0 |
 | `bus_errors` | frames | CAN error frames raised by the controller since the previous row |
 | `ctrl_frames` | frames | enable / disable / **set-zero** frames seen on the command ids since the previous row. Expected 0 except the final row |
 | `squeeze_tau` | N·m | gripper squeeze feed-forward included in J8's `cmd_tau`, signed in motor convention; 0 unless the gripper is commanded closed |
@@ -178,7 +179,9 @@ lags by one frame. `state_fresh` = 0 shows when it actually happens.
 | `gripper_squeeze_tau_config`, `max_joint_speed` | wrapper settings |
 | `tap_available` | per arm, at start |
 | `provenance` | `git_sha`, `git_dirty`, `openarm_can` version, URDF path + sha256 (gravity model), `calibration.json` path + sha256, `torque_calibration` (currently `null`: nothing calibrates `tau`) |
-| `closed`, `rows`, `parts`, `errors`, `max_snapshot_s`, `ctrl_frames` | written at close. `ctrl_frames` lists every enable/disable/set-zero frame with time and joint |
+| `poll_s`, `frames_schema` | idle-drain period (the taps are drained when no snapshot ran for this long, e.g. during a ramp); `"openarm_frames/1"` |
+| `iface` | `{start, end}` × side: the interface's kernel counters (`statistics`: `tx_packets`, `rx_errors`, ... from `/sys/class/net/<if>/statistics`) and CAN controller state (`can`: `state`, `berr_counter`, `xstats`, from `ip -details -statistics link`). Host reads only; `null` where unavailable |
+| `closed`, `rows`, `parts`, `frame_parts`, `errors`, `max_snapshot_s`, `taps`, `ctrl_frames` | written at close. `errors` = `{snapshot, writer, poll}`. `taps` per side: `frames` delivered, `kernel_dropped`, `host_dropped`, `untimed` (frames without a kernel timestamp: stamped at the row's reference time; must be 0). `ctrl_frames` lists every enable/disable/set-zero frame with time and joint |
 
 **Calibration provenance rule:** a consumer that uses `tau` quantitatively must check
 `provenance.torque_calibration`. While it is `null`, `tau` is uncalibrated and comparable only within a
@@ -207,3 +210,20 @@ end to end by `plugins/tests/test_telemetry_record.py`. Each dataset frame match
 * Joint acceleration: differentiate `dq` or `q` yourself, mind the 30 Hz rate.
 * Camera frame timestamps.
 * Simulation (`openarm_isaac`): telemetry is never started there.
+
+## 9. Raw frames (`frames-*.parquet`, `openarm_frames/1`)
+
+Every frame the receive-only tap delivered, verbatim, so that each derived column can be re-checked offline
+(`tools/force_aware/telemetry_check.py` does). Not needed for features.
+
+| column | type | meaning |
+|---|---|---|
+| `tick` | int64 | the row that counted the frame (the first row whose reference time is at or after `t_ns`) |
+| `side` | string | `L` / `R` (the interface) |
+| `seq` | int64 | delivery order on that side's socket, 0-based, gap-free unless frames were lost (`rx_dropped`) |
+| `can_id` | int32 | 11-bit id: command ids (`meta.can_ids.send`), reply ids (`recv`), 0x7FF refresh requests |
+| `data` | binary | payload (8 bytes for this protocol) |
+| `t_ns` | int64 | kernel receive time, ns since the epoch (CLOCK_REALTIME); null = the kernel gave none (counted in `meta.taps.*.untimed`) |
+
+Transmitted frames (MIT commands, refresh requests, control frames) appear through the interface's loopback, at
+TX completion. Load with `telemetry.load_frames(session_dir)`.

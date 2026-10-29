@@ -28,6 +28,9 @@ from lerobot_robot_openarm_umeow import telemetry as tel
 ROOT = Path(sys.argv[1] if len(sys.argv) > 1 else tempfile.mkdtemp(prefix="openarm_telemetry_"))
 REPO = Path(__file__).resolve().parents[2]
 FAILS = []
+# Hermetic: the interface counters come from a scratch folder, never the lab PC's real can0/can1.
+tel.SYSFS_NET = ROOT / "sysfs"
+tel._ip_link = lambda port: None
 
 
 def check(name, ok, detail=""):
@@ -39,7 +42,9 @@ def check(name, ok, detail=""):
 def make(wire: FakeWire, sub: str, fallback=None):
     arms = [tel._Arm(s, f"fake_{s}", wire.taps[s], tf.SEND, tf.RECV, [f"{s}J{i}" for i in range(1, 9)])
             for s in ("R", "L")]
-    return tel.MotorTelemetry(ROOT / sub, wire.channels, LIMITS, arms, {"test": sub}, status_fallback=fallback)
+    meta = {"test": sub, "can_ids": {"send": tf.SEND, "recv": tf.RECV, "refresh": tel.REFRESH_ID},
+            "tap_available": {a.side: a.tap.available for a in arms}}  # as for_robot() writes them
+    return tel.MotorTelemetry(ROOT / sub, wire.channels, LIMITS, arms, meta, status_fallback=fallback)
 
 
 def tick(t: tel.MotorTelemetry, wire: FakeWire, robot=None, period=0.0):
@@ -315,6 +320,210 @@ nxt = obs_rows.iloc[1:].reset_index(drop=True)
 gap = max(abs(nxt[f"{k[:-4]}.cmd_q"] - nxt[f"{k[:-4]}.sent"]).max() for k in MOTOR_KEYS)
 check("15 row k+1's wire command equals the host's sent command of tick k (within one LSB)",
       gap <= lsb(LIMITS["LJ1"], "q"), f"max {gap:.2e} rad")
+
+# ---------------------------------------------------------------------------------------------------- 16-17
+# WireTap.read() itself, on a real kernel socket: UDP over loopback carries the same SO_TIMESTAMPNS ancillary data
+# and non-blocking semantics as a CAN_RAW socket, and needs no CAN interface.
+import os  # noqa: E402
+import resource  # noqa: E402
+import socket  # noqa: E402
+import struct  # noqa: E402
+
+
+def udp_tap(timestamps=True, fd=None):
+    rx = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    rx.bind(("127.0.0.1", 0))
+    addr = rx.getsockname()
+    if timestamps:
+        rx.setsockopt(socket.SOL_SOCKET, tel.SO_TIMESTAMPNS, 1)
+    if fd is not None:
+        soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+        if soft <= fd:
+            resource.setrlimit(resource.RLIMIT_NOFILE, (fd + 16, hard))
+        os.dup2(rx.fileno(), fd)
+        rx.close()
+        rx = socket.socket(fileno=fd)
+    rx.setblocking(False)
+    w = tel.WireTap.__new__(tel.WireTap)  # no CAN socket: hand it the UDP one
+    w.port, w.available, w.dropped, w.errors, w.untimed, w._sock = "udp-loopback", True, 0, 0, 0, rx
+    return w, addr
+
+
+tx = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+payload = tf.enc_state(1, 1, 0.5, 0.0, 0.0, 30, 30, LIMITS["LJ1"])
+w, addr = udp_tap(fd=1500)
+t_send = time.time_ns()
+tx.sendto(struct.pack("=IB3x", 0x11, 8) + payload, addr)
+time.sleep(0.02)
+try:
+    got, err = w.read(), None
+except Exception as e:  # noqa: BLE001
+    got, err = [], e
+t_read = time.time_ns()
+ok = not err and len(got) == 1 and got[0][:2] == (0x11, payload) and got[0][2] is not None
+check("16 WireTap.read on a socket with fd >= 1024 (select() raised ValueError there): reads the frame",
+      ok, f"{type(err).__name__}: {err}" if err else f"fd {w._sock.fileno()}")
+check("16 ... with the KERNEL's receive time, not the read time",
+      ok and abs(got[0][2] - t_send) < 5e6 and t_read - got[0][2] > 15e6,
+      f"stamp - send {(got[0][2] - t_send) / 1e6:.3f} ms, read - stamp {(t_read - got[0][2]) / 1e6:.1f} ms" if ok else "")
+w._sock.close()
+
+w, addr = udp_tap(timestamps=False)
+tx.sendto(struct.pack("=IB3x", 0x11, 8) + payload, addr)
+time.sleep(0.005)
+got = w.read()
+check("17 a frame without a kernel timestamp is returned with t = None and counted in `untimed`",
+      len(got) == 1 and got[0][2] is None and w.untimed == 1)
+w._sock.close()
+
+
+class UntimedTap(tf.FakeTap):
+    def read(self):
+        out, self.queue = self.queue, []
+        self.untimed += len(out)
+        return [(c, d, None) for c, d, _ in out]
+
+
+wire = FakeWire()
+wire.taps = {"R": UntimedTap(), "L": UntimedTap()}
+t = make(wire, "untimed")
+for i in range(10):
+    wire.command({k: 0.01 * i for k in ZERO}, {}, {}, 50.0, 2.0)
+    tick(t, wire)
+d, _, meta = finish(t)
+d = d.iloc[1:]
+check("17 untimed frames stay in the row that read them (stamped at its reference time), and meta counts them",
+      (d["RJ3.cmd_n"] == 1).all() and (d["RJ3.rx_n"] == 2).all() and (d["RJ3.stale"] == 0).all()
+      and meta["taps"]["R"]["untimed"] == meta["taps"]["R"]["frames"] > 0,
+      f"untimed {meta['taps']['R']['untimed']} of {meta['taps']['R']['frames']} frames; before the fix every row was stale"
+      " and every frame landed one row late")
+
+# ---------------------------------------------------------------------------------------------------- 18
+# A ramp (sim_bridge_common.ramp_to) commands at 50 Hz without reading the robot; the kernel queue holds a few
+# hundred frames (rmem_max 212992 -> SO_RCVBUF 425984) and then drops the NEWEST -- the disable frames last.
+
+
+def ramp_session(sub):
+    wire = FakeWire()
+    wire.taps = {"R": tf.FakeTap(capacity=500), "L": tf.FakeTap(capacity=500)}
+    t = make(wire, sub)
+    for i in range(3):
+        wire.command({k: 0.0 for k in ZERO}, {}, {}, 50.0, 2.0)
+        tick(t, wire, period=1 / 30)
+    for i in range(60):  # 1.2 s at 50 Hz: 60 x 16 frames per arm
+        wire.command({k: 0.002 * i for k in ZERO}, {}, {}, 50.0, 2.0)
+        time.sleep(1 / 50)
+    wire.ctrl("R", 0xFD)
+    wire.ctrl("L", 0xFD)
+    _, df, meta = finish(t)
+    return df.iloc[-1], meta
+
+
+poll = tel.POLL_S
+tel.POLL_S = 3600.0  # the Gate-1 behaviour: nothing drains the taps between snapshots
+last_old, meta_old = ramp_session("ramp_nodrain")
+tel.POLL_S = poll
+last, meta = ramp_session("ramp")
+check("18 reproduced: with no drain between snapshots a ramp overflows the tap and the disable frames are lost",
+      last_old["R.rx_dropped"] > 0 and last_old["R.ctrl_frames"] < 8,
+      f"rx_dropped {last_old['R.rx_dropped']:.0f}, final-row disable frames {last_old['R.ctrl_frames']:.0f}/8")
+check("18 fixed: the idle drain keeps the tap empty through the ramp; final row shows all 8 disable frames per arm",
+      last["R.rx_dropped"] == 0 and last["L.rx_dropped"] == 0 and last["R.ctrl_frames"] == 8
+      and last["L.ctrl_frames"] == 8 and meta["errors"]["poll"] == 0,
+      f"rx_dropped {last['R.rx_dropped']:.0f}/{last['L.rx_dropped']:.0f}, disable {last['R.ctrl_frames']:.0f}/"
+      f"{last['L.ctrl_frames']:.0f}, frames {meta['taps']['R']['frames']}")
+
+# ---------------------------------------------------------------------------------------------------- 19-20
+# The raw frames log and the interface counters, then the Gate-2 analyzer over a whole fake session.
+sys.path.insert(0, str(REPO / "tools/force_aware"))
+import telemetry_check as tc  # noqa: E402
+
+sysfs = ROOT / "sysfs_fake"
+STATS = ("tx_packets", "rx_packets", "rx_errors", "tx_errors", "rx_dropped", "tx_dropped", "rx_over_errors")
+
+
+def write_sysfs(port, **vals):
+    d = sysfs / port / "statistics"
+    d.mkdir(parents=True, exist_ok=True)
+    for k in STATS:
+        (d / k).write_text(f"{vals.get(k, 0)}\n")
+
+
+tel.SYSFS_NET = sysfs
+tel._ip_link = lambda port: {"flags": ["NOARP", "UP", "LOWER_UP", "ECHO"], "linkinfo": {
+    "info_kind": "can", "info_data": {"state": "ERROR-ACTIVE", "berr_counter": {"tx": 0, "rx": 0}},
+    "info_xstats": {"restarts": 0, "bus_error": 0, "bus_off": 0}}}
+for port in ("fake_R", "fake_L"):
+    write_sysfs(port, tx_packets=1000)
+wire = FakeWire()
+t = make(wire, "frames")
+wire.tx = {"R": 0, "L": 0}
+host = types.SimpleNamespace(_fault=None, _motor_fault=None, gripper_squeeze_tau={"L": 0.0, "R": 0.0})
+for i in range(60):
+    host._last_sent = host._last_desired = {k: 0.002 * i for k in ZERO}
+    wire.command(host._last_sent, {}, {}, 50.0, 2.0)
+    tick(t, wire, host, period=1 / 30)
+for side in ("R", "L"):
+    wire.ctrl(side, 0xFD)
+    write_sysfs(f"fake_{side}", tx_packets=1000 + wire.tx[side])
+_, df, meta = finish(t)
+fr = tel.load_frames(t.dir)
+per_tick_mit = fr[fr.can_id.isin(tf.SEND) & fr.data.map(lambda b: b[:7] != b"\xff" * 7)].groupby(["tick", "side"]).size()
+cmd_cols = {(int(k), s): int(df.loc[df.tick == k, [f"{s}J{i}.cmd_n" for i in range(1, 9)]].to_numpy().sum())
+            for k in df.tick for s in "LR"}
+seq_ok = all(np.array_equal(g["seq"].to_numpy(), np.arange(len(g))) for _, g in fr.groupby("side"))
+check("19 frames log: every delivered frame once, in delivery order per arm, with the row that counted it",
+      len(fr) == sum(meta["taps"][s]["frames"] for s in "LR") and seq_ok
+      and all(per_tick_mit.get((k, s), 0) == n for (k, s), n in cmd_cols.items())
+      and (fr.can_id == tel.REFRESH_ID).sum() == 16 * 60 and meta["frames_schema"] == tel.FRAMES_SCHEMA,
+      f"{len(fr)} frames in {meta['frame_parts']} part(s)")
+check("19 meta.json holds the interfaces' kernel counters at start and close",
+      meta["iface"]["start"]["R"]["statistics"]["tx_packets"] == 1000
+      and meta["iface"]["end"]["R"]["statistics"]["tx_packets"] == 1000 + wire.tx["R"]
+      and meta["iface"]["end"]["L"]["can"]["state"] == "ERROR-ACTIVE")
+R, _ = tc.run(t.dir)
+st = {i["id"]: i["status"] for i in R.items}
+must = ["G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G13", "B1", "S1", "S2", "S3", "S5"]
+check("20 telemetry_check on a healthy fake session: every gate check it can evaluate PASSes; dataset/A-B UNKNOWN",
+      all(st[c] == "PASS" for c in must) and all(st[c] == "UNKNOWN" for c in ("G10", "G11", "G12")),
+      ", ".join(f"{k} {v}" for k, v in st.items()))
+for i in R.items:
+    if i["status"] != "PASS":
+        print(f"      {i['id']} {i['status']}: {i['detail'][:300]}")
+meta_path = t.dir / "meta.json"
+m = json.loads(meta_path.read_text())
+m["iface"]["end"]["R"]["statistics"]["tx_packets"] += 1  # one frame the library did not send
+meta_path.write_text(json.dumps(m))
+R, _ = tc.run(t.dir)
+st = {i["id"]: i for i in R.items}
+check("20 telemetry_check: ONE transmitted frame that no library frame explains fails G6 (and the verdict)",
+      st["G6"]["status"] == "FAIL" and R.verdict() == "NO-GO", st["G6"]["detail"])
+
+
+
+def diag_dir(name, late_every=0):
+    """A teleop DIAG folder (diag_log.py layout) whose 'obs' stream ticks at 30 Hz with 0.3 ms jitter."""
+    d = ROOT / name
+    d.mkdir(parents=True, exist_ok=True)
+    g = np.random.default_rng(1)
+    dt = 1 / 30 + g.normal(0, 3e-4, 900)
+    if late_every:
+        dt[::late_every] += 0.03
+    t = 1000 + np.cumsum(dt)
+    np.savez(d / "chunk_00001.npz", obs=np.stack([t, np.full_like(t, 0.004)], axis=1))
+    return d
+
+
+R, _ = tc.run(t.dir, diag=diag_dir("diag_on"), baseline_diag=diag_dir("diag_off"))
+same = next(i for i in R.items if i["id"] == "G10")
+R, _ = tc.run(t.dir, diag=diag_dir("diag_on_late", late_every=50), baseline_diag=diag_dir("diag_off"))
+late = next(i for i in R.items if i["id"] == "G10")
+check("20 telemetry_check G10: equal on/off loop timing PASSes; 2 % extra late ticks with telemetry on FAILs",
+      same["status"] == "PASS" and late["status"] == "FAIL", f"{same['detail']} || {late['detail']}")
+R, _ = tc.run(t.dir, diag=diag_dir("diag_on2"), baseline_diag=[diag_dir("diag_off"), diag_dir("diag_off_late", late_every=50)])
+aba = next(i for i in R.items if i["id"] == "G10")
+check("20 telemetry_check G10 (A-B-A): two telemetry-off runs that disagree make the comparison INCONCLUSIVE (UNKNOWN)",
+      aba["status"] == "UNKNOWN" and "INCONCLUSIVE" in aba["detail"], aba["detail"][-120:])
 
 print(f"\n{len(FAILS)} failed" + (f": {FAILS}" if FAILS else ""))
 sys.exit(1 if FAILS else 0)

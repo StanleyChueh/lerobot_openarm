@@ -79,10 +79,18 @@ class FakeMotor:
 
 
 class FakeTap:
-    """Stands in for telemetry.WireTap: a queue of (can_id, payload, kernel ns)."""
+    """Stands in for telemetry.WireTap: a queue of (can_id, payload, kernel ns). With `capacity`, a full queue
+    drops the NEWEST frame and counts it, as the kernel does when a socket's receive buffer is full."""
 
-    def __init__(self):
-        self.available, self.dropped, self.errors, self.queue = True, 0, 0, []
+    def __init__(self, capacity=None):
+        self.available, self.dropped, self.errors, self.untimed, self.queue = True, 0, 0, 0, []
+        self.capacity = capacity
+
+    def push(self, frame):
+        if self.capacity is not None and len(self.queue) >= self.capacity:
+            self.dropped += 1
+        else:
+            self.queue.append(frame)
 
     def read(self):
         out, self.queue = self.queue, []
@@ -109,6 +117,14 @@ class FakeWire:
         self.carry = {j: [] for j in tel.JOINTS}
         self.drop, self.unread = set(), set()
         self.commands = []
+        self.tx = {"R": 0, "L": 0}  # frames the "library" transmitted per interface (kernel tx_packets)
+        self._last_ns = 0
+
+    def _stamp(self) -> int:
+        """Kernel receive time of the next frame: a little in the past, strictly increasing in delivery order
+        (the kernel stamps an interface's frames in the order it delivers them)."""
+        self._last_ns = max(time.time_ns() - 3000, self._last_ns + 1)
+        return self._last_ns
 
     def channels(self):
         return [(j, self.motors[j]) for j in FOLLOWER_ORDER]
@@ -116,7 +132,7 @@ class FakeWire:
     def _reply(self, j, t_ns):
         i = int(j[2:])
         data = enc_state(self.status, i, *self.true[j], *self.temps, LIMITS[j])
-        self.taps[j[0]].queue.append((RECV[i - 1], data, t_ns))
+        self.taps[j[0]].push((RECV[i - 1], data, t_ns))
         return tel.decode_state(data, LIMITS[j])
 
     def command(self, sent: dict, vel: dict, tau_ff: dict, kp: float, kd: float):
@@ -124,28 +140,30 @@ class FakeWire:
         self.commands.append(dict(sent))
         for j in tel.JOINTS:
             i = int(j[2:])
-            t = time.time_ns() - 3000
-            self.taps[j[0]].queue.append(
-                (SEND[i - 1], enc_mit(sent[f"{j}.pos"], vel.get(f"{j}.vel", 0.0), kp, kd, tau_ff.get(j, 0.0), LIMITS[j]), t))
+            self.taps[j[0]].push(
+                (SEND[i - 1], enc_mit(sent[f"{j}.pos"], vel.get(f"{j}.vel", 0.0), kp, kd, tau_ff.get(j, 0.0), LIMITS[j]),
+                 self._stamp()))
+            self.tx[j[0]] += 1
             self.true[j][0] = sent[f"{j}.pos"]  # perfect tracking, like the other mocks
             if j not in self.drop:
-                self.inbox[j].append(self._reply(j, t + 1000))
+                self.inbox[j].append(self._reply(j, self._stamp()))
 
     def ctrl(self, side: str, code: int):
         for i in range(1, 9):
-            self.taps[side].queue.append((SEND[i - 1], enc_ctrl(code), time.time_ns() - 1000))
+            self.taps[side].push((SEND[i - 1], enc_ctrl(code), self._stamp()))
+            self.tx[side] += 1
 
     def read(self) -> dict:
         """follower._read_motor_positions_once: refresh every motor, drain, report positions."""
         for j in tel.JOINTS:
             i = int(j[2:])
-            t = time.time_ns() - 2000
-            self.taps[j[0]].queue.append((tel.REFRESH_ID, enc_refresh(SEND[i - 1]), t))
+            self.taps[j[0]].push((tel.REFRESH_ID, enc_refresh(SEND[i - 1]), self._stamp()))
+            self.tx[j[0]] += 1
             self.inbox[j] = self.carry[j] + self.inbox[j]
             self.carry[j] = []
             if j in self.drop:
                 continue
-            st = self._reply(j, t + 1000)
+            st = self._reply(j, self._stamp())
             (self.carry if j in self.unread else self.inbox)[j].append(st)
         for j in tel.JOINTS:
             if self.inbox[j]:

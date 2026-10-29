@@ -1,0 +1,831 @@
+{
+ "created": "2026-10-29T10:58:20+0800",
+ "robot": "openarm_umeow",
+ "ports": {
+  "R": "can0",
+  "L": "can1"
+ },
+ "can_ids": {
+  "send": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "recv": [
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24
+  ],
+  "refresh": 2047
+ },
+ "motor_types": {
+  "LJ1": "DM8009",
+  "LJ2": "DM8009",
+  "LJ3": "DM4340",
+  "LJ4": "DM4340",
+  "LJ5": "DM4310",
+  "LJ6": "DM4310",
+  "LJ7": "DM4310",
+  "LJ8": "DM4310",
+  "RJ1": "DM8009",
+  "RJ2": "DM8009",
+  "RJ3": "DM4340",
+  "RJ4": "DM4340",
+  "RJ5": "DM4310",
+  "RJ6": "DM4310",
+  "RJ7": "DM4310",
+  "RJ8": "DM4310"
+ },
+ "decode_limits": {
+  "LJ1": {
+   "pMax": 12.5,
+   "vMax": 45.0,
+   "tMax": 54.0
+  },
+  "LJ2": {
+   "pMax": 12.5,
+   "vMax": 45.0,
+   "tMax": 54.0
+  },
+  "LJ3": {
+   "pMax": 12.5,
+   "vMax": 8.0,
+   "tMax": 28.0
+  },
+  "LJ4": {
+   "pMax": 12.5,
+   "vMax": 8.0,
+   "tMax": 28.0
+  },
+  "LJ5": {
+   "pMax": 12.5,
+   "vMax": 30.0,
+   "tMax": 10.0
+  },
+  "LJ6": {
+   "pMax": 12.5,
+   "vMax": 30.0,
+   "tMax": 10.0
+  },
+  "LJ7": {
+   "pMax": 12.5,
+   "vMax": 30.0,
+   "tMax": 10.0
+  },
+  "LJ8": {
+   "pMax": 12.5,
+   "vMax": 30.0,
+   "tMax": 10.0
+  },
+  "RJ1": {
+   "pMax": 12.5,
+   "vMax": 45.0,
+   "tMax": 54.0
+  },
+  "RJ2": {
+   "pMax": 12.5,
+   "vMax": 45.0,
+   "tMax": 54.0
+  },
+  "RJ3": {
+   "pMax": 12.5,
+   "vMax": 8.0,
+   "tMax": 28.0
+  },
+  "RJ4": {
+   "pMax": 12.5,
+   "vMax": 8.0,
+   "tMax": 28.0
+  },
+  "RJ5": {
+   "pMax": 12.5,
+   "vMax": 30.0,
+   "tMax": 10.0
+  },
+  "RJ6": {
+   "pMax": 12.5,
+   "vMax": 30.0,
+   "tMax": 10.0
+  },
+  "RJ7": {
+   "pMax": 12.5,
+   "vMax": 30.0,
+   "tMax": 10.0
+  },
+  "RJ8": {
+   "pMax": 12.5,
+   "vMax": 30.0,
+   "tMax": 10.0
+  }
+ },
+ "gains": {
+  "kp": [
+   60.0,
+   50.0,
+   50.0,
+   60.0,
+   20.0,
+   40.0,
+   20.0,
+   3.0
+  ],
+  "kd": [
+   2.0,
+   2.0,
+   2.0,
+   2.5,
+   1.0,
+   1.2,
+   1.0,
+   0.3
+  ],
+  "index": "J1..J7, J8 = gripper, both arms"
+ },
+ "gripper_squeeze_tau_config": 1.5,
+ "max_joint_speed": 1.0,
+ "tap_available": {
+  "R": true,
+  "L": true
+ },
+ "provenance": {
+  "git_sha": "8377bbf78b206aa5928a51b5bfaaaf97a2a818a3",
+  "git_dirty": true,
+  "openarm_can": "1.2.8",
+  "urdf": "<fixture: no URDF>",
+  "urdf_sha256": null,
+  "calibration": null,
+  "calibration_sha256": null,
+  "torque_calibration": null
+ },
+ "schema": "openarm_telemetry/1",
+ "columns": [
+  "tick",
+  "kind",
+  "t",
+  "t_wall",
+  "obs_t0",
+  "obs_read_s",
+  "snapshot_ok",
+  "snapshot_s",
+  "hold",
+  "motor_fault",
+  "L.tap_ok",
+  "L.rx_dropped",
+  "L.bus_errors",
+  "L.ctrl_frames",
+  "L.squeeze_tau",
+  "R.tap_ok",
+  "R.rx_dropped",
+  "R.bus_errors",
+  "R.ctrl_frames",
+  "R.squeeze_tau",
+  "LJ1.q",
+  "LJ1.dq",
+  "LJ1.tau",
+  "LJ1.t_mos",
+  "LJ1.t_rotor",
+  "LJ1.status",
+  "LJ1.rx_n",
+  "LJ1.rx_age_s",
+  "LJ1.state_age_s",
+  "LJ1.state_fresh",
+  "LJ1.stale",
+  "LJ1.cmd_q",
+  "LJ1.cmd_dq",
+  "LJ1.cmd_kp",
+  "LJ1.cmd_kd",
+  "LJ1.cmd_tau",
+  "LJ1.cmd_n",
+  "LJ1.cmd_age_s",
+  "LJ1.sent",
+  "LJ1.desired",
+  "LJ2.q",
+  "LJ2.dq",
+  "LJ2.tau",
+  "LJ2.t_mos",
+  "LJ2.t_rotor",
+  "LJ2.status",
+  "LJ2.rx_n",
+  "LJ2.rx_age_s",
+  "LJ2.state_age_s",
+  "LJ2.state_fresh",
+  "LJ2.stale",
+  "LJ2.cmd_q",
+  "LJ2.cmd_dq",
+  "LJ2.cmd_kp",
+  "LJ2.cmd_kd",
+  "LJ2.cmd_tau",
+  "LJ2.cmd_n",
+  "LJ2.cmd_age_s",
+  "LJ2.sent",
+  "LJ2.desired",
+  "LJ3.q",
+  "LJ3.dq",
+  "LJ3.tau",
+  "LJ3.t_mos",
+  "LJ3.t_rotor",
+  "LJ3.status",
+  "LJ3.rx_n",
+  "LJ3.rx_age_s",
+  "LJ3.state_age_s",
+  "LJ3.state_fresh",
+  "LJ3.stale",
+  "LJ3.cmd_q",
+  "LJ3.cmd_dq",
+  "LJ3.cmd_kp",
+  "LJ3.cmd_kd",
+  "LJ3.cmd_tau",
+  "LJ3.cmd_n",
+  "LJ3.cmd_age_s",
+  "LJ3.sent",
+  "LJ3.desired",
+  "LJ4.q",
+  "LJ4.dq",
+  "LJ4.tau",
+  "LJ4.t_mos",
+  "LJ4.t_rotor",
+  "LJ4.status",
+  "LJ4.rx_n",
+  "LJ4.rx_age_s",
+  "LJ4.state_age_s",
+  "LJ4.state_fresh",
+  "LJ4.stale",
+  "LJ4.cmd_q",
+  "LJ4.cmd_dq",
+  "LJ4.cmd_kp",
+  "LJ4.cmd_kd",
+  "LJ4.cmd_tau",
+  "LJ4.cmd_n",
+  "LJ4.cmd_age_s",
+  "LJ4.sent",
+  "LJ4.desired",
+  "LJ5.q",
+  "LJ5.dq",
+  "LJ5.tau",
+  "LJ5.t_mos",
+  "LJ5.t_rotor",
+  "LJ5.status",
+  "LJ5.rx_n",
+  "LJ5.rx_age_s",
+  "LJ5.state_age_s",
+  "LJ5.state_fresh",
+  "LJ5.stale",
+  "LJ5.cmd_q",
+  "LJ5.cmd_dq",
+  "LJ5.cmd_kp",
+  "LJ5.cmd_kd",
+  "LJ5.cmd_tau",
+  "LJ5.cmd_n",
+  "LJ5.cmd_age_s",
+  "LJ5.sent",
+  "LJ5.desired",
+  "LJ6.q",
+  "LJ6.dq",
+  "LJ6.tau",
+  "LJ6.t_mos",
+  "LJ6.t_rotor",
+  "LJ6.status",
+  "LJ6.rx_n",
+  "LJ6.rx_age_s",
+  "LJ6.state_age_s",
+  "LJ6.state_fresh",
+  "LJ6.stale",
+  "LJ6.cmd_q",
+  "LJ6.cmd_dq",
+  "LJ6.cmd_kp",
+  "LJ6.cmd_kd",
+  "LJ6.cmd_tau",
+  "LJ6.cmd_n",
+  "LJ6.cmd_age_s",
+  "LJ6.sent",
+  "LJ6.desired",
+  "LJ7.q",
+  "LJ7.dq",
+  "LJ7.tau",
+  "LJ7.t_mos",
+  "LJ7.t_rotor",
+  "LJ7.status",
+  "LJ7.rx_n",
+  "LJ7.rx_age_s",
+  "LJ7.state_age_s",
+  "LJ7.state_fresh",
+  "LJ7.stale",
+  "LJ7.cmd_q",
+  "LJ7.cmd_dq",
+  "LJ7.cmd_kp",
+  "LJ7.cmd_kd",
+  "LJ7.cmd_tau",
+  "LJ7.cmd_n",
+  "LJ7.cmd_age_s",
+  "LJ7.sent",
+  "LJ7.desired",
+  "LJ8.q",
+  "LJ8.dq",
+  "LJ8.tau",
+  "LJ8.t_mos",
+  "LJ8.t_rotor",
+  "LJ8.status",
+  "LJ8.rx_n",
+  "LJ8.rx_age_s",
+  "LJ8.state_age_s",
+  "LJ8.state_fresh",
+  "LJ8.stale",
+  "LJ8.cmd_q",
+  "LJ8.cmd_dq",
+  "LJ8.cmd_kp",
+  "LJ8.cmd_kd",
+  "LJ8.cmd_tau",
+  "LJ8.cmd_n",
+  "LJ8.cmd_age_s",
+  "LJ8.sent",
+  "LJ8.desired",
+  "RJ1.q",
+  "RJ1.dq",
+  "RJ1.tau",
+  "RJ1.t_mos",
+  "RJ1.t_rotor",
+  "RJ1.status",
+  "RJ1.rx_n",
+  "RJ1.rx_age_s",
+  "RJ1.state_age_s",
+  "RJ1.state_fresh",
+  "RJ1.stale",
+  "RJ1.cmd_q",
+  "RJ1.cmd_dq",
+  "RJ1.cmd_kp",
+  "RJ1.cmd_kd",
+  "RJ1.cmd_tau",
+  "RJ1.cmd_n",
+  "RJ1.cmd_age_s",
+  "RJ1.sent",
+  "RJ1.desired",
+  "RJ2.q",
+  "RJ2.dq",
+  "RJ2.tau",
+  "RJ2.t_mos",
+  "RJ2.t_rotor",
+  "RJ2.status",
+  "RJ2.rx_n",
+  "RJ2.rx_age_s",
+  "RJ2.state_age_s",
+  "RJ2.state_fresh",
+  "RJ2.stale",
+  "RJ2.cmd_q",
+  "RJ2.cmd_dq",
+  "RJ2.cmd_kp",
+  "RJ2.cmd_kd",
+  "RJ2.cmd_tau",
+  "RJ2.cmd_n",
+  "RJ2.cmd_age_s",
+  "RJ2.sent",
+  "RJ2.desired",
+  "RJ3.q",
+  "RJ3.dq",
+  "RJ3.tau",
+  "RJ3.t_mos",
+  "RJ3.t_rotor",
+  "RJ3.status",
+  "RJ3.rx_n",
+  "RJ3.rx_age_s",
+  "RJ3.state_age_s",
+  "RJ3.state_fresh",
+  "RJ3.stale",
+  "RJ3.cmd_q",
+  "RJ3.cmd_dq",
+  "RJ3.cmd_kp",
+  "RJ3.cmd_kd",
+  "RJ3.cmd_tau",
+  "RJ3.cmd_n",
+  "RJ3.cmd_age_s",
+  "RJ3.sent",
+  "RJ3.desired",
+  "RJ4.q",
+  "RJ4.dq",
+  "RJ4.tau",
+  "RJ4.t_mos",
+  "RJ4.t_rotor",
+  "RJ4.status",
+  "RJ4.rx_n",
+  "RJ4.rx_age_s",
+  "RJ4.state_age_s",
+  "RJ4.state_fresh",
+  "RJ4.stale",
+  "RJ4.cmd_q",
+  "RJ4.cmd_dq",
+  "RJ4.cmd_kp",
+  "RJ4.cmd_kd",
+  "RJ4.cmd_tau",
+  "RJ4.cmd_n",
+  "RJ4.cmd_age_s",
+  "RJ4.sent",
+  "RJ4.desired",
+  "RJ5.q",
+  "RJ5.dq",
+  "RJ5.tau",
+  "RJ5.t_mos",
+  "RJ5.t_rotor",
+  "RJ5.status",
+  "RJ5.rx_n",
+  "RJ5.rx_age_s",
+  "RJ5.state_age_s",
+  "RJ5.state_fresh",
+  "RJ5.stale",
+  "RJ5.cmd_q",
+  "RJ5.cmd_dq",
+  "RJ5.cmd_kp",
+  "RJ5.cmd_kd",
+  "RJ5.cmd_tau",
+  "RJ5.cmd_n",
+  "RJ5.cmd_age_s",
+  "RJ5.sent",
+  "RJ5.desired",
+  "RJ6.q",
+  "RJ6.dq",
+  "RJ6.tau",
+  "RJ6.t_mos",
+  "RJ6.t_rotor",
+  "RJ6.status",
+  "RJ6.rx_n",
+  "RJ6.rx_age_s",
+  "RJ6.state_age_s",
+  "RJ6.state_fresh",
+  "RJ6.stale",
+  "RJ6.cmd_q",
+  "RJ6.cmd_dq",
+  "RJ6.cmd_kp",
+  "RJ6.cmd_kd",
+  "RJ6.cmd_tau",
+  "RJ6.cmd_n",
+  "RJ6.cmd_age_s",
+  "RJ6.sent",
+  "RJ6.desired",
+  "RJ7.q",
+  "RJ7.dq",
+  "RJ7.tau",
+  "RJ7.t_mos",
+  "RJ7.t_rotor",
+  "RJ7.status",
+  "RJ7.rx_n",
+  "RJ7.rx_age_s",
+  "RJ7.state_age_s",
+  "RJ7.state_fresh",
+  "RJ7.stale",
+  "RJ7.cmd_q",
+  "RJ7.cmd_dq",
+  "RJ7.cmd_kp",
+  "RJ7.cmd_kd",
+  "RJ7.cmd_tau",
+  "RJ7.cmd_n",
+  "RJ7.cmd_age_s",
+  "RJ7.sent",
+  "RJ7.desired",
+  "RJ8.q",
+  "RJ8.dq",
+  "RJ8.tau",
+  "RJ8.t_mos",
+  "RJ8.t_rotor",
+  "RJ8.status",
+  "RJ8.rx_n",
+  "RJ8.rx_age_s",
+  "RJ8.state_age_s",
+  "RJ8.state_fresh",
+  "RJ8.stale",
+  "RJ8.cmd_q",
+  "RJ8.cmd_dq",
+  "RJ8.cmd_kp",
+  "RJ8.cmd_kd",
+  "RJ8.cmd_tau",
+  "RJ8.cmd_n",
+  "RJ8.cmd_age_s",
+  "RJ8.sent",
+  "RJ8.desired"
+ ],
+ "joints": [
+  "LJ1",
+  "LJ2",
+  "LJ3",
+  "LJ4",
+  "LJ5",
+  "LJ6",
+  "LJ7",
+  "LJ8",
+  "RJ1",
+  "RJ2",
+  "RJ3",
+  "RJ4",
+  "RJ5",
+  "RJ6",
+  "RJ7",
+  "RJ8"
+ ],
+ "joint_fields": [
+  "q",
+  "dq",
+  "tau",
+  "t_mos",
+  "t_rotor",
+  "status",
+  "rx_n",
+  "rx_age_s",
+  "state_age_s",
+  "state_fresh",
+  "stale",
+  "cmd_q",
+  "cmd_dq",
+  "cmd_kp",
+  "cmd_kd",
+  "cmd_tau",
+  "cmd_n",
+  "cmd_age_s",
+  "sent",
+  "desired"
+ ],
+ "side_fields": [
+  "tap_ok",
+  "rx_dropped",
+  "bus_errors",
+  "ctrl_frames",
+  "squeeze_tau"
+ ],
+ "row_fields": [
+  "kind",
+  "t",
+  "t_wall",
+  "obs_t0",
+  "obs_read_s",
+  "snapshot_ok",
+  "snapshot_s",
+  "hold",
+  "motor_fault"
+ ],
+ "stale_s": 0.05,
+ "poll_s": 0.1,
+ "frames_schema": "openarm_frames/1",
+ "clock": {
+  "perf_counter": 2593662.561743236,
+  "time": 1793242700.7563944
+ },
+ "iface": {
+  "start": {
+   "R": {
+    "statistics": {
+     "rx_dropped": 0,
+     "rx_errors": 0,
+     "rx_over_errors": 0,
+     "rx_packets": 0,
+     "tx_dropped": 0,
+     "tx_errors": 0,
+     "tx_packets": 120000
+    },
+    "can": {
+     "flags": [
+      "NOARP",
+      "UP",
+      "LOWER_UP",
+      "ECHO"
+     ],
+     "state": "ERROR-ACTIVE",
+     "berr_counter": {
+      "tx": 0,
+      "rx": 0
+     },
+     "xstats": {
+      "restarts": 0,
+      "bus_error": 0,
+      "error_warning": 0,
+      "error_passive": 0,
+      "bus_off": 0
+     }
+    }
+   },
+   "L": {
+    "statistics": {
+     "rx_dropped": 0,
+     "rx_errors": 0,
+     "rx_over_errors": 0,
+     "rx_packets": 0,
+     "tx_dropped": 0,
+     "tx_errors": 0,
+     "tx_packets": 118500
+    },
+    "can": {
+     "flags": [
+      "NOARP",
+      "UP",
+      "LOWER_UP",
+      "ECHO"
+     ],
+     "state": "ERROR-ACTIVE",
+     "berr_counter": {
+      "tx": 0,
+      "rx": 0
+     },
+     "xstats": {
+      "restarts": 0,
+      "bus_error": 0,
+      "error_warning": 0,
+      "error_passive": 0,
+      "bus_off": 0
+     }
+    }
+   }
+  },
+  "end": {
+   "R": {
+    "statistics": {
+     "rx_dropped": 0,
+     "rx_errors": 0,
+     "rx_over_errors": 0,
+     "rx_packets": 0,
+     "tx_dropped": 0,
+     "tx_errors": 0,
+     "tx_packets": 122168
+    },
+    "can": {
+     "flags": [
+      "NOARP",
+      "UP",
+      "LOWER_UP",
+      "ECHO"
+     ],
+     "state": "ERROR-ACTIVE",
+     "berr_counter": {
+      "tx": 0,
+      "rx": 0
+     },
+     "xstats": {
+      "restarts": 0,
+      "bus_error": 0,
+      "error_warning": 0,
+      "error_passive": 0,
+      "bus_off": 0
+     }
+    }
+   },
+   "L": {
+    "statistics": {
+     "rx_dropped": 0,
+     "rx_errors": 0,
+     "rx_over_errors": 0,
+     "rx_packets": 0,
+     "tx_dropped": 0,
+     "tx_errors": 0,
+     "tx_packets": 120668
+    },
+    "can": {
+     "flags": [
+      "NOARP",
+      "UP",
+      "LOWER_UP",
+      "ECHO"
+     ],
+     "state": "ERROR-ACTIVE",
+     "berr_counter": {
+      "tx": 0,
+      "rx": 0
+     },
+     "xstats": {
+      "restarts": 0,
+      "bus_error": 0,
+      "error_warning": 0,
+      "error_passive": 0,
+      "bus_off": 0
+     }
+    }
+   }
+  }
+ },
+ "closed": true,
+ "rows": 117,
+ "parts": 2,
+ "frame_parts": 2,
+ "errors": {
+  "snapshot": 1,
+  "writer": 0,
+  "poll": 0
+ },
+ "max_snapshot_s": 0.0010237740352749825,
+ "taps": {
+  "R": {
+   "frames": 4324,
+   "kernel_dropped": 0,
+   "host_dropped": 0,
+   "untimed": 0
+  },
+  "L": {
+   "frames": 4328,
+   "kernel_dropped": 0,
+   "host_dropped": 0,
+   "untimed": 0
+  }
+ },
+ "ctrl_frames": [
+  {
+   "t_wall": 1793242706.229831,
+   "joint": "RJ1",
+   "command": "disable",
+   "side": "R"
+  },
+  {
+   "t_wall": 1793242706.2298365,
+   "joint": "RJ2",
+   "command": "disable",
+   "side": "R"
+  },
+  {
+   "t_wall": 1793242706.229838,
+   "joint": "RJ3",
+   "command": "disable",
+   "side": "R"
+  },
+  {
+   "t_wall": 1793242706.2298386,
+   "joint": "RJ4",
+   "command": "disable",
+   "side": "R"
+  },
+  {
+   "t_wall": 1793242706.229839,
+   "joint": "RJ5",
+   "command": "disable",
+   "side": "R"
+  },
+  {
+   "t_wall": 1793242706.2298393,
+   "joint": "RJ6",
+   "command": "disable",
+   "side": "R"
+  },
+  {
+   "t_wall": 1793242706.22984,
+   "joint": "RJ7",
+   "command": "disable",
+   "side": "R"
+  },
+  {
+   "t_wall": 1793242706.2298403,
+   "joint": "RJ8",
+   "command": "disable",
+   "side": "R"
+  },
+  {
+   "t_wall": 1793242706.2298415,
+   "joint": "LJ1",
+   "command": "disable",
+   "side": "L"
+  },
+  {
+   "t_wall": 1793242706.2298424,
+   "joint": "LJ2",
+   "command": "disable",
+   "side": "L"
+  },
+  {
+   "t_wall": 1793242706.229843,
+   "joint": "LJ3",
+   "command": "disable",
+   "side": "L"
+  },
+  {
+   "t_wall": 1793242706.2298431,
+   "joint": "LJ4",
+   "command": "disable",
+   "side": "L"
+  },
+  {
+   "t_wall": 1793242706.2298434,
+   "joint": "LJ5",
+   "command": "disable",
+   "side": "L"
+  },
+  {
+   "t_wall": 1793242706.2298439,
+   "joint": "LJ6",
+   "command": "disable",
+   "side": "L"
+  },
+  {
+   "t_wall": 1793242706.2298446,
+   "joint": "LJ7",
+   "command": "disable",
+   "side": "L"
+  },
+  {
+   "t_wall": 1793242706.2298448,
+   "joint": "LJ8",
+   "command": "disable",
+   "side": "L"
+  }
+ ],
+ "mock_fixture": "fake DM bus (plugins/tests/make_telemetry_fixture.py); NOT hardware data"
+}

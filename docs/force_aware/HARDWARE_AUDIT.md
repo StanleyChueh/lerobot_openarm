@@ -201,6 +201,10 @@ mechanism `can_monitor.py` has used on every connect since 2026-08-26.
 
 ### Proposed Gate-1 bench run (requires explicit approval; nothing below has been run)
 
+> **Superseded by [GATE2_HARDWARE_READINESS.md](GATE2_HARDWARE_READINESS.md)** (Gate 2A review fixes R1–R4, exact
+> thresholds, A–B–A procedure, safety prerequisites). Step 1 below became that procedure; step 2 is unchanged and
+> still needs its own approval.
+
 1. **Passive only, arm at rest, operator present.** Run a normal `lerobot-teleoperate` or
    `lerobot-record` session (the existing approach ramp) with `--robot.telemetry_dir=outputs/telemetry`,
    about 60 s, no contact. Report:

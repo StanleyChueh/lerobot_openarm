@@ -1,5 +1,8 @@
 # Handoff: force-aware telemetry, Gate 1
 
+> **Superseded for integration by [CODEX_GATE2_HANDOFF.md](CODEX_GATE2_HANDOFF.md)** (final schema answers, mock
+> fixture). The bench plan below is replaced by [GATE2_HARDWARE_READINESS.md](GATE2_HARDWARE_READINESS.md).
+
 **Branch:** `force-aware/telemetry-gate1`, from `official-lerobot-quest` @ `9abbe12`. **Status:** stopped at
 Gate 1. No real-robot run has been made or approved.
 

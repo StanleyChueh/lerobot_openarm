@@ -1,0 +1,62 @@
+{
+ "episodes": [
+  {
+   "episode_index": 0,
+   "frames": 45,
+   "start_tick": 13
+  },
+  {
+   "episode_index": 1,
+   "frames": 45,
+   "start_tick": 70
+  }
+ ],
+ "failed_snapshot_ticks": [
+  6
+ ],
+ "stale_joint_rows": {
+  "RJ5": [
+   81
+  ]
+ },
+ "hold_ticks": [
+  90,
+  91,
+  92,
+  93,
+  94,
+  95
+ ],
+ "rows": 117,
+ "schema": "openarm_telemetry/1",
+ "frames_schema": "openarm_frames/1",
+ "columns": 340,
+ "final_tick": 116,
+ "disable_frames_final_row": {
+  "L": 8,
+  "R": 8
+ },
+ "analyzer": {
+  "verdict": "NO-GO",
+  "checks": {
+   "G1": "FAIL",
+   "G2": "PASS",
+   "G3": "PASS",
+   "G4": "PASS",
+   "G5": "PASS",
+   "G6": "PASS",
+   "G7": "PASS",
+   "G8": "PASS",
+   "S5": "PASS",
+   "G10": "UNKNOWN",
+   "G11": "PASS",
+   "G12": "PASS",
+   "G13": "PASS",
+   "S4": "FAIL",
+   "B1": "PASS",
+   "S1": "FAIL",
+   "S2": "PASS",
+   "S3": "PASS"
+  }
+ }
+}

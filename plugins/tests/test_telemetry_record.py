@@ -29,6 +29,9 @@ from lerobot_robot_openarm_umeow.common import MOTOR_KEYS
 
 ROOT = Path(sys.argv[1])
 FAILS = []
+# Hermetic: the interface counters come from a scratch folder, never the lab PC's real can0/can1.
+tel.SYSFS_NET = ROOT / "sysfs"
+tel._ip_link = lambda port: None
 
 
 def check(name, ok, detail=""):
@@ -97,7 +100,7 @@ info = json.load(open(ds_root / "meta/info.json"))
 names = info["features"]["observation.state"]["names"]
 frames = pd.concat(pd.read_parquet(f) for f in sorted(glob.glob(f"{ds_root}/data/**/*.parquet", recursive=True)))
 check("A  one telemetry session, closed cleanly, no snapshot or writer errors",
-      len(sessions) == 1 and meta["closed"] and meta["errors"] == {"snapshot": 0, "writer": 0},
+      len(sessions) == 1 and meta["closed"] and set(meta["errors"].values()) == {0},
       f"{meta['rows']} rows, {info['total_episodes']} episodes, {len(frames)} frames")
 for ep, g in frames.groupby("episode_index"):
     g = g.sort_values("frame_index")
@@ -120,6 +123,21 @@ for ep, g in frames.groupby("episode_index"):
     check(f"B  episode {ep}: the wire command on row k+1 equals the host's sent command, within one LSB",
           cmd_gap <= 1.0, f"max {cmd_gap:.2f} LSB")
     check(f"B  episode {ep}: every frame traced to a wire frame on a healthy bus (stale = 0 throughout)", stale == 0)
+
+# The Gate-2 analyzer on this same session + dataset: everything that does not need the real interface's counters
+# (G6, B1) or a telemetry-off DIAG run (G10) must PASS. S3 (disable frames) cannot: the patched disconnect sends none.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools/force_aware"))
+import telemetry_check as tc  # noqa: E402
+
+report, _ = tc.run(sessions[-1], ds_root)
+st = {i["id"]: i["status"] for i in report.items}
+need = ["G1", "G2", "G3", "G4", "G5", "G7", "G8", "G11", "G12", "G13", "S1", "S2", "S4", "S5"]
+check("C  telemetry_check on the official lerobot-record session + dataset: every check it can evaluate here PASSes",
+      all(st[c] == "PASS" for c in need) and all(st[c] == "UNKNOWN" for c in ("G6", "G10", "B1")),
+      ", ".join(f"{k} {v}" for k, v in st.items()))
+for i in report.items:
+    if i["id"] in need and i["status"] != "PASS":
+        print(f"      {i['id']}: {i['detail'][:400]}")
 
 print(f"\n{len(FAILS)} failed" + (f": {FAILS}" if FAILS else ""))
 sys.exit(1 if FAILS else 0)

@@ -26,13 +26,16 @@ from the wire instead:
 The socket NEVER transmits (there is no send call in this module), observes the same frames openarm_can
 consumes without consuming them, and is fail-soft: if it cannot be opened every wire column is NaN and the
 rows are still written. Telemetry errors are counted and never raised into the control loop.
+
+Every frame the tap saw is also kept verbatim in frames-*.parquet (`openarm_frames/1`), so each derived
+column can be re-checked offline, and the interface's kernel counters are read at start and close; Gate-2
+analysis (telemetry_check.py) compares the two to prove nothing but the library transmitted.
 """
 
 import hashlib
 import json
 import logging
 import os
-import select
 import socket
 import struct
 import subprocess
@@ -65,9 +68,20 @@ COLUMNS = (
 _COL = {name: i for i, name in enumerate(COLUMNS)}
 
 KIND_OBS, KIND_FINAL = 0, 1
+# frames-*.parquet: every frame the tap delivered, verbatim. `tick` = the row that counted it, `seq` = delivery
+# order on that arm's socket, `t_ns` = kernel receive time (ns since epoch; null = none was given).
+FRAME_COLUMNS = ("tick", "side", "seq", "can_id", "data", "t_ns")
 STALE_S = 0.05      # a value older than this when the policy saw it is `stale` (1.5 ticks at 30 Hz)
 FLUSH_S = 5.0       # rows reach disk this often, so a crash loses at most this much
+# A ramp (sim_bridge_common.ramp_to: start-pose approach, return to rest) commands at 50 Hz WITHOUT reading the
+# robot, so no snapshot drains the tap; at ~800 frames/s per arm its ~0.4 MB kernel queue (rmem_max) is full in
+# well under a second and the kernel drops the newest frames -- the disable frames at shutdown among them. The
+# background thread drains the taps whenever no snapshot has for this long. It never runs between 30 Hz ticks.
+POLL_S = 0.1
 MAX_FRAMES_PER_READ = 20_000  # a bound on one drain, so a flooded bus cannot hold the control loop here
+MAX_PENDING = 200_000         # frames held per arm between rows (minutes of a ramp); beyond it the oldest go
+FRAMES_SCHEMA = "openarm_frames/1"
+SYSFS_NET = Path("/sys/class/net")
 # A decode here and openarm_can's are the same double arithmetic, but a compiler is free to fuse its
 # multiply-add; 1e-9 absorbs that and is still ~1e-5 of the finest LSB (DM4310 torque, 4.9e-3 N-m).
 MATCH_TOL = 1e-9
@@ -140,6 +154,7 @@ class WireTap:
         self.available = False
         self.dropped = 0   # frames the kernel dropped from THIS socket's queue (SO_RXQ_OVFL), cumulative
         self.errors = 0    # CAN error frames raised by the controller, cumulative
+        self.untimed = 0   # frames delivered without a kernel timestamp, cumulative (must stay 0)
         self._sock = None
         try:
             sock = socket.socket(socket.PF_CAN, socket.SOCK_RAW, socket.CAN_RAW)
@@ -159,14 +174,15 @@ class WireTap:
         self._sock = sock
         self.available = True
 
-    def read(self) -> list[tuple[int, bytes, int]]:
-        """Everything queued since the last read: [(can_id, payload, kernel receive time in ns since epoch)]."""
+    def read(self) -> list[tuple[int, bytes, int | None]]:
+        """Everything queued since the last read, in delivery order: [(can_id, payload, kernel receive time in
+        ns since epoch, or None if the kernel gave none)]."""
         if not self.available:
             return []
         frames = []
         for _ in range(MAX_FRAMES_PER_READ):
-            if not select.select([self._sock], [], [], 0)[0]:
-                break
+            # Non-blocking recvmsg alone, no select(): select() raises ValueError for a descriptor >= 1024,
+            # which a process with cameras, encoders and threads can reach (ulimit -n is far higher).
             try:
                 buf, anc, _, _ = self._sock.recvmsg(CANFD_MTU, 128)
             except BlockingIOError:
@@ -188,7 +204,11 @@ class WireTap:
             if raw_id & CAN_ERR_FLAG:
                 self.errors += 1
                 continue
-            frames.append((raw_id & CAN_EFF_MASK, bytes(buf[8:8 + buf[4]]), t_ns if t_ns is not None else time.time_ns()))
+            if t_ns is None:
+                # Not this host's clock at read time: that is AFTER the row's reference time and would push the
+                # frame into the next row. MotorTelemetry stamps it with the row's reference time and counts it.
+                self.untimed += 1
+            frames.append((raw_id & CAN_EFF_MASK, bytes(buf[8:8 + buf[4]]), t_ns))
         return frames
 
     def close(self) -> None:
@@ -221,7 +241,9 @@ class _Arm:
         self.side, self.port, self.tap = side, port, tap
         self.reply = dict(zip(recv_ids, joint_names))
         self.cmd = dict(zip(send_ids, joint_names))
-        self.pending: list[tuple[int, bytes, int]] = []
+        self.pending: list[tuple[int, bytes, int | None, int]] = []  # (can_id, data, t_ns or None, seq)
+        self.seq = 0            # frames pulled from the tap, cumulative: the kernel's delivery order
+        self.host_dropped = 0   # frames discarded because pending exceeded MAX_PENDING, cumulative
         self.errors_seen = tap.errors if tap is not None else 0
         self.ctrl_frames = 0
         self.ctrl_log: list[dict] = []
@@ -238,17 +260,23 @@ class MotorTelemetry:
         self._arms = arms
         self._status_fallback = status_fallback
         self._tick = 0
-        self._lock = threading.Lock()
+        self._lock = threading.Lock()        # rows / frames handed to the writer
+        self._tap_lock = threading.Lock()    # taps and pending: the snapshot and the idle drain
+        self._flush_lock = threading.Lock()  # one writer at a time (close() may overlap the thread)
         self._rows: list[np.ndarray] = []
-        self._part = 0
-        self.errors = {"snapshot": 0, "writer": 0}
+        self._frames: list[tuple] = []       # (tick, side, seq, can_id, data, t_ns or None) per ingested frame
+        self._part = self._fpart = 0
+        self._last_snapshot = time.perf_counter()
+        self.errors = {"snapshot": 0, "writer": 0, "poll": 0}
         self.max_snapshot_s = 0.0
         self.closed = False
         self.dir = _new_session_dir(Path(out_dir))
         self._meta = {**meta, "schema": SCHEMA_VERSION, "columns": COLUMNS, "joints": JOINTS,
                       "joint_fields": list(JOINT_FIELDS), "side_fields": list(SIDE_FIELDS),
-                      "row_fields": list(ROW_FIELDS), "stale_s": STALE_S,
+                      "row_fields": list(ROW_FIELDS), "stale_s": STALE_S, "poll_s": POLL_S,
+                      "frames_schema": FRAMES_SCHEMA,
                       "clock": {"perf_counter": time.perf_counter(), "time": time.time()},
+                      "iface": {"start": {a.side: iface_stats(a.port) for a in arms}},
                       "closed": False}
         self._write_meta()
         self._stop = threading.Event()
@@ -276,6 +304,7 @@ class MotorTelemetry:
             row[keep] = kept
             row[_COL["snapshot_ok"]] = 0.0
         cost = time.perf_counter() - t
+        self._last_snapshot = t + cost
         row[_COL["snapshot_s"]] = cost
         self.max_snapshot_s = max(self.max_snapshot_s, cost)
         with self._lock:
@@ -289,17 +318,20 @@ class MotorTelemetry:
         for joint, motor in self._channels():
             lib[joint] = (float(motor.get_position()), float(motor.get_velocity()), float(motor.get_torque()),
                           float(motor.get_state_tmos()), float(motor.get_state_trotor()))
-        # 2. Then the wire, split at the reference time: later frames belong to the next row.
+        # 2. Then the wire, split at the reference time: later frames belong to the next row. A frame without a
+        #    kernel timestamp (counted in the tap's `untimed`) belongs to this row, stamped at the reference time.
         for arm in self._arms:
-            if arm.tap is not None and arm.tap.available:
-                arm.pending.extend(arm.tap.read())
-            arm.pending.sort(key=lambda f: f[2])
-            split = 0
-            while split < len(arm.pending) and arm.pending[split][2] <= ref_ns:
-                split += 1
-            now, arm.pending = arm.pending[:split], arm.pending[split:]
-            for can_id, data, t_ns in now:
-                self._ingest(arm, can_id, data, t_ns)
+            with self._tap_lock:
+                self._pull(arm)
+                arm.pending.sort(key=lambda f: (ref_ns if f[2] is None else f[2], f[3]))
+                split = 0
+                while split < len(arm.pending) and (arm.pending[split][2] or 0) <= ref_ns:
+                    split += 1
+                now, arm.pending = arm.pending[:split], arm.pending[split:]
+            for can_id, data, t_ns, seq in now:
+                self._ingest(arm, can_id, data, ref_ns if t_ns is None else t_ns)
+            with self._lock:
+                self._frames.extend((self._tick, arm.side, seq, can_id, data, t_ns) for can_id, data, t_ns, seq in now)
         fallback = {}
         if self._status_fallback is not None:
             try:
@@ -318,7 +350,7 @@ class MotorTelemetry:
             ok = arm.tap is not None and arm.tap.available
             row[_COL[f"{s}.tap_ok"]] = float(ok)
             if ok:
-                row[_COL[f"{s}.rx_dropped"]] = arm.tap.dropped
+                row[_COL[f"{s}.rx_dropped"]] = arm.tap.dropped + arm.host_dropped
                 row[_COL[f"{s}.bus_errors"]] = arm.tap.errors - arm.errors_seen
                 row[_COL[f"{s}.ctrl_frames"]] = arm.ctrl_frames
             arm.errors_seen = arm.tap.errors if arm.tap is not None else 0
@@ -376,6 +408,30 @@ class MotorTelemetry:
                 row[c("cmd_age_s")] = (ref_ns - t_ns) / 1e9
             jw.replies, jw.cmd_n = [], 0
 
+    def _pull(self, arm: _Arm) -> None:
+        """Move what the tap has queued into `pending`, numbered in delivery order. Caller holds _tap_lock."""
+        if arm.tap is None or not arm.tap.available:
+            return
+        for can_id, data, t_ns in arm.tap.read():
+            arm.pending.append((can_id, data, t_ns, arm.seq))
+            arm.seq += 1
+        if len(arm.pending) > MAX_PENDING:
+            arm.host_dropped += len(arm.pending) - MAX_PENDING
+            del arm.pending[: len(arm.pending) - MAX_PENDING]
+
+    def _drain_idle(self) -> None:
+        """Background thread: keep the taps' kernel queues empty while nothing calls snapshot()."""
+        if time.perf_counter() - self._last_snapshot < POLL_S:
+            return
+        try:
+            for arm in self._arms:
+                with self._tap_lock:
+                    self._pull(arm)
+        except Exception as e:  # noqa: BLE001
+            self.errors["poll"] += 1
+            if self.errors["poll"] <= 3:
+                logger.warning(f"telemetry idle drain failed ({type(e).__name__}: {e})")
+
     def _ingest(self, arm: _Arm, can_id: int, data: bytes, t_ns: int) -> None:
         joint = arm.reply.get(can_id)
         if joint is not None:
@@ -405,26 +461,47 @@ class MotorTelemetry:
 
     # -- output ------------------------------------------------------------------------------------------
     def _flush(self) -> None:
-        with self._lock:
-            rows, self._rows = self._rows, []
-        if not rows:
-            return
-        try:
-            import pyarrow as pa
-            import pyarrow.parquet as pq
+        with self._flush_lock:
+            with self._lock:
+                rows, self._rows = self._rows, []
+                frames, self._frames = self._frames, []
+            if rows:
+                try:
+                    import pyarrow as pa
+                    import pyarrow.parquet as pq
 
-            block = np.stack(rows)
-            arrays = [pa.array(block[:, i].astype(np.int64) if name == "tick" else block[:, i])
-                      for i, name in enumerate(COLUMNS)]
-            self._part += 1
-            pq.write_table(pa.Table.from_arrays(arrays, names=COLUMNS), self.dir / f"part-{self._part:05d}.parquet")
-        except Exception as e:  # noqa: BLE001 -- never take the recording down
-            self.errors["writer"] += 1
-            logger.warning(f"telemetry write failed ({type(e).__name__}: {e}); {len(rows)} rows lost")
+                    block = np.stack(rows)
+                    arrays = [pa.array(block[:, i].astype(np.int64) if name == "tick" else block[:, i])
+                              for i, name in enumerate(COLUMNS)]
+                    self._part += 1
+                    pq.write_table(pa.Table.from_arrays(arrays, names=COLUMNS),
+                                   self.dir / f"part-{self._part:05d}.parquet")
+                except Exception as e:  # noqa: BLE001 -- never take the recording down
+                    self.errors["writer"] += 1
+                    logger.warning(f"telemetry write failed ({type(e).__name__}: {e}); {len(rows)} rows lost")
+            if frames:
+                try:
+                    import pyarrow as pa
+                    import pyarrow.parquet as pq
+
+                    tick, side, seq, can_id, data, t_ns = zip(*frames)
+                    table = pa.Table.from_arrays(
+                        [pa.array(tick, pa.int64()), pa.array(side, pa.string()), pa.array(seq, pa.int64()),
+                         pa.array(can_id, pa.int32()), pa.array(data, pa.binary()), pa.array(t_ns, pa.int64())],
+                        names=list(FRAME_COLUMNS))
+                    self._fpart += 1
+                    pq.write_table(table, self.dir / f"frames-{self._fpart:05d}.parquet")
+                except Exception as e:  # noqa: BLE001
+                    self.errors["writer"] += 1
+                    logger.warning(f"telemetry frame write failed ({type(e).__name__}: {e}); {len(frames)} frames lost")
 
     def _flush_loop(self) -> None:
-        while not self._stop.wait(FLUSH_S):
-            self._flush()
+        due = time.monotonic() + FLUSH_S
+        while not self._stop.wait(POLL_S):
+            self._drain_idle()
+            if time.monotonic() >= due:
+                self._flush()
+                due = time.monotonic() + FLUSH_S
 
     def _write_meta(self) -> None:
         try:
@@ -443,11 +520,15 @@ class MotorTelemetry:
         self._stop.set()
         self._thread.join(timeout=FLUSH_S + 1)
         self._flush()
+        self._meta["iface"]["end"] = {a.side: iface_stats(a.port) for a in self._arms}
+        taps = {a.side: {"frames": a.seq, "kernel_dropped": getattr(a.tap, "dropped", None),
+                         "host_dropped": a.host_dropped, "untimed": getattr(a.tap, "untimed", None)}
+                for a in self._arms}
         for arm in self._arms:
             if arm.tap is not None:
                 arm.tap.close()
-        self._meta.update(closed=True, rows=self._tick, parts=self._part, errors=dict(self.errors),
-                          max_snapshot_s=self.max_snapshot_s,
+        self._meta.update(closed=True, rows=self._tick, parts=self._part, frame_parts=self._fpart,
+                          errors=dict(self.errors), max_snapshot_s=self.max_snapshot_s, taps=taps,
                           ctrl_frames=[e | {"side": a.side} for a in self._arms for e in a.ctrl_log])
         self._write_meta()
         print(f"[openarm_telemetry] {self._tick} rows in {self.dir}", flush=True)
@@ -487,6 +568,31 @@ class MotorTelemetry:
             logger.warning(f"telemetry not started ({type(e).__name__}: {e})")
             print(f"[openarm_telemetry] NOT recording telemetry: {type(e).__name__}: {e}", flush=True)
             return None
+
+
+def _ip_link(port: str):
+    """`ip -details -statistics link show` for one interface as JSON (a kernel netlink read; nothing on the bus)."""
+    out = subprocess.run(["ip", "-j", "-details", "-statistics", "link", "show", "dev", port],
+                         capture_output=True, text=True, timeout=2)
+    return json.loads(out.stdout)[0] if out.returncode == 0 and out.stdout.strip() else None
+
+
+def iface_stats(port: str) -> dict | None:
+    """The interface's kernel counters (sysfs statistics: tx_packets, rx_errors, ...) and CAN controller state
+    (state, berr_counter, restarts, bus_off ...). Host-side reads only; None where unavailable."""
+    out = {}
+    try:
+        stats = SYSFS_NET / port / "statistics"
+        out["statistics"] = {f.name: int(f.read_text()) for f in sorted(stats.iterdir())} if stats.is_dir() else None
+    except Exception:  # noqa: BLE001
+        out["statistics"] = None
+    try:
+        link = _ip_link(port) or {}
+        info = link.get("linkinfo", {})
+        out["can"] = {"flags": link.get("flags"), **info.get("info_data", {}), "xstats": info.get("info_xstats")} if info else None
+    except Exception:  # noqa: BLE001
+        out["can"] = None
+    return out
 
 
 def _same(a, b) -> bool:
@@ -547,6 +653,15 @@ def load(session_dir: str | Path):
     parts = sorted(session_dir.glob("part-*.parquet"))
     df = pd.concat([pd.read_parquet(p) for p in parts], ignore_index=True) if parts else pd.DataFrame(columns=COLUMNS)
     return df.sort_values("tick", kind="stable").reset_index(drop=True), meta
+
+
+def load_frames(session_dir: str | Path):
+    """DataFrame of every raw frame of one session (FRAME_COLUMNS), sorted by side then delivery order."""
+    import pandas as pd
+
+    parts = sorted(Path(session_dir).glob("frames-*.parquet"))
+    df = pd.concat([pd.read_parquet(p) for p in parts], ignore_index=True) if parts else pd.DataFrame(columns=FRAME_COLUMNS)
+    return df.sort_values(["side", "seq"], kind="stable").reset_index(drop=True)
 
 
 def align_to_dataset(df, states: np.ndarray, names: list[str]) -> int:
