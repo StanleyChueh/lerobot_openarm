@@ -58,7 +58,7 @@ lerobot-record \
   --dataset.num_episodes=50 --dataset.fps=30 \
   --dataset.episode_time_s=120 --dataset.reset_time_s=15 \
   --dataset.streaming_encoding=true --dataset.encoder_threads=2 \
-  --display_data=true
+  --display_data=true  --teleop.smoothing_beta=1.0
 ```
 
 Run the same command again to continue the local dataset (only a local copy is continued, never the Hub's). `--dataset.num_episodes` is the total to reach: with 21 episodes recorded, `--dataset.num_episodes=40` records 19 more. `--dataset.push_to_hub=false` keeps it local.
