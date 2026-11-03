@@ -280,6 +280,7 @@ def client_class(base):
             if self.recorder is None:
                 return super().control_loop_action(verbose)
             observation = self.robot.get_observation()  # the state the action is sent from, as lerobot-record
+            self.tick_observation = (time.perf_counter(), observation)  # also the policy's, if this tick sends one
             performed = super().control_loop_action(verbose)
             self.recorder.add(observation, self._policy_action)
             return performed

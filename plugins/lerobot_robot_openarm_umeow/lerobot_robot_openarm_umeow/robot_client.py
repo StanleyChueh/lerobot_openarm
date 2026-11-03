@@ -45,6 +45,9 @@ the display.
   timing   every tick and chunk is logged as in lerobot-rollout (eval_metrics.py): a line per episode, a
            summary table and a plot at the end, in outputs/eval_logs/ (mode async, or async_rtc when the
            policy server runs with --rtc=true).
+
+  observations  sent to the server from a background thread, so the control loop keeps --fps
+           (--background_observations=false: lerobot's inline send). See _background_observation_client_class.
 """
 
 import sys
@@ -67,9 +70,10 @@ def _bool(value: str) -> bool:
 
 _FLAGS = {"num_episodes": int, "episode_time_s": float, "reset_time_s": float, "display_data": _bool,
           "record_repo_id": str, "record_root": str, "resume": _bool, "push_to_hub": _bool,
-          "episode_steps": int, "poses": str, "results_dir": str, "stall_timeout_s": float}
+          "episode_steps": int, "poses": str, "results_dir": str, "stall_timeout_s": float,
+          "background_observations": _bool}
 _DEFAULTS = {"episode_time_s": 60.0, "reset_time_s": 60.0,  # lerobot-record's / lerobot-rollout's defaults
-             "stall_timeout_s": 60.0}
+             "stall_timeout_s": 60.0, "background_observations": True}
 _MATCHED = {"episode_steps", "poses", "results_dir"}  # all three, or none
 
 
@@ -124,10 +128,92 @@ def _episode_client_class(rc):
             self.action_chunk_size = -1
             self.must_go.set()
             self.start_barrier = threading.Barrier(2)
+            if hasattr(self, "drop_observations"):  # none of the last episode's may reach the server after Ready
+                self.drop_observations()
             self.stub.Ready(services_pb2.Empty())  # the server resets its observation queue / timesteps / RTC chunk
             self.shutdown_event.clear()
 
     return EpisodeClient
+
+
+def _background_observation_client_class(rc):
+    """lerobot's RobotClient, with each observation sent to the server from a background thread.
+
+    lerobot's control loop sends the observation inline: it pickles three camera frames and waits on
+    SendObservations, whose handler runs in the server process alongside the policy. On the real arm a tick
+    that sent one took 67 ms (p50) against 33 ms for the others, so the loop ran at ~20 Hz instead of --fps
+    and every chunk played back at two thirds of the speed it was trained at (GR00T async + RTC, 2026-11-03,
+    episodes 1-3 of outputs/eval_logs/20261103_100725_*). With --record_repo_id the robot was also read twice
+    on those ticks: once for the recorded frame, once for the policy.
+
+    Here the control loop still reads the robot itself -- the CAN bus is only ever touched from one thread --
+    but reuses the recorder's reading of this tick when there is one, and hands the observation to a sender
+    thread that keeps only the newest. An observation that has to go (empty queue) passes its must-go on to
+    the one that replaces it."""
+
+    class BackgroundObservationClient(rc.RobotClient):
+        def __init__(self, config):
+            super().__init__(config)
+            self.tick_observation = None  # (perf_counter, observation) read by the recorder this tick
+            self._obs_cv = threading.Condition()
+            self._obs_pending = None
+            self._obs_busy = False
+            self._obs_sender = None
+
+        def control_loop_observation(self, task: str, verbose: bool = False):
+            try:
+                stamp, raw = self.tick_observation or (0.0, None)
+                self.tick_observation = None
+                if raw is None or time.perf_counter() - stamp >= self.config.environment_dt:
+                    raw = self.robot.get_observation()  # no reading from this tick to reuse
+                raw = {**raw, "task": task}
+                with self.latest_action_lock:
+                    latest_action = self.latest_action
+                observation = rc.TimedObservation(timestamp=time.time(), observation=raw,
+                                                  timestep=max(latest_action, 0))
+                with self.action_queue_lock:
+                    observation.must_go = self.must_go.is_set() and self.action_queue.empty()
+                self._post_observation(observation)
+                if observation.must_go:
+                    self.must_go.clear()  # set again when actions arrive, as in lerobot's client
+                return raw
+            except Exception as e:
+                self.logger.error(f"Error in observation sender: {e}")
+
+        def _post_observation(self, observation) -> None:
+            with self._obs_cv:
+                if self._obs_pending is not None and self._obs_pending.must_go:
+                    observation.must_go = True
+                self._obs_pending = observation
+                if self._obs_sender is None or not self._obs_sender.is_alive():
+                    self._obs_sender = threading.Thread(target=self._send_observations, daemon=True,
+                                                        name="openarm-observations")
+                    self._obs_sender.start()
+                self._obs_cv.notify()
+
+        def _send_observations(self) -> None:
+            while True:
+                with self._obs_cv:
+                    self._obs_cv.wait_for(lambda: self._obs_pending is not None)
+                    observation, self._obs_pending = self._obs_pending, None
+                    self._obs_busy = True
+                try:
+                    self.send_observation(observation)
+                except Exception as e:  # the episode ended (client not running): this observation is dropped
+                    self.logger.debug(f"observation #{observation.get_timestep()} not sent: {e}")
+                finally:
+                    with self._obs_cv:
+                        self._obs_busy = False
+                        self._obs_cv.notify_all()
+
+        def drop_observations(self, timeout_s: float = 5.0) -> None:
+            """Forget the observation not sent yet and wait for the one being sent, if any."""
+            with self._obs_cv:
+                self._obs_pending = None
+                if not self._obs_cv.wait_for(lambda: not self._obs_busy, timeout=timeout_s):
+                    print(f"[openarm] an observation was still being sent after {timeout_s:g} s.", flush=True)
+
+    return BackgroundObservationClient
 
 
 def _display_client_class(base):
@@ -356,7 +442,8 @@ def _run_matched(client, cfg, hw, matched: dict, log, recorder, events, num_epis
 
 
 def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: float, display: bool,
-                 record: "eval_recording.Target | None" = None, matched: dict | None = None) -> None:
+                 record: "eval_recording.Target | None" = None, matched: dict | None = None,
+                 background: bool = True) -> None:
     import lerobot.async_inference.robot_client as rc
     import lerobot.rollout.strategies.core as core  # imported before connecting: the robot slows its returns
 
@@ -364,8 +451,15 @@ def run_episodes(cfg, num_episodes: int, episode_time_s: float, reset_time_s: fl
     from lerobot.rollout.robot_wrapper import ThreadSafeRobot
     from lerobot.transport import services_pb2
 
+    if background:  # under the display, which shows what this returns
+        rc.RobotClient = _background_observation_client_class(rc)
+    print(f"[openarm] observations are sent to the server "
+          + ("from a background thread (--background_observations=false: inline, as lerobot's client)."
+             if background else "inline, as lerobot's client (the control loop waits for each send)."), flush=True)
     display = display and _start_display(rc)
     log = _eval_log(cfg.pretrained_name_or_path, cfg.fps, cfg.policy_type)
+    if log is not None:
+        log.options["background_observations"] = background
     client_cls = _episode_client_class(rc)
     if log is not None:
         client_cls = eval_metrics.client_class(client_cls, log)
@@ -472,8 +566,8 @@ def main() -> None:
     display = values.get("display_data", True)
     if "num_episodes" not in values:
         if set(values) - {"num_episodes", "display_data"}:
-            raise SystemExit("[openarm] --episode_time_s / --reset_time_s / --record_repo_id / --resume need"
-                             " --num_episodes.")
+            raise SystemExit("[openarm] --episode_time_s / --reset_time_s / --record_repo_id / --resume /"
+                             " --background_observations need --num_episodes.")
         display = display and _start_display(rc)
         log = _eval_log(eval_metrics._argv_value("--pretrained_name_or_path"),
                         float(eval_metrics._argv_value("--fps") or 30), eval_metrics._argv_value("--policy_type"))
@@ -525,7 +619,8 @@ def main() -> None:
     @draccus.wrap()
     def episodes(cfg: RobotClientConfig):
         run_episodes(cfg, values["num_episodes"], values.get("episode_time_s", _DEFAULTS["episode_time_s"]),
-                     values.get("reset_time_s", _DEFAULTS["reset_time_s"]), display, record, matched)
+                     values.get("reset_time_s", _DEFAULTS["reset_time_s"]), display, record, matched,
+                     values.get("background_observations", _DEFAULTS["background_observations"]))
 
     episodes()
 
