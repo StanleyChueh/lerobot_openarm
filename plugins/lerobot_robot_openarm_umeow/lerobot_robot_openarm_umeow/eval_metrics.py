@@ -110,6 +110,7 @@ class EvalLog:
         self.ticks: list[tuple] = []  # (t, episode, sent, queue, new_chunk, action[16] | None, state[16] | None)
         self.chunks: list[dict] = []
         self.episode = 0
+        self.options: dict = {}  # run settings that change the timing, written to summary.json
         self._lock = threading.Lock()
         self._t0 = time.perf_counter()
         self._episode_t0 = None
@@ -228,7 +229,7 @@ class EvalLog:
             _write(out, self, ticks, chunks)
             summary = summarize(ticks, chunks, self.fps)
             meta = {"mode": self.mode, "policy": self.policy, "model": self.model, "policy_type": self.policy_type,
-                    "fps": self.fps, "rerun": bool(self._live), "argv": sys.argv}
+                    "fps": self.fps, "rerun": bool(self._live), **self.options, "argv": sys.argv}
             (out / "summary.json").write_text(json.dumps({**meta, "metrics": summary}, indent=1))
             print(format_table([(f"{self.mode} | {self.policy}", summary)]), flush=True)
             png = out / "report.png"
