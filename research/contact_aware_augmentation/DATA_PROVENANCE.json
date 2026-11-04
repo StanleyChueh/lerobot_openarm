@@ -1,0 +1,778 @@
+{
+ "schema": "contact_aware_augmentation/data_provenance/1",
+ "generated_at": "2026-11-04T19:23:20+08:00",
+ "generated_by": [
+  "research/contact_aware_augmentation/scripts/gate0_diagnostics.py",
+  "research/contact_aware_augmentation/scripts/hub_metadata.py",
+  "research/contact_aware_augmentation/scripts/make_data_provenance.py"
+ ],
+ "hub_queried_at": "2026-11-04T19:17:17+08:00",
+ "code_repos": {
+  "lerobot_openarm": {
+   "sha": "21388b0e8803426af942a4e8519b1dcf54b704d6",
+   "branch": "research/contact-aware-augmentation",
+   "dirty": false
+  },
+  "lerobot": {
+   "sha": "530b253f262d6af92ea3b91d62abcae0295af59f",
+   "branch": "update_dev_v2",
+   "dirty": false
+  },
+  "IsaacLab": {
+   "sha": "4aa5e026f6b1b1fb7f95fb65f8d751f16c055e18",
+   "branch": "openarm-dev",
+   "dirty": false
+  }
+ },
+ "urdf": {
+  "path": "model/openarm_description.urdf",
+  "sha256": "7b3bcad456fbe188af102a32b3b91e177e5c53e2242247e992d79c167e6c205d"
+ },
+ "body_cam_model_used_for_projection": {
+  "parent": "openarm_body_link0",
+  "pos": [
+   0.05621,
+   -0.00305,
+   0.83062
+  ],
+  "quat_wxyz": [
+   0.1872,
+   -0.68244,
+   0.69543,
+   -0.1249
+  ],
+  "fx": 607.22,
+  "fy": 607.22,
+  "cx": 326.4,
+  "cy": 238.7,
+  "source": "IsaacLab@4aa5e026 stack_ik_abs_visuomotor_env_cfg.py body_cam OffsetCfg (FITTED, unvalidated on held-out keypoints)"
+ },
+ "datasets": {
+  "pringles_real_10_v00": {
+   "repo_id": "ethanCSL/openarm_pringles_lerobot_real_10_v00",
+   "hub_revision_sha": "cebdee98115ab6827a4ec2655335c536b5dd085b",
+   "hub_last_modified": "2026-10-21 10:43:00+00:00",
+   "hub_refs": {
+    "branches": {
+     "main": "cebdee98115ab6827a4ec2655335c536b5dd085b"
+    },
+    "tags": {
+     "v3.0": "cebdee98115ab6827a4ec2655335c536b5dd085b"
+    }
+   },
+   "local_copy": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/snapshots/cebdee98115ab6827a4ec2655335c536b5dd085b",
+   "local_vs_hub": {
+    "files_compared": 9,
+    "mismatches": [],
+    "hub_files_not_local": [
+     ".gitattributes"
+    ]
+   },
+   "codebase_version": "v3.0",
+   "robot_type": "openarm_umeow",
+   "fps_nominal": 30.0,
+   "tasks": [
+    "Pick up the Pringles can with the right arm, hand it to the left arm"
+   ],
+   "episodes": 10,
+   "frames": 2575,
+   "episodes_in_metadata": 10,
+   "frames_in_data": 2575,
+   "features": {
+    "action": {
+     "dtype": "float32",
+     "shape": [
+      16
+     ],
+     "names": [
+      "RJ1.pos",
+      "LJ1.pos",
+      "RJ2.pos",
+      "LJ2.pos",
+      "RJ3.pos",
+      "LJ3.pos",
+      "RJ4.pos",
+      "LJ4.pos",
+      "RJ5.pos",
+      "LJ5.pos",
+      "RJ6.pos",
+      "LJ6.pos",
+      "RJ7.pos",
+      "LJ7.pos",
+      "RJ8.pos",
+      "LJ8.pos"
+     ]
+    },
+    "observation.state": {
+     "dtype": "float32",
+     "shape": [
+      16
+     ],
+     "names": [
+      "RJ1.pos",
+      "LJ1.pos",
+      "RJ2.pos",
+      "LJ2.pos",
+      "RJ3.pos",
+      "LJ3.pos",
+      "RJ4.pos",
+      "LJ4.pos",
+      "RJ5.pos",
+      "LJ5.pos",
+      "RJ6.pos",
+      "LJ6.pos",
+      "RJ7.pos",
+      "LJ7.pos",
+      "RJ8.pos",
+      "LJ8.pos"
+     ]
+    },
+    "observation.images.body_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "observation.images.wrist_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "observation.images.right_wrist_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "timestamp": {
+     "dtype": "float32",
+     "shape": [
+      1
+     ]
+    },
+    "frame_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "episode_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "task_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    }
+   },
+   "file_sha256": {
+    "README.md": "dbf5a7fe9a2f243b0ce55fc776ab4704e0eb288996e4eb750292198eabdb7a6f",
+    "data/chunk-000/file-000.parquet": "f8190732b61e8cc0678fda1bb3d81f482fb76cfdee294cede6b99f817a4de234",
+    "meta/episodes/chunk-000/file-000.parquet": "7a12bbda1f0ea8747b55249391f681754e03ccf16a5feb7d90e0d2921b01a6f4",
+    "meta/info.json": "47958db0f00cddda7547e5a10cf9a4deaee11ae4fb9faec48d5361e8c5032a11",
+    "meta/stats.json": "d984160cab566fdae4a2616dbb6231bacfe62cc40a8766dc2bdf9e30cfec4892",
+    "meta/tasks.parquet": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+    "videos/observation.images.body_cam/chunk-000/file-000.mp4": "44ba7ce5325b2c1f549f4fdac546bfbe18295c7197bc62070a30bd6ce642f3a3",
+    "videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4": "2cce747bd6de83a222cb8ea62aed054326991bc7466f2ababbcf8b9bce5eef33",
+    "videos/observation.images.wrist_cam/chunk-000/file-000.mp4": "80fccbca892809c1a1bc88ec74877b1defcdf54b0659773e469b4a9e38f190e6"
+   },
+   "file_bytes": {
+    "README.md": 5901,
+    "data/chunk-000/file-000.parquet": 334463,
+    "meta/episodes/chunk-000/file-000.parquet": 91319,
+    "meta/info.json": 5002,
+    "meta/stats.json": 22179,
+    "meta/tasks.parquet": 2331,
+    "videos/observation.images.body_cam/chunk-000/file-000.mp4": 30256059,
+    "videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4": 12910491,
+    "videos/observation.images.wrist_cam/chunk-000/file-000.mp4": 12606166
+   },
+   "timing": {
+    "timestamp_minus_frame_index_over_fps_max_abs_s": 4.4504801444134046e-07,
+    "frame_index_contiguous_from_0": true,
+    "global_index_contiguous": true,
+    "metadata_length_equals_rows": true,
+    "episode_length_frames": {
+     "min": 241,
+     "median": 254.0,
+     "max": 280,
+     "total": 2575
+    },
+    "episode_length_s_nominal": {
+     "min": 8.03,
+     "median": 8.47,
+     "max": 9.33
+    },
+    "measured_loop_rate": "UNKNOWN: timestamps are nominal frame_index/fps; no DIAG/telemetry log of the recording sessions was found on this machine",
+    "cameras": {
+     "observation.images.body_cam": {
+      "video_span_minus_length_over_fps_max_abs_s": 0.0,
+      "video_packets_total": 2575,
+      "video_packets_equal_frames": true,
+      "codec": "libdav1d",
+      "width_height": [
+       640,
+       480
+      ],
+      "files_local": 1
+     },
+     "observation.images.wrist_cam": {
+      "video_span_minus_length_over_fps_max_abs_s": 0.0,
+      "video_packets_total": 2575,
+      "video_packets_equal_frames": true,
+      "codec": "libdav1d",
+      "width_height": [
+       640,
+       480
+      ],
+      "files_local": 1
+     },
+     "observation.images.right_wrist_cam": {
+      "video_span_minus_length_over_fps_max_abs_s": 0.0,
+      "video_packets_total": 2575,
+      "video_packets_equal_frames": true,
+      "codec": "libdav1d",
+      "width_height": [
+       640,
+       480
+      ],
+      "files_local": 1
+     }
+    }
+   },
+   "signals": {
+    "columns": [
+     "action",
+     "observation.state",
+     "timestamp",
+     "frame_index",
+     "episode_index",
+     "index",
+     "task_index",
+     "observation.images.body_cam",
+     "observation.images.wrist_cam",
+     "observation.images.right_wrist_cam"
+    ],
+    "verdict": "joint positions only (16 x .pos state, 16 x .pos action) + RGB video; no torque, current, velocity, temperature, force or telemetry field"
+   },
+   "action_semantics": {
+    "action_names_equal_state_names": true,
+    "action_leads_state_frames": 2,
+    "lag_error_rad": {
+     "0": 0.01353,
+     "1": 0.00962,
+     "2": 0.00861,
+     "3": 0.01113,
+     "4": 0.01501,
+     "5": 0.01935
+    },
+    "grippers": {
+     "RJ8.pos": {
+      "open_cmd": -1.298,
+      "closed_cmd": 0.0,
+      "frac_frames_at_endpoint": 0.9934,
+      "distinct_action_values": 19,
+      "state_range": [
+       -1.2648,
+       -0.5102
+      ]
+     },
+     "LJ8.pos": {
+      "open_cmd": 1.2121,
+      "closed_cmd": 0.0,
+      "frac_frames_at_endpoint": 0.9981,
+      "distinct_action_values": 7,
+      "state_range": [
+       0.4038,
+       1.1645
+      ]
+     }
+    }
+   }
+  },
+  "insertbattery_real_v02": {
+   "repo_id": "ethanCSL/openarm_insertbattery_lerobot_real_v02",
+   "hub_revision_sha": "ac63facb63571215f07cb5465386b127c4b740ff",
+   "hub_last_modified": "2026-11-02 11:07:43+00:00",
+   "hub_refs": {
+    "branches": {
+     "main": "ac63facb63571215f07cb5465386b127c4b740ff"
+    },
+    "tags": {
+     "v3.0": "ac63facb63571215f07cb5465386b127c4b740ff"
+    }
+   },
+   "local_copy": "/tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/hub_battery_v02",
+   "local_vs_hub": {
+    "files_compared": 9,
+    "mismatches": [],
+    "hub_files_not_local": [
+     ".gitattributes",
+     "videos/observation.images.body_cam/chunk-000/file-001.mp4",
+     "videos/observation.images.body_cam/chunk-000/file-002.mp4",
+     "videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4",
+     "videos/observation.images.right_wrist_cam/chunk-000/file-001.mp4",
+     "videos/observation.images.wrist_cam/chunk-000/file-000.mp4",
+     "videos/observation.images.wrist_cam/chunk-000/file-001.mp4"
+    ]
+   },
+   "codebase_version": "v3.0",
+   "robot_type": "openarm_umeow",
+   "fps_nominal": 30.0,
+   "tasks": [
+    "Pick up the charging station with the left arm, and insert battery in it with the right arm"
+   ],
+   "episodes": 55,
+   "frames": 41360,
+   "episodes_in_metadata": 55,
+   "frames_in_data": 41360,
+   "features": {
+    "action": {
+     "dtype": "float32",
+     "shape": [
+      16
+     ],
+     "names": [
+      "RJ1.pos",
+      "LJ1.pos",
+      "RJ2.pos",
+      "LJ2.pos",
+      "RJ3.pos",
+      "LJ3.pos",
+      "RJ4.pos",
+      "LJ4.pos",
+      "RJ5.pos",
+      "LJ5.pos",
+      "RJ6.pos",
+      "LJ6.pos",
+      "RJ7.pos",
+      "LJ7.pos",
+      "RJ8.pos",
+      "LJ8.pos"
+     ]
+    },
+    "observation.state": {
+     "dtype": "float32",
+     "shape": [
+      16
+     ],
+     "names": [
+      "RJ1.pos",
+      "LJ1.pos",
+      "RJ2.pos",
+      "LJ2.pos",
+      "RJ3.pos",
+      "LJ3.pos",
+      "RJ4.pos",
+      "LJ4.pos",
+      "RJ5.pos",
+      "LJ5.pos",
+      "RJ6.pos",
+      "LJ6.pos",
+      "RJ7.pos",
+      "LJ7.pos",
+      "RJ8.pos",
+      "LJ8.pos"
+     ]
+    },
+    "observation.images.body_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "observation.images.wrist_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "observation.images.right_wrist_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "timestamp": {
+     "dtype": "float32",
+     "shape": [
+      1
+     ]
+    },
+    "frame_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "episode_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "task_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    }
+   },
+   "file_sha256": {
+    "README.md": "8b331ae19c4df54a4571ecd12fea5b06b7f89a6354c0596e351a3609a552e260",
+    "data/chunk-000/file-000.parquet": "822deaf56db36314c60b1fe7ee54985d1a8e684c70d834f28db46ffb2d893cd5",
+    "data/chunk-000/file-001.parquet": "6cf6818300462a2ed458757deb44566d8bb6450440dd288192e92da505738285",
+    "meta/episodes/chunk-000/file-000.parquet": "53bc720eec0cb4860c380bb52e56aee9587f14180221b61f38096cb891b95252",
+    "meta/episodes/chunk-000/file-001.parquet": "fca945deeeaacf05f0f574897741ed3fb56d88f42446e72174c2bb2d02a0dbc8",
+    "meta/info.json": "69a4381225ac4382f10367c745594c768b37d75fb3bebb93545d3f17ce87b2e0",
+    "meta/stats.json": "b44513e9c70eb11aaa854f6f2fa8d19483ac9e4041ebab1abd51c4cb14bfb22c",
+    "meta/tasks.parquet": "db49d4afd25b6d803a5a1e68fc75074b7b4f52435f3a1711b4014b05dcab253b",
+    "videos/observation.images.body_cam/chunk-000/file-000.mp4": null
+   },
+   "file_bytes": {
+    "README.md": 5904,
+    "data/chunk-000/file-000.parquet": 5366276,
+    "data/chunk-000/file-001.parquet": 542232,
+    "meta/episodes/chunk-000/file-000.parquet": 339184,
+    "meta/episodes/chunk-000/file-001.parquet": 76755,
+    "meta/info.json": 5003,
+    "meta/stats.json": 22119,
+    "meta/tasks.parquet": 2440,
+    "videos/observation.images.body_cam/chunk-000/file-000.mp4": 206051040
+   },
+   "timing": {
+    "timestamp_minus_frame_index_over_fps_max_abs_s": 8.900960288826809e-07,
+    "frame_index_contiguous_from_0": true,
+    "global_index_contiguous": true,
+    "metadata_length_equals_rows": true,
+    "episode_length_frames": {
+     "min": 667,
+     "median": 754.0,
+     "max": 890,
+     "total": 41360
+    },
+    "episode_length_s_nominal": {
+     "min": 22.23,
+     "median": 25.13,
+     "max": 29.67
+    },
+    "measured_loop_rate": "UNKNOWN: timestamps are nominal frame_index/fps; no DIAG/telemetry log of the recording sessions was found on this machine",
+    "cameras": {
+     "observation.images.body_cam": {
+      "video_span_minus_length_over_fps_max_abs_s": 0.0,
+      "video_packets_total": null,
+      "video_packets_equal_frames": null,
+      "codec": null,
+      "width_height": null,
+      "files_local": 1
+     },
+     "observation.images.wrist_cam": {
+      "video_span_minus_length_over_fps_max_abs_s": 0.0,
+      "video_packets_total": null,
+      "video_packets_equal_frames": null,
+      "codec": null,
+      "width_height": null,
+      "files_local": 0
+     },
+     "observation.images.right_wrist_cam": {
+      "video_span_minus_length_over_fps_max_abs_s": 0.0,
+      "video_packets_total": null,
+      "video_packets_equal_frames": null,
+      "codec": null,
+      "width_height": null,
+      "files_local": 0
+     }
+    }
+   },
+   "signals": {
+    "columns": [
+     "action",
+     "observation.state",
+     "timestamp",
+     "frame_index",
+     "episode_index",
+     "index",
+     "task_index",
+     "observation.images.body_cam",
+     "observation.images.wrist_cam",
+     "observation.images.right_wrist_cam"
+    ],
+    "verdict": "joint positions only (16 x .pos state, 16 x .pos action) + RGB video; no torque, current, velocity, temperature, force or telemetry field"
+   },
+   "action_semantics": {
+    "action_names_equal_state_names": true,
+    "action_leads_state_frames": 2,
+    "lag_error_rad": {
+     "0": 0.02001,
+     "1": 0.01786,
+     "2": 0.01684,
+     "3": 0.01732,
+     "4": 0.01864,
+     "5": 0.02041
+    },
+    "grippers": {
+     "RJ8.pos": {
+      "open_cmd": -1.298,
+      "closed_cmd": 0.0,
+      "frac_frames_at_endpoint": 0.9597,
+      "distinct_action_values": 1251,
+      "state_range": [
+       -1.2835,
+       0.0643
+      ]
+     },
+     "LJ8.pos": {
+      "open_cmd": 1.2121,
+      "closed_cmd": 0.0,
+      "frac_frames_at_endpoint": 0.9926,
+      "distinct_action_values": 284,
+      "state_range": [
+       0.3737,
+       1.19
+      ]
+     }
+    }
+   }
+  },
+  "pringles_real_v00_pool": {
+   "repo_id": "ethanCSL/openarm_pringles_lerobot_real_v00",
+   "hub_revision_sha": "2c1bc860347c44fc0fbae7567469d36ee49baa8d",
+   "hub_last_modified": "2026-10-08 07:02:00+00:00",
+   "hub_refs": {
+    "branches": {
+     "main": "2c1bc860347c44fc0fbae7567469d36ee49baa8d"
+    },
+    "tags": {
+     "v3.0": "2c1bc860347c44fc0fbae7567469d36ee49baa8d"
+    }
+   },
+   "local_copy": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/snapshots/2c1bc860347c44fc0fbae7567469d36ee49baa8d",
+   "local_vs_hub": {
+    "files_compared": 7,
+    "mismatches": [],
+    "hub_files_not_local": [
+     ".gitattributes",
+     "videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4",
+     "videos/observation.images.wrist_cam/chunk-000/file-000.mp4"
+    ]
+   },
+   "codebase_version": "v3.0",
+   "robot_type": "openarm_umeow",
+   "fps_nominal": 30.0,
+   "tasks": [
+    "Pick up the Pringles can with the right arm, hand it to the left arm"
+   ],
+   "episodes": 50,
+   "frames": 12115,
+   "episodes_in_metadata": 50,
+   "frames_in_data": 12115,
+   "features": {
+    "action": {
+     "dtype": "float32",
+     "shape": [
+      16
+     ],
+     "names": [
+      "RJ1.pos",
+      "LJ1.pos",
+      "RJ2.pos",
+      "LJ2.pos",
+      "RJ3.pos",
+      "LJ3.pos",
+      "RJ4.pos",
+      "LJ4.pos",
+      "RJ5.pos",
+      "LJ5.pos",
+      "RJ6.pos",
+      "LJ6.pos",
+      "RJ7.pos",
+      "LJ7.pos",
+      "RJ8.pos",
+      "LJ8.pos"
+     ]
+    },
+    "observation.state": {
+     "dtype": "float32",
+     "shape": [
+      16
+     ],
+     "names": [
+      "RJ1.pos",
+      "LJ1.pos",
+      "RJ2.pos",
+      "LJ2.pos",
+      "RJ3.pos",
+      "LJ3.pos",
+      "RJ4.pos",
+      "LJ4.pos",
+      "RJ5.pos",
+      "LJ5.pos",
+      "RJ6.pos",
+      "LJ6.pos",
+      "RJ7.pos",
+      "LJ7.pos",
+      "RJ8.pos",
+      "LJ8.pos"
+     ]
+    },
+    "observation.images.body_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "observation.images.wrist_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "observation.images.right_wrist_cam": {
+     "dtype": "video",
+     "shape": [
+      480,
+      640,
+      3
+     ],
+     "codec": "av1",
+     "fps": 30,
+     "gop": 2,
+     "crf": 30
+    },
+    "timestamp": {
+     "dtype": "float32",
+     "shape": [
+      1
+     ]
+    },
+    "frame_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "episode_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    },
+    "task_index": {
+     "dtype": "int64",
+     "shape": [
+      1
+     ]
+    }
+   },
+   "file_sha256": {
+    "README.md": "882f30d0ad03b65b076a330de8deb6a11b8cbb1d48e528c489c3b78b22de4929",
+    "data/chunk-000/file-000.parquet": "e6be83a572dab9841604be3f0dc6337423ccd8f79e499c4706ce521ff181c761",
+    "meta/episodes/chunk-000/file-000.parquet": "6bbb9ab1f22cf13188535767749336cad0afa5307a8d1b3913ce505bf8edb393",
+    "meta/info.json": "8f1afff3b3c95c86229b7d0a008393347f85d48e37326684ed4b5da8597a0797",
+    "meta/stats.json": "6bd5c32b79d4c5172388b3dc77b87b53f6f8c2a940533c9df01d80d71810f504",
+    "meta/tasks.parquet": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+    "videos/observation.images.body_cam/chunk-000/file-000.mp4": null
+   },
+   "file_bytes": {
+    "README.md": 5899,
+    "data/chunk-000/file-000.parquet": 1836836,
+    "meta/episodes/chunk-000/file-000.parquet": 337134,
+    "meta/info.json": 5003,
+    "meta/stats.json": 22177,
+    "meta/tasks.parquet": 2331,
+    "videos/observation.images.body_cam/chunk-000/file-000.mp4": 144235561
+   }
+  }
+ },
+ "relations": {
+  "real_10_v00_equals_real_v00_pool_episodes_0_9": true,
+  "insertbattery_other_versions_on_hub": {
+   "ethanCSL/openarm_insertbattery_lerobot_real_v01": "0b3509ddda0a54c2e792235abf3203a6f76fb952",
+   "ethanCSL/openarm_insertbattery_lerobot_real_v00": "24eb901651f35bbab3ff7c375ce2dcd05abb1c16"
+  },
+  "local_insertbattery_v01_cache_snapshot": "b20b699e7fb2ef70986ab4ca9b24841fe777a23e (older than Hub main 0b3509dd; not used)"
+ },
+ "not_present_in_any_dataset": [
+  "motor torque / current",
+  "joint velocity",
+  "motor temperature",
+  "force / wrench",
+  "telemetry sidecar (openarm_telemetry/1)",
+  "depth",
+  "camera timestamps / frame age",
+  "controller gains or clamped command (q*)",
+  "recording code SHA"
+ ],
+ "preservation": "datasets were read only; v02 metadata/data and one body_cam video were downloaded into a session scratch folder (not the shared HF cache); no file under any dataset root was written; nothing pushed"
+}
