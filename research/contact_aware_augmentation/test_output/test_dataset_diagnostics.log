@@ -1,0 +1,11 @@
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 3.532s
+
+OK
+
+=== syn
+  technical: PASS | coverage: FAIL | quality: UNKNOWN | real_sim: UNKNOWN
+
+wrote /tmp/tmp5ssfgfcn/out/dataset_report.html
+exit 0

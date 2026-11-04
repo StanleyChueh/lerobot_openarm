@@ -1,0 +1,198 @@
+INFO 2026-11-04 19:11:19 t_record.py:388 {'dataset': {'depth_encoder': {'crf': 30,
+                               'depth_max': 10.0,
+                               'depth_min': 0.01,
+                               'extra_options': {'x265-params': 'lossless=1'},
+                               'fast_decode': 0,
+                               'g': 2,
+                               'pix_fmt': 'gray12le',
+                               'preset': None,
+                               'shift': 3.5,
+                               'use_log': True,
+                               'vcodec': 'hevc',
+                               'video_backend': 'pyav'},
+             'encoder_queue_maxsize': 30,
+             'encoder_threads': None,
+             'episode_time_s': 4,
+             'fps': 30,
+             'no_stamp': False,
+             'num_episodes': 2,
+             'num_image_writer_processes': 0,
+             'num_image_writer_threads_per_camera': 4,
+             'private': None,
+             'push_to_hub': False,
+             'repo_id': 'local/openarm_telemetry_mock',
+             'reset_time_s': 1,
+             'rgb_encoder': {'crf': 30,
+                             'extra_options': {},
+                             'fast_decode': 0,
+                             'g': 2,
+                             'pix_fmt': 'yuv420p',
+                             'preset': 12,
+                             'vcodec': 'libsvtav1',
+                             'video_backend': 'pyav'},
+             'root': '/tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/e2e/ds',
+             'single_task': 'mock telemetry',
+             'streaming_encoding': False,
+             'tags': None,
+             'video': True,
+             'video_encoding_batch_size': 1},
+ 'display_compressed_images': False,
+ 'display_data': False,
+ 'display_ip': None,
+ 'display_mode': 'rerun',
+ 'display_port': None,
+ 'play_sounds': False,
+ 'resume': False,
+ 'robot': {'approach_speed': 0.3,
+           'assume_yes': True,
+           'calibration': '/home/stanley/Stanley_ws/lerobot_openarm/calibration.json',
+           'calibration_dir': None,
+           'cameras': {},
+           'gripper_max_speed': 8.0,
+           'gripper_squeeze_tau': 1.5,
+           'id': None,
+           'ik_xml': '/home/stanley/Stanley_ws/dora-openarm-data-collection/nodes/dora-openarm-mujoco/src/dora_openarm_mujoco/scenes/v1_camera/scene.xml',
+           'left_port': 'can1',
+           'max_approach_delta': 1.8,
+           'max_command_jump': 0.25,
+           'max_joint_speed': 2.5,
+           'max_tracking_error': 0.5,
+           'model_path': '/home/stanley/Stanley_ws/lerobot_openarm/model/openarm_description.urdf',
+           'policy_dtype': 'auto',
+           'resume_tolerance': 0.1,
+           'return_speed': 0.3,
+           'return_to_rest': True,
+           'right_port': 'can0',
+           'start_keyframe': 'home',
+           'start_pose': 'keyframe',
+           'telemetry_dir': '/tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/e2e/telemetry'},
+ 'teleop': {'calibration': '/home/stanley/Stanley_ws/lerobot_openarm/calibration.json',
+            'calibration_dir': None,
+            'diag': False,
+            'episode_buttons': False,
+            'glitch_pause_count': 3,
+            'glitch_rot_speed_dps': 900.0,
+            'glitch_speed_mps': 4.0,
+            'host': '0.0.0.0',
+            'id': None,
+            'ik_args': '--mode bimanual --max-iters 10 --dt 0.1 --damping 0.1 '
+                       '--posture-cost 0 --lm-damping 0.01 --nullspace-cost 0 '
+                       '--singularity-max-approach-rate 0',
+            'ik_hz': 500.0,
+            'ik_jump_rad': 0.2,
+            'ik_xml': '/home/stanley/Stanley_ws/dora-openarm-data-collection/nodes/dora-openarm-mujoco/src/dora_openarm_mujoco/scenes/v1_camera/scene.xml',
+            'keyframe': 'home',
+            'max_joint_speed': 2.0,
+            'max_lead_rad': 1.0,
+            'port': 5995,
+            'pose_fresh_s': 0.3,
+            'return_speed': 0.3,
+            'smoothing_beta': 5.0,
+            'smoothing_d_cutoff': 1.5,
+            'smoothing_min_cutoff': 2.0}}
+[openarm_quest] listening for the Quest on UDP 0.0.0.0:5995
+[openarm_quest] HELD at 'home' with grippers open -- press X to anchor and start driving.
+[openarm_quest] connected. X = start driving; 2nd X = return home, then save; Y = discard + return home; triggers = grippers
+[openarm_quest] first Quest packet received from 127.0.0.1:44937
+
+Approach to the 'home' keyframe pose -- current vs target:
+  LJ1.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  LJ2.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  LJ3.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  LJ4.pos    real=-0.0002  target=+1.5708  delta=+1.5710  <-- furthest
+  LJ5.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  LJ6.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  LJ7.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  LJ8.pos    real=-0.0002  target=+1.2121  delta=+1.2123
+  RJ1.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  RJ2.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  RJ3.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  RJ4.pos    real=-0.0002  target=+1.5708  delta=+1.5710
+  RJ5.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  RJ6.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  RJ7.pos    real=-0.0002  target=+0.0000  delta=+0.0002
+  RJ8.pos    real=-0.0002  target=-1.2980  delta=-1.2978
+
+Planned approach: 1.571 rad on LJ4.pos over 5.2s (<= 0.3 rad/s per joint; grippers <= 8 rad/s).
+  [ramp_to] entering loop, about to call send_action() for step 1/261...
+INFO 2026-11-04 19:11:25 rd_input.py:372 Keyboard listener started (Right/Left/Esc, or n=next, r=re-record, q=quit).
+INFO 2026-11-04 19:11:25 t_record.py:489 Streaming encoding is disabled. If you have capable hardware, consider enabling it for way faster episode saving. --dataset.streaming_encoding=true --dataset.encoder_threads=2 # --dataset.rgb_encoder.vcodec=auto. More info in the documentation: https://huggingface.co/docs/lerobot/streaming_video_encoding
+INFO 2026-11-04 19:11:25 ls/utils.py:147 Recording episode 0
+Approach complete. Worst residual: RJ8.pos at 0.0004 rad (steady-state error at this hold; expected, not a fault).
+[openarm_quest] waiting for X to start recording this episode (nothing is recorded yet).
+[openarm_quest] X: anchored from home -- the arms follow the controllers.
+[openarm_quest] X: recording.
+[openarm_umeow] 30 Hz commands | step limit 2.5 rad/s bound 0% of them, worst 0.000 rad short of the request | observation read 0 ms avg, 0 max
+[openarm_quest] episode_time_s (4 s) reached: returning home, then saving.
+[openarm_quest] episode time limit: returning home slowly (0.04 rad over 0.5 s, <= 0.3 rad/s); the episode is SAVED on arrival, return included.
+[openarm_quest] home: SAVE the episode.
+[openarm_quest] episode SAVED (arms home).
+[openarm_quest] HELD at home -- grippers open once the episode is saved.
+INFO 2026-11-04 19:11:31 ls/utils.py:147 Reset the environment
+[openarm_quest] grippers opened -- press X for the next episode.
+Map:   0%|          | 0/135 [00:00<?, ? examples/s]Map: 100%|██████████| 135/135 [00:00<00:00, 4832.19 examples/s]
+INFO 2026-11-04 19:11:32 ls/utils.py:147 Recording episode 1
+[openarm_quest] waiting for X to start recording this episode (nothing is recorded yet).
+[openarm_quest] X: anchored from home -- the arms follow the controllers.
+[openarm_quest] X: recording.
+INFO 2026-11-04 19:11:32 le_timer.py:559 Cadence (episode 0): 29.91 Hz vs 30 Hz target · 135 ticks, 4.5 s measured · 0/134 ticks over the 33.3 ms budget (work mean 0.4 ms, worst 0.6 ms)
+[openarm_umeow] 30 Hz commands | step limit 2.5 rad/s bound 0% of them, worst 0.000 rad short of the request | observation read 0 ms avg, 0 max
+[openarm_quest] episode_time_s (4 s) reached: returning home, then saving.
+[openarm_quest] episode time limit: returning home slowly (0.08 rad over 0.5 s, <= 0.3 rad/s); the episode is SAVED on arrival, return included.
+[openarm_quest] home: SAVE the episode.
+[openarm_quest] episode SAVED (arms home).
+[openarm_quest] HELD at home -- grippers open once the episode is saved.
+[openarm_quest] grippers opened -- press X for the next episode.
+Map:   0%|          | 0/135 [00:00<?, ? examples/s]Map: 100%|██████████| 135/135 [00:00<00:00, 5676.79 examples/s]
+INFO 2026-11-04 19:11:37 le_timer.py:559 Cadence (episode 1): 29.91 Hz vs 30 Hz target · 135 ticks, 4.5 s measured · 0/134 ticks over the 33.3 ms budget (work mean 0.4 ms, worst 0.5 ms)
+INFO 2026-11-04 19:11:37 le_timer.py:606 Cadence summary — whole run, 2 episodes · target 30 Hz (33.3 ms budget per tick): 270 ticks, 268 judged
+  effective cadence: 29.91 Hz over 9.0 s measured
+  ticks over the 33.3 ms work budget: 0/268 (0.0%) — work mean 0.4 ms, worst 0.6 ms
+  ticks whose cadence slipped outside the loop body (sleep overshoot / CPU starvation while pacing): 4
+  loop-body steps (share of measured work):
+    observe      mean   0.24 ms · worst   0.37 ms ·  57.1% of work · 270 calls
+    process_obs  mean   0.01 ms · worst   0.02 ms ·   3.1% of work · 270 calls
+    teleop       mean   0.03 ms · worst   0.09 ms ·   6.2% of work · 270 calls
+    send         mean   0.11 ms · worst   0.26 ms ·  25.4% of work · 270 calls
+    record       mean   0.02 ms · worst   0.04 ms ·   4.2% of work · 270 calls
+  pacing headroom: 33.0 ms slept per tick on average (max 33.3 ms) — near zero means the loop is saturated
+INFO 2026-11-04 19:11:37 ls/utils.py:147 Stop recording
+[openarm_umeow] Returning to the connect-time rest pose before disabling...
+
+Approach to the connect-time rest pose -- current vs target:
+  LJ1.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+  LJ2.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+  LJ3.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+  LJ4.pos    real=+1.5707  target=-0.0002  delta=-1.5709  <-- furthest
+  LJ5.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+  LJ6.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+  LJ7.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+  LJ8.pos    real=+1.2118  target=-0.0002  delta=-1.2119
+  RJ1.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+  RJ2.pos    real=+0.0032  target=-0.0002  delta=-0.0034
+  RJ3.pos    real=+0.0029  target=-0.0002  delta=-0.0031
+  RJ4.pos    real=+1.5700  target=-0.0002  delta=-1.5702
+  RJ5.pos    real=+0.0032  target=-0.0002  delta=-0.0034
+  RJ6.pos    real=+0.0029  target=-0.0002  delta=-0.0031
+  RJ7.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+  RJ8.pos    real=-0.0002  target=-0.0002  delta=+0.0000
+
+Planned approach: 1.571 rad on LJ4.pos over 5.2s (<= 0.3 rad/s per joint; grippers <= 8 rad/s).
+  [ramp_to] entering loop, about to call send_action() for step 1/261...
+[openarm_quest] X ignored: lerobot is resetting the scene -- wait for WAITING for X.
+Approach complete. Worst residual: LJ1.pos at 0.0000 rad (steady-state error at this hold; expected, not a fault).
+[openarm_telemetry] 351 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/e2e/telemetry/20261104_191120_1883554
+INFO 2026-11-04 19:11:42 ls/utils.py:147 Exiting
+PASS  A  one telemetry session, closed cleanly, no snapshot or writer errors  (351 rows, 2 episodes, 270 frames)
+PASS  B  episode 0: its 135 frames are ONE run of consecutive telemetry rows (from row 35)
+PASS  B  episode 0: action[k] == desired on row k+1 (the request lerobot records, before the step limit)
+PASS  B  episode 0: the wire command on row k+1 equals the host's sent command, within one LSB  (max 1.00 LSB)
+PASS  B  episode 0: every frame traced to a wire frame on a healthy bus (stale = 0 throughout)
+PASS  B  episode 1: its 135 frames are ONE run of consecutive telemetry rows (from row 213)
+PASS  B  episode 1: action[k] == desired on row k+1 (the request lerobot records, before the step limit)
+PASS  B  episode 1: the wire command on row k+1 equals the host's sent command, within one LSB  (max 1.00 LSB)
+PASS  B  episode 1: every frame traced to a wire frame on a healthy bus (stale = 0 throughout)
+PASS  C  telemetry_check on the official lerobot-record session + dataset: every check it can evaluate here PASSes  (G1 PASS, G2 PASS, G3 PASS, G4 PASS, G5 PASS, G6 UNKNOWN, G7 PASS, G8 PASS, S5 PASS, G10 UNKNOWN, G11 PASS, G12 PASS, G13 PASS, S4 PASS, B1 UNKNOWN, S1 PASS, S2 PASS, S3 FAIL)
+
+0 failed
+exit 0

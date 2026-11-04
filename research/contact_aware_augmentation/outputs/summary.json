@@ -1,0 +1,770 @@
+{
+ "generated_at": "2026-11-04T19:23:20+08:00",
+ "script": "research/contact_aware_augmentation/scripts/gate0_diagnostics.py",
+ "repos": {
+  "lerobot_openarm": {
+   "sha": "21388b0e8803426af942a4e8519b1dcf54b704d6",
+   "branch": "research/contact-aware-augmentation",
+   "dirty": false
+  },
+  "lerobot": {
+   "sha": "530b253f262d6af92ea3b91d62abcae0295af59f",
+   "branch": "update_dev_v2",
+   "dirty": false
+  },
+  "IsaacLab": {
+   "sha": "4aa5e026f6b1b1fb7f95fb65f8d751f16c055e18",
+   "branch": "openarm-dev",
+   "dirty": false
+  }
+ },
+ "body_cam": {
+  "parent": "openarm_body_link0",
+  "pos": [
+   0.05621,
+   -0.00305,
+   0.83062
+  ],
+  "quat_wxyz": [
+   0.1872,
+   -0.68244,
+   0.69543,
+   -0.1249
+  ],
+  "fx": 607.22,
+  "fy": 607.22,
+  "cx": 326.4,
+  "cy": 238.7,
+  "source": "IsaacLab@4aa5e026 stack_ik_abs_visuomotor_env_cfg.py body_cam OffsetCfg (FITTED, unvalidated on held-out keypoints)"
+ },
+ "urdf": "model/openarm_description.urdf",
+ "urdf_sha256": "7b3bcad456fbe188af102a32b3b91e177e5c53e2242247e992d79c167e6c205d",
+ "timing": {
+  "pringles_real_10_v00": {
+   "fps_nominal": 30.0,
+   "timestamp_minus_frame_index_over_fps_max_abs_s": 4.4504801444134046e-07,
+   "frame_index_contiguous_from_0": true,
+   "global_index_contiguous": true,
+   "metadata_length_equals_rows": true,
+   "episode_length_frames": {
+    "min": 241,
+    "median": 254.0,
+    "max": 280,
+    "total": 2575
+   },
+   "episode_length_s_nominal": {
+    "min": 8.03,
+    "median": 8.47,
+    "max": 9.33
+   },
+   "cameras": {
+    "observation.images.body_cam": {
+     "video_span_minus_length_over_fps_max_abs_s": 0.0,
+     "files": [
+      "videos/observation.images.body_cam/chunk-000/file-000.mp4"
+     ],
+     "files_local": 1,
+     "codec": "libdav1d",
+     "video_packets_total": 2575,
+     "video_packets_equal_frames": true,
+     "width_height": [
+      640,
+      480
+     ]
+    },
+    "observation.images.wrist_cam": {
+     "video_span_minus_length_over_fps_max_abs_s": 0.0,
+     "files": [
+      "videos/observation.images.wrist_cam/chunk-000/file-000.mp4"
+     ],
+     "files_local": 1,
+     "codec": "libdav1d",
+     "video_packets_total": 2575,
+     "video_packets_equal_frames": true,
+     "width_height": [
+      640,
+      480
+     ]
+    },
+    "observation.images.right_wrist_cam": {
+     "video_span_minus_length_over_fps_max_abs_s": 0.0,
+     "files": [
+      "videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4"
+     ],
+     "files_local": 1,
+     "codec": "libdav1d",
+     "video_packets_total": 2575,
+     "video_packets_equal_frames": true,
+     "width_height": [
+      640,
+      480
+     ]
+    }
+   },
+   "measured_loop_rate": "UNKNOWN: timestamps are nominal frame_index/fps; no DIAG/telemetry log of the recording sessions was found on this machine"
+  },
+  "insertbattery_real_v02": {
+   "fps_nominal": 30.0,
+   "timestamp_minus_frame_index_over_fps_max_abs_s": 8.900960288826809e-07,
+   "frame_index_contiguous_from_0": true,
+   "global_index_contiguous": true,
+   "metadata_length_equals_rows": true,
+   "episode_length_frames": {
+    "min": 667,
+    "median": 754.0,
+    "max": 890,
+    "total": 41360
+   },
+   "episode_length_s_nominal": {
+    "min": 22.23,
+    "median": 25.13,
+    "max": 29.67
+   },
+   "cameras": {
+    "observation.images.body_cam": {
+     "video_span_minus_length_over_fps_max_abs_s": 0.0,
+     "files": [
+      "videos/observation.images.body_cam/chunk-000/file-000.mp4",
+      "videos/observation.images.body_cam/chunk-000/file-001.mp4",
+      "videos/observation.images.body_cam/chunk-000/file-002.mp4"
+     ],
+     "files_local": 1,
+     "video_packets_total": null,
+     "note": "video files not on disk; only Hub metadata checked"
+    },
+    "observation.images.wrist_cam": {
+     "video_span_minus_length_over_fps_max_abs_s": 0.0,
+     "files": [
+      "videos/observation.images.wrist_cam/chunk-000/file-000.mp4",
+      "videos/observation.images.wrist_cam/chunk-000/file-001.mp4"
+     ],
+     "files_local": 0,
+     "video_packets_total": null,
+     "note": "video files not on disk; only Hub metadata checked"
+    },
+    "observation.images.right_wrist_cam": {
+     "video_span_minus_length_over_fps_max_abs_s": 0.0,
+     "files": [
+      "videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4",
+      "videos/observation.images.right_wrist_cam/chunk-000/file-001.mp4"
+     ],
+     "files_local": 0,
+     "video_packets_total": null,
+     "note": "video files not on disk; only Hub metadata checked"
+    }
+   },
+   "measured_loop_rate": "UNKNOWN: timestamps are nominal frame_index/fps; no DIAG/telemetry log of the recording sessions was found on this machine"
+  }
+ },
+ "signals": {
+  "pringles_real_10_v00": {
+   "columns": [
+    "action",
+    "observation.state",
+    "timestamp",
+    "frame_index",
+    "episode_index",
+    "index",
+    "task_index",
+    "observation.images.body_cam",
+    "observation.images.wrist_cam",
+    "observation.images.right_wrist_cam"
+   ],
+   "vector_feature_names": {
+    "action": [
+     "RJ1.pos",
+     "LJ1.pos",
+     "RJ2.pos",
+     "LJ2.pos",
+     "RJ3.pos",
+     "LJ3.pos",
+     "RJ4.pos",
+     "LJ4.pos",
+     "RJ5.pos",
+     "LJ5.pos",
+     "RJ6.pos",
+     "LJ6.pos",
+     "RJ7.pos",
+     "LJ7.pos",
+     "RJ8.pos",
+     "LJ8.pos"
+    ],
+    "observation.state": [
+     "RJ1.pos",
+     "LJ1.pos",
+     "RJ2.pos",
+     "LJ2.pos",
+     "RJ3.pos",
+     "LJ3.pos",
+     "RJ4.pos",
+     "LJ4.pos",
+     "RJ5.pos",
+     "LJ5.pos",
+     "RJ6.pos",
+     "LJ6.pos",
+     "RJ7.pos",
+     "LJ7.pos",
+     "RJ8.pos",
+     "LJ8.pos"
+    ],
+    "timestamp": null
+   },
+   "keyword_hits_in_columns": [],
+   "keyword_hits_in_vector_names": {},
+   "all_vector_names_are_pos": true,
+   "verdict": "joint positions only (16 x .pos state, 16 x .pos action) + RGB video; no torque, current, velocity, temperature, force or telemetry field"
+  },
+  "insertbattery_real_v02": {
+   "columns": [
+    "action",
+    "observation.state",
+    "timestamp",
+    "frame_index",
+    "episode_index",
+    "index",
+    "task_index",
+    "observation.images.body_cam",
+    "observation.images.wrist_cam",
+    "observation.images.right_wrist_cam"
+   ],
+   "vector_feature_names": {
+    "action": [
+     "RJ1.pos",
+     "LJ1.pos",
+     "RJ2.pos",
+     "LJ2.pos",
+     "RJ3.pos",
+     "LJ3.pos",
+     "RJ4.pos",
+     "LJ4.pos",
+     "RJ5.pos",
+     "LJ5.pos",
+     "RJ6.pos",
+     "LJ6.pos",
+     "RJ7.pos",
+     "LJ7.pos",
+     "RJ8.pos",
+     "LJ8.pos"
+    ],
+    "observation.state": [
+     "RJ1.pos",
+     "LJ1.pos",
+     "RJ2.pos",
+     "LJ2.pos",
+     "RJ3.pos",
+     "LJ3.pos",
+     "RJ4.pos",
+     "LJ4.pos",
+     "RJ5.pos",
+     "LJ5.pos",
+     "RJ6.pos",
+     "LJ6.pos",
+     "RJ7.pos",
+     "LJ7.pos",
+     "RJ8.pos",
+     "LJ8.pos"
+    ],
+    "timestamp": null
+   },
+   "keyword_hits_in_columns": [],
+   "keyword_hits_in_vector_names": {},
+   "all_vector_names_are_pos": true,
+   "verdict": "joint positions only (16 x .pos state, 16 x .pos action) + RGB video; no torque, current, velocity, temperature, force or telemetry field"
+  }
+ },
+ "action_semantics": {
+  "pringles_real_10_v00": {
+   "names_order": [
+    "RJ1.pos",
+    "LJ1.pos",
+    "RJ2.pos",
+    "LJ2.pos",
+    "RJ3.pos",
+    "LJ3.pos",
+    "RJ4.pos",
+    "LJ4.pos",
+    "RJ5.pos",
+    "LJ5.pos",
+    "RJ6.pos",
+    "LJ6.pos",
+    "RJ7.pos",
+    "LJ7.pos",
+    "RJ8.pos",
+    "LJ8.pos"
+   ],
+   "action_names_equal_state_names": true,
+   "lag": {
+    "k_best": 2,
+    "mean_abs_err_rad": {
+     "0": 0.01353,
+     "1": 0.00962,
+     "2": 0.00861,
+     "3": 0.01113,
+     "4": 0.01501,
+     "5": 0.01935
+    }
+   },
+   "grippers": {
+    "RJ8.pos": {
+     "open_cmd": -1.298,
+     "closed_cmd": 0.0,
+     "frac_frames_at_endpoint": 0.9934,
+     "distinct_action_values": 19,
+     "state_range": [
+      -1.2648,
+      -0.5102
+     ]
+    },
+    "LJ8.pos": {
+     "open_cmd": 1.2121,
+     "closed_cmd": 0.0,
+     "frac_frames_at_endpoint": 0.9981,
+     "distinct_action_values": 7,
+     "state_range": [
+      0.4038,
+      1.1645
+     ]
+    }
+   }
+  },
+  "insertbattery_real_v02": {
+   "names_order": [
+    "RJ1.pos",
+    "LJ1.pos",
+    "RJ2.pos",
+    "LJ2.pos",
+    "RJ3.pos",
+    "LJ3.pos",
+    "RJ4.pos",
+    "LJ4.pos",
+    "RJ5.pos",
+    "LJ5.pos",
+    "RJ6.pos",
+    "LJ6.pos",
+    "RJ7.pos",
+    "LJ7.pos",
+    "RJ8.pos",
+    "LJ8.pos"
+   ],
+   "action_names_equal_state_names": true,
+   "lag": {
+    "k_best": 2,
+    "mean_abs_err_rad": {
+     "0": 0.02001,
+     "1": 0.01786,
+     "2": 0.01684,
+     "3": 0.01732,
+     "4": 0.01864,
+     "5": 0.02041
+    }
+   },
+   "grippers": {
+    "RJ8.pos": {
+     "open_cmd": -1.298,
+     "closed_cmd": 0.0,
+     "frac_frames_at_endpoint": 0.9597,
+     "distinct_action_values": 1251,
+     "state_range": [
+      -1.2835,
+      0.0643
+     ]
+    },
+    "LJ8.pos": {
+     "open_cmd": 1.2121,
+     "closed_cmd": 0.0,
+     "frac_frames_at_endpoint": 0.9926,
+     "distinct_action_values": 284,
+     "state_range": [
+      0.3737,
+      1.19
+     ]
+    }
+   }
+  }
+ },
+ "real_10_vs_pool": {
+  "real_10_episode_equals_pool_episode_same_index": {
+   "0": true,
+   "1": true,
+   "2": true,
+   "3": true,
+   "4": true,
+   "5": true,
+   "6": true,
+   "7": true,
+   "8": true,
+   "9": true
+  },
+  "all": true
+ },
+ "events": {
+  "pringles_real_10_v00": {
+   "right_close": {
+    "n": 10,
+    "min": 82,
+    "median": 86.5,
+    "max": 101
+   },
+   "right_open": {
+    "n": 10,
+    "min": 164,
+    "median": 168.5,
+    "max": 198
+   },
+   "left_close": {
+    "n": 10,
+    "min": 156,
+    "median": 163.5,
+    "max": 188
+   },
+   "left_open": null,
+   "right_stall_openness": {
+    "n": 10,
+    "min": 0.4025,
+    "median": 0.4228,
+    "max": 0.4319
+   },
+   "left_stall_openness": {
+    "n": 10,
+    "min": 0.3357,
+    "median": 0.3454,
+    "max": 0.3769
+   },
+   "episodes_with_single_close_both_arms": 10,
+   "episodes": 10,
+   "right_blocked": 10,
+   "left_blocked": 10,
+   "cmd_overlap_frames(right_open-left_close)": {
+    "min": 4,
+    "median": 5.0,
+    "max": 10
+   }
+  },
+  "insertbattery_real_v02": {
+   "right_close": {
+    "n": 55,
+    "min": 236,
+    "median": 286.0,
+    "max": 361
+   },
+   "right_open": {
+    "n": 55,
+    "min": 381,
+    "median": 440.0,
+    "max": 638
+   },
+   "left_close": {
+    "n": 55,
+    "min": 85,
+    "median": 117.0,
+    "max": 182
+   },
+   "left_open": {
+    "n": 54,
+    "min": 560,
+    "median": 653.5,
+    "max": 808
+   },
+   "right_stall_openness": {
+    "n": 55,
+    "min": -0.0495,
+    "median": -0.0489,
+    "max": -0.0207
+   },
+   "left_stall_openness": {
+    "n": 55,
+    "min": 0.3454,
+    "median": 0.4118,
+    "max": 0.4622
+   },
+   "episodes_with_single_close_both_arms": 1,
+   "episodes": 55,
+   "right_blocked": 0,
+   "left_blocked": 55,
+   "close_order": {
+    "left_close<right_close": 55
+   }
+  }
+ },
+ "tracking_residual": {
+  "battery/bimanual_carry/left": {
+   "n": 55,
+   "res_rms_rad_median": 0.0484,
+   "speed_rms_median": 0.0189,
+   "res_over_speed_median_s": 2.2811
+  },
+  "battery/bimanual_carry/right": {
+   "n": 55,
+   "res_rms_rad_median": 0.0119,
+   "speed_rms_median": 0.2614,
+   "res_over_speed_median_s": 0.0449
+  },
+  "battery/free_approach/left": {
+   "n": 55,
+   "res_rms_rad_median": 0.01084,
+   "speed_rms_median": 0.1149,
+   "res_over_speed_median_s": 0.0932
+  },
+  "battery/free_approach/right": {
+   "n": 55,
+   "res_rms_rad_median": 0.01228,
+   "speed_rms_median": 0.0421,
+   "res_over_speed_median_s": 0.2977
+  },
+  "battery/pre_release_1s/left": {
+   "n": 55,
+   "res_rms_rad_median": 0.05436,
+   "speed_rms_median": 0.0128,
+   "res_over_speed_median_s": 4.5341
+  },
+  "battery/pre_release_1s/right": {
+   "n": 55,
+   "res_rms_rad_median": 0.01273,
+   "speed_rms_median": 0.0641,
+   "res_over_speed_median_s": 0.202
+  },
+  "pringles/free_approach/left": {
+   "n": 10,
+   "res_rms_rad_median": 0.01135,
+   "speed_rms_median": 0.0362,
+   "res_over_speed_median_s": 0.294
+  },
+  "pringles/free_approach/right": {
+   "n": 10,
+   "res_rms_rad_median": 0.0124,
+   "speed_rms_median": 0.3578,
+   "res_over_speed_median_s": 0.0347
+  },
+  "pringles/handover/left": {
+   "n": 10,
+   "res_rms_rad_median": 0.01298,
+   "speed_rms_median": 0.1497,
+   "res_over_speed_median_s": 0.0857
+  },
+  "pringles/handover/right": {
+   "n": 10,
+   "res_rms_rad_median": 0.01196,
+   "speed_rms_median": 0.1154,
+   "res_over_speed_median_s": 0.0971
+  },
+  "pringles/right_carry/left": {
+   "n": 10,
+   "res_rms_rad_median": 0.00873,
+   "speed_rms_median": 0.3067,
+   "res_over_speed_median_s": 0.029
+  },
+  "pringles/right_carry/right": {
+   "n": 10,
+   "res_rms_rad_median": 0.01161,
+   "speed_rms_median": 0.2926,
+   "res_over_speed_median_s": 0.0396
+  }
+ },
+ "battery_right_gripper_structure": {
+  "n_close_segments_distribution": {
+   "1": 1,
+   "2": 52,
+   "3": 2
+  },
+  "interpretation": "close1 = grasp the AA cell, open1 = release over the bay, close2 = re-close with the cell no longer in hand (pressing/seating, SUPPORTED by visual check of episodes 0 and 7 only), open2 = release at the end"
+ },
+ "event_aligned_residual": {
+  "pringles@left_close": {
+   "right": {
+    "pre_res_median": 0.0281,
+    "pre_speed_median": 0.5664,
+    "post_0_30": {
+     "res_median": 0.0323,
+     "frac_eps_gt_pre": 0.8,
+     "speed_median": 0.4541
+    },
+    "post_30_60": {
+     "res_median": 0.0412,
+     "frac_eps_gt_pre": 1.0,
+     "speed_median": 1.1171
+    }
+   },
+   "left": {
+    "pre_res_median": 0.0222,
+    "pre_speed_median": 0.7353,
+    "post_0_30": {
+     "res_median": 0.0292,
+     "frac_eps_gt_pre": 1.0,
+     "speed_median": 0.2655
+    },
+    "post_30_60": {
+     "res_median": 0.0183,
+     "frac_eps_gt_pre": 0.1,
+     "speed_median": 0.7665
+    }
+   },
+   "n": 10
+  },
+  "battery@right_open1": {
+   "right": {
+    "pre_res_median": 0.0319,
+    "pre_speed_median": 0.2529,
+    "post_0_30": {
+     "res_median": 0.0288,
+     "frac_eps_gt_pre": 0.241,
+     "speed_median": 0.2974
+    },
+    "post_30_60": {
+     "res_median": 0.0313,
+     "frac_eps_gt_pre": 0.352,
+     "speed_median": 0.1919
+    },
+    "post_60_121": {
+     "res_median": 0.0408,
+     "frac_eps_gt_pre": 0.963,
+     "speed_median": 0.4543
+    }
+   },
+   "left": {
+    "pre_res_median": 0.1407,
+    "pre_speed_median": 0.0277,
+    "post_0_30": {
+     "res_median": 0.1494,
+     "frac_eps_gt_pre": 0.944,
+     "speed_median": 0.0198
+    },
+    "post_30_60": {
+     "res_median": 0.1551,
+     "frac_eps_gt_pre": 0.944,
+     "speed_median": 0.0197
+    },
+    "post_60_121": {
+     "res_median": 0.1399,
+     "frac_eps_gt_pre": 0.611,
+     "speed_median": 0.092
+    }
+   },
+   "n": 54
+  },
+  "battery@right_close2": {
+   "right": {
+    "pre_res_median": 0.0313,
+    "pre_speed_median": 0.1793,
+    "post_0_30": {
+     "res_median": 0.0301,
+     "frac_eps_gt_pre": 0.389,
+     "speed_median": 0.2153
+    },
+    "post_30_60": {
+     "res_median": 0.0389,
+     "frac_eps_gt_pre": 0.796,
+     "speed_median": 0.1835
+    },
+    "post_60_121": {
+     "res_median": 0.0408,
+     "frac_eps_gt_pre": 0.963,
+     "speed_median": 0.8082
+    }
+   },
+   "left": {
+    "pre_res_median": 0.1458,
+    "pre_speed_median": 0.0261,
+    "post_0_30": {
+     "res_median": 0.1549,
+     "frac_eps_gt_pre": 0.907,
+     "speed_median": 0.0179
+    },
+    "post_30_60": {
+     "res_median": 0.1585,
+     "frac_eps_gt_pre": 0.889,
+     "speed_median": 0.0191
+    },
+    "post_60_121": {
+     "res_median": 0.0924,
+     "frac_eps_gt_pre": 0.259,
+     "speed_median": 0.3733
+    }
+   },
+   "n": 54
+  }
+ },
+ "fk_geometry": {
+  "pringles_real_10_v00@left_close": {
+   "n": 10,
+   "tcp_distance_m": {
+    "median": 0.1326,
+    "min": 0.1141,
+    "max": 0.1512
+   },
+   "right_in_left_xyz_std_m": [
+    0.0126,
+    0.0126,
+    0.0092
+   ],
+   "right_in_left_xyz_mean_m": [
+    -0.1147,
+    -0.0163,
+    -0.0618
+   ],
+   "right_in_left_angle_deg": {
+    "median": 114.97,
+    "min": 91.28,
+    "max": 131.44
+   }
+  },
+  "insertbattery_real_v02@right_open1(>=2 right closes)": {
+   "n": 54,
+   "tcp_distance_m": {
+    "median": 0.0599,
+    "min": 0.0464,
+    "max": 0.0774
+   },
+   "right_in_left_xyz_std_m": [
+    0.0082,
+    0.0116,
+    0.0063
+   ],
+   "right_in_left_xyz_mean_m": [
+    0.0241,
+    0.032,
+    -0.0433
+   ],
+   "right_in_left_angle_deg": {
+    "median": 176.71,
+    "min": 167.96,
+    "max": 179.98
+   }
+  },
+  "battery_excluded_single_close": [
+   22
+  ]
+ },
+ "fk_projection_vs_annotation": {
+  "dataset": "pringles_real_v00_pool",
+  "n": 50,
+  "err_px": {
+   "median": 90.3,
+   "p90": 111.3,
+   "max": 124.9
+  },
+  "bias_px": {
+   "du_median": -24.4,
+   "dv_median": 86.8
+  },
+  "residual_after_median_bias_px": {
+   "median": 18.6,
+   "p90": 34.0
+  },
+  "corr_proj_vs_ann": {
+   "u": 0.968,
+   "v": 0.977
+  }
+ },
+ "poc_episodes": [
+  8,
+  0,
+  4
+ ],
+ "figures": [
+  "research/contact_aware_augmentation/outputs/figures/fk_overlay_body_cam_ep8.jpg",
+  "research/contact_aware_augmentation/outputs/figures/fk_overlay_body_cam_ep0.jpg",
+  "research/contact_aware_augmentation/outputs/figures/fk_overlay_body_cam_ep4.jpg",
+  "research/contact_aware_augmentation/outputs/figures/battery_phases_body_cam_ep0.jpg",
+  "research/contact_aware_augmentation/outputs/figures/battery_phases_body_cam_ep7.jpg"
+ ]
+}

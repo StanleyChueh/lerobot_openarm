@@ -1,0 +1,58 @@
+PASS  1  wire decode round-trips the C++ encoder within one LSB (state and MIT frames, all motor types)  (q 1.00 LSB, dq 1.00 LSB, tau 1.00 LSB, kp 1.00 LSB, kd 1.00 LSB)
+PASS  1  against the INSTALLED openarm_can: state decode bit-equal, MIT frames byte-equal to its encoder  (1600 random cases per codec, 0 + 0 mismatches)
+PASS  1  enable / disable / set_zero frames are recognised and an MIT frame is not
+[openarm_telemetry] 6 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/order/20261104_191049_1883336
+PASS  2  joint columns are LJ1..LJ8 then RJ1..RJ8, and each motor's value lands in its own column  (q = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16])
+PASS  3  ticks are consecutive and both clocks increase; one final row (kind=1) closes the session
+PASS  3  every value is traced to its wire frame: state_age_s >= 0 and under 5 ms, state_fresh = 1, stale = 0  (max age 0.08 ms)
+[openarm_telemetry] 6 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/dropped/20261104_191049_1883336
+PASS  4  a motor whose replies stop: rx_n = 0, the SAME frame's age grows, stale once older than stale_s  (age [0.0, 0.03, 0.061, 0.091, 0.0], stale [0.0, 0.0, 1.0, 1.0, 0.0])
+PASS  4  ... while every other motor stays fresh on the same ticks
+[openarm_telemetry] 3 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/unread/20261104_191049_1883336
+PASS  5  a refresh reply that lands after the drain: the value is traced to the COMMAND reply -> state_fresh = 0  (RJ2 age 20.2 ms)
+[openarm_telemetry] 2 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/never/20261104_191049_1883336
+PASS  6  a motor that never answered: state_age_s NaN, stale = 1 (not silently 0 / fresh)
+[openarm_telemetry] 2 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/notap/20261104_191049_1883336
+PASS  7  tap unavailable: wire columns NaN (unknown, not 0), tap_ok = 0, Motor values and fallback status kept
+WARNING:lerobot_robot_openarm_umeow.telemetry:telemetry snapshot failed (RuntimeError: injected motor read failure); row marked snapshot_ok=0
+WARNING:lerobot_robot_openarm_umeow.telemetry:telemetry write failed (OSError: disk full); 1 rows lost
+WARNING:lerobot_robot_openarm_umeow.telemetry:telemetry frame write failed (OSError: disk full); 32 frames lost
+[openarm_telemetry] 5 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/errors/20261104_191049_1883336
+PASS  8  a Motor read that raises: no exception reaches the caller, that row has snapshot_ok = 0 and NaN joints
+PASS  8  a writer failure is counted in meta.json, never raised  ({"snapshot": 1, "writer": 2, "poll": 0})
+[openarm_telemetry] 3 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/command/20261104_191049_1883336
+PASS  9  the applied MIT command is decoded from the wire: q, dq, kp, kd, tau within one LSB, cmd_n = 1
+PASS  9  host-side sent / desired / hold / squeeze columns come from the wrapper
+PASS  10 disable frames on the bus are counted per arm and listed in meta.json
+PASS  10 Parquet schema == telemetry.COLUMNS; tick int64, everything else float64  (340 columns)
+PASS  10 meta.json carries the contract and provenance fields; every column field is documented
+PASS  11 telemetry.py never transmits: no send/sendto/sendmsg/sendall call, WireTap has no send method
+[openarm_telemetry] 301 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/overhead/20261104_191049_1883336
+PASS  12 snapshot cost with a full tick of traffic (16 MIT + 16 refresh + 32 replies): median < 1 ms  (median 0.111 ms, p99 0.146 ms, max 0.19 ms; 33 ms tick at 30 Hz)
+PASS  13 telemetry off by default: no session is started
+PASS  13 telemetry on: the commands sent and the safety hold are identical to telemetry off  (40 commands)
+PASS  14 during get_observation + snapshot the arms see only getter calls -- no refresh/recv/command/enable  (calls: ['get_arm', 'get_arm().get_motors', 'get_gripper', 'get_gripper().get_motor'])
+PASS  15 one row per get_observation (plus connect-time reads), hold column follows the guard, final row shows the disable frames  (hold from row 26)
+PASS  15 row k+1's wire command equals the host's sent command of tick k (within one LSB)  (max 3.81e-04 rad)
+PASS  16 WireTap.read on a socket with fd >= 1024 (select() raised ValueError there): reads the frame  (fd 1500)
+PASS  16 ... with the KERNEL's receive time, not the read time  (stamp - send 0.016 ms, read - stamp 20.1 ms)
+PASS  17 a frame without a kernel timestamp is returned with t = None and counted in `untimed`
+[openarm_telemetry] 11 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/untimed/20261104_191051_1883336
+PASS  17 untimed frames stay in the row that read them (stamped at its reference time), and meta counts them  (untimed 320 of 320 frames; before the fix every row was stale and every frame landed one row late)
+[openarm_telemetry] 4 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/ramp_nodrain/20261104_191051_1883336
+[openarm_telemetry] 4 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/ramp/20261104_191052_1883336
+PASS  18 reproduced: with no drain between snapshots a ramp overflows the tap and the disable frames are lost  (rx_dropped 468, final-row disable frames 0/8)
+PASS  18 fixed: the idle drain keeps the tap empty through the ramp; final row shows all 8 disable frames per arm  (rx_dropped 0/0, disable 8/8, frames 1064)
+[openarm_telemetry] 61 rows in /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/fa7abc16-fc24-4e89-be66-4d1e5716fc93/scratchpad/tests/u/frames/20261104_191053_1883336
+PASS  19 frames log: every delivered frame once, in delivery order per arm, with the row that counted it  (3856 frames in 1 part(s))
+PASS  19 meta.json holds the interfaces' kernel counters at start and close
+PASS  20 telemetry_check on a healthy fake session: every gate check it can evaluate PASSes; dataset/A-B UNKNOWN  (G1 PASS, G2 PASS, G3 PASS, G4 PASS, G5 PASS, G6 PASS, G7 PASS, G8 PASS, S5 PASS, G10 UNKNOWN, G11 UNKNOWN, G12 UNKNOWN, G13 PASS, S4 PASS, B1 PASS, S1 PASS, S2 PASS, S3 PASS)
+      G10 UNKNOWN: pass --diag and --baseline-diag
+      G11 UNKNOWN: pass --dataset
+      G12 UNKNOWN: pass --dataset
+PASS  20 telemetry_check: ONE transmitted frame that no library frame explains fails G6 (and the verdict)  (L: tx_packets delta 968, library TX frames seen 968; R: tx_packets delta 969, library TX frames seen 968)
+PASS  20 telemetry_check G10: equal on/off loop timing PASSes; 2 % extra late ticks with telemetry on FAILs  (on vs off#1: median 33.33 vs 33.33 ms, p99 33.99 vs 33.99 ms, late 0.000% vs 0.000% || on vs off#1: median 33.34 vs 33.33 ms, p99 63.16 vs 33.99 ms, late 1.891% vs 0.000%)
+PASS  20 telemetry_check G10 (A-B-A): two telemetry-off runs that disagree make the comparison INCONCLUSIVE (UNKNOWN)  (.16 ms, late 0.000% vs 1.891% || INCONCLUSIVE: the telemetry-off runs differ from each other by more than the thresholds)
+
+0 failed
+exit 0

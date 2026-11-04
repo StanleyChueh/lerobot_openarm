@@ -1,0 +1,11 @@
+episode,length,right_n_closes,right_close,right_open,right_stall_openness,right_blocked,right_close2,right_open2,left_n_closes,left_close,left_open,left_stall_openness,left_blocked,left_close2,left_open2
+0,273,1,97,181,0.4025,True,,,1,176,,0.3388,True,,
+1,263,1,87,176,0.426,True,,,1,172,,0.3454,True,,
+2,280,1,101,198,0.4319,True,,,1,188,,0.346,True,,
+3,250,1,82,165,0.4259,True,,,1,156,,0.3357,True,,
+4,250,1,87,168,0.4222,True,,,1,163,,0.363,True,,
+5,255,1,86,169,0.4216,True,,,1,164,,0.3388,True,,
+6,241,1,82,166,0.4234,True,,,1,161,,0.3397,True,,
+7,261,1,87,179,0.4148,True,,,1,170,,0.3454,True,,
+8,249,1,83,164,0.4257,True,,,1,160,,0.3464,True,,
+9,253,1,85,168,0.4201,True,,,1,159,,0.3769,True,,

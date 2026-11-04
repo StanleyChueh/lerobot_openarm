@@ -1,0 +1,238 @@
+{
+ "events": {
+  "pringles_real_10_v00": {
+   "right_close": {
+    "n": 10,
+    "min": 82,
+    "median": 86.5,
+    "max": 101
+   },
+   "right_open": {
+    "n": 10,
+    "min": 164,
+    "median": 168.5,
+    "max": 198
+   },
+   "left_close": {
+    "n": 10,
+    "min": 156,
+    "median": 163.5,
+    "max": 188
+   },
+   "left_open": null,
+   "right_stall_openness": {
+    "n": 10,
+    "min": 0.4025,
+    "median": 0.4228,
+    "max": 0.4319
+   },
+   "left_stall_openness": {
+    "n": 10,
+    "min": 0.3357,
+    "median": 0.3454,
+    "max": 0.3769
+   },
+   "episodes_with_single_close_both_arms": 10,
+   "episodes": 10,
+   "right_blocked": 10,
+   "left_blocked": 10,
+   "cmd_overlap_frames(right_open-left_close)": {
+    "min": 4,
+    "median": 5.0,
+    "max": 10
+   }
+  },
+  "insertbattery_real_v02": {
+   "right_close": {
+    "n": 55,
+    "min": 236,
+    "median": 286.0,
+    "max": 361
+   },
+   "right_open": {
+    "n": 55,
+    "min": 381,
+    "median": 440.0,
+    "max": 638
+   },
+   "left_close": {
+    "n": 55,
+    "min": 85,
+    "median": 117.0,
+    "max": 182
+   },
+   "left_open": {
+    "n": 54,
+    "min": 560,
+    "median": 653.5,
+    "max": 808
+   },
+   "right_stall_openness": {
+    "n": 55,
+    "min": -0.0495,
+    "median": -0.0489,
+    "max": -0.0207
+   },
+   "left_stall_openness": {
+    "n": 55,
+    "min": 0.3454,
+    "median": 0.4118,
+    "max": 0.4622
+   },
+   "episodes_with_single_close_both_arms": 1,
+   "episodes": 55,
+   "right_blocked": 0,
+   "left_blocked": 55,
+   "close_order": {
+    "left_close<right_close": 55
+   }
+  }
+ },
+ "fk_geometry": {
+  "pringles_real_10_v00@left_close": {
+   "n": 10,
+   "tcp_distance_m": {
+    "median": 0.1326,
+    "min": 0.1141,
+    "max": 0.1512
+   },
+   "right_in_left_xyz_std_m": [
+    0.0126,
+    0.0126,
+    0.0092
+   ],
+   "right_in_left_xyz_mean_m": [
+    -0.1147,
+    -0.0163,
+    -0.0618
+   ],
+   "right_in_left_angle_deg": {
+    "median": 114.97,
+    "min": 91.28,
+    "max": 131.44
+   }
+  },
+  "insertbattery_real_v02@right_open1(>=2 right closes)": {
+   "n": 54,
+   "tcp_distance_m": {
+    "median": 0.0599,
+    "min": 0.0464,
+    "max": 0.0774
+   },
+   "right_in_left_xyz_std_m": [
+    0.0082,
+    0.0116,
+    0.0063
+   ],
+   "right_in_left_xyz_mean_m": [
+    0.0241,
+    0.032,
+    -0.0433
+   ],
+   "right_in_left_angle_deg": {
+    "median": 176.71,
+    "min": 167.96,
+    "max": 179.98
+   }
+  },
+  "battery_excluded_single_close": [
+   22
+  ]
+ },
+ "fk_projection_vs_annotation": {
+  "dataset": "pringles_real_v00_pool",
+  "n": 50,
+  "err_px": {
+   "median": 90.3,
+   "p90": 111.3,
+   "max": 124.9
+  },
+  "bias_px": {
+   "du_median": -24.4,
+   "dv_median": 86.8
+  },
+  "residual_after_median_bias_px": {
+   "median": 18.6,
+   "p90": 34.0
+  },
+  "corr_proj_vs_ann": {
+   "u": 0.968,
+   "v": 0.977
+  }
+ },
+ "tracking_residual": {
+  "battery/bimanual_carry/left": {
+   "n": 55,
+   "res_rms_rad_median": 0.0484,
+   "speed_rms_median": 0.0189,
+   "res_over_speed_median_s": 2.2811
+  },
+  "battery/bimanual_carry/right": {
+   "n": 55,
+   "res_rms_rad_median": 0.0119,
+   "speed_rms_median": 0.2614,
+   "res_over_speed_median_s": 0.0449
+  },
+  "battery/free_approach/left": {
+   "n": 55,
+   "res_rms_rad_median": 0.01084,
+   "speed_rms_median": 0.1149,
+   "res_over_speed_median_s": 0.0932
+  },
+  "battery/free_approach/right": {
+   "n": 55,
+   "res_rms_rad_median": 0.01228,
+   "speed_rms_median": 0.0421,
+   "res_over_speed_median_s": 0.2977
+  },
+  "battery/pre_release_1s/left": {
+   "n": 55,
+   "res_rms_rad_median": 0.05436,
+   "speed_rms_median": 0.0128,
+   "res_over_speed_median_s": 4.5341
+  },
+  "battery/pre_release_1s/right": {
+   "n": 55,
+   "res_rms_rad_median": 0.01273,
+   "speed_rms_median": 0.0641,
+   "res_over_speed_median_s": 0.202
+  },
+  "pringles/free_approach/left": {
+   "n": 10,
+   "res_rms_rad_median": 0.01135,
+   "speed_rms_median": 0.0362,
+   "res_over_speed_median_s": 0.294
+  },
+  "pringles/free_approach/right": {
+   "n": 10,
+   "res_rms_rad_median": 0.0124,
+   "speed_rms_median": 0.3578,
+   "res_over_speed_median_s": 0.0347
+  },
+  "pringles/handover/left": {
+   "n": 10,
+   "res_rms_rad_median": 0.01298,
+   "speed_rms_median": 0.1497,
+   "res_over_speed_median_s": 0.0857
+  },
+  "pringles/handover/right": {
+   "n": 10,
+   "res_rms_rad_median": 0.01196,
+   "speed_rms_median": 0.1154,
+   "res_over_speed_median_s": 0.0971
+  },
+  "pringles/right_carry/left": {
+   "n": 10,
+   "res_rms_rad_median": 0.00873,
+   "speed_rms_median": 0.3067,
+   "res_over_speed_median_s": 0.029
+  },
+  "pringles/right_carry/right": {
+   "n": 10,
+   "res_rms_rad_median": 0.01161,
+   "speed_rms_median": 0.2926,
+   "res_over_speed_median_s": 0.0396
+  }
+ }
+}
+exit 0

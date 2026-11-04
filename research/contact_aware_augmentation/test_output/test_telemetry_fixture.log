@@ -1,0 +1,12 @@
+PASS  F1 schema strings and row columns are the producer's current ones  (openarm_telemetry/1, 340 columns)
+PASS  F1 Parquet types: tick int64, every other row column float64; frames tick/seq/t_ns int64, side string, can_id int32, data binary
+PASS  F2 rows: consecutive ticks, one final row, the failed snapshot row is NaN but kept
+PASS  F3 align_to_dataset finds each episode at its expected tick  ([13, 70])
+PASS  F4 stale observation rows are exactly the expected ones (RJ5 after two lost replies)  ({'RJ5': [81]})
+PASS  F4 hold rows are exactly the expected ones, and sent stays frozen on them while desired moves
+PASS  F5 frames: per arm, seq is 0..n-1 and every frame belongs to an existing row  (8652 frames)
+PASS  F6 telemetry_check's verdict on the fixture is unchanged  (NO-GO; diff set())
+PASS  F7 the fixture says it is mock data
+
+0 failed
+exit 0
