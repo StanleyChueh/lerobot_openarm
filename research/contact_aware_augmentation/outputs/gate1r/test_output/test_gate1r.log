@@ -1,0 +1,34 @@
+test_evaluator_pending (test_gate1r.Annotation.test_evaluator_pending) ... ok
+test_event_session (test_gate1r.Annotation.test_event_session) ... ok
+test_gt_rules (test_gate1r.Annotation.test_gt_rules) ... ok
+test_keypoint_session (test_gate1r.Annotation.test_keypoint_session) ... ok
+test_manifest_pilot_only (test_gate1r.Annotation.test_manifest_pilot_only) ... ok
+test_F1_gate1_sample_has_no_action_field (test_gate1r.Gate1BlindSpots.test_F1_gate1_sample_has_no_action_field) ... ok
+test_F2_gap_excursion_leaves_C_rel_unchanged (test_gate1r.Gate1BlindSpots.test_F2_gap_excursion_leaves_C_rel_unchanged) ... ok
+test_F3_missing_receiver_is_a_finite_pass (test_gate1r.Gate1BlindSpots.test_F3_missing_receiver_is_a_finite_pass) ... ok
+test_F1_action_offsets_fail_component_A (test_gate1r.Gate1RVerifier.test_F1_action_offsets_fail_component_A) ... ok
+test_F2_transition_excursion_fails_component_C (test_gate1r.Gate1RVerifier.test_F2_transition_excursion_fails_component_C) ... ok
+test_F3_missing_receiver_never_passes (test_gate1r.Gate1RVerifier.test_F3_missing_receiver_never_passes) ... ok
+test_combine (test_gate1r.Gate1RVerifier.test_combine) ... ok
+test_command_only_phase_edit_fails (test_gate1r.Gate1RVerifier.test_command_only_phase_edit_fails) ... ok
+test_missing_threshold_is_unknown_and_absolute_contact_unknown (test_gate1r.Gate1RVerifier.test_missing_threshold_is_unknown_and_absolute_contact_unknown) ... ok
+test_original_and_hard_negatives_pass (test_gate1r.Gate1RVerifier.test_original_and_hard_negatives_pass) ... ok
+test_prediction_is_not_refit (test_gate1r.Gate1RVerifier.test_prediction_is_not_refit)
+A slip after the calibration segment is caught although a refit on the whole hold could absorb part of it. ... ok
+test_spec_is_versioned_and_sealed_disjoint (test_gate1r.Gate1RVerifier.test_spec_is_versioned_and_sealed_disjoint) ... ok
+test_temporal_offset_fails (test_gate1r.Gate1RVerifier.test_temporal_offset_fails) ... ok
+test_gate1_passes_all_three_on_every_episode (test_gate1r.RealPilotCounterexamples.test_gate1_passes_all_three_on_every_episode) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.972s
+
+OK
+{
+ "status": "PENDING",
+ "G1": "PENDING",
+ "G2": "PENDING",
+ "EV": "PENDING",
+ "sealed_ready": false,
+ "reason": "no human annotation file; ground truth is never inferred from tracker, FK or verifier output"
+}
+exit 0

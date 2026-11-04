@@ -1,0 +1,8 @@
+{
+ "status": "PENDING",
+ "G1": "PENDING",
+ "G2": "PENDING",
+ "EV": "PENDING",
+ "sealed_ready": false,
+ "reason": "no human annotation file; ground truth is never inferred from tracker, FK or verifier output"
+}

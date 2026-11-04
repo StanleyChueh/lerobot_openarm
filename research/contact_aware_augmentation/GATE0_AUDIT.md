@@ -1,6 +1,6 @@
 # Gate 0 audit: Contact-Aware Generative Augmentation for Few-Shot VLA Learning
 
-> **Erratum (2026-11-05, after Codex's review `CODEX_GATE0_REVIEW.md` and Gate 1).**
+> **Erratum (2026-11-04, after Codex's review `CODEX_GATE0_REVIEW.md` and Gate 1).**
 > * The motivation cited here (the historical 47 vs 49 / 100 tie, and both policies failing at the hand-over) is
 >   superseded by the matched evaluation: 53 vs 34 / 100, with the main failure at the right-hand grasp/lift. See
 >   GATE1_RESULTS.md §8.

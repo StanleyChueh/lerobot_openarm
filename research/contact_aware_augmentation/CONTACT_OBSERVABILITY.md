@@ -140,6 +140,6 @@ In order. Every item needs explicit approval and an operator. None has been run.
    plus ≥ 120 fps video with an LED sync), stamped on the host clock.
 5. **D6:** only if a Newton claim is wanted (F/T sensor or gauge pushes).
 
-With 1–4, a paper may claim *contact classification and uncalibrated effort residuals*. A *force* claim also needs item 5 (D6). (Corrected 2026-11-05: an earlier version said "needs 6" for this five-item list.)
+With 1–4, a paper may claim *contact classification and uncalibrated effort residuals*. A *force* claim also needs item 5 (D6). (Corrected 2026-11-04: an earlier version said "needs 6" for this five-item list.)
 Force-conditioned *generation* additionally needs a generator that outputs a contact signal whose
 distribution can be compared with the measured one. That is a Gate-3+ question.

@@ -1,0 +1,115 @@
+{
+ "criteria": {
+  "K1_originals": {
+   "counts": {
+    "PASS": 2,
+    "FAIL": 0,
+    "UNKNOWN": 1,
+    "n": 3
+   },
+   "met": true
+  },
+  "K1_hard_negatives": {
+   "counts": {
+    "PASS": 3,
+    "FAIL": 1,
+    "UNKNOWN": 2,
+    "n": 6
+   },
+   "met": true
+  },
+  "K2_codex_action": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 3,
+    "UNKNOWN": 0,
+    "n": 3
+   },
+   "met": true
+  },
+  "K2_codex_excursion": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 3,
+    "UNKNOWN": 0,
+    "n": 3
+   },
+   "met": true
+  },
+  "K2_codex_missing_receiver": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "UNKNOWN": 3,
+    "n": 3
+   },
+   "met": true
+  },
+  "K3_temporal": {
+   "counts": {
+    "time_lag_6": {
+     "PASS": 0,
+     "FAIL": 3,
+     "UNKNOWN": 0,
+     "n": 3
+    },
+    "time_lead_6": {
+     "PASS": 0,
+     "FAIL": 0,
+     "UNKNOWN": 3,
+     "n": 3
+    },
+    "time_lag_10": {
+     "PASS": 0,
+     "FAIL": 3,
+     "UNKNOWN": 0,
+     "n": 3
+    },
+    "time_lead_10": {
+     "PASS": 0,
+     "FAIL": 2,
+     "UNKNOWN": 1,
+     "n": 3
+    }
+   },
+   "met": false
+  },
+  "K4_action_offset": {
+   "counts": {
+    "action_offset_all_0.1rad": {
+     "PASS": 0,
+     "FAIL": 3,
+     "UNKNOWN": 0,
+     "n": 3
+    },
+    "action_offset_all_0.25rad": {
+     "PASS": 0,
+     "FAIL": 3,
+     "UNKNOWN": 0,
+     "n": 3
+    },
+    "action_offset_all_0.5rad": {
+     "PASS": 0,
+     "FAIL": 3,
+     "UNKNOWN": 0,
+     "n": 3
+    },
+    "action_offset_all_1rad": {
+     "PASS": 0,
+     "FAIL": 3,
+     "UNKNOWN": 0,
+     "n": 3
+    }
+   },
+   "met": true
+  },
+  "K5_no_silent_pass": {
+   "n_below_coverage": 21,
+   "silent_pass": 0,
+   "met": true
+  },
+  "all_met": false
+ },
+ "verdict_by_stop_rule": "NO-GO",
+ "runtime_s": 18.1
+}

@@ -10,7 +10,7 @@
 * Human ground truth does not exist yet. The 8 px robot-reprojection and tracker-accuracy criteria are therefore
   **PENDING**. The annotation interface and instructions are prepared.
 
-Date 2026-11-05. Base commit `3cce98e` (Gate 0); the delivery commit is in `git log`, and script SHA-256s are in
+Date 2026-11-04. Base commit `3cce98e` (Gate 0); the delivery commit is in `git log`, and script SHA-256s are in
 [GATE1_METRICS.json](GATE1_METRICS.json). Companion files:
 * [GATE1_FAILURE_ANALYSIS.md](GATE1_FAILURE_ANALYSIS.md)
 * [GATE1_METRICS.json](GATE1_METRICS.json)
