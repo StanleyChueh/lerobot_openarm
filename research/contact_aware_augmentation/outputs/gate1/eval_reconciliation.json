@@ -1,0 +1,148 @@
+{
+ "sources": [
+  "research/generated_data_diagnosis/matched_evaluation/comparison.json",
+  "research/generated_data_diagnosis/EVALUATION_COMPARISON.md",
+  "research/generated_data_diagnosis/matched_evaluation/MODEL_COMPARISON.md"
+ ],
+ "checkpoints": {
+  "manual-10": "ethanCSL/openarm_pringles_lerobot_sim_smolvla_10_v00 @ 9ce7ce48 (matched run_meta); historical run did not record a revision",
+  "generated-500": "ethanCSL/openarm_pringles_lerobot_sim_10_generated_500_smolvla_v00 @ 733c6856 (matched run_meta); historical run did not record a revision"
+ },
+ "models": {
+  "manual-10": {
+   "historical": {
+    "success": "49/100",
+    "wilson95": [
+     0.394,
+     0.587
+    ],
+    "by_region": {
+     "x<0.203": "25/43",
+     "0.203-0.27": "16/46",
+     "x>=0.27": "8/11"
+    }
+   },
+   "matched": {
+    "success": "53/100",
+    "wilson95": [
+     0.433,
+     0.625
+    ],
+    "by_region": {
+     "x<0.203": "21/35",
+     "0.203-0.27": "20/44",
+     "x>=0.27": "12/21"
+    }
+   },
+   "unpaired_fisher_hist_vs_matched_p": 0.6714,
+   "historical_standardized_to_matched_pose_mix": {
+    "expected": 50.9,
+    "sd": 4.9,
+    "observed_matched": 53,
+    "z": 0.3
+   },
+   "per_region_fisher_p": {
+    "x<0.203": 1.0,
+    "0.203-0.27": 0.3899,
+    "x>=0.27": 0.4647
+   },
+   "stratified_mantel_haenszel_hist_vs_matched": {
+    "chi2": 0.108,
+    "p": 0.7427,
+    "common_odds_ratio_hist_vs_matched": 0.871
+   }
+  },
+  "generated-500": {
+   "historical": {
+    "success": "47/100",
+    "wilson95": [
+     0.375,
+     0.567
+    ],
+    "by_region": {
+     "x<0.203": "6/37",
+     "0.203-0.27": "30/47",
+     "x>=0.27": "11/16"
+    }
+   },
+   "matched": {
+    "success": "34/100",
+    "wilson95": [
+     0.255,
+     0.437
+    ],
+    "by_region": {
+     "x<0.203": "1/35",
+     "0.203-0.27": "22/44",
+     "x>=0.27": "11/21"
+    }
+   },
+   "unpaired_fisher_hist_vs_matched_p": 0.0836,
+   "historical_standardized_to_matched_pose_mix": {
+    "expected": 48.2,
+    "sd": 4.5,
+    "observed_matched": 34,
+    "z": -2.18
+   },
+   "per_region_fisher_p": {
+    "x<0.203": 0.1076,
+    "0.203-0.27": 0.2084,
+    "x>=0.27": 0.5
+   },
+   "stratified_mantel_haenszel_hist_vs_matched": {
+    "chi2": 4.502,
+    "p": 0.0339,
+    "common_odds_ratio_hist_vs_matched": 2.167
+   }
+  }
+ },
+ "matched_unpaired_fisher_a_vs_b_p": 0.0101,
+ "historical_unpaired_fisher_a_vs_b_p": 0.8875,
+ "protocol_differences": [
+  {
+   "item": "can poses",
+   "historical": "random truncated Gaussian, unseeded, not logged (estimated afterwards from body_cam, LOO 0.6 mm in sim)",
+   "matched": "fixed 100-pose file (sha256 2b95ecf0...), identical order for both models, placed at the task rest height and verified <= 1.66 mm"
+  },
+  {
+   "item": "pairing",
+   "historical": "unpaired (different poses per model)",
+   "matched": "paired by pose (McNemar)"
+  },
+  {
+   "item": "horizon",
+   "historical": "15 s wall clock = 270-321 sim steps, fewer in successful episodes",
+   "matched": "exactly 330 sim steps"
+  },
+  {
+   "item": "success window",
+   "historical": "OR over policy steps AND the unrecorded return home",
+   "matched": "policy steps only (return contamination measured: 0/200)"
+  },
+  {
+   "item": "inference latency / RTC",
+   "historical": "mean 209 ms, delay 1.77 steps",
+   "matched": "mean 134 ms (A) / 130 ms (B)"
+  },
+  {
+   "item": "viewer",
+   "historical": "rerun display on",
+   "matched": "display off"
+  },
+  {
+   "item": "stage attribution",
+   "historical": "gripper-only detector: both fail at the pass (51/51, 51/53)",
+   "matched": "simulator ground truth: main failure is right grasp/lift (can never > 2 cm: 32 vs 50); pass failures 5 vs 11"
+  },
+  {
+   "item": "repeat runs (historical protocol, tick-log estimates)",
+   "historical": "manual 52/100 (vs 49); generated 33/73 = 45 % (vs 47); generated_400 61/100",
+   "matched": "one run per checkpoint"
+  }
+ ],
+ "conclusion": {
+  "manual-10": "49 -> 53 is consistent with noise and pose mix (standardized expectation 50.9 +- 4.9; Fisher p 0.6714).",
+  "generated-500": "47 -> 34 is NOT explained by the pose mix (standardized expectation 48.2 +- 4.5, stratified MH p 0.0339). The drop is spread over the near-base and middle bands. Remaining candidate causes, none isolated: single unlogged historical run (its own repeat estimate was 45 %), inference-latency/RTC timing change, exact placement at the rest height, horizon and success-window definition. UNRESOLVED; it would need repeated runs of the same checkpoint under both protocols.",
+  "direction": "Both protocols agree that the 500 generated demos do not improve on 10 manual demos (tie vs worse) and that generated-data failures concentrate where generation never started (x < 0.203). They DISAGREE on the failure stage: the historical gripper-only detector put it at the pass, the matched simulator ground truth puts it at the right-hand grasp/lift (the historical attribution was a detector artifact, MODEL_COMPARISON \u00a73). The historical tie and the 'pass is the bottleneck' motivation cited in Gate 0 are superseded by the matched result. Caveat: historical regions use estimated starts, and one checkpoint per arm limits both results."
+ }
+}

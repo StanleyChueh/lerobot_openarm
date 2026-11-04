@@ -1,0 +1,29 @@
+test_evaluator_pending_without_annotations (test_gate1.Annotation.test_evaluator_pending_without_annotations) ... ok
+test_ground_truth_rule (test_gate1.Annotation.test_ground_truth_rule) ... ok
+test_manifest_deterministic_and_excludes_sealed (test_gate1.Annotation.test_manifest_deterministic_and_excludes_sealed) ... ok
+test_session_state_machine (test_gate1.Annotation.test_session_state_machine) ... ok
+test_displacements_keep_ok_mask_and_have_no_step (test_gate1.Injection.test_displacements_keep_ok_mask_and_have_no_step) ... ok
+test_injected_displacement_is_detected_by_relative_model_only_when_not_rigid (test_gate1.Injection.test_injected_displacement_is_detected_by_relative_model_only_when_not_rigid) ... ok
+test_variants_and_labels (test_gate1.Injection.test_variants_and_labels) ... ok
+test_giver_is_first_closing_hand (test_gate1.Phases.test_giver_is_first_closing_hand) ... ok
+test_phase_logic (test_gate1.Phases.test_phase_logic) ... ok
+test_cmh_no_difference (test_gate1.Reconcile.test_cmh_no_difference) ... ok
+test_constant_image_offset_is_not_rigid (test_gate1.RigidModel.test_constant_image_offset_is_not_rigid) ... ok
+test_fit_recovers_point_and_rigid_rotation_is_not_flagged (test_gate1.RigidModel.test_fit_recovers_point_and_rigid_rotation_is_not_flagged) ... ok
+test_temporal_shift_raises_residual (test_gate1.RigidModel.test_temporal_shift_raises_residual) ... ok
+test_auc (test_gate1.Thresholds.test_auc) ... ok
+test_freeze_and_score (test_gate1.Thresholds.test_freeze_and_score) ... ok
+test_lost_when_nothing_matches (test_gate1.Tracker.test_lost_when_nothing_matches) ... ok
+test_tracks_moving_lid_and_flags_border (test_gate1.Tracker.test_tracks_moving_lid_and_flags_border) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.293s
+
+OK
+{
+ "status": "PENDING",
+ "reason": "no human annotation file found; GT is never inferred from the tracker or FK",
+ "G1": "PENDING",
+ "G2": "PENDING"
+}
+exit 0

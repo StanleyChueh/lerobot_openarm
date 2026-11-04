@@ -1,0 +1,17 @@
+test_close_until_end_has_no_open (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.Events.test_close_until_end_has_no_open) ... ok
+test_gripper_events_blocked_vs_empty (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.Events.test_gripper_events_blocked_vs_empty) ... ok
+test_segments (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.Events.test_segments) ... ok
+test_best_lag_recovers_shift (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.Lag.test_best_lag_recovers_shift) ... ok
+test_events (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.OnSyntheticDataset.test_events) ... ok
+test_fk_geometry_and_aligned_residual_run (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.OnSyntheticDataset.test_fk_geometry_and_aligned_residual_run) ... ok
+test_signals_and_semantics (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.OnSyntheticDataset.test_signals_and_semantics) ... ok
+test_timing_checks (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.OnSyntheticDataset.test_timing_checks) ... ok
+test_offset_point_scales_with_focal_length (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.Projection.test_offset_point_scales_with_focal_length) ... ok
+test_point_on_optical_axis_hits_principal_point (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.Projection.test_point_on_optical_axis_hits_principal_point) ... ok
+test_quaternion_matches_pinocchio (research.contact_aware_augmentation.scripts.test_gate0_diagnostics.Projection.test_quaternion_matches_pinocchio) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 2.756s
+
+OK
+exit 0

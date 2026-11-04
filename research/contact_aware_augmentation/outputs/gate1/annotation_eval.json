@@ -1,0 +1,6 @@
+{
+ "status": "PENDING",
+ "reason": "no human annotation file found; GT is never inferred from the tracker or FK",
+ "G1": "PENDING",
+ "G2": "PENDING"
+}

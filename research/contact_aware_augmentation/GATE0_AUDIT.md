@@ -1,5 +1,13 @@
 # Gate 0 audit: Contact-Aware Generative Augmentation for Few-Shot VLA Learning
 
+> **Erratum (2026-11-05, after Codex's review `CODEX_GATE0_REVIEW.md` and Gate 1).**
+> * The motivation cited here (the historical 47 vs 49 / 100 tie, and both policies failing at the hand-over) is
+>   superseded by the matched evaluation: 53 vs 34 / 100, with the main failure at the right-hand grasp/lift. See
+>   GATE1_RESULTS.md §8.
+> * The 18.6 px projection residual (§0 item 3) is not a calibration error or bound. See GATE1_RESULTS.md §6.
+> * The runtime SHA `21388b0` recorded in `outputs/summary.json` is the base commit. The audit files were added in
+>   `918a06b` / `3cce98e`.
+
 **Date:** 2026-11-04. **Branch:** `research/contact-aware-augmentation`, from `21388b0` (= `force-aware/gate2a-bench-prep` HEAD).
 The delivery commit SHA is in `git log` and the delivery note.
 **Scope:** read-only, CPU only. No GPU training, no robot, no CAN socket, no motor command, no Hub write. Datasets

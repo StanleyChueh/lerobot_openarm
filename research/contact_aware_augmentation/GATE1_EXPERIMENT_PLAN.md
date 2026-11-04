@@ -1,5 +1,15 @@
 # Gate 1 plan: can we *verify* action- and contact-consistency of generated data on this rig?
 
+> **Erratum (2026-11-05).** This plan was corrected before execution, following `CODEX_GATE0_REVIEW.md`:
+> * M2 is replaced by a 3D rigid-attachment model.
+> * M4 is renamed command/visible-event alignment.
+> * Thresholds are frozen on development episodes (leave-one-episode-out), and episodes 1, 2, 3, 5, 6, 7, 9 are sealed.
+> * Window-level bootstrap confidence intervals are dropped.
+> * The motivation from the historical tie and the "pass bottleneck" is withdrawn.
+>
+> What was executed and its outcome (PARTIAL) are in GATE1_RESULTS.md. The novelty statements in §4 are withdrawn
+> pending the comparisons listed in the review (Real2Edit2Real, CRAFT, FACTR 2/FIRST, among others).
+
 **Status: plan only. Nothing in this file has been run.**
 Inputs: [GATE0_AUDIT.md](GATE0_AUDIT.md), [CONTACT_OBSERVABILITY.md](CONTACT_OBSERVABILITY.md).
 
