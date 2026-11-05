@@ -7,16 +7,17 @@ Force and research tasks extend that baseline on separate branches. See [branch 
 
 | Branch | Purpose | Short pipeline |
 |---|---|---|
-| [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Shared collection, training and evaluation baseline, including the latest evaluation timing fixes | Quest / Isaac Sim → record demonstrations → train VLA → evaluate → inspect rollout metrics |
+| [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Latest shared dataset collection and evaluation functions, including evaluation timing fixes | Record demonstrations → train VLA → evaluate → inspect results |
 | [`main`](https://github.com/StanleyChueh/lerobot_openarm/tree/main) | Identical mirror of the default branch | Same pipeline as default; develop shared fixes on `official-lerobot-quest` |
-| [`force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/force-aware/gate2a-bench-prep) | Add passive motor telemetry and prepare hardware validation | Telemetry OFF / ON / OFF bench → check timing, freshness and bus health → GO / NO-GO before contact collection |
-| [`research/factr2-next-openarm`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/factr2-next-openarm) | Add NEXT data export and force estimation research tools | Validated telemetry → contact-free data → NEXT export → model training → residual analysis |
-| [`research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/contact-aware-augmentation) | Current sim-free dataset generation; also retains earlier verifier and simulation-feasibility experiments | Real demonstration → segment / track → recover motion → modify hand-over with contact constraints → synthesize video + candidate actions → validate |
+| [`force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/force-aware/gate2a-bench-prep) | Prepare motor telemetry collection and check signal reliability for later force estimation | Record telemetry → check timing, freshness and bus health → decide whether data collection can proceed |
+| [`research/factr2-next-openarm`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/factr2-next-openarm) | Adapt FACTR2/NEXT to OpenArm with data export and external-effort estimation tools | Validated contact-free telemetry → NEXT export → train model → estimate external-effort residuals |
+| [`research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/contact-aware-augmentation) | Sim-free dataset generation research; currently a one-episode prototype | Real demonstration → recover motion → modify hand-over → synthesize video + candidate actions → validate |
 | [`archive/official-lerobot-quest-real2sim2real-v0-codex`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/official-lerobot-quest-real2sim2real-v0-codex) | Frozen legacy replay and validation experiment | Real trajectory → replay in simulation → compare schema / visuals → validate replay dataset |
 
 All active task branches extend the default baseline; archive refs preserve historical code.
-The force branches have offline preparation complete; hardware collection and real-data model training are later steps.
-Sim-free generation is a one-episode prototype; its videos and candidate actions are not yet a validated training dataset.
+The force pipeline is prepared offline; hardware collection and real-data estimation remain unvalidated.
+NEXT requires motor telemetry that standard OpenArm datasets may not contain. Its residuals are not calibrated force measurements in Newtons.
+Sim-free outputs are not yet a validated training dataset; the branch also retains earlier verifier and simulation-feasibility experiments.
 The superseded telemetry Gate 1 milestone is preserved as tag `archive/force-aware/telemetry-gate1-2026-11-05`.
 
 ![Real and sim data collection, training and evaluation pipeline](docs/pipeline.svg)
