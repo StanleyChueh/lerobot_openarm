@@ -3,6 +3,22 @@
 `official-lerobot-quest` is the shared integration baseline; `main` mirrors the same commit.
 Force and research tasks extend that baseline on separate branches. See [branch workflow](docs/BRANCH_WORKFLOW.md).
 
+### Choose a branch
+
+| Branch | Purpose | Short pipeline |
+|---|---|---|
+| [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Shared collection, training and evaluation baseline, including the latest evaluation timing fixes | Quest / Isaac Sim → record demonstrations → train VLA → evaluate → inspect rollout metrics |
+| [`main`](https://github.com/StanleyChueh/lerobot_openarm/tree/main) | Identical mirror of the default branch | Same pipeline as default; develop shared fixes on `official-lerobot-quest` |
+| [`force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/force-aware/gate2a-bench-prep) | Add passive motor telemetry and prepare hardware validation | Telemetry OFF / ON / OFF bench → check timing, freshness and bus health → GO / NO-GO before contact collection |
+| [`research/factr2-next-openarm`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/factr2-next-openarm) | Add NEXT data export and force estimation research tools | Validated telemetry → contact-free data → NEXT export → model training → residual analysis |
+| [`research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/contact-aware-augmentation) | Current sim-free dataset generation; also retains earlier verifier and simulation-feasibility experiments | Real demonstration → segment / track → recover motion → modify hand-over with contact constraints → synthesize video + candidate actions → validate |
+| [`archive/official-lerobot-quest-real2sim2real-v0-codex`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/official-lerobot-quest-real2sim2real-v0-codex) | Frozen legacy replay and validation experiment | Real trajectory → replay in simulation → compare schema / visuals → validate replay dataset |
+
+All active task branches extend the default baseline; archive refs preserve historical code.
+The force branches have offline preparation complete; hardware collection and real-data model training are later steps.
+Sim-free generation is a one-episode prototype; its videos and candidate actions are not yet a validated training dataset.
+The superseded telemetry Gate 1 milestone is preserved as tag `archive/force-aware/telemetry-gate1-2026-11-05`.
+
 ![Real and sim data collection, training and evaluation pipeline](docs/pipeline.svg)
 
 Collect data on the real robot (Steps 0-5) or in Isaac Sim ([Sim Steps 1-6](#isaac-sim---robottypeopenarm_isaac)),
