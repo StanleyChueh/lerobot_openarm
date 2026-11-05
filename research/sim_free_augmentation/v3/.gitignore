@@ -1,0 +1,5 @@
+outputs/cache/
+outputs/lerobot/
+outputs/train/
+outputs/ep*/clips/
+__pycache__/

@@ -1,0 +1,19 @@
+test_common_tolerance_on_approach (test_v3.Baseline.test_common_tolerance_on_approach)
+v2's G missed the capture target by 8.5-10.5 mm on approach variations; G+ must reach it within 2 mm. ... ok
+test_new_initial_position_moves_the_standing_can_and_the_grasp (test_v3.Baseline.test_new_initial_position_moves_the_standing_can_and_the_grasp) ... ok
+test_regrasp_aware_attachment (test_v3.Baseline.test_regrasp_aware_attachment)
+v2's G failed grasp_higher only through its stale receiver attachment; G+ must pass the 6D checks. ... ok
+test_cylinder_support_height (test_v3.Contracts.test_cylinder_support_height) ... ok
+test_hash_changes_with_one_value (test_v3.Contracts.test_hash_changes_with_one_value) ... ok
+test_identity_is_the_source (test_v3.Contracts.test_identity_is_the_source) ... ok
+test_true_zero_order_hold (test_v3.Contracts.test_true_zero_order_hold) ... ok
+test_warp_keeps_gripper_latency (test_v3.Contracts.test_warp_keeps_gripper_latency) ... ok
+test_v2_tree_unchanged (test_v3.FrozenV2.test_v2_tree_unchanged) ... ok
+test_gripper_command_only_delay (test_v3.LabelFalseNegatives.test_gripper_command_only_delay) ... ok
+test_single_joint_delay (test_v3.LabelFalseNegatives.test_single_joint_delay) ... ok
+test_source_actions_substituted (test_v3.LabelFalseNegatives.test_source_actions_substituted) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 11.695s
+
+OK
