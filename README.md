@@ -1,5 +1,8 @@
 # This is the LeRobot-compatible VLA Training Pipeline
 
+`official-lerobot-quest` is the shared integration baseline; `main` mirrors the same commit.
+Force and research tasks extend that baseline on separate branches. See [branch workflow](docs/BRANCH_WORKFLOW.md).
+
 ![Real and sim data collection, training and evaluation pipeline](docs/pipeline.svg)
 
 Collect data on the real robot (Steps 0-5) or in Isaac Sim ([Sim Steps 1-6](#isaac-sim---robottypeopenarm_isaac)),
@@ -58,7 +61,7 @@ lerobot-record \
   --dataset.num_episodes=50 --dataset.fps=30 \
   --dataset.episode_time_s=120 --dataset.reset_time_s=15 \
   --dataset.streaming_encoding=true --dataset.encoder_threads=2 \
-  --display_data=true
+  --display_data=true  --teleop.smoothing_beta=1.0
 ```
 
 Run the same command again to continue the local dataset (only a local copy is continued, never the Hub's). `--dataset.num_episodes` is the total to reach: with 21 episodes recorded, `--dataset.num_episodes=40` records 19 more. `--dataset.push_to_hub=false` keeps it local.
