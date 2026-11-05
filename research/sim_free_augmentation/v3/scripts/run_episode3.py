@@ -309,7 +309,6 @@ def main():
     with timed("render_metrics"):
         pool = ctx.Pool(args.workers)
         it = pool.imap_unordered(render_job, keys)
-        torch.cuda.reset_peak_memory_stats(args.device)
         def half(F):
             return np.stack([cv2.resize(f, (320, 240), interpolation=cv2.INTER_AREA) for f in F])
         t0 = time.time()
