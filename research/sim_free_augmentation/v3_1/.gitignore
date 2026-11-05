@@ -1,0 +1,5 @@
+outputs/cache/
+outputs/predictions_all/
+outputs/lerobot/
+outputs/ep*/clips/
+__pycache__/

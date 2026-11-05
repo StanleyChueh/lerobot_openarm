@@ -1,0 +1,23 @@
+{
+ "_doc": "Task A protocol, declared BEFORE any ablation inference. Existing v3 checkpoints only (no retraining).",
+ "checkpoints": "research/sim_free_augmentation/v3/outputs/train/{R,RpGp,RpC}_s{0,1,2}/checkpoints/last/pretrained_model",
+ "heldout": {"dataset": "ethanCSL/openarm_pringles_lerobot_real_v00", "revision": "2c1bc860347c44fc0fbae7567469d36ee49baa8d",
+             "primary": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+             "extended": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+             "frame_stride": 5, "chunk": 50},
+ "fixed": {"state": "recorded held-out state", "language": "Pick up the Pringles can with the right arm, hand it to the left arm",
+           "targets": "recorded next 50 actions", "noise": "one N(0,1) tensor (50 x 32) per (episode, frame), from numpy seed 20261105 + 1000*episode + frame, identical for every checkpoint and condition",
+           "autocast": "bf16 inference autocast for every run", "preprocessing": "the checkpoint's own saved pre/post processors"},
+ "conditions": {
+   "original": "recorded body_cam frame",
+   "blank": "constant mid-grey image (0.5)",
+   "wrong_episode": "frame of the held-out episode whose initial lid click is farthest from this episode's, at the same relative time (nearest sampled frame)",
+   "object_occluded": "pixels of the Pringles can replaced by mid-grey: disk around the Gate-1 HSV lid track (radius max(45 px, 1.4 x equivalent lid radius)) plus HSV-red pixels within 150 px of the lid, dilated 9 px; last known lid position when the tracker is lost",
+   "state_only": "image tokens removed from attention via observation.images.camera1_padding_mask = False (diagnostic)"},
+ "phases_per_step": "each chunk step is labelled by the phase of its OWN target frame t+k: approach [0, rc-5), grasp [rc-5, rc+15), carry [rc+15, lc-5), handover [lc-5, ro+5), release [ro+5, T) from the held-out episode's gripper commands",
+ "normalisation": "per-joint action std of the TRAINING real source episodes (real_10 episodes 0-9), not of held-out data",
+ "near_far": {"rule": "distance (body_cam px) of the held-out episode's human-clicked initial lid to the nearest source-episode (0-9) initial click; near <= 40 px, far > 40 px",
+              "secondary": "far episodes within 20 px of an exported v3 C relocated initial lid position are additionally marked 'far_covered_by_generation'"},
+ "reporting": "per-step phase-balanced error, per phase, gripper transition timing, |prediction(intervention) - prediction(original)|, grouped by held-out recording with recording-level bootstrap (2000 resamples); original v3 start-frame metric also reported",
+ "interpretation_rule": "image dependence is called CLEAR for an arm only if blank AND wrong_episode both raise its primary phase-balanced error by >= 10% relative and the recording-level 95% CI of the increase excludes 0; a small effect of one OOD intervention alone is not evidence that vision is ignored"
+}
