@@ -1,0 +1,132 @@
+[
+ {
+  "kind": "real",
+  "E": 0,
+  "condition": "real",
+  "episode_index": 0,
+  "rows": [
+   0,
+   273
+  ],
+  "n_frames": 273,
+  "state_sha256": "c6161cee3d90f8ea0bd3492e2c9e4a19f855854ab5799314cbe28bd45e2fc407",
+  "action_sha256": "1f90bbb4f440e3fc3fe371827b7392d0804e1c99cad18342e794f061f3e42802"
+ },
+ {
+  "kind": "real",
+  "E": 1,
+  "condition": "real",
+  "episode_index": 1,
+  "rows": [
+   0,
+   263
+  ],
+  "n_frames": 263,
+  "state_sha256": "0c43da8d0c63d8c8d4a6e6681f281c32131b23638f782fb978d295eb3d381c9b",
+  "action_sha256": "b91a05fb4159270cb5fcb01e82da6e75070b95c0dca39d8d7e230b53260baa71"
+ },
+ {
+  "kind": "real",
+  "E": 2,
+  "condition": "real",
+  "episode_index": 2,
+  "rows": [
+   0,
+   280
+  ],
+  "n_frames": 280,
+  "state_sha256": "312fcd292efef81aef59d3ccf01de5677c7552c88956293355085bdd4485712d",
+  "action_sha256": "c534986fd3e44cb24836a7155fa98de7e429b94b11d8f675591d2de19c164147"
+ },
+ {
+  "kind": "real",
+  "E": 3,
+  "condition": "real",
+  "episode_index": 3,
+  "rows": [
+   0,
+   250
+  ],
+  "n_frames": 250,
+  "state_sha256": "a80d1686cc997ee14914f1fde1ac36f5174cbc944762fd28b1b53e23b96e3ad8",
+  "action_sha256": "dcf41a49d7508447e40f76e12649273edffd709f77f294b4e9cd29e51fb128cc"
+ },
+ {
+  "kind": "real",
+  "E": 4,
+  "condition": "real",
+  "episode_index": 4,
+  "rows": [
+   0,
+   250
+  ],
+  "n_frames": 250,
+  "state_sha256": "de764dab24e1cdc79c8d7a7e333a0f1e7b66a3a32227f89e9d08fdee53d5b440",
+  "action_sha256": "6c179e22b361d2460b115a935f6ef9aaecb6bd0a1cd1fc6a073b63359f02daf8"
+ },
+ {
+  "kind": "real",
+  "E": 5,
+  "condition": "real",
+  "episode_index": 5,
+  "rows": [
+   0,
+   255
+  ],
+  "n_frames": 255,
+  "state_sha256": "022e8b77c5298e5631cd20195e00a124789571d3a5acf09b1f18c3532ccace7b",
+  "action_sha256": "83fe4fd9b4d831692c5a0fc8469b24446988638f1db9247a42146f898595c876"
+ },
+ {
+  "kind": "real",
+  "E": 6,
+  "condition": "real",
+  "episode_index": 6,
+  "rows": [
+   0,
+   241
+  ],
+  "n_frames": 241,
+  "state_sha256": "db9484bbf3f81f7fd575241ed77ea04f42ca14e8f495abca0e665cea546e31a8",
+  "action_sha256": "166e5466b714e762a65c62c2d794186de5fc1f09bde1671efc143b18a59b0251"
+ },
+ {
+  "kind": "real",
+  "E": 7,
+  "condition": "real",
+  "episode_index": 7,
+  "rows": [
+   0,
+   261
+  ],
+  "n_frames": 261,
+  "state_sha256": "9886dd8550f6c37db87240c874d414415e3f9b23d77b2cba3b2a282a4a634a6c",
+  "action_sha256": "78659901ccae7e38e150bee8a7e66a8ca1a6242b504a78d6fac4bd5d725d2377"
+ },
+ {
+  "kind": "real",
+  "E": 8,
+  "condition": "real",
+  "episode_index": 8,
+  "rows": [
+   0,
+   249
+  ],
+  "n_frames": 249,
+  "state_sha256": "b07ecb0cf344978f938ac7c71d6f8a58e5dbbe0289d4dcb1cc977174aa154042",
+  "action_sha256": "22660a627e123788b793505992553f90f79baa84e4da9c15e5574b75ab768538"
+ },
+ {
+  "kind": "real",
+  "E": 9,
+  "condition": "real",
+  "episode_index": 9,
+  "rows": [
+   0,
+   253
+  ],
+  "n_frames": 253,
+  "state_sha256": "46c9a9da51bd7456110076fd061faa8fbf44720a62c8cd93fe727a3cf80647bb",
+  "action_sha256": "857b3682e8a4ac9a9a55399073d6afb743ab3142298448f3ace7d46c368db093"
+ }
+]

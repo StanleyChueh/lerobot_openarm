@@ -1,0 +1,537 @@
+{
+ "episodes": {
+  "10": {
+   "T": 229,
+   "events": {
+    "right_close": 89,
+    "left_close": 155,
+    "right_open": 158
+   },
+   "click": [
+    447.6,
+    292.4
+   ],
+   "partner": 12
+  },
+  "11": {
+   "T": 249,
+   "events": {
+    "right_close": 86,
+    "left_close": 158,
+    "right_open": 168
+   },
+   "click": [
+    348.8,
+    182.1
+   ],
+   "partner": 22
+  },
+  "12": {
+   "T": 245,
+   "events": {
+    "right_close": 88,
+    "left_close": 165,
+    "right_open": 174
+   },
+   "click": [
+    339.3,
+    29.3
+   ],
+   "partner": 22
+  },
+  "13": {
+   "T": 279,
+   "events": {
+    "right_close": 103,
+    "left_close": 188,
+    "right_open": 194
+   },
+   "click": [
+    267.0,
+    349.0
+   ],
+   "partner": 12
+  },
+  "14": {
+   "T": 255,
+   "events": {
+    "right_close": 87,
+    "left_close": 164,
+    "right_open": 168
+   },
+   "click": [
+    441.0,
+    365.8
+   ],
+   "partner": 12
+  },
+  "15": {
+   "T": 256,
+   "events": {
+    "right_close": 85,
+    "left_close": 162,
+    "right_open": 167
+   },
+   "click": [
+    322.9,
+    188.5
+   ],
+   "partner": 22
+  },
+  "16": {
+   "T": 252,
+   "events": {
+    "right_close": 86,
+    "left_close": 171,
+    "right_open": 174
+   },
+   "click": [
+    318.4,
+    294.7
+   ],
+   "partner": 12
+  },
+  "17": {
+   "T": 237,
+   "events": {
+    "right_close": 80,
+    "left_close": 151,
+    "right_open": 155
+   },
+   "click": [
+    449.3,
+    253.4
+   ],
+   "partner": 12
+  },
+  "18": {
+   "T": 247,
+   "events": {
+    "right_close": 85,
+    "left_close": 149,
+    "right_open": 159
+   },
+   "click": [
+    325.6,
+    146.6
+   ],
+   "partner": 22
+  },
+  "19": {
+   "T": 256,
+   "events": {
+    "right_close": 86,
+    "left_close": 157,
+    "right_open": 163
+   },
+   "click": [
+    363.9,
+    237.1
+   ],
+   "partner": 12
+  },
+  "20": {
+   "T": 266,
+   "events": {
+    "right_close": 92,
+    "left_close": 173,
+    "right_open": 176
+   },
+   "click": [
+    388.7,
+    316.4
+   ],
+   "partner": 12
+  },
+  "21": {
+   "T": 248,
+   "events": {
+    "right_close": 85,
+    "left_close": 158,
+    "right_open": 163
+   },
+   "click": [
+    331.0,
+    284.8
+   ],
+   "partner": 12
+  },
+  "22": {
+   "T": 276,
+   "events": {
+    "right_close": 101,
+    "left_close": 177,
+    "right_open": 181
+   },
+   "click": [
+    362.8,
+    410.6
+   ],
+   "partner": 12
+  },
+  "23": {
+   "T": 252,
+   "events": {
+    "right_close": 87,
+    "left_close": 162,
+    "right_open": 166
+   },
+   "click": [
+    433.8,
+    328.2
+   ],
+   "partner": 12
+  },
+  "24": {
+   "T": 253,
+   "events": {
+    "right_close": 86,
+    "left_close": 159,
+    "right_open": 162
+   },
+   "click": [
+    359.1,
+    115.7
+   ],
+   "partner": 22
+  },
+  "25": {
+   "T": 242,
+   "events": {
+    "right_close": 84,
+    "left_close": 147,
+    "right_open": 160
+   },
+   "click": [
+    368.5,
+    148.9
+   ],
+   "partner": 29
+  },
+  "26": {
+   "T": 255,
+   "events": {
+    "right_close": 83,
+    "left_close": 153,
+    "right_open": 167
+   },
+   "click": [
+    324.5,
+    129.7
+   ],
+   "partner": 22
+  },
+  "27": {
+   "T": 230,
+   "events": {
+    "right_close": 84,
+    "left_close": 148,
+    "right_open": 152
+   },
+   "click": [
+    462.1,
+    154.6
+   ],
+   "partner": 29
+  },
+  "28": {
+   "T": 264,
+   "events": {
+    "right_close": 92,
+    "left_close": 169,
+    "right_open": 171
+   },
+   "click": [
+    284.5,
+    349.6
+   ],
+   "partner": 12
+  },
+  "29": {
+   "T": 282,
+   "events": {
+    "right_close": 96,
+    "left_close": 186,
+    "right_open": 191
+   },
+   "click": [
+    252.0,
+    388.1
+   ],
+   "partner": 12
+  },
+  "30": {
+   "T": 265,
+   "events": {
+    "right_close": 90,
+    "left_close": 169,
+    "right_open": 175
+   },
+   "click": [
+    247.6,
+    292.7
+   ],
+   "partner": 12
+  },
+  "31": {
+   "T": 270,
+   "events": {
+    "right_close": 91,
+    "left_close": 162,
+    "right_open": 167
+   },
+   "click": [
+    282.3,
+    182.5
+   ],
+   "partner": 14
+  },
+  "32": {
+   "T": 239,
+   "events": {
+    "right_close": 85,
+    "left_close": 149,
+    "right_open": 151
+   },
+   "click": [
+    444.5,
+    297.5
+   ],
+   "partner": 12
+  },
+  "33": {
+   "T": 231,
+   "events": {
+    "right_close": 76,
+    "left_close": 139,
+    "right_open": 153
+   },
+   "click": [
+    393.4,
+    190.1
+   ],
+   "partner": 29
+  },
+  "34": {
+   "T": 249,
+   "events": {
+    "right_close": 87,
+    "left_close": 156,
+    "right_open": 159
+   },
+   "click": [
+    358.5,
+    347.4
+   ],
+   "partner": 12
+  },
+  "35": {
+   "T": 238,
+   "events": {
+    "right_close": 76,
+    "left_close": 141,
+    "right_open": 142
+   },
+   "click": [
+    334.3,
+    276.7
+   ],
+   "partner": 12
+  },
+  "36": {
+   "T": 236,
+   "events": {
+    "right_close": 89,
+    "left_close": 156,
+    "right_open": 158
+   },
+   "click": [
+    324.3,
+    222.5
+   ],
+   "partner": 12
+  },
+  "37": {
+   "T": 225,
+   "events": {
+    "right_close": 87,
+    "left_close": 153,
+    "right_open": 159
+   },
+   "click": [
+    384.4,
+    177.0
+   ],
+   "partner": 29
+  },
+  "38": {
+   "T": 213,
+   "events": {
+    "right_close": 80,
+    "left_close": 144,
+    "right_open": 148
+   },
+   "click": [
+    404.8,
+    243.9
+   ],
+   "partner": 12
+  },
+  "39": {
+   "T": 223,
+   "events": {
+    "right_close": 89,
+    "left_close": 155,
+    "right_open": 157
+   },
+   "click": [
+    372.1,
+    237.4
+   ],
+   "partner": 12
+  },
+  "40": {
+   "T": 227,
+   "events": {
+    "right_close": 85,
+    "left_close": 151,
+    "right_open": 151
+   },
+   "click": [
+    384.4,
+    352.1
+   ],
+   "partner": 12
+  },
+  "41": {
+   "T": 220,
+   "events": {
+    "right_close": 83,
+    "left_close": 149,
+    "right_open": 149
+   },
+   "click": [
+    370.7,
+    205.4
+   ],
+   "partner": 29
+  },
+  "42": {
+   "T": 188,
+   "events": {
+    "right_close": 64,
+    "left_close": 121,
+    "right_open": 123
+   },
+   "click": [
+    340.7,
+    216.4
+   ],
+   "partner": 22
+  },
+  "43": {
+   "T": 203,
+   "events": {
+    "right_close": 65,
+    "left_close": 125,
+    "right_open": 126
+   },
+   "click": [
+    323.9,
+    229.8
+   ],
+   "partner": 12
+  },
+  "44": {
+   "T": 205,
+   "events": {
+    "right_close": 76,
+    "left_close": 139,
+    "right_open": 140
+   },
+   "click": [
+    374.4,
+    123.8
+   ],
+   "partner": 29
+  },
+  "45": {
+   "T": 206,
+   "events": {
+    "right_close": 76,
+    "left_close": 133,
+    "right_open": 135
+   },
+   "click": [
+    336.6,
+    164.2
+   ],
+   "partner": 22
+  },
+  "46": {
+   "T": 216,
+   "events": {
+    "right_close": 77,
+    "left_close": 133,
+    "right_open": 134
+   },
+   "click": [
+    336.8,
+    255.9
+   ],
+   "partner": 12
+  },
+  "47": {
+   "T": 200,
+   "events": {
+    "right_close": 76,
+    "left_close": 129,
+    "right_open": 130
+   },
+   "click": [
+    418.4,
+    282.4
+   ],
+   "partner": 12
+  },
+  "48": {
+   "T": 192,
+   "events": {
+    "right_close": 70,
+    "left_close": 124,
+    "right_open": 127
+   },
+   "click": [
+    372.4,
+    175.3
+   ],
+   "partner": 29
+  },
+  "49": {
+   "T": 221,
+   "events": {
+    "right_close": 81,
+    "left_close": 142,
+    "right_open": 145
+   },
+   "click": [
+    333.3,
+    267.2
+   ],
+   "partner": 12
+  }
+ },
+ "load_s": 21.812448263168335,
+ "total_s": 374.00884556770325,
+ "checkpoints": [
+  "R_s0",
+  "R_s1",
+  "R_s2",
+  "RpC_s0",
+  "RpC_s1",
+  "RpC_s2",
+  "RpGp_s0",
+  "RpGp_s1",
+  "RpGp_s2"
+ ]
+}

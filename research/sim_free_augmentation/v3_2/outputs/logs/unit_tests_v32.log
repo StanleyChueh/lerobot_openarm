@@ -1,0 +1,9 @@
+test_identity_reproduces_the_source_wrist_frames (test_v32.Wrist.test_identity_reproduces_the_source_wrist_frames) ... ok
+test_mount_rule_recorded (test_v32.Wrist.test_mount_rule_recorded) ... ok
+test_translated_camera_changes_the_image (test_v32.Wrist.test_translated_camera_changes_the_image) ... ok
+test_unchanged_wrist_frame_rule_flags_a_copied_source_video (test_v32.Wrist.test_unchanged_wrist_frame_rule_flags_a_copied_source_video) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 12.634s
+
+OK

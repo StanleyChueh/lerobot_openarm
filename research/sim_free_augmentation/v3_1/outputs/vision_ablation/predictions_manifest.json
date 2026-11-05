@@ -1,0 +1,47 @@
+{
+ "R_s0.npz": {
+  "sha256": "609014c4bd92e2798a8e9305a60c862d289b7e126107a8d3ca899be4eee3816a",
+  "bytes": 11207019,
+  "chunks": 1524
+ },
+ "R_s1.npz": {
+  "sha256": "13c03116515db4a620aa6da3a8f8869f72b171ea327252033023ab80ad1ba37f",
+  "bytes": 11213079,
+  "chunks": 1524
+ },
+ "R_s2.npz": {
+  "sha256": "f8a4abdd4eb8ab76e2bdc0ba5bf5d96d7edd30becdacc78d8fbc363a31a73cb3",
+  "bytes": 11222281,
+  "chunks": 1524
+ },
+ "RpC_s0.npz": {
+  "sha256": "fdcdd68addfc729ab4b7a6d1f071b66b58c3246a14854f55240ed848d4696559",
+  "bytes": 11235332,
+  "chunks": 1524
+ },
+ "RpC_s1.npz": {
+  "sha256": "7c7e4478f5f5c067010a3e78b5463e7e63a08d84f858c2aa15b0d21232bd3fb8",
+  "bytes": 11233246,
+  "chunks": 1524
+ },
+ "RpC_s2.npz": {
+  "sha256": "ac005266eaafda69e33b8993dc5048575fb07056e766b88c9137ca46308e4f4a",
+  "bytes": 11234803,
+  "chunks": 1524
+ },
+ "RpGp_s0.npz": {
+  "sha256": "a30ceb55854d1edb30253d12216341f32734d99a6213cae85af824be8f296fce",
+  "bytes": 11234255,
+  "chunks": 1524
+ },
+ "RpGp_s1.npz": {
+  "sha256": "676decc14d245368dca4879495187f523f9a2c7b7b0d53707c313a439f656135",
+  "bytes": 11233804,
+  "chunks": 1524
+ },
+ "RpGp_s2.npz": {
+  "sha256": "3d305cee19687d3f84befe7f3adfe8b8a6cb106442e27f6794413bac4dd210d3",
+  "bytes": 11234375,
+  "chunks": 1524
+ }
+}

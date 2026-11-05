@@ -1,0 +1,91 @@
+  loaded pool ep10: 229 frames, 36 chunks, lid tracked 1.00
+  loaded pool ep11: 249 frames, 40 chunks, lid tracked 0.43
+  loaded pool ep12: 245 frames, 39 chunks, lid tracked 0.62
+  loaded pool ep13: 279 frames, 46 chunks, lid tracked 1.00
+  loaded pool ep14: 255 frames, 41 chunks, lid tracked 1.00
+  loaded pool ep15: 256 frames, 42 chunks, lid tracked 1.00
+  loaded pool ep16: 252 frames, 41 chunks, lid tracked 1.00
+  loaded pool ep17: 237 frames, 38 chunks, lid tracked 0.82
+  loaded pool ep18: 247 frames, 40 chunks, lid tracked 1.00
+  loaded pool ep19: 256 frames, 42 chunks, lid tracked 1.00
+  loaded pool ep20: 266 frames, 44 chunks, lid tracked 0.51
+  loaded pool ep21: 248 frames, 40 chunks, lid tracked 1.00
+  loaded pool ep22: 276 frames, 46 chunks, lid tracked 1.00
+  loaded pool ep23: 252 frames, 41 chunks, lid tracked 1.00
+  loaded pool ep24: 253 frames, 41 chunks, lid tracked 1.00
+  loaded pool ep25: 242 frames, 39 chunks, lid tracked 1.00
+  loaded pool ep26: 255 frames, 41 chunks, lid tracked 0.80
+  loaded pool ep27: 230 frames, 36 chunks, lid tracked 0.76
+  loaded pool ep28: 264 frames, 43 chunks, lid tracked 1.00
+  loaded pool ep29: 282 frames, 47 chunks, lid tracked 1.00
+  loaded pool ep30: 265 frames, 43 chunks, lid tracked 1.00
+  loaded pool ep31: 270 frames, 44 chunks, lid tracked 0.61
+  loaded pool ep32: 239 frames, 38 chunks, lid tracked 0.69
+  loaded pool ep33: 231 frames, 37 chunks, lid tracked 0.78
+  loaded pool ep34: 249 frames, 40 chunks, lid tracked 0.71
+  loaded pool ep35: 238 frames, 38 chunks, lid tracked 1.00
+  loaded pool ep36: 236 frames, 38 chunks, lid tracked 0.91
+  loaded pool ep37: 225 frames, 35 chunks, lid tracked 1.00
+  loaded pool ep38: 213 frames, 33 chunks, lid tracked 0.79
+  loaded pool ep39: 223 frames, 35 chunks, lid tracked 0.68
+  loaded pool ep40: 227 frames, 36 chunks, lid tracked 0.73
+  loaded pool ep41: 220 frames, 34 chunks, lid tracked 1.00
+  loaded pool ep42: 188 frames, 28 chunks, lid tracked 0.88
+  loaded pool ep43: 203 frames, 31 chunks, lid tracked 1.00
+  loaded pool ep44: 205 frames, 31 chunks, lid tracked 0.72
+  loaded pool ep45: 206 frames, 32 chunks, lid tracked 1.00
+  loaded pool ep46: 216 frames, 34 chunks, lid tracked 1.00
+  loaded pool ep47: 200 frames, 30 chunks, lid tracked 0.56
+  loaded pool ep48: 192 frames, 29 chunks, lid tracked 0.99
+  loaded pool ep49: 221 frames, 35 chunks, lid tracked 0.81
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s][ALoading weights:  64%|██████▎   | 311/489 [00:00<00:00, 3097.31it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 3847.77it/s]
+
+Loading weights:  75%|███████▍  | 365/489 [00:00<00:00, 3163.11it/s][ALoading weights: 100%|██████████| 489/489 [00:00<00:00, 3561.05it/s]
+Reducing the number of VLM layers to 16 ...
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+Loading weights from local directory
+R_s0: 1524 chunks x 5 conditions in 62 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6857.91it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+R_s1: 1524 chunks x 5 conditions in 67 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 5812.55it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+R_s2: 1524 chunks x 5 conditions in 58 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6473.41it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpC_s0: 1524 chunks x 5 conditions in 71 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 5632.89it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpC_s1: 1524 chunks x 5 conditions in 67 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6612.93it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpC_s2: 1524 chunks x 5 conditions in 70 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6794.21it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpGp_s0: 1524 chunks x 5 conditions in 87 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6082.47it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpGp_s1: 1524 chunks x 5 conditions in 70 s
+RpGp_s2: 1524 chunks x 5 conditions in 74 s
+done in 374 s
+EXIT 0

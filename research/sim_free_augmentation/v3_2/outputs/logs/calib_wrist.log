@@ -1,0 +1,13 @@
+ep0: pairs R 26 L 13 (17 s)
+ep1: pairs R 33 L 12 (27 s)
+ep2: pairs R 22 L 12 (36 s)
+ep3: pairs R 33 L 12 (44 s)
+ep4: pairs R 30 L 19 (56 s)
+ep5: pairs R 27 L 12 (61 s)
+ep6: pairs R 29 L 13 (67 s)
+ep7: pairs R 19 L 14 (73 s)
+ep8: pairs R 18 L 16 (80 s)
+ep9: pairs R 23 L 17 (87 s)
+R {"camera": "observation.images.right_wrist_cam", "rotation_adopted": false, "n_pairs_fit": 144, "n_pairs_val": 116, "lag_frames": -1.5, "rot_angle_magnitude_corr": 0.6655417372825896, "val_residual_deg_nominal": {"median": 1.2455813834117946, "p90": 4.917618042230678}, "val_residual_deg_fitted": {"median": 1.2036399979939083, "p90": 5.01309203920801}, "fit_residual_deg_fitted": 1.271662828789482, "rotation_change_from_nominal_deg": 14.795717689370084, "view_axis_in_link7": {"nominal": [-0.5223579195728891, 0.0, 0.8527263358542898], "fitted": [-0.6042879526279189, -0.09456788099777969, 0.791133987509289]}, "translation": {"fit": [0.1588073393993789, 0.0088255729485127, -0.03035682754069772], "nominal": [0.05342, 0.001, 0.12199], "condition_number": 2.6088186092114793, "distance_to_nominal_m": 0.18541112900623705, "adopted": false}, "fitted_rotation": [[0.11922757460401512, -0.7877949325571991, -0.6042879526279189], [0.9710190844873312, 0.21949681875821114, -0.09456788099777969], [0.2071393806484639, -0.5755000354406792, 0.791133987509289]]}
+L {"camera": "observation.images.wrist_cam", "rotation_adopted": false, "n_pairs_fit": 68, "n_pairs_val": 72, "lag_frames": 0.0, "rot_angle_magnitude_corr": 0.7705064515771318, "val_residual_deg_nominal": {"median": 1.2260979029393697, "p90": 2.591766051398229}, "val_residual_deg_fitted": {"median": 1.2349880568291747, "p90": 2.5676817842959254}, "fit_residual_deg_fitted": 0.807777424485614, "rotation_change_from_nominal_deg": 4.450598936777045, "view_axis_in_link7": {"nominal": [-0.5223579195728891, 0.0, 0.8527263358542898], "fitted": [-0.46665414478184425, 0.009075109392498476, 0.884393324006598]}, "translation": {"fit": [0.1722350214879649, -0.1177149285886619, -0.033571316395433454], "nominal": [0.05342, 0.001, 0.12199], "condition_number": 3.9625537412682474, "distance_to_nominal_m": 0.2289313581833577, "adopted": false}, "fitted_rotation": [[-0.03348856527021149, -0.8838056489715757, -0.46665414478184425], [0.9990489859140793, -0.04264699442591202, 0.009075109392498476], [-0.027922029657465208, -0.46590643772367846, 0.884393324006598]]}
+EXIT

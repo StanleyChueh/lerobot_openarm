@@ -1,0 +1,433 @@
+{
+ "name": "sfa_v32_C_threecam",
+ "episodes": 37,
+ "frames": 9398,
+ "skipped": [],
+ "v3_C_all_not_selected": 93,
+ "schema_ok": true,
+ "arrays_exact": true,
+ "boundaries_ok": true,
+ "psnr_db_min": {
+  "observation.images.body_cam": 37.86031684852079,
+  "observation.images.wrist_cam": 16.697079937152534,
+  "observation.images.right_wrist_cam": 36.875544719895174
+ },
+ "psnr_db_median": {
+  "observation.images.body_cam": 40.67716157069175,
+  "observation.images.wrist_cam": 41.76847508883202,
+  "observation.images.right_wrist_cam": 40.78462194756456
+ },
+ "unchanged_wrist_frame_violations_total": 0,
+ "write_s": 82.62837219238281,
+ "validate_s": 9.913544178009033,
+ "per_episode": [
+  {
+   "episode_index": 0,
+   "exact": true,
+   "n": 269,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.71260001159469,
+    "observation.images.wrist_cam": 40.572912697890615,
+    "observation.images.right_wrist_cam": 42.730297049238956
+   }
+  },
+  {
+   "episode_index": 1,
+   "exact": true,
+   "n": 269,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.57766581162588,
+    "observation.images.wrist_cam": 42.1350193740481,
+    "observation.images.right_wrist_cam": 40.78462194756456
+   }
+  },
+  {
+   "episode_index": 2,
+   "exact": true,
+   "n": 269,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.54663758329493,
+    "observation.images.wrist_cam": 42.1183000849912,
+    "observation.images.right_wrist_cam": 40.76996251640586
+   }
+  },
+  {
+   "episode_index": 3,
+   "exact": true,
+   "n": 269,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.715200226446456,
+    "observation.images.wrist_cam": 42.01791581274955,
+    "observation.images.right_wrist_cam": 39.35668425499412
+   }
+  },
+  {
+   "episode_index": 4,
+   "exact": true,
+   "n": 259,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.60191027740294,
+    "observation.images.wrist_cam": 39.99821559987657,
+    "observation.images.right_wrist_cam": 41.49453459708808
+   }
+  },
+  {
+   "episode_index": 5,
+   "exact": true,
+   "n": 259,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.67716157069175,
+    "observation.images.wrist_cam": 41.461100702921044,
+    "observation.images.right_wrist_cam": 40.871054250612275
+   }
+  },
+  {
+   "episode_index": 6,
+   "exact": true,
+   "n": 259,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.685115573085326,
+    "observation.images.wrist_cam": 41.35698109485688,
+    "observation.images.right_wrist_cam": 40.575877466190235
+   }
+  },
+  {
+   "episode_index": 7,
+   "exact": true,
+   "n": 259,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.49948946792444,
+    "observation.images.wrist_cam": 41.76847508883202,
+    "observation.images.right_wrist_cam": 40.688549794318845
+   }
+  },
+  {
+   "episode_index": 8,
+   "exact": true,
+   "n": 276,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.818916736417904,
+    "observation.images.wrist_cam": 38.42312898474204,
+    "observation.images.right_wrist_cam": 41.94280503019275
+   }
+  },
+  {
+   "episode_index": 9,
+   "exact": true,
+   "n": 276,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.92956204633124,
+    "observation.images.wrist_cam": 41.43097976759562,
+    "observation.images.right_wrist_cam": 40.62323045064639
+   }
+  },
+  {
+   "episode_index": 10,
+   "exact": true,
+   "n": 276,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.9193769617735,
+    "observation.images.wrist_cam": 41.65892949862269,
+    "observation.images.right_wrist_cam": 40.011858913894486
+   }
+  },
+  {
+   "episode_index": 11,
+   "exact": true,
+   "n": 276,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.888964245124214,
+    "observation.images.wrist_cam": 41.238074695897765,
+    "observation.images.right_wrist_cam": 40.8521853400794
+   }
+  },
+  {
+   "episode_index": 12,
+   "exact": true,
+   "n": 246,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.294482317414605,
+    "observation.images.wrist_cam": 40.73678226858754,
+    "observation.images.right_wrist_cam": 42.383090126315764
+   }
+  },
+  {
+   "episode_index": 13,
+   "exact": true,
+   "n": 246,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.434030640406874,
+    "observation.images.wrist_cam": 43.113726431722725,
+    "observation.images.right_wrist_cam": 41.806938453599926
+   }
+  },
+  {
+   "episode_index": 14,
+   "exact": true,
+   "n": 246,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.444029337796614,
+    "observation.images.wrist_cam": 43.098936954615674,
+    "observation.images.right_wrist_cam": 41.86378937548184
+   }
+  },
+  {
+   "episode_index": 15,
+   "exact": true,
+   "n": 246,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.68371781777924,
+    "observation.images.wrist_cam": 43.112392685176026,
+    "observation.images.right_wrist_cam": 41.95771162683442
+   }
+  },
+  {
+   "episode_index": 16,
+   "exact": true,
+   "n": 246,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.95091188215903,
+    "observation.images.wrist_cam": 40.140521528581644,
+    "observation.images.right_wrist_cam": 41.456323870194154
+   }
+  },
+  {
+   "episode_index": 17,
+   "exact": true,
+   "n": 251,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 41.39383358214725,
+    "observation.images.wrist_cam": 41.87643549438646,
+    "observation.images.right_wrist_cam": 41.5083083078034
+   }
+  },
+  {
+   "episode_index": 18,
+   "exact": true,
+   "n": 251,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 41.21782358708212,
+    "observation.images.wrist_cam": 42.66685068852716,
+    "observation.images.right_wrist_cam": 39.6206160583135
+   }
+  },
+  {
+   "episode_index": 19,
+   "exact": true,
+   "n": 251,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 41.246060018274456,
+    "observation.images.wrist_cam": 16.697079937152534,
+    "observation.images.right_wrist_cam": 41.23000003364483
+   }
+  },
+  {
+   "episode_index": 20,
+   "exact": true,
+   "n": 251,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 41.22682176421712,
+    "observation.images.wrist_cam": 42.641162413600966,
+    "observation.images.right_wrist_cam": 39.233381990682254
+   }
+  },
+  {
+   "episode_index": 21,
+   "exact": true,
+   "n": 236,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 37.86031684852079,
+    "observation.images.wrist_cam": 37.862952696272565,
+    "observation.images.right_wrist_cam": 39.44128041990562
+   }
+  },
+  {
+   "episode_index": 22,
+   "exact": true,
+   "n": 236,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 37.901620711338694,
+    "observation.images.wrist_cam": 38.97362611629766,
+    "observation.images.right_wrist_cam": 36.934761864631234
+   }
+  },
+  {
+   "episode_index": 23,
+   "exact": true,
+   "n": 236,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 37.86246324426786,
+    "observation.images.wrist_cam": 39.10651979310919,
+    "observation.images.right_wrist_cam": 39.412318934273294
+   }
+  },
+  {
+   "episode_index": 24,
+   "exact": true,
+   "n": 236,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 37.92668948489782,
+    "observation.images.wrist_cam": 38.87494661324532,
+    "observation.images.right_wrist_cam": 36.875544719895174
+   }
+  },
+  {
+   "episode_index": 25,
+   "exact": true,
+   "n": 257,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.64730066554414,
+    "observation.images.wrist_cam": 40.13170023481588,
+    "observation.images.right_wrist_cam": 41.269371515950304
+   }
+  },
+  {
+   "episode_index": 26,
+   "exact": true,
+   "n": 257,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.592252089176554,
+    "observation.images.wrist_cam": 41.822284801889644,
+    "observation.images.right_wrist_cam": 39.05606728556701
+   }
+  },
+  {
+   "episode_index": 27,
+   "exact": true,
+   "n": 257,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.701598530864835,
+    "observation.images.wrist_cam": 42.36828888353369,
+    "observation.images.right_wrist_cam": 39.75979507416693
+   }
+  },
+  {
+   "episode_index": 28,
+   "exact": true,
+   "n": 257,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.63713210411248,
+    "observation.images.wrist_cam": 41.81242846926638,
+    "observation.images.right_wrist_cam": 39.87234169017972
+   }
+  },
+  {
+   "episode_index": 29,
+   "exact": true,
+   "n": 245,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 41.124476467967355,
+    "observation.images.wrist_cam": 39.95288755345969,
+    "observation.images.right_wrist_cam": 42.027745313620315
+   }
+  },
+  {
+   "episode_index": 30,
+   "exact": true,
+   "n": 245,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 41.08410843679294,
+    "observation.images.wrist_cam": 42.07471190323876,
+    "observation.images.right_wrist_cam": 40.25563633744937
+   }
+  },
+  {
+   "episode_index": 31,
+   "exact": true,
+   "n": 245,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 41.13406332129986,
+    "observation.images.wrist_cam": 42.26556540204673,
+    "observation.images.right_wrist_cam": 40.40875395961899
+   }
+  },
+  {
+   "episode_index": 32,
+   "exact": true,
+   "n": 245,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 41.113433444151006,
+    "observation.images.wrist_cam": 42.27175007662238,
+    "observation.images.right_wrist_cam": 40.49788838146856
+   }
+  },
+  {
+   "episode_index": 33,
+   "exact": true,
+   "n": 249,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.507746822128574,
+    "observation.images.wrist_cam": 39.953030583019206,
+    "observation.images.right_wrist_cam": 41.95079712296922
+   }
+  },
+  {
+   "episode_index": 34,
+   "exact": true,
+   "n": 249,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.56275167025205,
+    "observation.images.wrist_cam": 42.4207950533662,
+    "observation.images.right_wrist_cam": 42.26703371993097
+   }
+  },
+  {
+   "episode_index": 35,
+   "exact": true,
+   "n": 249,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.45903262615791,
+    "observation.images.wrist_cam": 42.14180817577124,
+    "observation.images.right_wrist_cam": 42.19335448148783
+   }
+  },
+  {
+   "episode_index": 36,
+   "exact": true,
+   "n": 249,
+   "boundaries_ok": true,
+   "psnr_db": {
+    "observation.images.body_cam": 40.45165277738391,
+    "observation.images.wrist_cam": 41.99816083952364,
+    "observation.images.right_wrist_cam": 42.204530543722555
+   }
+  }
+ ],
+ "ok": false
+}

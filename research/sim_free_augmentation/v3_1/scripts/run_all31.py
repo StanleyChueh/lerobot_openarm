@@ -36,7 +36,7 @@ def main():
     ap.add_argument("--tag", default="")
     ap.add_argument("--families", nargs="*", default=None)
     ap.add_argument("--episodes", type=int, nargs="*", default=list(range(10)))
-    ap.add_argument("--workers", type=int, default=11)
+    ap.add_argument("--workers", type=int, default=9)
     ap.add_argument("--config", default=str(HERE / "configs/v3_1.json"))
     args = ap.parse_args()
     logdir = HERE / "outputs/logs"

@@ -1,0 +1,366 @@
+{
+ "0": {
+  "identity__C__s1.0_approach": {
+   "frames": 32,
+   "render_s": 0.019551515579223633,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "identity__C__s1.0_handover": {
+   "frames": 32,
+   "render_s": 0.1894214153289795,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.97973388671875,
+     "attached": 0.02026611328125,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_y-3__C__s1.0_approach": {
+   "frames": 32,
+   "render_s": 7.154292821884155,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.6068893432617187,
+     "attached": 0.012775472005208333,
+     "can_warp": 0.17137176513671876,
+     "multiview": 0.16427703857421874,
+     "inpainted": 0.03472056070963542,
+     "unknown": 0.0099658203125
+    },
+    "L": {
+     "reprojected": 0.9761710611979166,
+     "attached": 0.023828938802083335,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_y-3__C__s1.0_handover": {
+   "frames": 32,
+   "render_s": 6.0123982429504395,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.5356905110677084,
+     "attached": 0.4636632283528646,
+     "can_warp": 0.0,
+     "multiview": 0.0003480021158854167,
+     "inpainted": 0.00029825846354166667,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 0.811612548828125,
+     "attached": 0.005138753255208333,
+     "can_warp": 0.18044820149739582,
+     "multiview": 0.0017449951171875,
+     "inpainted": 0.0010555013020833333,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_x-6__C__s1.0_approach": {
+   "frames": 32,
+   "render_s": 9.359918355941772,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.4515275065104167,
+     "attached": 0.012775472005208333,
+     "can_warp": 0.17137176513671876,
+     "multiview": 0.12828114827473958,
+     "inpainted": 0.08904378255208334,
+     "unknown": 0.14700032552083334
+    },
+    "L": {
+     "reprojected": 0.9761710611979166,
+     "attached": 0.023828938802083335,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_x-6__C__s1.0_handover": {
+   "frames": 32,
+   "render_s": 5.664213180541992,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.5350467936197917,
+     "attached": 0.4636632283528646,
+     "can_warp": 0.0,
+     "multiview": 0.0005570475260416667,
+     "inpainted": 0.00073211669921875,
+     "unknown": 8.138020833333334e-07
+    },
+    "L": {
+     "reprojected": 0.8075121053059896,
+     "attached": 0.005138753255208333,
+     "can_warp": 0.18063161214192708,
+     "multiview": 0.005082600911458333,
+     "inpainted": 0.0016349283854166666,
+     "unknown": 0.0
+    }
+   }
+  },
+  "source_geometry_s": 9.653408288955688,
+  "episode_s": 53.05863547325134
+ },
+ "3": {
+  "identity__C__s1.0_approach": {
+   "frames": 32,
+   "render_s": 0.051047325134277344,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "identity__C__s1.0_handover": {
+   "frames": 32,
+   "render_s": 0.3348088264465332,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.97217041015625,
+     "attached": 0.02782958984375,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_y-3__C__s1.0_approach": {
+   "frames": 32,
+   "render_s": 15.086068153381348,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.734822998046875,
+     "attached": 0.012566731770833334,
+     "can_warp": 0.04770070393880208,
+     "multiview": 0.15363922119140624,
+     "inpainted": 0.04845458984375,
+     "unknown": 0.0028157552083333333
+    },
+    "L": {
+     "reprojected": 0.9781022135416667,
+     "attached": 0.021897786458333332,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_y-3__C__s1.0_handover": {
+   "frames": 32,
+   "render_s": 8.207717657089233,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.48875091552734373,
+     "attached": 0.5107842000325521,
+     "can_warp": 0.0,
+     "multiview": 0.00029917399088541665,
+     "inpainted": 0.00016571044921875,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 0.8197503662109376,
+     "attached": 0.0071097819010416665,
+     "can_warp": 0.16883768717447917,
+     "multiview": 0.0028519694010416667,
+     "inpainted": 0.0014127604166666668,
+     "unknown": 3.743489583333333e-05
+    }
+   }
+  },
+  "init_x-6__C__s1.0_approach": {
+   "frames": 32,
+   "render_s": 15.327536344528198,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.5174860636393229,
+     "attached": 0.012566731770833334,
+     "can_warp": 0.04770070393880208,
+     "multiview": 0.16690256754557292,
+     "inpainted": 0.09006785074869791,
+     "unknown": 0.16527608235677083
+    },
+    "L": {
+     "reprojected": 0.9781022135416667,
+     "attached": 0.021897786458333332,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_x-6__C__s1.0_handover": {
+   "frames": 32,
+   "render_s": 10.034880876541138,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.48806508382161456,
+     "attached": 0.5107842000325521,
+     "can_warp": 0.0,
+     "multiview": 0.0004302978515625,
+     "inpainted": 0.0007204182942708333,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 0.8120670572916666,
+     "attached": 0.0071097819010416665,
+     "can_warp": 0.16924224853515624,
+     "multiview": 0.0076590983072916665,
+     "inpainted": 0.003895263671875,
+     "unknown": 2.655029296875e-05
+    }
+   }
+  },
+  "source_geometry_s": 37.110954999923706,
+  "episode_s": 103.17156958580017
+ },
+ "8": {
+  "identity__C__s1.0_approach": {
+   "frames": 32,
+   "render_s": 0.08223891258239746,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "identity__C__s1.0_handover": {
+   "frames": 32,
+   "render_s": 0.3737494945526123,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.9724226888020834,
+     "attached": 0.027577311197916666,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 1.0,
+     "attached": 0.0,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_y-3__C__s1.0_approach": {
+   "frames": 32,
+   "render_s": 17.41704797744751,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.761829833984375,
+     "attached": 0.014506022135416666,
+     "can_warp": 0.03504964192708333,
+     "multiview": 0.13964558919270834,
+     "inpainted": 0.03442626953125,
+     "unknown": 0.014542643229166667
+    },
+    "L": {
+     "reprojected": 0.9942281087239583,
+     "attached": 0.0057718912760416664,
+     "can_warp": 0.0,
+     "multiview": 0.0,
+     "inpainted": 0.0,
+     "unknown": 0.0
+    }
+   }
+  },
+  "init_y-3__C__s1.0_handover": {
+   "frames": 32,
+   "render_s": 9.79574966430664,
+   "provenance_frac": {
+    "R": {
+     "reprojected": 0.4929095458984375,
+     "attached": 0.5068472290039062,
+     "can_warp": 0.0,
+     "multiview": 0.00020762125651041668,
+     "inpainted": 3.5603841145833336e-05,
+     "unknown": 0.0
+    },
+    "L": {
+     "reprojected": 0.8261325073242187,
+     "attached": 0.010118408203125,
+     "can_warp": 0.1611821492513021,
+     "multiview": 0.0011310831705729166,
+     "inpainted": 0.00141876220703125,
+     "unknown": 1.708984375e-05
+    }
+   }
+  },
+  "source_geometry_s": 47.931193351745605,
+  "episode_s": 106.44613409042358
+ }
+}

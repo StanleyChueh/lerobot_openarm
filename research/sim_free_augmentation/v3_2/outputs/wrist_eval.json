@@ -1,0 +1,3258 @@
+{
+ "ep0/approach_above__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4835164835164835,
+    "source_control": 0.4835164835164835
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.0081064453125,
+   "red_frac_hold": {
+    "generated": 0.7489028742283951,
+    "source": 0.7489028742283951
+   },
+   "novelty": {
+    "frames_with_changed_pose": 0,
+    "mean_abs_diff": 0.0,
+    "frac_pixels_changed_gt10": 0.0
+   },
+   "provenance": {
+    "reprojected": 0.9940450911935287,
+    "attached": 0.0025915750915750917,
+    "can_warp": 0.0030251497634310133,
+    "multiview": 1.5620230463980464e-06,
+    "inpainted": 0.00011096325549450549,
+    "unknown": 0.00022565867292429794
+   },
+   "provenance_changed_frames": {
+    "reprojected": null,
+    "attached": null,
+    "can_warp": null,
+    "multiview": null,
+    "inpainted": null,
+    "unknown": null
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 13,
+    "frac_generated_closer_to_nearest_view": 1.0,
+    "median_ncc_gain": 0.01908695697784424
+   },
+   "object_shift_error_px": {
+    "generated_median": 32.33470908008755,
+    "source_control_median": 67.43669928324378,
+    "n": 20
+   },
+   "visibility_agreement": {
+    "generated": 0.9816849816849816,
+    "source_control": 0.9816849816849816
+   },
+   "grasp_hold_frames": 94,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.8705636596679687,
+    "source": 0.8705636596679687
+   },
+   "novelty": {
+    "frames_with_changed_pose": 75,
+    "mean_abs_diff": 19.59066488715278,
+    "frac_pixels_changed_gt10": 0.38912968750000004
+   },
+   "provenance": {
+    "reprojected": 0.9175491023733211,
+    "attached": 0.0027935172466422467,
+    "can_warp": 0.028288070436507936,
+    "multiview": 0.02300183865613553,
+    "inpainted": 0.015072842738858365,
+    "unknown": 0.013294628548534798
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.6998787326388888,
+    "attached": 0.010168402777777778,
+    "can_warp": 0.1029685763888889,
+    "multiview": 0.08372669270833333,
+    "inpainted": 0.054865147569444446,
+    "unknown": 0.048392447916666664
+   }
+  }
+ },
+ "ep0/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 10,
+    "frac_generated_closer_to_nearest_view": 0.9,
+    "median_ncc_gain": 0.02013828605413437
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4835164835164835,
+    "source_control": 0.4835164835164835
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.6999708658854168,
+   "red_frac_hold": {
+    "generated": 0.7489028742283951,
+    "source": 0.7489028742283951
+   },
+   "novelty": {
+    "frames_with_changed_pose": 142,
+    "mean_abs_diff": 6.633878919813369,
+    "frac_pixels_changed_gt10": 0.16547173394097223
+   },
+   "provenance": {
+    "reprojected": 0.6758008408692002,
+    "attached": 0.2115635016025641,
+    "can_warp": 0.06718310010302198,
+    "multiview": 0.02330090048840049,
+    "inpainted": 0.012973102201617827,
+    "unknown": 0.00917855473519536
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.3858189141358569,
+    "attached": 0.39763506822183103,
+    "can_warp": 0.12916187555017608,
+    "multiview": 0.04479680164319249,
+    "inpainted": 0.02494124578198357,
+    "unknown": 0.017646094666960096
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.9816849816849816,
+    "source_control": 0.9816849816849816
+   },
+   "grasp_hold_frames": 94,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.8705636596679687,
+    "source": 0.8705636596679687
+   },
+   "novelty": {
+    "frames_with_changed_pose": 72,
+    "mean_abs_diff": 4.611090359157986,
+    "frac_pixels_changed_gt10": 0.10324964735243054
+   },
+   "provenance": {
+    "reprojected": 0.9619691625648656,
+    "attached": 0.008184857677045177,
+    "can_warp": 0.023439896691849815,
+    "multiview": 0.0039856627747252744,
+    "inpainted": 0.0024096769116300366,
+    "unknown": 1.0743379884004884e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8762719274450231,
+    "attached": 0.010562065972222222,
+    "can_warp": 0.08887627495659722,
+    "multiview": 0.015112304687499998,
+    "inpainted": 0.009136691623263887,
+    "unknown": 4.073531539351852e-05
+   }
+  }
+ },
+ "ep0/init_y+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 22,
+    "frac_generated_closer_to_nearest_view": 1.0,
+    "median_ncc_gain": 0.0631645917892456
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4835164835164835,
+    "source_control": 0.4835164835164835
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.6999708658854168,
+   "red_frac_hold": {
+    "generated": 0.7489028742283951,
+    "source": 0.7489028742283951
+   },
+   "novelty": {
+    "frames_with_changed_pose": 142,
+    "mean_abs_diff": 7.2137846317997685,
+    "frac_pixels_changed_gt10": 0.20071322970920139
+   },
+   "provenance": {
+    "reprojected": 0.6819568452380952,
+    "attached": 0.2115635016025641,
+    "can_warp": 0.06718255160637973,
+    "multiview": 0.022307787698412698,
+    "inpainted": 0.01240891378586691,
+    "unknown": 0.0045804000686813185
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.39765404929577464,
+    "attached": 0.39763506822183103,
+    "can_warp": 0.12916082104606808,
+    "multiview": 0.04288750733568075,
+    "inpainted": 0.023856573686913143,
+    "unknown": 0.008805980413732395
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.9816849816849816,
+    "source_control": 0.9816849816849816
+   },
+   "grasp_hold_frames": 94,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.8705636596679687,
+    "source": 0.8705636596679687
+   },
+   "novelty": {
+    "frames_with_changed_pose": 72,
+    "mean_abs_diff": 6.903015543619792,
+    "frac_pixels_changed_gt10": 0.17077351888020834
+   },
+   "provenance": {
+    "reprojected": 0.9619768534416971,
+    "attached": 0.008184857677045177,
+    "can_warp": 0.023462098882020756,
+    "multiview": 0.005008394383394383,
+    "inpainted": 0.0013591866033272283,
+    "unknown": 8.609012515262515e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8763010886863426,
+    "attached": 0.010562065972222222,
+    "can_warp": 0.08896045826099537,
+    "multiview": 0.018990162037037035,
+    "inpainted": 0.005153582537615741,
+    "unknown": 3.264250578703704e-05
+   }
+  }
+ },
+ "ep0/init_y-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 18,
+    "frac_generated_closer_to_nearest_view": 0.7777777777777778,
+    "median_ncc_gain": 0.02046966552734375
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4835164835164835,
+    "source_control": 0.4835164835164835
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.6999708658854168,
+   "red_frac_hold": {
+    "generated": 0.7494557773919752,
+    "source": 0.7489028742283951
+   },
+   "novelty": {
+    "frames_with_changed_pose": 142,
+    "mean_abs_diff": 6.4108935772931135,
+    "frac_pixels_changed_gt10": 0.18989095052083335
+   },
+   "provenance": {
+    "reprojected": 0.6843130556509462,
+    "attached": 0.2115635016025641,
+    "can_warp": 0.06718307625534188,
+    "multiview": 0.027359417925824175,
+    "inpainted": 0.008016719608516484,
+    "unknown": 0.0015642289568070819
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.4021839467796361,
+    "attached": 0.39763506822183103,
+    "can_warp": 0.12916182970217135,
+    "multiview": 0.0525994443221831,
+    "inpainted": 0.015412425726232396,
+    "unknown": 0.0030072852479460094
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.978021978021978,
+    "source_control": 0.9816849816849816
+   },
+   "grasp_hold_frames": 94,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.8705636596679687,
+    "source": 0.8705636596679687
+   },
+   "novelty": {
+    "frames_with_changed_pose": 72,
+    "mean_abs_diff": 6.884412751374422,
+    "frac_pixels_changed_gt10": 0.17132866753472223
+   },
+   "provenance": {
+    "reprojected": 0.9641216541704823,
+    "attached": 0.008184857677045177,
+    "can_warp": 0.023433779761904763,
+    "multiview": 0.003671803456959707,
+    "inpainted": 0.0005813229739010989,
+    "unknown": 6.581959706959707e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8844334581163195,
+    "attached": 0.010562065972222222,
+    "can_warp": 0.08885308159722223,
+    "multiview": 0.013922254774305556,
+    "inpainted": 0.002204182942708333,
+    "unknown": 2.495659722222222e-05
+   }
+  }
+ },
+ "ep1/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 10,
+    "frac_generated_closer_to_nearest_view": 0.7,
+    "median_ncc_gain": 0.034258753061294556
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4372623574144487,
+    "source_control": 0.4372623574144487
+   },
+   "grasp_hold_frames": 84,
+   "grasp_attached_frac_in_hold": 0.791124519469246,
+   "red_frac_hold": {
+    "generated": 0.7936978004092261,
+    "source": 0.7936978004092261
+   },
+   "novelty": {
+    "frames_with_changed_pose": 162,
+    "mean_abs_diff": 8.107250896186986,
+    "frac_pixels_changed_gt10": 0.19246395158179014
+   },
+   "provenance": {
+    "reprojected": 0.6267980260812738,
+    "attached": 0.25959301231780735,
+    "can_warp": 0.04757967215224968,
+    "multiview": 0.040656301984315586,
+    "inpainted": 0.014993440074461344,
+    "unknown": 0.010379547389892269
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.39822173193158433,
+    "attached": 0.4173390279385289,
+    "can_warp": 0.0772435418274177,
+    "multiview": 0.06600374951774692,
+    "inpainted": 0.024341202096193417,
+    "unknown": 0.01685074668852881
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 11.395414157507568,
+    "source_control_median": 16.20753174245329,
+    "n": 5
+   },
+   "visibility_agreement": {
+    "generated": 0.9809885931558935,
+    "source_control": 0.9809885931558935
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9355299479166667,
+    "source": 0.9355299479166667
+   },
+   "novelty": {
+    "frames_with_changed_pose": 56,
+    "mean_abs_diff": 3.567605651498538,
+    "frac_pixels_changed_gt10": 0.09434587445175438
+   },
+   "provenance": {
+    "reprojected": 0.9463080862840622,
+    "attached": 0.010005792538022813,
+    "can_warp": 0.038787168785646385,
+    "multiview": 0.0036062138585234473,
+    "inpainted": 0.0012851141674588087,
+    "unknown": 7.624366286438529e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.774341343470982,
+    "attached": 0.020489908854166666,
+    "can_warp": 0.18216116768973212,
+    "multiview": 0.01693632579985119,
+    "inpainted": 0.00603544689360119,
+    "unknown": 3.580729166666667e-05
+   }
+  }
+ },
+ "ep1/init_y+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 6,
+    "frac_generated_closer_to_nearest_view": 0.5,
+    "median_ncc_gain": -0.01481659710407257
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4372623574144487,
+    "source_control": 0.4372623574144487
+   },
+   "grasp_hold_frames": 84,
+   "grasp_attached_frac_in_hold": 0.791124519469246,
+   "red_frac_hold": {
+    "generated": 0.7936978004092261,
+    "source": 0.7936978004092261
+   },
+   "novelty": {
+    "frames_with_changed_pose": 162,
+    "mean_abs_diff": 8.283783737622171,
+    "frac_pixels_changed_gt10": 0.2265767264660494
+   },
+   "provenance": {
+    "reprojected": 0.6324490182390684,
+    "attached": 0.25959301231780735,
+    "can_warp": 0.04757777843789607,
+    "multiview": 0.03435506030180609,
+    "inpainted": 0.01563695639258555,
+    "unknown": 0.010388174310836502
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.4073958735210906,
+    "attached": 0.4173390279385289,
+    "can_warp": 0.07724046746399177,
+    "multiview": 0.0557739559220679,
+    "inpainted": 0.025385923032407408,
+    "unknown": 0.016864752121913584
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 2.763959345438205,
+    "source_control_median": 12.2906749878721,
+    "n": 3
+   },
+   "visibility_agreement": {
+    "generated": 0.9847908745247148,
+    "source_control": 0.9847908745247148
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9355299479166667,
+    "source": 0.9355299479166667
+   },
+   "novelty": {
+    "frames_with_changed_pose": 56,
+    "mean_abs_diff": 3.9462057976973686,
+    "frac_pixels_changed_gt10": 0.11697197094298244
+   },
+   "provenance": {
+    "reprojected": 0.9468048087967363,
+    "attached": 0.010005792538022813,
+    "can_warp": 0.03880611830640051,
+    "multiview": 0.003593613850602028,
+    "inpainted": 0.000778588898130545,
+    "unknown": 1.1077610107731306e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.7766741652715774,
+    "attached": 0.020489908854166666,
+    "can_warp": 0.18225016276041667,
+    "multiview": 0.01687715076264881,
+    "inpainted": 0.003656587146577381,
+    "unknown": 5.2025204613095236e-05
+   }
+  }
+ },
+ "ep1/init_y-3__C__s0.49": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 2,
+    "frac_generated_closer_to_nearest_view": 0.0,
+    "median_ncc_gain": -0.03553581237792969
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4372623574144487,
+    "source_control": 0.4372623574144487
+   },
+   "grasp_hold_frames": 84,
+   "grasp_attached_frac_in_hold": 0.791124519469246,
+   "red_frac_hold": {
+    "generated": 0.7936978004092261,
+    "source": 0.7936978004092261
+   },
+   "novelty": {
+    "frames_with_changed_pose": 162,
+    "mean_abs_diff": 4.97973504211677,
+    "frac_pixels_changed_gt10": 0.15383336950231483
+   },
+   "provenance": {
+    "reprojected": 0.6666278022021547,
+    "attached": 0.25959301231780735,
+    "can_warp": 0.047578496316539924,
+    "multiview": 0.020178541369613435,
+    "inpainted": 0.005674942074619772,
+    "unknown": 0.0003472057192648923
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.46288365242412544,
+    "attached": 0.4173390279385289,
+    "can_warp": 0.07724163290895061,
+    "multiview": 0.03275899000128601,
+    "inpainted": 0.009213023244598766,
+    "unknown": 0.000563673482510288
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.9809885931558935,
+    "source_control": 0.9809885931558935
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9355299479166667,
+    "source": 0.9355299479166667
+   },
+   "novelty": {
+    "frames_with_changed_pose": 56,
+    "mean_abs_diff": 2.183147500913743,
+    "frac_pixels_changed_gt10": 0.06240388569078945
+   },
+   "provenance": {
+    "reprojected": 0.9496770660052282,
+    "attached": 0.010005792538022813,
+    "can_warp": 0.03865603216096324,
+    "multiview": 0.001336875693124208,
+    "inpainted": 0.0003210526576362484,
+    "unknown": 3.1809450253485423e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.7901635160900299,
+    "attached": 0.020489908854166666,
+    "can_warp": 0.18154529389880952,
+    "multiview": 0.0062785412016369046,
+    "inpainted": 0.0015078008742559525,
+    "unknown": 1.4939081101190476e-05
+   }
+  }
+ },
+ "ep1/pos_left_down__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 6,
+    "frac_generated_closer_to_nearest_view": 0.3333333333333333,
+    "median_ncc_gain": -0.00240480899810791
+   },
+   "object_shift_error_px": {
+    "generated_median": 109.46346481893212,
+    "source_control_median": 128.2184350645968,
+    "n": 11
+   },
+   "visibility_agreement": {
+    "generated": 0.4372623574144487,
+    "source_control": 0.4372623574144487
+   },
+   "grasp_hold_frames": 84,
+   "grasp_attached_frac_in_hold": 0.8567068917410716,
+   "red_frac_hold": {
+    "generated": 0.7936978004092261,
+    "source": 0.7936978004092261
+   },
+   "novelty": {
+    "frames_with_changed_pose": 112,
+    "mean_abs_diff": 2.8818292557565792,
+    "frac_pixels_changed_gt10": 0.08942913925438596
+   },
+   "provenance": {
+    "reprojected": 0.6679147853295311,
+    "attached": 0.2823773541468631,
+    "can_warp": 0.036471106622306716,
+    "multiview": 0.005556058895754119,
+    "inpainted": 0.0053316599334600765,
+    "unknown": 0.0023490350720849176
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.2323568580264137,
+    "attached": 0.6585102480933781,
+    "can_warp": 0.07860793340773808,
+    "multiview": 0.012986624581473214,
+    "inpainted": 0.012116844540550595,
+    "unknown": 0.0054214913504464285
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 5.856352912998444,
+    "source_control_median": 28.566630511181117,
+    "n": 25
+   },
+   "visibility_agreement": {
+    "generated": 0.9847908745247148,
+    "source_control": 0.9847908745247148
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.6189276308001893,
+   "red_frac_hold": {
+    "generated": 0.9357686631944445,
+    "source": 0.9355299479166667
+   },
+   "novelty": {
+    "frames_with_changed_pose": 121,
+    "mean_abs_diff": 6.729548531715786,
+    "frac_pixels_changed_gt10": 0.16340177210365855
+   },
+   "provenance": {
+    "reprojected": 0.6989368464828898,
+    "attached": 0.21209994355988593,
+    "can_warp": 0.06535272595849176,
+    "multiview": 0.01373608800697085,
+    "inpainted": 0.008723945956115337,
+    "unknown": 0.0011504500356463879
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.3470038094008265,
+    "attached": 0.4596298747417355,
+    "can_warp": 0.1420476605544077,
+    "multiview": 0.02985612517217631,
+    "inpainted": 0.018961965177341604,
+    "unknown": 0.0025005649535123965
+   }
+  }
+ },
+ "ep2/init_x+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 37.48376726859308,
+    "source_control_median": 119.26453385735985,
+    "n": 1
+   },
+   "visibility_agreement": {
+    "generated": 0.8535714285714285,
+    "source_control": 0.8535714285714285
+   },
+   "grasp_hold_frames": 93,
+   "grasp_attached_frac_in_hold": 0.5694098272289427,
+   "red_frac_hold": {
+    "generated": 0.4497837911626344,
+    "source": 0.4496457073252688
+   },
+   "novelty": {
+    "frames_with_changed_pose": 173,
+    "mean_abs_diff": 9.27969803265685,
+    "frac_pixels_changed_gt10": 0.2037919809626437
+   },
+   "provenance": {
+    "reprojected": 0.6844861421130952,
+    "attached": 0.19407908993675596,
+    "can_warp": 0.06888847423735119,
+    "multiview": 0.027261218843005953,
+    "inpainted": 0.014886393229166666,
+    "unknown": 0.010398681640625
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.4926660532574663,
+    "attached": 0.31079212578275534,
+    "can_warp": 0.11149579645351639,
+    "multiview": 0.0441222039077553,
+    "inpainted": 0.024093584417148362,
+    "unknown": 0.01683023618135838
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 5.358876536591432,
+    "source_control_median": 13.07821184854772,
+    "n": 3
+   },
+   "visibility_agreement": {
+    "generated": 0.9928571428571429,
+    "source_control": 0.9928571428571429
+   },
+   "grasp_hold_frames": 89,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9348874782986109,
+    "source": 0.9348874782986109
+   },
+   "novelty": {
+    "frames_with_changed_pose": 56,
+    "mean_abs_diff": 3.0801290090460527,
+    "frac_pixels_changed_gt10": 0.08682822779605263
+   },
+   "provenance": {
+    "reprojected": 0.9543331008184524,
+    "attached": 0.011546735491071429,
+    "can_warp": 0.032003476097470236,
+    "multiview": 0.0012738211495535714,
+    "inpainted": 0.0006979050409226191,
+    "unknown": 0.0001449614025297619
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8056526692708333,
+    "attached": 0.02374651227678571,
+    "can_warp": 0.1600173804873512,
+    "multiview": 0.006369105747767857,
+    "inpainted": 0.003489525204613095,
+    "unknown": 0.0007248070126488095
+   }
+  }
+ },
+ "ep2/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 5,
+    "frac_generated_closer_to_nearest_view": 1.0,
+    "median_ncc_gain": 0.21888840198516846
+   },
+   "object_shift_error_px": {
+    "generated_median": 37.51428864888509,
+    "source_control_median": 119.24200030084081,
+    "n": 1
+   },
+   "visibility_agreement": {
+    "generated": 0.8535714285714285,
+    "source_control": 0.8535714285714285
+   },
+   "grasp_hold_frames": 93,
+   "grasp_attached_frac_in_hold": 0.5694098272289427,
+   "red_frac_hold": {
+    "generated": 0.45010406165994626,
+    "source": 0.4496457073252688
+   },
+   "novelty": {
+    "frames_with_changed_pose": 173,
+    "mean_abs_diff": 7.916777455998564,
+    "frac_pixels_changed_gt10": 0.19088867187499997
+   },
+   "provenance": {
+    "reprojected": 0.6738157668340774,
+    "attached": 0.19407908993675596,
+    "can_warp": 0.06899745396205358,
+    "multiview": 0.03379472423735119,
+    "inpainted": 0.014628243582589285,
+    "unknown": 0.01468472144717262
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.4753960817076108,
+    "attached": 0.31079212578275534,
+    "can_warp": 0.11167217982297688,
+    "multiview": 0.0546966635055395,
+    "inpainted": 0.02367576996026012,
+    "unknown": 0.02376717922085742
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 9.014861683469881,
+    "source_control_median": 12.215765074864434,
+    "n": 2
+   },
+   "visibility_agreement": {
+    "generated": 0.9964285714285714,
+    "source_control": 0.9928571428571429
+   },
+   "grasp_hold_frames": 89,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9348874782986109,
+    "source": 0.9348874782986109
+   },
+   "novelty": {
+    "frames_with_changed_pose": 56,
+    "mean_abs_diff": 3.1010991182383036,
+    "frac_pixels_changed_gt10": 0.08592413651315789
+   },
+   "provenance": {
+    "reprojected": 0.9529517415364583,
+    "attached": 0.011546735491071429,
+    "can_warp": 0.032088983444940475,
+    "multiview": 0.0019932454427083334,
+    "inpainted": 0.0014176781063988096,
+    "unknown": 1.6159784226190476e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.798745872860863,
+    "attached": 0.02374651227678571,
+    "can_warp": 0.1604449172247024,
+    "multiview": 0.009966227213541666,
+    "inpainted": 0.007088390531994048,
+    "unknown": 8.079892113095238e-06
+   }
+  }
+ },
+ "ep2/init_y+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 54,
+    "frac_generated_closer_to_nearest_view": 0.1111111111111111,
+    "median_ncc_gain": -0.00711822509765625
+   },
+   "object_shift_error_px": {
+    "generated_median": 37.592034203666515,
+    "source_control_median": 119.13735204734644,
+    "n": 1
+   },
+   "visibility_agreement": {
+    "generated": 0.8535714285714285,
+    "source_control": 0.8535714285714285
+   },
+   "grasp_hold_frames": 93,
+   "grasp_attached_frac_in_hold": 0.5694098272289427,
+   "red_frac_hold": {
+    "generated": 0.4496457073252688,
+    "source": 0.4496457073252688
+   },
+   "novelty": {
+    "frames_with_changed_pose": 173,
+    "mean_abs_diff": 6.943129489942529,
+    "frac_pixels_changed_gt10": 0.1977722027658046
+   },
+   "provenance": {
+    "reprojected": 0.6807084495907738,
+    "attached": 0.19407908993675596,
+    "can_warp": 0.06898631649925595,
+    "multiview": 0.029106677827380953,
+    "inpainted": 0.017471516927083333,
+    "unknown": 0.00964794921875
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.48655186882827556,
+    "attached": 0.31079212578275534,
+    "can_warp": 0.11165415387162812,
+    "multiview": 0.04710907394026975,
+    "inpainted": 0.02827759965077072,
+    "unknown": 0.015615177926300577
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.9964285714285714,
+    "source_control": 0.9928571428571429
+   },
+   "grasp_hold_frames": 89,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9348874782986109,
+    "source": 0.9348874782986109
+   },
+   "novelty": {
+    "frames_with_changed_pose": 56,
+    "mean_abs_diff": 3.9845496390716373,
+    "frac_pixels_changed_gt10": 0.11732096354166666
+   },
+   "provenance": {
+    "reprojected": 0.9529129580543155,
+    "attached": 0.011546735491071429,
+    "can_warp": 0.03217953636532738,
+    "multiview": 0.002505126953125,
+    "inpainted": 0.0008027692522321429,
+    "unknown": 5.287388392857143e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.7985519554501488,
+    "attached": 0.02374651227678571,
+    "can_warp": 0.1608976818266369,
+    "multiview": 0.012525634765625,
+    "inpainted": 0.004013846261160714,
+    "unknown": 0.0002643694196428571
+   }
+  }
+ },
+ "ep2/pos_left_down__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 30,
+    "frac_generated_closer_to_nearest_view": 0.7,
+    "median_ncc_gain": 0.0023894906044006348
+   },
+   "object_shift_error_px": {
+    "generated_median": 16.840803622300957,
+    "source_control_median": 28.18611730710088,
+    "n": 13
+   },
+   "visibility_agreement": {
+    "generated": 0.8571428571428571,
+    "source_control": 0.8535714285714285
+   },
+   "grasp_hold_frames": 93,
+   "grasp_attached_frac_in_hold": 0.6617990451388889,
+   "red_frac_hold": {
+    "generated": 0.4496457073252688,
+    "source": 0.4496457073252688
+   },
+   "novelty": {
+    "frames_with_changed_pose": 121,
+    "mean_abs_diff": 3.5986391905911246,
+    "frac_pixels_changed_gt10": 0.08714208587398375
+   },
+   "provenance": {
+    "reprojected": 0.7378071637834821,
+    "attached": 0.22570747302827382,
+    "can_warp": 0.02351518322172619,
+    "multiview": 0.005231573195684524,
+    "inpainted": 0.005788097563244048,
+    "unknown": 0.0019505092075892856
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.4019219180440771,
+    "attached": 0.5172957020488981,
+    "can_warp": 0.05225163567493113,
+    "multiview": 0.011910403753443526,
+    "inpainted": 0.012637149190771352,
+    "unknown": 0.003983191287878788
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 8.58834994462972,
+    "source_control_median": 26.028164597341004,
+    "n": 20
+   },
+   "visibility_agreement": {
+    "generated": 1.0,
+    "source_control": 0.9964285714285714
+   },
+   "grasp_hold_frames": 89,
+   "grasp_attached_frac_in_hold": 0.6671844276685394,
+   "red_frac_hold": {
+    "generated": 0.9348874782986109,
+    "source": 0.9348874782986109
+   },
+   "novelty": {
+    "frames_with_changed_pose": 128,
+    "mean_abs_diff": 6.306580517199612,
+    "frac_pixels_changed_gt10": 0.1596660004844961
+   },
+   "provenance": {
+    "reprojected": 0.701571521577381,
+    "attached": 0.21718247767857143,
+    "can_warp": 0.06125311569940476,
+    "multiview": 0.010512393043154761,
+    "inpainted": 0.007473539806547619,
+    "unknown": 0.0020069521949404763
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.3479499308268229,
+    "attached": 0.47432444254557293,
+    "can_warp": 0.1339911905924479,
+    "multiview": 0.022995859781901037,
+    "inpainted": 0.016348368326822918,
+    "unknown": 0.004390207926432292
+   }
+  }
+ },
+ "ep3/init_x+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 4,
+    "frac_generated_closer_to_nearest_view": 1.0,
+    "median_ncc_gain": 0.37504467368125916
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.504,
+    "source_control": 0.504
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.7234635416666666,
+   "red_frac_hold": {
+    "generated": 0.8802704234182097,
+    "source": 0.8800944010416666
+   },
+   "novelty": {
+    "frames_with_changed_pose": 146,
+    "mean_abs_diff": 10.163959219104308,
+    "frac_pixels_changed_gt10": 0.20467168898809524
+   },
+   "provenance": {
+    "reprojected": 0.6698894010416667,
+    "attached": 0.23581307291666667,
+    "can_warp": 0.05188731770833333,
+    "multiview": 0.016014817708333334,
+    "inpainted": 0.012924127604166667,
+    "unknown": 0.013471263020833334
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.440841761201484,
+    "attached": 0.3976898722888128,
+    "can_warp": 0.08884814676084474,
+    "multiview": 0.02742263306221461,
+    "inpainted": 0.022130355486586758,
+    "unknown": 0.02306723120005708
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.996,
+    "source_control": 0.996
+   },
+   "grasp_hold_frames": 91,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.8085887096774194,
+    "source": 0.8085887096774194
+   },
+   "novelty": {
+    "frames_with_changed_pose": 40,
+    "mean_abs_diff": 2.606928400917659,
+    "frac_pixels_changed_gt10": 0.06665062313988095
+   },
+   "provenance": {
+    "reprojected": 0.9644177734375,
+    "attached": 0.011975833333333333,
+    "can_warp": 0.022479361979166668,
+    "multiview": 0.000862421875,
+    "inpainted": 0.0002487890625,
+    "unknown": 1.58203125e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8325101725260418,
+    "attached": 0.01994986979166667,
+    "can_warp": 0.14049601236979167,
+    "multiview": 0.005390136718750001,
+    "inpainted": 0.0015549316406250002,
+    "unknown": 9.887695312499999e-05
+   }
+  }
+ },
+ "ep3/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.504,
+    "source_control": 0.504
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.7234635416666666,
+   "red_frac_hold": {
+    "generated": 0.8800944010416666,
+    "source": 0.8800944010416666
+   },
+   "novelty": {
+    "frames_with_changed_pose": 146,
+    "mean_abs_diff": 8.661188793225625,
+    "frac_pixels_changed_gt10": 0.18779104219812928
+   },
+   "provenance": {
+    "reprojected": 0.6505395182291667,
+    "attached": 0.23581307291666667,
+    "can_warp": 0.05188731770833333,
+    "multiview": 0.0306384375,
+    "inpainted": 0.01560109375,
+    "unknown": 0.015520559895833333
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.4077084002211758,
+    "attached": 0.3976898722888128,
+    "can_warp": 0.08884814676084474,
+    "multiview": 0.0524630779109589,
+    "inpainted": 0.026714201626712328,
+    "unknown": 0.026576301191495434
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.996,
+    "source_control": 0.996
+   },
+   "grasp_hold_frames": 91,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.8085887096774194,
+    "source": 0.8085887096774194
+   },
+   "novelty": {
+    "frames_with_changed_pose": 40,
+    "mean_abs_diff": 2.714017934647818,
+    "frac_pixels_changed_gt10": 0.06769066220238097
+   },
+   "provenance": {
+    "reprojected": 0.9631214713541667,
+    "attached": 0.011975833333333333,
+    "can_warp": 0.022487955729166665,
+    "multiview": 0.0017499088541666668,
+    "inpainted": 0.0006648307291666667,
+    "unknown": 0.0
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8244082845052084,
+    "attached": 0.01994986979166667,
+    "can_warp": 0.14054972330729165,
+    "multiview": 0.010936930338541668,
+    "inpainted": 0.0041551920572916665,
+    "unknown": 0.0
+   }
+  }
+ },
+ "ep3/init_y+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 15,
+    "frac_generated_closer_to_nearest_view": 0.26666666666666666,
+    "median_ncc_gain": -0.04661303758621216
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.5,
+    "source_control": 0.504
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.7234635416666666,
+   "red_frac_hold": {
+    "generated": 0.8800944010416666,
+    "source": 0.8800944010416666
+   },
+   "novelty": {
+    "frames_with_changed_pose": 146,
+    "mean_abs_diff": 8.276010731115363,
+    "frac_pixels_changed_gt10": 0.22860424638605442
+   },
+   "provenance": {
+    "reprojected": 0.6585541796875,
+    "attached": 0.23581307291666667,
+    "can_warp": 0.05188526041666667,
+    "multiview": 0.0201326953125,
+    "inpainted": 0.0173073046875,
+    "unknown": 0.016307486979166667
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.42143213559503423,
+    "attached": 0.3976898722888128,
+    "can_warp": 0.08884462400114156,
+    "multiview": 0.03447379334332192,
+    "inpainted": 0.029635795697773974,
+    "unknown": 0.027923779073915522
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.996,
+    "source_control": 0.996
+   },
+   "grasp_hold_frames": 91,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.8085887096774194,
+    "source": 0.8085887096774194
+   },
+   "novelty": {
+    "frames_with_changed_pose": 40,
+    "mean_abs_diff": 3.356493675595238,
+    "frac_pixels_changed_gt10": 0.09467657180059526
+   },
+   "provenance": {
+    "reprojected": 0.9631652213541667,
+    "attached": 0.011975833333333333,
+    "can_warp": 0.022538619791666666,
+    "multiview": 0.0018859635416666666,
+    "inpainted": 0.0004303515625,
+    "unknown": 4.0104166666666665e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8246817220052083,
+    "attached": 0.01994986979166667,
+    "can_warp": 0.14086637369791669,
+    "multiview": 0.011787272135416669,
+    "inpainted": 0.002689697265625,
+    "unknown": 2.5065104166666664e-05
+   }
+  }
+ },
+ "ep3/pos_left_down__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 3,
+    "frac_generated_closer_to_nearest_view": 0.3333333333333333,
+    "median_ncc_gain": -0.04016423225402832
+   },
+   "object_shift_error_px": {
+    "generated_median": 25.035252748378685,
+    "source_control_median": 38.85613605315473,
+    "n": 16
+   },
+   "visibility_agreement": {
+    "generated": 0.504,
+    "source_control": 0.504
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.8806496175130208,
+   "red_frac_hold": {
+    "generated": 0.8801372010030862,
+    "source": 0.8800944010416666
+   },
+   "novelty": {
+    "frames_with_changed_pose": 107,
+    "mean_abs_diff": 3.224625711323303,
+    "frac_pixels_changed_gt10": 0.0843209273726852
+   },
+   "provenance": {
+    "reprojected": 0.66702734375,
+    "attached": 0.29164434895833335,
+    "can_warp": 0.027962005208333335,
+    "multiview": 0.00418140625,
+    "inpainted": 0.006568971354166666,
+    "unknown": 0.002615924479166667
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.23433934482087224,
+    "attached": 0.6690991895443924,
+    "can_warp": 0.0653317878699377,
+    "multiview": 0.009769640771028036,
+    "inpainted": 0.015348063911604362,
+    "unknown": 0.006111973082165109
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 11.834436563751767,
+    "source_control_median": 28.648513621588712,
+    "n": 13
+   },
+   "visibility_agreement": {
+    "generated": 1.0,
+    "source_control": 1.0
+   },
+   "grasp_hold_frames": 91,
+   "grasp_attached_frac_in_hold": 0.5885450649610805,
+   "red_frac_hold": {
+    "generated": 0.8088323252688173,
+    "source": 0.8085887096774194
+   },
+   "novelty": {
+    "frames_with_changed_pose": 111,
+    "mean_abs_diff": 6.486817725929055,
+    "frac_pixels_changed_gt10": 0.15570717201576575
+   },
+   "provenance": {
+    "reprojected": 0.7187249348958333,
+    "attached": 0.21812092447916667,
+    "can_warp": 0.04180236979166667,
+    "multiview": 0.011871627604166667,
+    "inpainted": 0.008188229166666667,
+    "unknown": 0.0012919140625
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.3678676039320572,
+    "attached": 0.48989334060623113,
+    "can_warp": 0.09414948151276277,
+    "multiview": 0.026737900009384384,
+    "inpainted": 0.01844195758258258,
+    "unknown": 0.0029097163569819823
+   }
+  }
+ },
+ "ep4/pos_right_up__C__s0.7": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 2,
+    "frac_generated_closer_to_nearest_view": 0.0,
+    "median_ncc_gain": -0.12199518084526062
+   },
+   "object_shift_error_px": {
+    "generated_median": 50.96533003858903,
+    "source_control_median": 62.263921350587,
+    "n": 16
+   },
+   "visibility_agreement": {
+    "generated": 0.432,
+    "source_control": 0.432
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.8716581693046536,
+   "red_frac_hold": {
+    "generated": 0.8657882612179487,
+    "source": 0.8657882612179487
+   },
+   "novelty": {
+    "frames_with_changed_pose": 105,
+    "mean_abs_diff": 3.3356139322916665,
+    "frac_pixels_changed_gt10": 0.09344875372023809
+   },
+   "provenance": {
+    "reprojected": 0.6616790104166667,
+    "attached": 0.27461944010416667,
+    "can_warp": 0.05003973958333333,
+    "multiview": 0.0086602734375,
+    "inpainted": 0.004385625,
+    "unknown": 0.0006159114583333333
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.20840243675595238,
+    "attached": 0.6486216827876983,
+    "can_warp": 0.11101888020833334,
+    "multiview": 0.020535187251984128,
+    "inpainted": 0.010194568452380951,
+    "unknown": 0.0012272445436507936
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 8,
+    "frac_generated_closer_to_nearest_view": 1.0,
+    "median_ncc_gain": 0.09639427065849304
+   },
+   "object_shift_error_px": {
+    "generated_median": 11.920402964397336,
+    "source_control_median": 15.781687000265851,
+    "n": 12
+   },
+   "visibility_agreement": {
+    "generated": 0.66,
+    "source_control": 0.66
+   },
+   "grasp_hold_frames": 84,
+   "grasp_attached_frac_in_hold": 0.0822908916170635,
+   "red_frac_hold": {
+    "generated": 0.0,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 124,
+    "mean_abs_diff": 7.475712193080357,
+    "frac_pixels_changed_gt10": 0.16151266431051586
+   },
+   "provenance": {
+    "reprojected": 0.9027903645833333,
+    "attached": 0.032563645833333335,
+    "can_warp": 0.040495247395833336,
+    "multiview": 0.015861432291666668,
+    "inpainted": 0.007715885416666667,
+    "unknown": 0.0005734244791666666
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8040128318212365,
+    "attached": 0.06565251176075268,
+    "can_warp": 0.08164364394321236,
+    "multiview": 0.03197869413642473,
+    "inpainted": 0.01555622059811828,
+    "unknown": 0.0011560977402553766
+   }
+  }
+ },
+ "ep5/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 20,
+    "frac_generated_closer_to_nearest_view": 0.45,
+    "median_ncc_gain": -0.0014796257019042969
+   },
+   "object_shift_error_px": {
+    "generated_median": 71.02016331292853,
+    "source_control_median": 71.02016331292853,
+    "n": 2
+   },
+   "visibility_agreement": {
+    "generated": 0.43137254901960786,
+    "source_control": 0.43137254901960786
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.49288138834635414,
+   "red_frac_hold": {
+    "generated": 0.455793788580247,
+    "source": 0.455771484375
+   },
+   "novelty": {
+    "frames_with_changed_pose": 158,
+    "mean_abs_diff": 8.883820734243972,
+    "frac_pixels_changed_gt10": 0.20313660819575466
+   },
+   "provenance": {
+    "reprojected": 0.7331235957924837,
+    "attached": 0.15912598294526145,
+    "can_warp": 0.03492528339460784,
+    "multiview": 0.04724354064542484,
+    "inpainted": 0.016476766748366012,
+    "unknown": 0.009104830473856209
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.5721177396492616,
+    "attached": 0.2539812640097574,
+    "can_warp": 0.05636675484572784,
+    "multiview": 0.07624748648470464,
+    "inpainted": 0.026592250131856537,
+    "unknown": 0.014694504878691983
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.996078431372549,
+    "source_control": 0.996078431372549
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9671427951388889,
+    "source": 0.9671427951388889
+   },
+   "novelty": {
+    "frames_with_changed_pose": 48,
+    "mean_abs_diff": 3.7654208034939236,
+    "frac_pixels_changed_gt10": 0.09240132649739584
+   },
+   "provenance": {
+    "reprojected": 0.9647981770833334,
+    "attached": 0.010896548202614379,
+    "can_warp": 0.020169577205882354,
+    "multiview": 0.003181934232026144,
+    "inpainted": 0.0009537632761437908,
+    "unknown": 0.0
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8551845974392361,
+    "attached": 0.015693630642361112,
+    "can_warp": 0.10715087890625001,
+    "multiview": 0.016904025607638887,
+    "inpainted": 0.005066867404513889,
+    "unknown": 0.0
+   }
+  }
+ },
+ "ep5/init_x-6__C__s0.7": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 20,
+    "frac_generated_closer_to_nearest_view": 0.3,
+    "median_ncc_gain": -0.0080624520778656
+   },
+   "object_shift_error_px": {
+    "generated_median": 71.0210389816949,
+    "source_control_median": 71.0210389816949,
+    "n": 2
+   },
+   "visibility_agreement": {
+    "generated": 0.43137254901960786,
+    "source_control": 0.43137254901960786
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.49288138834635414,
+   "red_frac_hold": {
+    "generated": 0.45597583912037043,
+    "source": 0.455771484375
+   },
+   "novelty": {
+    "frames_with_changed_pose": 158,
+    "mean_abs_diff": 10.85370522553066,
+    "frac_pixels_changed_gt10": 0.23762977840015725
+   },
+   "provenance": {
+    "reprojected": 0.7148476945465686,
+    "attached": 0.15912598294526145,
+    "can_warp": 0.03492528339460784,
+    "multiview": 0.056307112949346406,
+    "inpainted": 0.020477775224673204,
+    "unknown": 0.014316150939542483
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.5426218230814874,
+    "attached": 0.2539812640097574,
+    "can_warp": 0.05636675484572784,
+    "multiview": 0.09087540381065401,
+    "inpainted": 0.03304957393855485,
+    "unknown": 0.02310518031381856
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 1.0,
+    "source_control": 0.996078431372549
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9671427951388889,
+    "source": 0.9671427951388889
+   },
+   "novelty": {
+    "frames_with_changed_pose": 48,
+    "mean_abs_diff": 5.138733859592014,
+    "frac_pixels_changed_gt10": 0.11844624837239584
+   },
+   "provenance": {
+    "reprojected": 0.9631869766135621,
+    "attached": 0.010896548202614379,
+    "can_warp": 0.020164419934640524,
+    "multiview": 0.004288436989379085,
+    "inpainted": 0.001456546160130719,
+    "unknown": 7.072099673202614e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8466250949435764,
+    "attached": 0.015693630642361112,
+    "can_warp": 0.10712348090277779,
+    "multiview": 0.022782321506076387,
+    "inpainted": 0.007737901475694444,
+    "unknown": 3.757052951388889e-05
+   }
+  }
+ },
+ "ep5/init_y-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 12,
+    "frac_generated_closer_to_nearest_view": 0.5,
+    "median_ncc_gain": 9.208917617797852e-06
+   },
+   "object_shift_error_px": {
+    "generated_median": 71.42372256786322,
+    "source_control_median": 71.02966157049283,
+    "n": 2
+   },
+   "visibility_agreement": {
+    "generated": 0.43137254901960786,
+    "source_control": 0.43137254901960786
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.49288138834635414,
+   "red_frac_hold": {
+    "generated": 0.45597391010802474,
+    "source": 0.455771484375
+   },
+   "novelty": {
+    "frames_with_changed_pose": 158,
+    "mean_abs_diff": 8.468350592079403,
+    "frac_pixels_changed_gt10": 0.23955219388757862
+   },
+   "provenance": {
+    "reprojected": 0.7472880412581699,
+    "attached": 0.15912598294526145,
+    "can_warp": 0.03492528339460784,
+    "multiview": 0.0436715047998366,
+    "inpainted": 0.013320886948529412,
+    "unknown": 0.0016683006535947711
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.5949780788502109,
+    "attached": 0.2539812640097574,
+    "can_warp": 0.05636675484572784,
+    "multiview": 0.07048249192378693,
+    "inpainted": 0.021498899821993673,
+    "unknown": 0.002692510548523207
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 1.0,
+    "source_control": 1.0
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9671427951388889,
+    "source": 0.9671427951388889
+   },
+   "novelty": {
+    "frames_with_changed_pose": 48,
+    "mean_abs_diff": 3.769905327690972,
+    "frac_pixels_changed_gt10": 0.10768961588541667
+   },
+   "provenance": {
+    "reprojected": 0.9654610779207516,
+    "attached": 0.010896548202614379,
+    "can_warp": 0.020131880616830064,
+    "multiview": 0.0030640573937908496,
+    "inpainted": 0.0004445338031045752,
+    "unknown": 1.902062908496732e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8587062581380208,
+    "attached": 0.015693630642361112,
+    "can_warp": 0.10695061577690973,
+    "multiview": 0.01627780490451389,
+    "inpainted": 0.0023615858289930554,
+    "unknown": 1.010470920138889e-05
+   }
+  }
+ },
+ "ep5/pos_right_up__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 112.39779152859323,
+    "source_control_median": 123.24464498833837,
+    "n": 28
+   },
+   "visibility_agreement": {
+    "generated": 0.43137254901960786,
+    "source_control": 0.43137254901960786
+   },
+   "grasp_hold_frames": 80,
+   "grasp_attached_frac_in_hold": 0.5572224934895834,
+   "red_frac_hold": {
+    "generated": 0.455771484375,
+    "source": 0.455771484375
+   },
+   "novelty": {
+    "frames_with_changed_pose": 107,
+    "mean_abs_diff": 3.911237853250386,
+    "frac_pixels_changed_gt10": 0.09914831090856481
+   },
+   "provenance": {
+    "reprojected": 0.7608825827205883,
+    "attached": 0.18123197508169936,
+    "can_warp": 0.03500238715277778,
+    "multiview": 0.011853477328431372,
+    "inpainted": 0.009633859272875817,
+    "unknown": 0.001395718443627451
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.43629605967679125,
+    "attached": 0.42677162431853577,
+    "can_warp": 0.08258469626168224,
+    "multiview": 0.028203885562694708,
+    "inpainted": 0.02285043686721184,
+    "unknown": 0.0032932973130841117
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 2,
+    "frac_generated_closer_to_nearest_view": 0.0,
+    "median_ncc_gain": -0.05690145492553711
+   },
+   "object_shift_error_px": {
+    "generated_median": 13.149063419327971,
+    "source_control_median": 27.418749795197474,
+    "n": 15
+   },
+   "visibility_agreement": {
+    "generated": 1.0,
+    "source_control": 0.996078431372549
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.6416734360203599,
+   "red_frac_hold": {
+    "generated": 0.9671427951388889,
+    "source": 0.9671427951388889
+   },
+   "novelty": {
+    "frames_with_changed_pose": 115,
+    "mean_abs_diff": 7.8680081463675196,
+    "frac_pixels_changed_gt10": 0.17239474826388884
+   },
+   "provenance": {
+    "reprojected": 0.703229026245915,
+    "attached": 0.22480089613970589,
+    "can_warp": 0.04315887969771242,
+    "multiview": 0.01835950265522876,
+    "inpainted": 0.008816125408496732,
+    "unknown": 0.0016355698529411764
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.3426279721467392,
+    "attached": 0.49778620357789866,
+    "can_warp": 0.09570012454710146,
+    "multiview": 0.04071020153985508,
+    "inpainted": 0.01954879981884058,
+    "unknown": 0.0036266983695652172
+   }
+  }
+ },
+ "ep6/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 23,
+    "frac_generated_closer_to_nearest_view": 0.43478260869565216,
+    "median_ncc_gain": -0.015422075986862183
+   },
+   "object_shift_error_px": {
+    "generated_median": 138.64329300584365,
+    "source_control_median": 138.64329300584365,
+    "n": 1
+   },
+   "visibility_agreement": {
+    "generated": 0.46887966804979253,
+    "source_control": 0.46887966804979253
+   },
+   "grasp_hold_frames": 81,
+   "grasp_attached_frac_in_hold": 0.4945757378472222,
+   "red_frac_hold": {
+    "generated": 0.25807773919753085,
+    "source": 0.25807773919753085
+   },
+   "novelty": {
+    "frames_with_changed_pose": 155,
+    "mean_abs_diff": 8.456112780448718,
+    "frac_pixels_changed_gt10": 0.22238531650641027
+   },
+   "provenance": {
+    "reprojected": 0.7044721835019018,
+    "attached": 0.17235221894450206,
+    "can_warp": 0.05090105787517289,
+    "multiview": 0.04208157741182573,
+    "inpainted": 0.018129349282503458,
+    "unknown": 0.012063612984094052
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.5416522177419354,
+    "attached": 0.26682959509408594,
+    "can_warp": 0.07914293514784945,
+    "multiview": 0.06543006552419355,
+    "inpainted": 0.028188214045698927,
+    "unknown": 0.018756972446236562
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": 18.124147924919754,
+    "source_control_median": 11.28330655094103,
+    "n": 2
+   },
+   "visibility_agreement": {
+    "generated": 0.983402489626556,
+    "source_control": 0.983402489626556
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9009709284855771,
+    "source": 0.9009709284855771
+   },
+   "novelty": {
+    "frames_with_changed_pose": 70,
+    "mean_abs_diff": 5.005324435763889,
+    "frac_pixels_changed_gt10": 0.11478719075520834
+   },
+   "provenance": {
+    "reprojected": 0.9452270271438451,
+    "attached": 0.010569404823651452,
+    "can_warp": 0.03662118829961964,
+    "multiview": 0.005011318940179806,
+    "inpainted": 0.0025169919173582294,
+    "unknown": 5.4068875345781466e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8329332217261904,
+    "attached": 0.014880208333333332,
+    "can_warp": 0.12608151971726192,
+    "multiview": 0.017253255208333335,
+    "inpainted": 0.008665643601190475,
+    "unknown": 0.0001861514136904762
+   }
+  }
+ },
+ "ep6/init_y+3__C__s0.49": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 8,
+    "frac_generated_closer_to_nearest_view": 0.5,
+    "median_ncc_gain": -0.0010048449039459229
+   },
+   "object_shift_error_px": {
+    "generated_median": 138.63528842443725,
+    "source_control_median": 138.63528842443725,
+    "n": 1
+   },
+   "visibility_agreement": {
+    "generated": 0.46887966804979253,
+    "source_control": 0.46887966804979253
+   },
+   "grasp_hold_frames": 81,
+   "grasp_attached_frac_in_hold": 0.4945757378472222,
+   "red_frac_hold": {
+    "generated": 0.25807773919753085,
+    "source": 0.25807773919753085
+   },
+   "novelty": {
+    "frames_with_changed_pose": 154,
+    "mean_abs_diff": 5.371467702490651,
+    "frac_pixels_changed_gt10": 0.17793269230769232
+   },
+   "provenance": {
+    "reprojected": 0.7403455788597856,
+    "attached": 0.17235221894450206,
+    "can_warp": 0.050897964751901795,
+    "multiview": 0.023377677104944674,
+    "inpainted": 0.011111876512793915,
+    "unknown": 0.0019146838260719226
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.5948154677353896,
+    "attached": 0.26856225480248913,
+    "can_warp": 0.07965200977408009,
+    "multiview": 0.03658454663825757,
+    "inpainted": 0.017389365192099566,
+    "unknown": 0.002996355857683983
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.9875518672199171,
+    "source_control": 0.9875518672199171
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9009709284855771,
+    "source": 0.9009709284855771
+   },
+   "novelty": {
+    "frames_with_changed_pose": 70,
+    "mean_abs_diff": 3.047373001663773,
+    "frac_pixels_changed_gt10": 0.08443874782986112
+   },
+   "provenance": {
+    "reprojected": 0.9495582641770401,
+    "attached": 0.010569404823651452,
+    "can_warp": 0.03663763993343707,
+    "multiview": 0.002547639501210235,
+    "inpainted": 0.0006737605895573997,
+    "unknown": 1.329097510373444e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8478450520833333,
+    "attached": 0.014880208333333332,
+    "can_warp": 0.1261381603422619,
+    "multiview": 0.008771158854166667,
+    "inpainted": 0.0023196614583333324,
+    "unknown": 4.575892857142857e-05
+   }
+  }
+ },
+ "ep6/init_y-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 21,
+    "frac_generated_closer_to_nearest_view": 0.2857142857142857,
+    "median_ncc_gain": -0.024870574474334717
+   },
+   "object_shift_error_px": {
+    "generated_median": 138.66416365865226,
+    "source_control_median": 138.66416365865226,
+    "n": 1
+   },
+   "visibility_agreement": {
+    "generated": 0.46887966804979253,
+    "source_control": 0.46887966804979253
+   },
+   "grasp_hold_frames": 81,
+   "grasp_attached_frac_in_hold": 0.4945757378472222,
+   "red_frac_hold": {
+    "generated": 0.25807773919753085,
+    "source": 0.25807773919753085
+   },
+   "novelty": {
+    "frames_with_changed_pose": 155,
+    "mean_abs_diff": 8.578869253305287,
+    "frac_pixels_changed_gt10": 0.28040934244791665
+   },
+   "provenance": {
+    "reprojected": 0.721043935857538,
+    "attached": 0.17235221894450206,
+    "can_warp": 0.05090105787517289,
+    "multiview": 0.040081380208333336,
+    "inpainted": 0.01345944901884509,
+    "unknown": 0.0021619580956085756
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.5674186197916666,
+    "attached": 0.26682959509408594,
+    "can_warp": 0.07914293514784945,
+    "multiview": 0.06232008148521505,
+    "inpainted": 0.02092727234543011,
+    "unknown": 0.003361496135752688
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.9875518672199171,
+    "source_control": 0.9875518672199171
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.9009709284855771,
+    "source": 0.9009709284855771
+   },
+   "novelty": {
+    "frames_with_changed_pose": 70,
+    "mean_abs_diff": 5.349151204427083,
+    "frac_pixels_changed_gt10": 0.14723347981770835
+   },
+   "provenance": {
+    "reprojected": 0.9478535075207469,
+    "attached": 0.010569404823651452,
+    "can_warp": 0.036473177623616876,
+    "multiview": 0.0040013669173582294,
+    "inpainted": 0.0010801888831258645,
+    "unknown": 2.235423150069156e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.841975818452381,
+    "attached": 0.014880208333333332,
+    "can_warp": 0.1255719401041667,
+    "multiview": 0.013776134672619048,
+    "inpainted": 0.003718936011904762,
+    "unknown": 7.696242559523809e-05
+   }
+  }
+ },
+ "ep6/pos_right_up__C__s0.49": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 22,
+    "frac_generated_closer_to_nearest_view": 0.7727272727272727,
+    "median_ncc_gain": 0.04741687327623367
+   },
+   "object_shift_error_px": {
+    "generated_median": 32.68633763957693,
+    "source_control_median": 37.22063235561011,
+    "n": 18
+   },
+   "visibility_agreement": {
+    "generated": 0.46887966804979253,
+    "source_control": 0.46887966804979253
+   },
+   "grasp_hold_frames": 81,
+   "grasp_attached_frac_in_hold": 0.5450181648662552,
+   "red_frac_hold": {
+    "generated": 0.25807773919753085,
+    "source": 0.25807773919753085
+   },
+   "novelty": {
+    "frames_with_changed_pose": 108,
+    "mean_abs_diff": 2.665542595003858,
+    "frac_pixels_changed_gt10": 0.07060474537037037
+   },
+   "provenance": {
+    "reprojected": 0.7657572343966114,
+    "attached": 0.18854105884768327,
+    "can_warp": 0.03220717982797372,
+    "multiview": 0.009503303833852006,
+    "inpainted": 0.003584430108921162,
+    "unknown": 0.0004067929849585062
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.48370698905285503,
+    "attached": 0.4143104986496913,
+    "can_warp": 0.0718697253568673,
+    "multiview": 0.02120644651813272,
+    "inpainted": 0.007998589409722222,
+    "unknown": 0.0009077510127314815
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 3,
+    "frac_generated_closer_to_nearest_view": 0.6666666666666666,
+    "median_ncc_gain": 0.0009935498237609863
+   },
+   "object_shift_error_px": {
+    "generated_median": 7.649837080654596,
+    "source_control_median": 14.010558744778868,
+    "n": 9
+   },
+   "visibility_agreement": {
+    "generated": 0.983402489626556,
+    "source_control": 0.983402489626556
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.6874942505411256,
+   "red_frac_hold": {
+    "generated": 0.9009709284855771,
+    "source": 0.9009709284855771
+   },
+   "novelty": {
+    "frames_with_changed_pose": 127,
+    "mean_abs_diff": 4.897573179102067,
+    "frac_pixels_changed_gt10": 0.13089487948158918
+   },
+   "provenance": {
+    "reprojected": 0.6947479442211273,
+    "attached": 0.22348547717842324,
+    "can_warp": 0.06103213066217151,
+    "multiview": 0.012613229923063624,
+    "inpainted": 0.007513263960926694,
+    "unknown": 0.0006079540542876902
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.42074216186843827,
+    "attached": 0.4240944881889763,
+    "can_warp": 0.11581687787073491,
+    "multiview": 0.02393534182250656,
+    "inpainted": 0.014257453658136483,
+    "unknown": 0.001153676591207349
+   }
+  }
+ },
+ "ep7/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4789272030651341,
+    "source_control": 0.4789272030651341
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.6626815148555871,
+   "red_frac_hold": {
+    "generated": 0.6891236979166666,
+    "source": 0.6889600694444444
+   },
+   "novelty": {
+    "frames_with_changed_pose": 162,
+    "mean_abs_diff": 9.329737694508745,
+    "frac_pixels_changed_gt10": 0.2173414592978395
+   },
+   "provenance": {
+    "reprojected": 0.6485506839679118,
+    "attached": 0.2294137506984355,
+    "can_warp": 0.05710217861989144,
+    "multiview": 0.03246505328065134,
+    "inpainted": 0.017088733736430398,
+    "unknown": 0.015379599696679439
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.43808123553240746,
+    "attached": 0.36530590920781897,
+    "can_warp": 0.09199795444315843,
+    "multiview": 0.052304808063271604,
+    "inpainted": 0.027531848797582307,
+    "unknown": 0.02477824395576132
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.9501915708812261,
+    "source_control": 0.946360153256705
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.2677348090277778,
+    "source": 0.2677348090277778
+   },
+   "novelty": {
+    "frames_with_changed_pose": 75,
+    "mean_abs_diff": 4.015191666666667,
+    "frac_pixels_changed_gt10": 0.09392252604166666
+   },
+   "provenance": {
+    "reprojected": 0.9524206776819923,
+    "attached": 0.009862158764367817,
+    "can_warp": 0.03128858856162196,
+    "multiview": 0.004137569344667944,
+    "inpainted": 0.0022837967951787994,
+    "unknown": 7.2088521711366535e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8529956597222222,
+    "attached": 0.01574861111111111,
+    "can_warp": 0.10888428819444443,
+    "multiview": 0.014398741319444443,
+    "inpainted": 0.007947612847222224,
+    "unknown": 2.5086805555555556e-05
+   }
+  }
+ },
+ "ep7/init_y+3__C__s0.49": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 33,
+    "frac_generated_closer_to_nearest_view": 0.21212121212121213,
+    "median_ncc_gain": -0.011627256870269775
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4789272030651341,
+    "source_control": 0.4789272030651341
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.6626815148555871,
+   "red_frac_hold": {
+    "generated": 0.6889600694444444,
+    "source": 0.6889600694444444
+   },
+   "novelty": {
+    "frames_with_changed_pose": 162,
+    "mean_abs_diff": 4.67528794528035,
+    "frac_pixels_changed_gt10": 0.14796784577546296
+   },
+   "provenance": {
+    "reprojected": 0.6802899879270434,
+    "attached": 0.2294137506984355,
+    "can_warp": 0.05710167973738825,
+    "multiview": 0.0188671251396871,
+    "inpainted": 0.010403957634897829,
+    "unknown": 0.003923498862547893
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.489216780799897,
+    "attached": 0.36530590920781897,
+    "can_warp": 0.0919971506880144,
+    "multiview": 0.030397034947273666,
+    "inpainted": 0.01676193174511317,
+    "unknown": 0.006321192611882717
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.946360153256705,
+    "source_control": 0.946360153256705
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.2677348090277778,
+    "source": 0.2677348090277778
+   },
+   "novelty": {
+    "frames_with_changed_pose": 75,
+    "mean_abs_diff": 2.8209838541666663,
+    "frac_pixels_changed_gt10": 0.07327239583333334
+   },
+   "provenance": {
+    "reprojected": 0.956076563497765,
+    "attached": 0.009862158764367817,
+    "can_warp": 0.031319332195881226,
+    "multiview": 0.0021729451029693487,
+    "inpainted": 0.000561592033844189,
+    "unknown": 7.408405172413793e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8657181423611111,
+    "attached": 0.01574861111111111,
+    "can_warp": 0.10899127604166665,
+    "multiview": 0.007561848958333333,
+    "inpainted": 0.001954340277777778,
+    "unknown": 2.5781250000000003e-05
+   }
+  }
+ },
+ "ep7/init_y-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 37,
+    "frac_generated_closer_to_nearest_view": 0.1891891891891892,
+    "median_ncc_gain": -0.053401052951812744
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4789272030651341,
+    "source_control": 0.4789272030651341
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.6626815148555871,
+   "red_frac_hold": {
+    "generated": 0.6896602647569442,
+    "source": 0.6889600694444444
+   },
+   "novelty": {
+    "frames_with_changed_pose": 162,
+    "mean_abs_diff": 7.146947036554785,
+    "frac_pixels_changed_gt10": 0.22510422694830245
+   },
+   "provenance": {
+    "reprojected": 0.6575788109634418,
+    "attached": 0.2294137506984355,
+    "can_warp": 0.0571020164830779,
+    "multiview": 0.04174055116538953,
+    "inpainted": 0.011969712843231162,
+    "unknown": 0.0021951578464240104
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.45262655124742796,
+    "attached": 0.36530590920781897,
+    "can_warp": 0.09199769322273661,
+    "multiview": 0.06724866576646091,
+    "inpainted": 0.0192845373585391,
+    "unknown": 0.003536643197016461
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.946360153256705,
+    "source_control": 0.946360153256705
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.2677348090277778,
+    "source": 0.2677348090277778
+   },
+   "novelty": {
+    "frames_with_changed_pose": 75,
+    "mean_abs_diff": 4.8990171006944445,
+    "frac_pixels_changed_gt10": 0.13199036458333335
+   },
+   "provenance": {
+    "reprojected": 0.9533113949752554,
+    "attached": 0.009862158764367817,
+    "can_warp": 0.031248278855363985,
+    "multiview": 0.004821861530172414,
+    "inpainted": 0.0007321849058109834,
+    "unknown": 2.41209690293742e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8560953559027779,
+    "attached": 0.01574861111111111,
+    "can_warp": 0.10874401041666665,
+    "multiview": 0.016780078125,
+    "inpainted": 0.0025480034722222223,
+    "unknown": 8.394097222222223e-05
+   }
+  }
+ },
+ "ep7/pos_left_down__C__s0.7": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 35,
+    "frac_generated_closer_to_nearest_view": 0.45714285714285713,
+    "median_ncc_gain": -0.0005186200141906738
+   },
+   "object_shift_error_px": {
+    "generated_median": 32.82478077532523,
+    "source_control_median": 45.67704507857454,
+    "n": 12
+   },
+   "visibility_agreement": {
+    "generated": 0.4827586206896552,
+    "source_control": 0.4789272030651341
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.7660012354995264,
+   "red_frac_hold": {
+    "generated": 0.6889600694444444,
+    "source": 0.6889600694444444
+   },
+   "novelty": {
+    "frames_with_changed_pose": 116,
+    "mean_abs_diff": 3.389481475917023,
+    "frac_pixels_changed_gt10": 0.0974979967948718
+   },
+   "provenance": {
+    "reprojected": 0.6834463551644316,
+    "attached": 0.26574983287436144,
+    "can_warp": 0.03594727809706258,
+    "multiview": 0.006485534901819924,
+    "inpainted": 0.00540110153256705,
+    "unknown": 0.0029698974297573434
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.2964606344288793,
+    "attached": 0.5965143734285201,
+    "can_warp": 0.07665976338002874,
+    "multiview": 0.014521540499281609,
+    "inpainted": 0.01169938712284483,
+    "unknown": 0.004144301140445402
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 1,
+    "frac_generated_closer_to_nearest_view": 0.0,
+    "median_ncc_gain": -0.000506281852722168
+   },
+   "object_shift_error_px": {
+    "generated_median": 8.111290158463468,
+    "source_control_median": 13.114548751593267,
+    "n": 9
+   },
+   "visibility_agreement": {
+    "generated": 0.9501915708812261,
+    "source_control": 0.946360153256705
+   },
+   "grasp_hold_frames": 88,
+   "grasp_attached_frac_in_hold": 0.2939623283617424,
+   "red_frac_hold": {
+    "generated": 0.2677348090277778,
+    "source": 0.2677348090277778
+   },
+   "novelty": {
+    "frames_with_changed_pose": 135,
+    "mean_abs_diff": 6.392121069637345,
+    "frac_pixels_changed_gt10": 0.1579449508101852
+   },
+   "provenance": {
+    "reprojected": 0.8367103438298212,
+    "attached": 0.10373867536717753,
+    "can_warp": 0.03777635596264368,
+    "multiview": 0.013094692887931034,
+    "inpainted": 0.008058137272509579,
+    "unknown": 0.0006217946799169859
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.6843066647376544,
+    "attached": 0.20056143904320986,
+    "can_warp": 0.07303428819444445,
+    "multiview": 0.02531640625,
+    "inpainted": 0.01557906539351852,
+    "unknown": 0.0012021363811728395
+   }
+  }
+ },
+ "ep8/init_x+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 4,
+    "frac_generated_closer_to_nearest_view": 1.0,
+    "median_ncc_gain": 0.18447929620742798
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.8313253012048193,
+    "source_control": 0.8313253012048193
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.7794177404626623,
+   "red_frac_hold": {
+    "generated": 0.8593423227163459,
+    "source": 0.859220502804487
+   },
+   "novelty": {
+    "frames_with_changed_pose": 141,
+    "mean_abs_diff": 6.345470481493796,
+    "frac_pixels_changed_gt10": 0.15619528479609932
+   },
+   "provenance": {
+    "reprojected": 0.6662512942394578,
+    "attached": 0.24494989070866802,
+    "can_warp": 0.05311736529451138,
+    "multiview": 0.02591820406626506,
+    "inpainted": 0.0070501145205823295,
+    "unknown": 0.002713131170515395
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.41689723238031917,
+    "attached": 0.42628783891105204,
+    "can_warp": 0.0938030067966903,
+    "multiview": 0.0457704454787234,
+    "inpainted": 0.012450202238475176,
+    "unknown": 0.004791274194739953
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.6465863453815262,
+    "source_control": 0.6465863453815262
+   },
+   "grasp_hold_frames": 86,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.0,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 69,
+    "mean_abs_diff": 4.039426281325483,
+    "frac_pixels_changed_gt10": 0.09850260416666665
+   },
+   "provenance": {
+    "reprojected": 0.9661567755396586,
+    "attached": 0.009654032797858099,
+    "can_warp": 0.02150682155706158,
+    "multiview": 0.002372563169344043,
+    "inpainted": 0.00029279879936412316,
+    "unknown": 1.700813671352075e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8958837654740337,
+    "attached": 0.016824803743961354,
+    "can_warp": 0.0776115734450483,
+    "multiview": 0.008561858393719804,
+    "inpainted": 0.001056621754227053,
+    "unknown": 6.137718900966184e-05
+   }
+  }
+ },
+ "ep8/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 2,
+    "frac_generated_closer_to_nearest_view": 1.0,
+    "median_ncc_gain": 0.18058624863624573
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.8313253012048193,
+    "source_control": 0.8313253012048193
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.7794177404626623,
+   "red_frac_hold": {
+    "generated": 0.8594096804887819,
+    "source": 0.859220502804487
+   },
+   "novelty": {
+    "frames_with_changed_pose": 141,
+    "mean_abs_diff": 5.967928879469563,
+    "frac_pixels_changed_gt10": 0.15341166611258866
+   },
+   "provenance": {
+    "reprojected": 0.6506782337684069,
+    "attached": 0.24494989070866802,
+    "can_warp": 0.05317075594042838,
+    "multiview": 0.03146961544093039,
+    "inpainted": 0.0117352875041834,
+    "unknown": 0.007996216637382864
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.3893958702718676,
+    "attached": 0.42628783891105204,
+    "can_warp": 0.09389729240543734,
+    "multiview": 0.05557400173611111,
+    "inpainted": 0.020724018358451533,
+    "unknown": 0.014120978317080377
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.6465863453815262,
+    "source_control": 0.6465863453815262
+   },
+   "grasp_hold_frames": 86,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.0,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 69,
+    "mean_abs_diff": 4.196309537288648,
+    "frac_pixels_changed_gt10": 0.0982120414402174
+   },
+   "provenance": {
+    "reprojected": 0.9627060586094377,
+    "attached": 0.009654032797858099,
+    "can_warp": 0.02151324046184739,
+    "multiview": 0.0038327659596720212,
+    "inpainted": 0.002293693001171352,
+    "unknown": 2.0917001338688085e-07
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8834311782910627,
+    "attached": 0.016824803743961354,
+    "can_warp": 0.07763473731884057,
+    "multiview": 0.013831285854468599,
+    "inpainted": 0.008277239960748793,
+    "unknown": 7.548309178743961e-07
+   }
+  }
+ },
+ "ep8/init_y+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 17,
+    "frac_generated_closer_to_nearest_view": 0.0,
+    "median_ncc_gain": -0.0373915433883667
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.8273092369477911,
+    "source_control": 0.8313253012048193
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.7794177404626623,
+   "red_frac_hold": {
+    "generated": 0.8592496744791666,
+    "source": 0.859220502804487
+   },
+   "novelty": {
+    "frames_with_changed_pose": 141,
+    "mean_abs_diff": 4.7611947076315015,
+    "frac_pixels_changed_gt10": 0.1533467697251773
+   },
+   "provenance": {
+    "reprojected": 0.651161468791834,
+    "attached": 0.24494989070866802,
+    "can_warp": 0.053170036918507364,
+    "multiview": 0.02848513847054886,
+    "inpainted": 0.011691976238286479,
+    "unknown": 0.010541488872155287
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.39024924276004735,
+    "attached": 0.42628783891105204,
+    "can_warp": 0.09389602264332152,
+    "multiview": 0.05030354240543735,
+    "inpainted": 0.020647532505910168,
+    "unknown": 0.01861582077423168
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.6465863453815262,
+    "source_control": 0.6465863453815262
+   },
+   "grasp_hold_frames": 86,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.0,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 69,
+    "mean_abs_diff": 5.040335569519928,
+    "frac_pixels_changed_gt10": 0.14382175611413045
+   },
+   "provenance": {
+    "reprojected": 0.9632568686203146,
+    "attached": 0.009654032797858099,
+    "can_warp": 0.021536366821452477,
+    "multiview": 0.0045138888888888885,
+    "inpainted": 0.0010268286688420347,
+    "unknown": 1.201420264390897e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8854188839824879,
+    "attached": 0.016824803743961354,
+    "can_warp": 0.07771819331219806,
+    "multiview": 0.016289251207729467,
+    "inpainted": 0.0037055121527777768,
+    "unknown": 4.335560084541063e-05
+   }
+  }
+ },
+ "ep8/pos_left_down__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 1,
+    "frac_generated_closer_to_nearest_view": 0.0,
+    "median_ncc_gain": -0.05323195457458496
+   },
+   "object_shift_error_px": {
+    "generated_median": 41.002109472616844,
+    "source_control_median": 60.29589307161275,
+    "n": 20
+   },
+   "visibility_agreement": {
+    "generated": 0.8353413654618473,
+    "source_control": 0.8353413654618473
+   },
+   "grasp_hold_frames": 77,
+   "grasp_attached_frac_in_hold": 0.8876688903544373,
+   "red_frac_hold": {
+    "generated": 0.859220502804487,
+    "source": 0.859220502804487
+   },
+   "novelty": {
+    "frames_with_changed_pose": 105,
+    "mean_abs_diff": 3.674605158730159,
+    "frac_pixels_changed_gt10": 0.10408063616071428
+   },
+   "provenance": {
+    "reprojected": 0.6525765954442772,
+    "attached": 0.27986626192269076,
+    "can_warp": 0.051899106844042836,
+    "multiview": 0.003348955718708166,
+    "inpainted": 0.00564460968875502,
+    "unknown": 0.006664470381526105
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.18765699404761907,
+    "attached": 0.6611229538690476,
+    "can_warp": 0.11682620287698411,
+    "multiview": 0.007711898561507937,
+    "inpainted": 0.012828900049603176,
+    "unknown": 0.013853050595238095
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 6,
+    "frac_generated_closer_to_nearest_view": 0.3333333333333333,
+    "median_ncc_gain": -0.0001214863732457161
+   },
+   "object_shift_error_px": {
+    "generated_median": 6.756886967805702,
+    "source_control_median": 14.249698518930096,
+    "n": 6
+   },
+   "visibility_agreement": {
+    "generated": 0.6506024096385542,
+    "source_control": 0.6465863453815262
+   },
+   "grasp_hold_frames": 86,
+   "grasp_attached_frac_in_hold": 0.09228969840116279,
+   "red_frac_hold": {
+    "generated": 0.0001879040948275862,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 124,
+    "mean_abs_diff": 9.06045425657242,
+    "frac_pixels_changed_gt10": 0.21712255084325396
+   },
+   "provenance": {
+    "reprojected": 0.9008190705530456,
+    "attached": 0.0367403468038822,
+    "can_warp": 0.031547805806559574,
+    "multiview": 0.01788113391064257,
+    "inpainted": 0.010154628932396251,
+    "unknown": 0.0028570139934738954
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8008382949008737,
+    "attached": 0.07377698672715054,
+    "can_warp": 0.06335002940188172,
+    "multiview": 0.03590647051411291,
+    "inpainted": 0.02039115003360215,
+    "unknown": 0.0057370684223790325
+   }
+  }
+ },
+ "ep9/init_x+3__C__s0.49": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 1,
+    "frac_generated_closer_to_nearest_view": 0.0,
+    "median_ncc_gain": -0.11933773756027222
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4980237154150198,
+    "source_control": 0.4980237154150198
+   },
+   "grasp_hold_frames": 79,
+   "grasp_attached_frac_in_hold": 0.7074002834915613,
+   "red_frac_hold": {
+    "generated": 0.8742640817901235,
+    "source": 0.8742640817901235
+   },
+   "novelty": {
+    "frames_with_changed_pose": 145,
+    "mean_abs_diff": 5.759831437783446,
+    "frac_pixels_changed_gt10": 0.1459855973639456
+   },
+   "provenance": {
+    "reprojected": 0.6941296627964427,
+    "attached": 0.2273346920289855,
+    "can_warp": 0.05652597218791173,
+    "multiview": 0.015406347784914362,
+    "inpainted": 0.005192610548418972,
+    "unknown": 0.0014107146533267458
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.47331364493534483,
+    "attached": 0.38965519486350575,
+    "can_warp": 0.0986280756106322,
+    "multiview": 0.02688142061781609,
+    "inpainted": 0.009060210129310343,
+    "unknown": 0.002461453843390805
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.6521739130434783,
+    "source_control": 0.6521739130434783
+   },
+   "grasp_hold_frames": 91,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.0,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 67,
+    "mean_abs_diff": 1.9699529174214974,
+    "frac_pixels_changed_gt10": 0.05135770493659421
+   },
+   "provenance": {
+    "reprojected": 0.969469696969697,
+    "attached": 0.00878232048748353,
+    "can_warp": 0.020296172492588933,
+    "multiview": 0.0012398741147891963,
+    "inpainted": 0.00020112812911725954,
+    "unknown": 1.0807806324110672e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.9015638603855721,
+    "attached": 0.01631316075870647,
+    "can_warp": 0.07664077075559703,
+    "multiview": 0.004681912702114428,
+    "inpainted": 0.0007594838308457712,
+    "unknown": 4.0811567164179106e-05
+   }
+  }
+ },
+ "ep9/init_x-3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4980237154150198,
+    "source_control": 0.4980237154150198
+   },
+   "grasp_hold_frames": 79,
+   "grasp_attached_frac_in_hold": 0.7074002834915613,
+   "red_frac_hold": {
+    "generated": 0.8742640817901235,
+    "source": 0.8742640817901235
+   },
+   "novelty": {
+    "frames_with_changed_pose": 145,
+    "mean_abs_diff": 8.92381406338577,
+    "frac_pixels_changed_gt10": 0.1969115380527211
+   },
+   "provenance": {
+    "reprojected": 0.6580729423995388,
+    "attached": 0.2273346920289855,
+    "can_warp": 0.056526898571310935,
+    "multiview": 0.031830790925559946,
+    "inpainted": 0.013548344347002635,
+    "unknown": 0.012686331727602107
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.4104008845186782,
+    "attached": 0.38965519486350575,
+    "can_warp": 0.09862969198994254,
+    "multiview": 0.055539242097701155,
+    "inpainted": 0.02363952496408046,
+    "unknown": 0.022135461566091953
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.6521739130434783,
+    "source_control": 0.6521739130434783
+   },
+   "grasp_hold_frames": 91,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.0,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 67,
+    "mean_abs_diff": 3.9361460692179944,
+    "frac_pixels_changed_gt10": 0.09369084012681161
+   },
+   "provenance": {
+    "reprojected": 0.9651760514451581,
+    "attached": 0.00878232048748353,
+    "can_warp": 0.020288774291831357,
+    "multiview": 0.004324241909584981,
+    "inpainted": 0.0014194252305665348,
+    "unknown": 9.186635375494071e-06
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8853505422108208,
+    "attached": 0.01631316075870647,
+    "can_warp": 0.07661283426616915,
+    "multiview": 0.016328853777985073,
+    "inpainted": 0.005359919154228856,
+    "unknown": 3.4689832089552235e-05
+   }
+  }
+ },
+ "ep9/init_y+3__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 16,
+    "frac_generated_closer_to_nearest_view": 0.4375,
+    "median_ncc_gain": -0.02094113826751709
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.4980237154150198,
+    "source_control": 0.4980237154150198
+   },
+   "grasp_hold_frames": 79,
+   "grasp_attached_frac_in_hold": 0.7074002834915613,
+   "red_frac_hold": {
+    "generated": 0.8742640817901235,
+    "source": 0.8742640817901235
+   },
+   "novelty": {
+    "frames_with_changed_pose": 145,
+    "mean_abs_diff": 7.674326747626133,
+    "frac_pixels_changed_gt10": 0.21722417091836732
+   },
+   "provenance": {
+    "reprojected": 0.6576870136487154,
+    "attached": 0.2273346920289855,
+    "can_warp": 0.056525894989295125,
+    "multiview": 0.031969310976613964,
+    "inpainted": 0.013680456912878787,
+    "unknown": 0.012802631443511198
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.40972750538793107,
+    "attached": 0.38965519486350575,
+    "can_warp": 0.09862794091235633,
+    "multiview": 0.05578093570402298,
+    "inpainted": 0.023870038613505746,
+    "unknown": 0.022338384518678162
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 0,
+    "frac_generated_closer_to_nearest_view": null,
+    "median_ncc_gain": null
+   },
+   "object_shift_error_px": {
+    "generated_median": null,
+    "source_control_median": null,
+    "n": 0
+   },
+   "visibility_agreement": {
+    "generated": 0.6521739130434783,
+    "source_control": 0.6521739130434783
+   },
+   "grasp_hold_frames": 91,
+   "grasp_attached_frac_in_hold": 0.0,
+   "red_frac_hold": {
+    "generated": 0.0,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 67,
+    "mean_abs_diff": 5.023098769625604,
+    "frac_pixels_changed_gt10": 0.13474595221920288
+   },
+   "provenance": {
+    "reprojected": 0.9648390280179513,
+    "attached": 0.00878232048748353,
+    "can_warp": 0.020319512207674573,
+    "multiview": 0.005220595046936759,
+    "inpainted": 0.00082422389657444,
+    "unknown": 1.432034337944664e-05
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.8840779015080844,
+    "attached": 0.01631316075870647,
+    "can_warp": 0.07672890430659204,
+    "multiview": 0.01971359025186567,
+    "inpainted": 0.0031123678482587063,
+    "unknown": 5.407532649253731e-05
+   }
+  }
+ },
+ "ep9/pos_left_down__C__s1.0": {
+  "R": {
+   "motion": {
+    "n_frames_tested": 1,
+    "frac_generated_closer_to_nearest_view": 0.0,
+    "median_ncc_gain": -0.009347796440124512
+   },
+   "object_shift_error_px": {
+    "generated_median": 43.168199032068266,
+    "source_control_median": 54.75018581130323,
+    "n": 18
+   },
+   "visibility_agreement": {
+    "generated": 0.4980237154150198,
+    "source_control": 0.4980237154150198
+   },
+   "grasp_hold_frames": 79,
+   "grasp_attached_frac_in_hold": 0.8631534727716246,
+   "red_frac_hold": {
+    "generated": 0.8742640817901235,
+    "source": 0.8742640817901235
+   },
+   "novelty": {
+    "frames_with_changed_pose": 107,
+    "mean_abs_diff": 3.0614095353491515,
+    "frac_pixels_changed_gt10": 0.08784812644675927
+   },
+   "provenance": {
+    "reprojected": 0.6700314584362648,
+    "attached": 0.27404456418807643,
+    "can_warp": 0.04086208981801713,
+    "multiview": 0.005274312417654809,
+    "inpainted": 0.006358965847332016,
+    "unknown": 0.003428609292654809
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.2290864425136293,
+    "attached": 0.646899277161215,
+    "can_warp": 0.09029123466705606,
+    "multiview": 0.012452419197819314,
+    "inpainted": 0.014775999075155762,
+    "unknown": 0.00649462738512461
+   }
+  },
+  "L": {
+   "motion": {
+    "n_frames_tested": 7,
+    "frac_generated_closer_to_nearest_view": 0.42857142857142855,
+    "median_ncc_gain": -0.0011442899703979492
+   },
+   "object_shift_error_px": {
+    "generated_median": 4.752322077671347,
+    "source_control_median": 16.800333419244236,
+    "n": 9
+   },
+   "visibility_agreement": {
+    "generated": 0.6521739130434783,
+    "source_control": 0.6521739130434783
+   },
+   "grasp_hold_frames": 91,
+   "grasp_attached_frac_in_hold": 0.10386761675824176,
+   "red_frac_hold": {
+    "generated": 0.0,
+    "source": 0.0
+   },
+   "novelty": {
+    "frames_with_changed_pose": 126,
+    "mean_abs_diff": 9.471668991815475,
+    "frac_pixels_changed_gt10": 0.22624736483134922
+   },
+   "provenance": {
+    "reprojected": 0.8952700407608696,
+    "attached": 0.040889894186429514,
+    "can_warp": 0.030001569705204217,
+    "multiview": 0.021199743700592886,
+    "inpainted": 0.009739094408761528,
+    "unknown": 0.0028996572381422927
+   },
+   "provenance_changed_frames": {
+    "reprojected": 0.7897088913690475,
+    "attached": 0.08210431134259259,
+    "can_warp": 0.06024124710648148,
+    "multiview": 0.04256773933531746,
+    "inpainted": 0.019555483217592595,
+    "unknown": 0.005822327628968254
+   }
+  }
+ }
+}

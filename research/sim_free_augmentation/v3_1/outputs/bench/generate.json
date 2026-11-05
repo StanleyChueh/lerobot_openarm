@@ -1,0 +1,82 @@
+{
+ "wall_s": 2900.9342815876007,
+ "lanes": {
+  "cuda:0": [
+   0,
+   2,
+   4,
+   6,
+   8
+  ],
+  "cuda:1": [
+   1,
+   3,
+   5,
+   7,
+   9
+  ]
+ },
+ "episodes": [
+  {
+   "episode": 0,
+   "device": "cuda:0",
+   "rc": 0,
+   "wall_s": 611.9884819984436
+  },
+  {
+   "episode": 2,
+   "device": "cuda:0",
+   "rc": 0,
+   "wall_s": 603.0858035087585
+  },
+  {
+   "episode": 4,
+   "device": "cuda:0",
+   "rc": 0,
+   "wall_s": 556.9088714122772
+  },
+  {
+   "episode": 6,
+   "device": "cuda:0",
+   "rc": 0,
+   "wall_s": 574.0951037406921
+  },
+  {
+   "episode": 8,
+   "device": "cuda:0",
+   "rc": 0,
+   "wall_s": 554.8462238311768
+  },
+  {
+   "episode": 1,
+   "device": "cuda:1",
+   "rc": 0,
+   "wall_s": 606.5047264099121
+  },
+  {
+   "episode": 3,
+   "device": "cuda:1",
+   "rc": 0,
+   "wall_s": 558.5417878627777
+  },
+  {
+   "episode": 5,
+   "device": "cuda:1",
+   "rc": 0,
+   "wall_s": 522.1936345100403
+  },
+  {
+   "episode": 7,
+   "device": "cuda:1",
+   "rc": 0,
+   "wall_s": 586.6584360599518
+  },
+  {
+   "episode": 9,
+   "device": "cuda:1",
+   "rc": 0,
+   "wall_s": 578.3341536521912
+  }
+ ],
+ "workers_per_lane": 9
+}

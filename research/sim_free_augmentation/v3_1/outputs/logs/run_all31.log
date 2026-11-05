@@ -1,0 +1,12 @@
+ep1 on cuda:1: rc=0 607 s
+ep0 on cuda:0: rc=0 612 s
+ep3 on cuda:1: rc=0 559 s
+ep2 on cuda:0: rc=0 603 s
+ep5 on cuda:1: rc=0 522 s
+ep4 on cuda:0: rc=0 557 s
+ep7 on cuda:1: rc=0 587 s
+ep6 on cuda:0: rc=0 574 s
+ep9 on cuda:1: rc=0 578 s
+ep8 on cuda:0: rc=0 555 s
+done in 2901 s
+EXIT 0
