@@ -340,8 +340,31 @@ def corruption_table(res):
             if k == "tampered_hash_differs":
                 fired = "hash"
         label = "intended (must NOT fire)" if k == "intended" else k
-        out.append(f"| {label} | {n}/{len(v)} {'(fired)' if k == 'intended' else ''} | {fired} |")
+        out.append(f"| {label} | {'fired on ' if k == 'intended' else ''}{n}/{len(v)} | {fired} |")
     return "\n".join(out)
+
+
+def smi_rows(path, run_json):
+    """1 Hz nvidia-smi samples restricted to the run's own window, one sample per (GPU, second): stray loggers
+    left by an interrupted earlier launch appended to the same file, so rows are de-duplicated by timestamp."""
+    import datetime as dt
+    import os
+    if not path.exists():
+        return []
+    wall = json.loads(run_json.read_text())["wall_s"]
+    t_end = os.path.getmtime(run_json)
+    seen, out = set(), []
+    for r in csv.reader(open(path)):
+        try:
+            ts = dt.datetime.strptime(r[0].strip(), "%Y/%m/%d %H:%M:%S.%f").timestamp()
+        except ValueError:
+            continue
+        k = (r[1].strip(), int(ts))
+        if t_end - wall - 2 <= ts <= t_end + 2 and k not in seen:
+            seen.add(k)
+            out.append([ts] + r[1:])
+    t0 = min(r[0] for r in out) if out else 0
+    return [[r[0] - t0] + r[1:] for r in sorted(out)]
 
 
 def runtime(res, exp_val, train_runs, train_eval):
@@ -349,7 +372,7 @@ def runtime(res, exp_val, train_runs, train_eval):
     pre_c = json.loads((HERE / "outputs/bench/preprocess_cached.json").read_text())
     gen = json.loads((HERE / "outputs/bench/generate.json").read_text()) if (HERE / "outputs/bench/generate.json").exists() else {}
     stages = ["plans", "render_metrics", "corruption_tests", "comparison_videos"]
-    fig, axs = plt.subplots(1, 2, figsize=(14, 4))
+    fig, axs = plt.subplots(1, 3, figsize=(18, 4))
     ax = axs[0]
     bottom = np.zeros(len(EPS))
     cols = ["#2a78d6", "#1baf7a", "#eda100", "#e87ba4", "#6250d6"]
@@ -362,15 +385,17 @@ def runtime(res, exp_val, train_runs, train_eval):
     ax.set_title("Per-episode generation time by stage (2 lanes in parallel, 11 CPU workers each)", loc="left")
     ax.legend(fontsize=7)
     ax = axs[1]
-    rows = list(csv.reader(open(HERE / "outputs/bench/nvidia_smi_generate.csv"))) if (HERE / "outputs/bench/nvidia_smi_generate.csv").exists() else []
+    rows = smi_rows(HERE / "outputs/bench/nvidia_smi_generate.csv", HERE / "outputs/bench/generate.json")
     for gpu, c in (("0", COL["G+"]), ("1", COL["C"])):
+        tt = [r[0] / 60 for r in rows if r[1].strip() == gpu]
         u = [float(r[2]) for r in rows if r[1].strip() == gpu]
         m = [float(r[3]) / 1024 for r in rows if r[1].strip() == gpu]
-        ax.plot(np.arange(len(u)) / 60, u, color=c, lw=0.8, label=f"GPU{gpu} util %")
-        ax.plot(np.arange(len(m)) / 60, m, color=c, lw=1.5, ls="--", label=f"GPU{gpu} memory GB")
-    ax.set_xlabel("minutes into the 10-episode generation run")
-    ax.set_title("GPU utilisation and memory during generation", loc="left")
-    ax.legend(fontsize=7)
+        axs[1].plot(tt, u, color=c, lw=0.6, alpha=0.8, label=f"GPU{gpu}")
+        axs[2].plot(tt, m, color=c, lw=1.5, label=f"GPU{gpu}")
+    for a_, t_ in ((axs[1], "GPU utilisation during generation (%)"), (axs[2], "GPU memory used during generation (GB)")):
+        a_.set_xlabel("minutes into the 10-episode generation run")
+        a_.set_title(t_, loc="left")
+        a_.legend(fontsize=7)
     fig.tight_layout()
     fig.savefig(FIG / "runtime_breakdown.png", dpi=150)
     plt.close(fig)
@@ -386,6 +411,47 @@ def runtime(res, exp_val, train_runs, train_eval):
             "raft_peak_vram_gb": [res[E]["gpu"].get("peak_vram_gb_raft") for E in EPS],
             "gpu_mean_util_pct_during_generation": util, "gpu_peak_mem_gb_during_generation": peak_mem,
             "accepted_candidates": n_valid, "export": n_export}
+
+
+def fig_train(te):
+    arms = [("R", "R", COL["source"]), ("RpGp", "R+G+", COL["G+"]), ("RpC", "R+C", COL["C"])]
+    phases = ("approach", "carry", "handover", "retreat")
+    fig, axs = plt.subplots(1, 2, figsize=(13, 3.8))
+    for i, (k, lab, c) in enumerate(arms):
+        runs = [v for n, v in te["per_run"].items() if n.rsplit("_s", 1)[0] == k]
+        vals = [v["phase_balanced_err"] for v in runs]
+        axs[0].bar(i, np.mean(vals), 0.6, color=c, alpha=0.85)
+        axs[0].scatter([i] * len(vals), vals, color=INK, s=14, zorder=3)
+        axs[0].text(i, np.mean(vals) + 0.004, f"{np.mean(vals):.4f}", ha="center", fontsize=8)
+        for j, ph in enumerate(phases):
+            pv = [v["per_phase"][ph] for v in runs if ph in v["per_phase"]]
+            axs[1].bar(j + (i - 1) * 0.27, np.mean(pv), 0.25, color=c, alpha=0.85, label=lab if j == 0 else None)
+    axs[0].set_xticks(range(3), [a[1] for a in arms])
+    axs[0].set_ylim(0.30, 0.345)
+    axs[0].set_ylabel("normalised arm-action MAE")
+    axs[0].set_title("Held-out real (pool 10-19): phase-balanced error, 3 seeds (dots)\n(y axis truncated; pre-declared benefit threshold = 10% below R)", loc="left")
+    axs[1].set_xticks(range(4), phases)
+    axs[1].set_ylabel("normalised arm-action MAE")
+    axs[1].set_title("Per phase (mean of 3 seeds)", loc="left")
+    axs[1].legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(FIG / "train_screen_heldout.png", dpi=150)
+    plt.close(fig)
+    out = ["| arm | phase-balanced error (mean ± sd, 3 seeds) | vs R | skill vs persistence | gripper precision / recall (steps 0-10) | transition timing error (frames) |",
+           "|---|---|---|---|---|---|"]
+    base = te["per_arm"]["R"]["phase_balanced_err_mean"]
+    for k, lab, _ in arms:
+        a = te["per_arm"][k]
+        out.append(f"| {lab} | {a['phase_balanced_err_mean']:.4f} ± {a['phase_balanced_err_sd']:.4f} | {100 * (1 - a['phase_balanced_err_mean'] / base):+.1f}% | "
+                   f"{a['skill_mean']:.3f} | {a['gripper_precision_mean']:.3f} / {a['gripper_recall_mean']:.3f} | {a['timing_mean']:.2f} |")
+    out.append("")
+    out.append("| arm | " + " | ".join(phases) + " |")
+    out.append("|---|" + "---|" * 4)
+    for k, lab, _ in arms:
+        runs = [v for n, v in te["per_run"].items() if n.rsplit("_s", 1)[0] == k]
+        out.append(f"| {lab} | " + " | ".join(f"{np.mean([v['per_phase'][p] for v in runs]):.4f}" for p in phases) + " |")
+    out.append(f"\npersistence baseline (hold current state) error: {next(iter(te['per_run'].values()))['persistence_err']:.4f}; decision: {json.dumps(te['decision'])}")
+    (TAB / "train_screen.md").write_text("\n".join(out) + "\n")
 
 
 def main():
@@ -407,6 +473,8 @@ def main():
             fig_timing(res, E)
     tr = json.loads((HERE / "outputs/train_screen_runs.json").read_text()) if (HERE / "outputs/train_screen_runs.json").exists() else None
     te = json.loads((HERE / "outputs/train_screen_eval.json").read_text()) if (HERE / "outputs/train_screen_eval.json").exists() else None
+    if te:
+        fig_train(te)
     rt = runtime(res, {"counts": {k: v.get("episodes") for k, v in val.get("timing", {}).items()}}, tr, te)
     if val:
         rt["export_timing"] = val.get("timing")

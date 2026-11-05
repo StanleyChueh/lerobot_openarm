@@ -1,0 +1,92 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s][ALoading weights:  60%|█████▉    | 292/489 [00:00<00:00, 2919.24it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6071.70it/s]
+Loading weights: 100%|██████████| 489/489 [00:00<00:00, 3598.88it/s]
+Reducing the number of VLM layers to 16 ...
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+Loading weights from local directory
+R_s0 {'phase_balanced_err': 0.3333, 'skill_vs_persistence': 0.5288, 'persistence_err': 0.7326, 'gripper_precision': 0.9352, 'gripper_recall': 0.9428, 'gripper_transition_timing_err_frames': 3.0667, 'n_transitions': 60, 'n_samples': 405}
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7322.59it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+R_s1 {'phase_balanced_err': 0.3381, 'skill_vs_persistence': 0.5248, 'persistence_err': 0.7326, 'gripper_precision': 0.9308, 'gripper_recall': 0.9428, 'gripper_transition_timing_err_frames': 3.1333, 'n_transitions': 60, 'n_samples': 405}
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7885.76it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+R_s2 {'phase_balanced_err': 0.331, 'skill_vs_persistence': 0.5292, 'persistence_err': 0.7326, 'gripper_precision': 0.9305, 'gripper_recall': 0.9428, 'gripper_transition_timing_err_frames': 3.0667, 'n_transitions': 60, 'n_samples': 405}
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 5806.00it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpC_s0 {'phase_balanced_err': 0.3256, 'skill_vs_persistence': 0.536, 'persistence_err': 0.7326, 'gripper_precision': 0.9334, 'gripper_recall': 0.9461, 'gripper_transition_timing_err_frames': 3.0833, 'n_transitions': 60, 'n_samples': 405}
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6239.45it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpC_s1 {'phase_balanced_err': 0.3275, 'skill_vs_persistence': 0.5383, 'persistence_err': 0.7326, 'gripper_precision': 0.9394, 'gripper_recall': 0.9435, 'gripper_transition_timing_err_frames': 2.7333, 'n_transitions': 60, 'n_samples': 405}
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7540.61it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpC_s2 {'phase_balanced_err': 0.3274, 'skill_vs_persistence': 0.5326, 'persistence_err': 0.7326, 'gripper_precision': 0.938, 'gripper_recall': 0.938, 'gripper_transition_timing_err_frames': 2.9, 'n_transitions': 60, 'n_samples': 405}
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6813.16it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpGp_s0 {'phase_balanced_err': 0.3276, 'skill_vs_persistence': 0.5369, 'persistence_err': 0.7326, 'gripper_precision': 0.9326, 'gripper_recall': 0.9439, 'gripper_transition_timing_err_frames': 3.15, 'n_transitions': 60, 'n_samples': 405}
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7257.81it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpGp_s1 {'phase_balanced_err': 0.3289, 'skill_vs_persistence': 0.5388, 'persistence_err': 0.7326, 'gripper_precision': 0.9379, 'gripper_recall': 0.941, 'gripper_transition_timing_err_frames': 2.8667, 'n_transitions': 60, 'n_samples': 405}
+RpGp_s2 {'phase_balanced_err': 0.3291, 'skill_vs_persistence': 0.5325, 'persistence_err': 0.7326, 'gripper_precision': 0.9355, 'gripper_recall': 0.9358, 'gripper_transition_timing_err_frames': 3.0833, 'n_transitions': 60, 'n_samples': 405}
+{
+ "per_arm": {
+  "R": {
+   "phase_balanced_err_mean": 0.33414560556411743,
+   "phase_balanced_err_sd": 0.0029372558575958287,
+   "skill_mean": 0.5275852282842001,
+   "timing_mean": 3.088888888888889,
+   "gripper_precision_mean": 0.9322022361869289,
+   "gripper_recall_mean": 0.9427942794279428,
+   "seeds": 3
+  },
+  "RpC": {
+   "phase_balanced_err_mean": 0.3268559177716573,
+   "phase_balanced_err_sd": 0.0008785124331507916,
+   "skill_mean": 0.5356247027715048,
+   "timing_mean": 2.9055555555555554,
+   "gripper_precision_mean": 0.9369502957692456,
+   "gripper_recall_mean": 0.9425498105366091,
+   "seeds": 3
+  },
+  "RpGp": {
+   "phase_balanced_err_mean": 0.32851167519887287,
+   "phase_balanced_err_sd": 0.000680196505876101,
+   "skill_mean": 0.5360786120096842,
+   "timing_mean": 3.033333333333333,
+   "gripper_precision_mean": 0.935319354565313,
+   "gripper_recall_mean": 0.9402273560689403,
+   "seeds": 3
+  }
+ },
+ "decision": {
+  "RpGp": {
+   "rel_improvement_vs_R": 0.016860704649199754,
+   "timing_delta_frames": -0.0555555555555558,
+   "augmentation_helps": false
+  },
+  "RpC": {
+   "rel_improvement_vs_R": 0.02181590202317163,
+   "timing_delta_frames": -0.18333333333333357,
+   "augmentation_helps": false
+  },
+  "contact_helps": false
+ }
+}
+EXIT 0

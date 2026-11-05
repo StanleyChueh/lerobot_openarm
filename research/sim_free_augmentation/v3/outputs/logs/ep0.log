@@ -1,0 +1,35 @@
+[ep0 preprocess_lid_track] 0.0 s
+[ep0 preprocess_sam2] 12.25 s
+/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/render.py:36: RuntimeWarning: All-NaN slice encountered
+  med = np.nanmedian(x, axis=0)
+[ep0 preprocess_recon_plate] 21.18 s
+[ep0 verifier_init] 2.81 s
+[ep0 plans] 29.48 s
+ep0: 60 proposed candidates, 59 to render (56 unique)
+[ep0 render_metrics] 440.51 s
+[ep0 corruption_tests] 72.57 s
+[ep0 comparison_videos] 49.87 s
+{
+ "episode": 0,
+ "accepted_own": {
+  "G+": 25,
+  "C": 25
+ },
+ "common": 25,
+ "runtime_s": {
+  "preprocess_lid_track": 0.0,
+  "preprocess_sam2": 12.25,
+  "preprocess_recon_plate": 21.18,
+  "verifier_init": 2.81,
+  "plans": 29.48,
+  "render_metrics": 440.51,
+  "corruption_tests": 72.57,
+  "comparison_videos": 49.87,
+  "total_episode_s": 636.42
+ },
+ "gpu": {
+  "raft_s": 402.9991888999939,
+  "n": 56,
+  "peak_vram_gb_raft": 0.52515072
+ }
+}

@@ -1,0 +1,228 @@
+{
+ "runs": [
+  {
+   "arm": "R",
+   "seed": 0,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 101.9670922756195,
+   "loss_log": [
+    0.973,
+    0.249,
+    0.169,
+    0.135,
+    0.107,
+    0.095,
+    0.083,
+    0.076,
+    0.073,
+    0.074
+   ]
+  },
+  {
+   "arm": "R+G+",
+   "seed": 0,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 107.23464441299438,
+   "loss_log": [
+    1.015,
+    0.297,
+    0.226,
+    0.186,
+    0.159,
+    0.14,
+    0.133,
+    0.124,
+    0.119,
+    0.12
+   ]
+  },
+  {
+   "arm": "R+C",
+   "seed": 0,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 99.27757573127747,
+   "loss_log": [
+    1.015,
+    0.299,
+    0.229,
+    0.19,
+    0.163,
+    0.144,
+    0.137,
+    0.127,
+    0.124,
+    0.125
+   ]
+  },
+  {
+   "arm": "R",
+   "seed": 1,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 106.81264758110046,
+   "loss_log": [
+    0.997,
+    0.236,
+    0.168,
+    0.138,
+    0.111,
+    0.094,
+    0.086,
+    0.079,
+    0.077,
+    0.073
+   ]
+  },
+  {
+   "arm": "R+G+",
+   "seed": 1,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 101.80690670013428,
+   "loss_log": [
+    1.033,
+    0.303,
+    0.226,
+    0.19,
+    0.161,
+    0.141,
+    0.135,
+    0.124,
+    0.123,
+    0.112
+   ]
+  },
+  {
+   "arm": "R+C",
+   "seed": 1,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 106.64494514465332,
+   "loss_log": [
+    1.035,
+    0.305,
+    0.231,
+    0.194,
+    0.166,
+    0.146,
+    0.139,
+    0.129,
+    0.127,
+    0.115
+   ]
+  },
+  {
+   "arm": "R",
+   "seed": 2,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 100.8820948600769,
+   "loss_log": [
+    1.016,
+    0.248,
+    0.177,
+    0.137,
+    0.111,
+    0.097,
+    0.082,
+    0.076,
+    0.074,
+    0.081
+   ]
+  },
+  {
+   "arm": "R+G+",
+   "seed": 2,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 107.73009872436523,
+   "loss_log": [
+    1.078,
+    0.303,
+    0.226,
+    0.183,
+    0.161,
+    0.145,
+    0.126,
+    0.12,
+    0.117,
+    0.131
+   ]
+  },
+  {
+   "arm": "R+C",
+   "seed": 2,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 98.58279466629028,
+   "loss_log": [
+    1.081,
+    0.308,
+    0.229,
+    0.189,
+    0.165,
+    0.149,
+    0.13,
+    0.125,
+    0.121,
+    0.134
+   ]
+  }
+ ],
+ "wall_s": 502.5179717540741,
+ "config": {
+  "_doc": "Bounded SmolVLA training screen, declared BEFORE any training run. Not a convergence study, not a closed-loop evaluation.",
+  "pretrained": "lerobot/smolvla_base (local HF cache, pinned snapshot recorded in results)",
+  "arms": {
+   "R": "sfa_v3_R",
+   "R+G+": "sfa_v3_R_plus_Gp",
+   "R+C": "sfa_v3_R_plus_C"
+  },
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "steps": 1000,
+  "batch_size": 16,
+  "num_workers": 4,
+  "camera_rename": {
+   "observation.images.body_cam": "observation.images.camera1"
+  },
+  "trainable": "action expert + state projection (freeze_vision_encoder=True, train_expert_only=True: smolvla_base defaults)",
+  "image_augmentation": "none (lerobot default), identical for all arms",
+  "heldout_eval": {
+   "dataset": "ethanCSL/openarm_pringles_lerobot_real_v00 pool",
+   "episodes": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "frame_stride": 5,
+   "chunk": 50,
+   "noise_seed": 1234,
+   "never_seen": "no held-out episode or synthetic descendant enters training; state fingerprints checked"
+  },
+  "metrics": [
+   "phase-balanced normalised arm-action MAE over the 50-step chunk (phases: approach, carry, handover, retreat from the held-out episode's gripper commands)",
+   "skill vs persistence baseline (1 - MAE_policy / MAE_hold-current-state)",
+   "per-joint normalised MAE",
+   "gripper closed-state precision/recall over chunk steps 0-10 and transition timing error"
+  ],
+  "decision_rule": {
+   "augmentation_helps": "arm mean phase-balanced error >= 10% below R (mean over seeds) AND gripper transition timing error not worse than R by > 1 frame",
+   "contact_helps": "R+C satisfies augmentation_helps AND is >= 10% below R+G+",
+   "otherwise": "report as no demonstrated benefit; do not scale"
+  }
+ }
+}

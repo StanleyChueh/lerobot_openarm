@@ -1,0 +1,4565 @@
+{
+ "reports": {
+  "R": {
+   "name": "sfa_v3_R",
+   "schema": true,
+   "policy_features": {
+    "observation.state": [
+     "FeatureType.STATE",
+     [
+      16
+     ]
+    ],
+    "action": [
+     "FeatureType.ACTION",
+     [
+      16
+     ]
+    ],
+    "observation.images.body_cam": [
+     "FeatureType.VISUAL",
+     [
+      3,
+      480,
+      640
+     ]
+    ]
+   },
+   "episodes": 10,
+   "frames": 2575,
+   "boundaries_ok": true,
+   "arrays_exact": true,
+   "psnr_db_min": 41.28482705721311,
+   "psnr_db_median": 41.872028658458,
+   "per_episode": [
+    {
+     "episode_index": 0,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.821884130808854,
+     "median_joint_lead": 1.9553538293839094
+    },
+    {
+     "episode_index": 1,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.46805253239103,
+     "median_joint_lead": 1.928934424602843
+    },
+    {
+     "episode_index": 2,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.20667996240772,
+     "median_joint_lead": 1.7758636397372356
+    },
+    {
+     "episode_index": 3,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.62069052371261,
+     "median_joint_lead": 1.7902361408302918
+    },
+    {
+     "episode_index": 4,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.28482705721311,
+     "median_joint_lead": 1.9066590063526032
+    },
+    {
+     "episode_index": 5,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.12347238279355,
+     "median_joint_lead": 1.8033468992095463
+    },
+    {
+     "episode_index": 6,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.922173186107145,
+     "median_joint_lead": 1.8438425601819808
+    },
+    {
+     "episode_index": 7,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.54698121475093,
+     "median_joint_lead": 1.8397297376678292
+    },
+    {
+     "episode_index": 8,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.93698115500232,
+     "median_joint_lead": 2.063826538989037
+    },
+    {
+     "episode_index": 9,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.09463069437254,
+     "median_joint_lead": 1.8233515378220626
+    }
+   ],
+   "ok": true
+  },
+  "Gp_matched": {
+   "name": "sfa_v3_Gp_matched",
+   "schema": true,
+   "policy_features": {
+    "observation.state": [
+     "FeatureType.STATE",
+     [
+      16
+     ]
+    ],
+    "action": [
+     "FeatureType.ACTION",
+     [
+      16
+     ]
+    ],
+    "observation.images.body_cam": [
+     "FeatureType.VISUAL",
+     [
+      3,
+      480,
+      640
+     ]
+    ]
+   },
+   "episodes": 113,
+   "frames": 28595,
+   "boundaries_ok": true,
+   "arrays_exact": true,
+   "psnr_db_min": 37.83710913117016,
+   "psnr_db_median": 40.19381392064968,
+   "per_episode": [
+    {
+     "episode_index": 0,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.79495932372204,
+     "median_joint_lead": 1.9590499395230259
+    },
+    {
+     "episode_index": 1,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.86895310635862,
+     "median_joint_lead": 1.9535815050248955
+    },
+    {
+     "episode_index": 2,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.38271628313092,
+     "median_joint_lead": 1.9570105371490936
+    },
+    {
+     "episode_index": 3,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.72967453360288,
+     "median_joint_lead": 1.984339279975588
+    },
+    {
+     "episode_index": 4,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.57369149190727,
+     "median_joint_lead": 1.9529576249347849
+    },
+    {
+     "episode_index": 5,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.662138256494984,
+     "median_joint_lead": 1.956392501239665
+    },
+    {
+     "episode_index": 6,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.615019867776326,
+     "median_joint_lead": 1.9461676274599329
+    },
+    {
+     "episode_index": 7,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.65638574353568,
+     "median_joint_lead": 1.9716952622618038
+    },
+    {
+     "episode_index": 8,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.72125829314776,
+     "median_joint_lead": 1.958555201607809
+    },
+    {
+     "episode_index": 9,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.50675090578342,
+     "median_joint_lead": 1.9785969892903381
+    },
+    {
+     "episode_index": 10,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.058003750872665,
+     "median_joint_lead": 1.9382532234194665
+    },
+    {
+     "episode_index": 11,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.98981511764869,
+     "median_joint_lead": 1.9312317292542427
+    },
+    {
+     "episode_index": 12,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.08085947816896,
+     "median_joint_lead": 1.8952448306825531
+    },
+    {
+     "episode_index": 13,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.379582179459725,
+     "median_joint_lead": 1.9452765212488974
+    },
+    {
+     "episode_index": 14,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.58306894158385,
+     "median_joint_lead": 1.9167759505823216
+    },
+    {
+     "episode_index": 15,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.78720533720337,
+     "median_joint_lead": 1.9229308145032278
+    },
+    {
+     "episode_index": 16,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.83655696640037,
+     "median_joint_lead": 1.9325557924985073
+    },
+    {
+     "episode_index": 17,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.779286765477025,
+     "median_joint_lead": 1.93108537750359
+    },
+    {
+     "episode_index": 18,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.8261043655046,
+     "median_joint_lead": 1.9220648707987231
+    },
+    {
+     "episode_index": 19,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.86042132740366,
+     "median_joint_lead": 1.9409798384390229
+    },
+    {
+     "episode_index": 20,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.72960785117145,
+     "median_joint_lead": 1.937135912766839
+    },
+    {
+     "episode_index": 21,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.138244495203026,
+     "median_joint_lead": 1.9631553143964426
+    },
+    {
+     "episode_index": 22,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.517733176959396,
+     "median_joint_lead": 1.794042913180054
+    },
+    {
+     "episode_index": 23,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.5420279732651,
+     "median_joint_lead": 1.7617507485275627
+    },
+    {
+     "episode_index": 24,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.68181596762717,
+     "median_joint_lead": 1.7985877120719067
+    },
+    {
+     "episode_index": 25,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.38264609415702,
+     "median_joint_lead": 1.8094218408312979
+    },
+    {
+     "episode_index": 26,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.389644743181066,
+     "median_joint_lead": 1.827131606403158
+    },
+    {
+     "episode_index": 27,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.325472420557624,
+     "median_joint_lead": 1.80247541972867
+    },
+    {
+     "episode_index": 28,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.43537458147377,
+     "median_joint_lead": 1.7842399992305946
+    },
+    {
+     "episode_index": 29,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.394843416916515,
+     "median_joint_lead": 1.821020683609831
+    },
+    {
+     "episode_index": 30,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.4530700537783,
+     "median_joint_lead": 1.8715417400659833
+    },
+    {
+     "episode_index": 31,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.32983880319594,
+     "median_joint_lead": 1.8017723943697963
+    },
+    {
+     "episode_index": 32,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.46629987105639,
+     "median_joint_lead": 1.78629403110142
+    },
+    {
+     "episode_index": 33,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.01048211710881,
+     "median_joint_lead": 1.8034818277413982
+    },
+    {
+     "episode_index": 34,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.441378464470795,
+     "median_joint_lead": 1.7881507908665033
+    },
+    {
+     "episode_index": 35,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.501848591397774,
+     "median_joint_lead": 1.7726726146870568
+    },
+    {
+     "episode_index": 36,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.98488717087821,
+     "median_joint_lead": 1.785773374963736
+    },
+    {
+     "episode_index": 37,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.455365702659826,
+     "median_joint_lead": 1.820857894204663
+    },
+    {
+     "episode_index": 38,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.526974099937554,
+     "median_joint_lead": 1.7838600173149637
+    },
+    {
+     "episode_index": 39,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.146930528263745,
+     "median_joint_lead": 1.7948783870295397
+    },
+    {
+     "episode_index": 40,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.10770211570439,
+     "median_joint_lead": 1.7682363008881061
+    },
+    {
+     "episode_index": 41,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.531510880739134,
+     "median_joint_lead": 1.8059968101909738
+    },
+    {
+     "episode_index": 42,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.20773465378536,
+     "median_joint_lead": 1.8094624144262919
+    },
+    {
+     "episode_index": 43,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.09425863823366,
+     "median_joint_lead": 1.8050411825850683
+    },
+    {
+     "episode_index": 44,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.54001945569284,
+     "median_joint_lead": 1.7867229444849384
+    },
+    {
+     "episode_index": 45,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.513627623740604,
+     "median_joint_lead": 1.886916026530817
+    },
+    {
+     "episode_index": 46,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.1033628764002,
+     "median_joint_lead": 1.8332322212252028
+    },
+    {
+     "episode_index": 47,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.19381392064968,
+     "median_joint_lead": 1.8451737342452836
+    },
+    {
+     "episode_index": 48,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.10766391879672,
+     "median_joint_lead": 1.919754984007795
+    },
+    {
+     "episode_index": 49,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.94438324645946,
+     "median_joint_lead": 1.9220856120673773
+    },
+    {
+     "episode_index": 50,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.311222450090355,
+     "median_joint_lead": 1.8999153225049084
+    },
+    {
+     "episode_index": 51,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.3758430979719,
+     "median_joint_lead": 1.8095421942814043
+    },
+    {
+     "episode_index": 52,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.30264746235464,
+     "median_joint_lead": 1.8698071820523394
+    },
+    {
+     "episode_index": 53,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.969907020804925,
+     "median_joint_lead": 1.8062226699506216
+    },
+    {
+     "episode_index": 54,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.08176678443953,
+     "median_joint_lead": 1.8166451137496729
+    },
+    {
+     "episode_index": 55,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.262945012601406,
+     "median_joint_lead": 1.8539997758348334
+    },
+    {
+     "episode_index": 56,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.35492892994312,
+     "median_joint_lead": 1.8691371886570098
+    },
+    {
+     "episode_index": 57,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09207563314177,
+     "median_joint_lead": 1.8315573315786522
+    },
+    {
+     "episode_index": 58,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.80207181508663,
+     "median_joint_lead": 1.8095980193473096
+    },
+    {
+     "episode_index": 59,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.957219679122055,
+     "median_joint_lead": 1.8192718713164855
+    },
+    {
+     "episode_index": 60,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.058143529202866,
+     "median_joint_lead": 1.793223032851308
+    },
+    {
+     "episode_index": 61,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.84778226117841,
+     "median_joint_lead": 1.815601596633312
+    },
+    {
+     "episode_index": 62,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.91629830438404,
+     "median_joint_lead": 1.8478141959608818
+    },
+    {
+     "episode_index": 63,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.90162542596842,
+     "median_joint_lead": 1.865885866488212
+    },
+    {
+     "episode_index": 64,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.91904552294989,
+     "median_joint_lead": 1.864012045203381
+    },
+    {
+     "episode_index": 65,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.890688297249646,
+     "median_joint_lead": 1.846544336650595
+    },
+    {
+     "episode_index": 66,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.993890780547616,
+     "median_joint_lead": 1.862359093815904
+    },
+    {
+     "episode_index": 67,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.971513418865946,
+     "median_joint_lead": 1.859225013504294
+    },
+    {
+     "episode_index": 68,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.87203605766824,
+     "median_joint_lead": 1.8923720522418894
+    },
+    {
+     "episode_index": 69,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.27426167964388,
+     "median_joint_lead": 1.8096010228822286
+    },
+    {
+     "episode_index": 70,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.7406684904749,
+     "median_joint_lead": 1.8714652133495118
+    },
+    {
+     "episode_index": 71,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.88827605231767,
+     "median_joint_lead": 1.8542876856324924
+    },
+    {
+     "episode_index": 72,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.916895825792466,
+     "median_joint_lead": 1.8513995094697602
+    },
+    {
+     "episode_index": 73,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.46015081554638,
+     "median_joint_lead": 1.9166152764359772
+    },
+    {
+     "episode_index": 74,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.63367389533112,
+     "median_joint_lead": 1.91941493931717
+    },
+    {
+     "episode_index": 75,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.83710913117016,
+     "median_joint_lead": 1.840200068571383
+    },
+    {
+     "episode_index": 76,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.92355028313833,
+     "median_joint_lead": 1.8662306866875618
+    },
+    {
+     "episode_index": 77,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.878226207729966,
+     "median_joint_lead": 1.838574141024397
+    },
+    {
+     "episode_index": 78,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.89312580190665,
+     "median_joint_lead": 1.8698567186868718
+    },
+    {
+     "episode_index": 79,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.88181813246828,
+     "median_joint_lead": 1.8557012212741897
+    },
+    {
+     "episode_index": 80,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.111645166919146,
+     "median_joint_lead": 1.8222031476407348
+    },
+    {
+     "episode_index": 81,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.20255126123489,
+     "median_joint_lead": 1.8726724919655917
+    },
+    {
+     "episode_index": 82,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.033081205804294,
+     "median_joint_lead": 1.9526971329604441
+    },
+    {
+     "episode_index": 83,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.019840645924916,
+     "median_joint_lead": 1.815385687770479
+    },
+    {
+     "episode_index": 84,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.70757459288206,
+     "median_joint_lead": 1.8689775365185666
+    },
+    {
+     "episode_index": 85,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1321063859862,
+     "median_joint_lead": 1.8489258995550715
+    },
+    {
+     "episode_index": 86,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.022267264088725,
+     "median_joint_lead": 1.8017124210134492
+    },
+    {
+     "episode_index": 87,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.06101835126916,
+     "median_joint_lead": 1.8309873330398634
+    },
+    {
+     "episode_index": 88,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1237662591934,
+     "median_joint_lead": 1.8493547036637985
+    },
+    {
+     "episode_index": 89,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.03470094296549,
+     "median_joint_lead": 1.8426575742793552
+    },
+    {
+     "episode_index": 90,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1621732115069,
+     "median_joint_lead": 1.7885947562719209
+    },
+    {
+     "episode_index": 91,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.39832606797225,
+     "median_joint_lead": 2.0153305716862233
+    },
+    {
+     "episode_index": 92,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.41836079113527,
+     "median_joint_lead": 1.9816897780335738
+    },
+    {
+     "episode_index": 93,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.46131847690995,
+     "median_joint_lead": 2.012569042930778
+    },
+    {
+     "episode_index": 94,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.34852887417172,
+     "median_joint_lead": 2.0568026114529436
+    },
+    {
+     "episode_index": 95,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.33241250685297,
+     "median_joint_lead": 2.0693372133585948
+    },
+    {
+     "episode_index": 96,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.33858371397546,
+     "median_joint_lead": 2.034337379798138
+    },
+    {
+     "episode_index": 97,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.30999284632568,
+     "median_joint_lead": 2.047589298057443
+    },
+    {
+     "episode_index": 98,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.38198294081207,
+     "median_joint_lead": 2.070255221367219
+    },
+    {
+     "episode_index": 99,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.37174687412299,
+     "median_joint_lead": 2.034217168558756
+    },
+    {
+     "episode_index": 100,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.30259252569353,
+     "median_joint_lead": 2.0478716386343705
+    },
+    {
+     "episode_index": 101,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.268573157975105,
+     "median_joint_lead": 2.0476127182803574
+    },
+    {
+     "episode_index": 102,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.6998807779679,
+     "median_joint_lead": 1.8069332707150672
+    },
+    {
+     "episode_index": 103,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.78490009667283,
+     "median_joint_lead": 1.7848642496675395
+    },
+    {
+     "episode_index": 104,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09182293163908,
+     "median_joint_lead": 1.7860406297735416
+    },
+    {
+     "episode_index": 105,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.7967801062905,
+     "median_joint_lead": 1.8213188924808286
+    },
+    {
+     "episode_index": 106,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.684620770703745,
+     "median_joint_lead": 1.8070248102358282
+    },
+    {
+     "episode_index": 107,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.7178718818972,
+     "median_joint_lead": 1.8320125565798797
+    },
+    {
+     "episode_index": 108,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.69270276236914,
+     "median_joint_lead": 1.839637324007433
+    },
+    {
+     "episode_index": 109,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.709809712910676,
+     "median_joint_lead": 1.8023640037798008
+    },
+    {
+     "episode_index": 110,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.66090998064426,
+     "median_joint_lead": 1.8632751956379388
+    },
+    {
+     "episode_index": 111,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.69240617681714,
+     "median_joint_lead": 1.8390936209326088
+    },
+    {
+     "episode_index": 112,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.00481381603797,
+     "median_joint_lead": 1.836341534584842
+    }
+   ],
+   "ok": true
+  },
+  "C_matched": {
+   "name": "sfa_v3_C_matched",
+   "schema": true,
+   "policy_features": {
+    "observation.state": [
+     "FeatureType.STATE",
+     [
+      16
+     ]
+    ],
+    "action": [
+     "FeatureType.ACTION",
+     [
+      16
+     ]
+    ],
+    "observation.images.body_cam": [
+     "FeatureType.VISUAL",
+     [
+      3,
+      480,
+      640
+     ]
+    ]
+   },
+   "episodes": 113,
+   "frames": 28595,
+   "boundaries_ok": true,
+   "arrays_exact": true,
+   "psnr_db_min": 37.78051340008829,
+   "psnr_db_median": 40.24631981356407,
+   "per_episode": [
+    {
+     "episode_index": 0,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.9357431136526,
+     "median_joint_lead": 1.9544093259555835
+    },
+    {
+     "episode_index": 1,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.99696273741389,
+     "median_joint_lead": 1.9449832382887373
+    },
+    {
+     "episode_index": 2,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.38271628313092,
+     "median_joint_lead": 1.9570105371490936
+    },
+    {
+     "episode_index": 3,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.72967453360288,
+     "median_joint_lead": 1.984339279975588
+    },
+    {
+     "episode_index": 4,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.539229202643845,
+     "median_joint_lead": 1.9540960955576283
+    },
+    {
+     "episode_index": 5,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.590987603141386,
+     "median_joint_lead": 1.9581908982969716
+    },
+    {
+     "episode_index": 6,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.54532260559097,
+     "median_joint_lead": 1.9344706040553423
+    },
+    {
+     "episode_index": 7,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.601662479778,
+     "median_joint_lead": 1.9798005751756975
+    },
+    {
+     "episode_index": 8,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.67917864725584,
+     "median_joint_lead": 1.9633093749525556
+    },
+    {
+     "episode_index": 9,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.4498527851338,
+     "median_joint_lead": 1.9852043601369211
+    },
+    {
+     "episode_index": 10,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.10270127426588,
+     "median_joint_lead": 1.9333265948534957
+    },
+    {
+     "episode_index": 11,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.13857244825435,
+     "median_joint_lead": 1.9310797102689015
+    },
+    {
+     "episode_index": 12,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.21931025181567,
+     "median_joint_lead": 1.8917922344429479
+    },
+    {
+     "episode_index": 13,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.379582179459725,
+     "median_joint_lead": 1.9452765212488974
+    },
+    {
+     "episode_index": 14,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.58306894158385,
+     "median_joint_lead": 1.9167759505823216
+    },
+    {
+     "episode_index": 15,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.78042478423637,
+     "median_joint_lead": 1.921436212861706
+    },
+    {
+     "episode_index": 16,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.703709041041556,
+     "median_joint_lead": 1.935369565063171
+    },
+    {
+     "episode_index": 17,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.69014211114898,
+     "median_joint_lead": 1.9282516896046071
+    },
+    {
+     "episode_index": 18,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.74503195054685,
+     "median_joint_lead": 1.9286099844409392
+    },
+    {
+     "episode_index": 19,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.728445782240016,
+     "median_joint_lead": 1.9448856966055494
+    },
+    {
+     "episode_index": 20,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.6806409116036,
+     "median_joint_lead": 1.9650044577221588
+    },
+    {
+     "episode_index": 21,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.228571879579306,
+     "median_joint_lead": 1.9798422236848736
+    },
+    {
+     "episode_index": 22,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.535528543043284,
+     "median_joint_lead": 1.7937933713060712
+    },
+    {
+     "episode_index": 23,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.560670496529056,
+     "median_joint_lead": 1.7611826835877067
+    },
+    {
+     "episode_index": 24,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.68181596762717,
+     "median_joint_lead": 1.7985877120719067
+    },
+    {
+     "episode_index": 25,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.433464394811196,
+     "median_joint_lead": 1.7965664656174296
+    },
+    {
+     "episode_index": 26,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44086413493695,
+     "median_joint_lead": 1.8343123998096056
+    },
+    {
+     "episode_index": 27,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.40410656716454,
+     "median_joint_lead": 1.7968920729660645
+    },
+    {
+     "episode_index": 28,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48077987028912,
+     "median_joint_lead": 1.7804382836386963
+    },
+    {
+     "episode_index": 29,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44868259235625,
+     "median_joint_lead": 1.8227436558221752
+    },
+    {
+     "episode_index": 30,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48348410060731,
+     "median_joint_lead": 1.8702931123015851
+    },
+    {
+     "episode_index": 31,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.40244312204946,
+     "median_joint_lead": 1.796225470280179
+    },
+    {
+     "episode_index": 32,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.506314097667826,
+     "median_joint_lead": 1.7889566662441443
+    },
+    {
+     "episode_index": 33,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.24631981356407,
+     "median_joint_lead": 1.8359088964351347
+    },
+    {
+     "episode_index": 34,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.5752313406486,
+     "median_joint_lead": 1.7878325787395468
+    },
+    {
+     "episode_index": 35,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.656362381223786,
+     "median_joint_lead": 1.7752543810545331
+    },
+    {
+     "episode_index": 36,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.98488717087821,
+     "median_joint_lead": 1.785773374963736
+    },
+    {
+     "episode_index": 37,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.455365702659826,
+     "median_joint_lead": 1.820857894204663
+    },
+    {
+     "episode_index": 38,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.55735290235355,
+     "median_joint_lead": 1.7844544424693127
+    },
+    {
+     "episode_index": 39,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.141700306359695,
+     "median_joint_lead": 1.7938488422388406
+    },
+    {
+     "episode_index": 40,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.092690846720984,
+     "median_joint_lead": 1.7679363423301537
+    },
+    {
+     "episode_index": 41,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.53521187813609,
+     "median_joint_lead": 1.8086034159136248
+    },
+    {
+     "episode_index": 42,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.176515984265144,
+     "median_joint_lead": 1.8252880025378744
+    },
+    {
+     "episode_index": 43,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.08418232535024,
+     "median_joint_lead": 1.8036700462761521
+    },
+    {
+     "episode_index": 44,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.519042620244974,
+     "median_joint_lead": 1.7868733485322226
+    },
+    {
+     "episode_index": 45,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.491793438092415,
+     "median_joint_lead": 1.9074396470404265
+    },
+    {
+     "episode_index": 46,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.06967786232223,
+     "median_joint_lead": 1.8564443845995384
+    },
+    {
+     "episode_index": 47,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.37415190985386,
+     "median_joint_lead": 1.884167298777056
+    },
+    {
+     "episode_index": 48,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.225605442341895,
+     "median_joint_lead": 1.9187879690795187
+    },
+    {
+     "episode_index": 49,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.107696565705496,
+     "median_joint_lead": 1.9178092360409837
+    },
+    {
+     "episode_index": 50,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48606962213383,
+     "median_joint_lead": 1.9239030330832056
+    },
+    {
+     "episode_index": 51,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.523259994827605,
+     "median_joint_lead": 1.7732508570606456
+    },
+    {
+     "episode_index": 52,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.49337336887127,
+     "median_joint_lead": 1.879552681676693
+    },
+    {
+     "episode_index": 53,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.147801804069076,
+     "median_joint_lead": 1.7936486948604458
+    },
+    {
+     "episode_index": 54,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.20776887351761,
+     "median_joint_lead": 1.8162272865718696
+    },
+    {
+     "episode_index": 55,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.45233944482074,
+     "median_joint_lead": 1.8665003928233994
+    },
+    {
+     "episode_index": 56,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.550512370265956,
+     "median_joint_lead": 1.9168888696210415
+    },
+    {
+     "episode_index": 57,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09207563314177,
+     "median_joint_lead": 1.8315573315786522
+    },
+    {
+     "episode_index": 58,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.80440113868936,
+     "median_joint_lead": 1.8185044228114182
+    },
+    {
+     "episode_index": 59,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.77166142959727,
+     "median_joint_lead": 1.8197941215253621
+    },
+    {
+     "episode_index": 60,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.86342240435681,
+     "median_joint_lead": 1.7961795711222663
+    },
+    {
+     "episode_index": 61,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.66223957963817,
+     "median_joint_lead": 1.8168403364976544
+    },
+    {
+     "episode_index": 62,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.13943054776128,
+     "median_joint_lead": 1.8657017506095515
+    },
+    {
+     "episode_index": 63,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.9239550483405,
+     "median_joint_lead": 1.8671848538011475
+    },
+    {
+     "episode_index": 64,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.97784549906973,
+     "median_joint_lead": 1.8689511286203975
+    },
+    {
+     "episode_index": 65,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.929110514638836,
+     "median_joint_lead": 1.8488908001416582
+    },
+    {
+     "episode_index": 66,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.02342474346756,
+     "median_joint_lead": 1.8678607603738988
+    },
+    {
+     "episode_index": 67,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.982187955999215,
+     "median_joint_lead": 1.855599763153636
+    },
+    {
+     "episode_index": 68,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.92411538528105,
+     "median_joint_lead": 1.8750537598697292
+    },
+    {
+     "episode_index": 69,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.27426167964388,
+     "median_joint_lead": 1.8096010228822286
+    },
+    {
+     "episode_index": 70,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.7406684904749,
+     "median_joint_lead": 1.8714652133495118
+    },
+    {
+     "episode_index": 71,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.92683727725554,
+     "median_joint_lead": 1.8557009981175479
+    },
+    {
+     "episode_index": 72,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.910821222859184,
+     "median_joint_lead": 1.8499466228947017
+    },
+    {
+     "episode_index": 73,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.52030934419585,
+     "median_joint_lead": 1.92219879138279
+    },
+    {
+     "episode_index": 74,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.658225524034556,
+     "median_joint_lead": 1.9222913073421917
+    },
+    {
+     "episode_index": 75,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.78051340008829,
+     "median_joint_lead": 1.8408456322931974
+    },
+    {
+     "episode_index": 76,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.85738896676384,
+     "median_joint_lead": 1.8628492363833353
+    },
+    {
+     "episode_index": 77,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.78269104316899,
+     "median_joint_lead": 1.8396007551127906
+    },
+    {
+     "episode_index": 78,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.887333380337864,
+     "median_joint_lead": 1.8714927250300581
+    },
+    {
+     "episode_index": 79,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.8401887708423,
+     "median_joint_lead": 1.8531762484931196
+    },
+    {
+     "episode_index": 80,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.15015718580908,
+     "median_joint_lead": 1.8189401431293013
+    },
+    {
+     "episode_index": 81,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.2452796280967,
+     "median_joint_lead": 1.8692911367590002
+    },
+    {
+     "episode_index": 82,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.12374186247267,
+     "median_joint_lead": 1.948844869542996
+    },
+    {
+     "episode_index": 83,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.019840645924916,
+     "median_joint_lead": 1.815385687770479
+    },
+    {
+     "episode_index": 84,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.70757459288206,
+     "median_joint_lead": 1.8689775365185666
+    },
+    {
+     "episode_index": 85,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.14677538499234,
+     "median_joint_lead": 1.8466904312595778
+    },
+    {
+     "episode_index": 86,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.08717637116477,
+     "median_joint_lead": 1.7978546706947462
+    },
+    {
+     "episode_index": 87,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.12616442262716,
+     "median_joint_lead": 1.8255643269543063
+    },
+    {
+     "episode_index": 88,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1423799040622,
+     "median_joint_lead": 1.8507220008777818
+    },
+    {
+     "episode_index": 89,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.08808428510784,
+     "median_joint_lead": 1.8351117131992094
+    },
+    {
+     "episode_index": 90,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.18718734657689,
+     "median_joint_lead": 1.7948515666488203
+    },
+    {
+     "episode_index": 91,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.39549375620689,
+     "median_joint_lead": 2.016008555924019
+    },
+    {
+     "episode_index": 92,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.46315930937721,
+     "median_joint_lead": 1.981452488941684
+    },
+    {
+     "episode_index": 93,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.51447631696736,
+     "median_joint_lead": 2.0343318845647325
+    },
+    {
+     "episode_index": 94,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.38037665899379,
+     "median_joint_lead": 2.0449000838517435
+    },
+    {
+     "episode_index": 95,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.40106458026878,
+     "median_joint_lead": 2.052298404796872
+    },
+    {
+     "episode_index": 96,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.39648212534401,
+     "median_joint_lead": 2.036087261849368
+    },
+    {
+     "episode_index": 97,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.364161997538154,
+     "median_joint_lead": 2.047839945529227
+    },
+    {
+     "episode_index": 98,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.4122250604998,
+     "median_joint_lead": 2.071725463444685
+    },
+    {
+     "episode_index": 99,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.44592059240055,
+     "median_joint_lead": 2.038249838712423
+    },
+    {
+     "episode_index": 100,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.37351376856799,
+     "median_joint_lead": 2.048148026365996
+    },
+    {
+     "episode_index": 101,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.346077877261266,
+     "median_joint_lead": 2.048958609659709
+    },
+    {
+     "episode_index": 102,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.86448281196954,
+     "median_joint_lead": 1.8005514422352973
+    },
+    {
+     "episode_index": 103,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.947201308196,
+     "median_joint_lead": 1.7904483987199742
+    },
+    {
+     "episode_index": 104,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09182293163908,
+     "median_joint_lead": 1.7860406297735416
+    },
+    {
+     "episode_index": 105,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.7967801062905,
+     "median_joint_lead": 1.8213188924808286
+    },
+    {
+     "episode_index": 106,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.412719136649486,
+     "median_joint_lead": 1.8066869524137341
+    },
+    {
+     "episode_index": 107,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.49706270591753,
+     "median_joint_lead": 1.8322806485314644
+    },
+    {
+     "episode_index": 108,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44254906441835,
+     "median_joint_lead": 1.8461227691230964
+    },
+    {
+     "episode_index": 109,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44248594269859,
+     "median_joint_lead": 1.8101462580609005
+    },
+    {
+     "episode_index": 110,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.388634941149526,
+     "median_joint_lead": 1.864209469219547
+    },
+    {
+     "episode_index": 111,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.430248155330055,
+     "median_joint_lead": 1.8453890567272775
+    },
+    {
+     "episode_index": 112,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.04392457910605,
+     "median_joint_lead": 1.8414430448014563
+    }
+   ],
+   "ok": true
+  },
+  "C_all": {
+   "name": "sfa_v3_C_all",
+   "schema": true,
+   "policy_features": {
+    "observation.state": [
+     "FeatureType.STATE",
+     [
+      16
+     ]
+    ],
+    "action": [
+     "FeatureType.ACTION",
+     [
+      16
+     ]
+    ],
+    "observation.images.body_cam": [
+     "FeatureType.VISUAL",
+     [
+      3,
+      480,
+      640
+     ]
+    ]
+   },
+   "episodes": 130,
+   "frames": 32940,
+   "boundaries_ok": true,
+   "arrays_exact": true,
+   "psnr_db_min": 37.78051340008829,
+   "psnr_db_median": 40.33929509887223,
+   "per_episode": [
+    {
+     "episode_index": 0,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.9357431136526,
+     "median_joint_lead": 1.9544093259555835
+    },
+    {
+     "episode_index": 1,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.99696273741389,
+     "median_joint_lead": 1.9449832382887373
+    },
+    {
+     "episode_index": 2,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.38271628313092,
+     "median_joint_lead": 1.9570105371490936
+    },
+    {
+     "episode_index": 3,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.72967453360288,
+     "median_joint_lead": 1.984339279975588
+    },
+    {
+     "episode_index": 4,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.46276402406016,
+     "median_joint_lead": 1.9567138346958124
+    },
+    {
+     "episode_index": 5,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.539229202643845,
+     "median_joint_lead": 1.9540960955576283
+    },
+    {
+     "episode_index": 6,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.590987603141386,
+     "median_joint_lead": 1.9581908982969716
+    },
+    {
+     "episode_index": 7,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.54532260559097,
+     "median_joint_lead": 1.9344706040553423
+    },
+    {
+     "episode_index": 8,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.601662479778,
+     "median_joint_lead": 1.9798005751756975
+    },
+    {
+     "episode_index": 9,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.67917864725584,
+     "median_joint_lead": 1.9633093749525556
+    },
+    {
+     "episode_index": 10,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.4498527851338,
+     "median_joint_lead": 1.9852043601369211
+    },
+    {
+     "episode_index": 11,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.10270127426588,
+     "median_joint_lead": 1.9333265948534957
+    },
+    {
+     "episode_index": 12,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.47904270628119,
+     "median_joint_lead": 1.9249483449578326
+    },
+    {
+     "episode_index": 13,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.13857244825435,
+     "median_joint_lead": 1.9310797102689015
+    },
+    {
+     "episode_index": 14,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.21931025181567,
+     "median_joint_lead": 1.8917922344429479
+    },
+    {
+     "episode_index": 15,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.332166311512516,
+     "median_joint_lead": 1.947195228935177
+    },
+    {
+     "episode_index": 16,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.41297270625779,
+     "median_joint_lead": 1.9065302238543567
+    },
+    {
+     "episode_index": 17,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.379582179459725,
+     "median_joint_lead": 1.9452765212488974
+    },
+    {
+     "episode_index": 18,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.58306894158385,
+     "median_joint_lead": 1.9167759505823216
+    },
+    {
+     "episode_index": 19,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.641063782931326,
+     "median_joint_lead": 1.8981699680782256
+    },
+    {
+     "episode_index": 20,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.78042478423637,
+     "median_joint_lead": 1.921436212861706
+    },
+    {
+     "episode_index": 21,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.703709041041556,
+     "median_joint_lead": 1.935369565063171
+    },
+    {
+     "episode_index": 22,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.69014211114898,
+     "median_joint_lead": 1.9282516896046071
+    },
+    {
+     "episode_index": 23,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.74503195054685,
+     "median_joint_lead": 1.9286099844409392
+    },
+    {
+     "episode_index": 24,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.728445782240016,
+     "median_joint_lead": 1.9448856966055494
+    },
+    {
+     "episode_index": 25,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.6806409116036,
+     "median_joint_lead": 1.9650044577221588
+    },
+    {
+     "episode_index": 26,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.228571879579306,
+     "median_joint_lead": 1.9798422236848736
+    },
+    {
+     "episode_index": 27,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.10266335235242,
+     "median_joint_lead": 1.9520490829284562
+    },
+    {
+     "episode_index": 28,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.37624524699494,
+     "median_joint_lead": 1.8173508793389557
+    },
+    {
+     "episode_index": 29,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.535528543043284,
+     "median_joint_lead": 1.7937933713060712
+    },
+    {
+     "episode_index": 30,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.560670496529056,
+     "median_joint_lead": 1.7611826835877067
+    },
+    {
+     "episode_index": 31,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.68181596762717,
+     "median_joint_lead": 1.7985877120719067
+    },
+    {
+     "episode_index": 32,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.42009866949377,
+     "median_joint_lead": 1.7684016131414877
+    },
+    {
+     "episode_index": 33,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.433464394811196,
+     "median_joint_lead": 1.7965664656174296
+    },
+    {
+     "episode_index": 34,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44086413493695,
+     "median_joint_lead": 1.8343123998096056
+    },
+    {
+     "episode_index": 35,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.40410656716454,
+     "median_joint_lead": 1.7968920729660645
+    },
+    {
+     "episode_index": 36,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48077987028912,
+     "median_joint_lead": 1.7804382836386963
+    },
+    {
+     "episode_index": 37,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44868259235625,
+     "median_joint_lead": 1.8227436558221752
+    },
+    {
+     "episode_index": 38,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48348410060731,
+     "median_joint_lead": 1.8702931123015851
+    },
+    {
+     "episode_index": 39,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.40244312204946,
+     "median_joint_lead": 1.796225470280179
+    },
+    {
+     "episode_index": 40,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.506314097667826,
+     "median_joint_lead": 1.7889566662441443
+    },
+    {
+     "episode_index": 41,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.24631981356407,
+     "median_joint_lead": 1.8359088964351347
+    },
+    {
+     "episode_index": 42,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.5752313406486,
+     "median_joint_lead": 1.7878325787395468
+    },
+    {
+     "episode_index": 43,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.656362381223786,
+     "median_joint_lead": 1.7752543810545331
+    },
+    {
+     "episode_index": 44,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.191903204743504,
+     "median_joint_lead": 1.879146294117763
+    },
+    {
+     "episode_index": 45,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.98488717087821,
+     "median_joint_lead": 1.785773374963736
+    },
+    {
+     "episode_index": 46,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.455365702659826,
+     "median_joint_lead": 1.820857894204663
+    },
+    {
+     "episode_index": 47,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.201771453478386,
+     "median_joint_lead": 1.7768006046945741
+    },
+    {
+     "episode_index": 48,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.55735290235355,
+     "median_joint_lead": 1.7844544424693127
+    },
+    {
+     "episode_index": 49,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.141700306359695,
+     "median_joint_lead": 1.7938488422388406
+    },
+    {
+     "episode_index": 50,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.092690846720984,
+     "median_joint_lead": 1.7679363423301537
+    },
+    {
+     "episode_index": 51,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.53521187813609,
+     "median_joint_lead": 1.8086034159136248
+    },
+    {
+     "episode_index": 52,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.176515984265144,
+     "median_joint_lead": 1.8252880025378744
+    },
+    {
+     "episode_index": 53,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.08418232535024,
+     "median_joint_lead": 1.8036700462761521
+    },
+    {
+     "episode_index": 54,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.519042620244974,
+     "median_joint_lead": 1.7868733485322226
+    },
+    {
+     "episode_index": 55,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.491793438092415,
+     "median_joint_lead": 1.9074396470404265
+    },
+    {
+     "episode_index": 56,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.06967786232223,
+     "median_joint_lead": 1.8564443845995384
+    },
+    {
+     "episode_index": 57,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.37415190985386,
+     "median_joint_lead": 1.884167298777056
+    },
+    {
+     "episode_index": 58,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.225605442341895,
+     "median_joint_lead": 1.9187879690795187
+    },
+    {
+     "episode_index": 59,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.107696565705496,
+     "median_joint_lead": 1.9178092360409837
+    },
+    {
+     "episode_index": 60,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48606962213383,
+     "median_joint_lead": 1.9239030330832056
+    },
+    {
+     "episode_index": 61,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.523259994827605,
+     "median_joint_lead": 1.7732508570606456
+    },
+    {
+     "episode_index": 62,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.49337336887127,
+     "median_joint_lead": 1.879552681676693
+    },
+    {
+     "episode_index": 63,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.147801804069076,
+     "median_joint_lead": 1.7936486948604458
+    },
+    {
+     "episode_index": 64,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.20776887351761,
+     "median_joint_lead": 1.8162272865718696
+    },
+    {
+     "episode_index": 65,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.45233944482074,
+     "median_joint_lead": 1.8665003928233994
+    },
+    {
+     "episode_index": 66,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.550512370265956,
+     "median_joint_lead": 1.9168888696210415
+    },
+    {
+     "episode_index": 67,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09207563314177,
+     "median_joint_lead": 1.8315573315786522
+    },
+    {
+     "episode_index": 68,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.71591934219149,
+     "median_joint_lead": 1.8073630270616707
+    },
+    {
+     "episode_index": 69,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.80440113868936,
+     "median_joint_lead": 1.8185044228114182
+    },
+    {
+     "episode_index": 70,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.77166142959727,
+     "median_joint_lead": 1.8197941215253621
+    },
+    {
+     "episode_index": 71,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.86342240435681,
+     "median_joint_lead": 1.7961795711222663
+    },
+    {
+     "episode_index": 72,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.66223957963817,
+     "median_joint_lead": 1.8168403364976544
+    },
+    {
+     "episode_index": 73,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.13943054776128,
+     "median_joint_lead": 1.8657017506095515
+    },
+    {
+     "episode_index": 74,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.9239550483405,
+     "median_joint_lead": 1.8671848538011475
+    },
+    {
+     "episode_index": 75,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.97784549906973,
+     "median_joint_lead": 1.8689511286203975
+    },
+    {
+     "episode_index": 76,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.929110514638836,
+     "median_joint_lead": 1.8488908001416582
+    },
+    {
+     "episode_index": 77,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.02342474346756,
+     "median_joint_lead": 1.8678607603738988
+    },
+    {
+     "episode_index": 78,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.982187955999215,
+     "median_joint_lead": 1.855599763153636
+    },
+    {
+     "episode_index": 79,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.92411538528105,
+     "median_joint_lead": 1.8750537598697292
+    },
+    {
+     "episode_index": 80,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.27426167964388,
+     "median_joint_lead": 1.8096010228822286
+    },
+    {
+     "episode_index": 81,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.7406684904749,
+     "median_joint_lead": 1.8714652133495118
+    },
+    {
+     "episode_index": 82,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.92632121138518,
+     "median_joint_lead": 1.7949552019164448
+    },
+    {
+     "episode_index": 83,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.910821222859184,
+     "median_joint_lead": 1.8499466228947017
+    },
+    {
+     "episode_index": 84,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.52030934419585,
+     "median_joint_lead": 1.92219879138279
+    },
+    {
+     "episode_index": 85,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.648743399710156,
+     "median_joint_lead": 1.9086118817159705
+    },
+    {
+     "episode_index": 86,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.78051340008829,
+     "median_joint_lead": 1.8408456322931974
+    },
+    {
+     "episode_index": 87,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.906411056172466,
+     "median_joint_lead": 1.8569574516415637
+    },
+    {
+     "episode_index": 88,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.85738896676384,
+     "median_joint_lead": 1.8628492363833353
+    },
+    {
+     "episode_index": 89,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.78269104316899,
+     "median_joint_lead": 1.8396007551127906
+    },
+    {
+     "episode_index": 90,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.887333380337864,
+     "median_joint_lead": 1.8714927250300581
+    },
+    {
+     "episode_index": 91,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.8401887708423,
+     "median_joint_lead": 1.8531762484931196
+    },
+    {
+     "episode_index": 92,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.15015718580908,
+     "median_joint_lead": 1.8189401431293013
+    },
+    {
+     "episode_index": 93,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.2452796280967,
+     "median_joint_lead": 1.8692911367590002
+    },
+    {
+     "episode_index": 94,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.12374186247267,
+     "median_joint_lead": 1.948844869542996
+    },
+    {
+     "episode_index": 95,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.019840645924916,
+     "median_joint_lead": 1.815385687770479
+    },
+    {
+     "episode_index": 96,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.70757459288206,
+     "median_joint_lead": 1.8689775365185666
+    },
+    {
+     "episode_index": 97,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.17300538517956,
+     "median_joint_lead": 1.8640695373779836
+    },
+    {
+     "episode_index": 98,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.16553863822195,
+     "median_joint_lead": 1.8502089957617076
+    },
+    {
+     "episode_index": 99,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.08717637116477,
+     "median_joint_lead": 1.7978546706947462
+    },
+    {
+     "episode_index": 100,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.12616442262716,
+     "median_joint_lead": 1.8255643269543063
+    },
+    {
+     "episode_index": 101,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1423799040622,
+     "median_joint_lead": 1.8507220008777818
+    },
+    {
+     "episode_index": 102,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.08808428510784,
+     "median_joint_lead": 1.8351117131992094
+    },
+    {
+     "episode_index": 103,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.18718734657689,
+     "median_joint_lead": 1.7948515666488203
+    },
+    {
+     "episode_index": 104,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.39549375620689,
+     "median_joint_lead": 2.016008555924019
+    },
+    {
+     "episode_index": 105,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.46315930937721,
+     "median_joint_lead": 1.981452488941684
+    },
+    {
+     "episode_index": 106,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.51447631696736,
+     "median_joint_lead": 2.0343318845647325
+    },
+    {
+     "episode_index": 107,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.378662221528124,
+     "median_joint_lead": 1.9549555939570071
+    },
+    {
+     "episode_index": 108,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.479659227754595,
+     "median_joint_lead": 1.9898373527839266
+    },
+    {
+     "episode_index": 109,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.38037665899379,
+     "median_joint_lead": 2.0449000838517435
+    },
+    {
+     "episode_index": 110,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.40106458026878,
+     "median_joint_lead": 2.052298404796872
+    },
+    {
+     "episode_index": 111,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.39648212534401,
+     "median_joint_lead": 2.036087261849368
+    },
+    {
+     "episode_index": 112,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.364161997538154,
+     "median_joint_lead": 2.047839945529227
+    },
+    {
+     "episode_index": 113,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.4122250604998,
+     "median_joint_lead": 2.071725463444685
+    },
+    {
+     "episode_index": 114,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.44592059240055,
+     "median_joint_lead": 2.038249838712423
+    },
+    {
+     "episode_index": 115,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.37351376856799,
+     "median_joint_lead": 2.048148026365996
+    },
+    {
+     "episode_index": 116,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.346077877261266,
+     "median_joint_lead": 2.048958609659709
+    },
+    {
+     "episode_index": 117,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.34642388623193,
+     "median_joint_lead": 1.8007754148038857
+    },
+    {
+     "episode_index": 118,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.86448281196954,
+     "median_joint_lead": 1.8005514422352973
+    },
+    {
+     "episode_index": 119,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.947201308196,
+     "median_joint_lead": 1.7904483987199742
+    },
+    {
+     "episode_index": 120,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09182293163908,
+     "median_joint_lead": 1.7860406297735416
+    },
+    {
+     "episode_index": 121,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.7967801062905,
+     "median_joint_lead": 1.8213188924808286
+    },
+    {
+     "episode_index": 122,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.38572249535963,
+     "median_joint_lead": 1.8143340329345055
+    },
+    {
+     "episode_index": 123,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.412719136649486,
+     "median_joint_lead": 1.8066869524137341
+    },
+    {
+     "episode_index": 124,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.49706270591753,
+     "median_joint_lead": 1.8322806485314644
+    },
+    {
+     "episode_index": 125,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44254906441835,
+     "median_joint_lead": 1.8461227691230964
+    },
+    {
+     "episode_index": 126,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44248594269859,
+     "median_joint_lead": 1.8101462580609005
+    },
+    {
+     "episode_index": 127,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.388634941149526,
+     "median_joint_lead": 1.864209469219547
+    },
+    {
+     "episode_index": 128,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.430248155330055,
+     "median_joint_lead": 1.8453890567272775
+    },
+    {
+     "episode_index": 129,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.04392457910605,
+     "median_joint_lead": 1.8414430448014563
+    }
+   ],
+   "ok": true
+  },
+  "R+Gp": {
+   "name": "sfa_v3_R_plus_Gp",
+   "schema": true,
+   "policy_features": {
+    "observation.state": [
+     "FeatureType.STATE",
+     [
+      16
+     ]
+    ],
+    "action": [
+     "FeatureType.ACTION",
+     [
+      16
+     ]
+    ],
+    "observation.images.body_cam": [
+     "FeatureType.VISUAL",
+     [
+      3,
+      480,
+      640
+     ]
+    ]
+   },
+   "episodes": 123,
+   "frames": 31170,
+   "boundaries_ok": true,
+   "arrays_exact": true,
+   "psnr_db_min": 37.83710913117016,
+   "psnr_db_median": 40.325472420557624,
+   "per_episode": [
+    {
+     "episode_index": 0,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.821884130808854,
+     "median_joint_lead": 1.9553538293839094
+    },
+    {
+     "episode_index": 1,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.46805253239103,
+     "median_joint_lead": 1.928934424602843
+    },
+    {
+     "episode_index": 2,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.20667996240772,
+     "median_joint_lead": 1.7758636397372356
+    },
+    {
+     "episode_index": 3,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.62069052371261,
+     "median_joint_lead": 1.7902361408302918
+    },
+    {
+     "episode_index": 4,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.28482705721311,
+     "median_joint_lead": 1.9066590063526032
+    },
+    {
+     "episode_index": 5,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.12347238279355,
+     "median_joint_lead": 1.8033468992095463
+    },
+    {
+     "episode_index": 6,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.922173186107145,
+     "median_joint_lead": 1.8438425601819808
+    },
+    {
+     "episode_index": 7,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.54698121475093,
+     "median_joint_lead": 1.8397297376678292
+    },
+    {
+     "episode_index": 8,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.93698115500232,
+     "median_joint_lead": 2.063826538989037
+    },
+    {
+     "episode_index": 9,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.09463069437254,
+     "median_joint_lead": 1.8233515378220626
+    },
+    {
+     "episode_index": 10,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.79495932372204,
+     "median_joint_lead": 1.9590499395230259
+    },
+    {
+     "episode_index": 11,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.86895310635862,
+     "median_joint_lead": 1.9535815050248955
+    },
+    {
+     "episode_index": 12,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.38271628313092,
+     "median_joint_lead": 1.9570105371490936
+    },
+    {
+     "episode_index": 13,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.72967453360288,
+     "median_joint_lead": 1.984339279975588
+    },
+    {
+     "episode_index": 14,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.57369149190727,
+     "median_joint_lead": 1.9529576249347849
+    },
+    {
+     "episode_index": 15,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.662138256494984,
+     "median_joint_lead": 1.956392501239665
+    },
+    {
+     "episode_index": 16,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.615019867776326,
+     "median_joint_lead": 1.9461676274599329
+    },
+    {
+     "episode_index": 17,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.65638574353568,
+     "median_joint_lead": 1.9716952622618038
+    },
+    {
+     "episode_index": 18,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.72125829314776,
+     "median_joint_lead": 1.958555201607809
+    },
+    {
+     "episode_index": 19,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.50675090578342,
+     "median_joint_lead": 1.9785969892903381
+    },
+    {
+     "episode_index": 20,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.058003750872665,
+     "median_joint_lead": 1.9382532234194665
+    },
+    {
+     "episode_index": 21,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.98981511764869,
+     "median_joint_lead": 1.9312317292542427
+    },
+    {
+     "episode_index": 22,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.08085947816896,
+     "median_joint_lead": 1.8952448306825531
+    },
+    {
+     "episode_index": 23,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.379582179459725,
+     "median_joint_lead": 1.9452765212488974
+    },
+    {
+     "episode_index": 24,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.58306894158385,
+     "median_joint_lead": 1.9167759505823216
+    },
+    {
+     "episode_index": 25,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.78720533720337,
+     "median_joint_lead": 1.9229308145032278
+    },
+    {
+     "episode_index": 26,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.83655696640037,
+     "median_joint_lead": 1.9325557924985073
+    },
+    {
+     "episode_index": 27,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.779286765477025,
+     "median_joint_lead": 1.93108537750359
+    },
+    {
+     "episode_index": 28,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.8261043655046,
+     "median_joint_lead": 1.9220648707987231
+    },
+    {
+     "episode_index": 29,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.86042132740366,
+     "median_joint_lead": 1.9409798384390229
+    },
+    {
+     "episode_index": 30,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.72960785117145,
+     "median_joint_lead": 1.937135912766839
+    },
+    {
+     "episode_index": 31,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.138244495203026,
+     "median_joint_lead": 1.9631553143964426
+    },
+    {
+     "episode_index": 32,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.517733176959396,
+     "median_joint_lead": 1.794042913180054
+    },
+    {
+     "episode_index": 33,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.5420279732651,
+     "median_joint_lead": 1.7617507485275627
+    },
+    {
+     "episode_index": 34,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.68181596762717,
+     "median_joint_lead": 1.7985877120719067
+    },
+    {
+     "episode_index": 35,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.38264609415702,
+     "median_joint_lead": 1.8094218408312979
+    },
+    {
+     "episode_index": 36,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.389644743181066,
+     "median_joint_lead": 1.827131606403158
+    },
+    {
+     "episode_index": 37,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.325472420557624,
+     "median_joint_lead": 1.80247541972867
+    },
+    {
+     "episode_index": 38,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.43537458147377,
+     "median_joint_lead": 1.7842399992305946
+    },
+    {
+     "episode_index": 39,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.394843416916515,
+     "median_joint_lead": 1.821020683609831
+    },
+    {
+     "episode_index": 40,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.4530700537783,
+     "median_joint_lead": 1.8715417400659833
+    },
+    {
+     "episode_index": 41,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.32983880319594,
+     "median_joint_lead": 1.8017723943697963
+    },
+    {
+     "episode_index": 42,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.46629987105639,
+     "median_joint_lead": 1.78629403110142
+    },
+    {
+     "episode_index": 43,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.01048211710881,
+     "median_joint_lead": 1.8034818277413982
+    },
+    {
+     "episode_index": 44,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.441378464470795,
+     "median_joint_lead": 1.7881507908665033
+    },
+    {
+     "episode_index": 45,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.501848591397774,
+     "median_joint_lead": 1.7726726146870568
+    },
+    {
+     "episode_index": 46,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.98488717087821,
+     "median_joint_lead": 1.785773374963736
+    },
+    {
+     "episode_index": 47,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.455365702659826,
+     "median_joint_lead": 1.820857894204663
+    },
+    {
+     "episode_index": 48,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.526974099937554,
+     "median_joint_lead": 1.7838600173149637
+    },
+    {
+     "episode_index": 49,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.146930528263745,
+     "median_joint_lead": 1.7948783870295397
+    },
+    {
+     "episode_index": 50,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.10770211570439,
+     "median_joint_lead": 1.7682363008881061
+    },
+    {
+     "episode_index": 51,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.531510880739134,
+     "median_joint_lead": 1.8059968101909738
+    },
+    {
+     "episode_index": 52,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.20773465378536,
+     "median_joint_lead": 1.8094624144262919
+    },
+    {
+     "episode_index": 53,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.09425863823366,
+     "median_joint_lead": 1.8050411825850683
+    },
+    {
+     "episode_index": 54,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.54001945569284,
+     "median_joint_lead": 1.7867229444849384
+    },
+    {
+     "episode_index": 55,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.513627623740604,
+     "median_joint_lead": 1.886916026530817
+    },
+    {
+     "episode_index": 56,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.1033628764002,
+     "median_joint_lead": 1.8332322212252028
+    },
+    {
+     "episode_index": 57,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.19381392064968,
+     "median_joint_lead": 1.8451737342452836
+    },
+    {
+     "episode_index": 58,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.10766391879672,
+     "median_joint_lead": 1.919754984007795
+    },
+    {
+     "episode_index": 59,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.94438324645946,
+     "median_joint_lead": 1.9220856120673773
+    },
+    {
+     "episode_index": 60,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.311222450090355,
+     "median_joint_lead": 1.8999153225049084
+    },
+    {
+     "episode_index": 61,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.3758430979719,
+     "median_joint_lead": 1.8095421942814043
+    },
+    {
+     "episode_index": 62,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.30264746235464,
+     "median_joint_lead": 1.8698071820523394
+    },
+    {
+     "episode_index": 63,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.969907020804925,
+     "median_joint_lead": 1.8062226699506216
+    },
+    {
+     "episode_index": 64,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.08176678443953,
+     "median_joint_lead": 1.8166451137496729
+    },
+    {
+     "episode_index": 65,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.262945012601406,
+     "median_joint_lead": 1.8539997758348334
+    },
+    {
+     "episode_index": 66,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.35492892994312,
+     "median_joint_lead": 1.8691371886570098
+    },
+    {
+     "episode_index": 67,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09207563314177,
+     "median_joint_lead": 1.8315573315786522
+    },
+    {
+     "episode_index": 68,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.80207181508663,
+     "median_joint_lead": 1.8095980193473096
+    },
+    {
+     "episode_index": 69,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.957219679122055,
+     "median_joint_lead": 1.8192718713164855
+    },
+    {
+     "episode_index": 70,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.058143529202866,
+     "median_joint_lead": 1.793223032851308
+    },
+    {
+     "episode_index": 71,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.84778226117841,
+     "median_joint_lead": 1.815601596633312
+    },
+    {
+     "episode_index": 72,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.91629830438404,
+     "median_joint_lead": 1.8478141959608818
+    },
+    {
+     "episode_index": 73,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.90162542596842,
+     "median_joint_lead": 1.865885866488212
+    },
+    {
+     "episode_index": 74,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.91904552294989,
+     "median_joint_lead": 1.864012045203381
+    },
+    {
+     "episode_index": 75,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.890688297249646,
+     "median_joint_lead": 1.846544336650595
+    },
+    {
+     "episode_index": 76,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.993890780547616,
+     "median_joint_lead": 1.862359093815904
+    },
+    {
+     "episode_index": 77,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.971513418865946,
+     "median_joint_lead": 1.859225013504294
+    },
+    {
+     "episode_index": 78,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.87203605766824,
+     "median_joint_lead": 1.8923720522418894
+    },
+    {
+     "episode_index": 79,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.27426167964388,
+     "median_joint_lead": 1.8096010228822286
+    },
+    {
+     "episode_index": 80,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.7406684904749,
+     "median_joint_lead": 1.8714652133495118
+    },
+    {
+     "episode_index": 81,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.88827605231767,
+     "median_joint_lead": 1.8542876856324924
+    },
+    {
+     "episode_index": 82,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.916895825792466,
+     "median_joint_lead": 1.8513995094697602
+    },
+    {
+     "episode_index": 83,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.46015081554638,
+     "median_joint_lead": 1.9166152764359772
+    },
+    {
+     "episode_index": 84,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.63367389533112,
+     "median_joint_lead": 1.91941493931717
+    },
+    {
+     "episode_index": 85,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.83710913117016,
+     "median_joint_lead": 1.840200068571383
+    },
+    {
+     "episode_index": 86,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.92355028313833,
+     "median_joint_lead": 1.8662306866875618
+    },
+    {
+     "episode_index": 87,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.878226207729966,
+     "median_joint_lead": 1.838574141024397
+    },
+    {
+     "episode_index": 88,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.89312580190665,
+     "median_joint_lead": 1.8698567186868718
+    },
+    {
+     "episode_index": 89,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.88181813246828,
+     "median_joint_lead": 1.8557012212741897
+    },
+    {
+     "episode_index": 90,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.111645166919146,
+     "median_joint_lead": 1.8222031476407348
+    },
+    {
+     "episode_index": 91,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.20255126123489,
+     "median_joint_lead": 1.8726724919655917
+    },
+    {
+     "episode_index": 92,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.033081205804294,
+     "median_joint_lead": 1.9526971329604441
+    },
+    {
+     "episode_index": 93,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.019840645924916,
+     "median_joint_lead": 1.815385687770479
+    },
+    {
+     "episode_index": 94,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.70757459288206,
+     "median_joint_lead": 1.8689775365185666
+    },
+    {
+     "episode_index": 95,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1321063859862,
+     "median_joint_lead": 1.8489258995550715
+    },
+    {
+     "episode_index": 96,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.022267264088725,
+     "median_joint_lead": 1.8017124210134492
+    },
+    {
+     "episode_index": 97,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.06101835126916,
+     "median_joint_lead": 1.8309873330398634
+    },
+    {
+     "episode_index": 98,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1237662591934,
+     "median_joint_lead": 1.8493547036637985
+    },
+    {
+     "episode_index": 99,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.03470094296549,
+     "median_joint_lead": 1.8426575742793552
+    },
+    {
+     "episode_index": 100,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1621732115069,
+     "median_joint_lead": 1.7885947562719209
+    },
+    {
+     "episode_index": 101,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.39832606797225,
+     "median_joint_lead": 2.0153305716862233
+    },
+    {
+     "episode_index": 102,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.41836079113527,
+     "median_joint_lead": 1.9816897780335738
+    },
+    {
+     "episode_index": 103,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.46131847690995,
+     "median_joint_lead": 2.012569042930778
+    },
+    {
+     "episode_index": 104,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.34852887417172,
+     "median_joint_lead": 2.0568026114529436
+    },
+    {
+     "episode_index": 105,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.33241250685297,
+     "median_joint_lead": 2.0693372133585948
+    },
+    {
+     "episode_index": 106,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.33858371397546,
+     "median_joint_lead": 2.034337379798138
+    },
+    {
+     "episode_index": 107,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.30999284632568,
+     "median_joint_lead": 2.047589298057443
+    },
+    {
+     "episode_index": 108,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.38198294081207,
+     "median_joint_lead": 2.070255221367219
+    },
+    {
+     "episode_index": 109,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.37174687412299,
+     "median_joint_lead": 2.034217168558756
+    },
+    {
+     "episode_index": 110,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.30259252569353,
+     "median_joint_lead": 2.0478716386343705
+    },
+    {
+     "episode_index": 111,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.268573157975105,
+     "median_joint_lead": 2.0476127182803574
+    },
+    {
+     "episode_index": 112,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.6998807779679,
+     "median_joint_lead": 1.8069332707150672
+    },
+    {
+     "episode_index": 113,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.78490009667283,
+     "median_joint_lead": 1.7848642496675395
+    },
+    {
+     "episode_index": 114,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09182293163908,
+     "median_joint_lead": 1.7860406297735416
+    },
+    {
+     "episode_index": 115,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.7967801062905,
+     "median_joint_lead": 1.8213188924808286
+    },
+    {
+     "episode_index": 116,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.684620770703745,
+     "median_joint_lead": 1.8070248102358282
+    },
+    {
+     "episode_index": 117,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.7178718818972,
+     "median_joint_lead": 1.8320125565798797
+    },
+    {
+     "episode_index": 118,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.69270276236914,
+     "median_joint_lead": 1.839637324007433
+    },
+    {
+     "episode_index": 119,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.709809712910676,
+     "median_joint_lead": 1.8023640037798008
+    },
+    {
+     "episode_index": 120,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.66090998064426,
+     "median_joint_lead": 1.8632751956379388
+    },
+    {
+     "episode_index": 121,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.69240617681714,
+     "median_joint_lead": 1.8390936209326088
+    },
+    {
+     "episode_index": 122,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.00481381603797,
+     "median_joint_lead": 1.836341534584842
+    }
+   ],
+   "ok": true
+  },
+  "R+C": {
+   "name": "sfa_v3_R_plus_C",
+   "schema": true,
+   "policy_features": {
+    "observation.state": [
+     "FeatureType.STATE",
+     [
+      16
+     ]
+    ],
+    "action": [
+     "FeatureType.ACTION",
+     [
+      16
+     ]
+    ],
+    "observation.images.body_cam": [
+     "FeatureType.VISUAL",
+     [
+      3,
+      480,
+      640
+     ]
+    ]
+   },
+   "episodes": 123,
+   "frames": 31170,
+   "boundaries_ok": true,
+   "arrays_exact": true,
+   "psnr_db_min": 37.78051340008829,
+   "psnr_db_median": 40.412719136649486,
+   "per_episode": [
+    {
+     "episode_index": 0,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.821884130808854,
+     "median_joint_lead": 1.9553538293839094
+    },
+    {
+     "episode_index": 1,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.46805253239103,
+     "median_joint_lead": 1.928934424602843
+    },
+    {
+     "episode_index": 2,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.20667996240772,
+     "median_joint_lead": 1.7758636397372356
+    },
+    {
+     "episode_index": 3,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.62069052371261,
+     "median_joint_lead": 1.7902361408302918
+    },
+    {
+     "episode_index": 4,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.28482705721311,
+     "median_joint_lead": 1.9066590063526032
+    },
+    {
+     "episode_index": 5,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.12347238279355,
+     "median_joint_lead": 1.8033468992095463
+    },
+    {
+     "episode_index": 6,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.922173186107145,
+     "median_joint_lead": 1.8438425601819808
+    },
+    {
+     "episode_index": 7,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.54698121475093,
+     "median_joint_lead": 1.8397297376678292
+    },
+    {
+     "episode_index": 8,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.93698115500232,
+     "median_joint_lead": 2.063826538989037
+    },
+    {
+     "episode_index": 9,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 42.09463069437254,
+     "median_joint_lead": 1.8233515378220626
+    },
+    {
+     "episode_index": 10,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.9357431136526,
+     "median_joint_lead": 1.9544093259555835
+    },
+    {
+     "episode_index": 11,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.99696273741389,
+     "median_joint_lead": 1.9449832382887373
+    },
+    {
+     "episode_index": 12,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.38271628313092,
+     "median_joint_lead": 1.9570105371490936
+    },
+    {
+     "episode_index": 13,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.72967453360288,
+     "median_joint_lead": 1.984339279975588
+    },
+    {
+     "episode_index": 14,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.539229202643845,
+     "median_joint_lead": 1.9540960955576283
+    },
+    {
+     "episode_index": 15,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.590987603141386,
+     "median_joint_lead": 1.9581908982969716
+    },
+    {
+     "episode_index": 16,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.54532260559097,
+     "median_joint_lead": 1.9344706040553423
+    },
+    {
+     "episode_index": 17,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.601662479778,
+     "median_joint_lead": 1.9798005751756975
+    },
+    {
+     "episode_index": 18,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.67917864725584,
+     "median_joint_lead": 1.9633093749525556
+    },
+    {
+     "episode_index": 19,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.4498527851338,
+     "median_joint_lead": 1.9852043601369211
+    },
+    {
+     "episode_index": 20,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.10270127426588,
+     "median_joint_lead": 1.9333265948534957
+    },
+    {
+     "episode_index": 21,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.13857244825435,
+     "median_joint_lead": 1.9310797102689015
+    },
+    {
+     "episode_index": 22,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.21931025181567,
+     "median_joint_lead": 1.8917922344429479
+    },
+    {
+     "episode_index": 23,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.379582179459725,
+     "median_joint_lead": 1.9452765212488974
+    },
+    {
+     "episode_index": 24,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.58306894158385,
+     "median_joint_lead": 1.9167759505823216
+    },
+    {
+     "episode_index": 25,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.78042478423637,
+     "median_joint_lead": 1.921436212861706
+    },
+    {
+     "episode_index": 26,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.703709041041556,
+     "median_joint_lead": 1.935369565063171
+    },
+    {
+     "episode_index": 27,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.69014211114898,
+     "median_joint_lead": 1.9282516896046071
+    },
+    {
+     "episode_index": 28,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.74503195054685,
+     "median_joint_lead": 1.9286099844409392
+    },
+    {
+     "episode_index": 29,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.728445782240016,
+     "median_joint_lead": 1.9448856966055494
+    },
+    {
+     "episode_index": 30,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.6806409116036,
+     "median_joint_lead": 1.9650044577221588
+    },
+    {
+     "episode_index": 31,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.228571879579306,
+     "median_joint_lead": 1.9798422236848736
+    },
+    {
+     "episode_index": 32,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.535528543043284,
+     "median_joint_lead": 1.7937933713060712
+    },
+    {
+     "episode_index": 33,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.560670496529056,
+     "median_joint_lead": 1.7611826835877067
+    },
+    {
+     "episode_index": 34,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.68181596762717,
+     "median_joint_lead": 1.7985877120719067
+    },
+    {
+     "episode_index": 35,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.433464394811196,
+     "median_joint_lead": 1.7965664656174296
+    },
+    {
+     "episode_index": 36,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44086413493695,
+     "median_joint_lead": 1.8343123998096056
+    },
+    {
+     "episode_index": 37,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.40410656716454,
+     "median_joint_lead": 1.7968920729660645
+    },
+    {
+     "episode_index": 38,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48077987028912,
+     "median_joint_lead": 1.7804382836386963
+    },
+    {
+     "episode_index": 39,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44868259235625,
+     "median_joint_lead": 1.8227436558221752
+    },
+    {
+     "episode_index": 40,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48348410060731,
+     "median_joint_lead": 1.8702931123015851
+    },
+    {
+     "episode_index": 41,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.40244312204946,
+     "median_joint_lead": 1.796225470280179
+    },
+    {
+     "episode_index": 42,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.506314097667826,
+     "median_joint_lead": 1.7889566662441443
+    },
+    {
+     "episode_index": 43,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.24631981356407,
+     "median_joint_lead": 1.8359088964351347
+    },
+    {
+     "episode_index": 44,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.5752313406486,
+     "median_joint_lead": 1.7878325787395468
+    },
+    {
+     "episode_index": 45,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.656362381223786,
+     "median_joint_lead": 1.7752543810545331
+    },
+    {
+     "episode_index": 46,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.98488717087821,
+     "median_joint_lead": 1.785773374963736
+    },
+    {
+     "episode_index": 47,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.455365702659826,
+     "median_joint_lead": 1.820857894204663
+    },
+    {
+     "episode_index": 48,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.55735290235355,
+     "median_joint_lead": 1.7844544424693127
+    },
+    {
+     "episode_index": 49,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.141700306359695,
+     "median_joint_lead": 1.7938488422388406
+    },
+    {
+     "episode_index": 50,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.092690846720984,
+     "median_joint_lead": 1.7679363423301537
+    },
+    {
+     "episode_index": 51,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.53521187813609,
+     "median_joint_lead": 1.8086034159136248
+    },
+    {
+     "episode_index": 52,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.176515984265144,
+     "median_joint_lead": 1.8252880025378744
+    },
+    {
+     "episode_index": 53,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.08418232535024,
+     "median_joint_lead": 1.8036700462761521
+    },
+    {
+     "episode_index": 54,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.519042620244974,
+     "median_joint_lead": 1.7868733485322226
+    },
+    {
+     "episode_index": 55,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.491793438092415,
+     "median_joint_lead": 1.9074396470404265
+    },
+    {
+     "episode_index": 56,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.06967786232223,
+     "median_joint_lead": 1.8564443845995384
+    },
+    {
+     "episode_index": 57,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.37415190985386,
+     "median_joint_lead": 1.884167298777056
+    },
+    {
+     "episode_index": 58,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.225605442341895,
+     "median_joint_lead": 1.9187879690795187
+    },
+    {
+     "episode_index": 59,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.107696565705496,
+     "median_joint_lead": 1.9178092360409837
+    },
+    {
+     "episode_index": 60,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.48606962213383,
+     "median_joint_lead": 1.9239030330832056
+    },
+    {
+     "episode_index": 61,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.523259994827605,
+     "median_joint_lead": 1.7732508570606456
+    },
+    {
+     "episode_index": 62,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.49337336887127,
+     "median_joint_lead": 1.879552681676693
+    },
+    {
+     "episode_index": 63,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.147801804069076,
+     "median_joint_lead": 1.7936486948604458
+    },
+    {
+     "episode_index": 64,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 41.20776887351761,
+     "median_joint_lead": 1.8162272865718696
+    },
+    {
+     "episode_index": 65,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.45233944482074,
+     "median_joint_lead": 1.8665003928233994
+    },
+    {
+     "episode_index": 66,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.550512370265956,
+     "median_joint_lead": 1.9168888696210415
+    },
+    {
+     "episode_index": 67,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09207563314177,
+     "median_joint_lead": 1.8315573315786522
+    },
+    {
+     "episode_index": 68,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.80440113868936,
+     "median_joint_lead": 1.8185044228114182
+    },
+    {
+     "episode_index": 69,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.77166142959727,
+     "median_joint_lead": 1.8197941215253621
+    },
+    {
+     "episode_index": 70,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.86342240435681,
+     "median_joint_lead": 1.7961795711222663
+    },
+    {
+     "episode_index": 71,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.66223957963817,
+     "median_joint_lead": 1.8168403364976544
+    },
+    {
+     "episode_index": 72,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.13943054776128,
+     "median_joint_lead": 1.8657017506095515
+    },
+    {
+     "episode_index": 73,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.9239550483405,
+     "median_joint_lead": 1.8671848538011475
+    },
+    {
+     "episode_index": 74,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.97784549906973,
+     "median_joint_lead": 1.8689511286203975
+    },
+    {
+     "episode_index": 75,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.929110514638836,
+     "median_joint_lead": 1.8488908001416582
+    },
+    {
+     "episode_index": 76,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.02342474346756,
+     "median_joint_lead": 1.8678607603738988
+    },
+    {
+     "episode_index": 77,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.982187955999215,
+     "median_joint_lead": 1.855599763153636
+    },
+    {
+     "episode_index": 78,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.92411538528105,
+     "median_joint_lead": 1.8750537598697292
+    },
+    {
+     "episode_index": 79,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.27426167964388,
+     "median_joint_lead": 1.8096010228822286
+    },
+    {
+     "episode_index": 80,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.7406684904749,
+     "median_joint_lead": 1.8714652133495118
+    },
+    {
+     "episode_index": 81,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.92683727725554,
+     "median_joint_lead": 1.8557009981175479
+    },
+    {
+     "episode_index": 82,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.910821222859184,
+     "median_joint_lead": 1.8499466228947017
+    },
+    {
+     "episode_index": 83,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.52030934419585,
+     "median_joint_lead": 1.92219879138279
+    },
+    {
+     "episode_index": 84,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.658225524034556,
+     "median_joint_lead": 1.9222913073421917
+    },
+    {
+     "episode_index": 85,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.78051340008829,
+     "median_joint_lead": 1.8408456322931974
+    },
+    {
+     "episode_index": 86,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.85738896676384,
+     "median_joint_lead": 1.8628492363833353
+    },
+    {
+     "episode_index": 87,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.78269104316899,
+     "median_joint_lead": 1.8396007551127906
+    },
+    {
+     "episode_index": 88,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.887333380337864,
+     "median_joint_lead": 1.8714927250300581
+    },
+    {
+     "episode_index": 89,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 37.8401887708423,
+     "median_joint_lead": 1.8531762484931196
+    },
+    {
+     "episode_index": 90,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.15015718580908,
+     "median_joint_lead": 1.8189401431293013
+    },
+    {
+     "episode_index": 91,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.2452796280967,
+     "median_joint_lead": 1.8692911367590002
+    },
+    {
+     "episode_index": 92,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.12374186247267,
+     "median_joint_lead": 1.948844869542996
+    },
+    {
+     "episode_index": 93,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.019840645924916,
+     "median_joint_lead": 1.815385687770479
+    },
+    {
+     "episode_index": 94,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.70757459288206,
+     "median_joint_lead": 1.8689775365185666
+    },
+    {
+     "episode_index": 95,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.14677538499234,
+     "median_joint_lead": 1.8466904312595778
+    },
+    {
+     "episode_index": 96,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.08717637116477,
+     "median_joint_lead": 1.7978546706947462
+    },
+    {
+     "episode_index": 97,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.12616442262716,
+     "median_joint_lead": 1.8255643269543063
+    },
+    {
+     "episode_index": 98,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.1423799040622,
+     "median_joint_lead": 1.8507220008777818
+    },
+    {
+     "episode_index": 99,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.08808428510784,
+     "median_joint_lead": 1.8351117131992094
+    },
+    {
+     "episode_index": 100,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.18718734657689,
+     "median_joint_lead": 1.7948515666488203
+    },
+    {
+     "episode_index": 101,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.39549375620689,
+     "median_joint_lead": 2.016008555924019
+    },
+    {
+     "episode_index": 102,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.46315930937721,
+     "median_joint_lead": 1.981452488941684
+    },
+    {
+     "episode_index": 103,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.51447631696736,
+     "median_joint_lead": 2.0343318845647325
+    },
+    {
+     "episode_index": 104,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.38037665899379,
+     "median_joint_lead": 2.0449000838517435
+    },
+    {
+     "episode_index": 105,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.40106458026878,
+     "median_joint_lead": 2.052298404796872
+    },
+    {
+     "episode_index": 106,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.39648212534401,
+     "median_joint_lead": 2.036087261849368
+    },
+    {
+     "episode_index": 107,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.364161997538154,
+     "median_joint_lead": 2.047839945529227
+    },
+    {
+     "episode_index": 108,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.4122250604998,
+     "median_joint_lead": 2.071725463444685
+    },
+    {
+     "episode_index": 109,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.44592059240055,
+     "median_joint_lead": 2.038249838712423
+    },
+    {
+     "episode_index": 110,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.37351376856799,
+     "median_joint_lead": 2.048148026365996
+    },
+    {
+     "episode_index": 111,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 38.346077877261266,
+     "median_joint_lead": 2.048958609659709
+    },
+    {
+     "episode_index": 112,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.86448281196954,
+     "median_joint_lead": 1.8005514422352973
+    },
+    {
+     "episode_index": 113,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.947201308196,
+     "median_joint_lead": 1.7904483987199742
+    },
+    {
+     "episode_index": 114,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.09182293163908,
+     "median_joint_lead": 1.7860406297735416
+    },
+    {
+     "episode_index": 115,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 39.7967801062905,
+     "median_joint_lead": 1.8213188924808286
+    },
+    {
+     "episode_index": 116,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.412719136649486,
+     "median_joint_lead": 1.8066869524137341
+    },
+    {
+     "episode_index": 117,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.49706270591753,
+     "median_joint_lead": 1.8322806485314644
+    },
+    {
+     "episode_index": 118,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44254906441835,
+     "median_joint_lead": 1.8461227691230964
+    },
+    {
+     "episode_index": 119,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.44248594269859,
+     "median_joint_lead": 1.8101462580609005
+    },
+    {
+     "episode_index": 120,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.388634941149526,
+     "median_joint_lead": 1.864209469219547
+    },
+    {
+     "episode_index": 121,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.430248155330055,
+     "median_joint_lead": 1.8453890567272775
+    },
+    {
+     "episode_index": 122,
+     "boundaries_ok": true,
+     "arrays_exact": true,
+     "psnr_db": 40.04392457910605,
+     "median_joint_lead": 1.8414430448014563
+    }
+   ],
+   "ok": true
+  },
+  "leakage": {
+   "heldout": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "heldout_sharing_source_fingerprint": [],
+   "ok": true,
+   "synthetic_sources": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  }
+ },
+ "timing": {
+  "R": {
+   "write_encode_s": 9.484369993209839,
+   "validate_s": 3.2021734714508057,
+   "episodes": 10,
+   "frames": 2575
+  },
+  "Gp_matched": {
+   "write_encode_s": 85.21421813964844,
+   "validate_s": 15.12079405784607,
+   "episodes": 113,
+   "frames": 28595
+  },
+  "C_matched": {
+   "write_encode_s": 85.06274557113647,
+   "validate_s": 12.320359468460083,
+   "episodes": 113,
+   "frames": 28595
+  },
+  "C_all": {
+   "write_encode_s": 99.01118469238281,
+   "validate_s": 15.551681518554688,
+   "episodes": 130,
+   "frames": 32940
+  },
+  "R+Gp": {
+   "write_encode_s": 97.57074737548828,
+   "validate_s": 15.381044626235962,
+   "episodes": 123,
+   "frames": 31170
+  },
+  "R+C": {
+   "write_encode_s": 96.99810981750488,
+   "validate_s": 15.382612466812134,
+   "episodes": 123,
+   "frames": 31170
+  }
+ },
+ "total_s": 775.4881253242493
+}

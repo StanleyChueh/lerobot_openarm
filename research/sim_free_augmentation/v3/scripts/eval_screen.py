@@ -66,10 +66,11 @@ def evaluate(ckpt, episodes, device):
                      "observation.images.camera1": torch.from_numpy(d["F"][t]).permute(2, 0, 1)[None].float() / 255.0,
                      "task": [task]}
             torch.manual_seed(H["noise_seed"])
-            with torch.inference_mode():
+            with torch.inference_mode(), torch.autocast(device_type="cuda", dtype=torch.bfloat16):
                 b = pre(batch)
                 act = policy.predict_action_chunk(b)
-                act = post(act)
+            with torch.inference_mode():
+                act = post(act.float())
             pred = act[0].float().cpu().numpy()[: H["chunk"]]
             rows.append({"e": e, "t": t, "phase": d["phase"][t], "pred": pred})
     return rows
