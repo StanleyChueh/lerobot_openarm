@@ -38,8 +38,10 @@ def candidate_hash(c) -> str:
 def construction(rec, c) -> dict:
     T, L = rec.T, rec.lead
     tau = c["tau"]
-    valid = c["valid"]
-    rows = np.flatnonzero(valid)
+    valid = np.asarray(c["valid"], bool)
+    supported = np.arange(T) <= T - 1 - L
+    extra = np.flatnonzero(valid & ~supported)                 # finite labels where q(t+lead) does not exist
+    rows = np.flatnonzero(valid & supported)
     dev = {}
     for name in ARM:
         j = rb.NAMES.index(name)
@@ -50,8 +52,9 @@ def construction(rec, c) -> dict:
     gdev = {s: float(np.abs(c["action"][rows, rb.NAMES.index(n)] - rec.action[zi[rows], rb.NAMES.index(n)]).max())
             for s, n in GRIP.items()}
     worst = max(dev, key=dev.get)
-    ok = max(dev.values()) <= 1e-6 and max(gdev.values()) <= 1e-9
-    return {"ok": bool(ok), "max_arm_dev_rad": dev[worst], "worst_joint": worst, "gripper_dev": gdev}
+    ok = max(dev.values()) <= 1e-6 and max(gdev.values()) <= 1e-9 and not len(extra)
+    return {"ok": bool(ok), "max_arm_dev_rad": dev[worst], "worst_joint": worst, "gripper_dev": gdev,
+            "unsupported_label_rows": int(len(extra))}
 
 
 def joint_leads(state, action, valid=None, kmax=8, thr=0.004, min_n=20) -> dict:

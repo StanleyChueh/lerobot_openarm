@@ -125,6 +125,18 @@ def windows(rec, m):
 
 
 def render_job(key):
+    import pickle
+    cache = G_["RAW"] / f"{key}_meta.pkl"
+    if cache.exists() and (G_["RAW"] / f"{key}.npy").exists():
+        return key, pickle.loads(cache.read_bytes())
+    key, out = _render_job(key)
+    cache.write_bytes(pickle.dumps(out))
+    return key, out
+
+
+def _render_job(key):
+    import cv2 as _cv
+    _cv.setNumThreads(1)
     rec, cfg = G_["rec"], G_["cfg"]
     robot, cam = rb.Robot(), rb.Camera()
     cand = G_["render"][key]
@@ -335,10 +347,16 @@ def main():
         gpu["peak_vram_gb_raft"] = torch.cuda.max_memory_allocated(args.device) / 1e9
     res["gpu"] = gpu
     # 4. corruption controls (label detectors + verifier + image lag)
+    import traceback
     with timed("corruption_tests"):
-        res["corruption_tests"] = corruptions(rec, robot, V, plans, rendered, alias)
+        try:
+            res["corruption_tests"] = corruptions(rec, robot, V, plans, rendered, alias)
+        except Exception:
+            res["corruption_tests"] = {"error": traceback.format_exc()}
+            print(res["corruption_tests"]["error"], flush=True)
     # 5. comparison videos: original | G+ | C for every variation (own scale), 960x240 per row
     with timed("comparison_videos"):
+      try:
         for vid, r in plans.items():
             row = []
             for c in pl.CONDITIONS:
@@ -357,6 +375,9 @@ def main():
                     panels.append(rd.label(np.array(x[0][t]), x[1]) if x is not None else rd.label(rec.plate // 3, f"{c}: rejected at every scale"))
                 frames.append(cv2.resize(np.concatenate(panels, 1), (1440, 360), interpolation=cv2.INTER_AREA))
             rd.write_mp4(OUT / "clips" / f"compare_{vid}.mp4", frames, crf=24)
+      except Exception:
+        res["comparison_video_error"] = traceback.format_exc()
+        print(res["comparison_video_error"], flush=True)
     res["candidates"] = allc
     res["plans"] = {vid: {"family": r["family"], "own_scale": r["own_scale"], "common_scale": r["common_scale"]} for vid, r in plans.items()}
     res["render_alias"] = alias
