@@ -1,7 +1,7 @@
 """lerobot's async-inference policy server, with the fixes our SmolVLA and GR00T N1.7 checkpoints need.
 
     python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 [--policy_dtype=auto]
-        [--obs_similarity_atol=0.0175]
+        [--obs_similarity_atol=0]
         [--rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP]
 
 Same flags and behaviour as `python -m lerobot.async_inference.policy_server`, which this runs after
@@ -29,7 +29,11 @@ patching a few things in it (none changes a policy that does not need it):
     (norm) of the last one it ran -- lerobot's robots report DEGREES, so ~1 degree. This robot reports
     RADIANS, where 1.0 is ~57 degrees: nearly every observation sent mid-chunk was skipped and the server
     only predicted once the client's queue had run EMPTY, i.e. async collapsed to synchronous (and RTC had
-    no unexecuted tail to continue). The threshold is now --obs_similarity_atol, default 0.0175 rad (1 deg).
+    no unexecuted tail to continue). The threshold is now --obs_similarity_atol, default 0 (rad): the filter is
+    off. The client only sends once its queue is at or below --chunk_size_threshold, i.e. when it wants a new
+    chunk; skipping that because the arm moved < 1 degree (holding a grasp, fine insertion) just lets the
+    queue run empty and costs a must-go inference of starvation. --obs_similarity_atol=0.0175 (~1 degree,
+    lerobot's intent for its degree-based robots) brings the filter back.
 
 And one addition, async + RTC (--rtc=true; lerobot's server has no RTC). lerobot's RTC engine
 (lerobot-rollout --inference.type=rtc) guides each new chunk to continue the unexecuted tail of the previous
@@ -48,7 +52,7 @@ import time
 from .policy_loading import load_bf16, require_async_inference, wants_bf16
 
 _POLICY_DTYPE = "auto"  # --policy_dtype, taken off the command line in main()
-_OBS_ATOL = 0.0175  # --obs_similarity_atol (rad): ~1 degree, lerobot's intent for its degree-based robots
+_OBS_ATOL = 0.0  # --obs_similarity_atol (rad): 0 = never "too similar" (norm < 0 is never true)
 _RTC: dict = {"enabled": False, "execution_horizon": 10, "max_guidance_weight": 10.0,
               "prefix_attention_schedule": None}  # --rtc*, taken off the command line in main()
 
