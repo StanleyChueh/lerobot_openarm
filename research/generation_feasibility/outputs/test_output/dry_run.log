@@ -1,0 +1,177 @@
+{
+ "pilot": {
+  "A": {
+   "n": 24,
+   "accepted": 24,
+   "checks_pass_all_ok": 6,
+   "checks_pass_all_ok_C": 1,
+   "pass_ik_ok": 24,
+   "pass_clearance_ok": 24,
+   "pass_phase_order_ok": 24,
+   "pass_receiver_in_grasp_cylinder": 17,
+   "pass_receiver_jaw_capture": 8,
+   "pass_receiver_on_can_body": 21,
+   "pass_grasp_separation_ok": 24,
+   "pass_receiver_after_giver_arrival": 11,
+   "speed_violation_plans": 11,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 0,
+   "planned_novel_pass_far": 0,
+   "planned_novel_axial": 0,
+   "planned_novel_azimuth": 0,
+   "median_novelty_ratio": {
+    "pass": 0.9689504108665201,
+    "grasp": 0.25727048240483685,
+    "path": 0.12857651883605958,
+    "timing": 8.801162633521313
+   },
+   "attachment_capture_model_median": 0.425,
+   "sources_used": [
+    "sim10_ep0",
+    "sim10_ep1",
+    "sim10_ep2",
+    "sim10_ep3",
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep6",
+    "sim10_ep7",
+    "sim10_ep8",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.02101564410597708,
+   "steps_median": 273.0
+  },
+  "B": {
+   "n": 24,
+   "accepted": 24,
+   "checks_pass_all_ok": 3,
+   "checks_pass_all_ok_C": 0,
+   "pass_ik_ok": 12,
+   "pass_clearance_ok": 18,
+   "pass_phase_order_ok": 24,
+   "pass_receiver_in_grasp_cylinder": 17,
+   "pass_receiver_jaw_capture": 8,
+   "pass_receiver_on_can_body": 15,
+   "pass_grasp_separation_ok": 23,
+   "pass_receiver_after_giver_arrival": 17,
+   "speed_violation_plans": 17,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 19,
+   "planned_novel_pass_far": 18,
+   "planned_novel_axial": 6,
+   "planned_novel_azimuth": 5,
+   "median_novelty_ratio": {
+    "pass": 5.083026847922129,
+    "grasp": 0.965116511691118,
+    "path": 2.4885066734872088,
+    "timing": 10.0
+   },
+   "attachment_capture_model_median": 0.14,
+   "sources_used": [
+    "sim10_ep0",
+    "sim10_ep1",
+    "sim10_ep2",
+    "sim10_ep3",
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep6",
+    "sim10_ep7",
+    "sim10_ep8",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.02101564410597708,
+   "steps_median": 279.0
+  },
+  "C": {
+   "n": 24,
+   "accepted": 20,
+   "checks_pass_all_ok": 20,
+   "checks_pass_all_ok_C": 20,
+   "pass_ik_ok": 21,
+   "pass_clearance_ok": 23,
+   "pass_phase_order_ok": 24,
+   "pass_receiver_in_grasp_cylinder": 24,
+   "pass_receiver_jaw_capture": 24,
+   "pass_receiver_on_can_body": 24,
+   "pass_grasp_separation_ok": 24,
+   "pass_receiver_after_giver_arrival": 24,
+   "speed_violation_plans": 0,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 11,
+   "planned_novel_pass_far": 11,
+   "planned_novel_axial": 0,
+   "planned_novel_azimuth": 2,
+   "median_novelty_ratio": {
+    "pass": 3.499180793654575,
+    "grasp": 0.637300672957794,
+    "path": 1.8648041792637797,
+    "timing": 13.856583108263472
+   },
+   "attachment_capture_model_median": 1.0,
+   "sources_used": [
+    "sim10_ep0",
+    "sim10_ep1",
+    "sim10_ep2",
+    "sim10_ep3",
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep6",
+    "sim10_ep7",
+    "sim10_ep8",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.02101564410597708,
+   "steps_median": 287.0
+  }
+ },
+ "smoke_accepted": {
+  "A": 4,
+  "B": 4,
+  "C": 3
+ },
+ "source_stats": {
+  "pass_std_xyz_m": [
+   0.009805754776643957,
+   0.008300934624010492,
+   0.023247106554330852
+  ],
+  "can0_std_xy_m": [
+   0.06393250926693576,
+   0.015618696374569873
+  ],
+  "receiver_capture_under_prediction": "6/10 (all 10 are GT successes)"
+ },
+ "gt": {
+  "V9": {
+   "n": 10,
+   "fps": 20,
+   "success_final": 10,
+   "stable_success": 10,
+   "slip_flag": 1,
+   "lowered_to_pad_while_held": 1,
+   "off_table": 0,
+   "arm_clearance_violation": 0,
+   "success_attr": 10,
+   "contract_violation_eps": 7,
+   "retention_steps_min": 102,
+   "slip_receiver_m_median": 0.005548810451192753,
+   "slip_giver_m_median": 0.004452155567263683
+  },
+  "stanley": {
+   "n": 30,
+   "fps": 20,
+   "success_final": 30,
+   "stable_success": 30,
+   "slip_flag": 10,
+   "lowered_to_pad_while_held": 9,
+   "off_table": 0,
+   "arm_clearance_violation": 0,
+   "success_attr": 30,
+   "contract_violation_eps": 20,
+   "retention_steps_min": 73,
+   "slip_receiver_m_median": 0.008756238082298438,
+   "slip_giver_m_median": 0.005285490302751868
+  }
+ },
+ "runtime_s": 20.4
+}

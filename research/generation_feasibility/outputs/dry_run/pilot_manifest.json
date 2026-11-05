@@ -1,0 +1,5097 @@
+{
+ "version": "genfeas-0.1-dryrun",
+ "criteria": {
+  "P0_replay": "smoke stage: the 10 sources replayed through the pilot runner reach stable success in >= 8/10, and condition A reaches stable success in >= 3/4 smoke poses; otherwise the runner/env is broken -> stop, report",
+  "S1_executable": "condition C: stable handover success >= 15/24 (62.5 %) AND not more than 3 below condition A",
+  "S2_novel": "among C's stable successes, >= 50 % are NOVEL: executed handover descriptor outside the source envelope (pass point >= 3 cm from every source pass point, OR receiver grasp height/azimuth in the can frame outside the source range by >= 1 cm / 10 deg), AND C's median novelty ratio >= 0.5 while A's is <= 0.2",
+  "S3_quality": "C stable successes: post-transfer retention >= 30 steps in >= 90 %; slip > 1.5 cm rate not more than 15 points above the P0 source-replay rate in the same env (known-good GT demos already show 27.5 %, 11/40); 0 joint-target safety-contract violations; 0 arm-arm clearance violations (offline capsule check on the measured joints)",
+  "S4_constraints_matter": "reported, not a GO condition: C - B stable success (paired by pose, McNemar)"
+ },
+ "stop_rule": "One pilot run per condition on the frozen 24 poses. If S1, S2 or S3 fails for C: NO-GO for scaling this generator; do not retune ranges on the same poses. If all hold: GO for a scaled generation experiment (new poses, a policy-level test) - still NOT evidence of policy benefit or force awareness.",
+ "episode_steps": 420,
+ "source_dataset": "ethanCSL/openarm_pringles_lerobot_sim_10_v00@b6d39dae630b8ce0b5822bee7a40bffc68a28819",
+ "candidates": [
+  {
+   "tag": "pilot_A_00",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 0,
+   "trial": 0,
+   "can0": [
+    0.1402,
+    -0.0003
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "delta_xy": [
+     -0.00027242701053620255,
+     -0.0038552671179175376
+    ]
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 214,
+    "L_approach": 119,
+    "L_close": 213,
+    "R_release_cmd": 231,
+    "end": 306,
+    "anchor": 143,
+    "R_release_eff": 231
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 307,
+   "notes": [],
+   "plan_file": "plans/pilot_A_00.npz",
+   "plan_sha256": "d279f001a0e13c6c8e9a8f1eec556b0f0bf6ce5f61883a8f4f8513e6958eda45"
+  },
+  {
+   "tag": "pilot_B_00",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 0,
+   "trial": 0,
+   "can0": [
+    0.1402,
+    -0.0003
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "pass_dx": 0.03951520653591717,
+    "pass_dy": 0.020578405163880084,
+    "pass_dz": -0.018635718687601284,
+    "approach_bump": 0.010767679596961465,
+    "bump_angle": 2.1779007229336886,
+    "grasp_axial": -0.027831200826369938,
+    "grasp_azimuth_deg": -16.971342954342493,
+    "approach_speed": 0.90755293389663,
+    "receiver_dwell": 11,
+    "release_delay": 8,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.00027242701053620255,
+     -0.0038552671179175376
+    ]
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 214,
+    "L_approach": 119,
+    "L_close": 234,
+    "R_release_cmd": 239,
+    "end": 319,
+    "anchor": 143,
+    "R_release_eff": 250
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 16,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 320,
+   "notes": [
+    "receiver grasp in can frame: axial -0.028 m, azimuth -17.0 deg relative to source; pass shift [0.04, 0.021, -0.019]"
+   ],
+   "plan_file": "plans/pilot_B_00.npz",
+   "plan_sha256": "869b3c6e42b193cc9ea0e44b1d45d08cf0ecb1db7fd850bdc1725756b8949102"
+  },
+  {
+   "tag": "pilot_C_00",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 0,
+   "trial": 0,
+   "can0": [
+    0.1402,
+    -0.0003
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "pass_dx": 0.0237091239215503,
+    "pass_dy": 0.01234704309832805,
+    "pass_dz": -0.01118143121256077,
+    "approach_bump": 0.006460607758176879,
+    "bump_angle": 2.1779007229336886,
+    "grasp_axial": -0.016698720495821964,
+    "grasp_azimuth_deg": -10.182805772605496,
+    "approach_speed": 0.90755293389663,
+    "receiver_dwell": 11,
+    "release_delay": 8,
+    "scale": 0.6,
+    "delta_xy": [
+     -0.00027242701053620255,
+     -0.0038552671179175376
+    ],
+    "giver_wait_added": 11,
+    "giver_source_index_at_take": 187,
+    "receiver_axial_on_can": 0.030598927653933964,
+    "retimed_steps": 4
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 218,
+    "L_approach": 119,
+    "L_close": 238,
+    "R_release_cmd": 254,
+    "end": 329,
+    "anchor": 143,
+    "R_release_eff": 265
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 16,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 143,
+     "pass_step": 238,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.21791439234745122,
+       -0.9754335173384534,
+       0.03229196278602966,
+       0.201917988753338
+      ],
+      [
+       0.9216520698651431,
+       0.21655813276234934,
+       0.32196278860728983,
+       -0.005196514835476937
+      ],
+      [
+       -0.32104638250747963,
+       -0.040398371096096126,
+       0.9462014541796289,
+       0.5524980423897166
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 330,
+   "notes": [
+    "receiver grasp in can frame: axial -0.017 m, azimuth -10.2 deg relative to source; pass shift [0.024, 0.012, -0.011]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok', 'clearance_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_00.npz",
+   "plan_sha256": "e0fd46ac7394817a13788e5194315ffe2f9b6f50d02f1330baeb9174f61183ce"
+  },
+  {
+   "tag": "pilot_A_01",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 1,
+   "trial": 1,
+   "can0": [
+    0.2954,
+    0.0256
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "delta_xy": [
+     0.0005320374011993367,
+     0.00038980943560600403
+    ]
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 204,
+    "L_approach": 159,
+    "L_close": 206,
+    "R_release_cmd": 216,
+    "end": 280,
+    "anchor": 142,
+    "R_release_eff": 216
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 281,
+   "notes": [],
+   "plan_file": "plans/pilot_A_01.npz",
+   "plan_sha256": "5624e72b2584d42190a01c67ac91bb0b3aac90d79a10abe2bbf00ae9734000c2"
+  },
+  {
+   "tag": "pilot_B_01",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 1,
+   "trial": 1,
+   "can0": [
+    0.2954,
+    0.0256
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "pass_dx": 0.006433603424417386,
+    "pass_dy": 0.03379824576930582,
+    "pass_dz": -0.030701446590535555,
+    "approach_bump": 0.03095646452107861,
+    "bump_angle": 3.7989429559985757,
+    "grasp_axial": -0.009470487035677832,
+    "grasp_azimuth_deg": 1.498081237752956,
+    "approach_speed": 1.076773021294322,
+    "receiver_dwell": 2,
+    "release_delay": 7,
+    "scale": 1.0,
+    "delta_xy": [
+     0.0005320374011993367,
+     0.00038980943560600403
+    ]
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 204,
+    "L_approach": 159,
+    "L_close": 205,
+    "R_release_cmd": 223,
+    "end": 287,
+    "anchor": 142,
+    "R_release_eff": 223
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 15,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 288,
+   "notes": [
+    "receiver grasp in can frame: axial -0.009 m, azimuth +1.5 deg relative to source; pass shift [0.006, 0.034, -0.031]"
+   ],
+   "plan_file": "plans/pilot_B_01.npz",
+   "plan_sha256": "5d76ba482a2307b1ad733344eafcca5b82946fe9d66ef11750334fc3da20abbb"
+  },
+  {
+   "tag": "pilot_C_01",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 1,
+   "trial": 1,
+   "can0": [
+    0.2954,
+    0.0256
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "pass_dx": 0.0038601620546504316,
+    "pass_dy": 0.02027894746158349,
+    "pass_dz": -0.01842086795432133,
+    "approach_bump": 0.018573878712647166,
+    "bump_angle": 3.7989429559985757,
+    "grasp_axial": -0.005682292221406699,
+    "grasp_azimuth_deg": 0.8988487426517736,
+    "approach_speed": 1.076773021294322,
+    "receiver_dwell": 2,
+    "release_delay": 7,
+    "scale": 0.6,
+    "delta_xy": [
+     0.0005320374011993367,
+     0.00038980943560600403
+    ],
+    "sync_dwell_added": 1,
+    "giver_source_index_at_take": 162,
+    "receiver_axial_on_can": 0.061283621152532046
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 204,
+    "L_approach": 159,
+    "L_close": 206,
+    "R_release_cmd": 223,
+    "end": 287,
+    "anchor": 142,
+    "R_release_eff": 223
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 15,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 142,
+     "pass_step": 206,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.41416697831751215,
+       -0.9100571068488402,
+       0.016179503863230596,
+       0.1854470731108923
+      ],
+      [
+       0.9014572376826657,
+       0.4125815137968047,
+       0.13096313642653634,
+       0.005942997090824624
+      ],
+      [
+       -0.1258592972365565,
+       -0.03965547562513872,
+       0.9912552045523215,
+       0.5112066473260272
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 288,
+   "notes": [
+    "receiver grasp in can frame: axial -0.006 m, azimuth +0.9 deg relative to source; pass shift [0.004, 0.02, -0.018]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['clearance_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_01.npz",
+   "plan_sha256": "c704b61fb720d975b4e74e4d86846c394694f67f8d6a0eef1eea8c32cf7122d4"
+  },
+  {
+   "tag": "pilot_A_02",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 2,
+   "trial": 2,
+   "can0": [
+    0.1829,
+    0.0543
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "delta_xy": [
+     -0.014532205080986016,
+     0.013497375923395158
+    ]
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 216,
+    "L_approach": 154,
+    "L_close": 216,
+    "R_release_cmd": 228,
+    "end": 303,
+    "anchor": 146,
+    "R_release_eff": 228
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 304,
+   "notes": [],
+   "plan_file": "plans/pilot_A_02.npz",
+   "plan_sha256": "a7a00ea2130f9f6e9a51e3217a2951c5e962c63410aa8e6900cf41bf4856c770"
+  },
+  {
+   "tag": "pilot_B_02",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 2,
+   "trial": 2,
+   "can0": [
+    0.1829,
+    0.0543
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "pass_dx": -0.051126387390702244,
+    "pass_dy": -0.019104281006036256,
+    "pass_dz": -0.01834482680622479,
+    "approach_bump": 0.028457913399369855,
+    "bump_angle": 6.066127373196228,
+    "grasp_axial": 0.00969243740373759,
+    "grasp_azimuth_deg": 14.104784853132294,
+    "approach_speed": 1.2253915483508002,
+    "receiver_dwell": 12,
+    "release_delay": 14,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.014532205080986016,
+     0.013497375923395158
+    ]
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 216,
+    "L_approach": 154,
+    "L_close": 216,
+    "R_release_cmd": 242,
+    "end": 317,
+    "anchor": 146,
+    "R_release_eff": 242
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 22,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 318,
+   "notes": [
+    "receiver grasp in can frame: axial +0.010 m, azimuth +14.1 deg relative to source; pass shift [-0.051, -0.019, -0.018]"
+   ],
+   "plan_file": "plans/pilot_B_02.npz",
+   "plan_sha256": "872ea20b90461e4b8e8cf8f98525a9c3e8e80b64e8bcdd9b5f8ef28eb4db967c"
+  },
+  {
+   "tag": "pilot_C_02",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 2,
+   "trial": 2,
+   "can0": [
+    0.1829,
+    0.0543
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "pass_dx": -0.051126387390702244,
+    "pass_dy": -0.019104281006036256,
+    "pass_dz": -0.01834482680622479,
+    "approach_bump": 0.028457913399369855,
+    "bump_angle": 6.066127373196228,
+    "grasp_axial": 0.00969243740373759,
+    "grasp_azimuth_deg": 14.104784853132294,
+    "approach_speed": 1.2253915483508002,
+    "receiver_dwell": 12,
+    "release_delay": 14,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.014532205080986016,
+     0.013497375923395158
+    ],
+    "sync_dwell_added": 2,
+    "giver_source_index_at_take": 174,
+    "receiver_axial_on_can": 0.07508000000000001,
+    "retimed_steps": 1
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 217,
+    "L_approach": 154,
+    "L_close": 219,
+    "R_release_cmd": 243,
+    "end": 318,
+    "anchor": 146,
+    "R_release_eff": 243
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 22,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 146,
+     "pass_step": 219,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.17084853537202138,
+       -0.9839787004226914,
+       -0.05095777738193263,
+       0.14667245671010598
+      ],
+      [
+       0.9523367159043797,
+       0.1516471815613514,
+       0.26468455161750626,
+       -0.03105287418408907
+      ],
+      [
+       -0.2527163578039555,
+       -0.09374993034114734,
+       0.962987742943457,
+       0.4963817716655912
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 319,
+   "notes": [
+    "receiver grasp in can frame: axial +0.010 m, azimuth +14.1 deg relative to source; pass shift [-0.051, -0.019, -0.018]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_02.npz",
+   "plan_sha256": "d2f3e0c4759f4723141ef0afbdb6154b28df0ac4fc7a4a5660a6575600a7b7dc"
+  },
+  {
+   "tag": "pilot_A_03",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 3,
+   "trial": 3,
+   "can0": [
+    0.2283,
+    -0.0027
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "delta_xy": [
+     -0.025416230392456052,
+     -0.02681303110420704
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 193,
+    "R_release_cmd": 203,
+    "end": 253,
+    "anchor": 138,
+    "R_release_eff": 203
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 254,
+   "notes": [],
+   "plan_file": "plans/pilot_A_03.npz",
+   "plan_sha256": "b5f4551ef653a42f00d68cff61ae3d370a443ffe33d4697072e30aa3b386b9a8"
+  },
+  {
+   "tag": "pilot_B_03",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 3,
+   "trial": 3,
+   "can0": [
+    0.2283,
+    -0.0027
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "pass_dx": -0.004541328279927301,
+    "pass_dy": 0.05780858135860245,
+    "pass_dz": -0.02272329165433173,
+    "approach_bump": 0.012764290957607739,
+    "bump_angle": 3.3928192464902014,
+    "grasp_axial": 0.017234082319840027,
+    "grasp_azimuth_deg": 9.23483647677282,
+    "approach_speed": 0.9107973877361039,
+    "receiver_dwell": 1,
+    "release_delay": 5,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.025416230392456052,
+     -0.02681303110420704
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 200,
+    "R_release_cmd": 208,
+    "end": 258,
+    "anchor": 138,
+    "R_release_eff": 213
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 13,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 259,
+   "notes": [
+    "receiver grasp in can frame: axial +0.017 m, azimuth +9.2 deg relative to source; pass shift [-0.005, 0.058, -0.023]"
+   ],
+   "plan_file": "plans/pilot_B_03.npz",
+   "plan_sha256": "329c44c07c17604b80f89a8dc08a14352de692a01a3e1ab16bae72d73230def7"
+  },
+  {
+   "tag": "pilot_C_03",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 3,
+   "trial": 3,
+   "can0": [
+    0.2283,
+    -0.0027
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "pass_dx": -0.004541328279927301,
+    "pass_dy": 0.05780858135860245,
+    "pass_dz": -0.02272329165433173,
+    "approach_bump": 0.012764290957607739,
+    "bump_angle": 3.3928192464902014,
+    "grasp_axial": 0.017234082319840027,
+    "grasp_azimuth_deg": 9.23483647677282,
+    "approach_speed": 0.9107973877361039,
+    "receiver_dwell": 1,
+    "release_delay": 5,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.025416230392456052,
+     -0.02681303110420704
+    ],
+    "giver_wait_added": 5,
+    "giver_source_index_at_take": 156,
+    "receiver_axial_on_can": 0.07508000000000001
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 200,
+    "R_release_cmd": 213,
+    "end": 263,
+    "anchor": 138,
+    "R_release_eff": 218
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 13,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 138,
+     "pass_step": 200,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.3774402712417661,
+       -0.9188175387618929,
+       0.11538272014682203,
+       0.19410955369744504
+      ],
+      [
+       0.8891970625246258,
+       0.3943948880720323,
+       0.23190786157486407,
+       0.061324339286502695
+      ],
+      [
+       -0.25858736558950274,
+       0.015066609644740553,
+       0.9658703699934554,
+       0.48850460909414917
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 264,
+   "notes": [
+    "receiver grasp in can frame: axial +0.017 m, azimuth +9.2 deg relative to source; pass shift [-0.005, 0.058, -0.023]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_03.npz",
+   "plan_sha256": "77d5b5bf7bf7bc672cd5aca8e248b2bbbbb9e70f90846e83d5e45d59c2cc668b"
+  },
+  {
+   "tag": "pilot_A_04",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 4,
+   "trial": 4,
+   "can0": [
+    0.2483,
+    0.0044
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "delta_xy": [
+     -0.016387478542327888,
+     -0.00378856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 190,
+    "R_release_cmd": 200,
+    "end": 262,
+    "anchor": 137,
+    "R_release_eff": 200
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 263,
+   "notes": [],
+   "plan_file": "plans/pilot_A_04.npz",
+   "plan_sha256": "34f4a1ba88aa80ad15fe9c76ea1a0521c3a8fe0722a5c4ff987ef3a574109548"
+  },
+  {
+   "tag": "pilot_B_04",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 4,
+   "trial": 4,
+   "can0": [
+    0.2483,
+    0.0044
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.058574285069581115,
+    "pass_dy": 0.04587005881499841,
+    "pass_dz": 0.03820231589931249,
+    "approach_bump": 0.035728116987607805,
+    "bump_angle": 5.966972370662845,
+    "grasp_axial": 0.03621874688621896,
+    "grasp_azimuth_deg": -31.31214365521158,
+    "approach_speed": 1.02178918866273,
+    "receiver_dwell": 10,
+    "release_delay": 13,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.016387478542327888,
+     -0.00378856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 198,
+    "R_release_cmd": 213,
+    "end": 275,
+    "anchor": 137,
+    "R_release_eff": 219
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 21,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 276,
+   "notes": [
+    "receiver grasp in can frame: axial +0.036 m, azimuth -31.3 deg relative to source; pass shift [-0.059, 0.046, 0.038]"
+   ],
+   "plan_file": "plans/pilot_B_04.npz",
+   "plan_sha256": "176c59cd2b2426fd29b2d166b12cbdb41c21bd06775909995c189625ef884737"
+  },
+  {
+   "tag": "pilot_C_04",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 4,
+   "trial": 4,
+   "can0": [
+    0.2483,
+    0.0044
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.02050099977435339,
+    "pass_dy": 0.016054520585249442,
+    "pass_dz": 0.013370810564759372,
+    "approach_bump": 0.012504840945662732,
+    "bump_angle": 5.966972370662845,
+    "grasp_axial": 0.012676561410176637,
+    "grasp_azimuth_deg": -10.959250279324053,
+    "approach_speed": 1.02178918866273,
+    "receiver_dwell": 10,
+    "release_delay": 13,
+    "scale": 0.35,
+    "delta_xy": [
+     -0.016387478542327888,
+     -0.00378856805562973
+    ],
+    "giver_wait_added": 6,
+    "giver_source_index_at_take": 154,
+    "receiver_axial_on_can": 0.07508000000000001,
+    "retimed_steps": 20
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 206,
+    "L_approach": 113,
+    "L_close": 212,
+    "R_release_cmd": 235,
+    "end": 301,
+    "anchor": 137,
+    "R_release_eff": 243
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 21,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 212,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.3028425923134359,
+       -0.95294388659334,
+       -0.013576202902793053,
+       0.1470322385757916
+      ],
+      [
+       0.9480998209410949,
+       0.2997933837258611,
+       0.10597479231243215,
+       0.027454651626940427
+      ],
+      [
+       -0.09691797466075391,
+       -0.04496527636497298,
+       0.994276133732013,
+       0.5452588928282214
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "rejected",
+   "steps": 302,
+   "notes": [
+    "receiver grasp in can frame: axial +0.013 m, azimuth -11.0 deg relative to source; pass shift [-0.021, 0.016, 0.013]",
+    "C rejected after 3 tries: [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.35, 'all_ok_C': False, 'failed': ['ik_ok']}]"
+   ],
+   "plan_file": "plans/pilot_C_04.npz",
+   "plan_sha256": "72b0871ef134461b9e1a70de5018ce88bc640e0d3044b0a0cd22762a4213530d"
+  },
+  {
+   "tag": "pilot_A_05",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 5,
+   "trial": 5,
+   "can0": [
+    0.1836,
+    0.0104
+   ],
+   "source": "sim10_ep3",
+   "params": {
+    "delta_xy": [
+     0.008245265936851515,
+     -0.014735355070233346
+    ]
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 206,
+    "L_approach": 154,
+    "L_close": 204,
+    "R_release_cmd": 213,
+    "end": 277,
+    "anchor": 142,
+    "R_release_eff": 213
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 278,
+   "notes": [],
+   "plan_file": "plans/pilot_A_05.npz",
+   "plan_sha256": "1f427bc6b333a9e099db0d5d5d4a48218e42854afe1a436707e221c813bfe606"
+  },
+  {
+   "tag": "pilot_B_05",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 5,
+   "trial": 5,
+   "can0": [
+    0.1836,
+    0.0104
+   ],
+   "source": "sim10_ep3",
+   "params": {
+    "pass_dx": -0.00810301568989602,
+    "pass_dy": -0.023349136080759496,
+    "pass_dz": 0.028612350593022605,
+    "approach_bump": 0.011857958946814687,
+    "bump_angle": 2.129945598384142,
+    "grasp_axial": -0.02789439909825228,
+    "grasp_azimuth_deg": 20.588860368541347,
+    "approach_speed": 1.2066255715568244,
+    "receiver_dwell": 5,
+    "release_delay": 2,
+    "scale": 1.0,
+    "delta_xy": [
+     0.008245265936851515,
+     -0.014735355070233346
+    ]
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 206,
+    "L_approach": 154,
+    "L_close": 200,
+    "R_release_cmd": 215,
+    "end": 279,
+    "anchor": 142,
+    "R_release_eff": 215
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 10,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 280,
+   "notes": [
+    "receiver grasp in can frame: axial -0.028 m, azimuth +20.6 deg relative to source; pass shift [-0.008, -0.023, 0.029]"
+   ],
+   "plan_file": "plans/pilot_B_05.npz",
+   "plan_sha256": "2dc18aacd6b889d6f1e24fbab1a521ec61172cf4922bf7c4985a43337d20e986"
+  },
+  {
+   "tag": "pilot_C_05",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 5,
+   "trial": 5,
+   "can0": [
+    0.1836,
+    0.0104
+   ],
+   "source": "sim10_ep3",
+   "params": {
+    "pass_dx": -0.004861809413937612,
+    "pass_dy": -0.014009481648455698,
+    "pass_dz": 0.017167410355813564,
+    "approach_bump": 0.007114775368088812,
+    "bump_angle": 2.129945598384142,
+    "grasp_axial": -0.016736639458951368,
+    "grasp_azimuth_deg": 12.353316221124809,
+    "approach_speed": 1.2066255715568244,
+    "receiver_dwell": 5,
+    "release_delay": 2,
+    "scale": 0.6,
+    "delta_xy": [
+     0.008245265936851515,
+     -0.014735355070233346
+    ],
+    "sync_dwell_added": 8,
+    "giver_wait_added": 3,
+    "giver_source_index_at_take": 164,
+    "receiver_axial_on_can": 0.04316280563328269
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 206,
+    "L_approach": 154,
+    "L_close": 208,
+    "R_release_cmd": 218,
+    "end": 282,
+    "anchor": 142,
+    "R_release_eff": 221
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 10,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 142,
+     "pass_step": 208,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.28499053654878387,
+       -0.9576070326803036,
+       -0.04206144361360442,
+       0.18966058850313475
+      ],
+      [
+       0.9544139976009096,
+       0.2794309668019734,
+       0.10493929662221843,
+       -0.021580376552784115
+      ],
+      [
+       -0.08873733859592442,
+       -0.07005073699354351,
+       0.993588737348393,
+       0.5600501648817113
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 283,
+   "notes": [
+    "receiver grasp in can frame: axial -0.017 m, azimuth +12.4 deg relative to source; pass shift [-0.005, -0.014, 0.017]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_05.npz",
+   "plan_sha256": "61b374a71c94954bf978391b229ec921de57c7d47aca878b84a909c560ba7af3"
+  },
+  {
+   "tag": "pilot_A_06",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 6,
+   "trial": 6,
+   "can0": [
+    0.3544,
+    -0.0093
+   ],
+   "source": "sim10_ep6",
+   "params": {
+    "delta_xy": [
+     0.0223660677909851,
+     -0.013818819972872733
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 100,
+    "giver_arrive": 177,
+    "L_approach": 142,
+    "L_close": 186,
+    "R_release_cmd": 202,
+    "end": 269,
+    "anchor": 137,
+    "R_release_eff": 202
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 270,
+   "notes": [],
+   "plan_file": "plans/pilot_A_06.npz",
+   "plan_sha256": "7aaf148af2b11bd344619f29bfdb9417674c00c197ce2abf3f9e0e7154c93983"
+  },
+  {
+   "tag": "pilot_B_06",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 6,
+   "trial": 6,
+   "can0": [
+    0.3544,
+    -0.0093
+   ],
+   "source": "sim10_ep6",
+   "params": {
+    "pass_dx": 0.06931508213937357,
+    "pass_dy": -0.04468587081881079,
+    "pass_dz": -0.0035916499818708925,
+    "approach_bump": 0.05492955151999823,
+    "bump_angle": 0.21004853681729904,
+    "grasp_axial": 0.004767116676162281,
+    "grasp_azimuth_deg": -23.804542485373574,
+    "approach_speed": 1.1805352214977083,
+    "receiver_dwell": 1,
+    "release_delay": 2,
+    "scale": 1.0,
+    "delta_xy": [
+     0.0223660677909851,
+     -0.013818819972872733
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 100,
+    "giver_arrive": 177,
+    "L_approach": 142,
+    "L_close": 180,
+    "R_release_cmd": 204,
+    "end": 271,
+    "anchor": 137,
+    "R_release_eff": 204
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 10,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 272,
+   "notes": [
+    "receiver grasp in can frame: axial +0.005 m, azimuth -23.8 deg relative to source; pass shift [0.069, -0.045, -0.004]"
+   ],
+   "plan_file": "plans/pilot_B_06.npz",
+   "plan_sha256": "29c53028059d8731ea129aa29c9cc795ce860654700a5d7a8e52b3205943ac35"
+  },
+  {
+   "tag": "pilot_C_06",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 6,
+   "trial": 6,
+   "can0": [
+    0.3544,
+    -0.0093
+   ],
+   "source": "sim10_ep6",
+   "params": {
+    "pass_dx": 0.04158904928362414,
+    "pass_dy": -0.026811522491286474,
+    "pass_dz": -0.0021549899891225356,
+    "approach_bump": 0.03295773091199894,
+    "bump_angle": 0.21004853681729904,
+    "grasp_axial": 0.002860270005697368,
+    "grasp_azimuth_deg": -14.282725491224143,
+    "approach_speed": 1.1805352214977083,
+    "receiver_dwell": 1,
+    "release_delay": 2,
+    "scale": 0.6,
+    "delta_xy": [
+     0.0223660677909851,
+     -0.013818819972872733
+    ],
+    "giver_source_index_at_take": 136,
+    "receiver_axial_on_can": 0.045218565266523576
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 100,
+    "giver_arrive": 177,
+    "L_approach": 142,
+    "L_close": 180,
+    "R_release_cmd": 204,
+    "end": 271,
+    "anchor": 137,
+    "R_release_eff": 204
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 10,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 180,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.41316893948970884,
+       -0.9104543705543262,
+       0.019085769030224922,
+       0.21925977523408605
+      ],
+      [
+       0.9098927612945196,
+       0.41358969724109484,
+       0.03222926123656223,
+       -0.03276098437653034
+      ],
+      [
+       -0.03723694918738947,
+       0.004049873398693675,
+       0.9992982578493123,
+       0.529974793761693
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 272,
+   "notes": [
+    "receiver grasp in can frame: axial +0.003 m, azimuth -14.3 deg relative to source; pass shift [0.042, -0.027, -0.002]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_06.npz",
+   "plan_sha256": "3fa6cc26ead9d2444f015983f6d0d1b1c3c354e1145af2f6ce75cb2fa7412d10"
+  },
+  {
+   "tag": "pilot_A_07",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 7,
+   "trial": 7,
+   "can0": [
+    0.2328,
+    -0.0329
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "delta_xy": [
+     -0.031887478542327874,
+     -0.04108856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 190,
+    "R_release_cmd": 200,
+    "end": 262,
+    "anchor": 137,
+    "R_release_eff": 200
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 263,
+   "notes": [],
+   "plan_file": "plans/pilot_A_07.npz",
+   "plan_sha256": "5f427fe7e376bcdce468f5d494a8abb9ee929a824864235440612c5f2fdddb29"
+  },
+  {
+   "tag": "pilot_B_07",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 7,
+   "trial": 7,
+   "can0": [
+    0.2328,
+    -0.0329
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": 0.05571578126089788,
+    "pass_dy": 0.051938749335578974,
+    "pass_dz": 0.020315962747310685,
+    "approach_bump": 0.0024283896805959637,
+    "bump_angle": 1.5860164900648746,
+    "grasp_axial": -0.030831501977740015,
+    "grasp_azimuth_deg": 22.371168871865805,
+    "approach_speed": 0.8990385036377677,
+    "receiver_dwell": 12,
+    "release_delay": 1,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.031887478542327874,
+     -0.04108856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 211,
+    "R_release_cmd": 201,
+    "end": 275,
+    "anchor": 137,
+    "R_release_eff": 220
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 9,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 276,
+   "notes": [
+    "receiver grasp in can frame: axial -0.031 m, azimuth +22.4 deg relative to source; pass shift [0.056, 0.052, 0.02]"
+   ],
+   "plan_file": "plans/pilot_B_07.npz",
+   "plan_sha256": "7ccad45fe5af9e8b06da4d6c8ed2f75b888d1f8210d6b25a7499ad736c7bf5a2"
+  },
+  {
+   "tag": "pilot_C_07",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 7,
+   "trial": 7,
+   "can0": [
+    0.2328,
+    -0.0329
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": 0.05571578126089788,
+    "pass_dy": 0.051938749335578974,
+    "pass_dz": 0.020315962747310685,
+    "approach_bump": 0.0024283896805959637,
+    "bump_angle": 1.5860164900648746,
+    "grasp_axial": -0.030831501977740015,
+    "grasp_azimuth_deg": 22.371168871865805,
+    "approach_speed": 0.8990385036377677,
+    "receiver_dwell": 12,
+    "release_delay": 1,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.031887478542327874,
+     -0.04108856805562973
+    ],
+    "giver_wait_added": 19,
+    "giver_source_index_at_take": 156,
+    "receiver_axial_on_can": 0.03880262863075881,
+    "retimed_steps": 3
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 211,
+    "R_release_cmd": 220,
+    "end": 285,
+    "anchor": 137,
+    "R_release_eff": 242
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 9,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 211,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.29972555086697555,
+       -0.9540253023582983,
+       0.0005626878762428492,
+       0.2212084444399363
+      ],
+      [
+       0.9476843180202094,
+       0.2978011937699724,
+       0.11492990197398942,
+       0.06469836270182175
+      ],
+      [
+       -0.10981360360200983,
+       -0.0339141777039861,
+       0.9933734448909957,
+       0.5490016321660245
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 286,
+   "notes": [
+    "receiver grasp in can frame: axial -0.031 m, azimuth +22.4 deg relative to source; pass shift [0.056, 0.052, 0.02]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_07.npz",
+   "plan_sha256": "86cf9f2c98960e0d5d2aaa1767c7dda645293c2a4ddeff9f8b2ee4e104837039"
+  },
+  {
+   "tag": "pilot_A_08",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 8,
+   "trial": 8,
+   "can0": [
+    0.1627,
+    -0.0038
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "delta_xy": [
+     0.022227572989463817,
+     -0.007355267117917537
+    ]
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 214,
+    "L_approach": 119,
+    "L_close": 213,
+    "R_release_cmd": 231,
+    "end": 306,
+    "anchor": 143,
+    "R_release_eff": 231
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 307,
+   "notes": [],
+   "plan_file": "plans/pilot_A_08.npz",
+   "plan_sha256": "936f5ae612e8241c9d9e8fc1135f0a065df484421df1ba7bb26625c10c8aab79"
+  },
+  {
+   "tag": "pilot_B_08",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 8,
+   "trial": 8,
+   "can0": [
+    0.1627,
+    -0.0038
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "pass_dx": 0.026002185401676245,
+    "pass_dy": -0.02697807074170521,
+    "pass_dz": 0.0094319028315005,
+    "approach_bump": 0.004232236343295781,
+    "bump_angle": 5.790406501306295,
+    "grasp_axial": -0.0002065378816227259,
+    "grasp_azimuth_deg": -2.970924430945672,
+    "approach_speed": 1.1317776606729144,
+    "receiver_dwell": 10,
+    "release_delay": 12,
+    "scale": 1.0,
+    "delta_xy": [
+     0.022227572989463817,
+     -0.007355267117917537
+    ]
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 214,
+    "L_approach": 119,
+    "L_close": 212,
+    "R_release_cmd": 243,
+    "end": 318,
+    "anchor": 143,
+    "R_release_eff": 243
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 20,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 319,
+   "notes": [
+    "receiver grasp in can frame: axial -0.000 m, azimuth -3.0 deg relative to source; pass shift [0.026, -0.027, 0.009]"
+   ],
+   "plan_file": "plans/pilot_B_08.npz",
+   "plan_sha256": "e144de4d7226006b7a75e8a16fd7a08ef5d720f6920cd67e6fef78ede638d077"
+  },
+  {
+   "tag": "pilot_C_08",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 8,
+   "trial": 8,
+   "can0": [
+    0.1627,
+    -0.0038
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "pass_dx": 0.026002185401676245,
+    "pass_dy": -0.02697807074170521,
+    "pass_dz": 0.0094319028315005,
+    "approach_bump": 0.004232236343295781,
+    "bump_angle": 5.790406501306295,
+    "grasp_axial": -0.0002065378816227259,
+    "grasp_azimuth_deg": -2.970924430945672,
+    "approach_speed": 1.1317776606729144,
+    "receiver_dwell": 10,
+    "release_delay": 12,
+    "scale": 1.0,
+    "delta_xy": [
+     0.022227572989463817,
+     -0.007355267117917537
+    ],
+    "sync_dwell_added": 4,
+    "giver_source_index_at_take": 172,
+    "receiver_axial_on_can": 0.028445045210940594
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 214,
+    "L_approach": 119,
+    "L_close": 216,
+    "R_release_cmd": 243,
+    "end": 318,
+    "anchor": 143,
+    "R_release_eff": 243
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 20,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 143,
+     "pass_step": 216,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.1750468477074022,
+       -0.9845151824955265,
+       -0.009405133890715022,
+       0.2001165380163615
+      ],
+      [
+       0.9644099839688005,
+       0.1695337490540629,
+       0.20290808449387207,
+       -0.04397791355577524
+      ],
+      [
+       -0.19817160222645364,
+       -0.04458882558976848,
+       0.9791526197194825,
+       0.5899136084818982
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 319,
+   "notes": [
+    "receiver grasp in can frame: axial -0.000 m, azimuth -3.0 deg relative to source; pass shift [0.026, -0.027, 0.009]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_08.npz",
+   "plan_sha256": "b08f0bb4f5aecd0a5ad5cfe076ee2490c2f06bd3b7e09a8023649b99866a0495"
+  },
+  {
+   "tag": "pilot_A_09",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 9,
+   "trial": 9,
+   "can0": [
+    0.1974,
+    0.0397
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "delta_xy": [
+     -3.220508098603081e-05,
+     -0.001102624076604844
+    ]
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 216,
+    "L_approach": 154,
+    "L_close": 216,
+    "R_release_cmd": 228,
+    "end": 303,
+    "anchor": 146,
+    "R_release_eff": 228
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 304,
+   "notes": [],
+   "plan_file": "plans/pilot_A_09.npz",
+   "plan_sha256": "05a1b8b10af9f56e6cf2ef8715326fda074d13bbdbeb6b4d0885281bbf25161f"
+  },
+  {
+   "tag": "pilot_B_09",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 9,
+   "trial": 9,
+   "can0": [
+    0.1974,
+    0.0397
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "pass_dx": -0.020405389425407622,
+    "pass_dy": -0.05835830311211741,
+    "pass_dz": 0.028615780949867796,
+    "approach_bump": 0.016466198942874773,
+    "bump_angle": 5.582805350659816,
+    "grasp_axial": -0.025125963876699367,
+    "grasp_azimuth_deg": 18.18011444543273,
+    "approach_speed": 1.2331936887674553,
+    "receiver_dwell": 10,
+    "release_delay": 14,
+    "scale": 1.0,
+    "delta_xy": [
+     -3.220508098603081e-05,
+     -0.001102624076604844
+    ]
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 216,
+    "L_approach": 154,
+    "L_close": 214,
+    "R_release_cmd": 242,
+    "end": 317,
+    "anchor": 146,
+    "R_release_eff": 242
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 22,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 318,
+   "notes": [
+    "receiver grasp in can frame: axial -0.025 m, azimuth +18.2 deg relative to source; pass shift [-0.02, -0.058, 0.029]"
+   ],
+   "plan_file": "plans/pilot_B_09.npz",
+   "plan_sha256": "5f89fe0e9cd9365422c34f4cc7def4b370e337e6fc984cb3a480e2abf1ec90b5"
+  },
+  {
+   "tag": "pilot_C_09",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 9,
+   "trial": 9,
+   "can0": [
+    0.1974,
+    0.0397
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "pass_dx": -0.020405389425407622,
+    "pass_dy": -0.05835830311211741,
+    "pass_dz": 0.028615780949867796,
+    "approach_bump": 0.016466198942874773,
+    "bump_angle": 5.582805350659816,
+    "grasp_axial": -0.025125963876699367,
+    "grasp_azimuth_deg": 18.18011444543273,
+    "approach_speed": 1.2331936887674553,
+    "receiver_dwell": 10,
+    "release_delay": 14,
+    "scale": 1.0,
+    "delta_xy": [
+     -3.220508098603081e-05,
+     -0.001102624076604844
+    ],
+    "sync_dwell_added": 4,
+    "giver_source_index_at_take": 174,
+    "receiver_axial_on_can": 0.05046585091068201
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 216,
+    "L_approach": 154,
+    "L_close": 218,
+    "R_release_cmd": 242,
+    "end": 317,
+    "anchor": 146,
+    "R_release_eff": 242
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 22,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 146,
+     "pass_step": 218,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.17084853537202138,
+       -0.9839787004226914,
+       -0.05095777738193263,
+       0.1773916035346984
+      ],
+      [
+       0.9523367159043797,
+       0.1516471815613514,
+       0.26468455161750626,
+       -0.07030453097905213
+      ],
+      [
+       -0.2527163578039555,
+       -0.09374993034114734,
+       0.962987742943457,
+       0.5433395497384647
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 318,
+   "notes": [
+    "receiver grasp in can frame: axial -0.025 m, azimuth +18.2 deg relative to source; pass shift [-0.02, -0.058, 0.029]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_09.npz",
+   "plan_sha256": "d39ad627a9bd028470d1b90f84d2dcec416bb979cc38976494c37efae6a90e5f"
+  },
+  {
+   "tag": "pilot_A_10",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 10,
+   "trial": 10,
+   "can0": [
+    0.1735,
+    -0.0729
+   ],
+   "source": "sim10_ep1",
+   "params": {
+    "delta_xy": [
+     0.03909222638607024,
+     -0.06421656717509032
+    ]
+   },
+   "marks": {
+    "R_close": 116,
+    "R_sig": 117,
+    "giver_arrive": 231,
+    "L_approach": 166,
+    "L_close": 231,
+    "R_release_cmd": 242,
+    "end": 308,
+    "anchor": 154,
+    "R_release_eff": 242
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 309,
+   "notes": [],
+   "plan_file": "plans/pilot_A_10.npz",
+   "plan_sha256": "ca41bc5b3ad0e96726a48beb73b5adde15672a69878a869274262a332def368f"
+  },
+  {
+   "tag": "pilot_B_10",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 10,
+   "trial": 10,
+   "can0": [
+    0.1735,
+    -0.0729
+   ],
+   "source": "sim10_ep1",
+   "params": {
+    "pass_dx": 0.0660891818927857,
+    "pass_dy": -0.011426540312963938,
+    "pass_dz": 3.9889969755603494e-05,
+    "approach_bump": 0.019376033981610183,
+    "bump_angle": 5.2510333539840905,
+    "grasp_axial": 0.03878423292922981,
+    "grasp_azimuth_deg": -21.63219649961484,
+    "approach_speed": 0.8796911381796785,
+    "receiver_dwell": 0,
+    "release_delay": 9,
+    "scale": 1.0,
+    "delta_xy": [
+     0.03909222638607024,
+     -0.06421656717509032
+    ]
+   },
+   "marks": {
+    "R_close": 116,
+    "R_sig": 117,
+    "giver_arrive": 231,
+    "L_approach": 166,
+    "L_close": 240,
+    "R_release_cmd": 251,
+    "end": 317,
+    "anchor": 154,
+    "R_release_eff": 257
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 17,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 318,
+   "notes": [
+    "receiver grasp in can frame: axial +0.039 m, azimuth -21.6 deg relative to source; pass shift [0.066, -0.011, 0.0]"
+   ],
+   "plan_file": "plans/pilot_B_10.npz",
+   "plan_sha256": "4fb03a5a1d103b3f9ab238b42bbdf419fbf3eea368c29b63e3719db3f1c3aef6"
+  },
+  {
+   "tag": "pilot_C_10",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 10,
+   "trial": 10,
+   "can0": [
+    0.1735,
+    -0.0729
+   ],
+   "source": "sim10_ep1",
+   "params": {
+    "pass_dx": 0.023131213662474996,
+    "pass_dy": -0.003999289109537378,
+    "pass_dz": 1.3961489414461222e-05,
+    "approach_bump": 0.006781611893563563,
+    "bump_angle": 5.2510333539840905,
+    "grasp_axial": 0.013574481525230433,
+    "grasp_azimuth_deg": -7.571268774865193,
+    "approach_speed": 0.8796911381796785,
+    "receiver_dwell": 0,
+    "release_delay": 9,
+    "scale": 0.35,
+    "delta_xy": [
+     0.03909222638607024,
+     -0.06421656717509032
+    ],
+    "giver_wait_added": 6,
+    "giver_source_index_at_take": 196,
+    "receiver_axial_on_can": 0.03326156522046774
+   },
+   "marks": {
+    "R_close": 116,
+    "R_sig": 117,
+    "giver_arrive": 231,
+    "L_approach": 166,
+    "L_close": 240,
+    "R_release_cmd": 257,
+    "end": 323,
+    "anchor": 154,
+    "R_release_eff": 263
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 17,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 154,
+     "pass_step": 240,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.18326221971012743,
+       -0.9702448342431278,
+       -0.15824007220499808,
+       0.1986056866212968
+      ],
+      [
+       0.9730653323572551,
+       0.15613341275472434,
+       0.1696060623504594,
+       -0.01190877005601125
+      ],
+      [
+       -0.13985284334393083,
+       -0.1850603119150321,
+       0.9727249678930471,
+       0.5749766316295396
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 324,
+   "notes": [
+    "receiver grasp in can frame: axial +0.014 m, azimuth -7.6 deg relative to source; pass shift [0.023, -0.004, 0.0]",
+    "C accepted at scale 0.35; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.35, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_10.npz",
+   "plan_sha256": "a0d4c56214a1f7f53858c83faf70b94c495eccd133a157fe7c10404ec14af59d"
+  },
+  {
+   "tag": "pilot_A_11",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 11,
+   "trial": 11,
+   "can0": [
+    0.2197,
+    -0.0695
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "delta_xy": [
+     -0.044987478542327874,
+     -0.07768856805562974
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 190,
+    "R_release_cmd": 200,
+    "end": 262,
+    "anchor": 137,
+    "R_release_eff": 200
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 263,
+   "notes": [],
+   "plan_file": "plans/pilot_A_11.npz",
+   "plan_sha256": "ca94e26883a7f2ee4fbccdec7920ca3ed07e9e2488160c22dd722d5c5982aa6a"
+  },
+  {
+   "tag": "pilot_B_11",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 11,
+   "trial": 11,
+   "can0": [
+    0.2197,
+    -0.0695
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.005129661032050578,
+    "pass_dy": 0.0013135297264325815,
+    "pass_dz": -0.019939593710305202,
+    "approach_bump": 0.0353773818043485,
+    "bump_angle": 4.226138912282705,
+    "grasp_axial": 0.024812689877526654,
+    "grasp_azimuth_deg": -43.47162878889484,
+    "approach_speed": 0.8363025873358227,
+    "receiver_dwell": 10,
+    "release_delay": 11,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.044987478542327874,
+     -0.07768856805562974
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 215,
+    "R_release_cmd": 211,
+    "end": 279,
+    "anchor": 137,
+    "R_release_eff": 234
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 19,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 280,
+   "notes": [
+    "receiver grasp in can frame: axial +0.025 m, azimuth -43.5 deg relative to source; pass shift [-0.005, 0.001, -0.02]"
+   ],
+   "plan_file": "plans/pilot_B_11.npz",
+   "plan_sha256": "1a262c0c0263b342b748fdef3179203b597eb56c0e9ab9c038a35ea0a8c85659"
+  },
+  {
+   "tag": "pilot_C_11",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 11,
+   "trial": 11,
+   "can0": [
+    0.2197,
+    -0.0695
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.0017953813612177022,
+    "pass_dy": 0.0004597354042514035,
+    "pass_dz": -0.00697885779860682,
+    "approach_bump": 0.012382083631521974,
+    "bump_angle": 4.226138912282705,
+    "grasp_axial": 0.008684441457134328,
+    "grasp_azimuth_deg": -15.215070076113193,
+    "approach_speed": 0.8363025873358227,
+    "receiver_dwell": 10,
+    "release_delay": 11,
+    "scale": 0.35,
+    "delta_xy": [
+     -0.044987478542327874,
+     -0.07768856805562974
+    ],
+    "giver_wait_added": 23,
+    "giver_source_index_at_take": 156,
+    "receiver_axial_on_can": 0.07508000000000001,
+    "retimed_steps": 7
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 197,
+    "L_approach": 113,
+    "L_close": 220,
+    "R_release_cmd": 239,
+    "end": 303,
+    "anchor": 137,
+    "R_release_eff": 264
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 19,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 220,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.29972555086697555,
+       -0.9540253023582983,
+       0.0005626878762428492,
+       0.1636972818178208
+      ],
+      [
+       0.9476843180202094,
+       0.2978011937699724,
+       0.11492990197398942,
+       0.013219348770494181
+      ],
+      [
+       -0.10981360360200983,
+       -0.0339141777039861,
+       0.9933734448909957,
+       0.5217068116201068
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "rejected",
+   "steps": 304,
+   "notes": [
+    "receiver grasp in can frame: axial +0.009 m, azimuth -15.2 deg relative to source; pass shift [-0.002, 0.0, -0.007]",
+    "C rejected after 3 tries: [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.35, 'all_ok_C': False, 'failed': ['ik_ok']}]"
+   ],
+   "plan_file": "plans/pilot_C_11.npz",
+   "plan_sha256": "727716fcc7451446013279c28bf40a723cca5be27ca2280d1a96521dde105079"
+  },
+  {
+   "tag": "pilot_A_12",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 12,
+   "trial": 12,
+   "can0": [
+    0.2562,
+    -0.0206
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "delta_xy": [
+     -0.008487478542327898,
+     -0.02878856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 190,
+    "R_release_cmd": 200,
+    "end": 262,
+    "anchor": 137,
+    "R_release_eff": 200
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 263,
+   "notes": [],
+   "plan_file": "plans/pilot_A_12.npz",
+   "plan_sha256": "0edf44c7a71efd1e4d76fcb7ca913ed0ed69f6f48e715b1e70d9aff2c2877c10"
+  },
+  {
+   "tag": "pilot_B_12",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 12,
+   "trial": 12,
+   "can0": [
+    0.2562,
+    -0.0206
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.02087062434831801,
+    "pass_dy": -0.03758342203499965,
+    "pass_dz": 0.005537057570962338,
+    "approach_bump": 0.0589783978972177,
+    "bump_angle": 3.615572114804235,
+    "grasp_axial": -0.00962997085653262,
+    "grasp_azimuth_deg": -6.8708706186798025,
+    "approach_speed": 1.150701829605932,
+    "receiver_dwell": 1,
+    "release_delay": 4,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.008487478542327898,
+     -0.02878856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 181,
+    "R_release_cmd": 204,
+    "end": 266,
+    "anchor": 137,
+    "R_release_eff": 204
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 12,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 267,
+   "notes": [
+    "receiver grasp in can frame: axial -0.010 m, azimuth -6.9 deg relative to source; pass shift [-0.021, -0.038, 0.006]"
+   ],
+   "plan_file": "plans/pilot_B_12.npz",
+   "plan_sha256": "e49749815377a43088d6a34d156644007db69eb48586b9cd73785687fd83b629"
+  },
+  {
+   "tag": "pilot_C_12",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 12,
+   "trial": 12,
+   "can0": [
+    0.2562,
+    -0.0206
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.02087062434831801,
+    "pass_dy": -0.03758342203499965,
+    "pass_dz": 0.005537057570962338,
+    "approach_bump": 0.0589783978972177,
+    "bump_angle": 3.615572114804235,
+    "grasp_axial": -0.00962997085653262,
+    "grasp_azimuth_deg": -6.8708706186798025,
+    "approach_speed": 1.150701829605932,
+    "receiver_dwell": 1,
+    "release_delay": 4,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.008487478542327898,
+     -0.02878856805562973
+    ],
+    "sync_dwell_added": 13,
+    "giver_wait_added": 2,
+    "giver_source_index_at_take": 150,
+    "receiver_axial_on_can": 0.05370398533825843,
+    "retimed_steps": 3
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 194,
+    "R_release_cmd": 206,
+    "end": 271,
+    "anchor": 137,
+    "R_release_eff": 208
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 12,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 194,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.30494920706692713,
+       -0.9522500459118313,
+       -0.015027680132604367,
+       0.1507352679230714
+      ],
+      [
+       0.9478552844634268,
+       0.3019318686229379,
+       0.10201718690797851,
+       -0.02982629381160086
+      ],
+      [
+       -0.09260853537341336,
+       -0.04535412628170161,
+       0.9946691220728706,
+       0.5395372952479258
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 272,
+   "notes": [
+    "receiver grasp in can frame: axial -0.010 m, azimuth -6.9 deg relative to source; pass shift [-0.021, -0.038, 0.006]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_12.npz",
+   "plan_sha256": "036f82b22068cd9bfe4e5553a1410128f57ccaa1c98395a1348ebc2c5a6d2a03"
+  },
+  {
+   "tag": "pilot_A_13",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 13,
+   "trial": 13,
+   "can0": [
+    0.2264,
+    -0.0232
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "delta_xy": [
+     -0.03828747854232789,
+     -0.03138856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 190,
+    "R_release_cmd": 200,
+    "end": 262,
+    "anchor": 137,
+    "R_release_eff": 200
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 263,
+   "notes": [],
+   "plan_file": "plans/pilot_A_13.npz",
+   "plan_sha256": "5a0e5de2e71cbf0cc7735396b8f25485f00f6ffda98940f670662dc5f799c306"
+  },
+  {
+   "tag": "pilot_B_13",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 13,
+   "trial": 13,
+   "can0": [
+    0.2264,
+    -0.0232
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.0431311341566239,
+    "pass_dy": -0.015621618623360596,
+    "pass_dz": -0.006623455684150958,
+    "approach_bump": 0.0014156802654172805,
+    "bump_angle": 5.660208160140951,
+    "grasp_axial": 0.014583252246953442,
+    "grasp_azimuth_deg": -4.382295738384663,
+    "approach_speed": 0.8982291021246153,
+    "receiver_dwell": 1,
+    "release_delay": 8,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.03828747854232789,
+     -0.03138856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 200,
+    "R_release_cmd": 208,
+    "end": 270,
+    "anchor": 137,
+    "R_release_eff": 216
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 16,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 271,
+   "notes": [
+    "receiver grasp in can frame: axial +0.015 m, azimuth -4.4 deg relative to source; pass shift [-0.043, -0.016, -0.007]"
+   ],
+   "plan_file": "plans/pilot_B_13.npz",
+   "plan_sha256": "89c0cca742d0d86d9f0b98fcd86dda5af8c7b8b2a74c697df3e2e45caa876b3d"
+  },
+  {
+   "tag": "pilot_C_13",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 13,
+   "trial": 13,
+   "can0": [
+    0.2264,
+    -0.0232
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.0431311341566239,
+    "pass_dy": -0.015621618623360596,
+    "pass_dz": -0.006623455684150958,
+    "approach_bump": 0.0014156802654172805,
+    "bump_angle": 5.660208160140951,
+    "grasp_axial": 0.014583252246953442,
+    "grasp_azimuth_deg": -4.382295738384663,
+    "approach_speed": 0.8982291021246153,
+    "receiver_dwell": 1,
+    "release_delay": 8,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.03828747854232789,
+     -0.03138856805562973
+    ],
+    "giver_wait_added": 8,
+    "giver_source_index_at_take": 156,
+    "receiver_axial_on_can": 0.07508000000000001,
+    "retimed_steps": 1
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 200,
+    "R_release_cmd": 216,
+    "end": 279,
+    "anchor": 137,
+    "R_release_eff": 225
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 16,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 200,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.29972555086697555,
+       -0.9540253023582983,
+       0.0005626878762428492,
+       0.12339381818353308
+      ],
+      [
+       0.9476843180202094,
+       0.2978011937699724,
+       0.11492990197398942,
+       -0.003217920419774138
+      ],
+      [
+       -0.10981360360200983,
+       -0.0339141777039861,
+       0.9933734448909957,
+       0.5230324393624058
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 280,
+   "notes": [
+    "receiver grasp in can frame: axial +0.015 m, azimuth -4.4 deg relative to source; pass shift [-0.043, -0.016, -0.007]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_13.npz",
+   "plan_sha256": "4a3795e0f89acd6f4a085cc696f2832ab57f780b83895eea7873adf93a1d1732"
+  },
+  {
+   "tag": "pilot_A_14",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 14,
+   "trial": 14,
+   "can0": [
+    0.3824,
+    0.0162
+   ],
+   "source": "sim10_ep6",
+   "params": {
+    "delta_xy": [
+     0.050366067790985125,
+     0.011681180027127265
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 100,
+    "giver_arrive": 177,
+    "L_approach": 142,
+    "L_close": 186,
+    "R_release_cmd": 202,
+    "end": 269,
+    "anchor": 137,
+    "R_release_eff": 202
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 270,
+   "notes": [],
+   "plan_file": "plans/pilot_A_14.npz",
+   "plan_sha256": "6fedac3e086e05735c63fe2ff05f21bdc0b33fc1c4858576a6bc142ebfe515be"
+  },
+  {
+   "tag": "pilot_B_14",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 14,
+   "trial": 14,
+   "can0": [
+    0.3824,
+    0.0162
+   ],
+   "source": "sim10_ep6",
+   "params": {
+    "pass_dx": 0.015779755278823512,
+    "pass_dy": 0.022117508383813142,
+    "pass_dz": 0.011524176681719345,
+    "approach_bump": 0.04173082290036096,
+    "bump_angle": 3.8990551801107416,
+    "grasp_axial": 0.027614886239537402,
+    "grasp_azimuth_deg": -6.06087228965454,
+    "approach_speed": 0.9485301285138127,
+    "receiver_dwell": 2,
+    "release_delay": 1,
+    "scale": 1.0,
+    "delta_xy": [
+     0.050366067790985125,
+     0.011681180027127265
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 100,
+    "giver_arrive": 177,
+    "L_approach": 142,
+    "L_close": 190,
+    "R_release_cmd": 203,
+    "end": 270,
+    "anchor": 137,
+    "R_release_eff": 203
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 9,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 271,
+   "notes": [
+    "receiver grasp in can frame: axial +0.028 m, azimuth -6.1 deg relative to source; pass shift [0.016, 0.022, 0.012]"
+   ],
+   "plan_file": "plans/pilot_B_14.npz",
+   "plan_sha256": "aa212461e0ebe107ae90b1211c6c97a2976be9e9485bdaa42ba7138380f53086"
+  },
+  {
+   "tag": "pilot_C_14",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 14,
+   "trial": 14,
+   "can0": [
+    0.3824,
+    0.0162
+   ],
+   "source": "sim10_ep6",
+   "params": {
+    "pass_dx": 0.009467853167294107,
+    "pass_dy": 0.013270505030287885,
+    "pass_dz": 0.006914506009031607,
+    "approach_bump": 0.025038493740216574,
+    "bump_angle": 3.8990551801107416,
+    "grasp_axial": 0.01656893174372244,
+    "grasp_azimuth_deg": -3.636523373792724,
+    "approach_speed": 0.9485301285138127,
+    "receiver_dwell": 2,
+    "release_delay": 1,
+    "scale": 0.6,
+    "delta_xy": [
+     0.050366067790985125,
+     0.011681180027127265
+    ],
+    "giver_source_index_at_take": 146,
+    "receiver_axial_on_can": 0.05203680117884001
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 100,
+    "giver_arrive": 177,
+    "L_approach": 142,
+    "L_close": 190,
+    "R_release_cmd": 203,
+    "end": 270,
+    "anchor": 137,
+    "R_release_eff": 203
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 9,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 190,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.4434810138454694,
+       -0.896089377691116,
+       0.018665946205414452,
+       0.19197764062925213
+      ],
+      [
+       0.8962812507005516,
+       0.4434329310792207,
+       -0.00686697001208328,
+       0.009678630599553595
+      ],
+      [
+       -0.0021236763524827345,
+       0.019775308433503194,
+       0.999802194023953,
+       0.541676502002484
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 271,
+   "notes": [
+    "receiver grasp in can frame: axial +0.017 m, azimuth -3.6 deg relative to source; pass shift [0.009, 0.013, 0.007]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['clearance_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_14.npz",
+   "plan_sha256": "5f57217e5fa130b9fdd42a8237e79302ad951b12c0ac301f7e20465e9ff08d65"
+  },
+  {
+   "tag": "pilot_A_15",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 15,
+   "trial": 15,
+   "can0": [
+    0.2049,
+    0.0438
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "delta_xy": [
+     0.007467794919013976,
+     0.0029973759233951555
+    ]
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 216,
+    "L_approach": 154,
+    "L_close": 216,
+    "R_release_cmd": 228,
+    "end": 303,
+    "anchor": 146,
+    "R_release_eff": 228
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 304,
+   "notes": [],
+   "plan_file": "plans/pilot_A_15.npz",
+   "plan_sha256": "a555cba238c8770b28901eab6e432748d574b82764d48d0da398a6a5317a4d93"
+  },
+  {
+   "tag": "pilot_B_15",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 15,
+   "trial": 15,
+   "can0": [
+    0.2049,
+    0.0438
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "pass_dx": -0.04156810575967063,
+    "pass_dy": -0.034701538469881055,
+    "pass_dz": -0.024081751932586486,
+    "approach_bump": 0.01424343704243041,
+    "bump_angle": 3.5057537653803226,
+    "grasp_axial": 0.03777326397342471,
+    "grasp_azimuth_deg": -9.914492187533511,
+    "approach_speed": 0.8059998064112427,
+    "receiver_dwell": 5,
+    "release_delay": 9,
+    "scale": 1.0,
+    "delta_xy": [
+     0.007467794919013976,
+     0.0029973759233951555
+    ]
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 216,
+    "L_approach": 154,
+    "L_close": 236,
+    "R_release_cmd": 237,
+    "end": 315,
+    "anchor": 146,
+    "R_release_eff": 253
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 17,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 316,
+   "notes": [
+    "receiver grasp in can frame: axial +0.038 m, azimuth -9.9 deg relative to source; pass shift [-0.042, -0.035, -0.024]"
+   ],
+   "plan_file": "plans/pilot_B_15.npz",
+   "plan_sha256": "4f80bbc5f0ac7f6e37172504b464860a00e7c947452a181a9e1f8c4784862fc6"
+  },
+  {
+   "tag": "pilot_C_15",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 15,
+   "trial": 15,
+   "can0": [
+    0.2049,
+    0.0438
+   ],
+   "source": "sim10_ep0",
+   "params": {
+    "pass_dx": -0.02494086345580238,
+    "pass_dy": -0.020820923081928632,
+    "pass_dz": -0.01444905115955189,
+    "approach_bump": 0.008546062225458246,
+    "bump_angle": 3.5057537653803226,
+    "grasp_axial": 0.022663958384054824,
+    "grasp_azimuth_deg": -5.9486953125201065,
+    "approach_speed": 0.8059998064112427,
+    "receiver_dwell": 5,
+    "release_delay": 9,
+    "scale": 0.6,
+    "delta_xy": [
+     0.007467794919013976,
+     0.0029973759233951555
+    ],
+    "giver_wait_added": 16,
+    "giver_source_index_at_take": 184,
+    "receiver_axial_on_can": 0.07508000000000001
+   },
+   "marks": {
+    "R_close": 108,
+    "R_sig": 109,
+    "giver_arrive": 216,
+    "L_approach": 154,
+    "L_close": 236,
+    "R_release_cmd": 253,
+    "end": 328,
+    "anchor": 146,
+    "R_release_eff": 269
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 17,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 146,
+     "pass_step": 236,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.17040040653364041,
+       -0.9844835948366714,
+       -0.041901705820110054,
+       0.1685485964557262
+      ],
+      [
+       0.9483668886740255,
+       0.15230776433577028,
+       0.2782132085106467,
+       -0.028785628595481325
+      ],
+      [
+       -0.26751438451028975,
+       -0.08714583421199479,
+       0.9596049487469189,
+       0.49903865770801786
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 329,
+   "notes": [
+    "receiver grasp in can frame: axial +0.023 m, azimuth -5.9 deg relative to source; pass shift [-0.025, -0.021, -0.014]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['clearance_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_15.npz",
+   "plan_sha256": "b8f6831836bdb77e77dfd380296cb05d6a55e428ea9055ece0992ac1d6f2b129"
+  },
+  {
+   "tag": "pilot_A_16",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 16,
+   "trial": 16,
+   "can0": [
+    0.2876,
+    -0.0193
+   ],
+   "source": "sim10_ep8",
+   "params": {
+    "delta_xy": [
+     0.004730810022354148,
+     -0.018463128435611726
+    ]
+   },
+   "marks": {
+    "R_close": 98,
+    "R_sig": 99,
+    "giver_arrive": 192,
+    "L_approach": 112,
+    "L_close": 192,
+    "R_release_cmd": 202,
+    "end": 261,
+    "anchor": 136,
+    "R_release_eff": 202
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 262,
+   "notes": [],
+   "plan_file": "plans/pilot_A_16.npz",
+   "plan_sha256": "b4f562e25865db2b64b3cede55b2394c882c30070c127aec1331f3b8bc4d0b8d"
+  },
+  {
+   "tag": "pilot_B_16",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 16,
+   "trial": 16,
+   "can0": [
+    0.2876,
+    -0.0193
+   ],
+   "source": "sim10_ep8",
+   "params": {
+    "pass_dx": -0.059337019349602164,
+    "pass_dy": 0.016756554466960533,
+    "pass_dz": 0.04545199890559116,
+    "approach_bump": 0.042168680836662996,
+    "bump_angle": 2.1622590870052574,
+    "grasp_axial": 0.0028427567948979895,
+    "grasp_azimuth_deg": -14.774232698392169,
+    "approach_speed": 1.158355684699667,
+    "receiver_dwell": 12,
+    "release_delay": 9,
+    "scale": 1.0,
+    "delta_xy": [
+     0.004730810022354148,
+     -0.018463128435611726
+    ]
+   },
+   "marks": {
+    "R_close": 98,
+    "R_sig": 99,
+    "giver_arrive": 192,
+    "L_approach": 112,
+    "L_close": 193,
+    "R_release_cmd": 211,
+    "end": 270,
+    "anchor": 136,
+    "R_release_eff": 211
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 17,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 271,
+   "notes": [
+    "receiver grasp in can frame: axial +0.003 m, azimuth -14.8 deg relative to source; pass shift [-0.059, 0.017, 0.045]"
+   ],
+   "plan_file": "plans/pilot_B_16.npz",
+   "plan_sha256": "c6d18dce55d7e480fc33b82c4b56b831f203e17bf3ba7eda800b5497e961cdad"
+  },
+  {
+   "tag": "pilot_C_16",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 16,
+   "trial": 16,
+   "can0": [
+    0.2876,
+    -0.0193
+   ],
+   "source": "sim10_ep8",
+   "params": {
+    "pass_dx": -0.0356022116097613,
+    "pass_dy": 0.01005393268017632,
+    "pass_dz": 0.027271199343354695,
+    "approach_bump": 0.025301208501997796,
+    "bump_angle": 2.1622590870052574,
+    "grasp_axial": 0.0017056540769387937,
+    "grasp_azimuth_deg": -8.8645396190353,
+    "approach_speed": 1.158355684699667,
+    "receiver_dwell": 12,
+    "release_delay": 9,
+    "scale": 0.6,
+    "delta_xy": [
+     0.004730810022354148,
+     -0.018463128435611726
+    ],
+    "sync_dwell_added": 1,
+    "giver_source_index_at_take": 150,
+    "receiver_axial_on_can": 0.059498753735525274,
+    "retimed_steps": 1
+   },
+   "marks": {
+    "R_close": 98,
+    "R_sig": 99,
+    "giver_arrive": 193,
+    "L_approach": 112,
+    "L_close": 195,
+    "R_release_cmd": 212,
+    "end": 271,
+    "anchor": 136,
+    "R_release_eff": 212
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 17,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 136,
+     "pass_step": 195,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.38971259304506,
+       -0.9187866343920096,
+       0.06289050234096896,
+       0.1579422321028838
+      ],
+      [
+       0.9204747832237365,
+       0.3907701184236299,
+       0.004988787066780419,
+       0.019617275297628713
+      ],
+      [
+       -0.02915935992628765,
+       0.055944928365190695,
+       0.9980079642562494,
+       0.5569691719476343
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 272,
+   "notes": [
+    "receiver grasp in can frame: axial +0.002 m, azimuth -8.9 deg relative to source; pass shift [-0.036, 0.01, 0.027]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok', 'speed']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_16.npz",
+   "plan_sha256": "84d6831d1e361b4bc9598d2afc0b5a5698a1be46e683f62d989562a91cb45121"
+  },
+  {
+   "tag": "pilot_A_17",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 17,
+   "trial": 17,
+   "can0": [
+    0.1573,
+    0.0041
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "delta_xy": [
+     0.0168275729894638,
+     0.0005447328820824627
+    ]
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 214,
+    "L_approach": 119,
+    "L_close": 213,
+    "R_release_cmd": 231,
+    "end": 306,
+    "anchor": 143,
+    "R_release_eff": 231
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 307,
+   "notes": [],
+   "plan_file": "plans/pilot_A_17.npz",
+   "plan_sha256": "18d0d618a740bb827a0ef7bab84e5169d7d3a90d867a8c97abd5b2c4d2ebe60a"
+  },
+  {
+   "tag": "pilot_B_17",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 17,
+   "trial": 17,
+   "can0": [
+    0.1573,
+    0.0041
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "pass_dx": -0.013132118126646573,
+    "pass_dy": -0.05159372084477683,
+    "pass_dz": 0.043072753956817915,
+    "approach_bump": 0.014494337580625802,
+    "bump_angle": 1.235204255318397,
+    "grasp_axial": 0.011571535366541354,
+    "grasp_azimuth_deg": 27.82231779813297,
+    "approach_speed": 1.132542782704968,
+    "receiver_dwell": 1,
+    "release_delay": 1,
+    "scale": 1.0,
+    "delta_xy": [
+     0.0168275729894638,
+     0.0005447328820824627
+    ]
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 214,
+    "L_approach": 119,
+    "L_close": 203,
+    "R_release_cmd": 232,
+    "end": 307,
+    "anchor": 143,
+    "R_release_eff": 232
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 9,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 308,
+   "notes": [
+    "receiver grasp in can frame: axial +0.012 m, azimuth +27.8 deg relative to source; pass shift [-0.013, -0.052, 0.043]"
+   ],
+   "plan_file": "plans/pilot_B_17.npz",
+   "plan_sha256": "ed8d4e3a9b38281e79933bc264365a7199bf4e6b66e579e855d6f0ddd0d8ec51"
+  },
+  {
+   "tag": "pilot_C_17",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 17,
+   "trial": 17,
+   "can0": [
+    0.1573,
+    0.0041
+   ],
+   "source": "sim10_ep2",
+   "params": {
+    "pass_dx": -0.0045962413443263,
+    "pass_dy": -0.018057802295671888,
+    "pass_dz": 0.01507546388488627,
+    "approach_bump": 0.005073018153219031,
+    "bump_angle": 1.235204255318397,
+    "grasp_axial": 0.004050037378289474,
+    "grasp_azimuth_deg": 9.737811229346539,
+    "approach_speed": 1.132542782704968,
+    "receiver_dwell": 1,
+    "release_delay": 1,
+    "scale": 0.35,
+    "delta_xy": [
+     0.0168275729894638,
+     0.0005447328820824627
+    ],
+    "sync_dwell_added": 13,
+    "giver_source_index_at_take": 172,
+    "receiver_axial_on_can": 0.032701620470852795
+   },
+   "marks": {
+    "R_close": 105,
+    "R_sig": 106,
+    "giver_arrive": 214,
+    "L_approach": 119,
+    "L_close": 216,
+    "R_release_cmd": 232,
+    "end": 307,
+    "anchor": 143,
+    "R_release_eff": 232
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 9,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 143,
+     "pass_step": 216,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.1750468477074022,
+       -0.9845151824955265,
+       -0.009405133890715022,
+       0.16951991206753653
+      ],
+      [
+       0.9644099839688005,
+       0.1695337490540629,
+       0.20290808449387207,
+       -0.035058170090793206
+      ],
+      [
+       -0.19817160222645364,
+       -0.04458882558976848,
+       0.9791526197194825,
+       0.5955568373970044
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "rejected",
+   "steps": 308,
+   "notes": [
+    "receiver grasp in can frame: axial +0.004 m, azimuth +9.7 deg relative to source; pass shift [-0.005, -0.018, 0.015]",
+    "C rejected after 3 tries: [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok', 'clearance_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['ik_ok', 'clearance_ok']}, {'scale': 0.35, 'all_ok_C': False, 'failed': ['ik_ok']}]"
+   ],
+   "plan_file": "plans/pilot_C_17.npz",
+   "plan_sha256": "64405302aacf94130a81bafc1bda4f26731cfafd13f4791cf6db9c5d2963c0b1"
+  },
+  {
+   "tag": "pilot_A_18",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 18,
+   "trial": 18,
+   "can0": [
+    0.238,
+    -0.0424
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "delta_xy": [
+     -0.02668747854232789,
+     -0.05058856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 190,
+    "R_release_cmd": 200,
+    "end": 262,
+    "anchor": 137,
+    "R_release_eff": 200
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 263,
+   "notes": [],
+   "plan_file": "plans/pilot_A_18.npz",
+   "plan_sha256": "86907fa969376afa6b97f0d7fd37fe6b2948cf0fbc56b2611a9c74cd28189158"
+  },
+  {
+   "tag": "pilot_B_18",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 18,
+   "trial": 18,
+   "can0": [
+    0.238,
+    -0.0424
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": 0.02320204457241623,
+    "pass_dy": -0.03146621042789191,
+    "pass_dz": -0.01830072092436713,
+    "approach_bump": 0.016156212823218805,
+    "bump_angle": 5.031301987154032,
+    "grasp_axial": -0.019390775645652,
+    "grasp_azimuth_deg": 44.70463221488194,
+    "approach_speed": 1.169840754692784,
+    "receiver_dwell": 1,
+    "release_delay": 3,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.02668747854232789,
+     -0.05058856805562973
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 180,
+    "R_release_cmd": 203,
+    "end": 265,
+    "anchor": 137,
+    "R_release_eff": 203
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 11,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 266,
+   "notes": [
+    "receiver grasp in can frame: axial -0.019 m, azimuth +44.7 deg relative to source; pass shift [0.023, -0.031, -0.018]"
+   ],
+   "plan_file": "plans/pilot_B_18.npz",
+   "plan_sha256": "2af531c1c6cebc43a5e7074e167a83d960a31055ee389f2d3a974e338ab0222a"
+  },
+  {
+   "tag": "pilot_C_18",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 18,
+   "trial": 18,
+   "can0": [
+    0.238,
+    -0.0424
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": 0.02320204457241623,
+    "pass_dy": -0.03146621042789191,
+    "pass_dz": -0.01830072092436713,
+    "approach_bump": 0.016156212823218805,
+    "bump_angle": 5.031301987154032,
+    "grasp_axial": -0.019390775645652,
+    "grasp_azimuth_deg": 44.70463221488194,
+    "approach_speed": 1.169840754692784,
+    "receiver_dwell": 1,
+    "release_delay": 3,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.02668747854232789,
+     -0.05058856805562973
+    ],
+    "sync_dwell_added": 14,
+    "giver_wait_added": 2,
+    "giver_source_index_at_take": 150,
+    "receiver_axial_on_can": 0.04394318054913905,
+    "retimed_steps": 6
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 194,
+    "R_release_cmd": 205,
+    "end": 273,
+    "anchor": 137,
+    "R_release_eff": 207
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 11,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 194,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.30494920706692713,
+       -0.9522500459118313,
+       -0.015027680132604367,
+       0.19480400788115984
+      ],
+      [
+       0.9478552844634268,
+       0.3019318686229379,
+       0.10201718690797851,
+       -0.023709627537836647
+      ],
+      [
+       -0.09260853537341336,
+       -0.04535412628170161,
+       0.9946691220728706,
+       0.5157016418279222
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 274,
+   "notes": [
+    "receiver grasp in can frame: axial -0.019 m, azimuth +44.7 deg relative to source; pass shift [0.023, -0.031, -0.018]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_18.npz",
+   "plan_sha256": "f4198dd37ed3b7d2ec90575937b462cd6ef3c92b30004b98b412bc294b32d19c"
+  },
+  {
+   "tag": "pilot_A_19",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 19,
+   "trial": 19,
+   "can0": [
+    0.2444,
+    0.0061
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "delta_xy": [
+     -0.009316230392456049,
+     -0.018013031104207038
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 193,
+    "R_release_cmd": 203,
+    "end": 253,
+    "anchor": 138,
+    "R_release_eff": 203
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 254,
+   "notes": [],
+   "plan_file": "plans/pilot_A_19.npz",
+   "plan_sha256": "af40c6c8e4bb486c358bd14d661964dde3eee8a02731593a5239e1b820416890"
+  },
+  {
+   "tag": "pilot_B_19",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 19,
+   "trial": 19,
+   "can0": [
+    0.2444,
+    0.0061
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "pass_dx": -0.04779000594064571,
+    "pass_dy": 0.053425386203398054,
+    "pass_dz": -0.03769994277748456,
+    "approach_bump": 0.052506113967549124,
+    "bump_angle": 2.4498372516393347,
+    "grasp_axial": 0.03375787932792449,
+    "grasp_azimuth_deg": -23.80789880725474,
+    "approach_speed": 0.8713411342782442,
+    "receiver_dwell": 3,
+    "release_delay": 3,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.009316230392456049,
+     -0.018013031104207038
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 205,
+    "R_release_cmd": 206,
+    "end": 257,
+    "anchor": 138,
+    "R_release_eff": 216
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 11,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 258,
+   "notes": [
+    "receiver grasp in can frame: axial +0.034 m, azimuth -23.8 deg relative to source; pass shift [-0.048, 0.053, -0.038]"
+   ],
+   "plan_file": "plans/pilot_B_19.npz",
+   "plan_sha256": "ac59b41412733ee285782659643065641d26e1b84a537fe2b385e904d0939f40"
+  },
+  {
+   "tag": "pilot_C_19",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 19,
+   "trial": 19,
+   "can0": [
+    0.2444,
+    0.0061
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "pass_dx": -0.028674003564387426,
+    "pass_dy": 0.03205523172203883,
+    "pass_dz": -0.022619965666490736,
+    "approach_bump": 0.031503668380529475,
+    "bump_angle": 2.4498372516393347,
+    "grasp_axial": 0.020254727596754694,
+    "grasp_azimuth_deg": -14.284739284352844,
+    "approach_speed": 0.8713411342782442,
+    "receiver_dwell": 3,
+    "release_delay": 3,
+    "scale": 0.6,
+    "delta_xy": [
+     -0.009316230392456049,
+     -0.018013031104207038
+    ],
+    "giver_wait_added": 10,
+    "giver_source_index_at_take": 159,
+    "receiver_axial_on_can": 0.07508000000000001,
+    "retimed_steps": 7
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 203,
+    "L_approach": 133,
+    "L_close": 210,
+    "R_release_cmd": 221,
+    "end": 273,
+    "anchor": 138,
+    "R_release_eff": 231
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 11,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 138,
+     "pass_step": 210,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.3805166300960285,
+       -0.9155802353688289,
+       0.13007661904555382,
+       0.16721982701504717
+      ],
+      [
+       0.8841962195528703,
+       0.40141170412323157,
+       0.23888425883949727,
+       0.0384155883529098
+      ],
+      [
+       -0.2709319832518392,
+       0.02411382165570457,
+       0.9622964117445217,
+       0.4872476505805833
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 274,
+   "notes": [
+    "receiver grasp in can frame: axial +0.020 m, azimuth -14.3 deg relative to source; pass shift [-0.029, 0.032, -0.023]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok', 'clearance_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_19.npz",
+   "plan_sha256": "b186cab147024351059853ed39d5d97be16f300586200430a120d75cbbf53bfe"
+  },
+  {
+   "tag": "pilot_A_20",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 20,
+   "trial": 20,
+   "can0": [
+    0.2533,
+    0.0229
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "delta_xy": [
+     -0.00041623039245602955,
+     -0.0012130311042070387
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 193,
+    "R_release_cmd": 203,
+    "end": 253,
+    "anchor": 138,
+    "R_release_eff": 203
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 254,
+   "notes": [],
+   "plan_file": "plans/pilot_A_20.npz",
+   "plan_sha256": "54593ca293e12b0bb42d10d4e87c0ea960e01bc4a02eb10bd771a957382d197d"
+  },
+  {
+   "tag": "pilot_B_20",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 20,
+   "trial": 20,
+   "can0": [
+    0.2533,
+    0.0229
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "pass_dx": 0.058717340402586915,
+    "pass_dy": 0.05622257498420263,
+    "pass_dz": 0.026502477959387198,
+    "approach_bump": 0.026274721524932345,
+    "bump_angle": 3.4487174479331415,
+    "grasp_axial": 0.03226785964614232,
+    "grasp_azimuth_deg": -18.306869718820113,
+    "approach_speed": 0.9143093869953637,
+    "receiver_dwell": 9,
+    "release_delay": 5,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.00041623039245602955,
+     -0.0012130311042070387
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 208,
+    "R_release_cmd": 208,
+    "end": 260,
+    "anchor": 138,
+    "R_release_eff": 221
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 13,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 261,
+   "notes": [
+    "receiver grasp in can frame: axial +0.032 m, azimuth -18.3 deg relative to source; pass shift [0.059, 0.056, 0.027]"
+   ],
+   "plan_file": "plans/pilot_B_20.npz",
+   "plan_sha256": "677ec4f7838343c43f4e12fc2133946a13ef382a41bb6aec65c9cf98bfe281c4"
+  },
+  {
+   "tag": "pilot_C_20",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 20,
+   "trial": 20,
+   "can0": [
+    0.2533,
+    0.0229
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "pass_dx": 0.020551069140905417,
+    "pass_dy": 0.01967790124447092,
+    "pass_dz": 0.009275867285785519,
+    "approach_bump": 0.009196152533726321,
+    "bump_angle": 3.4487174479331415,
+    "grasp_axial": 0.011293750876149812,
+    "grasp_azimuth_deg": -6.40740440158704,
+    "approach_speed": 0.9143093869953637,
+    "receiver_dwell": 9,
+    "release_delay": 5,
+    "scale": 0.35,
+    "delta_xy": [
+     -0.00041623039245602955,
+     -0.0012130311042070387
+    ],
+    "giver_wait_added": 13,
+    "giver_source_index_at_take": 159,
+    "receiver_axial_on_can": 0.07508000000000001
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 208,
+    "R_release_cmd": 221,
+    "end": 271,
+    "anchor": 138,
+    "R_release_eff": 234
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 13,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 138,
+     "pass_step": 208,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.3805166300960285,
+       -0.9155802353688289,
+       0.13007661904555382,
+       0.21630096628986542
+      ],
+      [
+       0.8841962195528703,
+       0.40141170412323157,
+       0.23888425883949727,
+       0.026033340650786062
+      ],
+      [
+       -0.2709319832518392,
+       0.02411382165570457,
+       0.9622964117445217,
+       0.5190555536401015
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 272,
+   "notes": [
+    "receiver grasp in can frame: axial +0.011 m, azimuth -6.4 deg relative to source; pass shift [0.021, 0.02, 0.009]",
+    "C accepted at scale 0.35; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.35, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_20.npz",
+   "plan_sha256": "a191fbfb43d213929f52be49d5741d0a7e3103972eccce5c97581299de8dc35c"
+  },
+  {
+   "tag": "pilot_A_21",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 21,
+   "trial": 21,
+   "can0": [
+    0.222,
+    0.0506
+   ],
+   "source": "sim10_ep5",
+   "params": {
+    "delta_xy": [
+     0.014874291539192203,
+     0.01587111157774925
+    ]
+   },
+   "marks": {
+    "R_close": 97,
+    "R_sig": 98,
+    "giver_arrive": 201,
+    "L_approach": 111,
+    "L_close": 202,
+    "R_release_cmd": 212,
+    "end": 275,
+    "anchor": 135,
+    "R_release_eff": 212
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 276,
+   "notes": [],
+   "plan_file": "plans/pilot_A_21.npz",
+   "plan_sha256": "6db4e6ee6e8e9b87ab80cec7680534e6b35b1329d357e187265859f85eea3450"
+  },
+  {
+   "tag": "pilot_B_21",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 21,
+   "trial": 21,
+   "can0": [
+    0.222,
+    0.0506
+   ],
+   "source": "sim10_ep5",
+   "params": {
+    "pass_dx": 0.041453958754903444,
+    "pass_dy": -0.006377614931928746,
+    "pass_dz": -0.025753162382355185,
+    "approach_bump": 0.00037042390919891585,
+    "bump_angle": 6.186173490958286,
+    "grasp_axial": -0.037604141555612966,
+    "grasp_azimuth_deg": 43.32177347536991,
+    "approach_speed": 1.2430966362421703,
+    "receiver_dwell": 9,
+    "release_delay": 2,
+    "scale": 1.0,
+    "delta_xy": [
+     0.014874291539192203,
+     0.01587111157774925
+    ]
+   },
+   "marks": {
+    "R_close": 97,
+    "R_sig": 98,
+    "giver_arrive": 201,
+    "L_approach": 111,
+    "L_close": 193,
+    "R_release_cmd": 214,
+    "end": 277,
+    "anchor": 135,
+    "R_release_eff": 214
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 10,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 278,
+   "notes": [
+    "receiver grasp in can frame: axial -0.038 m, azimuth +43.3 deg relative to source; pass shift [0.041, -0.006, -0.026]"
+   ],
+   "plan_file": "plans/pilot_B_21.npz",
+   "plan_sha256": "b3d296ecda90e1bc6dc363eb6f280f5ab0a32a05d9f2dbcbf53b681bd48d0e24"
+  },
+  {
+   "tag": "pilot_C_21",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 21,
+   "trial": 21,
+   "can0": [
+    0.222,
+    0.0506
+   ],
+   "source": "sim10_ep5",
+   "params": {
+    "pass_dx": 0.041453958754903444,
+    "pass_dy": -0.006377614931928746,
+    "pass_dz": -0.025753162382355185,
+    "approach_bump": 0.00037042390919891585,
+    "bump_angle": 6.186173490958286,
+    "grasp_axial": -0.037604141555612966,
+    "grasp_azimuth_deg": 43.32177347536991,
+    "approach_speed": 1.2430966362421703,
+    "receiver_dwell": 9,
+    "release_delay": 2,
+    "scale": 1.0,
+    "delta_xy": [
+     0.014874291539192203,
+     0.01587111157774925
+    ],
+    "sync_dwell_added": 10,
+    "giver_source_index_at_take": 159,
+    "receiver_axial_on_can": 0.03993947216492484,
+    "retimed_steps": 1
+   },
+   "marks": {
+    "R_close": 97,
+    "R_sig": 98,
+    "giver_arrive": 201,
+    "L_approach": 111,
+    "L_close": 203,
+    "R_release_cmd": 214,
+    "end": 278,
+    "anchor": 135,
+    "R_release_eff": 214
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 10,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 135,
+     "pass_step": 203,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.36101841125716894,
+       -0.9305976252909753,
+       0.060446393905240106,
+       0.23346847318437636
+      ],
+      [
+       0.8863758900959886,
+       0.36256320569701506,
+       0.2878987727157724,
+       -0.01635156541157831
+      ],
+      [
+       -0.2898335525605923,
+       -0.05035853132788699,
+       0.955751290939544,
+       0.4911934939875333
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 279,
+   "notes": [
+    "receiver grasp in can frame: axial -0.038 m, azimuth +43.3 deg relative to source; pass shift [0.041, -0.006, -0.026]",
+    "C accepted at scale 1.0; tries [{'scale': 1.0, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_21.npz",
+   "plan_sha256": "209212f3e74d2fe3f4c35c722c14ed45e5b7d92a1544e296edfdb7248030e3b5"
+  },
+  {
+   "tag": "pilot_A_22",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 22,
+   "trial": 22,
+   "can0": [
+    0.1888,
+    -0.0612
+   ],
+   "source": "sim10_ep1",
+   "params": {
+    "delta_xy": [
+     0.05439222638607025,
+     -0.05251656717509031
+    ]
+   },
+   "marks": {
+    "R_close": 116,
+    "R_sig": 117,
+    "giver_arrive": 231,
+    "L_approach": 166,
+    "L_close": 231,
+    "R_release_cmd": 242,
+    "end": 308,
+    "anchor": 154,
+    "R_release_eff": 242
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 309,
+   "notes": [],
+   "plan_file": "plans/pilot_A_22.npz",
+   "plan_sha256": "3a9b0aae1660c1d944f4fefb2301365af63226ef7891d7eb2ca983e36ada272e"
+  },
+  {
+   "tag": "pilot_B_22",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 22,
+   "trial": 22,
+   "can0": [
+    0.1888,
+    -0.0612
+   ],
+   "source": "sim10_ep1",
+   "params": {
+    "pass_dx": -0.05386492266209306,
+    "pass_dy": 0.03976659463984028,
+    "pass_dz": -0.01218022334041929,
+    "approach_bump": 0.05381787106182578,
+    "bump_angle": 1.4482818715867578,
+    "grasp_axial": -0.021484287562135586,
+    "grasp_azimuth_deg": -35.597806883851796,
+    "approach_speed": 0.8094041232684901,
+    "receiver_dwell": 4,
+    "release_delay": 7,
+    "scale": 1.0,
+    "delta_xy": [
+     0.05439222638607025,
+     -0.05251656717509031
+    ]
+   },
+   "marks": {
+    "R_close": 116,
+    "R_sig": 117,
+    "giver_arrive": 231,
+    "L_approach": 166,
+    "L_close": 251,
+    "R_release_cmd": 249,
+    "end": 320,
+    "anchor": 154,
+    "R_release_eff": 266
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 15,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 321,
+   "notes": [
+    "receiver grasp in can frame: axial -0.021 m, azimuth -35.6 deg relative to source; pass shift [-0.054, 0.04, -0.012]"
+   ],
+   "plan_file": "plans/pilot_B_22.npz",
+   "plan_sha256": "790a9f2bd7b62cafc867350e7be041158400913f4a2ba471accd43863e4c974e"
+  },
+  {
+   "tag": "pilot_C_22",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 22,
+   "trial": 22,
+   "can0": [
+    0.1888,
+    -0.0612
+   ],
+   "source": "sim10_ep1",
+   "params": {
+    "pass_dx": -0.01885272293173257,
+    "pass_dy": 0.013918308123944097,
+    "pass_dz": -0.004263078169146751,
+    "approach_bump": 0.01883625487163902,
+    "bump_angle": 1.4482818715867578,
+    "grasp_axial": -0.007519500646747454,
+    "grasp_azimuth_deg": -12.459232409348127,
+    "approach_speed": 0.8094041232684901,
+    "receiver_dwell": 4,
+    "release_delay": 7,
+    "scale": 0.35,
+    "delta_xy": [
+     0.05439222638607025,
+     -0.05251656717509031
+    ],
+    "giver_wait_added": 17,
+    "giver_source_index_at_take": 198,
+    "receiver_axial_on_can": 0.012712224874750115,
+    "retimed_steps": 8
+   },
+   "marks": {
+    "R_close": 116,
+    "R_sig": 117,
+    "giver_arrive": 237,
+    "L_approach": 166,
+    "L_close": 257,
+    "R_release_cmd": 272,
+    "end": 340,
+    "anchor": 154,
+    "R_release_eff": 290
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 15,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 154,
+     "pass_step": 257,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.1978320762566957,
+       -0.9676308619303611,
+       -0.1566939202517831,
+       0.15907081396228856
+      ],
+      [
+       0.9684734274006106,
+       0.1682551100750592,
+       0.18371020209162306,
+       0.005427432634710155
+      ],
+      [
+       -0.15139910839526172,
+       -0.18809766870840522,
+       0.970411035079251,
+       0.569921099081458
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "rejected",
+   "steps": 341,
+   "notes": [
+    "receiver grasp in can frame: axial -0.008 m, azimuth -12.5 deg relative to source; pass shift [-0.019, 0.014, -0.004]",
+    "C rejected after 3 tries: [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok', 'grasp_separation_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['ik_ok', 'clearance_ok']}, {'scale': 0.35, 'all_ok_C': False, 'failed': ['clearance_ok']}]"
+   ],
+   "plan_file": "plans/pilot_C_22.npz",
+   "plan_sha256": "7c4346a552bf205a767ca5fdef62275d7e73df8feb8ffb5a2cf3389549e7ae02"
+  },
+  {
+   "tag": "pilot_A_23",
+   "stage": "pilot",
+   "cond": "A",
+   "i": 23,
+   "trial": 23,
+   "can0": [
+    0.2949,
+    0.0186
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "delta_xy": [
+     3.203740119933629e-05,
+     -0.006610190564393999
+    ]
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 204,
+    "L_approach": 159,
+    "L_close": 206,
+    "R_release_cmd": 216,
+    "end": 280,
+    "anchor": 142,
+    "R_release_eff": 216
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 281,
+   "notes": [],
+   "plan_file": "plans/pilot_A_23.npz",
+   "plan_sha256": "23c7fc626330b1c6901370a24346da9ee29670bc888db91e1c6248be2a254255"
+  },
+  {
+   "tag": "pilot_B_23",
+   "stage": "pilot",
+   "cond": "B",
+   "i": 23,
+   "trial": 23,
+   "can0": [
+    0.2949,
+    0.0186
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "pass_dx": 0.029240079332535793,
+    "pass_dy": -0.04567177482962406,
+    "pass_dz": 0.006637231078327421,
+    "approach_bump": 0.0475206427056806,
+    "bump_angle": 3.607970523417341,
+    "grasp_axial": 0.024160703779632357,
+    "grasp_azimuth_deg": -34.12343546013321,
+    "approach_speed": 0.8457118880658762,
+    "receiver_dwell": 11,
+    "release_delay": 6,
+    "scale": 1.0,
+    "delta_xy": [
+     3.203740119933629e-05,
+     -0.006610190564393999
+    ]
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 204,
+    "L_approach": 159,
+    "L_close": 226,
+    "R_release_cmd": 222,
+    "end": 292,
+    "anchor": 142,
+    "R_release_eff": 240
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 14,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 293,
+   "notes": [
+    "receiver grasp in can frame: axial +0.024 m, azimuth -34.1 deg relative to source; pass shift [0.029, -0.046, 0.007]"
+   ],
+   "plan_file": "plans/pilot_B_23.npz",
+   "plan_sha256": "8065bed9e6fd52885166bb476f95db3de07a1e7c4769d6bb9f3506c415991912"
+  },
+  {
+   "tag": "pilot_C_23",
+   "stage": "pilot",
+   "cond": "C",
+   "i": 23,
+   "trial": 23,
+   "can0": [
+    0.2949,
+    0.0186
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "pass_dx": 0.010234027766387526,
+    "pass_dy": -0.01598512119036842,
+    "pass_dz": 0.0023230308774145974,
+    "approach_bump": 0.016632224946988208,
+    "bump_angle": 3.607970523417341,
+    "grasp_axial": 0.008456246322871324,
+    "grasp_azimuth_deg": -11.943202411046622,
+    "approach_speed": 0.8457118880658762,
+    "receiver_dwell": 11,
+    "release_delay": 6,
+    "scale": 0.35,
+    "delta_xy": [
+     3.203740119933629e-05,
+     -0.006610190564393999
+    ],
+    "giver_wait_added": 18,
+    "giver_source_index_at_take": 172,
+    "receiver_axial_on_can": 0.07508000000000001,
+    "retimed_steps": 3
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 207,
+    "L_approach": 159,
+    "L_close": 229,
+    "R_release_cmd": 243,
+    "end": 307,
+    "anchor": 142,
+    "R_release_eff": 261
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 14,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 142,
+     "pass_step": 229,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.4117828184860654,
+       -0.9107450723085161,
+       0.03127816595371504,
+       0.1861318915318274
+      ],
+      [
+       0.8974822002785244,
+       0.4112587484143025,
+       0.1593484924180974,
+       -0.02476672082412966
+      ],
+      [
+       -0.1579892736323928,
+       -0.037545374128612544,
+       0.9867267779373639,
+       0.524922705457896
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 308,
+   "notes": [
+    "receiver grasp in can frame: axial +0.008 m, azimuth -11.9 deg relative to source; pass shift [0.01, -0.016, 0.002]",
+    "C accepted at scale 0.35; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.35, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/pilot_C_23.npz",
+   "plan_sha256": "e7f3ec0a9057691655a40b1bc8d0653a1fbba3b65ad500b6b525f2477a401a04"
+  },
+  {
+   "tag": "smoke_A_00",
+   "stage": "smoke",
+   "cond": "A",
+   "i": 0,
+   "trial": 96,
+   "can0": [
+    0.2758,
+    0.0239
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "delta_xy": [
+     -0.01906796259880067,
+     -0.001310190564393996
+    ]
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 204,
+    "L_approach": 159,
+    "L_close": 206,
+    "R_release_cmd": 216,
+    "end": 280,
+    "anchor": 142,
+    "R_release_eff": 216
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 281,
+   "notes": [],
+   "plan_file": "plans/smoke_A_00.npz",
+   "plan_sha256": "215dc17aa2c7c28cd41ef89c4bdfc4048807251ac789a15541e2497ba5afade4"
+  },
+  {
+   "tag": "smoke_B_00",
+   "stage": "smoke",
+   "cond": "B",
+   "i": 0,
+   "trial": 96,
+   "can0": [
+    0.2758,
+    0.0239
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "pass_dx": -0.056912181166059124,
+    "pass_dy": 0.029686724356354416,
+    "pass_dz": -0.02471426002861615,
+    "approach_bump": 0.046288942194578866,
+    "bump_angle": 4.731102958722828,
+    "grasp_axial": -0.023471417645024247,
+    "grasp_azimuth_deg": -12.171613987301008,
+    "approach_speed": 1.2100375704225772,
+    "receiver_dwell": 8,
+    "release_delay": 5,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.01906796259880067,
+     -0.001310190564393996
+    ]
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 204,
+    "L_approach": 159,
+    "L_close": 206,
+    "R_release_cmd": 221,
+    "end": 285,
+    "anchor": 142,
+    "R_release_eff": 221
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 13,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 286,
+   "notes": [
+    "receiver grasp in can frame: axial -0.023 m, azimuth -12.2 deg relative to source; pass shift [-0.057, 0.03, -0.025]"
+   ],
+   "plan_file": "plans/smoke_B_00.npz",
+   "plan_sha256": "43e8304818b87c315c3e94e25c1d1e11f0f2c9c76e0003399a21df6ccd1d23b6"
+  },
+  {
+   "tag": "smoke_C_00",
+   "stage": "smoke",
+   "cond": "C",
+   "i": 0,
+   "trial": 96,
+   "can0": [
+    0.2758,
+    0.0239
+   ],
+   "source": "sim10_ep4",
+   "params": {
+    "pass_dx": -0.034147308699635476,
+    "pass_dy": 0.017812034613812647,
+    "pass_dz": -0.014828556017169689,
+    "approach_bump": 0.02777336531674732,
+    "bump_angle": 4.731102958722828,
+    "grasp_axial": -0.014082850587014547,
+    "grasp_azimuth_deg": -7.302968392380604,
+    "approach_speed": 1.2100375704225772,
+    "receiver_dwell": 8,
+    "release_delay": 5,
+    "scale": 0.6,
+    "delta_xy": [
+     -0.01906796259880067,
+     -0.001310190564393996
+    ],
+    "giver_source_index_at_take": 162,
+    "receiver_axial_on_can": 0.052883062786924194
+   },
+   "marks": {
+    "R_close": 104,
+    "R_sig": 105,
+    "giver_arrive": 204,
+    "L_approach": 159,
+    "L_close": 206,
+    "R_release_cmd": 221,
+    "end": 285,
+    "anchor": 142,
+    "R_release_eff": 221
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 13,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 142,
+     "pass_step": 206,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.41416697831751215,
+       -0.9100571068488402,
+       0.016179503863230596,
+       0.1474423977220512
+      ],
+      [
+       0.9014572376826657,
+       0.4125815137968047,
+       0.13096313642653634,
+       0.0034762656790397403
+      ],
+      [
+       -0.1258592972365565,
+       -0.03965547562513872,
+       0.9912552045523215,
+       0.514798695056578
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 286,
+   "notes": [
+    "receiver grasp in can frame: axial -0.014 m, azimuth -7.3 deg relative to source; pass shift [-0.034, 0.018, -0.015]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['clearance_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/smoke_C_00.npz",
+   "plan_sha256": "dae7011d11c57299f4fc146a709baf5daed6802623dcb647a9d7ccade0dba896"
+  },
+  {
+   "tag": "smoke_A_01",
+   "stage": "smoke",
+   "cond": "A",
+   "i": 1,
+   "trial": 97,
+   "can0": [
+    0.2432,
+    0.0407
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "delta_xy": [
+     -0.010516230392456055,
+     0.01658696889579296
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 193,
+    "R_release_cmd": 203,
+    "end": 253,
+    "anchor": 138,
+    "R_release_eff": 203
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 254,
+   "notes": [],
+   "plan_file": "plans/smoke_A_01.npz",
+   "plan_sha256": "95de31c9ae5e05a443b68b75df9b818876c2ced7eeef447bd22a9cb009d88368"
+  },
+  {
+   "tag": "smoke_B_01",
+   "stage": "smoke",
+   "cond": "B",
+   "i": 1,
+   "trial": 97,
+   "can0": [
+    0.2432,
+    0.0407
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "pass_dx": 0.008736249434283763,
+    "pass_dy": -0.0020871909218175347,
+    "pass_dz": -0.03481219105159785,
+    "approach_bump": 0.019767485430677016,
+    "bump_angle": 5.393731221707916,
+    "grasp_axial": -0.007514601724111732,
+    "grasp_azimuth_deg": -27.579390965745738,
+    "approach_speed": 0.8416634499220949,
+    "receiver_dwell": 4,
+    "release_delay": 0,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.010516230392456055,
+     0.01658696889579296
+    ]
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 198,
+    "L_approach": 133,
+    "L_close": 208,
+    "R_release_cmd": 203,
+    "end": 260,
+    "anchor": 138,
+    "R_release_eff": 216
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 261,
+   "notes": [
+    "receiver grasp in can frame: axial -0.008 m, azimuth -27.6 deg relative to source; pass shift [0.009, -0.002, -0.035]"
+   ],
+   "plan_file": "plans/smoke_B_01.npz",
+   "plan_sha256": "f65a6d467faffb3c9de00d25e7d47cf6d95d3dee9d39a28a776ecf9a0879d09d"
+  },
+  {
+   "tag": "smoke_C_01",
+   "stage": "smoke",
+   "cond": "C",
+   "i": 1,
+   "trial": 97,
+   "can0": [
+    0.2432,
+    0.0407
+   ],
+   "source": "sim10_ep9",
+   "params": {
+    "pass_dx": 0.005241749660570258,
+    "pass_dy": -0.0012523145530905207,
+    "pass_dz": -0.02088731463095871,
+    "approach_bump": 0.011860491258406209,
+    "bump_angle": 5.393731221707916,
+    "grasp_axial": -0.004508761034467039,
+    "grasp_azimuth_deg": -16.547634579447443,
+    "approach_speed": 0.8416634499220949,
+    "receiver_dwell": 4,
+    "release_delay": 0,
+    "scale": 0.6,
+    "delta_xy": [
+     -0.010516230392456055,
+     0.01658696889579296
+    ],
+    "giver_wait_added": 13,
+    "giver_source_index_at_take": 159,
+    "receiver_axial_on_can": 0.06128652560125605,
+    "retimed_steps": 3
+   },
+   "marks": {
+    "R_close": 100,
+    "R_sig": 101,
+    "giver_arrive": 201,
+    "L_approach": 133,
+    "L_close": 211,
+    "R_release_cmd": 219,
+    "end": 269,
+    "anchor": 138,
+    "R_release_eff": 232
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 138,
+     "pass_step": 211,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.3805166300960285,
+       -0.9155802353688289,
+       0.13007661904555382,
+       0.2009916468095303
+      ],
+      [
+       0.8841962195528703,
+       0.40141170412323157,
+       0.23888425883949727,
+       0.0051031248532246234
+      ],
+      [
+       -0.2709319832518392,
+       0.02411382165570457,
+       0.9622964117445217,
+       0.48889237172335726
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 270,
+   "notes": [
+    "receiver grasp in can frame: axial -0.005 m, azimuth -16.5 deg relative to source; pass shift [0.005, -0.001, -0.021]",
+    "C accepted at scale 0.6; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok']}, {'scale': 0.6, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/smoke_C_01.npz",
+   "plan_sha256": "e0a03d2aec539d13134e47bb0da576d8825f6e52f6d1dbcc86c848e88752be25"
+  },
+  {
+   "tag": "smoke_A_02",
+   "stage": "smoke",
+   "cond": "A",
+   "i": 2,
+   "trial": 98,
+   "can0": [
+    0.2315,
+    -0.0129
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "delta_xy": [
+     -0.03318747854232787,
+     -0.021088568055629732
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 190,
+    "R_release_cmd": 200,
+    "end": 262,
+    "anchor": 137,
+    "R_release_eff": 200
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 263,
+   "notes": [],
+   "plan_file": "plans/smoke_A_02.npz",
+   "plan_sha256": "b8959e992573c66f8e4b43f9fea01a63817c627a903cf5a4271537b68f44c633"
+  },
+  {
+   "tag": "smoke_B_02",
+   "stage": "smoke",
+   "cond": "B",
+   "i": 2,
+   "trial": 98,
+   "can0": [
+    0.2315,
+    -0.0129
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.011905558283392861,
+    "pass_dy": -0.041246649205429656,
+    "pass_dz": -0.03471123726529615,
+    "approach_bump": 0.0027229100215213787,
+    "bump_angle": 4.959326792197221,
+    "grasp_axial": -0.02725322619651984,
+    "grasp_azimuth_deg": -0.9055107303197687,
+    "approach_speed": 0.9722226668035474,
+    "receiver_dwell": 9,
+    "release_delay": 4,
+    "scale": 1.0,
+    "delta_xy": [
+     -0.03318747854232787,
+     -0.021088568055629732
+    ]
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 201,
+    "R_release_cmd": 204,
+    "end": 266,
+    "anchor": 137,
+    "R_release_eff": 213
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 12,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 267,
+   "notes": [
+    "receiver grasp in can frame: axial -0.027 m, azimuth -0.9 deg relative to source; pass shift [-0.012, -0.041, -0.035]"
+   ],
+   "plan_file": "plans/smoke_B_02.npz",
+   "plan_sha256": "9f3dc1edbf543def3427e83cbf225eb98d48b0edb99cb8d750a2150abefaff33"
+  },
+  {
+   "tag": "smoke_C_02",
+   "stage": "smoke",
+   "cond": "C",
+   "i": 2,
+   "trial": 98,
+   "can0": [
+    0.2315,
+    -0.0129
+   ],
+   "source": "sim10_ep7",
+   "params": {
+    "pass_dx": -0.004166945399187501,
+    "pass_dy": -0.014436327221900379,
+    "pass_dz": -0.012148933042853652,
+    "approach_bump": 0.0009530185075324824,
+    "bump_angle": 4.959326792197221,
+    "grasp_axial": -0.009538629168781943,
+    "grasp_azimuth_deg": -0.316928755611919,
+    "approach_speed": 0.9722226668035474,
+    "receiver_dwell": 9,
+    "release_delay": 4,
+    "scale": 0.35,
+    "delta_xy": [
+     -0.03318747854232787,
+     -0.021088568055629732
+    ],
+    "giver_wait_added": 9,
+    "giver_source_index_at_take": 156,
+    "receiver_axial_on_can": 0.060095501439716884
+   },
+   "marks": {
+    "R_close": 99,
+    "R_sig": 100,
+    "giver_arrive": 192,
+    "L_approach": 113,
+    "L_close": 201,
+    "R_release_cmd": 213,
+    "end": 275,
+    "anchor": 137,
+    "R_release_eff": 222
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 12,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 137,
+     "pass_step": 201,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.29972555086697555,
+       -0.9540253023582983,
+       0.0005626878762428492,
+       0.16179510098846092
+      ],
+      [
+       0.9476843180202094,
+       0.2978011937699724,
+       0.11492990197398942,
+       -0.001851540056444563
+      ],
+      [
+       -0.10981360360200983,
+       -0.0339141777039861,
+       0.9933734448909957,
+       0.516945799135905
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "planned",
+   "steps": 276,
+   "notes": [
+    "receiver grasp in can frame: axial -0.010 m, azimuth -0.3 deg relative to source; pass shift [-0.004, -0.014, -0.012]",
+    "C accepted at scale 0.35; tries [{'scale': 1.0, 'all_ok_C': False, 'failed': ['clearance_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['clearance_ok']}, {'scale': 0.35, 'all_ok_C': True, 'failed': []}]"
+   ],
+   "plan_file": "plans/smoke_C_02.npz",
+   "plan_sha256": "ed0e711b55f858fa5c160070c010321b7fe895408f2b1b0743a0c35dc8be89d9"
+  },
+  {
+   "tag": "smoke_A_03",
+   "stage": "smoke",
+   "cond": "A",
+   "i": 3,
+   "trial": 99,
+   "can0": [
+    0.2228,
+    0.0074
+   ],
+   "source": "sim10_ep5",
+   "params": {
+    "delta_xy": [
+     0.015674291539192198,
+     -0.027328888422250747
+    ]
+   },
+   "marks": {
+    "R_close": 97,
+    "R_sig": 98,
+    "giver_arrive": 201,
+    "L_approach": 111,
+    "L_close": 202,
+    "R_release_cmd": 212,
+    "end": 275,
+    "anchor": 135,
+    "R_release_eff": 212
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 8,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 276,
+   "notes": [],
+   "plan_file": "plans/smoke_A_03.npz",
+   "plan_sha256": "9247c9e56cfb5a76f07f9d1e9634ae159c220e74c96fde6d0894f36df6be8569"
+  },
+  {
+   "tag": "smoke_B_03",
+   "stage": "smoke",
+   "cond": "B",
+   "i": 3,
+   "trial": 99,
+   "can0": [
+    0.2228,
+    0.0074
+   ],
+   "source": "sim10_ep5",
+   "params": {
+    "pass_dx": -0.03466934577262648,
+    "pass_dy": -0.00306284884094149,
+    "pass_dz": -0.03870539763111991,
+    "approach_bump": 0.008344621948623976,
+    "bump_angle": 0.38384545344656895,
+    "grasp_axial": 0.006560601933520108,
+    "grasp_azimuth_deg": -44.53081258999248,
+    "approach_speed": 0.925647889390304,
+    "receiver_dwell": 4,
+    "release_delay": 8,
+    "scale": 1.0,
+    "delta_xy": [
+     0.015674291539192198,
+     -0.027328888422250747
+    ]
+   },
+   "marks": {
+    "R_close": 97,
+    "R_sig": 98,
+    "giver_arrive": 201,
+    "L_approach": 111,
+    "L_close": 213,
+    "R_release_cmd": 220,
+    "end": 283,
+    "anchor": 135,
+    "R_release_eff": 229
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 16,
+    "receiver_close_gate": false,
+    "receiver_reanchor": null
+   },
+   "status": "planned",
+   "steps": 284,
+   "notes": [
+    "receiver grasp in can frame: axial +0.007 m, azimuth -44.5 deg relative to source; pass shift [-0.035, -0.003, -0.039]"
+   ],
+   "plan_file": "plans/smoke_B_03.npz",
+   "plan_sha256": "6304f61633bf38aaaba26fd8eeb8c6388c77a59d99e6aa979a17cdfc7cc8130f"
+  },
+  {
+   "tag": "smoke_C_03",
+   "stage": "smoke",
+   "cond": "C",
+   "i": 3,
+   "trial": 99,
+   "can0": [
+    0.2228,
+    0.0074
+   ],
+   "source": "sim10_ep5",
+   "params": {
+    "pass_dx": -0.012134271020419267,
+    "pass_dy": -0.0010719970943295215,
+    "pass_dz": -0.013546889170891967,
+    "approach_bump": 0.0029206176820183913,
+    "bump_angle": 0.38384545344656895,
+    "grasp_axial": 0.0022962106767320375,
+    "grasp_azimuth_deg": -15.585784406497366,
+    "approach_speed": 0.925647889390304,
+    "receiver_dwell": 4,
+    "release_delay": 8,
+    "scale": 0.35,
+    "delta_xy": [
+     0.015674291539192198,
+     -0.027328888422250747
+    ],
+    "giver_wait_added": 9,
+    "giver_source_index_at_take": 168,
+    "receiver_axial_on_can": 0.07508000000000001
+   },
+   "marks": {
+    "R_close": 97,
+    "R_sig": 98,
+    "giver_arrive": 201,
+    "L_approach": 111,
+    "L_close": 213,
+    "R_release_cmd": 229,
+    "end": 292,
+    "anchor": 135,
+    "R_release_eff": 238
+   },
+   "runtime": {
+    "giver_hold_until_taken": true,
+    "release_overlap": 16,
+    "receiver_close_gate": true,
+    "receiver_reanchor": {
+     "anchor_step": 135,
+     "pass_step": 213,
+     "rule": "at anchor_step measure X = inv(T_R_grasp) @ T_can (sim GT); predicted can at the pass = target_R[pass_step] @ X; apply ONE rigid correction inv-plan-prediction to every left target from L_approach on, blended in over the approach (smoothstep)",
+     "plan_can_at_pass": [
+      [
+       0.32967995687872764,
+       -0.9417052451901426,
+       0.06709960665916231,
+       0.16786168981151403
+      ],
+      [
+       0.8621099993093039,
+       0.32925912257782963,
+       0.38516850765631244,
+       -0.004834470340599903
+      ],
+      [
+       -0.3848083615559222,
+       -0.06913509514459189,
+       0.9204036416138279,
+       0.48943405902733256
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ]
+     ]
+    },
+    "close_gate_wait": 15
+   },
+   "status": "rejected",
+   "steps": 293,
+   "notes": [
+    "receiver grasp in can frame: axial +0.002 m, azimuth -15.6 deg relative to source; pass shift [-0.012, -0.001, -0.014]",
+    "C rejected after 3 tries: [{'scale': 1.0, 'all_ok_C': False, 'failed': ['ik_ok', 'clearance_ok']}, {'scale': 0.6, 'all_ok_C': False, 'failed': ['clearance_ok']}, {'scale': 0.35, 'all_ok_C': False, 'failed': ['clearance_ok']}]"
+   ],
+   "plan_file": "plans/smoke_C_03.npz",
+   "plan_sha256": "628bca17336a02fb36353c785989f57bd7e093385ea67abc3fe8a8661b68f51b"
+  }
+ ]
+}

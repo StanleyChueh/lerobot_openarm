@@ -1,0 +1,24 @@
+test_A_replays_the_handover (test_generation_feasibility.BaselineA.test_A_replays_the_handover)
+A's receiver path is the source's: path novelty << 1 for every pilot pose. ... ok
+test_A_translates_only_the_right_approach (test_generation_feasibility.BaselineA.test_A_translates_only_the_right_approach) ... ok
+test_zero_parameter_B_equals_A (test_generation_feasibility.BaselineA.test_zero_parameter_B_equals_A) ... ok
+test_C_constraints_hold_on_accepted_plans (test_generation_feasibility.ConditionC.test_C_constraints_hold_on_accepted_plans) ... ok
+test_reanchor_model_tolerates_attachment_error_open_loop_does_not (test_generation_feasibility.ConditionC.test_reanchor_model_tolerates_attachment_error_open_loop_does_not) ... ok
+test_retime_keeps_arms_synchronised (test_generation_feasibility.ConditionC.test_retime_keeps_arms_synchronised) ... ok
+test_fk_matches_simulator_grasp_frames (test_generation_feasibility.Kinematics.test_fk_matches_simulator_grasp_frames)
+URDF FK + 2.4 mm reproduces the recorded sim grasp frames (pre-step obs[t+1] vs post-step state[t]). ... ok
+test_ik_round_trip_and_limits (test_generation_feasibility.Kinematics.test_ik_round_trip_and_limits) ... ok
+test_gate1r_verifier_frozen (test_generation_feasibility.Protocol.test_gate1r_verifier_frozen)
+The failed Gate 1R line is not modified by this experiment. ... ok
+test_manifest_pairs_conditions (test_generation_feasibility.Protocol.test_manifest_pairs_conditions) ... ok
+test_preflight_refuses_without_approval (test_generation_feasibility.Protocol.test_preflight_refuses_without_approval) ... ok
+test_dropped_can_is_not_stable (test_generation_feasibility.SimMetrics.test_dropped_can_is_not_stable) ... ok
+test_executed_descriptor_on_a_recorded_episode (test_generation_feasibility.SimMetrics.test_executed_descriptor_on_a_recorded_episode) ... ok
+test_giver_never_releasing_is_not_success (test_generation_feasibility.SimMetrics.test_giver_never_releasing_is_not_success) ... ok
+test_receiver_shut_on_air_is_not_success (test_generation_feasibility.SimMetrics.test_receiver_shut_on_air_is_not_success) ... ok
+test_replica_matches_recorded_success_and_sources_are_stable (test_generation_feasibility.SimMetrics.test_replica_matches_recorded_success_and_sources_are_stable) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 4.114s
+
+OK

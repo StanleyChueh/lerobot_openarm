@@ -1,0 +1,68 @@
+
+REFUSED: no review approval for this exact spec (outputs/PILOT_APPROVED.json with spec_sha256). No simulation is started by this script in any case.
+{
+ "version": "genfeas-0.1-dryrun",
+ "spec_sha256": "824a8e4eeec33acef6c3fea0290fa37c98ce48100aa3cbeac57afb7dfcc8b125",
+ "approved": false,
+ "prerequisites": [
+  {
+   "check": "dry-run manifest present",
+   "ok": true,
+   "detail": "/home/stanley/Stanley_ws/lerobot_openarm/research/generation_feasibility/outputs/dry_run/pilot_manifest.json"
+  },
+  {
+   "check": "manifest version matches config",
+   "ok": true,
+   "detail": "genfeas-0.1-dryrun"
+  },
+  {
+   "check": "24 pilot candidates per condition",
+   "ok": true,
+   "detail": {
+    "A": 24,
+    "B": 24,
+    "C": 24
+   }
+  },
+  {
+   "check": "IsaacLab at the audited commit",
+   "ok": true,
+   "detail": "4aa5e026"
+  },
+  {
+   "check": "IsaacLab tree clean",
+   "ok": true,
+   "detail": "uncommitted changes would change the env"
+  },
+  {
+   "check": "sim_10 LeRobot sources cached",
+   "ok": true,
+   "detail": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_sim_10_v00/snapshots/b6d39dae630b8ce0b5822bee7a40bffc68a28819"
+  },
+  {
+   "check": "server source HDF5 with per-step can pose (needed for P0 source replays and GT attachments)",
+   "ok": false,
+   "detail": "/home/stanley/Stanley_ws/IsaacLab/logs/demos/openarm_pringles_lerobot_sim_10_v00_annotated.hdf5"
+  },
+  {
+   "check": "pilot runner implemented (scripts/run_pilot_isaac.py)",
+   "ok": false,
+   "detail": "specified in GENERATION_FEASIBILITY_PLAN.md \u00a75; deliberately NOT written before review"
+  },
+  {
+   "check": "Isaac Lab python env",
+   "ok": true,
+   "detail": "env_isaaclab"
+  },
+  {
+   "check": "GPU driver present (not queried)",
+   "ok": true,
+   "detail": "presence only"
+  },
+  {
+   "check": "disk >= 20 GB free (no cameras: ~1-2 MB per rollout)",
+   "ok": true,
+   "detail": "2734 GB"
+  }
+ ]
+}

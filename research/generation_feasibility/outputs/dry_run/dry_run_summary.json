@@ -1,0 +1,674 @@
+{
+ "version": "genfeas-0.1-dryrun",
+ "date_utc": "2026-11-05T02:17:12Z",
+ "repo_commit": "277906945c7c3f2cf234bfd98ece80051e3b19c6",
+ "isaaclab_commit": "4aa5e026",
+ "isaaclab_dirty": false,
+ "source_dataset": "ethanCSL/openarm_pringles_lerobot_sim_10_v00@b6d39dae630b8ce0b5822bee7a40bffc68a28819",
+ "n_sources": 10,
+ "pilot_trials": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23
+ ],
+ "smoke_trials": [
+  96,
+  97,
+  98,
+  99
+ ],
+ "source_stats": {
+  "can0_std_xy_m": [
+   0.06393250926693576,
+   0.015618696374569873
+  ],
+  "can0_range_xy_m": [
+   [
+    0.13440777361392975,
+    -0.008683432824909687
+   ],
+   [
+    0.3320339322090149,
+    0.04080262407660484
+   ]
+  ],
+  "pass_std_xyz_m": [
+   0.009805754776643957,
+   0.008300934624010492,
+   0.023247106554330852
+  ],
+  "pass_range_xyz_m": [
+   [
+    0.16778788948588816,
+    -0.011484032807412815,
+    0.5088711518054624
+   ],
+   [
+    0.19678983307573963,
+    0.011591280083424714,
+    0.5804472068276157
+   ]
+  ],
+  "corr_can0x_passx": 0.13833075092049044,
+  "corr_can0y_passy": -0.24340654270447878,
+  "nn_scale": {
+   "pass": 0.009659600778925968,
+   "grasp": 1.5187338631964742,
+   "path": 0.020260879381036448,
+   "timing": 1.0
+  },
+  "envelope": {
+   "axial_sep": [
+    0.06063098443859359,
+    0.12775733955564328
+   ],
+   "rel_azimuth_deg": [
+    175.7847237897608,
+    232.93854223144118
+   ]
+  },
+  "attachment_source": "nominal attachment (mean of 40 local GT demos, config.NOMINAL_ATTACH_*); std 1.35/0.29/0.68 cm",
+  "receiver_capture_under_prediction": "6/10 (all 10 are GT successes)"
+ },
+ "source_table": [
+  {
+   "name": "sim10_ep0",
+   "can0": [
+    0.19743220508098602,
+    0.04080262407660484
+   ],
+   "t_sig": 87,
+   "t_R_close": 86,
+   "t_L_approach": 118,
+   "t_giver_arrive": 172,
+   "t_L_close": 180,
+   "t_R_release": 184,
+   "T": 260,
+   "pass": [
+    0.19239270899739144,
+    -0.0062679609210899365,
+    0.5171180600198536
+   ],
+   "axial_sep": 0.12071391078905724,
+   "rel_azimuth_deg": 175.7847237897608,
+   "axial_L": 0.0776835294334505,
+   "t_close_minus_arrive": 8,
+   "overlap": 4
+  },
+  {
+   "name": "sim10_ep1",
+   "can0": [
+    0.13440777361392975,
+    -0.008683432824909687
+   ],
+   "t_sig": 95,
+   "t_R_close": 94,
+   "t_L_approach": 130,
+   "t_giver_arrive": 187,
+   "t_L_close": 195,
+   "t_R_release": 198,
+   "T": 265,
+   "pass": [
+    0.1738885781304754,
+    -0.007504225719275004,
+    0.5757595388128892
+   ],
+   "axial_sep": 0.06063098443859359,
+   "rel_azimuth_deg": 178.98775417337973,
+   "axial_L": 0.017600603082986756,
+   "t_close_minus_arrive": 8,
+   "overlap": 3
+  },
+  {
+   "name": "sim10_ep2",
+   "can0": [
+    0.1404724270105362,
+    0.0035552671179175377
+   ],
+   "t_sig": 84,
+   "t_R_close": 83,
+   "t_L_approach": 83,
+   "t_giver_arrive": 170,
+   "t_L_close": 177,
+   "t_R_release": 187,
+   "T": 263,
+   "pass": [
+    0.17255633854368188,
+    -0.011484032807412815,
+    0.5804472068276157
+   ],
+   "axial_sep": 0.07691232046639161,
+   "rel_azimuth_deg": 189.13544622383077,
+   "axial_L": 0.0338819391107848,
+   "t_close_minus_arrive": 7,
+   "overlap": 10
+  },
+  {
+   "name": "sim10_ep3",
+   "can0": [
+    0.1753547340631485,
+    0.025135355070233345
+   ],
+   "t_sig": 83,
+   "t_R_close": 82,
+   "t_L_approach": 118,
+   "t_giver_arrive": 162,
+   "t_L_close": 168,
+   "t_R_release": 169,
+   "T": 234,
+   "pass": [
+    0.19156773618148104,
+    -0.001202534577515943,
+    0.5346542093688063
+   ],
+   "axial_sep": 0.11778809953409528,
+   "rel_azimuth_deg": 206.88657136847718,
+   "axial_L": 0.07475771817848853,
+   "t_close_minus_arrive": 6,
+   "overlap": 1
+  },
+  {
+   "name": "sim10_ep4",
+   "can0": [
+    0.29486796259880066,
+    0.025210190564393997
+   ],
+   "t_sig": 83,
+   "t_R_close": 82,
+   "t_L_approach": 123,
+   "t_giver_arrive": 160,
+   "t_L_close": 170,
+   "t_R_release": 172,
+   "T": 237,
+   "pass": [
+    0.17765692422332327,
+    -0.009838485045841713,
+    0.5274687315182566
+   ],
+   "axial_sep": 0.11045862944967824,
+   "rel_azimuth_deg": 189.3134061129913,
+   "axial_L": 0.06742824809407143,
+   "t_close_minus_arrive": 10,
+   "overlap": 2
+  },
+  {
+   "name": "sim10_ep5",
+   "can0": [
+    0.2071257084608078,
+    0.03472888842225075
+   ],
+   "t_sig": 76,
+   "t_R_close": 75,
+   "t_L_approach": 75,
+   "t_giver_arrive": 157,
+   "t_L_close": 166,
+   "t_R_release": 168,
+   "T": 232,
+   "pass": [
+    0.1921525007100161,
+    -0.009603584075532953,
+    0.5088711518054624
+   ],
+   "axial_sep": 0.12775733955564328,
+   "rel_azimuth_deg": 188.319204704497,
+   "axial_L": 0.0847269582000365,
+   "t_close_minus_arrive": 9,
+   "overlap": 2
+  },
+  {
+   "name": "sim10_ep6",
+   "can0": [
+    0.3320339322090149,
+    0.004518819972872734
+   ],
+   "t_sig": 78,
+   "t_R_close": 78,
+   "t_L_approach": 106,
+   "t_giver_arrive": 133,
+   "t_L_close": 150,
+   "t_R_release": 158,
+   "T": 226,
+   "pass": [
+    0.1838426370079759,
+    -0.0025450395718236846,
+    0.5288290615045239
+   ],
+   "axial_sep": 0.08127485137208681,
+   "rel_azimuth_deg": 205.74318094949564,
+   "axial_L": 0.03824447001648004,
+   "t_close_minus_arrive": 17,
+   "overlap": 8
+  },
+  {
+   "name": "sim10_ep7",
+   "can0": [
+    0.2646874785423279,
+    0.00818856805562973
+   ],
+   "t_sig": 78,
+   "t_R_close": 77,
+   "t_L_approach": 77,
+   "t_giver_arrive": 148,
+   "t_L_close": 154,
+   "t_R_release": 156,
+   "T": 219,
+   "pass": [
+    0.16778788948588816,
+    0.011591280083424714,
+    0.5320434827623262
+   ],
+   "axial_sep": 0.11057008380363299,
+   "rel_azimuth_deg": 196.04936065662122,
+   "axial_L": 0.06753970244802616,
+   "t_close_minus_arrive": 6,
+   "overlap": 2
+  },
+  {
+   "name": "sim10_ep8",
+   "can0": [
+    0.2828691899776459,
+    -0.0008368715643882751
+   ],
+   "t_sig": 77,
+   "t_R_close": 76,
+   "t_L_approach": 76,
+   "t_giver_arrive": 148,
+   "t_L_close": 156,
+   "t_R_release": 158,
+   "T": 218,
+   "pass": [
+    0.1922194812844625,
+    0.011300475555994477,
+    0.5295080770060335
+   ],
+   "axial_sep": 0.10473237962672564,
+   "rel_azimuth_deg": 217.47588535691983,
+   "axial_L": 0.06170199827111888,
+   "t_close_minus_arrive": 8,
+   "overlap": 2
+  },
+  {
+   "name": "sim10_ep9",
+   "can0": [
+    0.25371623039245605,
+    0.02411303110420704
+   ],
+   "t_sig": 79,
+   "t_R_close": 78,
+   "t_L_approach": 97,
+   "t_giver_arrive": 154,
+   "t_L_close": 157,
+   "t_R_release": 159,
+   "T": 210,
+   "pass": [
+    0.19678983307573963,
+    0.0062967789425586035,
+    0.5117088374505042
+   ],
+   "axial_sep": 0.10883166435073174,
+   "rel_azimuth_deg": 232.93854223144118,
+   "axial_L": 0.0658012829951249,
+   "t_close_minus_arrive": 3,
+   "overlap": 2
+  }
+ ],
+ "A_self_replay": [
+  {
+   "source": "sim10_ep0",
+   "pass_nn_m": 0.010724960787515083,
+   "path_nn_m": 0.0019217887931883679,
+   "grasp_ratio": 0.11519419958297475,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep1",
+   "pass_nn_m": 0.009967954832119956,
+   "path_nn_m": 0.0025307065551894293,
+   "grasp_ratio": 0.49504452425085815,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep2",
+   "pass_nn_m": 0.009164561316305954,
+   "path_nn_m": 0.0023068292355932145,
+   "grasp_ratio": 0.2721903701426552,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep3",
+   "pass_nn_m": 0.013657555875033136,
+   "path_nn_m": 0.0032490737673262866,
+   "grasp_ratio": 0.6975284733401598,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep4",
+   "pass_nn_m": 0.00634943372578628,
+   "path_nn_m": 0.003497227056585364,
+   "grasp_ratio": 0.2423505946670185,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep5",
+   "pass_nn_m": 0.0063960583972084125,
+   "path_nn_m": 0.0040649095093007615,
+   "grasp_ratio": 0.40735034691912136,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep6",
+   "pass_nn_m": 0.007264542015148482,
+   "path_nn_m": 0.0029831880516779955,
+   "grasp_ratio": 0.5631320466670438,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep7",
+   "pass_nn_m": 0.009554786970787797,
+   "path_nn_m": 0.002605073339370964,
+   "grasp_ratio": 0.06047097691116009,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep8",
+   "pass_nn_m": 0.006874476109721301,
+   "path_nn_m": 0.003987309812580557,
+   "grasp_ratio": 0.16928134747471252,
+   "inserted_steps": 44
+  },
+  {
+   "source": "sim10_ep9",
+   "pass_nn_m": 0.008189230830825088,
+   "path_nn_m": 0.003624866148205715,
+   "grasp_ratio": 0.2961008959079055,
+   "inserted_steps": 44
+  }
+ ],
+ "pilot": {
+  "A": {
+   "n": 24,
+   "accepted": 24,
+   "checks_pass_all_ok": 6,
+   "checks_pass_all_ok_C": 1,
+   "pass_ik_ok": 24,
+   "pass_clearance_ok": 24,
+   "pass_phase_order_ok": 24,
+   "pass_receiver_in_grasp_cylinder": 17,
+   "pass_receiver_jaw_capture": 8,
+   "pass_receiver_on_can_body": 21,
+   "pass_grasp_separation_ok": 24,
+   "pass_receiver_after_giver_arrival": 11,
+   "speed_violation_plans": 11,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 0,
+   "planned_novel_pass_far": 0,
+   "planned_novel_axial": 0,
+   "planned_novel_azimuth": 0,
+   "median_novelty_ratio": {
+    "pass": 0.9689504108665201,
+    "grasp": 0.25727048240483685,
+    "path": 0.12857651883605958,
+    "timing": 8.801162633521313
+   },
+   "attachment_capture_model_median": 0.425,
+   "sources_used": [
+    "sim10_ep0",
+    "sim10_ep1",
+    "sim10_ep2",
+    "sim10_ep3",
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep6",
+    "sim10_ep7",
+    "sim10_ep8",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.02101564410597708,
+   "steps_median": 273.0
+  },
+  "B": {
+   "n": 24,
+   "accepted": 24,
+   "checks_pass_all_ok": 3,
+   "checks_pass_all_ok_C": 0,
+   "pass_ik_ok": 12,
+   "pass_clearance_ok": 18,
+   "pass_phase_order_ok": 24,
+   "pass_receiver_in_grasp_cylinder": 17,
+   "pass_receiver_jaw_capture": 8,
+   "pass_receiver_on_can_body": 15,
+   "pass_grasp_separation_ok": 23,
+   "pass_receiver_after_giver_arrival": 17,
+   "speed_violation_plans": 17,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 19,
+   "planned_novel_pass_far": 18,
+   "planned_novel_axial": 6,
+   "planned_novel_azimuth": 5,
+   "median_novelty_ratio": {
+    "pass": 5.083026847922129,
+    "grasp": 0.965116511691118,
+    "path": 2.4885066734872088,
+    "timing": 10.0
+   },
+   "attachment_capture_model_median": 0.14,
+   "sources_used": [
+    "sim10_ep0",
+    "sim10_ep1",
+    "sim10_ep2",
+    "sim10_ep3",
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep6",
+    "sim10_ep7",
+    "sim10_ep8",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.02101564410597708,
+   "steps_median": 279.0
+  },
+  "C": {
+   "n": 24,
+   "accepted": 20,
+   "checks_pass_all_ok": 20,
+   "checks_pass_all_ok_C": 20,
+   "pass_ik_ok": 21,
+   "pass_clearance_ok": 23,
+   "pass_phase_order_ok": 24,
+   "pass_receiver_in_grasp_cylinder": 24,
+   "pass_receiver_jaw_capture": 24,
+   "pass_receiver_on_can_body": 24,
+   "pass_grasp_separation_ok": 24,
+   "pass_receiver_after_giver_arrival": 24,
+   "speed_violation_plans": 0,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 11,
+   "planned_novel_pass_far": 11,
+   "planned_novel_axial": 0,
+   "planned_novel_azimuth": 2,
+   "median_novelty_ratio": {
+    "pass": 3.499180793654575,
+    "grasp": 0.637300672957794,
+    "path": 1.8648041792637797,
+    "timing": 13.856583108263472
+   },
+   "attachment_capture_model_median": 1.0,
+   "sources_used": [
+    "sim10_ep0",
+    "sim10_ep1",
+    "sim10_ep2",
+    "sim10_ep3",
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep6",
+    "sim10_ep7",
+    "sim10_ep8",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.02101564410597708,
+   "steps_median": 287.0
+  }
+ },
+ "smoke": {
+  "A": {
+   "n": 4,
+   "accepted": 4,
+   "checks_pass_all_ok": 1,
+   "checks_pass_all_ok_C": 0,
+   "pass_ik_ok": 4,
+   "pass_clearance_ok": 4,
+   "pass_phase_order_ok": 4,
+   "pass_receiver_in_grasp_cylinder": 4,
+   "pass_receiver_jaw_capture": 1,
+   "pass_receiver_on_can_body": 4,
+   "pass_grasp_separation_ok": 4,
+   "pass_receiver_after_giver_arrival": 2,
+   "speed_violation_plans": 3,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 0,
+   "planned_novel_pass_far": 0,
+   "planned_novel_axial": 0,
+   "planned_novel_azimuth": 0,
+   "median_novelty_ratio": {
+    "pass": 0.7549633552068603,
+    "grasp": 0.269225745287462,
+    "path": 0.1757597256972256,
+    "timing": 7.5
+   },
+   "attachment_capture_model_median": 0.4525,
+   "sources_used": [
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep7",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.025572253605632988,
+   "steps_median": 269.5
+  },
+  "B": {
+   "n": 4,
+   "accepted": 4,
+   "checks_pass_all_ok": 0,
+   "checks_pass_all_ok_C": 0,
+   "pass_ik_ok": 2,
+   "pass_clearance_ok": 1,
+   "pass_phase_order_ok": 4,
+   "pass_receiver_in_grasp_cylinder": 4,
+   "pass_receiver_jaw_capture": 3,
+   "pass_receiver_on_can_body": 3,
+   "pass_grasp_separation_ok": 4,
+   "pass_receiver_after_giver_arrival": 4,
+   "speed_violation_plans": 2,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 3,
+   "planned_novel_pass_far": 3,
+   "planned_novel_axial": 0,
+   "planned_novel_azimuth": 1,
+   "median_novelty_ratio": {
+    "pass": 4.961966758225321,
+    "grasp": 0.7169676548708468,
+    "path": 2.1674485319397276,
+    "timing": 5.3383095436647325
+   },
+   "attachment_capture_model_median": 0.8175,
+   "sources_used": [
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep7",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.025572253605632988,
+   "steps_median": 275.5
+  },
+  "C": {
+   "n": 4,
+   "accepted": 3,
+   "checks_pass_all_ok": 3,
+   "checks_pass_all_ok_C": 3,
+   "pass_ik_ok": 4,
+   "pass_clearance_ok": 3,
+   "pass_phase_order_ok": 4,
+   "pass_receiver_in_grasp_cylinder": 4,
+   "pass_receiver_jaw_capture": 4,
+   "pass_receiver_on_can_body": 4,
+   "pass_grasp_separation_ok": 4,
+   "pass_receiver_after_giver_arrival": 4,
+   "speed_violation_plans": 0,
+   "jump_violation_plans": 0,
+   "planned_novel_outside_envelope": 0,
+   "planned_novel_pass_far": 0,
+   "planned_novel_axial": 0,
+   "planned_novel_azimuth": 0,
+   "median_novelty_ratio": {
+    "pass": 2.4049465352607213,
+    "grasp": 0.5720568998789157,
+    "path": 1.4520018763351799,
+    "timing": 11.180339887498949
+   },
+   "attachment_capture_model_median": 1.0,
+   "sources_used": [
+    "sim10_ep4",
+    "sim10_ep5",
+    "sim10_ep7",
+    "sim10_ep9"
+   ],
+   "median_source_dxy_m": 0.025572253605632988,
+   "steps_median": 281.0
+  }
+ },
+ "metric_validation_on_recorded_GT": {
+  "V9": {
+   "n": 10,
+   "fps": 20,
+   "success_final": 10,
+   "stable_success": 10,
+   "slip_flag": 1,
+   "lowered_to_pad_while_held": 1,
+   "off_table": 0,
+   "arm_clearance_violation": 0,
+   "success_attr": 10,
+   "contract_violation_eps": 7,
+   "retention_steps_min": 102,
+   "slip_receiver_m_median": 0.005548810451192753,
+   "slip_giver_m_median": 0.004452155567263683
+  },
+  "stanley": {
+   "n": 30,
+   "fps": 20,
+   "success_final": 30,
+   "stable_success": 30,
+   "slip_flag": 10,
+   "lowered_to_pad_while_held": 9,
+   "off_table": 0,
+   "arm_clearance_violation": 0,
+   "success_attr": 30,
+   "contract_violation_eps": 20,
+   "retention_steps_min": 73,
+   "slip_receiver_m_median": 0.008756238082298438,
+   "slip_giver_m_median": 0.005285490302751868
+  }
+ },
+ "simulation_run": false,
+ "runtime_s": 20.4
+}
