@@ -1,0 +1,310 @@
+{
+ "_doc": "v3.1: IDENTICAL families, targets, scales, sources and tolerances to v3/configs/v3.json; protocol changes are in sfa31/protocol.py (bounded G+ tails, hard/diagnostic label split, residual-model uncertainty). Frozen before the v3.1 regeneration.",
+ "dataset": "ethanCSL/openarm_pringles_lerobot_real_10_v00@cebdee98115ab6827a4ec2655335c536b5dd085b",
+ "source_episodes": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "heldout": {
+  "dataset": "ethanCSL/openarm_pringles_lerobot_real_v00 (50-episode pool; pool episodes 0-9 are byte-identical in state to real_10 0-9)",
+  "episodes": [
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19
+  ],
+  "rule": "external real recordings: no state fingerprint shared with any source episode; no synthetic descendant enters training"
+ },
+ "conditions": [
+  "G+",
+  "C"
+ ],
+ "sigma_G_frames": 20,
+ "repair_scales": [
+  1.0,
+  0.7,
+  0.49
+ ],
+ "common_target_tolerance": {
+  "mm": 2.0,
+  "deg": 1.0,
+  "applies_to": "contact waypoints (grasp, pass, capture, tilt end) of the shared Spec"
+ },
+ "closed_openness": 0.7,
+ "image_qa": {
+  "_doc": "frozen before the v3 run; relative to the identity re-render of the same episode; confirmatory on episodes 1,2,3,5,6,7,9 (never inspected in v2)",
+  "lid_coverage_ratio_min": 0.8,
+  "lid_median_px_max": 12.0,
+  "pregrasp_lid_coverage_min": 0.8,
+  "pregrasp_lid_median_px_max": 8.0,
+  "old_location_red_residual_max": 0.15
+ },
+ "families": {
+  "A_original_geometry": [
+   {
+    "id": "pos_right_up",
+    "delta_m": [
+     0.0,
+     -0.045,
+     0.04
+    ]
+   },
+   {
+    "id": "pos_left_down",
+    "delta_m": [
+     0.0,
+     0.04,
+     -0.03
+    ]
+   },
+   {
+    "id": "pos_forward",
+    "delta_m": [
+     0.05,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "id": "approach_above",
+    "approach_m": [
+     0.0,
+     0.0,
+     0.07
+    ]
+   },
+   {
+    "id": "approach_side",
+    "approach_m": [
+     0.0,
+     0.07,
+     0.0
+    ]
+   },
+   {
+    "id": "orient_tilt20",
+    "rot_axis": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "rot_deg": 20.0
+   },
+   {
+    "id": "orient_yaw30",
+    "rot_axis": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "rot_deg": 30.0
+   },
+   {
+    "id": "timing_early",
+    "dt_frames": -10
+   },
+   {
+    "id": "timing_late",
+    "dt_frames": 10
+   }
+  ],
+  "B_original_contact": [
+   {
+    "id": "grasp_spin30",
+    "regrasp_spin_deg": 30.0
+   },
+   {
+    "id": "grasp_higher",
+    "regrasp_shift_m": -0.025
+   },
+   {
+    "id": "rot_handover_nominal",
+    "regrasp_shift_m": -0.025,
+    "dual_tilt_deg": 20.0,
+    "dual_axis": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "dual_frames": 30,
+    "close_offset": 0
+   },
+   {
+    "id": "rot_handover_early6",
+    "regrasp_shift_m": -0.025,
+    "dual_tilt_deg": 20.0,
+    "dual_axis": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "dual_frames": 30,
+    "close_offset": -6
+   },
+   {
+    "id": "rot_handover_late6",
+    "regrasp_shift_m": -0.025,
+    "dual_tilt_deg": 20.0,
+    "dual_axis": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "dual_frames": 30,
+    "close_offset": 6
+   }
+  ],
+  "C_new_initial_position": [
+   {
+    "id": "init_x+3",
+    "init_shift_m": [
+     0.03,
+     0.0
+    ]
+   },
+   {
+    "id": "init_x-3",
+    "init_shift_m": [
+     -0.03,
+     0.0
+    ]
+   },
+   {
+    "id": "init_y+3",
+    "init_shift_m": [
+     0.0,
+     0.03
+    ]
+   },
+   {
+    "id": "init_y-3",
+    "init_shift_m": [
+     0.0,
+     -0.03
+    ]
+   },
+   {
+    "id": "init_x+6",
+    "init_shift_m": [
+     0.06,
+     0.0
+    ]
+   },
+   {
+    "id": "init_x-6",
+    "init_shift_m": [
+     -0.06,
+     0.0
+    ]
+   },
+   {
+    "id": "init_y+6",
+    "init_shift_m": [
+     0.0,
+     0.06
+    ]
+   },
+   {
+    "id": "init_y-6",
+    "init_shift_m": [
+     0.0,
+     -0.06
+    ]
+   }
+  ],
+  "D_new_position_plus_handover": [
+   {
+    "id": "init_x+5_pos_right_up",
+    "init_shift_m": [
+     0.05,
+     0.0
+    ],
+    "delta_m": [
+     0.0,
+     -0.045,
+     0.04
+    ]
+   },
+   {
+    "id": "init_y+5_grasp_higher",
+    "init_shift_m": [
+     0.0,
+     0.05
+    ],
+    "regrasp_shift_m": -0.025
+   },
+   {
+    "id": "init_x-5_orient_tilt20",
+    "init_shift_m": [
+     -0.05,
+     0.0
+    ],
+    "rot_axis": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "rot_deg": 20.0
+   }
+  ]
+ },
+ "init_sweep_grid_m": {
+  "x": [
+   -0.1,
+   -0.075,
+   -0.05,
+   -0.025,
+   0.0,
+   0.025,
+   0.05,
+   0.075,
+   0.1
+  ],
+  "y": [
+   -0.1,
+   -0.075,
+   -0.05,
+   -0.025,
+   0.0,
+   0.025,
+   0.05,
+   0.075,
+   0.1
+  ]
+ },
+ "devices": [
+  "cuda:0",
+  "cuda:1"
+ ],
+ "v3_config_sha256": "d9bf3f372171add3d1534d45cb70595ad4b81de6c1e762c8466a5cba02d14f81",
+ "label_protocol": {
+  "hard": [
+   "construction",
+   "unsupported_rows",
+   "gripper_chronology",
+   "finite",
+   "hash"
+  ],
+  "diagnostic": [
+   "per_joint_apparent_lead"
+  ],
+  "uncertainty": {
+   "residual_model_ratio": 2.0,
+   "floor_rad": 0.002
+  }
+ }
+}
