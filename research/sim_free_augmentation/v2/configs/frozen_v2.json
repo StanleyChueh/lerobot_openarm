@@ -1,0 +1,130 @@
+{
+ "_doc": "v2 experiment configuration. Developed on episode 0, then FROZEN (sha256 recorded in every result) before episodes 4 and 8 were processed. Variation magnitudes are world/can-frame quantities shared by all conditions; x forward, y left, z up of the robot base; can z axis = lid -> bottom.",
+ "dataset": "ethanCSL/openarm_pringles_lerobot_real_10_v00@cebdee98115ab6827a4ec2655335c536b5dd085b",
+ "dev_episode": 0,
+ "test_episodes": [
+  4,
+  8
+ ],
+ "camera": "observation.images.body_cam (only generated camera)",
+ "sam2_keyframe_step": 15,
+ "joint_fit_closure_weight_px_per_m": 1000,
+ "closed_openness": 0.7,
+ "sigma_G_frames": 20,
+ "sigma_G_grid": [
+  10,
+  20,
+  30,
+  45,
+  60,
+  90
+ ],
+ "repair_scales": [
+  1.0,
+  0.7,
+  0.49
+ ],
+ "variations": [
+  {
+   "id": "identity",
+   "type": "control"
+  },
+  {
+   "id": "pos_right_up",
+   "type": "position",
+   "delta_m": [
+    0.0,
+    -0.045,
+    0.04
+   ]
+  },
+  {
+   "id": "pos_left_down",
+   "type": "position",
+   "delta_m": [
+    0.0,
+    0.04,
+    -0.03
+   ]
+  },
+  {
+   "id": "pos_forward",
+   "type": "position",
+   "delta_m": [
+    0.05,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "id": "approach_above",
+   "type": "approach",
+   "approach_m": [
+    0.0,
+    0.0,
+    0.07
+   ]
+  },
+  {
+   "id": "approach_side",
+   "type": "approach",
+   "approach_m": [
+    0.0,
+    0.07,
+    0.0
+   ]
+  },
+  {
+   "id": "grasp_spin30",
+   "type": "grasp",
+   "regrasp_spin_deg": 30.0
+  },
+  {
+   "id": "grasp_higher",
+   "type": "grasp",
+   "regrasp_shift_m": -0.025
+  },
+  {
+   "id": "timing_early",
+   "type": "timing",
+   "dt_frames": -15
+  },
+  {
+   "id": "timing_late",
+   "type": "timing",
+   "dt_frames": 15
+  },
+  {
+   "id": "orient_tilt20",
+   "type": "orientation",
+   "rot_axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "rot_deg": 20.0
+  },
+  {
+   "id": "orient_yaw30",
+   "type": "orientation",
+   "rot_axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "rot_deg": 30.0
+  }
+ ],
+ "device": "cuda:0",
+ "sigma_G_selection": "episode 0 only: sigma in sigma_G_grid maximising G's own full-scale acceptance under the verifier (20: 10/12 accepted, all full scale; 10: 9/12, 30/45: 8/12, 60/90: 3/12). Frozen before episodes 4 and 8.",
+ "verifier_tolerances": "sfa2/verify.py TOL (frozen with this file)",
+ "image_qa": {
+  "_doc": "frozen before any v2 image metric was inspected; used only for the generation-yield count (not for dataset acceptance)",
+  "lid_coverage_min": 0.5,
+  "lid_median_px_max": 12.0,
+  "windows": [
+   "giver_hold",
+   "receiver_hold"
+  ]
+ }
+}

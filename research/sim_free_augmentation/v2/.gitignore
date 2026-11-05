@@ -1,0 +1,4 @@
+outputs/cache/
+outputs/**/raw/
+__pycache__/
+outputs/lerobot/
