@@ -1,0 +1,22 @@
+{
+ "_doc": "Bounded SmolVLA training screen, declared BEFORE any training run. Not a convergence study, not a closed-loop evaluation.",
+ "pretrained": "lerobot/smolvla_base (local HF cache, pinned snapshot recorded in results)",
+ "arms": {"R": "sfa_v3_R", "R+G+": "sfa_v3_R_plus_Gp", "R+C": "sfa_v3_R_plus_C"},
+ "seeds": [0, 1, 2],
+ "steps": 1000,
+ "batch_size": 16,
+ "num_workers": 4,
+ "camera_rename": {"observation.images.body_cam": "observation.images.camera1"},
+ "trainable": "action expert + state projection (freeze_vision_encoder=True, train_expert_only=True: smolvla_base defaults)",
+ "image_augmentation": "none (lerobot default), identical for all arms",
+ "heldout_eval": {"dataset": "ethanCSL/openarm_pringles_lerobot_real_v00 pool", "episodes": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+                  "frame_stride": 5, "chunk": 50, "noise_seed": 1234,
+                  "never_seen": "no held-out episode or synthetic descendant enters training; state fingerprints checked"},
+ "metrics": ["phase-balanced normalised arm-action MAE over the 50-step chunk (phases: approach, carry, handover, retreat from the held-out episode's gripper commands)",
+             "skill vs persistence baseline (1 - MAE_policy / MAE_hold-current-state)",
+             "per-joint normalised MAE",
+             "gripper closed-state precision/recall over chunk steps 0-10 and transition timing error"],
+ "decision_rule": {"augmentation_helps": "arm mean phase-balanced error >= 10% below R (mean over seeds) AND gripper transition timing error not worse than R by > 1 frame",
+                   "contact_helps": "R+C satisfies augmentation_helps AND is >= 10% below R+G+",
+                   "otherwise": "report as no demonstrated benefit; do not scale"}
+}

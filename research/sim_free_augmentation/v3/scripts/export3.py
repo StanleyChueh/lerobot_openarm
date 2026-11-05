@@ -161,7 +161,7 @@ def write(name, items, task):
 
 def validate(name, root, man):
     from lerobot.datasets.lerobot_dataset import LeRobotDataset
-    from lerobot.datasets.feature_utils import dataset_to_policy_features
+    from lerobot.utils.feature_utils import dataset_to_policy_features
     info = json.loads((root / "meta/info.json").read_text())
     f = info["features"]
     rep = {"name": name}
