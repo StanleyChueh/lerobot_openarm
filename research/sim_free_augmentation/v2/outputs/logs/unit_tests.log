@@ -1,0 +1,18 @@
+test_action_lead_detector (test_v2.Corruptions.test_action_lead_detector) ... ok
+test_verifier_flags_rotation_and_gripper_corruptions (test_v2.Corruptions.test_verifier_flags_rotation_and_gripper_corruptions) ... ok
+test_all_conditions_reach_the_same_targets (test_v2.MatchedConditions.test_all_conditions_reach_the_same_targets) ... ok
+test_identity_reproduces_source_in_every_condition (test_v2.MatchedConditions.test_identity_reproduces_source_in_every_condition) ... ok
+test_regrasp_separates_P_from_C (test_v2.MatchedConditions.test_regrasp_separates_P_from_C) ... ok
+test_warp_error_respects_region (test_v2.Metrics.test_warp_error_respects_region)
+regression for the v1 bug: the region must restrict the flow-warp error itself. ... ok
+test_joint_fit_reduces_closure (test_v2.Reconstruction.test_joint_fit_reduces_closure) ... ok
+test_power_and_spin (test_v2.SE3.test_power_and_spin) ... ok
+test_export_range_trims_unsupported_rows (test_v2.Synchronisation.test_export_range_trims_unsupported_rows) ... ok
+test_source_frame_map (test_v2.Synchronisation.test_source_frame_map)
+identity: video frame i is rendered from source frame i; a timing warp re-indexes source frames. ... ok
+test_time_warp_moves_gripper_events (test_v2.Synchronisation.test_time_warp_moves_gripper_events) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 10.296s
+
+OK

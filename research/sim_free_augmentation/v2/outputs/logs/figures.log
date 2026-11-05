@@ -1,0 +1,45 @@
+| variation | ep0 G | ep0 P | ep0 C | ep4 G | ep4 P | ep4 C | ep8 G | ep8 P | ep8 C |
+|---|---|---|---|---|---|---|---|---|---|
+| identity | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 |
+| pos_right_up | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 |
+| pos_left_down | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 |
+| pos_forward | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 |
+| approach_above | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 |
+| approach_side | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 |
+| grasp_spin30 | ✗ 6D-spin | ✗ 6D-spin | ✓ ×1.0 | ✗ 6D-spin | ✗ 6D-spin | ✓ ×1.0 | ✗ 6D-spin | ✗ 6D-spin | ✓ ×1.0 |
+| grasp_higher | ✗ 6D-translation | ✗ 6D-translation | ✓ ×1.0 | ✗ 6D-translation | ✗ 6D-translation | ✓ ×1.0 | ✗ 6D-translation | ✗ 6D-translation | ✓ ×1.0 |
+| timing_early | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✗ joint_speed | ✗ joint_speed | ✗ joint_speed | ✗ joint_limits | ✗ joint_limits | ✗ joint_limits |
+| timing_late | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✗ joint_limits | ✗ joint_limits | ✗ joint_limits |
+| orient_tilt20 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 |
+| orient_yaw30 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×1.0 | ✓ ×0.7 | ✓ ×0.7 |
+
+| condition | ep0 | ep4 | ep8 | total accepted | accepted at full scale |
+|---|---|---|---|---|---|
+| G | 9/11 | 8/11 | 7/11 | 24/33 | 24/33 |
+| P | 9/11 | 8/11 | 7/11 | 24/33 | 23/33 |
+| C | 11/11 | 10/11 | 9/11 | 30/33 | 29/33 |
+
+| condition | n clips (accepted, non-identity) | kp median px R / L / can | lid err receiver px | can-axis 2D receiver ° | ghost frac | warp err robot region | lag = expected | lead = 2 |
+|---|---|---|---|---|---|---|---|---|
+| G | 24 | 2.3 / 2.8 / 4.2 | 3.5 | 9.0 | 0.06 | 2.95 | 24/24 | 24/24 |
+| P | 24 | 2.4 / 2.6 / 4.8 | 3.5 | 9.6 | 0.06 | 2.92 | 24/24 | 24/24 |
+| C | 30 | 2.0 / 2.5 / 2.3 | 3.6 | 9.4 | 0.06 | 2.91 | 30/30 | 30/30 |
+
+Frozen rule:
+
+| condition | ep0 accepted / sync ok / image QA | ep4 accepted / sync ok / image QA | ep8 accepted / sync ok / image QA | overall yield |
+|---|---|---|---|---|
+| G | 9 / 9 / 9 of 11 | 8 / 8 / 0 of 11 | 7 / 7 / 2 of 11 | 11/33 |
+| P | 9 / 9 / 6 of 11 | 8 / 8 / 0 of 11 | 7 / 7 / 2 of 11 | 8/33 |
+| C | 11 / 11 / 8 of 11 | 10 / 10 / 0 of 11 | 9 / 9 / 2 of 11 | 10/33 |
+
+Post-hoc, source-relative rule:
+
+| condition | ep0 sync ok / relative image QA | ep4 sync ok / relative image QA | ep8 sync ok / relative image QA | overall |
+|---|---|---|---|---|
+| G | 9 / 9 of 11 | 8 / 8 of 11 | 7 / 6 of 11 | 23/33 |
+| P | 9 / 6 of 11 | 8 / 8 of 11 | 7 / 4 of 11 | 18/33 |
+| C | 11 / 8 of 11 | 10 / 10 of 11 | 9 / 6 of 11 | 24/33 |
+
+reference: ep0 identity lid coverage giver 1.00 receiver 0.72 ; ep4 identity lid coverage giver 1.00 receiver 0.29 ; ep8 identity lid coverage giver 1.00 receiver 0.49
+

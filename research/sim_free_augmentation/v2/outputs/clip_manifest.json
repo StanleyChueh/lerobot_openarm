@@ -1,0 +1,818 @@
+{
+"outputs/ep0/clips/approach_above__G.mp4": {
+"bytes": 1934301,
+"sha256": "44c766952c0cd5b5605872daf59806eb17c4ab31da4d189cf71dff959da92fde"
+},
+"outputs/ep0/clips/approach_above__G_overlay.mp4": {
+"bytes": 1181781,
+"sha256": "b0b0ff030a4d7d475c609022afa41de21c9a76b804e33bbc739d88acea2950d0"
+},
+"outputs/ep0/clips/approach_above__P.mp4": {
+"bytes": 1928966,
+"sha256": "f05cd4a729d601cd7c7623ddb6b21fe1476028c722e6391d4ca3285696ef01ec"
+},
+"outputs/ep0/clips/approach_above__P_overlay.mp4": {
+"bytes": 1176518,
+"sha256": "a9ad34c7e4963788b6eefe224edde7bff3310caace20e815103280fbadd25de5"
+},
+"outputs/ep0/clips/approach_side__G.mp4": {
+"bytes": 1919947,
+"sha256": "a3fbecdb5fa35e4fc33f3e9ca3493713abe3c926cd56b67e7a6822070fa02590"
+},
+"outputs/ep0/clips/approach_side__G_overlay.mp4": {
+"bytes": 1163378,
+"sha256": "56538139369c4562111f822ee68c5cceaf5927c19b5ebb63aabaee114e5994ff"
+},
+"outputs/ep0/clips/approach_side__P.mp4": {
+"bytes": 1918590,
+"sha256": "49b5c56af2715082ccb42bb79c338977dbd22c9e01c2d9ede9fc556627f6a414"
+},
+"outputs/ep0/clips/approach_side__P_overlay.mp4": {
+"bytes": 1161588,
+"sha256": "5729b4bc8c626685b012afd3817318cf732909cb89d1d2307cefaf89b3bc9fc3"
+},
+"outputs/ep0/clips/compare_approach_above.mp4": {
+"bytes": 2072064,
+"sha256": "e3676a90e2b4730fe1fdc70bbd1c5a1d44fde436a4b49ce95b857f38a82872f4"
+},
+"outputs/ep0/clips/compare_approach_side.mp4": {
+"bytes": 2038651,
+"sha256": "892e020c24c1b1b3ca27461737c2dc844db245d5d263894dca51cacacc1d6043"
+},
+"outputs/ep0/clips/compare_grasp_higher.mp4": {
+"bytes": 2022725,
+"sha256": "6987c2dfba35956e91f2b5393cdf10255720e98a92d9803f045d9a480777e729"
+},
+"outputs/ep0/clips/compare_grasp_spin30.mp4": {
+"bytes": 2060466,
+"sha256": "5838c7ef179a4bbdd6cb471b26c9ec542e77dd036c2530fceec68eb8919653a9"
+},
+"outputs/ep0/clips/compare_identity.mp4": {
+"bytes": 1987744,
+"sha256": "cee9a480fc1ccdb9844d2d307eb6db24ecc1f4cf73f50505b31c51578899ca59"
+},
+"outputs/ep0/clips/compare_orient_tilt20.mp4": {
+"bytes": 2095059,
+"sha256": "a58d73943fe98326a2f5cbef8ed806e87ccabd47c11ad818fc3c5141c034129a"
+},
+"outputs/ep0/clips/compare_orient_yaw30.mp4": {
+"bytes": 2062259,
+"sha256": "8b7174bc4cf14fd52dd5b84660715f0005ef439358721026e93efea278e8b04a"
+},
+"outputs/ep0/clips/compare_pos_forward.mp4": {
+"bytes": 2042457,
+"sha256": "bf5eb461dfe963384daea7f5bd9ed1039373fcf3eb463f23eeac6ed0fe234c85"
+},
+"outputs/ep0/clips/compare_pos_left_down.mp4": {
+"bytes": 2041015,
+"sha256": "acc9ce044abd5066056292538ba577fad0858ceac49b144ba748d88841fb9279"
+},
+"outputs/ep0/clips/compare_pos_right_up.mp4": {
+"bytes": 2074363,
+"sha256": "c9d0e8dc6a8d5bfe3d3670604e972a22d0094f57c31798226b48d0014a79d8b4"
+},
+"outputs/ep0/clips/compare_timing_early.mp4": {
+"bytes": 2032661,
+"sha256": "4e68106ff34449e04fed701806c887c08cf4645bab0e4aeadfc137a1b0623e7a"
+},
+"outputs/ep0/clips/compare_timing_late.mp4": {
+"bytes": 2052058,
+"sha256": "adc3aa454f8cee2d9759a3275d1068dd1330d016746a65c3a8467ac1bf338a42"
+},
+"outputs/ep0/clips/grasp_higher__C.mp4": {
+"bytes": 1918135,
+"sha256": "12e58b86e38995d33fb5067681ddbd2107089ee0f3afaa42f7927ac328a13e45"
+},
+"outputs/ep0/clips/grasp_higher__C_overlay.mp4": {
+"bytes": 1154700,
+"sha256": "bc4ace8f3d337012a769dd4cb990414e1c920c0d2bf64590068679b5067b3248"
+},
+"outputs/ep0/clips/grasp_higher__G.mp4": {
+"bytes": 1904956,
+"sha256": "96065fbb96eca24268c33755fc8ceae6c7edb3a0175ca505c81680f9ccd71efa"
+},
+"outputs/ep0/clips/grasp_higher__G_overlay.mp4": {
+"bytes": 1143251,
+"sha256": "40f2476a763b2e1704efd7e4328a484b7c7d5956535269380c31396f257c4241"
+},
+"outputs/ep0/clips/grasp_higher__P.mp4": {
+"bytes": 1904416,
+"sha256": "f468792df2dce6c4c388e2818f99cec91a85bd198fb64635d463edfe77ceaaa5"
+},
+"outputs/ep0/clips/grasp_higher__P_overlay.mp4": {
+"bytes": 1147500,
+"sha256": "d81c3b9f5fbde00aff11fff66fa725b4ca2e012ace3de2a3709496a7daa16dce"
+},
+"outputs/ep0/clips/grasp_spin30__C.mp4": {
+"bytes": 1902035,
+"sha256": "9759185816b8a945efdf7f08d62891ca49193ce372bf79e64f38234a78f39fb1"
+},
+"outputs/ep0/clips/grasp_spin30__C_overlay.mp4": {
+"bytes": 1167412,
+"sha256": "dbcfb2465379aaef6c769017b2dc8c1406bf239a428b659ef1a84296fdcc4b45"
+},
+"outputs/ep0/clips/grasp_spin30__G.mp4": {
+"bytes": 1920362,
+"sha256": "6805b1a04e111d69e9491c61e351d28af9dc7c7b845fb2208f65cdb73a659fc4"
+},
+"outputs/ep0/clips/grasp_spin30__G_overlay.mp4": {
+"bytes": 1157957,
+"sha256": "0c4ea199aec0a4952a5d3c90420714eb8f82fef095426db4f891dec72e64d3fc"
+},
+"outputs/ep0/clips/grasp_spin30__P.mp4": {
+"bytes": 1922871,
+"sha256": "b2fdbd5d2d6fe1a735618dc38c0fe25d5ee34848a78ea8a50f0536dabbdf8256"
+},
+"outputs/ep0/clips/grasp_spin30__P_overlay.mp4": {
+"bytes": 1172438,
+"sha256": "45adcc9f1dbaf87af587ab72ddae600484b1b9b99e507de45e901ab783770765"
+},
+"outputs/ep0/clips/identity__G.mp4": {
+"bytes": 1912530,
+"sha256": "ea073a0eb175b5264757e1fd8bdb278292489e2b598d7c2e130deb820e9be062"
+},
+"outputs/ep0/clips/identity__G_overlay.mp4": {
+"bytes": 1144067,
+"sha256": "09fdb826c73cc9f1445ae4d9d73cde3ad4b978a510bcdfcecfa4d2f4914dfba9"
+},
+"outputs/ep0/clips/orient_tilt20__C.mp4": {
+"bytes": 1928671,
+"sha256": "ea9319c6c509beafeb8baa48feeb44c49404d254f86297117d8ebe8985b769a8"
+},
+"outputs/ep0/clips/orient_tilt20__C_overlay.mp4": {
+"bytes": 1179956,
+"sha256": "32bf691b7cfa1be56dd315d59da630758938bb4998606e90b3b9097515a7e2a1"
+},
+"outputs/ep0/clips/orient_tilt20__G.mp4": {
+"bytes": 1930913,
+"sha256": "db24a5cad001bfc15f7da0f263c422035568985130df1af02b5bf04f81f27183"
+},
+"outputs/ep0/clips/orient_tilt20__G_overlay.mp4": {
+"bytes": 1177202,
+"sha256": "589862b53fafffe6f86f29ebaa14b936ab2345c48f63a8dd23b29da2ef87953b"
+},
+"outputs/ep0/clips/orient_tilt20__P.mp4": {
+"bytes": 1936978,
+"sha256": "dd9951df0014dede745f74b297cc9fe8c5adfaf798ee3bc8733c4b538dfebc13"
+},
+"outputs/ep0/clips/orient_tilt20__P_overlay.mp4": {
+"bytes": 1186356,
+"sha256": "0e37088a49bfcf3e8344dfc8467a0ed62c1ae960d1cf1e722828e267ef6d0f62"
+},
+"outputs/ep0/clips/orient_yaw30__C.mp4": {
+"bytes": 1908309,
+"sha256": "0e56a14eee42668e5bffcdab78801825cee1a1009b3f2e44690766525e735975"
+},
+"outputs/ep0/clips/orient_yaw30__C_overlay.mp4": {
+"bytes": 1151477,
+"sha256": "964d6594672379f828c732f2665c7b25b4c7a0161298c9f77e64981a218527f1"
+},
+"outputs/ep0/clips/orient_yaw30__G.mp4": {
+"bytes": 1916687,
+"sha256": "6dca2808b5fcf855b26a3d2ce4982cc7e08dc2c6987d61d85c410447baecf6be"
+},
+"outputs/ep0/clips/orient_yaw30__G_overlay.mp4": {
+"bytes": 1157762,
+"sha256": "87d88015af777b3c3e90ff63bd103e78235622f9d7d4a929c08d62c9cd3cd4ea"
+},
+"outputs/ep0/clips/orient_yaw30__P.mp4": {
+"bytes": 1914255,
+"sha256": "c9c4c575215b036f4f216a86148a0c6527e93879da09aa0bcd1b622c2bb65d0a"
+},
+"outputs/ep0/clips/orient_yaw30__P_overlay.mp4": {
+"bytes": 1158104,
+"sha256": "5dae9a41ebafb9379548558285938ca4c9bccdf768e955615b53fa03f699806e"
+},
+"outputs/ep0/clips/pos_forward__C.mp4": {
+"bytes": 1903856,
+"sha256": "ab5aea2abe6ef3848ddcaa1803e3ae0a3028f9a71d88d8efbd1c207cba91f7c9"
+},
+"outputs/ep0/clips/pos_forward__C_overlay.mp4": {
+"bytes": 1158277,
+"sha256": "b8c2762d8a2e9b4b1bb0b39fbf41c8ecbd5767be8276e454f8901cf4e25a8c2d"
+},
+"outputs/ep0/clips/pos_forward__G.mp4": {
+"bytes": 1906784,
+"sha256": "66651cfdd672d1a54740fc438d8a9a9f18eeb40726ce56902f78489b6e700c95"
+},
+"outputs/ep0/clips/pos_forward__G_overlay.mp4": {
+"bytes": 1163075,
+"sha256": "3bc38cac1bc45cc5497276eb738ebc358f156afa4f2331a558d75ebba0d6536f"
+},
+"outputs/ep0/clips/pos_forward__P.mp4": {
+"bytes": 1906776,
+"sha256": "7e1898435c890ecc63c19006775e1a3daeab847d58c1e920c4ca2438e55b8de6"
+},
+"outputs/ep0/clips/pos_forward__P_overlay.mp4": {
+"bytes": 1167561,
+"sha256": "224e5a41fd4635623d10e1576d54b7a5449a5d9a0bb8478baad11a9519cfb0d4"
+},
+"outputs/ep0/clips/pos_left_down__C.mp4": {
+"bytes": 1906131,
+"sha256": "9b524c1c8da8ad47312de52be3b599122896e8f463d97e9e21cfa71fc14aad5e"
+},
+"outputs/ep0/clips/pos_left_down__C_overlay.mp4": {
+"bytes": 1146159,
+"sha256": "ff20d16031fd53887a183d4e8c1a49802d8311253ee4db2c5c40eca6233d8677"
+},
+"outputs/ep0/clips/pos_left_down__G.mp4": {
+"bytes": 1913675,
+"sha256": "a1ea9ebb323fe5d4e632eeb0ec8c4d2aa71d8b7d8da699feb8acd502b758fd4e"
+},
+"outputs/ep0/clips/pos_left_down__G_overlay.mp4": {
+"bytes": 1155420,
+"sha256": "e9a4436ee0d455cdaf36f919ce85eb045c2b0b1b00c2b543a0c0ef35e96762f5"
+},
+"outputs/ep0/clips/pos_left_down__P.mp4": {
+"bytes": 1905539,
+"sha256": "759f835e3b559113604393aa60bc93bf2c68c4b69200fcb77f1d7fbe350507eb"
+},
+"outputs/ep0/clips/pos_left_down__P_overlay.mp4": {
+"bytes": 1148923,
+"sha256": "d528b6d47450c4d5700e7591f619f908a4a5ec8619a5d584145940cfdf99f173"
+},
+"outputs/ep0/clips/pos_right_up__C.mp4": {
+"bytes": 1927024,
+"sha256": "f75ab2985a6742d46f7b15ec266c30ba200fa1fd80364f47f37d7947cd0c31b6"
+},
+"outputs/ep0/clips/pos_right_up__C_overlay.mp4": {
+"bytes": 1172988,
+"sha256": "3c031d42e19a3560d7b640cf94f2199bf25e161f378a421bccf7287360d3c211"
+},
+"outputs/ep0/clips/pos_right_up__G.mp4": {
+"bytes": 1927251,
+"sha256": "dcc0376f3dcb75db4bbd80baac1727f394c4066e409a2bd45de49b102674d88c"
+},
+"outputs/ep0/clips/pos_right_up__G_overlay.mp4": {
+"bytes": 1167144,
+"sha256": "7eadb002a4f623264f58ea192687df0a1767e2b473f56871c2682d5903a1cb5e"
+},
+"outputs/ep0/clips/pos_right_up__P.mp4": {
+"bytes": 1933669,
+"sha256": "c9ac3b64cab29be3bcd58cf8097531f26d25bb4851b4d9921008f9d0bbd52e26"
+},
+"outputs/ep0/clips/pos_right_up__P_overlay.mp4": {
+"bytes": 1175240,
+"sha256": "d6696a0a13fb1237f4b79fe35880538deca77b8eda0035f1ba1407ad504c5c48"
+},
+"outputs/ep0/clips/timing_early__G.mp4": {
+"bytes": 1919680,
+"sha256": "9c23c889029257f22a665bec4294ba5b3d92f5da664ae95cbe407f294b80b11b"
+},
+"outputs/ep0/clips/timing_early__G_overlay.mp4": {
+"bytes": 1153782,
+"sha256": "849abeff1f3e018815a85b252a97923a545dfa041801ec68648d759a1e016cf5"
+},
+"outputs/ep0/clips/timing_late__G.mp4": {
+"bytes": 1942476,
+"sha256": "aa47082a1526dfa572d272ec76e71e792e7c5dbcdb80c6e8a53f1ea9ada84c13"
+},
+"outputs/ep0/clips/timing_late__G_overlay.mp4": {
+"bytes": 1158806,
+"sha256": "d613deb0c4c3983e263432a964c57dd91da042f7862f12c1795a4881ed47bb0c"
+},
+"outputs/ep4/clips/approach_above__G.mp4": {
+"bytes": 1781652,
+"sha256": "6d90d940adbe44b0517784ac48c7eeb1fa6de05274a503b0695e4c177c067530"
+},
+"outputs/ep4/clips/approach_above__G_overlay.mp4": {
+"bytes": 1082614,
+"sha256": "03dcb02f82354c86093bf99ff09ab59d438a29fd2ab486ccae339ef1e79480b8"
+},
+"outputs/ep4/clips/approach_above__P.mp4": {
+"bytes": 1773431,
+"sha256": "2daca249f2b6d813fa029c3a9f3c8babcd0c5c71eb76393ae608b8f3c96bcef0"
+},
+"outputs/ep4/clips/approach_above__P_overlay.mp4": {
+"bytes": 1075039,
+"sha256": "e78b25629b9f2b51de6cf09fb7a1081ab0f474dd7427fb9f23d0c46d4c51e243"
+},
+"outputs/ep4/clips/approach_side__G.mp4": {
+"bytes": 1767363,
+"sha256": "77b77105deb8752d2675ba50d42f1676fbbcf7617606f6abb1f63ec644bef88b"
+},
+"outputs/ep4/clips/approach_side__G_overlay.mp4": {
+"bytes": 1069138,
+"sha256": "9a20cabfaee8d33a2bc3399b91a89c4d1226af858c8e9d4f907268c0f92679db"
+},
+"outputs/ep4/clips/approach_side__P.mp4": {
+"bytes": 1756402,
+"sha256": "c45a199aeb585c8491511bd954e136a283f15e3e333091e5bdd23ee7eb1d96e3"
+},
+"outputs/ep4/clips/approach_side__P_overlay.mp4": {
+"bytes": 1066663,
+"sha256": "d5cf0f70dea884788fa278ef2550b8e548bd31611aac2aa4d4687153dfd8c2dd"
+},
+"outputs/ep4/clips/compare_approach_above.mp4": {
+"bytes": 1905066,
+"sha256": "95295a5429c622f83341e5a422236a0b23da3634bcf5735967ed415794ea02a7"
+},
+"outputs/ep4/clips/compare_approach_side.mp4": {
+"bytes": 1878513,
+"sha256": "bacf903e1ef3237ee23f6eca4571aae19cd11ee664ec9f34fe60a2d2ec5ed51e"
+},
+"outputs/ep4/clips/compare_grasp_higher.mp4": {
+"bytes": 1866479,
+"sha256": "fe7e38dc4f70f97c0e624f3530a96dfd0c2d92e5be84e6873967dc6e2952c2ed"
+},
+"outputs/ep4/clips/compare_grasp_spin30.mp4": {
+"bytes": 1888899,
+"sha256": "f84e0883e9afd2f05c2dabb12e65e915c903dc9009d535735f25df024a9973ce"
+},
+"outputs/ep4/clips/compare_identity.mp4": {
+"bytes": 1832034,
+"sha256": "c2b9600e95d2750c107ee29ac9cb25fbe958cc6600d326f711a9ce980a262893"
+},
+"outputs/ep4/clips/compare_orient_tilt20.mp4": {
+"bytes": 1921820,
+"sha256": "f8d1d61446df5773ea0d829d78bfa1dc4dd290f881402da21724d5bb78f18d79"
+},
+"outputs/ep4/clips/compare_orient_yaw30.mp4": {
+"bytes": 1911874,
+"sha256": "51e912e10ab82cc9ac38ba79b7b4ce064b0bddd044a323674cb9850853f697aa"
+},
+"outputs/ep4/clips/compare_pos_forward.mp4": {
+"bytes": 1903956,
+"sha256": "1f87e50ea08163cfb9befc241e03ccb30bb980c6102fea4c1ce3d9da460ee05e"
+},
+"outputs/ep4/clips/compare_pos_left_down.mp4": {
+"bytes": 1894623,
+"sha256": "71e37c6ac02370f04d7f1ec47be6808f8ec1678c7898b9baca3c9ce50741f3de"
+},
+"outputs/ep4/clips/compare_pos_right_up.mp4": {
+"bytes": 1938263,
+"sha256": "9d1c66c8d0922e4b12e55e729b75d733cac63516dd8b35f77af654d6670411d0"
+},
+"outputs/ep4/clips/compare_timing_early.mp4": {
+"bytes": 1881473,
+"sha256": "27521e73807772cba2ceccff9d9987d88d3a3e88a191645a8b171872b2e4aecb"
+},
+"outputs/ep4/clips/compare_timing_late.mp4": {
+"bytes": 1895886,
+"sha256": "731a3a6ab9764231b17fbcd9bdfc64a856b6cabd517ec2d5e95dd0ad198873ce"
+},
+"outputs/ep4/clips/grasp_higher__C.mp4": {
+"bytes": 1765329,
+"sha256": "4a0bf6e3c465841335982417d7c80876bdd551ef1099064f2b0a7a37cd2db932"
+},
+"outputs/ep4/clips/grasp_higher__C_overlay.mp4": {
+"bytes": 1060951,
+"sha256": "20cb3026f353cba525335a3d285c7a073760d66a756d81efd09b081ab898edb5"
+},
+"outputs/ep4/clips/grasp_higher__G.mp4": {
+"bytes": 1755393,
+"sha256": "859ee7f04deac7a2f222626cf99b7a076a899bd7a10ac9f52d82faecccf2c22c"
+},
+"outputs/ep4/clips/grasp_higher__G_overlay.mp4": {
+"bytes": 1048969,
+"sha256": "ce0b776bc79f97d031f64d05bf9b5862f08b8105b7c213167697b897710c9d07"
+},
+"outputs/ep4/clips/grasp_higher__P.mp4": {
+"bytes": 1760327,
+"sha256": "634494ce3435c3451ffd33ac4f38c2f51dd54e0429dae8e30738be4c203572ef"
+},
+"outputs/ep4/clips/grasp_higher__P_overlay.mp4": {
+"bytes": 1057814,
+"sha256": "3e75a3e6378020f0583a5885e79be29ed7a8d68fc12ac4c9087f8af4a65b9283"
+},
+"outputs/ep4/clips/grasp_spin30__C.mp4": {
+"bytes": 1739237,
+"sha256": "4b6b3cf9a70a2a0172bbfd798ac038ac6a4d687e449eb318b57e0804f344a218"
+},
+"outputs/ep4/clips/grasp_spin30__C_overlay.mp4": {
+"bytes": 1061966,
+"sha256": "6ed3a845ed96ae582e04ff1242898b7c482a86a1c173bff7f3bd5cf3dcb950d4"
+},
+"outputs/ep4/clips/grasp_spin30__G.mp4": {
+"bytes": 1763577,
+"sha256": "d198186d85cbb9aca512d30c2352ffe756dcad541310beb669b28875abfd452d"
+},
+"outputs/ep4/clips/grasp_spin30__G_overlay.mp4": {
+"bytes": 1066423,
+"sha256": "f10a429cf2bf79a05ed4165440579953fef50200df330ad714d34a940a51c95f"
+},
+"outputs/ep4/clips/grasp_spin30__P.mp4": {
+"bytes": 1766256,
+"sha256": "aeb52bb209aa1e607e0de70a632a7091fcccdde0686221b25b8814d9d6205938"
+},
+"outputs/ep4/clips/grasp_spin30__P_overlay.mp4": {
+"bytes": 1070835,
+"sha256": "0ef8d03b59ae3717cf49b06ff491533bd66602a65f14e925628bca692cf97397"
+},
+"outputs/ep4/clips/identity__G.mp4": {
+"bytes": 1755513,
+"sha256": "794dcf40e9ec6bf5edf62e68f043c8e8ee802864875a4bb59ff068958d87ef1a"
+},
+"outputs/ep4/clips/identity__G_overlay.mp4": {
+"bytes": 1050156,
+"sha256": "00ad2c1451a378ccf462879ce603e2f249cefb9c5b8312acec99fa71edd72cee"
+},
+"outputs/ep4/clips/orient_tilt20__C.mp4": {
+"bytes": 1786526,
+"sha256": "71005a0d9dfad2d090a2c295cebb5d63c3f1a9bca7986a0a1d1fae54d176246f"
+},
+"outputs/ep4/clips/orient_tilt20__C_overlay.mp4": {
+"bytes": 1088965,
+"sha256": "8b6da6be056ab2b247781a18df6c4b4939166f18dde804b3f2241403f0d9eaae"
+},
+"outputs/ep4/clips/orient_tilt20__G.mp4": {
+"bytes": 1788251,
+"sha256": "177a8467fc6ad9b6e48fa73deaa4b257c2c4aa9bb49786bce34345b143d015d2"
+},
+"outputs/ep4/clips/orient_tilt20__G_overlay.mp4": {
+"bytes": 1089311,
+"sha256": "51546548c634fca4036033b353a1f1da64a9a4a1eba9544710cbbe444bf608d6"
+},
+"outputs/ep4/clips/orient_tilt20__P.mp4": {
+"bytes": 1789356,
+"sha256": "72ce181af5f383b81c8fe162bea15c751bf9c98dbddae56a33de74f44e6ffc4f"
+},
+"outputs/ep4/clips/orient_tilt20__P_overlay.mp4": {
+"bytes": 1092306,
+"sha256": "4170e675487a23a2f8faa8ab44649f6e8bbdbfd00421b8577847f55b36aa373a"
+},
+"outputs/ep4/clips/orient_yaw30__C.mp4": {
+"bytes": 1761180,
+"sha256": "e92769b68cfaea3d8f3b536cf810b5ca0853dd0e3fb0593b2d9c86019382a96d"
+},
+"outputs/ep4/clips/orient_yaw30__C_overlay.mp4": {
+"bytes": 1063861,
+"sha256": "744c82a9c0c62c655e74f691c47e0b841a9244e250d6cd89320ea1da5e8c556b"
+},
+"outputs/ep4/clips/orient_yaw30__G.mp4": {
+"bytes": 1777819,
+"sha256": "28aab93e3f1286b08a17a98a390d64a27ef56e572b2be97d126033474fb5237f"
+},
+"outputs/ep4/clips/orient_yaw30__G_overlay.mp4": {
+"bytes": 1071508,
+"sha256": "1f4bd2dcfbe030374b32d5b833cf1bf68184c9c906e0e92142f5a52709711aa9"
+},
+"outputs/ep4/clips/orient_yaw30__P.mp4": {
+"bytes": 1773559,
+"sha256": "b3cdfd8003dcc8ddf8e39f5bedcb813c17554372c0084b36985b11e54fa3908d"
+},
+"outputs/ep4/clips/orient_yaw30__P_overlay.mp4": {
+"bytes": 1066851,
+"sha256": "2ac27964f9b19c0e0eb8b6745fd861c6be1a1c3163e5e9652412b5bd08fc3130"
+},
+"outputs/ep4/clips/pos_forward__C.mp4": {
+"bytes": 1763824,
+"sha256": "37ad7882c82bd16e3d1adeaf6ab704d0b51516115f8d4abfac1e92c5e0d39729"
+},
+"outputs/ep4/clips/pos_forward__C_overlay.mp4": {
+"bytes": 1072397,
+"sha256": "a633fc69baee97e7e42450e239966a85d486cde2212753344fda3ddac1799384"
+},
+"outputs/ep4/clips/pos_forward__G.mp4": {
+"bytes": 1777257,
+"sha256": "dad8a023416cdcbb668779ec7561a90a228a774dcb5f6b5f11959544437abfe3"
+},
+"outputs/ep4/clips/pos_forward__G_overlay.mp4": {
+"bytes": 1069930,
+"sha256": "6e8c1f705f5ae766f5ad23ddd0fddd9777cd4eb15695aa9723c1c2f247ea0587"
+},
+"outputs/ep4/clips/pos_forward__P.mp4": {
+"bytes": 1768189,
+"sha256": "e61a8acba68f3cf8b8445a5c4c1a700459828108c588babdf5b40612950cf81a"
+},
+"outputs/ep4/clips/pos_forward__P_overlay.mp4": {
+"bytes": 1071201,
+"sha256": "d7ff468ef83f490401be4f4268f6c1c03be602619e90ef65d9455cc4c5d54ece"
+},
+"outputs/ep4/clips/pos_left_down__C.mp4": {
+"bytes": 1756918,
+"sha256": "3e29da4228f464b7a4403c7f6e43cbb347ef082e4ce03de4b59a7db0609707de"
+},
+"outputs/ep4/clips/pos_left_down__C_overlay.mp4": {
+"bytes": 1052952,
+"sha256": "c824e889c3067bb65bb804c6d06156eac7a2188adabb4a51da8a8c5baa940566"
+},
+"outputs/ep4/clips/pos_left_down__G.mp4": {
+"bytes": 1772444,
+"sha256": "9fdf260cc9ded9c1a92c60d7de43326df989d529182ebfaf8584314c060edf54"
+},
+"outputs/ep4/clips/pos_left_down__G_overlay.mp4": {
+"bytes": 1063505,
+"sha256": "471afd7d97ae440e4219118eabafd3e94e6d56a917a40a98b39d1f298c851608"
+},
+"outputs/ep4/clips/pos_left_down__P.mp4": {
+"bytes": 1759242,
+"sha256": "f04ffe7c23621ae578540fef1b75b1f37abeefa39c480670e959607ed7c2b84a"
+},
+"outputs/ep4/clips/pos_left_down__P_overlay.mp4": {
+"bytes": 1059045,
+"sha256": "596a6e4baf8644cbee513e19b1d6045c23ab187c413af77313426aefef7382c1"
+},
+"outputs/ep4/clips/pos_right_up__C.mp4": {
+"bytes": 1791823,
+"sha256": "f69e1a9963a9ad871712f3bc3b13c53f5b2806a0dc648cc42bac6895bd85feb3"
+},
+"outputs/ep4/clips/pos_right_up__C_overlay.mp4": {
+"bytes": 1090359,
+"sha256": "5bb71c5d7a32610fed57071733fcd5e58096fb623efcc99db4a0951bdafc3a89"
+},
+"outputs/ep4/clips/pos_right_up__G.mp4": {
+"bytes": 1797083,
+"sha256": "b0e7b2c96e15b9ca6c9a97478c46135501161c919f775372dd8f5a52133695d5"
+},
+"outputs/ep4/clips/pos_right_up__G_overlay.mp4": {
+"bytes": 1090621,
+"sha256": "e2956e4f2fc889587131dfbfa11e6e288acc504e162d1fba69c3c4d117a4f826"
+},
+"outputs/ep4/clips/pos_right_up__P.mp4": {
+"bytes": 1798136,
+"sha256": "93bebfc3027eb09c27ae51fcfb818ede73db3c82206c1c0ecc03396c3e7c11b2"
+},
+"outputs/ep4/clips/pos_right_up__P_overlay.mp4": {
+"bytes": 1100990,
+"sha256": "c2a6d962cea593784c0b453875b63b33f7f3432e574937bbad4accb53b6799f5"
+},
+"outputs/ep4/clips/timing_early__G.mp4": {
+"bytes": 1775754,
+"sha256": "1c84005308c3c1859e84835ea2b95ffbbb8e88d1dedfd57cbdef1a64128e8e4c"
+},
+"outputs/ep4/clips/timing_early__G_overlay.mp4": {
+"bytes": 1066722,
+"sha256": "3899e79ffb4621870b88a61cbb84ae436173ada83a5bc9d9db55df42b3fcade5"
+},
+"outputs/ep4/clips/timing_late__G.mp4": {
+"bytes": 1789960,
+"sha256": "8a9c48eceac6802cc7e15d7b8cdf58a684eefe6803cf0d03e0805f52ecc1081b"
+},
+"outputs/ep4/clips/timing_late__G_overlay.mp4": {
+"bytes": 1070578,
+"sha256": "9dc1263d2a927186037df079f8218748ee622487ed9acb5cffabe04e513bff12"
+},
+"outputs/ep8/clips/approach_above__G.mp4": {
+"bytes": 1736095,
+"sha256": "3e2449b31c62dca66c01aad97caf9a64861ea92ae88633e3b43193393ad3477f"
+},
+"outputs/ep8/clips/approach_above__G_overlay.mp4": {
+"bytes": 1057306,
+"sha256": "e29a793ee3e85da7e1f834ba10a7ec6530e84e9aa49b225e680a63f958dc7137"
+},
+"outputs/ep8/clips/approach_above__P.mp4": {
+"bytes": 1727786,
+"sha256": "5b2f352d64e0d37797b3da05ff661b0aef509d0e1bcc21ccff4e63e3ff68af2b"
+},
+"outputs/ep8/clips/approach_above__P_overlay.mp4": {
+"bytes": 1046276,
+"sha256": "d60d4ef96661c49646e67f7804eff8da2ada8a7267aaae45dbf86f90200e4e95"
+},
+"outputs/ep8/clips/approach_side__G.mp4": {
+"bytes": 1710361,
+"sha256": "8d79f082d6ac446804ec1722cbd8f369d70b196f1141cc11b3d681e18e8b1081"
+},
+"outputs/ep8/clips/approach_side__G_overlay.mp4": {
+"bytes": 1042321,
+"sha256": "91ddbd7e835a8ab4e51ff6cdef3673afc2171c981f13587b6eb576cb4d83f558"
+},
+"outputs/ep8/clips/approach_side__P.mp4": {
+"bytes": 1703317,
+"sha256": "8027c37d73de32c76afd55e401092ffd53eb17bc74dae394b98576c1bd879f52"
+},
+"outputs/ep8/clips/approach_side__P_overlay.mp4": {
+"bytes": 1033266,
+"sha256": "f248739e2a267b566994bacbd50cd5512d5ee64ceb619efda85bde0a647aaf00"
+},
+"outputs/ep8/clips/compare_approach_above.mp4": {
+"bytes": 1856670,
+"sha256": "5288c38aab31aca42daa65957cb87374ec0eb68d687fe66fe585fda6dcac68b1"
+},
+"outputs/ep8/clips/compare_approach_side.mp4": {
+"bytes": 1826075,
+"sha256": "b85093274bdefaced36bc21dbb92b37be83e3ea6b5cb351b515c0a7211dd5122"
+},
+"outputs/ep8/clips/compare_grasp_higher.mp4": {
+"bytes": 1821755,
+"sha256": "e39ef274ebb34b5cc9ae200fa525c503c56ea61513e991e0ae44b7a367d66935"
+},
+"outputs/ep8/clips/compare_grasp_spin30.mp4": {
+"bytes": 1848774,
+"sha256": "753a3f4e17b596d98139109ecc3bae8a43d2227beb5bcefbb2805bad8ec630c6"
+},
+"outputs/ep8/clips/compare_identity.mp4": {
+"bytes": 1782378,
+"sha256": "b9b524856acf70d766147f40644718835e3f3087dc431f2e501d4903dcbbaeb6"
+},
+"outputs/ep8/clips/compare_orient_tilt20.mp4": {
+"bytes": 1898156,
+"sha256": "46c0f10a5d17dd3d2e6c1c4b20acac0986f8e5e18dbabb8b109887b706516c6f"
+},
+"outputs/ep8/clips/compare_orient_yaw30.mp4": {
+"bytes": 1855069,
+"sha256": "7467a29da3eae025e594f693f1728c1b36c6a2e90ba4b3dfe112d34d6fdf0928"
+},
+"outputs/ep8/clips/compare_pos_forward.mp4": {
+"bytes": 1876971,
+"sha256": "178590cc8e82a8fe67a32fadd2db17e71442e2b1bf815cbcc9060818e80bcf8b"
+},
+"outputs/ep8/clips/compare_pos_left_down.mp4": {
+"bytes": 1857586,
+"sha256": "06d0a77a0103f0c7b0d1c7e8f0f995ffd9734fda595686416a5e84c10bedb3a6"
+},
+"outputs/ep8/clips/compare_pos_right_up.mp4": {
+"bytes": 1879805,
+"sha256": "8716c96bc4b73d3abea1ee001959f581bf6be6bd62166aa4d161c835563bb502"
+},
+"outputs/ep8/clips/compare_timing_early.mp4": {
+"bytes": 1845883,
+"sha256": "4fdfcc02d3b142d3cae4b33864e3ccfea84035712d56cda9c5bae82f3b9ddcf9"
+},
+"outputs/ep8/clips/compare_timing_late.mp4": {
+"bytes": 1838675,
+"sha256": "82d07304668f87dbb27137c1b62b64cb4fee782103b51ae0b8414143bee0461a"
+},
+"outputs/ep8/clips/grasp_higher__C.mp4": {
+"bytes": 1723172,
+"sha256": "e1c91ad1d7073283daa9d4f243a0872132cb765dc6859b059becd169211cf5a1"
+},
+"outputs/ep8/clips/grasp_higher__C_overlay.mp4": {
+"bytes": 1032020,
+"sha256": "f672b7da484284f717eaa294dfa372592ac76688b6a2fc82b6368c35f39836ee"
+},
+"outputs/ep8/clips/grasp_higher__G.mp4": {
+"bytes": 1708920,
+"sha256": "875eebf28b7456ea6b79e6a21be8b82b67a1b20f7f7e6b85adae41b4a7a83eb7"
+},
+"outputs/ep8/clips/grasp_higher__G_overlay.mp4": {
+"bytes": 1019700,
+"sha256": "6d4c26929c7e95ef04fec5d16038296bab326531d265c077e18c66eec8ed1a26"
+},
+"outputs/ep8/clips/grasp_higher__P.mp4": {
+"bytes": 1709770,
+"sha256": "ca7c23ac8f546ae40823234f8181e28237e9a58fba44e29c9da9779e7e036dd8"
+},
+"outputs/ep8/clips/grasp_higher__P_overlay.mp4": {
+"bytes": 1025020,
+"sha256": "54e168e7b3a4a6cea743be6337198fa632dfeab96c9ca2b297bce28a56ab1bf6"
+},
+"outputs/ep8/clips/grasp_spin30__C.mp4": {
+"bytes": 1703551,
+"sha256": "2a7c8200aff69ab6edb20dc207a8b24fee7d3583b108830a3d186bfa16229bc1"
+},
+"outputs/ep8/clips/grasp_spin30__C_overlay.mp4": {
+"bytes": 1042396,
+"sha256": "ebbb4173a860be7d7ae4c68a290c53b958d2ef597c1ca3ca227c5f5b3da61974"
+},
+"outputs/ep8/clips/grasp_spin30__G.mp4": {
+"bytes": 1715923,
+"sha256": "a8b21240d94da8292b5083beb2a558c4ab694c630b399f5cd2620e9b8ded6aa9"
+},
+"outputs/ep8/clips/grasp_spin30__G_overlay.mp4": {
+"bytes": 1033340,
+"sha256": "52b13bbe060e9ce8603e3778c2a6c753d54359f4ca22d5ef276b5665e83d4d85"
+},
+"outputs/ep8/clips/grasp_spin30__P.mp4": {
+"bytes": 1722005,
+"sha256": "21eed9f466d3deb60d545438a8f411be6d44bbd854a19f251c80b7809e9d2614"
+},
+"outputs/ep8/clips/grasp_spin30__P_overlay.mp4": {
+"bytes": 1043198,
+"sha256": "bb40ad904f8d0726ff7805e973e3c85e0ea40dc19de8bbfd1c9f5fe769c8fa43"
+},
+"outputs/ep8/clips/identity__G.mp4": {
+"bytes": 1700590,
+"sha256": "d1433cdc3daee3a853610de3fdb772458f6cb7a1c5253306d028f5234360e237"
+},
+"outputs/ep8/clips/identity__G_overlay.mp4": {
+"bytes": 1018570,
+"sha256": "7fea088427f2ab7e7f6efb7fafc7af69949715d28b6831bf7d7a0c506937be6e"
+},
+"outputs/ep8/clips/orient_tilt20__C.mp4": {
+"bytes": 1748888,
+"sha256": "f4366a39c47d24ab43a713847e76772315a784dc336e3cb4736947f03ba739a7"
+},
+"outputs/ep8/clips/orient_tilt20__C_overlay.mp4": {
+"bytes": 1059760,
+"sha256": "0ddd3dc47dd09a06f58bff56bc6d924ed2f49f50e76f38178b37474560891703"
+},
+"outputs/ep8/clips/orient_tilt20__G.mp4": {
+"bytes": 1753350,
+"sha256": "159eaab7743ce5f0d1fefc18d538c85b41dd9583dfeba55372b98f9c727b91b3"
+},
+"outputs/ep8/clips/orient_tilt20__G_overlay.mp4": {
+"bytes": 1062176,
+"sha256": "463ca679977e641f5f7f6998a1f84d55e41d5f0d09c415a2fa415b0249f2ac38"
+},
+"outputs/ep8/clips/orient_tilt20__P.mp4": {
+"bytes": 1756297,
+"sha256": "9c8c46abd7484539515205aae1081bdbb3f15f78a5a511d34c8b917bc0511c60"
+},
+"outputs/ep8/clips/orient_tilt20__P_overlay.mp4": {
+"bytes": 1067758,
+"sha256": "33223c5e8f380371b9fecb528d540a832f45f9f9dda3656141178adbaaaa6ea0"
+},
+"outputs/ep8/clips/orient_yaw30__C.mp4": {
+"bytes": 1712528,
+"sha256": "4625cad6c8004a6207aa69462307719c5a7231fe31e1701a8d6f76705bcc3abf"
+},
+"outputs/ep8/clips/orient_yaw30__C_overlay.mp4": {
+"bytes": 1035043,
+"sha256": "167d638abf4b51d17fc06ff02e24134072c43d81ef6b098ba975419070ca7148"
+},
+"outputs/ep8/clips/orient_yaw30__G.mp4": {
+"bytes": 1728400,
+"sha256": "b136d96a1ce727c2fe4922d96e7f643567baa40c25ce6b333a94f25fe0165986"
+},
+"outputs/ep8/clips/orient_yaw30__G_overlay.mp4": {
+"bytes": 1047109,
+"sha256": "84d75181f7609584f8b7fb9a6f972519664776da0f1e8524133d2d0c5e17ab29"
+},
+"outputs/ep8/clips/orient_yaw30__P.mp4": {
+"bytes": 1721244,
+"sha256": "3dcee8ac7a50319a2e9a728bfec5fc0a26ef36d73af3737c35bbb7cb304e983e"
+},
+"outputs/ep8/clips/orient_yaw30__P_overlay.mp4": {
+"bytes": 1041445,
+"sha256": "336bbe9539ca5e3d8b04b6e64a79759bf0df8842f0ddd098de1ee73270730113"
+},
+"outputs/ep8/clips/pos_forward__C.mp4": {
+"bytes": 1735277,
+"sha256": "0ac7bc666e50d2d5e2d372a5c72b11a5baa11e8127d10117f45ac4c632d203df"
+},
+"outputs/ep8/clips/pos_forward__C_overlay.mp4": {
+"bytes": 1048049,
+"sha256": "035f8976c1adfedc41432570d331998484ab6fee192201d1544da072672ecd9e"
+},
+"outputs/ep8/clips/pos_forward__G.mp4": {
+"bytes": 1744731,
+"sha256": "a614af3fd1797e43787ad5481bdee673511e57a41a692d51a867677bdec42bde"
+},
+"outputs/ep8/clips/pos_forward__G_overlay.mp4": {
+"bytes": 1051193,
+"sha256": "964e55c522a14db0870c8e81520976201b73f9f9d0492f11618005e9b276a7c0"
+},
+"outputs/ep8/clips/pos_forward__P.mp4": {
+"bytes": 1734456,
+"sha256": "5f61638c3b13bbcadf533b6b141299de13bee01eb6a06cf01cafff50e22cbc5c"
+},
+"outputs/ep8/clips/pos_forward__P_overlay.mp4": {
+"bytes": 1049758,
+"sha256": "8e02a21828e16b53b1ae16952f0545602367db7a0590529b874651bf935ead6b"
+},
+"outputs/ep8/clips/pos_left_down__C.mp4": {
+"bytes": 1716240,
+"sha256": "3a3e406dd46abc70e98c1b2a81729703cb2c704c397c09b25783affd99db7c80"
+},
+"outputs/ep8/clips/pos_left_down__C_overlay.mp4": {
+"bytes": 1032158,
+"sha256": "6ad19ebfb08d2b8e741d6ccec53f328227c7b906bfa7339db1a5db210c23892b"
+},
+"outputs/ep8/clips/pos_left_down__G.mp4": {
+"bytes": 1731005,
+"sha256": "b862c6bb8bd840e9e517facd4cd161db6e7831bc6d1504336924715600d8cb7c"
+},
+"outputs/ep8/clips/pos_left_down__G_overlay.mp4": {
+"bytes": 1042411,
+"sha256": "d4762d27136a9c0bd0572929439972f24f5dec00b942bfe3d243c704bbeda30a"
+},
+"outputs/ep8/clips/pos_left_down__P.mp4": {
+"bytes": 1722557,
+"sha256": "9bb6109d4ec12412e49233d202264be3b266ec8e1ae7d36b9db5fceaeda3b0df"
+},
+"outputs/ep8/clips/pos_left_down__P_overlay.mp4": {
+"bytes": 1036178,
+"sha256": "d720afa171094897b7162bd7e20535907014ffc9342a8adb62b8bb32c226f0ce"
+},
+"outputs/ep8/clips/pos_right_up__C.mp4": {
+"bytes": 1738951,
+"sha256": "43888cb220220dc84b5768548be83862bab8d9b2c9d76bc8a2c7d065b25243cb"
+},
+"outputs/ep8/clips/pos_right_up__C_overlay.mp4": {
+"bytes": 1051922,
+"sha256": "e227d5ec959e220455a90a14e0e0ba5f92f931f07278f978a74146b21f7a6995"
+},
+"outputs/ep8/clips/pos_right_up__G.mp4": {
+"bytes": 1747567,
+"sha256": "f2b8c0a39140e78ccc43252845e7f4b96613d4016599edf94ef43fab5f707aee"
+},
+"outputs/ep8/clips/pos_right_up__G_overlay.mp4": {
+"bytes": 1053090,
+"sha256": "eb908d5fac7df894b946a33f722868036e2839af58b085b502e7fb077d5f565e"
+},
+"outputs/ep8/clips/pos_right_up__P.mp4": {
+"bytes": 1744108,
+"sha256": "e07094c78928841c7f90e00fe77f756af9956ba42101b253e5ce1acb482ba576"
+},
+"outputs/ep8/clips/pos_right_up__P_overlay.mp4": {
+"bytes": 1054372,
+"sha256": "aa275f5c5b638366a724ee3d8b4df72b6348f18f3088661020e8c7d583ba54b0"
+},
+"outputs/ep8/clips/timing_early__G.mp4": {
+"bytes": 1745394,
+"sha256": "97f58678a23f1e68e2619926702c6d5130053f0e45e745643ea64686facc3c50"
+},
+"outputs/ep8/clips/timing_early__G_overlay.mp4": {
+"bytes": 1045946,
+"sha256": "4f2ad7b7ec18b6b2f24520da5f828c5fb4c4251e2c5585d0429677acb9be5f6b"
+},
+"outputs/ep8/clips/timing_late__G.mp4": {
+"bytes": 1735063,
+"sha256": "75aaac03fb0f88a8304661b72a306a1994773e999d52a3f169e597a9e60a7092"
+},
+"outputs/ep8/clips/timing_late__G_overlay.mp4": {
+"bytes": 1037516,
+"sha256": "1f20aa67c27cc527902eb470d5f121fcd04b09d74cc73bbbe40791fd2c422562"
+}
+}

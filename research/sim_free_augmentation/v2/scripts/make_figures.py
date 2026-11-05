@@ -134,6 +134,30 @@ def yield_table(rows, qa, episodes) -> str:
     return "\n".join(out)
 
 
+def yield_table_relative(rows, qa, episodes) -> str:
+    """POST-HOC (defined after the frozen rule failed the unmodified source on episodes 4/8): lid coverage at least
+    80 % of the identity re-render's coverage in the same window, median error <= the frozen 12 px."""
+    ref = {(r["ep"]): r for r in rows if r["var"] == "identity" and r["cond"] == "C"}
+    def ok(r):
+        b = ref[r["ep"]]
+        return all(r[f"lid_{w}"] is not None and r[f"lid_{w}"] <= qa["lid_median_px_max"]
+                   and r[f"lid_cov_{w}"] >= 0.8 * b[f"lid_cov_{w}"] for w in ("g", "r"))
+    out = ["| condition | " + " | ".join(f"ep{E} sync ok / relative image QA" for E in episodes) + " | overall |",
+           "|---|" + "---|" * (len(episodes) + 1)]
+    for c in pl.CONDITIONS:
+        cells, tot, n = [], 0, 0
+        for E in episodes:
+            rr = [r for r in rows if r["cond"] == c and r["ep"] == E and r["var"] != "identity"]
+            syn = [r for r in rr if r["accepted"] and abs(r["lag"] - r["lag_expected"]) <= 0.5 and r["lead"] == r["lead_expected"]]
+            q = [r for r in syn if ok(r)]
+            cells.append(f"{len(syn)} / {len(q)} of {len(rr)}")
+            tot += len(q)
+            n += len(rr)
+        out.append(f"| {c} | " + " | ".join(cells) + f" | {tot}/{n} |")
+    src = " ; ".join(f"ep{E} identity lid coverage giver {ref[E]['lid_cov_g']:.2f} receiver {ref[E]['lid_cov_r']:.2f}" for E in episodes)
+    return "\n".join(out) + "\n\nreference: " + src
+
+
 def summary_by_condition(rows) -> str:
     out = ["| condition | n clips (accepted, non-identity) | kp median px R / L / can | lid err receiver px | can-axis 2D receiver ° | ghost frac | warp err robot region | lag = expected | lead = 2 |",
            "|---|---|---|---|---|---|---|---|---|"]
@@ -167,7 +191,7 @@ def fig_acceptance(R, variations):
     ax.set_ylim(len(vids), 0)
     ax.set_xticks(np.arange(len(cols)) + 0.5, [f"ep{E}\n{c}" for E, c in cols], fontsize=8)
     ax.set_yticks(np.arange(len(vids)) + 0.5, vids, fontsize=8)
-    ax.set_title("Verifier acceptance (✓ full scale, ×s accepted after shrinking to scale s, ✗ rejected after 3 tries)", loc="left")
+    ax.set_title("Verifier acceptance\n✓ full scale · ×s accepted at scale s · ✗ rejected after 3 tries", loc="left")
     for j in range(1, len(R)):
         ax.axvline(3 * j, color=INK2, lw=1.0)
     fig.tight_layout()
@@ -177,7 +201,7 @@ def fig_acceptance(R, variations):
 
 def fig_6d(E, vid, V):
     keys = {c: f"{vid}__{c}" for c in pl.CONDITIONS}
-    src = {"state": V.rec.state, "action": V.rec.action, "can": V.src_can, "tau": np.arange(V.rec.T, float)}
+    src = {"state": V.rec.state, "action": V.rec.action, "can": V.src_can, "tau": np.arange(V.rec.T, dtype=float)}
     cs = {c: cand(E, k) for c, k in keys.items()}
     fig, axs = plt.subplots(2, 3, figsize=(11, 5.4), sharex=True)
     t = np.arange(V.rec.T)
@@ -206,7 +230,8 @@ def fig_6d(E, vid, V):
             ax.axvline(m[ev], color=GRID, lw=1.0, zorder=0)
         ax.set_xlabel("frame") if ax in axs[1] else None
     axs[0, 0].legend(loc="best", fontsize=8)
-    fig.suptitle(f"Episode {E}, {vid}: 6D object motion and receiver-relative attachment (grey verticals: R close, L close, R open)",
+    fig.suptitle(f"Episode {E}, {vid}: 6D object motion and receiver-relative attachment of the final (accepted or last-tried) "
+                 f"candidate per condition; grey verticals: R close, L close, R open",
                  x=0.01, ha="left", fontsize=10, color=INK)
     fig.tight_layout()
     fig.savefig(FIG / f"motion6d_ep{E}_{vid}.png", dpi=150)
@@ -264,7 +289,7 @@ def fig_sync(E, rec, key):
         x = np.array(list(s["curve"]))
         axs[0].plot(x, [s["curve"][k] for k in x], color=col, ls=ls, label=f"{lab} (argmin {s['lag']})")
     axs[0].axvline(rec.lag, color=STATUS["good"], lw=1.0, ls=":")
-    axs[0].set_title(f"image-to-state lag scan on the generated clip ({key}); expected {rec.lag}", loc="left")
+    axs[0].set_title(f"image-to-state lag scan, {key} (expected {rec.lag})", loc="left")
     axs[0].set_xlabel("assumed lag (frames)")
     axs[0].set_ylabel("median lid reprojection error (px)")
     axs[0].legend(fontsize=8)
@@ -272,7 +297,7 @@ def fig_sync(E, rec, key):
                             ("source", {"state": rec.state, "action": rec.action}, COL["source"], ":")):
         r = sync.action_lead(d["state"], d["action"])
         axs[1].plot(list(r["err"]), list(r["err"].values()), color=col, ls=ls, marker="o", ms=4, label=f"{lab} (argmin {r['lead']})")
-    axs[1].set_title("command-to-state lead: mean |a(t) - s(t+k)| (rad)", loc="left")
+    axs[1].set_title("command lead: mean |a(t) - s(t+k)| (rad)", loc="left")
     axs[1].set_xlabel("k (frames)")
     axs[1].legend(fontsize=8)
     fig.tight_layout()
@@ -338,7 +363,8 @@ def main():
     (HERE / "outputs/tables/acceptance.md").write_text(acceptance_tables(R, variations) + "\n")
     (HERE / "outputs/tables/clip_metrics.md").write_text(metric_table(rows) + "\n")
     (HERE / "outputs/tables/summary_by_condition.md").write_text(summary_by_condition(rows) + "\n")
-    (HERE / "outputs/tables/yield.md").write_text(yield_table(rows, cfg["image_qa"], list(R)) + "\n")
+    (HERE / "outputs/tables/yield.md").write_text("Frozen rule:\n\n" + yield_table(rows, cfg["image_qa"], list(R)) +
+                                                  "\n\nPost-hoc, source-relative rule:\n\n" + yield_table_relative(rows, cfg["image_qa"], list(R)) + "\n")
     (HERE / "outputs/tables/clip_metrics.json").write_text(json.dumps(rows, indent=1, default=float))
     for E in R:
         V = vf.Verifier(recs[E], robot)

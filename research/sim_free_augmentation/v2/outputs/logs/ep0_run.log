@@ -1,0 +1,60 @@
+[recon ep0] lag -1.75 | closure indep {'translation_mm_median': 43.439661137458145, 'translation_mm_max': 43.75059189887003, 'axis_tilt_deg_median': 37.22412179453495, 'spin_deg_median': 41.58745839224311} -> joint {'translation_mm_median': 14.641219626867121, 'translation_mm_max': 15.646759631513383, 'axis_tilt_deg_median': 0.3536901489476152, 'spin_deg_median': 0.20026376642032792} | rms R 6.47 L 2.97 px | 11.1 s
+[sam2_or_cache] 12.35 s
+/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/render.py:36: RuntimeWarning: All-NaN slice encountered
+  med = np.nanmedian(x, axis=0)
+[recon ep0] lag -1.75 | closure indep {'translation_mm_median': 43.439661137458145, 'translation_mm_max': 43.75059189887003, 'axis_tilt_deg_median': 37.22412179453495, 'spin_deg_median': 41.58745839224311} -> joint {'translation_mm_median': 14.641219626867121, 'translation_mm_max': 15.646759631513383, 'axis_tilt_deg_median': 0.3536901489476152, 'spin_deg_median': 0.20026376642032792} | rms R 6.47 L 2.97 px | 25.6 s
+[recon] 25.61 s
+[verifier_init] 0.9 s
+[plans] 10.72 s
+36 candidates, 28 unique renders
+[flows_original] 30.17 s
+  done approach_above__P (54 s render+cpu metrics)
+  done approach_side__P (54 s render+cpu metrics)
+  done grasp_higher__P (56 s render+cpu metrics)
+  done grasp_higher__G (56 s render+cpu metrics)
+  done grasp_higher__C (61 s render+cpu metrics)
+  done approach_above__G (60 s render+cpu metrics)
+  done approach_side__G (62 s render+cpu metrics)
+  done identity__G (52 s render+cpu metrics)
+  done grasp_spin30__G (63 s render+cpu metrics)
+  done grasp_spin30__C (67 s render+cpu metrics)
+  done grasp_spin30__P (65 s render+cpu metrics)
+  done orient_tilt20__G (74 s render+cpu metrics)
+  done orient_tilt20__C (75 s render+cpu metrics)
+  done orient_tilt20__P (74 s render+cpu metrics)
+  done orient_yaw30__C (83 s render+cpu metrics)
+  done orient_yaw30__P (74 s render+cpu metrics)
+  done pos_forward__C (75 s render+cpu metrics)
+  done orient_yaw30__G (81 s render+cpu metrics)
+  done pos_forward__P (69 s render+cpu metrics)
+  done pos_forward__G (75 s render+cpu metrics)
+  done pos_left_down__C (75 s render+cpu metrics)
+  done pos_left_down__G (68 s render+cpu metrics)
+  done pos_right_up__C (65 s render+cpu metrics)
+  done pos_left_down__P (66 s render+cpu metrics)
+  done pos_right_up__G (66 s render+cpu metrics)
+  done timing_early__G (54 s render+cpu metrics)
+  done pos_right_up__P (57 s render+cpu metrics)
+  done timing_late__G (48 s render+cpu metrics)
+[render_and_gpu_metrics] 844.35 s
+[corruption_tests] 6.57 s
+[comparison_videos] 24.07 s
+{
+ "episode": 0,
+ "accepted": {
+  "G": 10,
+  "P": 10,
+  "C": 12
+ },
+ "runtime_s": {
+  "sam2_or_cache": 12.35,
+  "recon": 25.61,
+  "verifier_init": 0.9,
+  "plans": 10.72,
+  "flows_original": 30.17,
+  "render_and_gpu_metrics": 844.35,
+  "corruption_tests": 6.57,
+  "comparison_videos": 24.07
+ }
+}
+EXIT 0
