@@ -5,6 +5,36 @@ Force and research tasks extend that baseline on separate branches. See [branch 
 
 ### Choose a branch
 
+```mermaid
+flowchart TB
+    BASE["official-lerobot-quest · DEFAULT<br/>Collect demonstrations → train VLA → evaluate<br/>Latest shared collection and evaluation fixes"]
+    MAIN["main<br/>Identical commit and code"]
+    BASE ---|mirror| MAIN
+
+    BASE -->|shared baseline| BENCH["force-aware/gate2a-bench-prep<br/>Prepare telemetry collection<br/>Check timing, freshness and bus health"]
+    BASE -->|shared baseline| NEXT["research/factr2-next-openarm<br/>Adapt FACTR2/NEXT<br/>Export data → train model → estimate residuals"]
+    BASE -->|shared baseline| SIMFREE["research/contact-aware-augmentation<br/>Sim-free dataset generation<br/>Real demo → new motion → video + candidate actions"]
+
+    BENCH -.->|"prerequisite: validated contact-free telemetry"| NEXT
+    NEXT --> FORCE["Goal: external-effort estimates<br/>Real-data estimation not yet validated"]
+    SIMFREE --> SYNTH["Goal: augmented training data<br/>One-episode prototype; validation still needed"]
+
+    ARCHIVE["archive/official-lerobot-quest-real2sim2real-v0-codex<br/>Frozen real → sim replay experiment<br/>Historical reference only"]
+
+    classDef baseline fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef force fill:#fef3c7,stroke:#d97706,color:#451a03
+    classDef generation fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef archived fill:#f3f4f6,stroke:#6b7280,color:#374151
+    class BASE,MAIN baseline
+    class BENCH,NEXT,FORCE force
+    class SIMFREE,SYNTH generation
+    class ARCHIVE archived
+```
+
+**Read the arrows:** “shared baseline” means the task branch includes the default branch's code.
+The dotted arrow is a data prerequisite for NEXT, not an automatic branch merge or a completed hardware run.
+Reviewed collection/evaluation fixes return to the default branch, then propagate to `main` and the task branches.
+
 | Branch | Purpose | Short pipeline |
 |---|---|---|
 | [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Latest shared dataset collection and evaluation functions, including evaluation timing fixes | Record demonstrations → train VLA → evaluate → inspect results |
