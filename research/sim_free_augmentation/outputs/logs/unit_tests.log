@@ -1,0 +1,17 @@
+test_candidate_actions_keep_the_command_state_relation (test_sfa.ContactModel.test_candidate_actions_keep_the_command_state_relation) ... ok
+test_contact_plan_satisfies_the_model (test_sfa.ContactModel.test_contact_plan_satisfies_the_model) ... ok
+test_geometry_only_violates_attachment (test_sfa.ContactModel.test_geometry_only_violates_attachment) ... ok
+test_zero_offset_reproduces_the_recording (test_sfa.ContactModel.test_zero_offset_reproduces_the_recording) ... ok
+test_dataset_conventions (test_sfa.Formats.test_dataset_conventions) ... ok
+test_link_sides (test_sfa.Formats.test_link_sides)
+regression: 'openarm_left_right_finger' belongs to the LEFT arm (substring test used to say right). ... ok
+test_fit_point_recovers_a_synthetic_attachment (test_sfa.Kinematics.test_fit_point_recovers_a_synthetic_attachment) ... ok
+test_ik_round_trip (test_sfa.Kinematics.test_ik_round_trip) ... ok
+test_follow_error_and_iou (test_sfa.Rendering.test_follow_error_and_iou) ... ok
+test_homography_of_a_translation (test_sfa.Rendering.test_homography_of_a_translation) ... ok
+test_identity_edit_returns_the_frame (test_sfa.Rendering.test_identity_edit_returns_the_frame) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.450s
+
+OK

@@ -1,0 +1,22 @@
+{
+ "episode": 0,
+ "lid_track": "research/contact_aware_augmentation/outputs/gate1/tracks/lid_track_ep0.npz",
+ "delta_m": [
+  0.0,
+  -0.045,
+  0.04
+ ],
+ "seed": 1,
+ "kp_ref_frame": 150,
+ "still_frames": [
+  60,
+  130,
+  160,
+  178,
+  200,
+  240
+ ],
+ "device": "cuda:0",
+ "_notes": "delta: world TCP offset of the new pass point (x forward, y left, z up of the robot base); chosen from a feasibility scan (all 8 candidates feasible), ~100 px in body_cam. Episode 0 = Gate 1 pilot episode with an existing automatic lid track.",
+ "sam2_keyframe_step": 15
+}
