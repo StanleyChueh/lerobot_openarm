@@ -1,5 +1,8 @@
 # This is the LeRobot-compatible VLA Training Pipeline
 
+`official-lerobot-quest` is the shared integration baseline; `main` mirrors the same commit.
+Force and research tasks extend that baseline on separate branches. See [branch workflow](docs/BRANCH_WORKFLOW.md).
+
 ![Real and sim data collection, training and evaluation pipeline](docs/pipeline.svg)
 
 Collect data on the real robot (Steps 0-5) or in Isaac Sim ([Sim Steps 1-6](#isaac-sim---robottypeopenarm_isaac)),
