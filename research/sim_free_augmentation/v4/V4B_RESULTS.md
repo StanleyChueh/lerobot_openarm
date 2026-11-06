@@ -188,7 +188,7 @@ Same frozen rule, primary arm R+Both:
 
 Development-only add-on (no new data):
 * A composition-only ablation: the same RpPos pool at 8 % vs 50 % real.
-* A carry-tail ablation: position-only episodes with the synthetic rows restricted to frames before the right-gripper close.
+* A carry-tail ablation: position-only synthetic rows restricted to approach/grasp frames (t < rc+15), so no G+ carry tail is trained on.
 
 These isolate the cause of the handover loss.
 
