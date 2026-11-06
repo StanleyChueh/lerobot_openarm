@@ -1,0 +1,55 @@
+{
+ "_doc": "v4B config. family_audit_thresholds are used by scripts/audit_families.py (Task 1). The training/evaluation protocol is added and frozen in V4B_EXPERIMENT_SPEC.md before any v4B training.",
+ "family_audit_thresholds": {
+  "init_moved_mm": 5.0,
+  "init_still_mm": 1.0,
+  "dq_rad": 0.001,
+  "can_mm": 1.0
+ },
+ "training": {
+  "_doc": "frozen with V4B_EXPERIMENT_SPEC.md before any v4B training run",
+  "pretrained": "lerobot/smolvla_base",
+  "pretrained_snapshot": "5e8d12a6 (local HF cache; sha256 of model.safetensors recorded per run)",
+  "real_dataset": "sfa_v31_R",
+  "synthetic_dataset": "sfa_v31_Gp_matched_evidence_complete",
+  "arms": {
+   "R": "real only",
+   "RpPos": "real + position-only G+ (primary)",
+   "RpHO": "real + handover-only G+",
+   "RpBoth": "real + position-only and handover-only G+ (same budget)",
+   "RpPosAll": "secondary: real + all 46 position-only G+ (unmatched distinct-episode budget)"
+  },
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "steps": 1000,
+  "batch_size": 16,
+  "real_fraction": 0.5,
+  "num_workers": 4,
+  "camera_rename": {
+   "observation.images.body_cam": "observation.images.camera1"
+  },
+  "selection_seed": 20261106,
+  "sampler_seed": 4206
+ },
+ "scoring": {
+  "_doc": "frozen before any v4B result; implemented in scripts/score_v4b.py",
+  "conditions": [
+   "original",
+   "blank",
+   "wrong_episode",
+   "object_only",
+   "background",
+   "gripper_only"
+  ],
+  "near_px": 40,
+  "covered_px": 20,
+  "bootstrap_n": 10000,
+  "bootstrap_seed": 20261106,
+  "min_far_grasp_rel": 0.05,
+  "max_handover_degradation": 0.02
+ },
+ "frozen_inputs": "configs/frozen_inputs_sha256.json (sha256 of every file of the two frozen v3.1 LeRobot datasets + manifests, recorded before training)"
+}

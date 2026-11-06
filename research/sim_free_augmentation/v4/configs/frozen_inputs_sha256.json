@@ -1,0 +1,19 @@
+{
+ "v3_1/outputs/lerobot/sfa_v31_R/data/chunk-000/file-000.parquet": "514787d4c442b98c4f86453c571cbf48f28d3c47932edc1d7912f847c232fbda",
+ "v3_1/outputs/lerobot/sfa_v31_R/meta/episodes/chunk-000/file-000.parquet": "cde6f3b44095812999bbdf6e397e3084cdfd51c4427919a237558ea8e4828d55",
+ "v3_1/outputs/lerobot/sfa_v31_R/meta/info.json": "e66df4a014bf02876d635fa248eb72804582fa9691887ae7b5462f1e1763334e",
+ "v3_1/outputs/lerobot/sfa_v31_R/meta/sfa_provenance.json": "ca86d2658a535b17ecb2f56e29b7847327693c420db9faa935b6897e72371f97",
+ "v3_1/outputs/lerobot/sfa_v31_R/meta/stats.json": "c38916c45029ab26abcabc708596c473007750530e966538a77fca8ddd1be044",
+ "v3_1/outputs/lerobot/sfa_v31_R/meta/tasks.parquet": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+ "v3_1/outputs/lerobot/sfa_v31_R/videos/observation.images.body_cam/chunk-000/file-000.mp4": "76f77f2be33980a58bf4724acd7cbe33c26d87d2e5d1eb1c1f0a5a030b0612d4",
+ "v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/data/chunk-000/file-000.parquet": "db8e47be8647d65670e8de7d394b97c244dccce8e14673a7e2a01cbb283fc463",
+ "v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/episodes/chunk-000/file-000.parquet": "807152aa6b329eee1b527fc15fe531e2543391f998c4e279956457c36114edd3",
+ "v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/info.json": "c54cee59903941197e1d1fc6daf7b4069ab9306d47d784bfc6c2fa5737c6d69f",
+ "v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/sfa_provenance.json": "84047fd32736f58ecf991831b3db78277f3db5afdc0e0b9ca2f54cb0ddf493e6",
+ "v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/stats.json": "02629623008f9c234d1ea47c47d8a37aa9d781732e8d325312b0e594aafdf05c",
+ "v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/tasks.parquet": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+ "v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/videos/observation.images.body_cam/chunk-000/file-000.mp4": "db6271a573744bda3648b5d12b373210b2b0345ec8587ac7b8f604d22966b864",
+ "v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/videos/observation.images.body_cam/chunk-000/file-001.mp4": "c77c70e8aa89a4de8fa6740f8896ea7d28a13c18b2a32216e3ac3f7ba631d33b",
+ "v3_1/outputs/dataset_export/Gp_matched_evidence_complete_manifest.json": "66f5c11fd7194e205934032fa018319caabb1509aeaaa2678aff587918cc06b2",
+ "v3_1/outputs/dataset_export/export_checks.json": "3fcbe9076d108c1bf0887239e3cfcbe32ae2d6884219d57bd253439d7b1da320"
+}

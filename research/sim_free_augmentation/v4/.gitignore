@@ -1,0 +1,5 @@
+outputs/v4b/train/*/
+outputs/v4b/predictions/
+outputs/v4b/masks/
+outputs/v4b/cache/
+__pycache__/

@@ -1,0 +1,10 @@
+{
+ "mean_area_fraction": {
+  "object_only": 0.04008502416201881,
+  "gripper_only": 0.18568238479467414,
+  "background": 0.03647426975680774
+ },
+ "n_frames": 1524,
+ "background_fallback_disk": 151,
+ "empty_object": 3
+}
