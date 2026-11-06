@@ -1,0 +1,59 @@
+{
+ "_doc": "EXPLORATORY (not in the frozen spec): rendered body-cam frames of the selected synthetic episodes vs the real source frame at the same index, per source phase; every 3rd frame",
+ "result": {
+  "RpPos": {
+   "approach": {
+    "mean_abs": 8.25862648664333,
+    "frac_px_gt10": 0.13241811898210418,
+    "identical_frames": 0.0
+   },
+   "grasp": {
+    "mean_abs": 8.374564651537698,
+    "frac_px_gt10": 0.16044614955357145,
+    "identical_frames": 0.0
+   },
+   "carry": {
+    "mean_abs": 5.567594295708351,
+    "frac_px_gt10": 0.11321013411510787,
+    "identical_frames": 0.013541125541125543
+   },
+   "handover": {
+    "mean_abs": 0.050173747519841265,
+    "frac_px_gt10": 0.0013645647321428572,
+    "identical_frames": 0.9542857142857143
+   },
+   "release": {
+    "mean_abs": 0.0,
+    "frac_px_gt10": 0.0,
+    "identical_frames": 1.0
+   }
+  },
+  "RpHO": {
+   "approach": {
+    "mean_abs": 0.0,
+    "frac_px_gt10": 0.0,
+    "identical_frames": 1.0
+   },
+   "grasp": {
+    "mean_abs": 0.4537346850198412,
+    "frac_px_gt10": 0.009734486607142857,
+    "identical_frames": 0.8971428571428571
+   },
+   "carry": {
+    "mean_abs": 10.65057229262144,
+    "frac_px_gt10": 0.21074420309271893,
+    "identical_frames": 0.06689951492697488
+   },
+   "handover": {
+    "mean_abs": 11.628124227430556,
+    "frac_px_gt10": 0.2251625632440476,
+    "identical_frames": 0.06971428571428571
+   },
+   "release": {
+    "mean_abs": 8.411190063371906,
+    "frac_px_gt10": 0.17820387200390905,
+    "identical_frames": 0.1418823067098929
+   }
+  }
+ }
+}

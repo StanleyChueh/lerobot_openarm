@@ -1,0 +1,121 @@
+  pool ep10: 229 frames, 36 chunks
+  pool ep11: 249 frames, 40 chunks
+  pool ep12: 245 frames, 39 chunks
+  pool ep13: 279 frames, 46 chunks
+  pool ep14: 255 frames, 41 chunks
+  pool ep15: 256 frames, 42 chunks
+  pool ep16: 252 frames, 41 chunks
+  pool ep17: 237 frames, 38 chunks
+  pool ep18: 247 frames, 40 chunks
+  pool ep19: 256 frames, 42 chunks
+  pool ep20: 266 frames, 44 chunks
+  pool ep21: 248 frames, 40 chunks
+  pool ep22: 276 frames, 46 chunks
+  pool ep23: 252 frames, 41 chunks
+  pool ep24: 253 frames, 41 chunks
+  pool ep25: 242 frames, 39 chunks
+  pool ep26: 255 frames, 41 chunks
+  pool ep27: 230 frames, 36 chunks
+  pool ep28: 264 frames, 43 chunks
+  pool ep29: 282 frames, 47 chunks
+  pool ep30: 265 frames, 43 chunks
+  pool ep31: 270 frames, 44 chunks
+  pool ep32: 239 frames, 38 chunks
+  pool ep33: 231 frames, 37 chunks
+  pool ep34: 249 frames, 40 chunks
+  pool ep35: 238 frames, 38 chunks
+  pool ep36: 236 frames, 38 chunks
+  pool ep37: 225 frames, 35 chunks
+  pool ep38: 213 frames, 33 chunks
+  pool ep39: 223 frames, 35 chunks
+  pool ep40: 227 frames, 36 chunks
+  pool ep41: 220 frames, 34 chunks
+  pool ep42: 188 frames, 28 chunks
+  pool ep43: 203 frames, 31 chunks
+  pool ep44: 205 frames, 31 chunks
+  pool ep45: 206 frames, 32 chunks
+  pool ep46: 216 frames, 34 chunks
+  pool ep47: 200 frames, 30 chunks
+  pool ep48: 192 frames, 29 chunks
+  pool ep49: 221 frames, 35 chunks
+15 checkpoints, 15 to evaluate on 40 recordings x 6 conditions
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s][ALoading weights:  45%|████▍     | 218/489 [00:00<00:00, 2162.18it/s]
+Loading weights:  82%|████████▏ | 403/489 [00:00<00:00, 4029.79it/s][ALoading weights: 100%|██████████| 489/489 [00:00<00:00, 4164.56it/s]
+Loading weights: 100%|██████████| 489/489 [00:00<00:00, 3091.08it/s]
+Reducing the number of VLM layers to 16 ...
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+Loading weights from local directory
+R_s0: 1524 chunks x 6 in 74 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 5898.47it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+R_s1: 1524 chunks x 6 in 84 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7819.47it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+R_s2: 1524 chunks x 6 in 70 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6205.27it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpBoth_s0: 1524 chunks x 6 in 76 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7146.42it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpBoth_s1: 1524 chunks x 6 in 70 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7686.74it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpBoth_s2: 1524 chunks x 6 in 75 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6734.66it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpHO_s0: 1524 chunks x 6 in 71 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6598.28it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpHO_s1: 1524 chunks x 6 in 81 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6837.31it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpHO_s2: 1524 chunks x 6 in 71 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6954.71it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpPosAll_s0: 1524 chunks x 6 in 77 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7630.80it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpPosAll_s1: 1524 chunks x 6 in 70 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6780.44it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpPosAll_s2: 1524 chunks x 6 in 75 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7619.66it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpPos_s0: 1524 chunks x 6 in 70 s
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6201.65it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+RpPos_s1: 1524 chunks x 6 in 76 s
+RpPos_s2: 1524 chunks x 6 in 69 s
+done in 583 s

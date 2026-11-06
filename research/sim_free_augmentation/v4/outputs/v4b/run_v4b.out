@@ -1,0 +1,15 @@
+{'arm': 'R', 'seed': 0, 'rc': 0, 'wall_s': 242.27806997299194, 'skipped': None, 'final_loss': 0.069}
+{'arm': 'RpPos', 'seed': 0, 'rc': 0, 'wall_s': 249.98286151885986, 'skipped': None, 'final_loss': 0.083}
+{'arm': 'RpHO', 'seed': 0, 'rc': 0, 'wall_s': 241.10621690750122, 'skipped': None, 'final_loss': 0.095}
+{'arm': 'RpBoth', 'seed': 0, 'rc': 0, 'wall_s': 250.23863315582275, 'skipped': None, 'final_loss': 0.089}
+{'arm': 'RpPosAll', 'seed': 0, 'rc': 0, 'wall_s': 262.4815573692322, 'skipped': None, 'final_loss': 0.085}
+{'arm': 'R', 'seed': 1, 'rc': 0, 'wall_s': 267.3887548446655, 'skipped': None, 'final_loss': 0.069}
+{'arm': 'RpPos', 'seed': 1, 'rc': 0, 'wall_s': 262.3473024368286, 'skipped': None, 'final_loss': 0.081}
+{'arm': 'RpHO', 'seed': 1, 'rc': 0, 'wall_s': 268.4907605648041, 'skipped': None, 'final_loss': 0.096}
+{'arm': 'RpBoth', 'seed': 1, 'rc': 0, 'wall_s': 260.56537222862244, 'skipped': None, 'final_loss': 0.086}
+{'arm': 'RpPosAll', 'seed': 1, 'rc': 0, 'wall_s': 250.7445273399353, 'skipped': None, 'final_loss': 0.084}
+{'arm': 'R', 'seed': 2, 'rc': 0, 'wall_s': 262.8612468242645, 'skipped': None, 'final_loss': 0.074}
+{'arm': 'RpPos', 'seed': 2, 'rc': 0, 'wall_s': 247.42005968093872, 'skipped': None, 'final_loss': 0.089}
+{'arm': 'RpHO', 'seed': 2, 'rc': 0, 'wall_s': 207.7459635734558, 'skipped': None, 'final_loss': 0.1}
+{'arm': 'RpBoth', 'seed': 2, 'rc': 0, 'wall_s': 107.34850931167603, 'skipped': None, 'final_loss': 0.095}
+{'arm': 'RpPosAll', 'seed': 2, 'rc': 0, 'wall_s': 204.21034049987793, 'skipped': None, 'final_loss': 0.089}

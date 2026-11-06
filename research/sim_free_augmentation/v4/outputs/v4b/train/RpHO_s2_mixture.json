@@ -1,0 +1,87 @@
+{
+ "parts": {
+  "real": {
+   "root": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3_1/outputs/lerobot/sfa_v31_R",
+   "frames": 2575,
+   "episodes": 10
+  },
+  "synthetic": {
+   "root": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete",
+   "frames": 23633,
+   "episodes": 92
+  }
+ },
+ "ranges": null,
+ "sampler": {
+  "arm": "RpHO",
+  "n_real_per_batch": 8,
+  "real_frames": 2575,
+  "real_source_weights": [
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.2,
+   0.07500000000000001,
+   0.2,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001
+  ],
+  "synthetic_frames_by_source": {
+   "0": 1076,
+   "1": 1036,
+   "2": 831,
+   "3": 738,
+   "5": 753,
+   "7": 1032,
+   "8": 492,
+   "9": 498
+  },
+  "synthetic_fraction_first50": 0.5,
+  "schedule_sha256": "a95aa95da752da625c7186d37a4c726faf3dcd4cc05759aa8833ba2006dbfe4c",
+  "selection_keys": {
+   "0": [
+    "timing_early__G+__s1.0",
+    "orient_yaw30__G+__s1.0",
+    "grasp_higher__G+__s1.0",
+    "timing_late__G+__s1.0"
+   ],
+   "1": [
+    "timing_late__G+__s1.0",
+    "grasp_higher__G+__s1.0",
+    "approach_side__G+__s1.0",
+    "timing_early__G+__s1.0"
+   ],
+   "2": [
+    "grasp_higher__G+__s1.0",
+    "approach_side__G+__s1.0",
+    "approach_above__G+__s1.0"
+   ],
+   "3": [
+    "timing_late__G+__s1.0",
+    "timing_early__G+__s1.0",
+    "grasp_higher__G+__s1.0"
+   ],
+   "5": [
+    "timing_late__G+__s1.0",
+    "grasp_higher__G+__s1.0",
+    "orient_yaw30__G+__s1.0"
+   ],
+   "7": [
+    "pos_right_up__G+__s0.49",
+    "timing_late__G+__s1.0",
+    "grasp_higher__G+__s1.0",
+    "timing_early__G+__s1.0"
+   ],
+   "8": [
+    "grasp_higher__G+__s1.0",
+    "pos_left_down__G+__s1.0"
+   ],
+   "9": [
+    "timing_late__G+__s1.0",
+    "timing_early__G+__s1.0"
+   ]
+  }
+ }
+}

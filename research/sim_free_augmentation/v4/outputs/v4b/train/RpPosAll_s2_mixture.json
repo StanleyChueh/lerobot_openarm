@@ -1,0 +1,108 @@
+{
+ "parts": {
+  "real": {
+   "root": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3_1/outputs/lerobot/sfa_v31_R",
+   "frames": 2575,
+   "episodes": 10
+  },
+  "synthetic": {
+   "root": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete",
+   "frames": 23633,
+   "episodes": 92
+  }
+ },
+ "ranges": null,
+ "sampler": {
+  "arm": "RpPosAll",
+  "n_real_per_batch": 8,
+  "real_frames": 2575,
+  "real_source_weights": [
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.2,
+   0.07500000000000001,
+   0.2,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001
+  ],
+  "synthetic_frames_by_source": {
+   "0": 1345,
+   "1": 1295,
+   "2": 2216,
+   "3": 1968,
+   "5": 753,
+   "7": 1290,
+   "8": 1476,
+   "9": 1494
+  },
+  "synthetic_fraction_first50": 0.5,
+  "schedule_sha256": "38148cd9d18b4f06f37c846f2db565f5311696d41e8bfcf8e34261ed7647a10f",
+  "selection_keys": {
+   "0": [
+    "init_y+3__G+__s1.0",
+    "init_x-6__G+__s1.0",
+    "init_y+6__G+__s1.0",
+    "init_y-3__G+__s1.0",
+    "init_x-3__G+__s1.0"
+   ],
+   "1": [
+    "init_y+3__G+__s1.0",
+    "init_x-3__G+__s1.0",
+    "init_y-3__G+__s0.49",
+    "init_y+6__G+__s0.7",
+    "init_x-6__G+__s1.0"
+   ],
+   "2": [
+    "init_y+3__G+__s1.0",
+    "init_x-3__G+__s1.0",
+    "init_y-6__G+__s1.0",
+    "init_y-3__G+__s1.0",
+    "init_y+6__G+__s0.49",
+    "init_x+3__G+__s1.0",
+    "init_x-6__G+__s1.0",
+    "init_x+6__G+__s1.0"
+   ],
+   "3": [
+    "init_x+6__G+__s1.0",
+    "init_x+3__G+__s1.0",
+    "init_y-6__G+__s1.0",
+    "init_y-3__G+__s1.0",
+    "init_x-3__G+__s1.0",
+    "init_y+3__G+__s1.0",
+    "init_x-6__G+__s1.0",
+    "init_y+6__G+__s1.0"
+   ],
+   "5": [
+    "init_y-3__G+__s1.0",
+    "init_x-6__G+__s0.7",
+    "init_x-3__G+__s1.0"
+   ],
+   "7": [
+    "init_x-6__G+__s1.0",
+    "init_y-3__G+__s1.0",
+    "init_y+3__G+__s0.49",
+    "init_x-3__G+__s1.0",
+    "init_y-6__G+__s1.0"
+   ],
+   "8": [
+    "init_x-3__G+__s1.0",
+    "init_y+3__G+__s1.0",
+    "init_x+3__G+__s1.0",
+    "init_y+6__G+__s0.49",
+    "init_x+6__G+__s1.0",
+    "init_y-3__G+__s1.0"
+   ],
+   "9": [
+    "init_x-6__G+__s1.0",
+    "init_y+6__G+__s0.49",
+    "init_y-3__G+__s1.0",
+    "init_x-3__G+__s1.0",
+    "init_y+3__G+__s1.0",
+    "init_x+3__G+__s0.49"
+   ]
+  }
+ }
+}

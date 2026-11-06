@@ -1,0 +1,36 @@
+{
+ "parts": {
+  "real": {
+   "root": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3_1/outputs/lerobot/sfa_v31_R",
+   "frames": 2575,
+   "episodes": 10
+  },
+  "synthetic": {
+   "root": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete",
+   "frames": 23633,
+   "episodes": 92
+  }
+ },
+ "ranges": null,
+ "sampler": {
+  "arm": "R",
+  "n_real_per_batch": 16,
+  "real_frames": 2575,
+  "real_source_weights": [
+   0.1,
+   0.1,
+   0.1,
+   0.1,
+   0.1,
+   0.1,
+   0.1,
+   0.1,
+   0.1,
+   0.1
+  ],
+  "synthetic_frames_by_source": {},
+  "synthetic_fraction_first50": 0.0,
+  "schedule_sha256": "6612004493481d52854925c2613dae16d640dc5fd77ed0fa02916c08e5b846f9",
+  "selection_keys": {}
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "v3_R_s0": {
+  "path": "../v3/outputs/train/R_s0/checkpoints/last/pretrained_model",
+  "model.safetensors": "a818cfae930b4d65c8a83967c0362741059183dde7bec074b87ab900658ac9da",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "v3_R_s1": {
+  "path": "../v3/outputs/train/R_s1/checkpoints/last/pretrained_model",
+  "model.safetensors": "71504a00c690438f9c42d0164d07cde9b93cd1413bc1715ebaeb4d59c426caf7",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "v3_R_s2": {
+  "path": "../v3/outputs/train/R_s2/checkpoints/last/pretrained_model",
+  "model.safetensors": "75521994bf6f5e97290e6a339e3f865a4c1fb210a164fbebaf18e5e12476fb2c",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "v3_RpC_s0": {
+  "path": "../v3/outputs/train/RpC_s0/checkpoints/last/pretrained_model",
+  "model.safetensors": "f138c4eb91ddd130154f5bfbff30e18afbb527e73e98262e68a399556a5b3fb4",
+  "normalizer": "d94efe99998a51d59c0980f4e8bb8a699279da7568b5a209874e1b8cb23492be"
+ },
+ "v3_RpC_s1": {
+  "path": "../v3/outputs/train/RpC_s1/checkpoints/last/pretrained_model",
+  "model.safetensors": "63ff3bc4ca65aca9ee8577ba4944b2fe7e0090443fce91d497e4776c483f493b",
+  "normalizer": "d94efe99998a51d59c0980f4e8bb8a699279da7568b5a209874e1b8cb23492be"
+ },
+ "v3_RpC_s2": {
+  "path": "../v3/outputs/train/RpC_s2/checkpoints/last/pretrained_model",
+  "model.safetensors": "3687480214d7a2a8cb17e98dbbe9a6b091bdf8824c19d1fe68c3d1b3229ff8b4",
+  "normalizer": "d94efe99998a51d59c0980f4e8bb8a699279da7568b5a209874e1b8cb23492be"
+ },
+ "v3_RpGp_s0": {
+  "path": "../v3/outputs/train/RpGp_s0/checkpoints/last/pretrained_model",
+  "model.safetensors": "eaa4e3b9c17a9023fdefcb0e54ce6a8bb58ce00cdd32e0a8a93255a54ecdc7e6",
+  "normalizer": "cf9cba7d45fb8614838745d0250c86597eccb5de62ccde6b3d2da05e67955da2"
+ },
+ "v3_RpGp_s1": {
+  "path": "../v3/outputs/train/RpGp_s1/checkpoints/last/pretrained_model",
+  "model.safetensors": "47f74271d6141e0f09a9baacc284441540a7394fd69da99e4dd713d4c382fda9",
+  "normalizer": "cf9cba7d45fb8614838745d0250c86597eccb5de62ccde6b3d2da05e67955da2"
+ },
+ "v3_RpGp_s2": {
+  "path": "../v3/outputs/train/RpGp_s2/checkpoints/last/pretrained_model",
+  "model.safetensors": "10e4af6b1d93baad9f63f0f4e8fa728617f1834aa7d512a175ed940e6ae3f6cc",
+  "normalizer": "cf9cba7d45fb8614838745d0250c86597eccb5de62ccde6b3d2da05e67955da2"
+ },
+ "R_s1": {
+  "path": "outputs/v4b/train/R_s1/checkpoints/last/pretrained_model",
+  "model.safetensors": "23f78e2b0d439f069048007e328e8ca152d80c010d203302b869bcf016065d38",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "R_s0": {
+  "path": "outputs/v4b/train/R_s0/checkpoints/last/pretrained_model",
+  "model.safetensors": "f876e627cc3273440c7ea220f97f240de3ac727ab52b15ca16f6c8dda29872a1",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "R_s2": {
+  "path": "outputs/v4b/train/R_s2/checkpoints/last/pretrained_model",
+  "model.safetensors": "7097f695b8cb9c436ad76e9cb295ff46b27641d3bb34480d25ab9ad8150343c4",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpBoth_s0": {
+  "path": "outputs/v4b/train/RpBoth_s0/checkpoints/last/pretrained_model",
+  "model.safetensors": "2897aa0c3ae8ed5c88827f3db88e455f9010b3e4da8f28e300db66db1aebd90d",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpBoth_s1": {
+  "path": "outputs/v4b/train/RpBoth_s1/checkpoints/last/pretrained_model",
+  "model.safetensors": "310978f6992ba9a36df68ccf884282faf4e50452eb116495bbedf207d957709b",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpBoth_s2": {
+  "path": "outputs/v4b/train/RpBoth_s2/checkpoints/last/pretrained_model",
+  "model.safetensors": "214bd661161f937200ce4bcb64e8eab34fc591565e2ae790839e332274f6f59e",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpHO_s0": {
+  "path": "outputs/v4b/train/RpHO_s0/checkpoints/last/pretrained_model",
+  "model.safetensors": "eb46b63e6482605b87dbc2d62c564d058feff0b402d718cb9baf11474eab1ded",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpHO_s1": {
+  "path": "outputs/v4b/train/RpHO_s1/checkpoints/last/pretrained_model",
+  "model.safetensors": "6d4c1f23db9673c3f6548cba9a26799d755e87cd0d5191ff7686732ee5b450b5",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpHO_s2": {
+  "path": "outputs/v4b/train/RpHO_s2/checkpoints/last/pretrained_model",
+  "model.safetensors": "944097ca99e6216f356d0236f0599ed0c413c7d8922db0567a731311c14cb37d",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpPosAll_s0": {
+  "path": "outputs/v4b/train/RpPosAll_s0/checkpoints/last/pretrained_model",
+  "model.safetensors": "9b912de76802a7398067eecea938e573f5527c556fefc2fd5c2527aca74d78dc",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpPosAll_s1": {
+  "path": "outputs/v4b/train/RpPosAll_s1/checkpoints/last/pretrained_model",
+  "model.safetensors": "cf34cf8758a51cfb018e2250132cfdbbc40f753b973444029e9475085ca6989a",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpPosAll_s2": {
+  "path": "outputs/v4b/train/RpPosAll_s2/checkpoints/last/pretrained_model",
+  "model.safetensors": "04826ed841188f07711fd7991f6730a32cb6ec93720ef10c4029ac99565e5ec0",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpPos_s0": {
+  "path": "outputs/v4b/train/RpPos_s0/checkpoints/last/pretrained_model",
+  "model.safetensors": "0bc70396468502cac34017b5ee358878c35216e4c02969d0e32dab6de9fdbb1b",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpPos_s1": {
+  "path": "outputs/v4b/train/RpPos_s1/checkpoints/last/pretrained_model",
+  "model.safetensors": "0d07c85ceb25b4dbd190b66a97e7b5a05e5423ba56267138ab4f70fc07528540",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ },
+ "RpPos_s2": {
+  "path": "outputs/v4b/train/RpPos_s2/checkpoints/last/pretrained_model",
+  "model.safetensors": "4cc33a1ed234ce66fe08165ca394e65e1f8106541e7afdca25cbfdae5f9d807a",
+  "normalizer": "aaf92ed3d33bdf6251ba3dcebea72ad3d0df336eaaa13d86e009fb0c4b62fed0"
+ }
+}
