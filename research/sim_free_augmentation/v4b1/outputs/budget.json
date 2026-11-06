@@ -1,0 +1,57 @@
+{
+ "phase_mask": {
+  "0": {
+   "syn_draws": 8000,
+   "nonpad_target_steps": 362847,
+   "phase_valid_steps": 124653,
+   "phase_valid_fraction": 0.34354149269526824,
+   "phase_fully_masked_rows_fraction": 0.592625,
+   "random_valid_fraction": null
+  },
+  "1": {
+   "syn_draws": 8000,
+   "nonpad_target_steps": 362623,
+   "phase_valid_steps": 119265,
+   "phase_valid_fraction": 0.32889529897441694,
+   "phase_fully_masked_rows_fraction": 0.605125,
+   "random_valid_fraction": null
+  },
+  "2": {
+   "syn_draws": 8000,
+   "nonpad_target_steps": 361874,
+   "phase_valid_steps": 122074,
+   "phase_valid_fraction": 0.33733841060700687,
+   "phase_fully_masked_rows_fraction": 0.600875,
+   "random_valid_fraction": null
+  }
+ },
+ "pooled_phase_valid_fraction": 0.33659265145161055,
+ "p_drop": 0.6634,
+ "random_mask": {
+  "0": {
+   "syn_draws": 8000,
+   "nonpad_target_steps": 362847,
+   "phase_valid_steps": 124653,
+   "phase_valid_fraction": 0.34354149269526824,
+   "phase_fully_masked_rows_fraction": 0.592625,
+   "random_valid_fraction": 0.33473337246828555
+  },
+  "1": {
+   "syn_draws": 8000,
+   "nonpad_target_steps": 362623,
+   "phase_valid_steps": 119265,
+   "phase_valid_fraction": 0.32889529897441694,
+   "phase_fully_masked_rows_fraction": 0.605125,
+   "random_valid_fraction": 0.3361783450029369
+  },
+  "2": {
+   "syn_draws": 8000,
+   "nonpad_target_steps": 361874,
+   "phase_valid_steps": 122074,
+   "phase_valid_fraction": 0.33733841060700687,
+   "phase_fully_masked_rows_fraction": 0.600875,
+   "random_valid_fraction": 0.33713944632662196
+  }
+ },
+ "note": "fractions are over non-padded synthetic target steps; real rows (8 per batch) keep all their targets"
+}

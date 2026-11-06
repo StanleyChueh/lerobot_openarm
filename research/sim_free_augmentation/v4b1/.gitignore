@@ -1,0 +1,3 @@
+outputs/train/*/
+outputs/predictions/
+__pycache__/

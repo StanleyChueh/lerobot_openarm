@@ -1,0 +1,139 @@
+{
+ "_doc": "v4B.1 config; frozen with V4B1_EXPERIMENT_SPEC.md before any v4B.1 training. Base data, selection, sampler, optimizer, normalisation and evaluation are those of v4/configs/v4b.json (frozen at 0d7007c).",
+ "v4b_config": "../v4/configs/v4b.json",
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "steps": 1000,
+ "grasp_end_offset": 15,
+ "random_mask_seed": 4207,
+ "p_drop": 0.6634,
+ "arms": {
+  "RpBoth_NoSynthRGB": {
+   "base": "RpBoth",
+   "synth_rgb": "missing",
+   "target_mask": "none",
+   "role": "H1 treatment"
+  },
+  "RpBoth_rerun": {
+   "base": "RpBoth",
+   "synth_rgb": "present",
+   "target_mask": "none",
+   "role": "H1 replication / nondeterminism control (same code path)"
+  },
+  "RpPos_PhaseMask": {
+   "base": "RpPos",
+   "synth_rgb": "present",
+   "target_mask": "phase",
+   "role": "H2 treatment"
+  },
+  "RpPos_RandMask": {
+   "base": "RpPos",
+   "synth_rgb": "present",
+   "target_mask": "random",
+   "role": "H2 matched synthetic-loss-budget control"
+  },
+  "RpPos_rerun": {
+   "base": "RpPos",
+   "synth_rgb": "present",
+   "target_mask": "none",
+   "role": "H2 replication / nondeterminism control (same code path)"
+  }
+ },
+ "frozen_references": {
+  "R": "../v4/outputs/v4b/train/R_s{seed}",
+  "RpBoth": "../v4/outputs/v4b/train/RpBoth_s{seed}",
+  "RpPos": "../v4/outputs/v4b/train/RpPos_s{seed}"
+ },
+ "scoring": {
+  "_doc": "frozen before any v4B.1 result; implemented in scripts/score_v4b1.py",
+  "conditions": [
+   "original",
+   "blank",
+   "wrong_episode",
+   "object_only",
+   "background",
+   "gripper_only"
+  ],
+  "bootstrap_n": 10000,
+  "bootstrap_seed": 20261107,
+  "thresholds": {
+   "rgb_min_rel": 0.03,
+   "handover_guardrail": 0.02
+  },
+  "contrasts": [
+   [
+    "RpBoth",
+    "RpBoth_NoSynthRGB"
+   ],
+   [
+    "RpBoth_NoSynthRGB",
+    "R"
+   ],
+   [
+    "RpBoth",
+    "R"
+   ],
+   [
+    "RpBoth_rerun",
+    "RpBoth"
+   ],
+   [
+    "RpBoth_rerun",
+    "RpBoth_NoSynthRGB"
+   ],
+   [
+    "RpPos_PhaseMask",
+    "RpPos"
+   ],
+   [
+    "RpPos_PhaseMask",
+    "R"
+   ],
+   [
+    "RpPos_RandMask",
+    "RpPos"
+   ],
+   [
+    "RpPos_PhaseMask",
+    "RpPos_RandMask"
+   ],
+   [
+    "RpPos_RandMask",
+    "R"
+   ],
+   [
+    "RpPos_rerun",
+    "RpPos"
+   ],
+   [
+    "RpPos_PhaseMask",
+    "RpPos_rerun"
+   ],
+   [
+    "RpPos",
+    "R"
+   ]
+  ],
+  "inference_condition_contrasts": [
+   [
+    "RpBoth",
+    "RpBoth_NoSynthRGB"
+   ],
+   [
+    "RpBoth_NoSynthRGB",
+    "R"
+   ],
+   [
+    "RpBoth",
+    "R"
+   ],
+   [
+    "RpPos_PhaseMask",
+    "RpPos"
+   ]
+  ]
+ }
+}
