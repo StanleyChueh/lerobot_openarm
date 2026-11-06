@@ -1,0 +1,497 @@
+{
+ "runs": [
+  {
+   "arm": "RpBoth_NoSynthRGB",
+   "seed": 0,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 177.65211272239685,
+   "loss_log": [
+    1.529,
+    0.489,
+    0.34,
+    0.258,
+    0.231,
+    0.201,
+    0.18,
+    0.171,
+    0.147,
+    0.142,
+    0.148,
+    0.13,
+    0.129,
+    0.121,
+    0.115,
+    0.11,
+    0.111,
+    0.114,
+    0.113,
+    0.106
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:33:26 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpBoth_rerun",
+   "seed": 0,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 186.22492218017578,
+   "loss_log": [
+    1.498,
+    0.461,
+    0.31,
+    0.228,
+    0.202,
+    0.177,
+    0.165,
+    0.147,
+    0.125,
+    0.121,
+    0.124,
+    0.108,
+    0.108,
+    0.101,
+    0.095,
+    0.092,
+    0.091,
+    0.096,
+    0.095,
+    0.089
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:33:26 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_PhaseMask",
+   "seed": 0,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 180.1348578929901,
+   "loss_log": [
+    1.479,
+    0.476,
+    0.344,
+    0.251,
+    0.224,
+    0.193,
+    0.164,
+    0.15,
+    0.134,
+    0.132,
+    0.131,
+    0.109,
+    0.109,
+    0.106,
+    0.1,
+    0.094,
+    0.092,
+    0.102,
+    0.101,
+    0.089
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:33:28 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_MatchedRandMask",
+   "seed": 0,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 188.5130591392517,
+   "loss_log": [
+    1.471,
+    0.478,
+    0.342,
+    0.25,
+    0.221,
+    0.192,
+    0.164,
+    0.149,
+    0.133,
+    0.132,
+    0.132,
+    0.109,
+    0.11,
+    0.107,
+    0.101,
+    0.095,
+    0.093,
+    0.102,
+    0.101,
+    0.089
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:33:28 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_rerun",
+   "seed": 0,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 174.59306406974792,
+   "loss_log": [
+    1.497,
+    0.452,
+    0.295,
+    0.228,
+    0.201,
+    0.172,
+    0.153,
+    0.142,
+    0.121,
+    0.119,
+    0.118,
+    0.1,
+    0.103,
+    0.096,
+    0.091,
+    0.088,
+    0.086,
+    0.089,
+    0.09,
+    0.083
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:36:23 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpBoth_NoSynthRGB",
+   "seed": 1,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 181.54559183120728,
+   "loss_log": [
+    1.611,
+    0.473,
+    0.312,
+    0.274,
+    0.217,
+    0.21,
+    0.184,
+    0.177,
+    0.159,
+    0.145,
+    0.137,
+    0.123,
+    0.12,
+    0.128,
+    0.114,
+    0.114,
+    0.116,
+    0.118,
+    0.108,
+    0.105
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:36:26 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpBoth_rerun",
+   "seed": 1,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 176.44012427330017,
+   "loss_log": [
+    1.566,
+    0.438,
+    0.284,
+    0.242,
+    0.195,
+    0.192,
+    0.163,
+    0.16,
+    0.138,
+    0.124,
+    0.115,
+    0.103,
+    0.099,
+    0.11,
+    0.095,
+    0.094,
+    0.095,
+    0.1,
+    0.089,
+    0.086
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:36:33 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_PhaseMask",
+   "seed": 1,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 184.21929478645325,
+   "loss_log": [
+    1.585,
+    0.463,
+    0.301,
+    0.263,
+    0.212,
+    0.197,
+    0.169,
+    0.166,
+    0.147,
+    0.126,
+    0.114,
+    0.106,
+    0.108,
+    0.116,
+    0.097,
+    0.099,
+    0.098,
+    0.102,
+    0.095,
+    0.084
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:36:38 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_MatchedRandMask",
+   "seed": 1,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 178.28066325187683,
+   "loss_log": [
+    1.582,
+    0.465,
+    0.303,
+    0.264,
+    0.209,
+    0.196,
+    0.17,
+    0.165,
+    0.15,
+    0.128,
+    0.115,
+    0.106,
+    0.109,
+    0.116,
+    0.098,
+    0.099,
+    0.099,
+    0.103,
+    0.095,
+    0.084
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:39:21 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_rerun",
+   "seed": 1,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 183.4937288761139,
+   "loss_log": [
+    1.57,
+    0.437,
+    0.277,
+    0.241,
+    0.185,
+    0.18,
+    0.16,
+    0.152,
+    0.132,
+    0.118,
+    0.11,
+    0.097,
+    0.095,
+    0.103,
+    0.09,
+    0.088,
+    0.091,
+    0.094,
+    0.084,
+    0.081
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:39:29 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpBoth_NoSynthRGB",
+   "seed": 2,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 176.63860893249512,
+   "loss_log": [
+    1.65,
+    0.471,
+    0.312,
+    0.263,
+    0.231,
+    0.213,
+    0.189,
+    0.175,
+    0.153,
+    0.149,
+    0.138,
+    0.136,
+    0.121,
+    0.119,
+    0.108,
+    0.116,
+    0.113,
+    0.108,
+    0.124,
+    0.113
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:39:30 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpBoth_rerun",
+   "seed": 2,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 186.000972032547,
+   "loss_log": [
+    1.62,
+    0.44,
+    0.281,
+    0.239,
+    0.206,
+    0.187,
+    0.165,
+    0.149,
+    0.133,
+    0.129,
+    0.117,
+    0.116,
+    0.101,
+    0.1,
+    0.089,
+    0.096,
+    0.095,
+    0.089,
+    0.105,
+    0.095
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:39:40 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_PhaseMask",
+   "seed": 2,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 173.58745121955872,
+   "loss_log": [
+    1.67,
+    0.472,
+    0.318,
+    0.259,
+    0.218,
+    0.191,
+    0.174,
+    0.175,
+    0.147,
+    0.137,
+    0.123,
+    0.12,
+    0.106,
+    0.099,
+    0.092,
+    0.101,
+    0.1,
+    0.086,
+    0.108,
+    0.096
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:42:19 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_MatchedRandMask",
+   "seed": 2,
+   "gpu": 1,
+   "rc": 0,
+   "wall_s": 111.17863845825195,
+   "loss_log": [
+    1.667,
+    0.472,
+    0.32,
+    0.259,
+    0.22,
+    0.191,
+    0.171,
+    0.174,
+    0.147,
+    0.138,
+    0.123,
+    0.12,
+    0.106,
+    0.099,
+    0.093,
+    0.102,
+    0.101,
+    0.086,
+    0.108,
+    0.096
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:42:28 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  },
+  {
+   "arm": "RpPos_rerun",
+   "seed": 2,
+   "gpu": 0,
+   "rc": 0,
+   "wall_s": 170.37868666648865,
+   "loss_log": [
+    1.607,
+    0.438,
+    0.278,
+    0.233,
+    0.198,
+    0.18,
+    0.158,
+    0.146,
+    0.128,
+    0.124,
+    0.113,
+    0.109,
+    0.096,
+    0.094,
+    0.085,
+    0.091,
+    0.09,
+    0.082,
+    0.099,
+    0.089
+   ],
+   "warmup_autoscale_lines": [
+    "INFO 2026-11-06 22:42:32 hedulers.py:155 Auto-scaling LR scheduler: num_training_steps (1000) < num_decay_steps (30000). Scaling warmup: 1000 \u2192 33, decay: 30000 \u2192 1000 (scale factor: 0.033)"
+   ]
+  }
+ ],
+ "wall_s": 715.5574326515198,
+ "lanes": 4,
+ "gpu_usage": {
+  "0": {
+   "max_mem_mib": 8618.0,
+   "mean_util_pct": 94.01398601398601
+  },
+  "1": {
+   "max_mem_mib": 8869.0,
+   "mean_util_pct": 88.1118881118881
+  }
+ },
+ "terminal_git_head": "d29013e1fe3cb303510d600cfaeb86dbe465c5b9"
+}

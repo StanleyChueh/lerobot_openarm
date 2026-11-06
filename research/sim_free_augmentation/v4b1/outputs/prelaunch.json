@@ -1,0 +1,124 @@
+{
+ "time": 1793975598.2592912,
+ "git_head": "d29013e1fe3cb303510d600cfaeb86dbe465c5b9",
+ "dirty_tracked": [],
+ "v4b1_dirty": [],
+ "v4b1_untracked_code": [],
+ "spec_sha256": "a57062840509ea69f06a84743e69254fbdf315c14d4d9202fc54547dbedce29e",
+ "config_sha256": "f6baaa63312133f342534e3e83e96c476c7e8d814e1c53cbb8e2c4d86e47f5f6",
+ "v4b_config_sha256": "84d2b7228eb0113cf533453ce9e91da25ce335517eed518ec0e86074f287a6b0",
+ "frozen_inputs_sha256": "464d4833cc59fc357e54726a7d2bb59eddea25ed554d6121bdfae875358f7d3e",
+ "lerobot_version": "0.6.2",
+ "lerobot_installed_from": {
+  "url": "https://github.com/huggingface/lerobot.git",
+  "vcs_info": {
+   "vcs": "git",
+   "commit_id": "3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e",
+   "requested_revision": "3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e"
+  }
+ },
+ "content_checks": {
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_R/data/chunk-000/file-000.parquet": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_R/meta/episodes/chunk-000/file-000.parquet": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_R/meta/info.json": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_R/meta/sfa_provenance.json": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_R/meta/stats.json": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_R/meta/tasks.parquet": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_R/videos/observation.images.body_cam/chunk-000/file-000.mp4": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/data/chunk-000/file-000.parquet": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/episodes/chunk-000/file-000.parquet": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/info.json": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/sfa_provenance.json": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/stats.json": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/meta/tasks.parquet": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/videos/observation.images.body_cam/chunk-000/file-000.mp4": true,
+  "frozen_input:v3_1/outputs/lerobot/sfa_v31_Gp_matched_evidence_complete/videos/observation.images.body_cam/chunk-000/file-001.mp4": true,
+  "frozen_input:v3_1/outputs/dataset_export/Gp_matched_evidence_complete_manifest.json": true,
+  "frozen_input:v3_1/outputs/dataset_export/export_checks.json": true,
+  "pretrained:5e8d12a6e2975b0e5e5fce7c8caf47c371d257b6/model.safetensors": true,
+  "pretrained:c83c3163b8ca9b7e67c509fffd9121e66cb96205/model.safetensors": true,
+  "pretrained:d9f33c94a60fb382c90dea2164c96845bd955e28/model.safetensors": true,
+  "frozen_reference:R_s0": true,
+  "frozen_reference:R_s1": true,
+  "frozen_reference:R_s2": true,
+  "frozen_reference:RpBoth_s0": true,
+  "frozen_reference:RpBoth_s1": true,
+  "frozen_reference:RpBoth_s2": true,
+  "frozen_reference:RpPos_s0": true,
+  "frozen_reference:RpPos_s1": true,
+  "frozen_reference:RpPos_s2": true,
+  "mask_manifest:outputs/masks/RpPos_PhaseMask_s0.npz": true,
+  "mask_manifest:outputs/masks/RpPos_MatchedRandMask_s0.npz": true,
+  "matched_control_exact:s0": true,
+  "mask_manifest:outputs/masks/RpPos_PhaseMask_s1.npz": true,
+  "mask_manifest:outputs/masks/RpPos_MatchedRandMask_s1.npz": true,
+  "matched_control_exact:s1": true,
+  "mask_manifest:outputs/masks/RpPos_PhaseMask_s2.npz": true,
+  "mask_manifest:outputs/masks/RpPos_MatchedRandMask_s2.npz": true,
+  "matched_control_exact:s2": true
+ },
+ "loss_normalisation": "SmolVLA: sum(valid 16-D elements)/count(valid elements) over the batch (readiness 5e)",
+ "steps": 1000,
+ "jobs": [
+  [
+   "RpBoth_NoSynthRGB",
+   0
+  ],
+  [
+   "RpBoth_rerun",
+   0
+  ],
+  [
+   "RpPos_PhaseMask",
+   0
+  ],
+  [
+   "RpPos_MatchedRandMask",
+   0
+  ],
+  [
+   "RpPos_rerun",
+   0
+  ],
+  [
+   "RpBoth_NoSynthRGB",
+   1
+  ],
+  [
+   "RpBoth_rerun",
+   1
+  ],
+  [
+   "RpPos_PhaseMask",
+   1
+  ],
+  [
+   "RpPos_MatchedRandMask",
+   1
+  ],
+  [
+   "RpPos_rerun",
+   1
+  ],
+  [
+   "RpBoth_NoSynthRGB",
+   2
+  ],
+  [
+   "RpBoth_rerun",
+   2
+  ],
+  [
+   "RpPos_PhaseMask",
+   2
+  ],
+  [
+   "RpPos_MatchedRandMask",
+   2
+  ],
+  [
+   "RpPos_rerun",
+   2
+  ]
+ ]
+}

@@ -1,0 +1,337 @@
+{
+ "steps": 1000,
+ "runs": {
+  "RpBoth_NoSynthRGB_s0": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "7c508ed6114bad6c3d7e76a4eeff7e5824fa461af206c7516d02c87211d4e7f1",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpBoth_NoSynthRGB_s1": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "9752e4c6c5b0b19c29be70192f2cd3675ff14fa507ce30262f0f43d1a21ab65f",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpBoth_NoSynthRGB_s2": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "7ca83e5b9a4dca977501edeb4beb1d2db3eb0d24a9d775a906802003e49c53cd",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpBoth_rerun_s0": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "2897aa0c3ae8ed5c88827f3db88e455f9010b3e4da8f28e300db66db1aebd90d",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpBoth_rerun_s1": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "310978f6992ba9a36df68ccf884282faf4e50452eb116495bbedf207d957709b",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpBoth_rerun_s2": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "214bd661161f937200ce4bcb64e8eab34fc591565e2ae790839e332274f6f59e",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_PhaseMask_s0": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "f441a063d6756a2409bf1ac191a42155cd6571f50899e2ab24ef70c16e0fd2a0",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_PhaseMask_s1": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "206d643e28038e2b58deece774e39046ded25b602c55dedf7934b118229cb7fd",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_PhaseMask_s2": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "eb0797bf16f1ce54260d1471a87000a28e83100c9389dae2439532dfe4437f75",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_MatchedRandMask_s0": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "6e8cd5f145494116c94e378ef0eb94b3c6d90d3102b11ee0c913685631736154",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_MatchedRandMask_s1": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "3114b584c08932e963396011a354ab58d8a8e6a8ef8d4142f4c18dc94aa57edd",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_MatchedRandMask_s2": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "06f3aa26edce2ad6f488d185c4a91b72afd9c9d29128f7828437a0538cf368bd",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_rerun_s0": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "0bc70396468502cac34017b5ee358878c35216e4c02969d0e32dab6de9fdbb1b",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_rerun_s1": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "0d07c85ceb25b4dbd190b66a97e7b5a05e5423ba56267138ab4f70fc07528540",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  },
+  "RpPos_rerun_s2": {
+   "adamw_param_states": 155,
+   "adamw_step_min": 1000.0,
+   "adamw_step_max": 1000.0,
+   "scheduler_last_epoch": 1000,
+   "scheduler_step_count": 1001,
+   "final_lr": [
+    2.5e-06
+   ],
+   "trainer_step": 1000,
+   "checkpoint_dirs": [
+    "001000",
+    "last"
+   ],
+   "resume": false,
+   "train_config_diff_vs_frozen_base": {},
+   "param_groups_equal_frozen_base": true,
+   "scheduler_equal_frozen_base": true,
+   "model_sha256_rehash": "4cc33a1ed234ce66fe08165ca394e65e1f8106541e7afdca25cbfdae5f9d807a",
+   "evaluated_hash_equal_rehash": true,
+   "pass": true
+  }
+ },
+ "all_pass": true,
+ "n_runs": 15
+}

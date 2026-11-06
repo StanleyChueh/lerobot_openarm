@@ -1,0 +1,16 @@
+{'arm': 'RpBoth_NoSynthRGB', 'seed': 0, 'rc': 0, 'wall_s': 177.65211272239685, 'skipped': None}
+{'arm': 'RpBoth_rerun', 'seed': 0, 'rc': 0, 'wall_s': 186.22492218017578, 'skipped': None}
+{'arm': 'RpPos_PhaseMask', 'seed': 0, 'rc': 0, 'wall_s': 180.1348578929901, 'skipped': None}
+{'arm': 'RpPos_MatchedRandMask', 'seed': 0, 'rc': 0, 'wall_s': 188.5130591392517, 'skipped': None}
+{'arm': 'RpPos_rerun', 'seed': 0, 'rc': 0, 'wall_s': 174.59306406974792, 'skipped': None}
+{'arm': 'RpBoth_NoSynthRGB', 'seed': 1, 'rc': 0, 'wall_s': 181.54559183120728, 'skipped': None}
+{'arm': 'RpBoth_rerun', 'seed': 1, 'rc': 0, 'wall_s': 176.44012427330017, 'skipped': None}
+{'arm': 'RpPos_PhaseMask', 'seed': 1, 'rc': 0, 'wall_s': 184.21929478645325, 'skipped': None}
+{'arm': 'RpPos_MatchedRandMask', 'seed': 1, 'rc': 0, 'wall_s': 178.28066325187683, 'skipped': None}
+{'arm': 'RpPos_rerun', 'seed': 1, 'rc': 0, 'wall_s': 183.4937288761139, 'skipped': None}
+{'arm': 'RpBoth_NoSynthRGB', 'seed': 2, 'rc': 0, 'wall_s': 176.63860893249512, 'skipped': None}
+{'arm': 'RpBoth_rerun', 'seed': 2, 'rc': 0, 'wall_s': 186.000972032547, 'skipped': None}
+{'arm': 'RpPos_PhaseMask', 'seed': 2, 'rc': 0, 'wall_s': 173.58745121955872, 'skipped': None}
+{'arm': 'RpPos_MatchedRandMask', 'seed': 2, 'rc': 0, 'wall_s': 111.17863845825195, 'skipped': None}
+{'arm': 'RpPos_rerun', 'seed': 2, 'rc': 0, 'wall_s': 170.37868666648865, 'skipped': None}
+launcher exit 0

@@ -1,0 +1,89 @@
+{
+ "prelaunch": {
+  "arm": "RpPos_PhaseMask",
+  "seed": 0,
+  "steps": 1000,
+  "base_arm": "RpPos",
+  "spec": {
+   "base": "RpPos",
+   "synth_rgb": "present",
+   "target_mask": "phase",
+   "role": "H2 treatment"
+  },
+  "p_drop": 0.6634,
+  "git_head": "d29013e1fe3cb303510d600cfaeb86dbe465c5b9",
+  "v4b1_dirty": [],
+  "v4b1_untracked_code": [],
+  "lerobot_version": "0.6.2",
+  "lerobot_path": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/lerobot",
+  "lerobot_installed_from": {
+   "url": "https://github.com/huggingface/lerobot.git",
+   "vcs_info": {
+    "vcs": "git",
+    "commit_id": "3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e",
+    "requested_revision": "3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e"
+   }
+  }
+ },
+ "ranges": null,
+ "sampler": {
+  "base_arm": "RpPos",
+  "n_real_per_batch": 8,
+  "real_source_weights": [
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.2,
+   0.07500000000000001,
+   0.2,
+   0.07500000000000001,
+   0.07500000000000001,
+   0.07500000000000001
+  ],
+  "schedule_sha256": "3335e234e104a6adfe4a54083adbc0e6739ec32d6e030998efbb26d3d35c1ec7",
+  "selection_keys": {
+   "0": [
+    "init_y+3__G+__s1.0",
+    "init_x-6__G+__s1.0",
+    "init_y+6__G+__s1.0",
+    "init_y-3__G+__s1.0"
+   ],
+   "1": [
+    "init_y+3__G+__s1.0",
+    "init_x-3__G+__s1.0",
+    "init_y-3__G+__s0.49",
+    "init_y+6__G+__s0.7"
+   ],
+   "2": [
+    "init_y+3__G+__s1.0",
+    "init_x-3__G+__s1.0",
+    "init_y-6__G+__s1.0"
+   ],
+   "3": [
+    "init_x+6__G+__s1.0",
+    "init_x+3__G+__s1.0",
+    "init_y-6__G+__s1.0"
+   ],
+   "5": [
+    "init_y-3__G+__s1.0",
+    "init_x-6__G+__s0.7",
+    "init_x-3__G+__s1.0"
+   ],
+   "7": [
+    "init_x-6__G+__s1.0",
+    "init_y-3__G+__s1.0",
+    "init_y+3__G+__s0.49",
+    "init_x-3__G+__s1.0"
+   ],
+   "8": [
+    "init_x-3__G+__s1.0",
+    "init_y+3__G+__s1.0"
+   ],
+   "9": [
+    "init_x-6__G+__s1.0",
+    "init_y+6__G+__s0.49"
+   ]
+  }
+ }
+}
