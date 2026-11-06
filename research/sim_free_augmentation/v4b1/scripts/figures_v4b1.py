@@ -22,8 +22,8 @@ ROWS = [("RpBoth__vs__RpBoth_NoSynthRGB", "H1  Both (gen. RGB) vs Both (no synth
         ("RpBoth_NoSynthRGB__vs__R", "      Both (no synth RGB) vs R"),
         ("RpBoth__vs__R", "      Both vs R (v4B)"),
         ("RpPos_PhaseMask__vs__RpPos", "H2  Position phase-mask vs Position"),
-        ("RpPos_RandMask__vs__RpPos", "      random-mask (budget) vs Position"),
-        ("RpPos_PhaseMask__vs__RpPos_RandMask", "      phase-mask vs random-mask"),
+        ("RpPos_MatchedRandMask__vs__RpPos", "      per-row matched random vs Position"),
+        ("RpPos_PhaseMask__vs__RpPos_MatchedRandMask", "      phase-mask vs per-row matched random"),
         ("RpPos_rerun__vs__RpPos", "      replication: Position rerun vs Position"),
         ("RpPos_PhaseMask__vs__R", "      Position phase-mask vs R"),
         ("RpPos__vs__R", "      Position vs R (v4B)")]

@@ -1,0 +1,521 @@
+{
+ "_doc": "A1 accounting under the frozen v4B RpPos schedules. 'valid' = target steps entering the loss; loss denominator = 16 x per-batch valid steps. Coefficient mass = per-batch fraction of valid elements, not gradient norm.",
+ "seeds": {
+  "0": {
+   "RpPos_rerun": {
+    "retained_synthetic_steps": 362847,
+    "synthetic_retention_vs_unmasked": 1.0,
+    "fully_masked_synthetic_row_fraction": 0.0,
+    "mean_batch_synthetic_share_of_valid_elements": 0.5003831839934096,
+    "mean_real_element_multiplier_vs_unmasked": 1.0,
+    "batch_denominator_min_max": [
+     550,
+     800
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     42936,
+     48118,
+     45994,
+     44588,
+     0,
+     44176,
+     0,
+     45642,
+     46365,
+     45028
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.059272961575116065,
+     0.06650515892036882,
+     0.06356409405086973,
+     0.06106136332253588,
+     0.0,
+     0.06092023673638872,
+     0.0,
+     0.06288258165441235,
+     0.06402726009239972,
+     0.06214952764131772
+    ]
+   },
+   "RpPos_PhaseMask": {
+    "retained_synthetic_steps": 124653,
+    "synthetic_retention_vs_unmasked": 0.34354149269526824,
+    "fully_masked_synthetic_row_fraction": 0.592625,
+    "mean_batch_synthetic_share_of_valid_elements": 0.24458848548720982,
+    "mean_real_element_multiplier_vs_unmasked": 1.5149493193923023,
+    "batch_denominator_min_max": [
+     268,
+     713
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     15050,
+     15427,
+     17473,
+     14974,
+     0,
+     15122,
+     0,
+     16837,
+     14834,
+     14936
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.02947749888892675,
+     0.030523612889425716,
+     0.034387733153053254,
+     0.02920949340510207,
+     0.0,
+     0.02953689955404462,
+     0.0,
+     0.032843615000973304,
+     0.02951504118998201,
+     0.029094591405702072
+    ],
+    "manifest": {
+     "path": "outputs/masks/RpPos_PhaseMask_s0.npz",
+     "sha256": "b6379cdb34bc4337882f647f25adf5bc1534941225ec8d0906dce4b2139cd072"
+    }
+   },
+   "RpPos_MatchedRandMask": {
+    "retained_synthetic_steps": 124653,
+    "synthetic_retention_vs_unmasked": 0.34354149269526824,
+    "fully_masked_synthetic_row_fraction": 0.592625,
+    "mean_batch_synthetic_share_of_valid_elements": 0.24458848548720982,
+    "mean_real_element_multiplier_vs_unmasked": 1.5149493193923023,
+    "batch_denominator_min_max": [
+     268,
+     713
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     15050,
+     15427,
+     17473,
+     14974,
+     0,
+     15122,
+     0,
+     16837,
+     14834,
+     14936
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.02947749888892675,
+     0.030523612889425716,
+     0.034387733153053254,
+     0.02920949340510207,
+     0.0,
+     0.02953689955404462,
+     0.0,
+     0.032843615000973304,
+     0.02951504118998201,
+     0.029094591405702072
+    ],
+    "vs_PhaseMask": {
+     "rows_with_equal_retained_count": 16000,
+     "rows": 16000,
+     "batches_with_equal_denominator": 1000,
+     "batches": 1000,
+     "active_row_sets_equal_in_batches": 1000,
+     "max_real_weight_ratio": 1.0,
+     "min_real_weight_ratio": 1.0,
+     "synthetic_rows_with_identical_positions": 6469,
+     "synthetic_rows_with_0<K<valid": 1531
+    },
+    "manifest": {
+     "path": "outputs/masks/RpPos_MatchedRandMask_s0.npz",
+     "sha256": "9da1f720d55867caf191e520e86530dab3b8c9c2bb8ec9fb96873657cc5299f4"
+    }
+   },
+   "RpPos_RandMask": {
+    "retained_synthetic_steps": 121457,
+    "synthetic_retention_vs_unmasked": 0.33473337246828555,
+    "fully_masked_synthetic_row_fraction": 0.00675,
+    "mean_batch_synthetic_share_of_valid_elements": 0.251631791556413,
+    "mean_real_element_multiplier_vs_unmasked": 1.5010970473525826,
+    "batch_denominator_min_max": [
+     353,
+     561
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     14509,
+     16172,
+     15472,
+     14764,
+     0,
+     14850,
+     0,
+     15108,
+     15630,
+     14952
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.030052648342570758,
+     0.033591768361019604,
+     0.03209948076024688,
+     0.030332411459050263,
+     0.0,
+     0.030804105583381043,
+     0.0,
+     0.031309452751937424,
+     0.03245651992941609,
+     0.030985404368791127
+    ],
+    "vs_PhaseMask": {
+     "rows_with_equal_retained_count": 8087,
+     "rows": 16000,
+     "batches_with_equal_denominator": 5,
+     "batches": 1000,
+     "active_row_sets_equal_in_batches": 3,
+     "max_real_weight_ratio": 1.4365671641791045,
+     "min_real_weight_ratio": 0.6942496493688639,
+     "synthetic_rows_with_identical_positions": 54,
+     "synthetic_rows_with_0<K<valid": 1531
+    }
+   }
+  },
+  "1": {
+   "RpPos_rerun": {
+    "retained_synthetic_steps": 362623,
+    "synthetic_retention_vs_unmasked": 1.0,
+    "fully_masked_synthetic_row_fraction": 0.0,
+    "mean_batch_synthetic_share_of_valid_elements": 0.5002067352884257,
+    "mean_real_element_multiplier_vs_unmasked": 1.0,
+    "batch_denominator_min_max": [
+     554,
+     800
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     44937,
+     47584,
+     47639,
+     46129,
+     0,
+     44502,
+     0,
+     42399,
+     46828,
+     42605
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.0619251786737237,
+     0.06562863057626328,
+     0.06564786001147424,
+     0.06380257389619504,
+     0.0,
+     0.06127143093474373,
+     0.0,
+     0.058560421914248914,
+     0.06433169895146838,
+     0.05903894033030806
+    ]
+   },
+   "RpPos_PhaseMask": {
+    "retained_synthetic_steps": 119265,
+    "synthetic_retention_vs_unmasked": 0.32889529897441694,
+    "fully_masked_synthetic_row_fraction": 0.605125,
+    "mean_batch_synthetic_share_of_valid_elements": 0.23716386974968917,
+    "mean_real_element_multiplier_vs_unmasked": 1.5285575597287528,
+    "batch_denominator_min_max": [
+     268,
+     745
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     14606,
+     15438,
+     16943,
+     15170,
+     0,
+     13802,
+     0,
+     14349,
+     14975,
+     13982
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.028745282376796757,
+     0.030729337001714676,
+     0.03367845890926099,
+     0.030079497037845133,
+     0.0,
+     0.02758514556283662,
+     0.0,
+     0.02870475039671908,
+     0.029666787847405743,
+     0.027974610617110172
+    ],
+    "manifest": {
+     "path": "outputs/masks/RpPos_PhaseMask_s1.npz",
+     "sha256": "4386c802e7f26c50651a2cca2ef7e3848828325c644191d0ffe31bafcdefe4d4"
+    }
+   },
+   "RpPos_MatchedRandMask": {
+    "retained_synthetic_steps": 119265,
+    "synthetic_retention_vs_unmasked": 0.32889529897441694,
+    "fully_masked_synthetic_row_fraction": 0.605125,
+    "mean_batch_synthetic_share_of_valid_elements": 0.23716386974968917,
+    "mean_real_element_multiplier_vs_unmasked": 1.5285575597287528,
+    "batch_denominator_min_max": [
+     268,
+     745
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     14606,
+     15438,
+     16943,
+     15170,
+     0,
+     13802,
+     0,
+     14349,
+     14975,
+     13982
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.028745282376796757,
+     0.030729337001714676,
+     0.03367845890926099,
+     0.030079497037845133,
+     0.0,
+     0.02758514556283662,
+     0.0,
+     0.02870475039671908,
+     0.029666787847405743,
+     0.027974610617110172
+    ],
+    "vs_PhaseMask": {
+     "rows_with_equal_retained_count": 16000,
+     "rows": 16000,
+     "batches_with_equal_denominator": 1000,
+     "batches": 1000,
+     "active_row_sets_equal_in_batches": 1000,
+     "max_real_weight_ratio": 1.0,
+     "min_real_weight_ratio": 1.0,
+     "synthetic_rows_with_identical_positions": 6448,
+     "synthetic_rows_with_0<K<valid": 1552
+    },
+    "manifest": {
+     "path": "outputs/masks/RpPos_MatchedRandMask_s1.npz",
+     "sha256": "1d1fe8d24864a7692775d81dee35e78d46b4422a49ab5beeef188963dde2f230"
+    }
+   },
+   "RpPos_RandMask": {
+    "retained_synthetic_steps": 121906,
+    "synthetic_retention_vs_unmasked": 0.3361783450029369,
+    "fully_masked_synthetic_row_fraction": 0.0055,
+    "mean_batch_synthetic_share_of_valid_elements": 0.2522312369940994,
+    "mean_real_element_multiplier_vs_unmasked": 1.4992426287557727,
+    "batch_denominator_min_max": [
+     333,
+     554
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     15080,
+     16136,
+     15950,
+     15604,
+     0,
+     14989,
+     0,
+     14416,
+     15562,
+     14169
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.03126025791201576,
+     0.033323358184477146,
+     0.03294932449706385,
+     0.03241629623039274,
+     0.0,
+     0.030954955454552534,
+     0.0,
+     0.029856962317815004,
+     0.03202742392357451,
+     0.02944265847420792
+    ],
+    "vs_PhaseMask": {
+     "rows_with_equal_retained_count": 8075,
+     "rows": 16000,
+     "batches_with_equal_denominator": 8,
+     "batches": 1000,
+     "active_row_sets_equal_in_batches": 1,
+     "max_real_weight_ratio": 1.4982935153583619,
+     "min_real_weight_ratio": 0.6917404129793511,
+     "synthetic_rows_with_identical_positions": 44,
+     "synthetic_rows_with_0<K<valid": 1552
+    }
+   }
+  },
+  "2": {
+   "RpPos_rerun": {
+    "retained_synthetic_steps": 361874,
+    "synthetic_retention_vs_unmasked": 1.0,
+    "fully_masked_synthetic_row_fraction": 0.0,
+    "mean_batch_synthetic_share_of_valid_elements": 0.49991299326976957,
+    "mean_real_element_multiplier_vs_unmasked": 1.0,
+    "batch_denominator_min_max": [
+     552,
+     800
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     46594,
+     44477,
+     45910,
+     47492,
+     0,
+     43028,
+     0,
+     45525,
+     44243,
+     44605
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.06431787992399719,
+     0.06161765032242406,
+     0.06347232490330885,
+     0.06564929583104492,
+     0.0,
+     0.05935472417149724,
+     0.0,
+     0.06294714289792448,
+     0.06111912824882875,
+     0.06143484697074384
+    ]
+   },
+   "RpPos_PhaseMask": {
+    "retained_synthetic_steps": 122074,
+    "synthetic_retention_vs_unmasked": 0.33733841060700687,
+    "fully_masked_synthetic_row_fraction": 0.600875,
+    "mean_batch_synthetic_share_of_valid_elements": 0.2416132151327945,
+    "mean_real_element_multiplier_vs_unmasked": 1.5186120768894056,
+    "batch_denominator_min_max": [
+     310,
+     730
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     16796,
+     14361,
+     17182,
+     15267,
+     0,
+     13606,
+     0,
+     14437,
+     15745,
+     14680
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.03285314423139796,
+     0.028573449612269767,
+     0.034127898974187394,
+     0.03035804844553539,
+     0.0,
+     0.026906010866275358,
+     0.0,
+     0.02846583232448511,
+     0.031202241698934166,
+     0.02912658897970931
+    ],
+    "manifest": {
+     "path": "outputs/masks/RpPos_PhaseMask_s2.npz",
+     "sha256": "c1ec26f621309d86c862d0918560d79bebecd1ddb70fe1ec1c5c60e5d188a166"
+    }
+   },
+   "RpPos_MatchedRandMask": {
+    "retained_synthetic_steps": 122074,
+    "synthetic_retention_vs_unmasked": 0.33733841060700687,
+    "fully_masked_synthetic_row_fraction": 0.600875,
+    "mean_batch_synthetic_share_of_valid_elements": 0.2416132151327945,
+    "mean_real_element_multiplier_vs_unmasked": 1.5186120768894056,
+    "batch_denominator_min_max": [
+     310,
+     730
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     16796,
+     14361,
+     17182,
+     15267,
+     0,
+     13606,
+     0,
+     14437,
+     15745,
+     14680
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.03285314423139796,
+     0.028573449612269767,
+     0.034127898974187394,
+     0.03035804844553539,
+     0.0,
+     0.026906010866275358,
+     0.0,
+     0.02846583232448511,
+     0.031202241698934166,
+     0.02912658897970931
+    ],
+    "vs_PhaseMask": {
+     "rows_with_equal_retained_count": 16000,
+     "rows": 16000,
+     "batches_with_equal_denominator": 1000,
+     "batches": 1000,
+     "active_row_sets_equal_in_batches": 1000,
+     "max_real_weight_ratio": 1.0,
+     "min_real_weight_ratio": 1.0,
+     "synthetic_rows_with_identical_positions": 6464,
+     "synthetic_rows_with_0<K<valid": 1538
+    },
+    "manifest": {
+     "path": "outputs/masks/RpPos_MatchedRandMask_s2.npz",
+     "sha256": "71086aca822b54f9813ba25de401e482804474aa34ed71aae13bdae8a0355e6f"
+    }
+   },
+   "RpPos_RandMask": {
+    "retained_synthetic_steps": 122002,
+    "synthetic_retention_vs_unmasked": 0.33713944632662196,
+    "fully_masked_synthetic_row_fraction": 0.007,
+    "mean_batch_synthetic_share_of_valid_elements": 0.25259634133082964,
+    "mean_real_element_multiplier_vs_unmasked": 1.4977249984173955,
+    "batch_denominator_min_max": [
+     341,
+     558
+    ],
+    "synthetic_direct_target_steps_by_source": [
+     15861,
+     14809,
+     15316,
+     15896,
+     0,
+     14341,
+     0,
+     15285,
+     15150,
+     15344
+    ],
+    "synthetic_loss_coefficient_mass_by_source": [
+     0.0328038001763471,
+     0.03073965852965152,
+     0.031729545159198354,
+     0.0329760306351311,
+     0.0,
+     0.029654152957215477,
+     0.0,
+     0.03168518180666275,
+     0.03138616485703733,
+     0.03162180720958616
+    ],
+    "vs_PhaseMask": {
+     "rows_with_equal_retained_count": 8084,
+     "rows": 16000,
+     "batches_with_equal_denominator": 5,
+     "batches": 1000,
+     "active_row_sets_equal_in_batches": 0,
+     "max_real_weight_ratio": 1.4112426035502958,
+     "min_real_weight_ratio": 0.7,
+     "synthetic_rows_with_identical_positions": 56,
+     "synthetic_rows_with_0<K<valid": 1538
+    }
+   }
+  }
+ }
+}

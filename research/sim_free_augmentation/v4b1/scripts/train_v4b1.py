@@ -35,7 +35,7 @@ def lerobot_rev():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--arm", required=True, choices=list(iv.CFG["arms"]))
+    ap.add_argument("--arm", required=True, choices=list(iv.CFG["arms"]))  # superseded arms cannot be trained
     ap.add_argument("--seed", type=int, required=True)
     ap.add_argument("--steps", type=int, default=iv.CFG["steps"])
     ap.add_argument("--out", default=None)
@@ -52,7 +52,8 @@ def main():
     git = lambda *c: subprocess.run(["git", *c], cwd=REPO, capture_output=True, text=True).stdout.strip()  # noqa: E731
     pre = {"arm": a.arm, "seed": a.seed, "steps": a.steps, "base_arm": base, "spec": iv.CFG["arms"][a.arm],
            "p_drop": iv.CFG["p_drop"], "git_head": git("rev-parse", "HEAD"),
-           "v4b1_dirty": git("status", "--porcelain", "--", "research/sim_free_augmentation/v4b1").splitlines(),
+           "v4b1_dirty": git("status", "--porcelain", "--untracked-files=no", "--", "research/sim_free_augmentation/v4b1").splitlines(),
+           "v4b1_untracked_code": [l for l in git("status", "--porcelain", "--untracked-files=all", "--", "research/sim_free_augmentation/v4b1").splitlines() if l.startswith("??") and l.endswith(".py")],
            "lerobot_version": getattr(lerobot, "__version__", None), "lerobot_path": str(Path(lerobot.__file__).parent),
            "lerobot_installed_from": lerobot_rev()}
     sel = mx.selection()

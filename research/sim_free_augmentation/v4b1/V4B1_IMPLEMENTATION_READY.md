@@ -58,3 +58,26 @@
 * Input-side effects of partially masked rows remain.
 * The evaluation pool is reused development data.
 * The cached v4B masks include 151 unequal-area background fallbacks (diagnostic only).
+
+## Amendment A1 gate evidence — 2026-11-06
+
+This responds to `CODEX_SIM_FREE_V4B1_PRETRAIN_AUDIT.md`, a NO-GO for the combined causal study at `1f80f2e`. See `V4B1_EXPERIMENT_SPEC.md`, Amendment A1. **Full training still has not started.** It waits for a *targeted* Codex re-audit of the A1 corrections.
+
+| # | check | evidence | result |
+|---|---|---|---|
+| A1-1 | Per-row matched control exact | `test_full_schedules_exactly_matched`: 3 seeds × 1,000 batches × 16 rows. All match PhaseMask: retained count per synthetic row (24,000 draws vs an independent closed form), active-row sets, per-batch valid counts and ×16 loss denominators, per-source exposure (overall and per batch), real-target weights, and original padding | PASS |
+| A1-2 | Old control reproduced as unmatched | `outputs/matched_budget.json`: equal denominators 5 / 8 / 5 of 1,000 batches; real-weight ratio 0.69–1.50. Identical to Codex's figures | reproduced |
+| A1-3 | Zero-retention and episode-boundary cases | `test_zero_retention_and_episode_boundaries`. K = 0 → zero targets. Grasp-end past episode end. Partially padded crossing chunk | PASS |
+| A1-4 | Exhaustive boundary entries | `test_phase_boundaries_exhaustive`: 322,800 phase-mask entries, plus the matched rule at every frame of the 25 RpPos episodes | PASS |
+| A1-5 | Uniform placement and determinism | normalised rank mean 0.5 ± 0.02; recomputation identical | PASS |
+| A1-6 | Dataset view and applier | matched items equal the pure function; action, state, padding and RGB equal the v4B view. Applier records row indices, applied masks and denominators | PASS |
+| A1-7 | GPU smoke, both H2 arms (20 steps, seed 0) | `verify_runs.py`: consumed batches = schedule, applied masks = expected bit for bit, real padding unchanged. Phase and matched have identical per-step valid counts (354.15 / 138.65) | PASS (smoke; the dirty-tree and 20-step-schedule flags fail as expected) |
+| A1-8 | Scorer fails closed | `tests/test_scorer_v4b1.py` (19 tests): one- and two-seed inputs, missing arms or contrasts, frozen-name shadowing, the frozen directory, superseded or unregistered names, item order, missing conditions, wrong shapes, NaN/inf. Adversarial fixtures: effects inside rerun noise, CIs spanning 0, both masks improve, guardrail violated despite reduction, grasp deteriorates while handover improves, harmful within noise | PASS |
+| A1-9 | Frozen references by content | 9/9 frozen archives, models and normalisers re-hashed; optimizer step = 1000 | PASS |
+| A1-10 | Pre-launch content gate | `run_v4b1.py::content_checks`: 17 inputs, 3 base snapshots, 9 references, mask manifests, matched exactness. Launch aborts on a dirty v4b1 tree | implemented |
+| A1-11 | Unit tests | 32/32: 6 original + 7 A1 mask tests + 19 scorer tests | PASS |
+
+**Declared after A1 (non-blocking):**
+* The positions of the two H2 arms differ only in boundary-crossing rows, about 19 % of synthetic draws, so D is a narrow, low-powered contrast.
+* Action-token conditioning: the gradient paths differ (spec A1.4).
+* H1's image availability identifies synthetic origin (spec A1.8).

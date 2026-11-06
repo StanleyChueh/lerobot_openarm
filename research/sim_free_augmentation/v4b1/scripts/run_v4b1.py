@@ -70,18 +70,60 @@ def lerobot_rev():
     return json.loads(Path(f[0]).read_text()) if f else None
 
 
+def content_checks():
+    """A1: verify actual file CONTENT before any worker starts (not only the hash of a list of hashes); abort on mismatch."""
+    V4 = HERE.parent / "v4"
+    bad, rep = [], {}
+    for rel, h in json.loads((V4 / "configs/frozen_inputs_sha256.json").read_text()).items():
+        ok = sha(HERE.parent / rel) == h
+        rep[f"frozen_input:{rel}"] = ok
+        bad += [] if ok else [rel]
+    snap = Path.home() / ".cache/huggingface/hub/models--lerobot--smolvla_base/snapshots"
+    for rel, h in json.loads((V4 / "outputs/v4b/train_runs.json").read_text())["pretrained_sha256"].items():
+        ok = (snap / rel).exists() and sha(snap / rel) == h
+        rep[f"pretrained:{rel}"] = ok
+        bad += [] if ok else [rel]
+    ck = json.loads((V4 / "outputs/v4b/predictions/checkpoint_hashes.json").read_text())
+    for arm, pat in CFG["frozen_references"].items():
+        for s in CFG["seeds"]:
+            pm = HERE / pat.format(seed=s) / "checkpoints/last/pretrained_model"
+            ok = (sha(pm / "model.safetensors") == ck[f"{arm}_s{s}"]["model.safetensors"]
+                  and sha(next(pm.glob("policy_preprocessor_step_*_normalizer_processor.safetensors"))) == ck[f"{arm}_s{s}"]["normalizer"])
+            rep[f"frozen_reference:{arm}_s{s}"] = ok
+            bad += [] if ok else [f"{arm}_s{s}"]
+    bud = json.loads((OUT / "matched_budget.json").read_text())
+    for seed, q in bud["seeds"].items():
+        for arm in ("RpPos_PhaseMask", "RpPos_MatchedRandMask"):
+            m = q[arm]["manifest"]
+            ok = sha(HERE / m["path"]) == m["sha256"]
+            rep[f"mask_manifest:{m['path']}"] = ok
+            bad += [] if ok else [m["path"]]
+        mm = q["RpPos_MatchedRandMask"]["vs_PhaseMask"]
+        ok = mm["rows_with_equal_retained_count"] == mm["rows"] and mm["batches_with_equal_denominator"] == mm["batches"]
+        rep[f"matched_control_exact:s{seed}"] = ok
+        bad += [] if ok else [f"matched s{seed}"]
+    if bad:
+        raise SystemExit(f"pre-launch content checks FAILED: {bad}")
+    return rep
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--lanes", type=int, default=4)
     a = ap.parse_args()
     import lerobot
     OUT.mkdir(parents=True, exist_ok=True)
+    checks = content_checks()
     pre = {"time": time.time(), "git_head": git("rev-parse", "HEAD"), "dirty_tracked": git("status", "--porcelain", "--untracked-files=no").splitlines(),
-           "v4b1_dirty": git("status", "--porcelain", "--", "research/sim_free_augmentation/v4b1").splitlines(),
+           "v4b1_dirty": git("status", "--porcelain", "--untracked-files=no", "--", "research/sim_free_augmentation/v4b1").splitlines(),
+           "v4b1_untracked_code": [l for l in git("status", "--porcelain", "--untracked-files=all", "--", "research/sim_free_augmentation/v4b1").splitlines() if l.startswith("??") and l.endswith(".py")],
            "spec_sha256": sha(HERE / "V4B1_EXPERIMENT_SPEC.md"), "config_sha256": sha(HERE / "configs/v4b1.json"),
            "v4b_config_sha256": sha(HERE.parent / "v4/configs/v4b.json"), "frozen_inputs_sha256": sha(HERE.parent / "v4/configs/frozen_inputs_sha256.json"),
            "lerobot_version": getattr(lerobot, "__version__", None), "lerobot_installed_from": lerobot_rev(),
-           "jobs": [(arm, s) for s in CFG["seeds"] for arm in CFG["arms"]]}
+           "content_checks": checks, "loss_normalisation": "SmolVLA: sum(valid 16-D elements)/count(valid elements) over the batch (readiness 5e)",
+           "steps": CFG["steps"], "jobs": [(arm, s) for s in CFG["seeds"] for arm in CFG["arms"]]}
+    if pre["v4b1_dirty"] or pre["v4b1_untracked_code"]:
+        raise SystemExit(f"v4b1 tree has uncommitted changes; commit before launch: {pre["v4b1_dirty"] + pre["v4b1_untracked_code"]}")
     (OUT / "prelaunch.json").write_text(json.dumps(pre, indent=1))
     stop, samples = threading.Event(), []
     threading.Thread(target=gpu_sampler, args=(stop, samples), daemon=True).start()

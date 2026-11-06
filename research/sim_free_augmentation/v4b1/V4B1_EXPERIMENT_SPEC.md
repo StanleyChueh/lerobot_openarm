@@ -259,4 +259,198 @@ $PY scripts/score_v4b1.py && $PY scripts/figures_v4b1.py
 
 ## Amendments
 
-(none)
+### Amendment A1 — 2026-11-06 (after `CODEX_SIM_FREE_V4B1_PRETRAIN_AUDIT.md`, reviewed commit `1f80f2e`)
+
+**Status:** frozen before any full v4B.1 training run (no 1,000-update v4B.1 checkpoint exists). The protocol text above is unchanged and stays the historical record. Where it conflicts with this amendment, the amendment governs.
+
+**Unchanged:**
+* All decision thresholds: 3 % RGB, 5 % far grasp with CI > 0, 2 % handover guardrail.
+* Seeds 0/1/2, 1,000 updates, data, selection, schedules, optimiser, normalisation.
+* Frozen R / RpBoth / RpPos references.
+* The H1 arms and their missing-camera intervention.
+* The evaluation protocol of §4–§5.
+
+#### A1.1 Why the H2 control changed
+
+The pooled-rate `RpPos_RandMask` (§3.2) matched only aggregate synthetic-target retention. Codex's audit numbers are reproduced exactly by `scripts/masks.py` (`outputs/matched_budget.json`):
+
+| seed | PhaseMask kept | old RandMask kept | equal batch denominators | fully masked synthetic rows, Phase / old Rand | real-element weight ratio, old Rand / Phase |
+|---|---|---|---|---|---|
+| 0 | 124,653 (34.35 %) | 33.47 % | 5 / 1,000 | 59.3 % / 0.7 % | 0.69–1.44 |
+| 1 | 119,265 (32.89 %) | 33.62 % | 8 / 1,000 | 60.5 % / 0.6 % | 0.69–1.50 |
+| 2 | 122,074 (33.73 %) | 33.71 % | 5 / 1,000 | 60.1 % / 0.7 % | 0.70–1.41 |
+
+So the old control did not match:
+* which rows are active;
+* per-batch loss denominators, and hence each real target's weight;
+* per-source synthetic loss exposure.
+
+Two statements above were too strong: §3.2 "matches the amount of synthetic supervision" and §8 "matched by the random control". **`RpPos_RandMask` is superseded and is never run.** It is kept in `configs/v4b1.json → superseded_arms` for the record.
+
+#### A1.2 Corrected control: `RpPos_MatchedRandMask` (per-row matched)
+
+For each sampled synthetic row, with global index i at episode frame f (`sfa4b1/interventions.py::synthetic_exclusion`):
+1. Take the original valid targets: f+k < episode length. This is LeRobot's own padding, asserted per item.
+2. Compute K = the number of those targets that PhaseMask retains (f+k < right_close + 15). K = 0 gives zero retained targets.
+3. Draw exactly K of the originally valid positions uniformly without replacement, with `np.random.default_rng([4208, seed, i])`. Draws are deterministic.
+4. Supervise only those K positions. Padding stays excluded; real rows are untouched.
+
+Everything else is identical to PhaseMask: the frozen RpPos batches, sources, state/action tensors, generated RGB, updates, pretrained checkpoint and normalisation.
+
+**Exact matching verified** for all 3 seeds × 1,000 batches × 16 rows (`tests/test_v4b1_amendment.py`; `outputs/matched_budget.json`):
+
+| property | PhaseMask = MatchedRandMask |
+|---|---|
+| retained count per sampled row (vs independent closed form clip(min(L, g) − f, 0, 50)) | 24,000 / 24,000 synthetic draws |
+| active-row sets per batch | 3,000 / 3,000 |
+| valid-target count and loss denominator (×16) per batch | 3,000 / 3,000 |
+| synthetic direct-target exposure per source, overall and per batch | equal |
+| real-target loss weights (real rows fully supervised, equal denominators) | equal (ratio exactly 1.0) |
+| original action padding | preserved (retained ⊆ originally valid) |
+
+**Other checks:**
+* Zero-retention, grasp-end-beyond-episode-end and partially padded boundary cases are tested.
+* The 322,800 exhaustive phase-mask boundary entries still pass, plus the matched rule at every frame of the 25 episodes.
+* Retained positions are uniform within the valid steps (normalised rank mean 0.5 ± 0.02).
+* A 20-step GPU smoke run of both H2 arms showed:
+  * the batches the trainer consumed equal the schedule;
+  * the applied masks equal the expected masks bit for bit;
+  * identical per-step valid counts (354.15 real / 138.65 synthetic) and fully masked rows (4.45 per batch).
+
+#### A1.3 What the corrected H2 comparison can and cannot establish
+
+**Estimand of D (PhaseMask vs MatchedRandMask):** the effect of *where* direct synthetic supervision is placed (approach/grasp prefix vs uniformly random) within the same active contexts, retained counts, denominators and source exposure.
+
+**Where the two arms can differ:** only in boundary-crossing rows (0 < K < number of valid steps). That is 1,531 / 1,552 / 1,538 of 8,000 synthetic draws per seed, about 19 %. In the other about 81 % the arms are identical:
+* K = 0 in 59–61 % of draws (rows starting after grasp end);
+* K = all valid steps in about 20 %.
+
+D is therefore a narrow, low-powered contrast. A small or unresolved D is expected even if late synthetic targets matter.
+
+**A (PhaseMask vs RpPos) is a bundled package**, made of:
+1. removing about 60 % of synthetic rows from the loss entirely (whole late-phase contexts);
+2. raising real-target weight about 1.52×;
+3. phase placement within crossing rows.
+
+MatchedRandMask vs RpPos shares components 1 and 2. **What is identifiable:**
+* A: the package effect.
+* MatchedRandMask vs RpPos: the context-removal and reweighting share.
+* D: the placement increment.
+
+**What it cannot establish:**
+* The causal effect of removing *entire* late-phase training contexts, because both masked arms remove the same ones.
+* That the regression is "explained by budget": no identifying comparison isolates budget alone.
+* Any physical contact or force mechanism. Phases are command-derived proxies.
+
+#### A1.4 Remaining action-token conditioning differences (declared)
+
+**Inputs are identical across arms:**
+* The noisy action tokens of all 50 steps are formed from the same targets.
+* Flow-matching noise and time draws consume the RNG identically.
+
+Loss masking removes targets, not information. Codex's CPU probe found that the installed SmolVLA action-expert attention is causal and that excluded *later* actions do not change retained earlier losses.
+
+**What does differ is which conditioning paths receive gradient:**
+* PhaseMask retains a prefix, so no retained loss is computed at a post-boundary position.
+* In crossing rows, MatchedRandMask retains some post-boundary positions. Their losses condition on earlier noisy tokens, including excluded ones.
+* The gradient reaching the shared VLM prefix (image and state tokens) also differs.
+
+This difference cannot be removed without changing the estimand.
+
+#### A1.5 Scorer corrections (`scripts/score_v4b1.py`; fail closed, `StudyContractError`)
+
+1. Exactly the registered seeds {0, 1, 2} for every new arm and frozen reference. One- or two-seed inputs raise. `decisions()` also refuses per-seed sets ≠ {s0, s1, s2}.
+2. All five registered new arms are required, including both reruns and the matched control. Every contrast used by a decision must exist.
+3. Incomplete studies give no verdict. `--smoke` produces descriptive tables only (`SMOKE_NO_SCIENTIFIC_DECISIONS`) and writes `results_smoke.json`.
+4. Frozen reference names are protected:
+   * names of R, RpPos, RpBoth, the RpHO/RpPosAll/v3_ archives, unregistered arms, superseded arms and unregistered seeds in `--pred_dir` raise;
+   * the frozen prediction directory is refused as `--pred_dir`.
+5. Frozen archive, model and normaliser sha256 are recomputed from content and compared to the v4B manifests.
+6. The ordered `(recording, frame)` item list of every archive must equal the frozen evaluation. `eval_meta` (episodes, conditions, pool revision, wrong-episode partner) and `targets.npz` must also equal the frozen evaluation.
+7. All six registered image conditions are required.
+8. Every prediction array must be finite with shape (1524, 50, 16).
+9. Optimizer update counters are checked:
+   * frozen `training_step.json` = 1000;
+   * new runs through `scripts/verify_runs.py`: the step counter, 1,000 preprocessing calls, consumed batch indices equal to the frozen schedule, applied masks equal to the expected masks, the schedule hash, and an unchanged real-only normaliser and code tree.
+   * The scorer requires `all_pass`, and requires the evaluated checkpoint hashes to equal the verified ones.
+10. The replication-noise guard (§7 "Interpretation guards") is applied consistently:
+    * **noise** = |seed-averaged point estimate of rerun vs frozen| on the same metric (H1: `RpBoth_rerun vs RpBoth`, far grasp; H2: `RpPos_rerun vs RpPos`, handover and far grasp);
+    * it is required to be present;
+    * it gates H1 USEFUL, H1 HARMFUL, and every H2 component.
+
+#### A1.6 Corrected decision contract (thresholds unchanged)
+
+**H1:**
+* **GENERATED_RGB_USEFUL:** Δ ≥ 3 %, CI lower > 0, all three seeds > 0, and |Δ| > noise.
+* **GENERATED_RGB_HARMFUL:** Δ ≤ −3 %, CI upper < 0, and |Δ| > noise.
+* **INCREMENTAL_VALUE_NOT_ESTABLISHED** otherwise, with the failing reasons listed. This never means equivalence or uselessness.
+
+The old key "kinematic supervision alone gives the screen gain" is renamed `synthetic_state_action_without_synthetic_rgb_passes_far_grasp_screen_part`. It means additional synthetic state/action supervision without its RGB, on top of real-RGB training and a pretrained VLM. It does not mean a state-only policy.
+
+**H2 is reported as separate components.** An effect status is `improved` iff CI lower > 0 and |pt| > noise; `worsened` iff CI upper < 0 and |pt| > noise; otherwise `not_resolved`.
+
+| component | definition |
+|---|---|
+| A | handover improvement, PhaseMask vs RpPos; plus MatchedRandMask vs RpPos, and PhaseMask vs RpPos_rerun as sensitivity |
+| B | residual handover degradation of PhaseMask vs R, with CI; guardrail ≤ 2 % (point estimate) |
+| C | far grasp: P2 (vs R ≥ 5 %, CI > 0) and change vs RpPos; `far_grasp_reduced_vs_RpPos` flag |
+| D | phase-specific increment: PhaseMask vs MatchedRandMask on handover |
+| E | statistical resolution: noise levels, whether A and D exceed noise, CI widths |
+
+**Mechanism labels:**
+* `PHASE_PLACED_SUPERVISION_REDUCES_HANDOVER_ERROR_BEYOND_MATCHED_RANDOM` (A and D improved);
+* `BOTH_MASKS_REDUCE_HANDOVER_ERROR_PHASE_SPECIFICITY_NOT_ESTABLISHED`;
+* `HANDOVER_REDUCED_PHASE_SPECIFICITY_NOT_ESTABLISHED`;
+* `PHASE_MASK_INCREASES_HANDOVER_ERROR`;
+* `HANDOVER_REDUCTION_NOT_ESTABLISHED`.
+
+The original labels `HANDOVER_REDUCED_BUT_EXPLAINED_BY_SYNTHETIC_BUDGET` and `PHASE_RESTRICTION_DOES_NOT_REDUCE_HANDOVER_REGRESSION` are withdrawn. The first claimed an explanation from non-significance; the second conflated a failed guardrail with no reduction.
+
+**Q2 = YES** only if A improved, D improved, B is within the guardrail and C (P2) holds. Otherwise `NOT_SUPPORTED_BY_THIS_SCREEN`, with components shown.
+
+**Continuity flags:**
+* P1 = A ∧ B;
+* P2 = C;
+* P3 = D, now against the matched control.
+
+**Unchanged rules:**
+* The v4B screening rule per arm, which never overturns the v4B primary FAIL.
+* Inference-time image-condition contrasts are diagnostic only (added: PhaseMask vs MatchedRandMask).
+
+#### A1.7 Provenance and launch gating
+
+`scripts/run_v4b1.py` aborts before any worker starts unless:
+* the actual **content** sha256 of all 17 frozen inputs, the three base-model snapshots and the 9 frozen reference checkpoints and normalisers matches;
+* the H2 mask manifests match `matched_budget.json`, and the matched control is exact;
+* the v4b1 tree has no tracked modifications or untracked code.
+
+Each run records:
+* the prelaunch block;
+* the per-step budget, including `loss_denominator_elements`;
+* the consumed row indices and the applied supervision mask (`{run}_masks.npz`).
+
+#### A1.8 H1 interpretation (Codex Audit A; no design change)
+
+H1 estimates the effect of **providing this renderer's synthetic RGB versus SmolVLA's masked missing-camera treatment on synthetic rows**. That includes the mode change: image availability perfectly identifies synthetic origin.
+
+It does not perfectly isolate image content. The outcome reads as follows:
+* A positive result supports the current body-camera renderer at this budget. It does not validate three-camera geometry.
+* An unresolved result does not show RGB is useless.
+
+Source RGB is never substituted for changed trajectories. No image-generation changes enter v4B.1.
+
+#### A1.9 Arms after A1 (15 runs)
+
+The arms are `RpBoth_NoSynthRGB`, `RpBoth_rerun`, `RpPos_PhaseMask`, `RpPos_MatchedRandMask` and `RpPos_rerun`, each with 3 seeds × 1,000 updates.
+
+#### A1.10 Commands after A1 (from `research/sim_free_augmentation/v4b1`)
+
+```bash
+PY="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 ../../../.venv/bin/python"
+$PY scripts/masks.py                                           # H2 masks + matched accounting (CPU, ~2 s)
+CUDA_VISIBLE_DEVICES= $PY -m unittest discover -s tests -v     # 32 tests (CPU, ~20 s)
+$PY scripts/run_v4b1.py --lanes 4                              # only after the targeted Codex re-audit
+$PY scripts/verify_runs.py                                     # -> outputs/run_verification.json (must be all_pass)
+$PY ../v4/scripts/eval_v4b.py --train_dir outputs/train --pred_dir outputs/predictions
+$PY scripts/score_v4b1.py && $PY scripts/figures_v4b1.py
+```

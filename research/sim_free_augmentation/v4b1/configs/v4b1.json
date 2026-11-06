@@ -29,11 +29,11 @@
    "target_mask": "phase",
    "role": "H2 treatment"
   },
-  "RpPos_RandMask": {
+  "RpPos_MatchedRandMask": {
    "base": "RpPos",
    "synth_rgb": "present",
-   "target_mask": "random",
-   "role": "H2 matched synthetic-loss-budget control"
+   "target_mask": "matched_random",
+   "role": "H2 per-row matched control (A1): same rows, same retained count K per row, same batch denominators and source exposure as PhaseMask; K positions drawn uniformly among the row's originally valid targets"
   },
   "RpPos_rerun": {
    "base": "RpPos",
@@ -61,7 +61,8 @@
   "bootstrap_seed": 20261107,
   "thresholds": {
    "rgb_min_rel": 0.03,
-   "handover_guardrail": 0.02
+   "handover_guardrail": 0.02,
+   "far_grasp_screen_rel": 0.05
   },
   "contrasts": [
    [
@@ -93,15 +94,15 @@
     "R"
    ],
    [
-    "RpPos_RandMask",
+    "RpPos_MatchedRandMask",
     "RpPos"
    ],
    [
     "RpPos_PhaseMask",
-    "RpPos_RandMask"
+    "RpPos_MatchedRandMask"
    ],
    [
-    "RpPos_RandMask",
+    "RpPos_MatchedRandMask",
     "R"
    ],
    [
@@ -133,7 +134,51 @@
    [
     "RpPos_PhaseMask",
     "RpPos"
+   ],
+   [
+    "RpPos_PhaseMask",
+    "RpPos_MatchedRandMask"
    ]
-  ]
+  ],
+  "contrasts_superseded_A1": [
+   [
+    "RpPos_RandMask",
+    "RpPos"
+   ],
+   [
+    "RpPos_PhaseMask",
+    "RpPos_RandMask"
+   ],
+   [
+    "RpPos_RandMask",
+    "R"
+   ]
+  ],
+  "replication_noise": {
+   "_doc": "A1: preregistered rule of spec section 7 'Interpretation guards', now applied to every primary conclusion. noise = |seed-averaged point estimate of rerun vs frozen| on the same metric; an effect must exceed it in magnitude.",
+   "H1": {
+    "contrast": "RpBoth_rerun__vs__RpBoth",
+    "metric": "far/grasp"
+   },
+   "H2_handover": {
+    "contrast": "RpPos_rerun__vs__RpPos",
+    "metric": "all40/handover"
+   },
+   "H2_grasp": {
+    "contrast": "RpPos_rerun__vs__RpPos",
+    "metric": "far/grasp"
+   }
+  }
+ },
+ "_amendment_A1": "2026-11-06, V4B1_EXPERIMENT_SPEC.md Amendment A1 (after CODEX_SIM_FREE_V4B1_PRETRAIN_AUDIT.md): the pooled-rate RpPos_RandMask control is superseded (never run) by RpPos_MatchedRandMask (per-row exact retained count). Decision rules corrected to fail closed; thresholds unchanged.",
+ "matched_random_seed": 4208,
+ "superseded_arms": {
+  "RpPos_RandMask": {
+   "base": "RpPos",
+   "synth_rgb": "present",
+   "target_mask": "random",
+   "role": "H2 matched synthetic-loss-budget control",
+   "status": "SUPERSEDED by amendment A1; not run"
+  }
  }
 }
