@@ -1,0 +1,936 @@
+{
+ "ten_vs_pool": {
+  "0": {
+   "length": 273,
+   "same_length_pool_episodes": [
+    0
+   ],
+   "exact_state_action_matches": [
+    0
+   ],
+   "hash_matches": [
+    0
+   ],
+   "closest_same_length": [
+    {
+     "pool": 0,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 273,
+     "max_abs_px": 135,
+     "mean_abs_px": 1.190646681515822,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 273,
+     "max_abs_px": 72,
+     "mean_abs_px": 1.006871657350173,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 273,
+     "max_abs_px": 94,
+     "mean_abs_px": 1.1556899451821327,
+     "identical_frames": 0
+    }
+   }
+  },
+  "1": {
+   "length": 263,
+   "same_length_pool_episodes": [
+    1
+   ],
+   "exact_state_action_matches": [
+    1
+   ],
+   "hash_matches": [
+    1
+   ],
+   "closest_same_length": [
+    {
+     "pool": 1,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 263,
+     "max_abs_px": 105,
+     "mean_abs_px": 1.211331722644698,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 263,
+     "max_abs_px": 94,
+     "mean_abs_px": 0.9397570682166244,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 263,
+     "max_abs_px": 76,
+     "mean_abs_px": 1.1224008131007077,
+     "identical_frames": 0
+    }
+   }
+  },
+  "2": {
+   "length": 280,
+   "same_length_pool_episodes": [
+    2
+   ],
+   "exact_state_action_matches": [
+    2
+   ],
+   "hash_matches": [
+    2
+   ],
+   "closest_same_length": [
+    {
+     "pool": 2,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 280,
+     "max_abs_px": 90,
+     "mean_abs_px": 1.1771268097408234,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 280,
+     "max_abs_px": 107,
+     "mean_abs_px": 1.0156453101748513,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 280,
+     "max_abs_px": 115,
+     "mean_abs_px": 1.0209552912636408,
+     "identical_frames": 0
+    }
+   }
+  },
+  "3": {
+   "length": 250,
+   "same_length_pool_episodes": [
+    3,
+    4
+   ],
+   "exact_state_action_matches": [
+    3
+   ],
+   "hash_matches": [
+    3
+   ],
+   "closest_same_length": [
+    {
+     "pool": 3,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    },
+    {
+     "pool": 4,
+     "state_max_abs": 0.7297626733779907,
+     "action_max_abs": 1.2979999780654907
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 250,
+     "max_abs_px": 82,
+     "mean_abs_px": 1.2113115625,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 250,
+     "max_abs_px": 75,
+     "mean_abs_px": 0.8933065277777777,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 250,
+     "max_abs_px": 70,
+     "mean_abs_px": 1.1034192447916666,
+     "identical_frames": 0
+    }
+   }
+  },
+  "4": {
+   "length": 250,
+   "same_length_pool_episodes": [
+    3,
+    4
+   ],
+   "exact_state_action_matches": [
+    4
+   ],
+   "hash_matches": [
+    4
+   ],
+   "closest_same_length": [
+    {
+     "pool": 4,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    },
+    {
+     "pool": 3,
+     "state_max_abs": 0.7297626733779907,
+     "action_max_abs": 1.2979999780654907
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 250,
+     "max_abs_px": 122,
+     "mean_abs_px": 1.2167031684027778,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 250,
+     "max_abs_px": 73,
+     "mean_abs_px": 0.9270579774305555,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 250,
+     "max_abs_px": 100,
+     "mean_abs_px": 1.1524045269097223,
+     "identical_frames": 0
+    }
+   }
+  },
+  "5": {
+   "length": 255,
+   "same_length_pool_episodes": [
+    5,
+    14,
+    26
+   ],
+   "exact_state_action_matches": [
+    5
+   ],
+   "hash_matches": [
+    5
+   ],
+   "closest_same_length": [
+    {
+     "pool": 5,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    },
+    {
+     "pool": 26,
+     "state_max_abs": 0.7011520862579346,
+     "action_max_abs": 1.2979999780654907
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 255,
+     "max_abs_px": 102,
+     "mean_abs_px": 1.2226173109000544,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 255,
+     "max_abs_px": 87,
+     "mean_abs_px": 1.0365258033769063,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 255,
+     "max_abs_px": 92,
+     "mean_abs_px": 1.0548518986587692,
+     "identical_frames": 0
+    }
+   }
+  },
+  "6": {
+   "length": 241,
+   "same_length_pool_episodes": [
+    6
+   ],
+   "exact_state_action_matches": [
+    6
+   ],
+   "hash_matches": [
+    6
+   ],
+   "closest_same_length": [
+    {
+     "pool": 6,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 241,
+     "max_abs_px": 89,
+     "mean_abs_px": 1.2392807070150416,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 241,
+     "max_abs_px": 63,
+     "mean_abs_px": 1.0470217320049562,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 241,
+     "max_abs_px": 87,
+     "mean_abs_px": 1.0714239622954127,
+     "identical_frames": 0
+    }
+   }
+  },
+  "7": {
+   "length": 261,
+   "same_length_pool_episodes": [
+    7
+   ],
+   "exact_state_action_matches": [
+    7
+   ],
+   "hash_matches": [
+    7
+   ],
+   "closest_same_length": [
+    {
+     "pool": 7,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 261,
+     "max_abs_px": 90,
+     "mean_abs_px": 1.2188948131186144,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 261,
+     "max_abs_px": 77,
+     "mean_abs_px": 0.9522616921429332,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 261,
+     "max_abs_px": 116,
+     "mean_abs_px": 1.045138331803427,
+     "identical_frames": 0
+    }
+   }
+  },
+  "8": {
+   "length": 249,
+   "same_length_pool_episodes": [
+    8,
+    11,
+    34
+   ],
+   "exact_state_action_matches": [
+    8
+   ],
+   "hash_matches": [
+    8
+   ],
+   "closest_same_length": [
+    {
+     "pool": 8,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    },
+    {
+     "pool": 34,
+     "state_max_abs": 0.6649118661880493,
+     "action_max_abs": 1.2979999780654907
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 249,
+     "max_abs_px": 107,
+     "mean_abs_px": 1.1952987427139112,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 249,
+     "max_abs_px": 95,
+     "mean_abs_px": 0.9144471549392013,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 249,
+     "max_abs_px": 78,
+     "mean_abs_px": 1.0963870586512718,
+     "identical_frames": 0
+    }
+   }
+  },
+  "9": {
+   "length": 253,
+   "same_length_pool_episodes": [
+    9,
+    24
+   ],
+   "exact_state_action_matches": [
+    9
+   ],
+   "hash_matches": [
+    9
+   ],
+   "closest_same_length": [
+    {
+     "pool": 9,
+     "state_max_abs": 0.0,
+     "action_max_abs": 0.0
+    },
+    {
+     "pool": 24,
+     "state_max_abs": 0.4810406565666199,
+     "action_max_abs": 1.2979999780654907
+    }
+   ],
+   "compressed_video_packet_matches": {
+    "observation.images.body_cam": [],
+    "observation.images.wrist_cam": [],
+    "observation.images.right_wrist_cam": []
+   },
+   "decoded_pixels": {
+    "observation.images.body_cam": {
+     "frames": 253,
+     "max_abs_px": 88,
+     "mean_abs_px": 1.2122510044397783,
+     "identical_frames": 0
+    },
+    "observation.images.wrist_cam": {
+     "frames": 253,
+     "max_abs_px": 153,
+     "mean_abs_px": 0.9102545152613087,
+     "identical_frames": 0
+    },
+    "observation.images.right_wrist_cam": {
+     "frames": 253,
+     "max_abs_px": 103,
+     "mean_abs_px": 1.109420367053689,
+     "identical_frames": 0
+    }
+   }
+  }
+ },
+ "pool_internal": {
+  "exact_duplicate_groups": [],
+  "nearest_trajectory": {
+   "0": {
+    "nearest": 45,
+    "rms_rad": 0.08484560740485594
+   },
+   "1": {
+    "nearest": 4,
+    "rms_rad": 0.05500988675828861
+   },
+   "2": {
+    "nearest": 7,
+    "rms_rad": 0.07629665863517653
+   },
+   "3": {
+    "nearest": 15,
+    "rms_rad": 0.06714071376664903
+   },
+   "4": {
+    "nearest": 5,
+    "rms_rad": 0.05168923312825702
+   },
+   "5": {
+    "nearest": 11,
+    "rms_rad": 0.04385701912010731
+   },
+   "6": {
+    "nearest": 4,
+    "rms_rad": 0.06373903444063973
+   },
+   "7": {
+    "nearest": 9,
+    "rms_rad": 0.06185399779832352
+   },
+   "8": {
+    "nearest": 29,
+    "rms_rad": 0.059810349217995204
+   },
+   "9": {
+    "nearest": 7,
+    "rms_rad": 0.06185399779832352
+   },
+   "10": {
+    "nearest": 39,
+    "rms_rad": 0.07106021457162408
+   },
+   "11": {
+    "nearest": 5,
+    "rms_rad": 0.04385701912010731
+   },
+   "12": {
+    "nearest": 11,
+    "rms_rad": 0.10076270579581209
+   },
+   "13": {
+    "nearest": 29,
+    "rms_rad": 0.07953609053068958
+   },
+   "14": {
+    "nearest": 23,
+    "rms_rad": 0.05197762720105999
+   },
+   "15": {
+    "nearest": 25,
+    "rms_rad": 0.05750738688502006
+   },
+   "16": {
+    "nearest": 14,
+    "rms_rad": 0.07824991041019297
+   },
+   "17": {
+    "nearest": 19,
+    "rms_rad": 0.05762009097978225
+   },
+   "18": {
+    "nearest": 25,
+    "rms_rad": 0.04506580766960608
+   },
+   "19": {
+    "nearest": 17,
+    "rms_rad": 0.05762009097978225
+   },
+   "20": {
+    "nearest": 21,
+    "rms_rad": 0.05912931867396905
+   },
+   "21": {
+    "nearest": 42,
+    "rms_rad": 0.05755459039650109
+   },
+   "22": {
+    "nearest": 28,
+    "rms_rad": 0.07064640227842466
+   },
+   "23": {
+    "nearest": 14,
+    "rms_rad": 0.05197762720105999
+   },
+   "24": {
+    "nearest": 18,
+    "rms_rad": 0.054164373919226336
+   },
+   "25": {
+    "nearest": 18,
+    "rms_rad": 0.04506580766960608
+   },
+   "26": {
+    "nearest": 18,
+    "rms_rad": 0.052429076619563565
+   },
+   "27": {
+    "nearest": 48,
+    "rms_rad": 0.06283432922603034
+   },
+   "28": {
+    "nearest": 29,
+    "rms_rad": 0.06283338093596005
+   },
+   "29": {
+    "nearest": 8,
+    "rms_rad": 0.059810349217995204
+   },
+   "30": {
+    "nearest": 9,
+    "rms_rad": 0.06213438579520095
+   },
+   "31": {
+    "nearest": 18,
+    "rms_rad": 0.06577256658448968
+   },
+   "32": {
+    "nearest": 34,
+    "rms_rad": 0.06452580573058937
+   },
+   "33": {
+    "nearest": 25,
+    "rms_rad": 0.05241405432869956
+   },
+   "34": {
+    "nearest": 21,
+    "rms_rad": 0.058911553262410626
+   },
+   "35": {
+    "nearest": 31,
+    "rms_rad": 0.07262895443916496
+   },
+   "36": {
+    "nearest": 49,
+    "rms_rad": 0.06039621017088095
+   },
+   "37": {
+    "nearest": 38,
+    "rms_rad": 0.043423141500047516
+   },
+   "38": {
+    "nearest": 37,
+    "rms_rad": 0.043423141500047516
+   },
+   "39": {
+    "nearest": 10,
+    "rms_rad": 0.07106021457162408
+   },
+   "40": {
+    "nearest": 49,
+    "rms_rad": 0.06272356676576647
+   },
+   "41": {
+    "nearest": 38,
+    "rms_rad": 0.05634461907597853
+   },
+   "42": {
+    "nearest": 45,
+    "rms_rad": 0.05606610678561376
+   },
+   "43": {
+    "nearest": 46,
+    "rms_rad": 0.05141394430022904
+   },
+   "44": {
+    "nearest": 37,
+    "rms_rad": 0.06449659529930664
+   },
+   "45": {
+    "nearest": 48,
+    "rms_rad": 0.04707068425682892
+   },
+   "46": {
+    "nearest": 43,
+    "rms_rad": 0.05141394430022904
+   },
+   "47": {
+    "nearest": 48,
+    "rms_rad": 0.054865827170560696
+   },
+   "48": {
+    "nearest": 45,
+    "rms_rad": 0.04707068425682892
+   },
+   "49": {
+    "nearest": 47,
+    "rms_rad": 0.057118555468754544
+   }
+  },
+  "min_pair_rms_rad": 0.043423141500047516,
+  "median_nn_rms_rad": 0.05826582212109643,
+  "identical_compressed_video_groups": {
+   "observation.images.body_cam": [],
+   "observation.images.wrist_cam": [],
+   "observation.images.right_wrist_cam": []
+  }
+ },
+ "mapping_ten_to_pool": {
+  "0": 0,
+  "1": 1,
+  "2": 2,
+  "3": 3,
+  "4": 4,
+  "5": 5,
+  "6": 6,
+  "7": 7,
+  "8": 8,
+  "9": 9
+ },
+ "alignment": {
+  "mean_abs_px_by_shift": {
+   "0": {
+    "observation.images.body_cam": {
+     "-2": 7.319681702285773,
+     "-1": 4.8340045445261435,
+     "0": 1.1898341950295075,
+     "1": 4.83850017871732,
+     "2": 7.318151089714022
+    },
+    "observation.images.wrist_cam": {
+     "-2": 10.153958093096556,
+     "-1": 6.256009689031862,
+     "0": 1.0062655963827838,
+     "1": 6.259042777267157,
+     "2": 10.144970178608036
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 14.287223039027266,
+     "-1": 8.697521669475082,
+     "0": 1.1554003389550265,
+     "1": 8.71058758106107,
+     "2": 14.257755788104756
+    }
+   },
+   "1": {
+    "observation.images.body_cam": {
+     "-2": 7.480684516682631,
+     "-1": 5.010646519163486,
+     "0": 1.210384221852556,
+     "1": 5.014451253048134,
+     "2": 7.48351923358344
+    },
+    "observation.images.wrist_cam": {
+     "-2": 10.608129905677949,
+     "-1": 6.552768914996819,
+     "0": 0.9392702887357415,
+     "1": 6.5454849183630195,
+     "2": 10.605763705965304
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 14.517158614703066,
+     "-1": 8.837796944576972,
+     "0": 1.1224075999419096,
+     "1": 8.853724670669,
+     "2": 14.52151369266177
+    }
+   },
+   "2": {
+    "observation.images.body_cam": {
+     "-2": 7.104985808228418,
+     "-1": 4.688571333009757,
+     "0": 1.1760926339285713,
+     "1": 4.695041427095779,
+     "2": 7.1054187587430055
+    },
+    "observation.images.wrist_cam": {
+     "-2": 10.389431361161071,
+     "-1": 6.439287929983075,
+     "0": 1.0150362568204365,
+     "1": 6.4394393418956595,
+     "2": 10.385581050784372
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 13.624503116256994,
+     "-1": 8.227834388067503,
+     "0": 1.0205555245535713,
+     "1": 8.233700281262445,
+     "2": 13.625967694594324
+    }
+   },
+   "3": {
+    "observation.images.body_cam": {
+     "-2": 7.877630680863575,
+     "-1": 5.287076657323739,
+     "0": 1.2103760243055555,
+     "1": 5.2877809501896476,
+     "2": 7.879915539594534
+    },
+    "observation.images.wrist_cam": {
+     "-2": 10.677194325436828,
+     "-1": 6.703530789825971,
+     "0": 0.8927898784722222,
+     "1": 6.692041551623159,
+     "2": 10.66411383078517
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 14.403392802139336,
+     "-1": 8.800732443663543,
+     "0": 1.102955329861111,
+     "1": 8.820624564229139,
+     "2": 14.418582951808915
+    }
+   },
+   "4": {
+    "observation.images.body_cam": {
+     "-2": 7.574876459593414,
+     "-1": 5.032168622406292,
+     "0": 1.2162658680555556,
+     "1": 5.036790652192102,
+     "2": 7.57915760108647
+    },
+    "observation.images.wrist_cam": {
+     "-2": 11.772916229138666,
+     "-1": 7.1227697247322626,
+     "0": 0.9261978645833333,
+     "1": 7.125194737282463,
+     "2": 11.77720963891689
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 15.391381083389337,
+     "-1": 9.744196699994422,
+     "0": 1.1522835590277778,
+     "1": 9.761289602855868,
+     "2": 15.403388269349238
+    }
+   },
+   "5": {
+    "observation.images.body_cam": {
+     "-2": 8.226353737785463,
+     "-1": 5.5782686905347765,
+     "0": 1.2214638650599128,
+     "1": 5.585731234279309,
+     "2": 8.23194374107927
+    },
+    "observation.images.wrist_cam": {
+     "-2": 10.142937235809178,
+     "-1": 6.289858069499125,
+     "0": 1.0362356685729848,
+     "1": 6.303697369860018,
+     "2": 10.136947498078612
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 15.419860098951471,
+     "-1": 9.325988506807743,
+     "0": 1.0541248638344227,
+     "1": 9.341825633612205,
+     "2": 15.4338685770751
+    }
+   },
+   "6": {
+    "observation.images.body_cam": {
+     "-2": 8.5165251263947,
+     "-1": 5.674267957899305,
+     "0": 1.2383067874020286,
+     "1": 5.675580078125,
+     "2": 8.51693921431892
+    },
+    "observation.images.wrist_cam": {
+     "-2": 12.423176302446537,
+     "-1": 7.871117169415509,
+     "0": 1.0465791587425082,
+     "1": 7.872378833912037,
+     "2": 12.416875435843794
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 17.002219171315666,
+     "-1": 10.33264207175926,
+     "0": 1.0710011994294606,
+     "1": 10.336694986979166,
+     "2": 17.001810531438867
+    }
+   },
+   "7": {
+    "observation.images.body_cam": {
+     "-2": 7.802159246299872,
+     "-1": 5.166412944043803,
+     "0": 1.2179060570987654,
+     "1": 5.173764122596154,
+     "2": 7.802732732732733
+    },
+    "observation.images.wrist_cam": {
+     "-2": 12.157583135590949,
+     "-1": 7.497206981169872,
+     "0": 0.9520051418156662,
+     "1": 7.4822570612980766,
+     "2": 12.140308109448734
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 16.962841055341055,
+     "-1": 10.109776225293803,
+     "0": 1.0449517414325245,
+     "1": 10.113955061431623,
+     "2": 16.963767930877307
+    }
+   },
+   "8": {
+    "observation.images.body_cam": {
+     "-2": 7.837748696159469,
+     "-1": 5.211759230090726,
+     "0": 1.1945462230867916,
+     "1": 5.216743776601702,
+     "2": 7.840260240946918
+    },
+    "observation.images.wrist_cam": {
+     "-2": 11.378501022688933,
+     "-1": 7.02269286234319,
+     "0": 0.9136618871318608,
+     "1": 7.017684776825717,
+     "2": 11.371087441661043
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 15.661327123397436,
+     "-1": 9.777500595038083,
+     "0": 1.0952849069890673,
+     "1": 9.799151458193325,
+     "2": 15.66907269174539
+    }
+   },
+   "9": {
+    "observation.images.body_cam": {
+     "-2": 7.8918941421812745,
+     "-1": 5.297938901978616,
+     "0": 1.2111476689448837,
+     "1": 5.300580512152778,
+     "2": 7.894734447626162
+    },
+    "observation.images.wrist_cam": {
+     "-2": 11.336315311669987,
+     "-1": 7.062017884700176,
+     "0": 0.9097237661945542,
+     "1": 7.062406201774691,
+     "2": 11.338254274568394
+    },
+    "observation.images.right_wrist_cam": {
+     "-2": 16.5465043644865,
+     "-1": 10.31747550843254,
+     "0": 1.1092772665513835,
+     "1": 10.31909233079806,
+     "2": 16.54130569734949
+    }
+   }
+  },
+  "zero_shift_best_everywhere": true,
+  "min_ratio_shift1_over_shift0": 3.986566361995013
+ }
+}
