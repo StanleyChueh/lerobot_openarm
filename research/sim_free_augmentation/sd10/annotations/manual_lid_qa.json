@@ -1,0 +1,219 @@
+{
+ "annotator": "Claude Code (claude-opus-5-5)",
+ "date": "2026-11-07",
+ "sheet": "outputs/review/lid_qa.jpg (final A1 variant)",
+ "episodes": {
+  "0": {
+   "accept": true,
+   "notes": []
+  },
+  "1": {
+   "accept": true,
+   "notes": []
+  },
+  "2": {
+   "accept": true,
+   "notes": []
+  },
+  "3": {
+   "accept": true,
+   "notes": []
+  },
+  "4": {
+   "accept": true,
+   "notes": []
+  },
+  "5": {
+   "accept": true,
+   "notes": []
+  },
+  "6": {
+   "accept": true,
+   "notes": []
+  },
+  "7": {
+   "accept": true,
+   "notes": []
+  },
+  "8": {
+   "accept": true,
+   "notes": []
+  },
+  "9": {
+   "accept": true,
+   "notes": []
+  },
+  "10": {
+   "accept": true,
+   "notes": []
+  },
+  "11": {
+   "accept": true,
+   "notes": [
+    "human click on the body, not the lid"
+   ]
+  },
+  "12": {
+   "accept": true,
+   "notes": [
+    "can at the far image-top edge"
+   ]
+  },
+  "13": {
+   "accept": true,
+   "notes": []
+  },
+  "14": {
+   "accept": true,
+   "notes": []
+  },
+  "15": {
+   "accept": true,
+   "notes": []
+  },
+  "16": {
+   "accept": true,
+   "notes": []
+  },
+  "17": {
+   "accept": true,
+   "notes": []
+  },
+  "18": {
+   "accept": true,
+   "notes": [
+    "cable partially over the lid"
+   ]
+  },
+  "19": {
+   "accept": true,
+   "notes": []
+  },
+  "20": {
+   "accept": true,
+   "notes": []
+  },
+  "21": {
+   "accept": true,
+   "notes": []
+  },
+  "22": {
+   "accept": true,
+   "notes": []
+  },
+  "23": {
+   "accept": true,
+   "notes": []
+  },
+  "24": {
+   "accept": true,
+   "notes": []
+  },
+  "25": {
+   "accept": true,
+   "notes": []
+  },
+  "26": {
+   "accept": true,
+   "notes": [
+    "cable partially over the lid"
+   ]
+  },
+  "27": {
+   "accept": true,
+   "notes": []
+  },
+  "28": {
+   "accept": true,
+   "notes": []
+  },
+  "29": {
+   "accept": true,
+   "notes": []
+  },
+  "30": {
+   "accept": true,
+   "notes": []
+  },
+  "31": {
+   "accept": true,
+   "notes": [
+    "cable partially over the lid"
+   ]
+  },
+  "32": {
+   "accept": true,
+   "notes": []
+  },
+  "33": {
+   "accept": true,
+   "notes": []
+  },
+  "34": {
+   "accept": true,
+   "notes": []
+  },
+  "35": {
+   "accept": true,
+   "notes": []
+  },
+  "36": {
+   "accept": true,
+   "notes": []
+  },
+  "37": {
+   "accept": true,
+   "notes": []
+  },
+  "38": {
+   "accept": true,
+   "notes": [
+    "human click on the body, not the lid"
+   ]
+  },
+  "39": {
+   "accept": true,
+   "notes": []
+  },
+  "40": {
+   "accept": true,
+   "notes": []
+  },
+  "41": {
+   "accept": true,
+   "notes": []
+  },
+  "42": {
+   "accept": true,
+   "notes": []
+  },
+  "43": {
+   "accept": true,
+   "notes": []
+  },
+  "44": {
+   "accept": true,
+   "notes": []
+  },
+  "45": {
+   "accept": true,
+   "notes": []
+  },
+  "46": {
+   "accept": true,
+   "notes": []
+  },
+  "47": {
+   "accept": true,
+   "notes": []
+  },
+  "48": {
+   "accept": true,
+   "notes": []
+  },
+  "49": {
+   "accept": true,
+   "notes": []
+  }
+ }
+}

@@ -1,0 +1,258 @@
+{
+ "study": "SFA-SD10 source-diversity ten (PROPOSED; source curation only)",
+ "status": "Selection executed \u2014 pending independent Codex review",
+ "source_dataset": {
+  "repo": "ethanCSL/openarm_pringles_lerobot_real_v00",
+  "revision": "2c1bc860347c44fc0fbae7567469d36ee49baa8d"
+ },
+ "original_ten_dataset": {
+  "repo": "ethanCSL/openarm_pringles_lerobot_real_10_v00",
+  "revision": "cebdee98115ab6827a4ec2655335c536b5dd085b",
+  "identical_to_pool_episodes": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "selected_episodes": [
+  1,
+  6,
+  7,
+  11,
+  13,
+  14,
+  27,
+  34,
+  42,
+  47
+ ],
+ "overlap_with_original_ten": [
+  1,
+  6,
+  7
+ ],
+ "v4a_locked_excluded": [
+  10,
+  17,
+  24,
+  31,
+  38,
+  45
+ ],
+ "random_ten_control": [
+  5,
+  6,
+  7,
+  8,
+  18,
+  25,
+  29,
+  32,
+  43,
+  44
+ ],
+ "random_seed": 20261107,
+ "selection_rule": {
+  "stage1": "exact k-center (k=10) on eligible episodes",
+  "stage2": "radius-constrained p-median, -1e-4*q tie-break",
+  "stage3": "no-good-cut tie check; lexicographic",
+  "solver": "scipy.optimize.milp (HiGHS)",
+  "features": {
+   "position": [
+    "lid_u",
+    "lid_v"
+   ],
+   "interaction": [
+    "left_receive_x_m",
+    "left_receive_y_m",
+    "left_receive_z_m",
+    "handover_dt_s"
+   ]
+  },
+  "weights_on_squared_normalised_diffs": {
+   "position": 1.0,
+   "interaction": 0.25
+  }
+ },
+ "selected_details": [
+  {
+   "episode": 1,
+   "lid_uv_px": [
+    403.4,
+    144.5
+   ],
+   "left_receive_xyz_m": [
+    0.2543,
+    -0.0311,
+    0.4674
+   ],
+   "handover_dt_s": 2.833,
+   "length": 263,
+   "quality_score_q": 0.349,
+   "on_eligible_hull": false
+  },
+  {
+   "episode": 6,
+   "lid_uv_px": [
+    348.8,
+    145.4
+   ],
+   "left_receive_xyz_m": [
+    0.2625,
+    0.0218,
+    0.487
+   ],
+   "handover_dt_s": 2.633,
+   "length": 241,
+   "quality_score_q": 0.709,
+   "on_eligible_hull": false
+  },
+  {
+   "episode": 7,
+   "lid_uv_px": [
+    323.5,
+    235.4
+   ],
+   "left_receive_xyz_m": [
+    0.2365,
+    -0.0204,
+    0.5101
+   ],
+   "handover_dt_s": 2.767,
+   "length": 261,
+   "quality_score_q": 0.61,
+   "on_eligible_hull": false
+  },
+  {
+   "episode": 11,
+   "lid_uv_px": [
+    344.7,
+    91.9
+   ],
+   "left_receive_xyz_m": [
+    0.2291,
+    0.0019,
+    0.5121
+   ],
+   "handover_dt_s": 2.4,
+   "length": 249,
+   "quality_score_q": 0.477,
+   "on_eligible_hull": false
+  },
+  {
+   "episode": 13,
+   "lid_uv_px": [
+    266.6,
+    350.7
+   ],
+   "left_receive_xyz_m": [
+    0.2171,
+    0.0004,
+    0.5249
+   ],
+   "handover_dt_s": 2.833,
+   "length": 279,
+   "quality_score_q": 0.547,
+   "on_eligible_hull": false
+  },
+  {
+   "episode": 14,
+   "lid_uv_px": [
+    439.5,
+    367.5
+   ],
+   "left_receive_xyz_m": [
+    0.2149,
+    0.0077,
+    0.5184
+   ],
+   "handover_dt_s": 2.567,
+   "length": 255,
+   "quality_score_q": 0.267,
+   "on_eligible_hull": true
+  },
+  {
+   "episode": 27,
+   "lid_uv_px": [
+    459.5,
+    157.4
+   ],
+   "left_receive_xyz_m": [
+    0.2449,
+    0.018,
+    0.4955
+   ],
+   "handover_dt_s": 2.133,
+   "length": 230,
+   "quality_score_q": 0.628,
+   "on_eligible_hull": true
+  },
+  {
+   "episode": 34,
+   "lid_uv_px": [
+    357.9,
+    348.8
+   ],
+   "left_receive_xyz_m": [
+    0.2122,
+    0.0019,
+    0.5188
+   ],
+   "handover_dt_s": 2.3,
+   "length": 249,
+   "quality_score_q": 0.198,
+   "on_eligible_hull": false
+  },
+  {
+   "episode": 42,
+   "lid_uv_px": [
+    341.4,
+    216.7
+   ],
+   "left_receive_xyz_m": [
+    0.2244,
+    0.0043,
+    0.5223
+   ],
+   "handover_dt_s": 1.9,
+   "length": 188,
+   "quality_score_q": 0.517,
+   "on_eligible_hull": false
+  },
+  {
+   "episode": 47,
+   "lid_uv_px": [
+    417.4,
+    283.3
+   ],
+   "left_receive_xyz_m": [
+    0.2424,
+    0.0303,
+    0.5303
+   ],
+   "handover_dt_s": 1.767,
+   "length": 200,
+   "quality_score_q": 0.552,
+   "on_eligible_hull": false
+  }
+ ],
+ "provenance": {
+  "code": [
+   "scripts/select10.py",
+   "scripts/build_features.py"
+  ],
+  "features": "full50_episode_features.csv"
+ },
+ "use_restrictions": [
+  "Selected episodes are training sources for a separate SD10 study; never evaluation data for it.",
+  "Recordings 10-49 are development data; not an untouched independent test.",
+  "Do not use VLA outcomes to amend this selection."
+ ]
+}

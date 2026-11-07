@@ -1,0 +1,639 @@
+{
+ "annotator": "Claude Code (claude-opus-5-5), visual review of outputs/review/transfer_*.jpg",
+ "date": "2026-11-07",
+ "criteria": "protocol Q5",
+ "frames": [
+  "start",
+  "rc",
+  "rc+20",
+  "lc",
+  "ro+10",
+  "last"
+ ],
+ "episodes": {
+  "0": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "1": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "2": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "3": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "4": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "5": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "cable crosses/near the can at frame 0"
+   ],
+   "confidence": "body+wrist"
+  },
+  "6": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "can visibly tilted in the left grasp after the right release"
+   ],
+   "confidence": "body+wrist"
+  },
+  "7": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "8": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "9": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "cable crosses/near the can at frame 0"
+   ],
+   "confidence": "body+wrist"
+  },
+  "10": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "wrist streams withheld (v4A lock): body camera only"
+   ],
+   "notes": [],
+   "confidence": "body-only"
+  },
+  "11": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (lid visible) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "12": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "can at the far (top) edge of the workspace at frame 0"
+   ],
+   "confidence": "body+wrist"
+  },
+  "13": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "14": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "15": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "16": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "17": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "wrist streams withheld (v4A lock): body camera only"
+   ],
+   "notes": [],
+   "confidence": "body-only"
+  },
+  "18": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "cable crosses/near the can at frame 0"
+   ],
+   "confidence": "body+wrist"
+  },
+  "19": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "20": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "21": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "22": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "23": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "24": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "wrist streams withheld (v4A lock): body camera only"
+   ],
+   "notes": [],
+   "confidence": "body-only"
+  },
+  "25": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "26": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (lid visible) -> held by left gripper"
+   ],
+   "notes": [
+    "cable crosses/near the can at frame 0"
+   ],
+   "confidence": "body+wrist"
+  },
+  "27": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "28": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "29": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "30": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "31": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "wrist streams withheld (v4A lock): body camera only"
+   ],
+   "notes": [
+    "cable crosses/near the can at frame 0"
+   ],
+   "confidence": "body-only"
+  },
+  "32": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "can visibly tilted in the left grasp after the right release"
+   ],
+   "confidence": "body+wrist"
+  },
+  "33": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "can visibly tilted in the left grasp after the right release"
+   ],
+   "confidence": "body+wrist"
+  },
+  "34": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "35": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "36": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "37": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "38": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "wrist streams withheld (v4A lock): body camera only"
+   ],
+   "notes": [
+    "can visibly tilted in the left grasp after the right release"
+   ],
+   "confidence": "body-only"
+  },
+  "39": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (lid visible) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "40": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "41": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "42": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "43": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "44": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "can visibly tilted in the left grasp after the right release"
+   ],
+   "confidence": "body+wrist"
+  },
+  "45": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "wrist streams withheld (v4A lock): body camera only"
+   ],
+   "notes": [],
+   "confidence": "body-only"
+  },
+  "46": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "47": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [
+    "can visibly tilted in the left grasp after the right release"
+   ],
+   "confidence": "body+wrist"
+  },
+  "48": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (lid visible) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  },
+  "49": {
+   "label": "SUCCESS",
+   "evidence": [
+    "body rc+20: can lifted off the table in the right gripper",
+    "body lc: can held at centre, left gripper at the can",
+    "body ro+10: can still aloft between the left fingers after the right gripper opened",
+    "body last: table empty; can at the left arm's retreat pose",
+    "left wrist ro+10/last: can fills view (red wrapper) -> held by left gripper"
+   ],
+   "notes": [],
+   "confidence": "body+wrist"
+  }
+ }
+}

@@ -123,3 +123,31 @@ The null-distribution percentile is reported for each coverage metric.
 * "10 selected from 50 collected": this supports a 10-input-demonstration augmentation claim, not a 10-demonstration acquisition cost.
 * A fair future comparison would be a 2×2: {original ten, SD10} × {real-only, matched augmentation}, plus random ten, same budgets and seeds. Results should be evaluated on prospectively recorded, locked episodes (a separate authorisation), not on recordings 10–49.
 * Diversity-based demonstration selection is prior art (e.g. data-scaling and data-selection work); it is not a claimed novelty.
+
+---
+
+## Amendment A1 — 2026-11-07 (before any selection, control or coverage metric was computed)
+
+**Trigger:** the Q6 visual QA of the frame-0 SAM masks (`outputs/review/mask_qa.jpg`) found inconsistent mask granularity.
+* SAM returned lid-only masks for episodes 22, 23, 29, 30 and 40 (and partly 38), and lid + body masks for the others.
+* Under the oblique body view, the whole-mask centroid moves toward the body by up to about half the visible body length.
+* The registered P (mask centroid) therefore mixed position with segmentation granularity.
+
+**Change to §3 (position feature):**
+* P = (u, v) is now the centre of an ellipse fitted (convex hull) to a lid-only SAM2.1 mask (`scripts/lid_center.py`):
+  * box prompt: the full silhouette width over the top 30 % of the whole-can mask, as tall as it is wide;
+  * positive point: the box centre;
+  * negative points: the lowest red-wrapper pixels outside the box.
+* The lid top is a fixed-height landmark. This matches the lid convention used by the earlier v3/v4B far-position definition.
+* Two intermediate prompt variants were tried and rejected on the same QA sheet, before any selection code existed: colour-only lid extraction, and point-only re-prompting. Both leaked into the white label or the face on the body in about 10 episodes.
+* The final variant was accepted on visual QA for all 50 episodes (`outputs/review/lid_qa.jpg`).
+
+**Change to Q6:** the lid ellipse must have fill ratio ≥ 0.80 (mask area / ellipse area) and be accepted on visual QA. The whole-can mask must still contain the click or touch the lid.
+
+**SAM checkpoint:** `facebook/sam2.1-hiera-small` for both image and video. The hiera-large weights are not cached locally; small is the model the v1 pipeline used.
+
+**Diagnostic noted, not a gate:** SAM2.1 video-propagated can visibility (area ≥ 30 % of frame 0) was 1.00 for every episode. It does not discriminate and is reported only.
+
+**Unchanged:** quality gates Q1–Q5; interaction features, weights, normalisation, solver, seeds and tie-breakers.
+
+**What I knew at amendment time:** the frame-0 image positions, through the QA sheets. No selection, random control or coverage metric had been computed.
