@@ -89,9 +89,16 @@ def main():
     pre = json.loads((G.OUT / "preprocess.json").read_text())
     assert pre["cold_cache"] and len(pre["sources"]) == 23
     import importlib.metadata as im
+
+    def ver(k):
+        try:
+            return im.version(k)
+        except im.PackageNotFoundError:
+            return None
+    import cv2
     reg = {"git_head": git("rev-parse", "HEAD"), "branch": git("branch", "--show-current"), "exec_code_sha256":
            {p.name: G.sha(p) for p in sorted(G.EXEC.glob("*.py"))}, "seal_sha256": G.SEAL_SHA,
-           "packages": {k: im.version(k) for k in ("numpy", "scipy", "pin", "opencv-python", "torch", "transformers", "av")},
+           "packages": {k: ver(k) for k in ("numpy", "scipy", "pin", "torch", "transformers", "av")} | {"cv2": cv2.__version__},
            "python": sys.version, "cpu_threads": 4, "geometry_device": "CPU (pinocchio float64)",
            "preprocess_device": pre["sources"][0].get("gpu"), "sam_dtype": "bfloat16",
            "store": str(G.STORE), "time": time.time()}
