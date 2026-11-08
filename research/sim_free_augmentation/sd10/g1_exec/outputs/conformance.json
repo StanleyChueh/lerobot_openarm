@@ -1,0 +1,148 @@
+{
+ "source": 6,
+ "F0_identity": {
+  "max_q_dev_rad": 0.0,
+  "max_action_dev_rad": 0.0,
+  "ok": true
+ },
+ "F1_translation": {
+  "transform": {
+   "rotation_rule": "shortest",
+   "source_lid_xyz": [
+    0.31261894263286555,
+    0.014785782128734572,
+    0.45579820683359695
+   ],
+   "source_axis": [
+    0.07887116039485445,
+    -0.26256491603418214,
+    -0.9616855020878357
+   ],
+   "translation_m": 0.020000000000000018,
+   "rotation_deg": 15.911667391765176
+  },
+  "Y_A": false,
+  "failed": [
+   "3_ik_residual",
+   "8_object_continuity"
+  ],
+  "init_lid_err_m": 3.469446951953614e-18,
+  "init_axis_err_deg": 0.0,
+  "label_dev": 5.879636266747923e-08,
+  "gate9_ok": true,
+  "gate3": {
+   "max_pos_m_all_frames": 0.020031801493601956,
+   "max_rot_deg_all_frames": 2.083723708179396,
+   "contact_waypoint_max_mm": 8.053511389854336
+  },
+  "ok": true
+ },
+ "corruptions": {
+  "source_action_substitution": {
+   "must_fail": [
+    "9_labels"
+   ],
+   "caught_by": [
+    "9_labels"
+   ],
+   "failed": [
+    "3_ik_residual",
+    "8_object_continuity",
+    "9_labels"
+   ],
+   "ok": true
+  },
+  "one_joint_delay6": {
+   "must_fail": [
+    "9_labels"
+   ],
+   "caught_by": [
+    "9_labels"
+   ],
+   "failed": [
+    "3_ik_residual",
+    "8_object_continuity",
+    "9_labels"
+   ],
+   "ok": true
+  },
+  "gripper_cmd_shift3": {
+   "must_fail": [
+    "9_labels"
+   ],
+   "caught_by": [
+    "9_labels"
+   ],
+   "failed": [
+    "3_ik_residual",
+    "8_object_continuity",
+    "9_labels"
+   ],
+   "ok": true
+  },
+  "state_delay3": {
+   "must_fail": [
+    "9_labels",
+    "3_ik_residual"
+   ],
+   "caught_by": [
+    "9_labels"
+   ],
+   "failed": [
+    "3_ik_residual",
+    "6_steady_holds",
+    "8_object_continuity",
+    "9_labels"
+   ],
+   "ok": true
+  },
+  "initial_can_offset5mm": {
+   "must_fail": [
+    "2_initial_candidate",
+    "8_object_continuity"
+   ],
+   "caught_by": [
+    "2_initial_candidate"
+   ],
+   "failed": [
+    "2_initial_candidate",
+    "3_ik_residual",
+    "8_object_continuity"
+   ],
+   "ok": true
+  },
+  "can_rotated20_after_capture": {
+   "must_fail": [
+    "6_steady_holds",
+    "8_object_continuity"
+   ],
+   "caught_by": [
+    "6_steady_holds"
+   ],
+   "failed": [
+    "3_ik_residual",
+    "6_steady_holds",
+    "8_object_continuity"
+   ],
+   "ok": true
+  },
+  "copied_static_can": {
+   "must_fail": [
+    "6_steady_holds",
+    "7_receiver_capture"
+   ],
+   "caught_by": [
+    "6_steady_holds",
+    "7_receiver_capture"
+   ],
+   "failed": [
+    "3_ik_residual",
+    "5_clearance_penetration",
+    "6_steady_holds",
+    "7_receiver_capture"
+   ],
+   "ok": true
+  }
+ },
+ "ALL_PASS": true
+}
