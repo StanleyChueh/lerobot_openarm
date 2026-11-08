@@ -1,0 +1,823 @@
+{
+  "study": "SD10-G1",
+  "base_head": "8d31437e5779ef80aca9ffd3e6fa94b288d54f5e",
+  "conditions": {
+    "Original10": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "SD10": [
+      1,
+      6,
+      7,
+      11,
+      13,
+      14,
+      27,
+      34,
+      42,
+      47
+    ],
+    "Random10": [
+      5,
+      6,
+      7,
+      8,
+      18,
+      25,
+      29,
+      32,
+      43,
+      44
+    ]
+  },
+  "data": {
+    "pool_repo": "ethanCSL/openarm_pringles_lerobot_real_v00",
+    "pool_revision": "2c1bc860347c44fc0fbae7567469d36ee49baa8d",
+    "real10_lineage_repo": "ethanCSL/openarm_pringles_lerobot_real_10_v00",
+    "real10_revision": "cebdee98115ab6827a4ec2655335c536b5dd085b",
+    "all_rgb_from_pool": true,
+    "allowed_source_union": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13,
+      14,
+      18,
+      25,
+      27,
+      29,
+      32,
+      34,
+      42,
+      43,
+      44,
+      47
+    ],
+    "excluded_v4a": [
+      10,
+      17,
+      24,
+      31,
+      38,
+      45
+    ],
+    "camera": "body_cam only; no wrist processing"
+  },
+  "targets_sha256": "81be5905ef51034de8c66cf802878403e6c80d47b2667d188cfe58f216701ba6",
+  "source_metadata": {
+    "0": {
+      "capture_id": "pringles-real-v00-capture-00",
+      "frames": 273,
+      "state_sha256": "c6161cee3d90f8ea0bd3492e2c9e4a19f855854ab5799314cbe28bd45e2fc407",
+      "action_sha256": "1f90bbb4f440e3fc3fe371827b7392d0804e1c99cad18342e794f061f3e42802",
+      "events_rc_lc_ro": [
+        97,
+        176,
+        181
+      ],
+      "initial_lid_uv": [
+        371.89776611328125,
+        204.49246215820312
+      ],
+      "duration_s": 9.1,
+      "grasp_to_receive_s": 2.6333333333333333,
+      "observation_quality": {
+        "can_crop_sharpness": 456.410888671875,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "1": {
+      "capture_id": "pringles-real-v00-capture-01",
+      "frames": 263,
+      "state_sha256": "0c43da8d0c63d8c8d4a6e6681f281c32131b23638f782fb978d295eb3d381c9b",
+      "action_sha256": "b91a05fb4159270cb5fcb01e82da6e75070b95c0dca39d8d7e230b53260baa71",
+      "events_rc_lc_ro": [
+        87,
+        172,
+        176
+      ],
+      "initial_lid_uv": [
+        403.41265869140625,
+        144.51895141601562
+      ],
+      "duration_s": 8.766666666666667,
+      "grasp_to_receive_s": 2.8333333333333335,
+      "observation_quality": {
+        "can_crop_sharpness": 514.7725830078125,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "2": {
+      "capture_id": "pringles-real-v00-capture-02",
+      "frames": 280,
+      "state_sha256": "312fcd292efef81aef59d3ccf01de5677c7552c88956293355085bdd4485712d",
+      "action_sha256": "c534986fd3e44cb24836a7155fa98de7e429b94b11d8f675591d2de19c164147",
+      "events_rc_lc_ro": [
+        101,
+        188,
+        198
+      ],
+      "initial_lid_uv": [
+        321.71435546875,
+        291.7563171386719
+      ],
+      "duration_s": 9.333333333333334,
+      "grasp_to_receive_s": 2.9,
+      "observation_quality": {
+        "can_crop_sharpness": 285.41162109375,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "3": {
+      "capture_id": "pringles-real-v00-capture-03",
+      "frames": 250,
+      "state_sha256": "a80d1686cc997ee14914f1fde1ac36f5174cbc944762fd28b1b53e23b96e3ad8",
+      "action_sha256": "dcf41a49d7508447e40f76e12649273edffd709f77f294b4e9cd29e51fb128cc",
+      "events_rc_lc_ro": [
+        82,
+        156,
+        165
+      ],
+      "initial_lid_uv": [
+        345.8363342285156,
+        208.36985778808594
+      ],
+      "duration_s": 8.333333333333334,
+      "grasp_to_receive_s": 2.466666666666667,
+      "observation_quality": {
+        "can_crop_sharpness": 325.6024475097656,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "4": {
+      "capture_id": "pringles-real-v00-capture-04",
+      "frames": 250,
+      "state_sha256": "de764dab24e1cdc79c8d7a7e333a0f1e7b66a3a32227f89e9d08fdee53d5b440",
+      "action_sha256": "6c179e22b361d2460b115a935f6ef9aaecb6bd0a1cd1fc6a073b63359f02daf8",
+      "events_rc_lc_ro": [
+        87,
+        163,
+        168
+      ],
+      "initial_lid_uv": [
+        390.06561279296875,
+        133.7978057861328
+      ],
+      "duration_s": 8.333333333333334,
+      "grasp_to_receive_s": 2.533333333333333,
+      "observation_quality": {
+        "can_crop_sharpness": 572.2054443359375,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "5": {
+      "capture_id": "pringles-real-v00-capture-05",
+      "frames": 255,
+      "state_sha256": "022e8b77c5298e5631cd20195e00a124789571d3a5acf09b1f18c3532ccace7b",
+      "action_sha256": "83fe4fd9b4d831692c5a0fc8469b24446988638f1db9247a42146f898595c876",
+      "events_rc_lc_ro": [
+        86,
+        164,
+        169
+      ],
+      "initial_lid_uv": [
+        333.5313415527344,
+        123.4538345336914
+      ],
+      "duration_s": 8.5,
+      "grasp_to_receive_s": 2.6,
+      "observation_quality": {
+        "can_crop_sharpness": 936.6261596679688,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "6": {
+      "capture_id": "pringles-real-v00-capture-06",
+      "frames": 241,
+      "state_sha256": "db9484bbf3f81f7fd575241ed77ea04f42ca14e8f495abca0e665cea546e31a8",
+      "action_sha256": "166e5466b714e762a65c62c2d794186de5fc1f09bde1671efc143b18a59b0251",
+      "events_rc_lc_ro": [
+        82,
+        161,
+        166
+      ],
+      "initial_lid_uv": [
+        348.7561340332031,
+        145.38943481445312
+      ],
+      "duration_s": 8.033333333333333,
+      "grasp_to_receive_s": 2.6333333333333333,
+      "observation_quality": {
+        "can_crop_sharpness": 721.6563720703125,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "7": {
+      "capture_id": "pringles-real-v00-capture-07",
+      "frames": 261,
+      "state_sha256": "9886dd8550f6c37db87240c874d414415e3f9b23d77b2cba3b2a282a4a634a6c",
+      "action_sha256": "78659901ccae7e38e150bee8a7e66a8ca1a6242b504a78d6fac4bd5d725d2377",
+      "events_rc_lc_ro": [
+        87,
+        170,
+        179
+      ],
+      "initial_lid_uv": [
+        323.52056884765625,
+        235.40101623535156
+      ],
+      "duration_s": 8.7,
+      "grasp_to_receive_s": 2.7666666666666666,
+      "observation_quality": {
+        "can_crop_sharpness": 529.8285522460938,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "8": {
+      "capture_id": "pringles-real-v00-capture-08",
+      "frames": 249,
+      "state_sha256": "b07ecb0cf344978f938ac7c71d6f8a58e5dbbe0289d4dcb1cc977174aa154042",
+      "action_sha256": "22660a627e123788b793505992553f90f79baa84e4da9c15e5574b75ab768538",
+      "events_rc_lc_ro": [
+        83,
+        160,
+        164
+      ],
+      "initial_lid_uv": [
+        322.02288818359375,
+        355.97808837890625
+      ],
+      "duration_s": 8.3,
+      "grasp_to_receive_s": 2.566666666666667,
+      "observation_quality": {
+        "can_crop_sharpness": 254.16114807128906,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "9": {
+      "capture_id": "pringles-real-v00-capture-09",
+      "frames": 253,
+      "state_sha256": "46c9a9da51bd7456110076fd061faa8fbf44720a62c8cd93fe727a3cf80647bb",
+      "action_sha256": "857b3682e8a4ac9a9a55399073d6afb743ab3142298448f3ace7d46c368db093",
+      "events_rc_lc_ro": [
+        85,
+        159,
+        168
+      ],
+      "initial_lid_uv": [
+        294.98394775390625,
+        215.4577178955078
+      ],
+      "duration_s": 8.433333333333334,
+      "grasp_to_receive_s": 2.466666666666667,
+      "observation_quality": {
+        "can_crop_sharpness": 426.5727233886719,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "11": {
+      "capture_id": "pringles-real-v00-capture-11",
+      "frames": 249,
+      "state_sha256": "e7eb4fa4ebabcc6ecd1b536069808f7fc58d0a33df3e7121aa62e93eb19b44da",
+      "action_sha256": "9a94391aab67278c3c441788ee41efb9bc66c02be8a5fd257b5058f9f84e7e2f",
+      "events_rc_lc_ro": [
+        86,
+        158,
+        168
+      ],
+      "initial_lid_uv": [
+        344.681884765625,
+        91.9449234008789
+      ],
+      "duration_s": 8.3,
+      "grasp_to_receive_s": 2.4,
+      "observation_quality": {
+        "can_crop_sharpness": 725.9049072265625,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "13": {
+      "capture_id": "pringles-real-v00-capture-13",
+      "frames": 279,
+      "state_sha256": "917549a5a7ea7ad8de2e1b0b91c3489892b2cf211c9b88c2e32dfdcc00043ae0",
+      "action_sha256": "04119c94c137b8d4a658ca954bd8bced0c29bce16b2cf9c341a2ddd18be42b08",
+      "events_rc_lc_ro": [
+        103,
+        188,
+        194
+      ],
+      "initial_lid_uv": [
+        266.5950622558594,
+        350.69732666015625
+      ],
+      "duration_s": 9.3,
+      "grasp_to_receive_s": 2.8333333333333335,
+      "observation_quality": {
+        "can_crop_sharpness": 255.71755981445312,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "14": {
+      "capture_id": "pringles-real-v00-capture-14",
+      "frames": 255,
+      "state_sha256": "2cf13e802d5332d786b739900b3293924ddaf6225f80dc6d84ba5b9ee29d0825",
+      "action_sha256": "3f37003c433559f59a08dac36093df81516ccba835de072570d2c0a45e407988",
+      "events_rc_lc_ro": [
+        87,
+        164,
+        168
+      ],
+      "initial_lid_uv": [
+        439.4931335449219,
+        367.50048828125
+      ],
+      "duration_s": 8.5,
+      "grasp_to_receive_s": 2.566666666666667,
+      "observation_quality": {
+        "can_crop_sharpness": 317.68463134765625,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "18": {
+      "capture_id": "pringles-real-v00-capture-18",
+      "frames": 247,
+      "state_sha256": "6946f5e0a7563fa29f26b9885e8bce8a28e59249ef91c3df7282540dc97219ad",
+      "action_sha256": "4f1cf8ebc3e808ee71081f3aead8c64f16e5adc4c08693540fdeab3959546450",
+      "events_rc_lc_ro": [
+        85,
+        149,
+        159
+      ],
+      "initial_lid_uv": [
+        323.40704345703125,
+        147.29299926757812
+      ],
+      "duration_s": 8.233333333333333,
+      "grasp_to_receive_s": 2.1333333333333333,
+      "observation_quality": {
+        "can_crop_sharpness": 732.34228515625,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "25": {
+      "capture_id": "pringles-real-v00-capture-25",
+      "frames": 242,
+      "state_sha256": "06abbb5e4d7218dec5ff54d2b6bfcf42aea5ed35d1c5d31e7b7759fbbef630a2",
+      "action_sha256": "9aaff9da17d1b9197e1a9bb7a8c65ca3bd275a4fa5a4dc2f1544f129227c0562",
+      "events_rc_lc_ro": [
+        84,
+        147,
+        160
+      ],
+      "initial_lid_uv": [
+        369.3257141113281,
+        151.84706115722656
+      ],
+      "duration_s": 8.066666666666666,
+      "grasp_to_receive_s": 2.1,
+      "observation_quality": {
+        "can_crop_sharpness": 549.1172485351562,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "27": {
+      "capture_id": "pringles-real-v00-capture-27",
+      "frames": 230,
+      "state_sha256": "9c98edc18ee0b68f75a57a8082a156bf341ad3749e4aa4f2dd5c5a7fb8495471",
+      "action_sha256": "c7b92b131df717bd823e9f5bb06f504c676fa352d11d9902a8acbb0b038b9bfd",
+      "events_rc_lc_ro": [
+        84,
+        148,
+        152
+      ],
+      "initial_lid_uv": [
+        459.468017578125,
+        157.37461853027344
+      ],
+      "duration_s": 7.666666666666667,
+      "grasp_to_receive_s": 2.1333333333333333,
+      "observation_quality": {
+        "can_crop_sharpness": 384.6548767089844,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "29": {
+      "capture_id": "pringles-real-v00-capture-29",
+      "frames": 282,
+      "state_sha256": "11b0596abe1ecfd46f7a0c8f19cfdd548a6d4661f226daa1aa4d3f1d9ab3d7c5",
+      "action_sha256": "1c07e50d7b7fc5829927b4545a9ba8997004d20b4fae8415bda552f853fd17f4",
+      "events_rc_lc_ro": [
+        96,
+        186,
+        191
+      ],
+      "initial_lid_uv": [
+        252.67161560058594,
+        388.82623291015625
+      ],
+      "duration_s": 9.4,
+      "grasp_to_receive_s": 3.0,
+      "observation_quality": {
+        "can_crop_sharpness": 313.3690490722656,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "32": {
+      "capture_id": "pringles-real-v00-capture-32",
+      "frames": 239,
+      "state_sha256": "101dd94f33ed08d308cccf53204425e46d1353c7df79bd65d1717e4f54d382b2",
+      "action_sha256": "d0a544fe19148d8f2d63df1ce0d5ff149d064ebf30514d66c514583e2d4d9de2",
+      "events_rc_lc_ro": [
+        85,
+        149,
+        151
+      ],
+      "initial_lid_uv": [
+        443.08990478515625,
+        299.0467529296875
+      ],
+      "duration_s": 7.966666666666667,
+      "grasp_to_receive_s": 2.1333333333333333,
+      "observation_quality": {
+        "can_crop_sharpness": 416.746826171875,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "34": {
+      "capture_id": "pringles-real-v00-capture-34",
+      "frames": 249,
+      "state_sha256": "51ec49f2ee7ec2b394c452d1e4ad3e9c329728d7a03caae3fe3a4f2b9d7e8376",
+      "action_sha256": "201ffde8d405825e9370287f43bbe408b607abf351af80e198e9f7c6cc5b44f9",
+      "events_rc_lc_ro": [
+        87,
+        156,
+        159
+      ],
+      "initial_lid_uv": [
+        357.8535461425781,
+        348.8481750488281
+      ],
+      "duration_s": 8.3,
+      "grasp_to_receive_s": 2.3,
+      "observation_quality": {
+        "can_crop_sharpness": 315.6537780761719,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "42": {
+      "capture_id": "pringles-real-v00-capture-42",
+      "frames": 188,
+      "state_sha256": "c2b668ea16936a7285c0c1b80ae5c46771d2e9cf5f7c015a298b13ac7b308732",
+      "action_sha256": "88c34b0e3213c13b2728f606c387860122ded21c3f6653efa009ff08f9c52bb7",
+      "events_rc_lc_ro": [
+        64,
+        121,
+        123
+      ],
+      "initial_lid_uv": [
+        341.44439697265625,
+        216.6531524658203
+      ],
+      "duration_s": 6.266666666666667,
+      "grasp_to_receive_s": 1.9,
+      "observation_quality": {
+        "can_crop_sharpness": 339.32958984375,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "43": {
+      "capture_id": "pringles-real-v00-capture-43",
+      "frames": 203,
+      "state_sha256": "b87e2810ad7280d1a182704269ff9d9511d1c21e67e51b94a0ed5007fc69deda",
+      "action_sha256": "4d5ed491c05f1019ead95d5eb750307f74f670d7d33a88e3026515cfb3a5b920",
+      "events_rc_lc_ro": [
+        65,
+        125,
+        126
+      ],
+      "initial_lid_uv": [
+        324.699462890625,
+        230.71746826171875
+      ],
+      "duration_s": 6.766666666666667,
+      "grasp_to_receive_s": 2.0,
+      "observation_quality": {
+        "can_crop_sharpness": 324.9771728515625,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "44": {
+      "capture_id": "pringles-real-v00-capture-44",
+      "frames": 205,
+      "state_sha256": "46012ca7b9eb57777a0708a9f51fb16b63deac8bd949a42dd5980c530b14b37c",
+      "action_sha256": "fb7fe52c4d4354676890ea256e04e5938c44284b88c7c3a28a0ee25b4f3a1ba1",
+      "events_rc_lc_ro": [
+        76,
+        139,
+        140
+      ],
+      "initial_lid_uv": [
+        375.03240966796875,
+        126.91156768798828
+      ],
+      "duration_s": 6.833333333333333,
+      "grasp_to_receive_s": 2.1,
+      "observation_quality": {
+        "can_crop_sharpness": 620.0449829101562,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    },
+    "47": {
+      "capture_id": "pringles-real-v00-capture-47",
+      "frames": 200,
+      "state_sha256": "cf3331af582603b64dc6d46d193944777e7c94adea6ec366f3974d447f496554",
+      "action_sha256": "ddb61bbc3bc4d65c7dfd178ecfd020f6513feae0799b5653c675f2d3b67f79ad",
+      "events_rc_lc_ro": [
+        76,
+        129,
+        130
+      ],
+      "initial_lid_uv": [
+        417.3929748535156,
+        283.2604675292969
+      ],
+      "duration_s": 6.666666666666667,
+      "grasp_to_receive_s": 1.7666666666666666,
+      "observation_quality": {
+        "can_crop_sharpness": 342.5062255859375,
+        "receiver_from_closure_only": "must be logged by new reconstruction; never treated as measured contact"
+      }
+    }
+  },
+  "algorithm": {
+    "planner": "v3 G+ waypoint geometry only, common pool/full-initial-pose adapter; no C comparison",
+    "renderer": "v3 render3 layered lid/body/robot homographies, unchanged pixels except common input plumbing",
+    "initial_pose": "absolute shared candidate position; shortest rotation aligns can axis to down; yaw free",
+    "handover": "source native interaction, no pass/regrasp/timing perturbations; D=I Gamma=I tau=t scale=1",
+    "reconstruction": "v3/v2 source body-only fitting, SAM small; common fixed body camera/lag; receiver closure-only flagged",
+    "body_lag_frames": -1.625,
+    "camera_refit": false,
+    "source_scoring": "locked_targets.json assignments, no quality/IK/outcome reranking",
+    "ik": {
+      "method": "pinned Robot.ik DLS",
+      "iterations": 80,
+      "damping": 0.001,
+      "joint_margin_rad": 0.02,
+      "warm_start": "half previous solution plus half corresponding source reference",
+      "restarts": 0
+    },
+    "actions": "q_generated[t+source_lead] + (source_action[t]-source_state[t+source_lead]); grippers source ZOH",
+    "source_lead": "pinned data.action_lead over 0..6; lower argmin tie; no fit against generated RGB",
+    "export_native_interval": "[3,T-6), shared across all sources; no endpoint padding, require all transitions and >=15 post-release frames",
+    "provenance_logging": "sidecar only, no condition-specific pixel repair or filtering"
+  },
+  "acceptance": {
+    "target_lid_position_error_m": 0.002,
+    "initial_axis_error_deg": 1,
+    "ik_max_position_error_m": 0.004,
+    "ik_max_rotation_error_deg": 2,
+    "contact_waypoint_position_m": 0.002,
+    "contact_waypoint_rotation_deg": 1,
+    "joint_position_slack_rad": 1e-06,
+    "joint_speed": "URDF velocity limits, same per joint",
+    "joint_accel_max_rad_s2": 100,
+    "command_step_max_rad": 0.25,
+    "steady_attachment_error_m": 0.01,
+    "steady_attachment_rotation_deg": 5,
+    "receiver_capture_error_m": 0.01,
+    "receiver_capture_rotation_deg": 5,
+    "can_step_max_m": 0.08,
+    "can_step_max_deg": 10,
+    "holder_switch_step_m": 0.005,
+    "holder_switch_step_deg": 3,
+    "can_table_penetration_max_m": 0.01,
+    "distal_arm_arm_penetration_max_m": 0.005,
+    "can_nonfinger_link_penetration_max_m": 0.01,
+    "all_frames_checked": true,
+    "no_source_relative_threshold_relaxation": true,
+    "label_construction_abs_tolerance_rad": 1e-06,
+    "source_gripper_chronology_preserved": true,
+    "post_release_min_frames": 15
+  },
+  "compute": {
+    "seed": 20261108,
+    "one_selected_source_attempt_per_primary_target": 1,
+    "retry_budget": 0,
+    "target_shrink_budget": 0,
+    "source_preprocessing_cap_s": 600,
+    "geometry_cap_s": 120,
+    "rgb_encode_decode_cap_s": 120,
+    "cpu_threads": 4,
+    "gpu": "one common GPU model/device, sequential; record actual device/precision before launch",
+    "condition_order": "target k ascending, rotate condition order by k mod3; each arm sees T000..T099",
+    "preprocessing": "new pool-keyed cold cache for all23; shared capture uses same asset hashes; charge standalone ten-source costs per arm",
+    "report": "cold preprocessing, assets/model loads, failures/timeouts, verification, rendering, encoding, I/O and per-accepted-bundle time"
+  },
+  "statistics": {
+    "unit": "paired target ID, all100; failures remain zero",
+    "bootstrap_draws": 10000,
+    "seed": 20261108,
+    "geometry_min_gain_pp": 10,
+    "require_both_controls": true,
+    "paired_ci_lower_gt": 0,
+    "spatial_block_ci_lower_gt": 0,
+    "exact_mcnemar_two_sided_p_max": 0.05,
+    "rgb_clean_bundle_min_gain_pp": 10,
+    "h2_common_rendered_min_targets": 30,
+    "h2_gross_artifact_reduction_min_pp": 10,
+    "new_mechanism_claim_permitted": false
+  },
+  "models": {
+    "sam": {
+      "snapshot": "/home/stanley/.cache/huggingface/hub/models--facebook--sam2.1-hiera-small/snapshots/ee5bba1d82bb8749febdf90f45e84b687142ba03",
+      "revision": "ee5bba1d82bb8749febdf90f45e84b687142ba03",
+      "files": {
+        "processor_config.json": "f8a68e865cfad115c1c2763f3d93eca7b1c622da06da2a9273eb437fb2389b6d",
+        "video_preprocessor_config.json": "9fccfe5f464ec38c2f236d0e6a68e95511c80c22132fc2fa4b9f7b65f24fad95",
+        "preprocessor_config.json": "6ebf229ee259368ce4a8d4f2fe893a72b053023710853e257253939e601f583d",
+        "config.json": "97ff9f65b76d107acda4247885f0a5555d0048850ae3c5f97183df289aaecde9",
+        "model.safetensors": "0a4067b11ce1e23d5229203f11c718a823060d15a4b23fa2372a7d4b77cbbc60"
+      }
+    },
+    "raft": {
+      "weights": "Raft_Large_Weights.C_T_SKHT_V2",
+      "local": "/home/stanley/.cache/torch/hub/checkpoints/raft_large_C_T_SKHT_V2-ff5fadd5.pth",
+      "sha256": "ff5fadd56d26b40647388883af1547351ea17868b765c05b27231e72dd16a322"
+    }
+  },
+  "inherited_code_and_robot_sha256": {
+    "research/sim_free_augmentation/sfa/data.py": "18168059858994842db132509e56226142f775ef424bd7f58a2a7f8d2d4dbf0e",
+    "research/sim_free_augmentation/sfa/robot.py": "170b90df85bc3ee21c0e234a3618f96f6ea952d74a2f56cbc8f4259b248e365f",
+    "research/sim_free_augmentation/sfa/track.py": "828c12f7cd6e9f2818a95283df252edddb1cd920f34cc03b0e7f20d6df737936",
+    "research/sim_free_augmentation/sfa/metrics.py": "247fd8d1eb0ce95fb9b0b8926130645f71a833927c9fc9b86365f865eb6f95b8",
+    "research/sim_free_augmentation/sfa/segment.py": "55fee28694fb342fadc63446fe7767e92c0efba51932e9f71b4182331ce56c61",
+    "research/sim_free_augmentation/sfa/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/sim_free_augmentation/sfa/recover.py": "5c0a55bb104e7ce18bc8d2fe5261c7f32a5a1ab5d0d2fd8e9eee6c6b24b47d9c",
+    "research/sim_free_augmentation/sfa/plan.py": "2b09c27f8e104da83151090984329dc7e3959d659053cb7813400b33e8c6c3c4",
+    "research/sim_free_augmentation/sfa/render.py": "9ec64d744c1568fb49a66258d16fa6097383fef9773bd4671d5d2a242efc5b27",
+    "research/sim_free_augmentation/v2/sfa2/metrics2.py": "b7ae9149e0214835829841df0e0f74100be4425b729d791b90116ff11b408719",
+    "research/sim_free_augmentation/v2/sfa2/verify.py": "275c5b21f5ae86d7f04570d54cb465ee00a2f23470f3de04f899c513e3b687c8",
+    "research/sim_free_augmentation/v2/sfa2/sync.py": "99fdc18f6796650ab8a277231b86eb580baa0eeb4e61948b11dffd95c45d013a",
+    "research/sim_free_augmentation/v2/sfa2/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/sim_free_augmentation/v2/sfa2/recon.py": "55db25134a038dfad312ff82ff2b63ec25861b3c9bdcdff29dfabe5cfad37ffa",
+    "research/sim_free_augmentation/v2/sfa2/se3.py": "1649823b8beb0f47028eb6e0b2164162531038e9727d7910d49f0568709de040",
+    "research/sim_free_augmentation/v2/sfa2/planner.py": "3a2b4b84043ed4a0fab42c78d5d9e3f588ebe604cce70cd48bc6359b786adcdb",
+    "research/sim_free_augmentation/v2/sfa2/render2.py": "ef40b65695f5c3fc33aa29fb302b775765b08a0dd0652e152dc6f2be42c2bead",
+    "research/sim_free_augmentation/v3/sfa3/labels.py": "52c4f48802355469493469c6067ba0b08bc74bb3238713c4cbb2270a29239034",
+    "research/sim_free_augmentation/v3/sfa3/recon3.py": "55dbde96b5bd3c63c39654b420d8dd6d2a8ba19cb281ae455707d35db500e135",
+    "research/sim_free_augmentation/v3/sfa3/verify3.py": "f1cfe0c5ff7f1441b3fea74bbc41fc7fced5a96d3a7b26dd8a28fba7df0666cb",
+    "research/sim_free_augmentation/v3/sfa3/render3.py": "fe09728f7eea4669d0910d1ddbf2e196fa2d3ac193ab42703f4eb0e53ad3f90b",
+    "research/sim_free_augmentation/v3/sfa3/planner3.py": "416596199c327ff910f9a7e81983f64279e5e9b0d14284803603234035c83b49",
+    "research/sim_free_augmentation/v3/sfa3/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "model/openarm_description.urdf": "7b3bcad456fbe188af102a32b3b91e177e5c53e2242247e992d79c167e6c205d",
+    "model/openarm_description_leader.urdf": "9b97414cf78255536a756de53fdae06dcbe7960b1c551686da700cdfae9ce3f8",
+    "model/meshes/link7_symp.stl": "434f207f21f75f5f0bd604e390b8e5bc7b62b619265222846770e06b3f9b5cfb",
+    "model/meshes/link2_symp.stl": "382ab32e4ae0880e8a1512e7a6ca6ce1f478a6c125db4efa977429ffb1d6b02a",
+    "model/meshes/link1.stl": "2a182c7fd4d25226aff6d9e2dd9d1008a85fce7df8e16525722a5c5053f8b055",
+    "model/meshes/link1_symp.stl": "066113d13d5cc85098609003bc7ebb73c570015350877f5ed7162ef1b6601852",
+    "model/meshes/body_link0.stl": "7ab0afa9a26bebbf5c6149894c41d96622caa649555ae7c5f0f2548f86148d91",
+    "model/meshes/link3.stl": "8d47d75d0c47a65021708ba63cb73162bf7c3b1d14e9cfc70dfa47336034ac76",
+    "model/meshes/body_link0_symp.stl": "6c18bbf7e86b03e3faf802e61e8eb438b38dcbcf146d97cffe6e808c65e9a72a",
+    "model/meshes/link6.stl": "e49f91279f109baecb9ff54f5041eeb4514f757ba6daa65c3ea01fb1991967e4",
+    "model/meshes/link3_symp.stl": "00c908cefab152c00416a570a48bf9aafed1549085f19ff2d882dc3f355d9f59",
+    "model/meshes/link5.stl": "30ea7abfdd3661b315f897bb82a5f34fd966357b358e890e155e928e931ea975",
+    "model/meshes/link2.stl": "de1b190a56c16dea14546fb8e22c86eccabc2ca5e054819630c1932592381745",
+    "model/meshes/link6_symp.stl": "95529bec23733476dfdbbb266c7db0d25a473a568de73c8337a82440fe4a9ac3",
+    "model/meshes/link0_symp.stl": "baf52578e1d9e6225f3818cae82b6074a0b948d3cef8e9a3e6dfafca78507590",
+    "model/meshes/link0.stl": "c77bdc9419947088e1dfc452e29c6092cc7b02b239ff4f2f5be3d77e393af185",
+    "model/meshes/link7.stl": "a91593b67d2dec16d1dfb6f1305df3ddcd214cdef02e97d5aba30bc633e775b2",
+    "model/meshes/hand.stl": "8e5d373ebbd3fd001b506058644062ad71a68f1ced5ca5d5ed0f6de20137956b",
+    "model/meshes/finger.stl": "8e96e1314618cf434908f70df78f68dd2b049c03538964e8d41fc99abe41564d",
+    "model/meshes/link4.stl": "8ca8149f2ce8b1b102270ec0b1a4b75c3e6f98c09b084430a450adce808607e1",
+    "model/meshes/link5_symp.stl": "678a2802906eff7b45a836d2f34a2d8e51def50b6599376968f888e05c72739e",
+    "model/meshes/link4_symp.stl": "b54883b8c7c96268a68a5879f95998a53ad0b0c4fe74325fad63a6caef669c73"
+  },
+  "source_dataset_files": {
+    "pool/README.md": {
+      "local": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/e2e9fb857194edbc3cdcf7026943e23e2562645e",
+      "sha256": "882f30d0ad03b65b076a330de8deb6a11b8cbb1d48e528c489c3b78b22de4929"
+    },
+    "pool/data/chunk-000/file-000.parquet": {
+      "local": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/e6be83a572dab9841604be3f0dc6337423ccd8f79e499c4706ce521ff181c761",
+      "sha256": "e6be83a572dab9841604be3f0dc6337423ccd8f79e499c4706ce521ff181c761"
+    },
+    "pool/meta/episodes/chunk-000/file-000.parquet": {
+      "local": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/6bbb9ab1f22cf13188535767749336cad0afa5307a8d1b3913ce505bf8edb393",
+      "sha256": "6bbb9ab1f22cf13188535767749336cad0afa5307a8d1b3913ce505bf8edb393"
+    },
+    "pool/meta/info.json": {
+      "local": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/71ee495e295de714746c31b2b688c1a9d7aa0d05",
+      "sha256": "8f1afff3b3c95c86229b7d0a008393347f85d48e37326684ed4b5da8597a0797"
+    },
+    "pool/meta/stats.json": {
+      "local": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/1d6b10385d97e8c7ceed967737bebd791332706b",
+      "sha256": "6bd5c32b79d4c5172388b3dc77b87b53f6f8c2a940533c9df01d80d71810f504"
+    },
+    "pool/meta/tasks.parquet": {
+      "local": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+      "sha256": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732"
+    },
+    "pool/videos/observation.images.body_cam/chunk-000/file-000.mp4": {
+      "local": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+      "sha256": "51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50"
+    },
+    "pool/videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4": {
+      "local": "/home/stanley/Stanley_ws/lerobot_openarm/artifacts/codex_sim_free_v4a_freeze_20261107/inputs/pool/videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4",
+      "sha256": "c2abb140d59f67ec021dd9650ce625e5dd6f333ff39732f8a163a44a82b89f7e"
+    },
+    "pool/videos/observation.images.wrist_cam/chunk-000/file-000.mp4": {
+      "local": "/home/stanley/Stanley_ws/lerobot_openarm/artifacts/codex_sim_free_v4a_freeze_20261107/inputs/pool/videos/observation.images.wrist_cam/chunk-000/file-000.mp4",
+      "sha256": "505f06df5e413ad87c33395e1abd14e6da5c196312b903fdfd61b2448350843d"
+    },
+    "ten/.gitattributes": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/bed0738c7eeb449bca98b5d2f33c89a1ee56349a",
+      "sha256": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb"
+    },
+    "ten/README.md": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/3d9268ba3a212c57df5efbb3067c883b0a9ffc7c",
+      "sha256": "dbf5a7fe9a2f243b0ce55fc776ab4704e0eb288996e4eb750292198eabdb7a6f"
+    },
+    "ten/data/chunk-000/file-000.parquet": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/f8190732b61e8cc0678fda1bb3d81f482fb76cfdee294cede6b99f817a4de234",
+      "sha256": "f8190732b61e8cc0678fda1bb3d81f482fb76cfdee294cede6b99f817a4de234"
+    },
+    "ten/meta/episodes/chunk-000/file-000.parquet": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/7a12bbda1f0ea8747b55249391f681754e03ccf16a5feb7d90e0d2921b01a6f4",
+      "sha256": "7a12bbda1f0ea8747b55249391f681754e03ccf16a5feb7d90e0d2921b01a6f4"
+    },
+    "ten/meta/info.json": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/ff36712e0a4523d0615fb2231769d5f35be28164",
+      "sha256": "47958db0f00cddda7547e5a10cf9a4deaee11ae4fb9faec48d5361e8c5032a11"
+    },
+    "ten/meta/stats.json": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/d7e13690bee4fc9e01031b10ef85094e2ce88dd9",
+      "sha256": "d984160cab566fdae4a2616dbb6231bacfe62cc40a8766dc2bdf9e30cfec4892"
+    },
+    "ten/meta/tasks.parquet": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+      "sha256": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732"
+    },
+    "ten/videos/observation.images.body_cam/chunk-000/file-000.mp4": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/44ba7ce5325b2c1f549f4fdac546bfbe18295c7197bc62070a30bd6ce642f3a3",
+      "sha256": "44ba7ce5325b2c1f549f4fdac546bfbe18295c7197bc62070a30bd6ce642f3a3"
+    },
+    "ten/videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/2cce747bd6de83a222cb8ea62aed054326991bc7466f2ababbcf8b9bce5eef33",
+      "sha256": "2cce747bd6de83a222cb8ea62aed054326991bc7466f2ababbcf8b9bce5eef33"
+    },
+    "ten/videos/observation.images.wrist_cam/chunk-000/file-000.mp4": {
+      "local": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/blobs/80fccbca892809c1a1bc88ec74877b1defcdf54b0659773e469b4a9e38f190e6",
+      "sha256": "80fccbca892809c1a1bc88ec74877b1defcdf54b0659773e469b4a9e38f190e6"
+    }
+  },
+  "preserved_source_selection_sha256": {
+    "research/sim_free_augmentation/sd10/ten_source_selection_protocol.md": "36f6eeeaa2c21b2fefcdc8d0a4a4bcf64ef4ccc5ca6e9882324e9b2763aeb4ea",
+    "research/sim_free_augmentation/sd10/full50_episode_features.csv": "1b87abd3742e6cda9c4ed399e914eb5209956427f07b34db9de5a0777d340bbc",
+    "research/sim_free_augmentation/sd10/selected_10_episodes.json": "0634d4bac7fd009d5237cf57374413d3791f6dd583a7432e62981e47a2a963d1",
+    "research/sim_free_augmentation/sd10/FULL50_EPISODE_AUDIT.md": "7d9e8b2d3e8373c2458e88a4d4789b085d8a79fbcccb222b4f8d1396180bd0f2",
+    "research/sim_free_augmentation/sd10/annotations/manual_transfer_review.json": "fb5e2e7c5fc41e73b8f69ade1974d3b68a780b5b0e96e968a43f8af3f6d978f4",
+    "research/sim_free_augmentation/sd10/annotations/manual_lid_qa.json": "0d9f7e0f054c3386ea8a7e4601664a38898405efc3a3d0b8f29bae6f0569d359",
+    "research/sim_free_augmentation/sd10/outputs/data_verification.json": "b6e3c8f661eb3489c0378320dbb0acd1ed001aa3afbc4668024e6104bb8cb916",
+    "research/sim_free_augmentation/sd10/outputs/duplication.json": "b458f32b5314d1bcb49a9837c74da2b312458e7b300ed877e6ae5ef0960150be",
+    "research/sim_free_augmentation/sd10/outputs/features_raw.json": "f3c6a276f5a1815ddf8dc8bc975ad6873e35478693c71df27cc47a84786f4361",
+    "research/sim_free_augmentation/sd10/outputs/lid_centers.json": "04377346c3e781f92800544c304b0b68e53a6fc3d3033ac5c7bce20f19f595aa",
+    "research/sim_free_augmentation/sd10/outputs/selection_details.json": "4ed99e7c8745de2f2c27768a1835251e5686e3ae094cfd255d7831b523fba72d",
+    "research/sim_free_augmentation/sd10/figures/source_diversity_comparison.png": "512e8d7b62cc7ee1f48fa9b73920ada84a119967f951a9736e4fb9141ebea6ae",
+    "research/sim_free_augmentation/sd10/figures/contact_sheet_full50.jpg": "fb1f56ea82c46e1ba9e049964c7be821252b524add18c5821ea3d25fa5a91d8f",
+    "research/sim_free_augmentation/sd10/figures/contact_sheet_original_ten.jpg": "1ee4ba2f0c5660fabd896736ba25eab5f5a7301845474b26f50f301f886fe83d",
+    "research/sim_free_augmentation/sd10/figures/contact_sheet_sd10.jpg": "aff5cbeefc55b666be6dba005e95cab8280fa7e1b73a7585a1deff6d4bef4010",
+    "research/sim_free_augmentation/sd10/scripts/build_features.py": "ecf3856290500e6b0ddc69c898de96cb5095d7e118c6d1d37c77dc845dc7e124",
+    "research/sim_free_augmentation/sd10/scripts/extract_features.py": "68b1d8dd10811600693ea1524d5b8b76a49be795400aeea263439cb1d068bfa1",
+    "research/sim_free_augmentation/sd10/scripts/figures.py": "4aecc2e7e61d1b49c68d909c4c5b8ef75a51c2a6ae6266291a574551d71b5713",
+    "research/sim_free_augmentation/sd10/scripts/lid_center.py": "bf1a6999481fc5bc8b1f483e796db74ab8f658b3e5677d822f4fb3aee3991c05",
+    "research/sim_free_augmentation/sd10/scripts/make_manifest.py": "b6b15f84d87fe8a2876aa3d4e8545cf8890e3d5d3898fbd86b0c117b063dabe9",
+    "research/sim_free_augmentation/sd10/scripts/make_review_sheets.py": "d5a1a7d5b51e1c9f6432ba1e7e774c8c1802b005ec33fb6a26798d55a6844865",
+    "research/sim_free_augmentation/sd10/scripts/select10.py": "b1f662390e341b2455f82387812c769688df25be4d6746fa6897b3f7140cba2b",
+    "research/sim_free_augmentation/sd10/scripts/verify_alignment.py": "8427959770dc34d62e49843d5d4a5dd7173a0b4013bb9184db69fe6328b5b006",
+    "research/sim_free_augmentation/sd10/scripts/verify_data.py": "a82927d7ed70d7b1460ff96ac1bfb5e021e2bbd5d1dd1399d649b73596a95a31",
+    "research/sim_free_augmentation/sd10/sd10/common.py": "d13c0385b9c31d5c4e4759499f4f0205cfc5dc0c8f6aae38a8821710a8d9fb60"
+  },
+  "historical_seals": {
+    "research/sim_free_augmentation/v4a/locked_manifest.sha256": "91eea62d751c5fd44aa39a452ba875016eb470f31542c02594388b98ed088e17",
+    "research/sim_free_augmentation/v4a/locked_schedule.sha256": "eaf14b1e78b17bb95601586496fbf3f45f7af3f77ab9cc76b73a0da8d08a7322"
+  },
+  "learning_seal_sha256": "7c74ef44bd658136535e3ad65991d53278c5f957624388f929ca929c54197183",
+  "status": "REGISTERED_NOT_IMPLEMENTED_NOT_EXECUTED; no final result claimed"
+}

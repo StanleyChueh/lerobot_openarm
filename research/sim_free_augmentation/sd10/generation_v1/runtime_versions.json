@@ -1,0 +1,14 @@
+{
+  "construction_runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1",
+    "pandas": "2.3.3",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "transformers": "5.5.4",
+    "av": "15.1.0",
+    "pin": "3.7.0"
+  },
+  "hardware": "Not operated/queried; actual matched generation hardware/dtype and implementation hashes must be registered before first attempt",
+  "not_generation_outputs": true
+}
