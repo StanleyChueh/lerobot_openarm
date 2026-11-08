@@ -74,7 +74,7 @@ failed inside the frozen v2/v3 reconstruction.** The frozen Gate-1 HSV lid track
 - **47:** 0/40 giver-hold and 0/62 receiver frames.
 
 The frozen `recon3` closure-only fallback handles only a missing receiver window, so `joint_fit`/`fit_point` receive an
-empty frame list. Six other sources (6, 27, 32, 34, 44 and SD10-shared 6) use the flagged closure-only receiver fallback.
+empty frame list. 5 other sources (6, 27, 32, 34, 44) prepared through the flagged closure-only receiver fallback.
 
 Handling, per protocol ("preprocessing failure of that selected source makes the corresponding attempt fail; do not try
 the runner-up"):
