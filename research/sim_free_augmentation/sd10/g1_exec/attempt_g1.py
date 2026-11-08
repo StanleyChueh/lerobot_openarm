@@ -37,6 +37,13 @@ def run(target, cond, source=None, rec=None, kind="primary"):
     sel_ok = rank == a["ranked_source_ids"] and rank[0] == a["source_episode"]
     src = a["source_episode"] if source is None else source
     assert src in G.UNION and src not in G.CFG["data"]["excluded_v4a"]
+    if rec is None and not (G.STORE / "assets" / f"pool_ep{src:02d}_geometry.pkl").exists():
+        return ({"kind": kind, "target_id": target["target_id"], "condition": cond, "source_episode": src,
+                 "locked_source_episode": a["source_episode"], "selection_recomputed_equal": sel_ok,
+                 "selection_score_sq_px": a["score_squared_pixels"], "selection_distance_px": a["distance_pixels"],
+                 "near_far": target["near_far"], "region": target["region"], "spatial_block": target["spatial_block"],
+                 "Y_A": False, "status": "source_preprocessing_failed", "failed_gates": ["source_preprocessing_failed"],
+                 "timing_s": {"total_s": time.time() - t0}}, None)
     rec_ = rec if rec is not None else G.load_light(src)
     robot, geom = robot_geom()
     out = {"kind": kind, "target_id": target["target_id"], "condition": cond, "source_episode": src,

@@ -64,3 +64,21 @@ the first locked-target attempt**.
   - table→giver bookkeeping jump 49.9 mm.
 
   If this is typical, the G1-A yield may be at the floor in every condition. Thresholds, targets and the generator are unchanged regardless.
+
+## Pre-attempt addendum (after cold preprocessing, before any locked-target attempt)
+
+The official cold preprocessing (`outputs/preprocess.json`) completed for 20/23 sources. **SD10 sources 11, 42 and 47
+failed inside the frozen v2/v3 reconstruction.** The frozen Gate-1 HSV lid tracker lost the can:
+- **11:** 1/249 frames ok (lost from frame 1).
+- **42:** 0/44 giver-hold frames.
+- **47:** 0/40 giver-hold and 0/62 receiver frames.
+
+The frozen `recon3` closure-only fallback handles only a missing receiver window, so `joint_fit`/`fit_point` receive an
+empty frame list. Six other sources (6, 27, 32, 34, 44 and SD10-shared 6) use the flagged closure-only receiver fallback.
+
+Handling, per protocol ("preprocessing failure of that selected source makes the corresponding attempt fail; do not try
+the runner-up"):
+- Those attempts are recorded `source_preprocessing_failed`, Y_A = 0, in the registered all-100 analysis. That is 29 SD10 targets: 7 + 10 + 12.
+- No tracker, reconstruction, fallback source or threshold change is made.
+- The protocol's decision section lists "failed preparation" as INCONCLUSIVE. The scorer therefore returns INCONCLUSIVE whenever any assigned source failed preparation and the both-controls PASS does not hold.
+- A descriptive paired comparison on targets whose assigned sources prepared in all three conditions is also reported. It is conditioned on preparation only, never on geometric outcome, and is not a replacement endpoint.

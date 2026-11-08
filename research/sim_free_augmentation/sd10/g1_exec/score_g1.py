@@ -22,6 +22,7 @@ import g1lib as G
 spec = importlib.util.spec_from_file_location("paired_stats", G.GEN / "paired_stats.py")
 PS = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(PS)
+PREP_FAIL = "source_preprocessing_failed"
 GATES = ["1_arrays_support", "2_initial_candidate", "3_ik_residual", "4_kinematic_limits", "5_clearance_penetration",
          "6_steady_holds", "7_receiver_capture", "8_object_continuity", "9_labels"]
 
@@ -99,7 +100,7 @@ def main():
         cnt = Counter(g for r in rs for g in r.get("failed_gates", []))
         first = Counter((r.get("failed_gates") or ["none"])[0] for r in rs)
         only = Counter(r["failed_gates"][0] for r in rs if len(r.get("failed_gates", [])) == 1)
-        fc[c] = {"any_fail_by_gate": {g: cnt.get(g, 0) for g in GATES + ["exception", "timeout_120s"]},
+        fc[c] = {"any_fail_by_gate": {g: cnt.get(g, 0) for g in GATES + [PREP_FAIL, "exception", "timeout_120s"]},
                  "first_failing_gate": dict(first), "sole_failing_gate": dict(only),
                  "n_failed_gates_distribution": dict(Counter(len(r.get("failed_gates", [])) for r in rs))}
     res["failure_categories"] = fc
@@ -171,12 +172,27 @@ def main():
                                                               "table_to_giver_switch_m": (gv(r, "8_object_continuity", "switches") or {}).get("table_to_giver", {}).get("step_m"),
                                                               "can_nonfinger_pen_m": gv(r, "5_clearance_penetration", "can_nonfinger_pen_m"),
                                                               "axis_tilt_deg": gv(r, "2_initial_candidate", "axis_err_deg")} for r in ident}
+    # preparation failures (declared before the first attempt): attempts stay Y_A=0 in the registered all100 analysis;
+    # protocol decision section lists "failed preparation" as INCONCLUSIVE. Descriptive sensitivity restricted to targets
+    # whose assigned source prepared in ALL three conditions (outcome-conditioned on preparation only, not on geometry).
+    prep = {c: np.array([keyed[(t, c)].get("status") != PREP_FAIL for t in tid]) for c in G.CONDS}
+    common = prep["Original10"] & prep["SD10"] & prep["Random10"]
+    res["preparation"] = {"failed_sources": json.loads((G.OUT / "preprocess.json").read_text())["per_condition_charge"],
+                          "targets_with_failed_assigned_source": {c: int((~prep[c]).sum()) for c in G.CONDS},
+                          "common_prepared_targets": int(common.sum())}
+    if common.sum() >= 2:
+        idx = np.flatnonzero(common)
+        res["paired"]["SD10_vs_Original10_prepared_subset_descriptive"] = PS.paired_effect(Y["SD10"][common], Y["Original10"][common], idx)
+        res["paired"]["SD10_vs_Random10_prepared_subset_descriptive"] = PS.paired_effect(Y["SD10"][common], Y["Random10"][common], idx)
+        res["yield_prepared_subset_descriptive"] = {c: float(Y[c][common].mean()) for c in G.CONDS}
     # decision
     p1, p2 = res["paired"]["SD10_vs_Original10"], res["paired"]["SD10_vs_Random10"]
     floor = max(yields.values()) < 0.10
     ceiling = min(yields.values()) > 0.90
     if not complete or not inv_ok:
         dec = "INCOMPLETE"
+    elif any(res["preparation"]["targets_with_failed_assigned_source"].values()) and not (p1["PASS"] and p2["PASS"]):
+        dec = "INCONCLUSIVE (failed source preparation in the frozen reconstruction)" + (" + geometry floor" if floor else "")
     elif floor or ceiling:
         dec = "INCONCLUSIVE (geometry " + ("floor" if floor else "ceiling") + ")"
     elif p1["PASS"] and p2["PASS"]:

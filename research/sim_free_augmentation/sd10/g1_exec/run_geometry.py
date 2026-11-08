@@ -43,6 +43,9 @@ def job_list():
 
 def identity(e):
     """source-only identity diagnostic: init = I at the source's own (reconstructed) standing-can pose."""
+    if not (G.STORE / "assets" / f"pool_ep{e:02d}_geometry.pkl").exists():
+        return {"kind": "identity", "source_episode": e, "Y_A_diagnostic": False, "status": "source_preprocessing_failed",
+                "failed_gates": ["source_preprocessing_failed"]}, None
     rec = G.load_light(e)
     robot, geom = AT.robot_geom()
     t0 = time.time()
