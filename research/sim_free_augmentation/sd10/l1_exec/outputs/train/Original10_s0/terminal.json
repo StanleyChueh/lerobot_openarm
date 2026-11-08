@@ -1,0 +1,49 @@
+{
+ "wall_s": 116.48452591896057,
+ "consumed_optimizer_updates": 1000,
+ "adam_step_counters": [
+  1000
+ ],
+ "source_draws_consumed": {
+  "0": 1600,
+  "1": 1600,
+  "2": 1600,
+  "3": 1600,
+  "4": 1600,
+  "5": 1600,
+  "6": 1600,
+  "7": 1600,
+  "8": 1600,
+  "9": 1600
+ },
+ "valid_target_timesteps": 800000,
+ "scalar_loss_entries": 12800000,
+ "final_loss": 0.06734128296375275,
+ "nonfinite_loss": false,
+ "max_cuda_mem_gib": 3.46816349029541,
+ "warnings": [
+  "DeprecationWarning: This process (pid=2695955) is multi-threaded, use of fork() may lead to deadlocks in the child. (/home/stanley/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/multiprocessing/popen_fork.py:66)"
+ ],
+ "model_sha256": "73021b12ac8ef52a2e03e1ae4dc3489b03a6fc896d93814dc51b84568855cc05",
+ "processor_sha256": {
+  "policy_postprocessor.json": "68470e2ef2c5263e75791636bc3303dd73b0b51fe3bcb40e997e22d1fba84b64",
+  "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "1ca6f45f9e2ddbeb72f0d747d9876612098f96168387f466f54b8245833539ff",
+  "policy_preprocessor.json": "76e0eaa467bd60c4ab19eba61a24c0ecbba0a3a24e9c2756a5d87884a1a47cfc",
+  "policy_preprocessor_step_5_normalizer_processor.safetensors": "1ca6f45f9e2ddbeb72f0d747d9876612098f96168387f466f54b8245833539ff"
+ },
+ "optimizer_state_sha256": "a24d3ec7de25ab1e0acc8c0f49877aefed3803479934e157f95fe9e4a3e60835",
+ "schedule_state": {
+  "consumed_optimizer_updates": 1000,
+  "next_lr_index": 1000,
+  "last_lr": 2.5002405714094122e-06,
+  "lr_source": "learning_rates.npy (set before each update)",
+  "schedule_sha256": "8bdbdcd9edb2ea096073682504df59f3f90c1ad6b5ea7edbdd4b702458e7d32c",
+  "consumed_schedule_sha256": "8bdbdcd9edb2ea096073682504df59f3f90c1ad6b5ea7edbdd4b702458e7d32c",
+  "consumed_equals_frozen": true,
+  "dataloader_fetched_batches": 1000,
+  "discarded_prefetched_batches": 0,
+  "adam_step_counters": [
+   1000
+  ]
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "consumed_optimizer_updates": 1000,
+ "next_lr_index": 1000,
+ "last_lr": 2.5002405714094122e-06,
+ "lr_source": "learning_rates.npy (set before each update)",
+ "schedule_sha256": "252e6ba901a3ca5a730405b48d938fbedf06f5d47b6990f35187ebb2d18ff605",
+ "consumed_schedule_sha256": "252e6ba901a3ca5a730405b48d938fbedf06f5d47b6990f35187ebb2d18ff605",
+ "consumed_equals_frozen": true,
+ "dataloader_fetched_batches": 1000,
+ "discarded_prefetched_batches": 0,
+ "adam_step_counters": [
+  1000
+ ]
+}

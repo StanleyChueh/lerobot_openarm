@@ -1,0 +1,34 @@
+{
+ "run": "SD10_s1",
+ "arm": "SD10",
+ "seed": 1,
+ "update": 1000,
+ "model_sha256": "1b56affc4710d9491e73001b4b3d3a639132b31a84525aca9413ede7e3125872",
+ "processor_sha256": {
+  "policy_postprocessor.json": "68470e2ef2c5263e75791636bc3303dd73b0b51fe3bcb40e997e22d1fba84b64",
+  "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "86d728ae7d12d8f198d28991a99c07ca404f176c7cc9b92789d90c0bf6603d37",
+  "policy_preprocessor.json": "76e0eaa467bd60c4ab19eba61a24c0ecbba0a3a24e9c2756a5d87884a1a47cfc",
+  "policy_preprocessor_step_5_normalizer_processor.safetensors": "86d728ae7d12d8f198d28991a99c07ca404f176c7cc9b92789d90c0bf6603d37"
+ },
+ "normalizer_tensor_sha256": {
+  "NormalizerProcessorStep/action/mean": "f1e4e4506ecaa61d1a7b5144d5131cfb3529da23be0397815e4564e88d0f214a",
+  "NormalizerProcessorStep/action/std": "504aa9fbc2b3e333388b254f8077001fe3581ae4d7104a451e18f80f42e765f4",
+  "NormalizerProcessorStep/observation.state/mean": "a628719b19780f236b708c36e9be967ba623ca72d5865d6666e91e1a6a2b07b1",
+  "NormalizerProcessorStep/observation.state/std": "6845921adefcaa5fc050fc9d30bf62152e85024b6ed97a086d23c06604d45cc7",
+  "UnnormalizerProcessorStep/action/mean": "f1e4e4506ecaa61d1a7b5144d5131cfb3529da23be0397815e4564e88d0f214a",
+  "UnnormalizerProcessorStep/action/std": "504aa9fbc2b3e333388b254f8077001fe3581ae4d7104a451e18f80f42e765f4",
+  "UnnormalizerProcessorStep/observation.state/mean": "a628719b19780f236b708c36e9be967ba623ca72d5865d6666e91e1a6a2b07b1",
+  "UnnormalizerProcessorStep/observation.state/std": "6845921adefcaa5fc050fc9d30bf62152e85024b6ed97a086d23c06604d45cc7"
+ },
+ "prediction_sha256": "1fb7f9652ed4ecd3e73dcedd71fd32280a61aeb30d46f472140533b398324151",
+ "items_sha256": "8bee631ce9d21ecd28e0cd1cd2f354bad5511061fca9f2c864bc650095365339",
+ "dtype": "float32",
+ "shape": [
+  834,
+  50,
+  16
+ ],
+ "wall_s": 10.823821544647217,
+ "eval_arrays_sha256": "731f7c73ce713d3ac0253c9641f76c484d914279628287bae83c0024440290a2",
+ "inference": "bf16 autocast, batch 32, 10 flow steps, stored noise"
+}

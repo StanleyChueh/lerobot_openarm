@@ -1,0 +1,35 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 5548.86it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+/home/stanley/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=2696989) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/home/stanley/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=2696989) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/home/stanley/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=2696989) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+/home/stanley/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=2696989) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+update 0 lr 2.941e-06 loss 3.6785 gn 13.031 1s
+update 50 lr 9.940e-05 loss 0.6653 gn 3.309 6s
+update 100 lr 9.761e-05 loss 0.3520 gn 2.540 12s
+update 150 lr 9.469e-05 loss 0.2059 gn 2.241 18s
+update 200 lr 9.069e-05 loss 0.2214 gn 2.045 24s
+update 250 lr 8.572e-05 loss 0.1373 gn 1.513 30s
+update 300 lr 7.990e-05 loss 0.2160 gn 1.403 35s
+update 350 lr 7.338e-05 loss 0.0978 gn 1.069 41s
+update 400 lr 6.631e-05 loss 0.0984 gn 1.127 47s
+update 450 lr 5.888e-05 loss 0.0829 gn 1.065 53s
+update 500 lr 5.125e-05 loss 0.0987 gn 1.037 58s
+update 550 lr 4.362e-05 loss 0.1146 gn 1.000 64s
+update 600 lr 3.619e-05 loss 0.0854 gn 1.010 70s
+update 650 lr 2.912e-05 loss 0.0668 gn 0.934 76s
+update 700 lr 2.260e-05 loss 0.0720 gn 0.870 81s
+update 750 lr 1.678e-05 loss 0.0858 gn 0.957 87s
+update 800 lr 1.181e-05 loss 0.0708 gn 1.033 93s
+update 850 lr 7.813e-06 loss 0.0846 gn 0.841 99s
+update 900 lr 4.886e-06 loss 0.0589 gn 0.578 105s
+update 950 lr 3.100e-06 loss 0.0926 gn 0.848 110s
+update 999 lr 2.500e-06 loss 0.0669 gn 0.725 116s
+{"wall_s": 116.65791702270508, "consumed_optimizer_updates": 1000, "adam_step_counters": [1000], "final_loss": 0.06687895953655243}

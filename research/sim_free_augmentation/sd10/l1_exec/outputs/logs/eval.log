@@ -1,0 +1,46 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 5690.17it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "Original10_s0", "prediction_sha256": "6f6a820addbe47392b048b3bbf7a27c4c29eea3f15355dbe2cb65c1cd9f59409", "wall_s": 13.518135070800781}
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6519.81it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "Original10_s1", "prediction_sha256": "cadff85e4d806611eef1f656ace5c7f1d04e073d455a7397483a62639f196dfa", "wall_s": 10.713326692581177}
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7395.63it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "Original10_s2", "prediction_sha256": "4d7c050aa91ff54764f309f82e5aa8397e0b91e8111fa0403321d227d61c0526", "wall_s": 11.056660652160645}
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 5851.38it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "SD10_s0", "prediction_sha256": "0ffe355184151b908634fa1ecebd0dd6ccaf4782ccf8248d17fa7c5b40aca09c", "wall_s": 10.856311559677124}
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7274.88it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "SD10_s1", "prediction_sha256": "1fb7f9652ed4ecd3e73dcedd71fd32280a61aeb30d46f472140533b398324151", "wall_s": 10.823821544647217}
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7153.22it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "SD10_s2", "prediction_sha256": "87f10d8da0e2f232f9299ed8c2cab220261e604b625a17b78fdd28f4fe0cfea0", "wall_s": 11.146970272064209}
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 7138.66it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "Random10_s0", "prediction_sha256": "7e16479e87a965a38c6dd01fb0f7c3ca4c09a88bd5563e6fc74631b2ae6076c8", "wall_s": 10.829044580459595}
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6010.88it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "Random10_s1", "prediction_sha256": "55fcb603d101a80ba84053c41a7587b3206590921ffbbc116d7bb6c2d40cc134", "wall_s": 10.837732553482056}
+Loading  /home/stanley/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467 weights ...
+Loading weights:   0%|          | 0/489 [00:00<?, ?it/s]Loading weights: 100%|██████████| 489/489 [00:00<00:00, 6535.66it/s]
+Reducing the number of VLM layers to 16 ...
+Loading weights from local directory
+{"run": "Random10_s2", "prediction_sha256": "2d9a1ae8a80abd21819005922a40b9d27e1169b7e758eb8e646a0562b9c39364", "wall_s": 10.868349313735962}

@@ -1,0 +1,55 @@
+{
+ "arm": "Random10",
+ "seed": 1,
+ "steps": 1000,
+ "determinism": {
+  "seed": 1,
+  "allow_tf32_matmul": false,
+  "allow_tf32_cudnn": false,
+  "cudnn_benchmark": false,
+  "cudnn_deterministic": true,
+  "deterministic_algorithms": true,
+  "deterministic_warn_only": true,
+  "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+  "float32_matmul_precision": "highest"
+ },
+ "gpu": "NVIDIA GeForce RTX 4090",
+ "torch": "2.11.0+cu128",
+ "cuda": "12.8",
+ "cudnn": 91900,
+ "lerobot_file": "/home/stanley/Stanley_ws/lerobot/src/lerobot/__init__.py",
+ "trainable_params": 99880992,
+ "param_numel_by_dtype_[trainable,frozen]": {
+  "torch.bfloat16": [
+   96607440,
+   350165184
+  ],
+  "torch.float32": [
+   3273552,
+   0
+  ]
+ },
+ "normalizer_tensor_sha256": {
+  "NormalizerProcessorStep/observation.state/mean": "ccc9ac86eac6811a094047619e78c595107b5ef07542e417bfe599e65c28725f",
+  "NormalizerProcessorStep/observation.state/std": "5dc279807d915e9afb1563face6f039296d22a0c7c97e1edf1e71b6b4c0d7f16",
+  "NormalizerProcessorStep/action/mean": "7eb7a4a4a9fbb67bf253631927a161d8f59ba72d094a69a05ef5475e23cf36ff",
+  "NormalizerProcessorStep/action/std": "3e24bfbf7c806aa08a6daeb4325c02e421313bd6e0c202cf6a3f43650d9426f5",
+  "UnnormalizerProcessorStep/observation.state/mean": "ccc9ac86eac6811a094047619e78c595107b5ef07542e417bfe599e65c28725f",
+  "UnnormalizerProcessorStep/observation.state/std": "5dc279807d915e9afb1563face6f039296d22a0c7c97e1edf1e71b6b4c0d7f16",
+  "UnnormalizerProcessorStep/action/mean": "7eb7a4a4a9fbb67bf253631927a161d8f59ba72d094a69a05ef5475e23cf36ff",
+  "UnnormalizerProcessorStep/action/std": "3e24bfbf7c806aa08a6daeb4325c02e421313bd6e0c202cf6a3f43650d9426f5"
+ },
+ "schedule_sha256": "252e6ba901a3ca5a730405b48d938fbedf06f5d47b6990f35187ebb2d18ff605",
+ "lr_max_abs_diff_vs_pinned_lerobot_scheduler": 0.0,
+ "exec_code_sha256": {
+  "build_frame_cache.py": "32c785e5052946256de9d7680e10c03d0afe855d74be91a414eefa64a3d5475b",
+  "eval_l1.py": "4e2be8fac485b61eb035cd7d97d07452fb3befdc2284efb10634769fe771868d",
+  "exposure_l1.py": "ce8c9c7fe6a54eb75058d5758550550c3d5d7c74ecc4a6f0fe8e68b23d34fed8",
+  "figures_l1.py": "2b335711950e4fd2e8ac208e8f480f185b8a3e06761327adea3f7d5fcbb394a7",
+  "l1lib.py": "c1a8cfcf7ad6671e68eddc39f4b0e799816db5195434dd5de5f88b34f8387c4d",
+  "run_all.py": "382348e2c70ae66166492464811fd8cf6485adb2e1294935d3258d8d5853e135",
+  "score_l1.py": "2f6265722b57b991620812ee16885365ba9fc7854fde40ba58c9b7c873c7f7b2",
+  "train_l1.py": "bbd0c939cc213f58ffa3bca4797b458c44f9fddc79d856659f0e5af032bc1ad0"
+ },
+ "seal_sha256": "7c74ef44bd658136535e3ad65991d53278c5f957624388f929ca929c54197183"
+}

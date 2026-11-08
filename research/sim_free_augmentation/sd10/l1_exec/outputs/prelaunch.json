@@ -1,0 +1,137 @@
+{
+ "time": 1794100084.285746,
+ "git_head": "703692b0146cd035a220ea87a7671029b3c5626d",
+ "branch": "research/contact-aware-augmentation",
+ "exec_code_committed_clean": true,
+ "exec_code_sha256": {
+  "build_frame_cache.py": "32c785e5052946256de9d7680e10c03d0afe855d74be91a414eefa64a3d5475b",
+  "eval_l1.py": "4e2be8fac485b61eb035cd7d97d07452fb3befdc2284efb10634769fe771868d",
+  "l1lib.py": "c1a8cfcf7ad6671e68eddc39f4b0e799816db5195434dd5de5f88b34f8387c4d",
+  "run_all.py": "382348e2c70ae66166492464811fd8cf6485adb2e1294935d3258d8d5853e135",
+  "score_l1.py": "2f6265722b57b991620812ee16885365ba9fc7854fde40ba58c9b7c873c7f7b2",
+  "train_l1.py": "bbd0c939cc213f58ffa3bca4797b458c44f9fddc79d856659f0e5af032bc1ad0"
+ },
+ "seal_sha256": "7c74ef44bd658136535e3ad65991d53278c5f957624388f929ca929c54197183",
+ "verify_preregistration": {
+  "study": "SD10-L1",
+  "decision": "GO for registered design; no training executed",
+  "base_head": "59b2bfe697c7400e201c988d3f05123b9018dcac",
+  "actual_head": "703692b0146cd035a220ea87a7671029b3c5626d",
+  "evaluation_recordings": 21,
+  "evaluation_inputs": 834,
+  "near": [
+   15,
+   16,
+   19,
+   21,
+   26,
+   28,
+   33,
+   35,
+   36,
+   37,
+   39,
+   41,
+   46,
+   48,
+   49
+  ],
+  "far": [
+   12,
+   20,
+   22,
+   23,
+   30,
+   40
+  ],
+  "registered_runs": 9,
+  "training_run_artifacts_checked": 0,
+  "training_completed_claimed": false,
+  "schedule_draws_per_run": 16000,
+  "draws_per_source": 1600,
+  "valid_targets_per_run": 800000,
+  "all_target_phase_boundaries_pass": true,
+  "shared_capture_draws_identical_across_arms": true,
+  "oracle_and_known_error_scorer_fixtures_pass": true,
+  "no_clipped_gripper_error_pass": true,
+  "paired_bootstrap_numeric_fixtures_pass": true,
+  "rgb_redecoded_and_matched": false,
+  "historical_SD10_hashes_unchanged": true,
+  "v4a_indexed_files_verified": 303,
+  "sealed": true,
+  "locked_artifacts_manifest_sha256": "7c74ef44bd658136535e3ad65991d53278c5f957624388f929ca929c54197183",
+  "PASS": true
+ },
+ "lerobot_src_head": "530b253f262d6af92ea3b91d62abcae0295af59f",
+ "lerobot_imported_from": "/home/stanley/Stanley_ws/lerobot/src/lerobot/__init__.py",
+ "frame_cache": {
+  "train": 23,
+  "eval": {
+   "12": 40,
+   "15": 43,
+   "16": 42,
+   "19": 43,
+   "20": 45,
+   "21": 41,
+   "22": 47,
+   "23": 42,
+   "26": 42,
+   "28": 44,
+   "30": 44,
+   "33": 38,
+   "35": 39,
+   "36": 39,
+   "37": 36,
+   "39": 36,
+   "40": 37,
+   "41": 35,
+   "46": 35,
+   "48": 30,
+   "49": 36
+  },
+  "eval_items": 834,
+  "eval_rgb_pts_timebase_all_match_manifest": true,
+  "eval_frames_content_sha256": "b341c91ce78cd34fea198b7ad8909925a0062f5e3684af43fa7d3206c60aa3f7"
+ },
+ "run_order": [
+  [
+   "Original10",
+   0
+  ],
+  [
+   "SD10",
+   0
+  ],
+  [
+   "Random10",
+   0
+  ],
+  [
+   "SD10",
+   1
+  ],
+  [
+   "Random10",
+   1
+  ],
+  [
+   "Original10",
+   1
+  ],
+  [
+   "Random10",
+   2
+  ],
+  [
+   "Original10",
+   2
+  ],
+  [
+   "SD10",
+   2
+  ]
+ ],
+ "gpu": "0",
+ "synthetic_data": "none",
+ "image_augmentation": "none"
+}

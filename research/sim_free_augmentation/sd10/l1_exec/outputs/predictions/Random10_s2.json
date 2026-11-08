@@ -1,0 +1,34 @@
+{
+ "run": "Random10_s2",
+ "arm": "Random10",
+ "seed": 2,
+ "update": 1000,
+ "model_sha256": "a6094b8e0d41ece7025a4f5711914b7c75632147cd8e3d0e9b36d00937f937ee",
+ "processor_sha256": {
+  "policy_postprocessor.json": "68470e2ef2c5263e75791636bc3303dd73b0b51fe3bcb40e997e22d1fba84b64",
+  "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "8f41ff9631f51337eb282b95bd1c7463e2a37e4a58e0303c6ca38dd6a64498e5",
+  "policy_preprocessor.json": "76e0eaa467bd60c4ab19eba61a24c0ecbba0a3a24e9c2756a5d87884a1a47cfc",
+  "policy_preprocessor_step_5_normalizer_processor.safetensors": "8f41ff9631f51337eb282b95bd1c7463e2a37e4a58e0303c6ca38dd6a64498e5"
+ },
+ "normalizer_tensor_sha256": {
+  "NormalizerProcessorStep/action/mean": "7eb7a4a4a9fbb67bf253631927a161d8f59ba72d094a69a05ef5475e23cf36ff",
+  "NormalizerProcessorStep/action/std": "3e24bfbf7c806aa08a6daeb4325c02e421313bd6e0c202cf6a3f43650d9426f5",
+  "NormalizerProcessorStep/observation.state/mean": "ccc9ac86eac6811a094047619e78c595107b5ef07542e417bfe599e65c28725f",
+  "NormalizerProcessorStep/observation.state/std": "5dc279807d915e9afb1563face6f039296d22a0c7c97e1edf1e71b6b4c0d7f16",
+  "UnnormalizerProcessorStep/action/mean": "7eb7a4a4a9fbb67bf253631927a161d8f59ba72d094a69a05ef5475e23cf36ff",
+  "UnnormalizerProcessorStep/action/std": "3e24bfbf7c806aa08a6daeb4325c02e421313bd6e0c202cf6a3f43650d9426f5",
+  "UnnormalizerProcessorStep/observation.state/mean": "ccc9ac86eac6811a094047619e78c595107b5ef07542e417bfe599e65c28725f",
+  "UnnormalizerProcessorStep/observation.state/std": "5dc279807d915e9afb1563face6f039296d22a0c7c97e1edf1e71b6b4c0d7f16"
+ },
+ "prediction_sha256": "2d9a1ae8a80abd21819005922a40b9d27e1169b7e758eb8e646a0562b9c39364",
+ "items_sha256": "8bee631ce9d21ecd28e0cd1cd2f354bad5511061fca9f2c864bc650095365339",
+ "dtype": "float32",
+ "shape": [
+  834,
+  50,
+  16
+ ],
+ "wall_s": 10.868349313735962,
+ "eval_arrays_sha256": "731f7c73ce713d3ac0253c9641f76c484d914279628287bae83c0024440290a2",
+ "inference": "bf16 autocast, batch 32, 10 flow steps, stored noise"
+}

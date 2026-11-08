@@ -1,0 +1,145 @@
+{
+ "train": {
+  "0": {
+   "frames": 273,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "5583f46f7eb6f5913a29a6ba794765e5b1f1f92e8e6570997e1f0dc381fff123"
+  },
+  "1": {
+   "frames": 263,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "c604d8e5b1aefd07c51b8629944407ed82c44f6f69e97cec00f7987e5352faef"
+  },
+  "2": {
+   "frames": 280,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "e8a44686c8539745c6233140f05993c34ea05ddd257be1003832587dcff28a9d"
+  },
+  "3": {
+   "frames": 250,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "a303d3f22fcc8589015d50e570c91e9c9becb79af851f5779d081ed6c4513de8"
+  },
+  "4": {
+   "frames": 250,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "6f59ccddd61f2bfd1b373c3b991d6fa7a28c1e3036443acf7f7f3cff205a2093"
+  },
+  "5": {
+   "frames": 255,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "a1fe357a44b7843d92e1bf68f4da72055d6d9c9063cead2ab73581fd6e9e3655"
+  },
+  "6": {
+   "frames": 241,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "d85bf7b5cfa49f8c3983c5c0c7f8dad6419333b061e46e4d553cf21fe70d4ff4"
+  },
+  "7": {
+   "frames": 261,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "23f12880b36172ab4139060d9d3131d95fa4904483c0b1992a693ad45f359369"
+  },
+  "8": {
+   "frames": 249,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "65979ce5c1eec4dacfbef4ae31cd21f1b9660ef6903ab9b182825fd7a878975b"
+  },
+  "9": {
+   "frames": 253,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "46eac1f68e0dd9f9ad35c4f12e938eefbba8b1b67d956e49202f79a374c4abc0"
+  },
+  "11": {
+   "frames": 249,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "508713ba4cc4262ffcd7d68215f9e5625dae2814104d09d804c5e1a4dd1e0a0e"
+  },
+  "13": {
+   "frames": 279,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "201a7cc7ed42bd7af4b9907f6cd549fe25b5bc173d6d4811b7fae1c59edaabb2"
+  },
+  "14": {
+   "frames": 255,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "f0950c2abdb6e8439113e5204e56375d81f989185425c62a43e84d912cf19aa4"
+  },
+  "18": {
+   "frames": 247,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "b68aa8ac4e2a110317991c20a356a182e1021570e9767737e1e798b79a5da00b"
+  },
+  "25": {
+   "frames": 242,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "72000ec64710ab59298a120ac1e79987a9bb1cd65bc22b56734a6518f57e02e1"
+  },
+  "27": {
+   "frames": 230,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "7cf8cf17192a1e3226f319503851b4b661fa0017764bd20bf0b8a47c046a36e8"
+  },
+  "29": {
+   "frames": 282,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "0778cb07d10f4054d762da0f76c999033d64b5fa2a17c45f93d733fb7a87983d"
+  },
+  "32": {
+   "frames": 239,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "a197edb63edb85964636d49549765a6ff9aaa5672f5271708793c604654effd2"
+  },
+  "34": {
+   "frames": 249,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "d81561e31a90267bd1f72e1edc2d73a5f3cb0d4720e4c5ad05761aa6b9f1efc1"
+  },
+  "42": {
+   "frames": 188,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "4bedc7b31ed60fe547d176972daa7dc4c3e6d119aec54d0290a6326ff4f8edf6"
+  },
+  "43": {
+   "frames": 203,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "8a35782a79b9aed69074f7aa58326044aca7a3dd29480ef58050a46db8a1d785"
+  },
+  "44": {
+   "frames": 205,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "e37f26573fbce6f11fd6fefba3885ea6e16b8e28227be9a7d77d5c99792b9f2c"
+  },
+  "47": {
+   "frames": 200,
+   "video": "/home/stanley/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/blobs/51b3f0d89c5cfdebafa768a8b6b5b7b23c821f1d1f677b695d361e1d45916d50",
+   "content_sha256": "61d854cf1bdfecfa11aa95ce0028aa6119ac24eb5cb356da4d4e8cdeee80bf45"
+  }
+ },
+ "eval": {
+  "12": 40,
+  "15": 43,
+  "16": 42,
+  "19": 43,
+  "20": 45,
+  "21": 41,
+  "22": 47,
+  "23": 42,
+  "26": 42,
+  "28": 44,
+  "30": 44,
+  "33": 38,
+  "35": 39,
+  "36": 39,
+  "37": 36,
+  "39": 36,
+  "40": 37,
+  "41": 35,
+  "46": 35,
+  "48": 30,
+  "49": 36
+ },
+ "eval_items": 834,
+ "eval_rgb_pts_timebase_all_match_manifest": true,
+ "eval_frames_content_sha256": "b341c91ce78cd34fea198b7ad8909925a0062f5e3684af43fa7d3206c60aa3f7"
+}
