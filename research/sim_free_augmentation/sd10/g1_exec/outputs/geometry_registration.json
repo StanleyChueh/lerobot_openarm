@@ -1,0 +1,31 @@
+{
+ "git_head": "28de18b66ce28d642e8b203bea280bebe8314338",
+ "branch": "research/sd10-g1-generation",
+ "exec_code_sha256": {
+  "attempt_g1.py": "bb37bf68d83e72f4dc8e9a5c10bc11c10fa80639304d55fbc241a77a7e8ce2ea",
+  "conformance_g1.py": "598c863164efe4189358321ce02174d31b9d070dc3fc401a95da9f207e0af407",
+  "figures_g1.py": "6fd4d72e851b43d8f41952b9a43fb990c9ef6ef6b1a4a3cf4180d17be0bbc109",
+  "g1gates.py": "46979ea8ae63f1f5545365a5d2a86e50d3d759f2ad32eaa8b164e9987e4b2363",
+  "g1lib.py": "be8af204c250259381bcbf28da2c8692c1fad62cc9fd285b7cc8cb2be601b54e",
+  "preprocess_g1.py": "62c783e618a1f472d3280cb1217b24e261fa4cee18a8827a0f05f82db557ed41",
+  "run_geometry.py": "beb8d574be777aa0d453147c00f4ae114d5f1a78507b155e45bcbf6a0c725e16",
+  "score_g1.py": "a77ced12cb46e9f3847110712afd86fd0cdf6214e37d362f5607d60bedd6eb41"
+ },
+ "seal_sha256": "2dd6ad940d06f243c096e331b2b6fc1187036ae2a4ed9d8caef5507efd0d9e8a",
+ "packages": {
+  "numpy": "2.2.6",
+  "scipy": "1.18.1",
+  "pin": "3.7.0",
+  "torch": "2.11.0+cu128",
+  "transformers": "5.5.4",
+  "av": "15.1.0",
+  "cv2": "4.13.0"
+ },
+ "python": "3.12.14 (main, Sep  1 2026, 14:16:52) [Clang 22.1.3 ]",
+ "cpu_threads": 4,
+ "geometry_device": "CPU (pinocchio float64)",
+ "preprocess_device": "NVIDIA GeForce RTX 4090",
+ "sam_dtype": "bfloat16",
+ "store": "/home/stanley/Stanley_ws/sd10_g1_store",
+ "time": 1794106045.9453475
+}
