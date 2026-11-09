@@ -1,0 +1,46 @@
+{
+ "synthetic": {
+  "episodes": 96,
+  "frames": 24645,
+  "loads_in_lerobot": true,
+  "labels_sha_ok": true,
+  "episodes_identical_to_a_real_episode": 0,
+  "sources_used": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "families": {
+   "object_position": 29,
+   "interaction_location": 67
+  },
+  "all_replay_checks_pass": true,
+  "observation.images.body_cam": {
+   "decoded": 24645,
+   "any_all_black_frame": false,
+   "psnr_vs_rendered_db": 39.38
+  },
+  "observation.images.wrist_cam": {
+   "decoded": 24645,
+   "any_all_black_frame": false
+  },
+  "observation.images.right_wrist_cam": {
+   "decoded": 24645,
+   "any_all_black_frame": false
+  }
+ },
+ "mixed": {
+  "episodes": 106,
+  "frames": 27220,
+  "real_episodes": 10,
+  "is_synthetic_flag_correct": true,
+  "real_labels_identical_to_source": true
+ }
+}

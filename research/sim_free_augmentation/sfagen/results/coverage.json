@@ -1,0 +1,122 @@
+{
+ "pringles/can": {
+  "n_other_real": 40,
+  "other_real_hull_cm2": 365.8776478754379,
+  "source": {
+   "n": 10,
+   "hull_cm2": 95.50506021065621,
+   "within_2cm": 9,
+   "median_nn_cm": 2.7147856234753207
+  },
+  "published": {
+   "n": 65,
+   "hull_cm2": 211.88408911541214,
+   "within_2cm": 29,
+   "median_nn_cm": 1.371039019903011,
+   "new_positions_gt_1cm": 37
+  },
+  "unified": {
+   "n": 96,
+   "hull_cm2": 201.24653705259345,
+   "within_2cm": 24,
+   "median_nn_cm": 1.5461543978805454,
+   "new_positions_gt_1cm": 23
+  }
+ },
+ "pringles/handover": {
+  "n_other_real": 40,
+  "other_real_hull_cm2": 18.76615085520683,
+  "source": {
+   "n": 10,
+   "hull_cm2": 12.551355491795707,
+   "within_2cm": 33,
+   "median_nn_cm": 1.074728954794074
+  },
+  "published": {
+   "n": 65,
+   "hull_cm2": 34.55543917706216,
+   "within_2cm": 38,
+   "median_nn_cm": 0.8517291624645447,
+   "new_positions_gt_1cm": 8
+  },
+  "unified": {
+   "n": 96,
+   "hull_cm2": 123.56001584774376,
+   "within_2cm": 40,
+   "median_nn_cm": 0.504629987687643,
+   "new_positions_gt_1cm": 55
+  }
+ },
+ "battery/battery": {
+  "n_other_real": 45,
+  "other_real_hull_cm2": 260.4940837706596,
+  "source": {
+   "n": 10,
+   "hull_cm2": 95.10505966878468,
+   "within_2cm": 22,
+   "median_nn_cm": 2.0272690674280143
+  },
+  "published": {
+   "n": 65,
+   "hull_cm2": 223.90037079501965,
+   "within_2cm": 41,
+   "median_nn_cm": 0.9778632281952877,
+   "new_positions_gt_1cm": 33
+  },
+  "unified": {
+   "n": 114,
+   "hull_cm2": 247.93315579547144,
+   "within_2cm": 41,
+   "median_nn_cm": 0.9411747247349378,
+   "new_positions_gt_1cm": 35
+  }
+ },
+ "battery/station": {
+  "n_other_real": 45,
+  "other_real_hull_cm2": 242.33954855904827,
+  "source": {
+   "n": 10,
+   "hull_cm2": 60.53375008008923,
+   "within_2cm": 16,
+   "median_nn_cm": 2.466720186616773
+  },
+  "published": {
+   "n": 65,
+   "hull_cm2": 151.41839264382682,
+   "within_2cm": 29,
+   "median_nn_cm": 1.4787842822714896,
+   "new_positions_gt_1cm": 23
+  },
+  "unified": {
+   "n": 114,
+   "hull_cm2": 128.34271318634973,
+   "within_2cm": 31,
+   "median_nn_cm": 1.2767882680151794,
+   "new_positions_gt_1cm": 15
+  }
+ },
+ "battery/insertion": {
+  "n_other_real": 45,
+  "other_real_hull_cm2": 69.28621378288811,
+  "source": {
+   "n": 10,
+   "hull_cm2": 90.60627010495806,
+   "within_2cm": 34,
+   "median_nn_cm": 0.855105930919086
+  },
+  "published": {
+   "n": 65,
+   "hull_cm2": 90.60627010495806,
+   "within_2cm": 34,
+   "median_nn_cm": 0.855105930919086,
+   "new_positions_gt_1cm": 0
+  },
+  "unified": {
+   "n": 114,
+   "hull_cm2": 236.2482398406376,
+   "within_2cm": 43,
+   "median_nn_cm": 0.6323788382622663,
+   "new_positions_gt_1cm": 36
+  }
+ }
+}

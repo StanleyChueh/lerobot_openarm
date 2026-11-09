@@ -1,0 +1,96 @@
+{"stage": "calibrate", "seconds": 144.74, "gpu_peak_torch_gib": 0.846, "gpu_peak_process_gib": 1.295, "time": "2026-11-09 11:21:40"}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 0.68, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 11:30:49"}
+{"stage": "reconstruct ep8", "seconds": 15.8, "gpu_peak_torch_gib": 0.869, "gpu_peak_process_gib": 0.646, "time": "2026-11-09 11:31:05", "episode": 8}
+{"stage": "plan+check ep8", "seconds": 55.76, "gpu_peak_torch_gib": 0.199, "gpu_peak_process_gib": 0.646, "time": "2026-11-09 11:32:00", "episode": 8}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 0.67, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 11:34:53"}
+{"stage": "reconstruct ep8", "seconds": 15.43, "gpu_peak_torch_gib": 0.869, "gpu_peak_process_gib": 1.316, "time": "2026-11-09 11:35:09", "episode": 8}
+{"stage": "plan+check ep8", "seconds": 55.79, "gpu_peak_torch_gib": 0.199, "gpu_peak_process_gib": 0.646, "time": "2026-11-09 11:36:04", "episode": 8}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 0.68, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 11:39:21"}
+{"stage": "reconstruct ep8", "seconds": 15.47, "gpu_peak_torch_gib": 0.869, "gpu_peak_process_gib": 0.861, "time": "2026-11-09 11:39:37", "episode": 8}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 0.68, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 11:42:00"}
+{"stage": "reconstruct ep8", "seconds": 15.74, "gpu_peak_torch_gib": 0.869, "gpu_peak_process_gib": 1.174, "time": "2026-11-09 11:42:16", "episode": 8}
+{"stage": "plan+check ep8", "seconds": 55.67, "gpu_peak_torch_gib": 0.199, "gpu_peak_process_gib": 0.646, "time": "2026-11-09 11:43:11", "episode": 8}
+{"stage": "table height (all source episodes)", "seconds": 167.75, "gpu_peak_torch_gib": 0.949, "gpu_peak_process_gib": 1.32, "time": "2026-11-09 11:57:42"}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 0.67, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 12:01:06"}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 0.67, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 12:01:06"}
+{"stage": "reconstruct ep5", "seconds": 35.86, "gpu_peak_torch_gib": 0.898, "gpu_peak_process_gib": 0.881, "time": "2026-11-09 12:01:42", "episode": 5}
+{"stage": "reconstruct ep0", "seconds": 36.47, "gpu_peak_torch_gib": 0.936, "gpu_peak_process_gib": 0.66, "time": "2026-11-09 12:01:42", "episode": 0}
+{"stage": "plan+check ep0", "seconds": 48.45, "gpu_peak_torch_gib": 0.213, "gpu_peak_process_gib": 0.66, "time": "2026-11-09 12:02:31", "episode": 0}
+{"stage": "plan+check ep5", "seconds": 49.1, "gpu_peak_torch_gib": 0.213, "gpu_peak_process_gib": 0.66, "time": "2026-11-09 12:02:31", "episode": 5}
+{"stage": "reconstruct ep6", "seconds": 35.77, "gpu_peak_torch_gib": 0.836, "gpu_peak_process_gib": 1.273, "time": "2026-11-09 12:03:07", "episode": 6}
+{"stage": "reconstruct ep1", "seconds": 36.15, "gpu_peak_torch_gib": 0.9, "gpu_peak_process_gib": 0.887, "time": "2026-11-09 12:03:07", "episode": 1}
+{"stage": "plan+check ep1", "seconds": 51.73, "gpu_peak_torch_gib": 0.213, "gpu_peak_process_gib": 0.66, "time": "2026-11-09 12:03:59", "episode": 1}
+{"stage": "plan+check ep6", "seconds": 54.02, "gpu_peak_torch_gib": 0.203, "gpu_peak_process_gib": 0.65, "time": "2026-11-09 12:04:01", "episode": 6}
+{"stage": "reconstruct ep2", "seconds": 35.63, "gpu_peak_torch_gib": 0.949, "gpu_peak_process_gib": 0.668, "time": "2026-11-09 12:04:34", "episode": 2}
+{"stage": "reconstruct ep7", "seconds": 35.14, "gpu_peak_torch_gib": 0.887, "gpu_peak_process_gib": 0.658, "time": "2026-11-09 12:04:36", "episode": 7}
+{"stage": "plan+check ep2", "seconds": 55.01, "gpu_peak_torch_gib": 0.221, "gpu_peak_process_gib": 0.668, "time": "2026-11-09 12:05:29", "episode": 2}
+{"stage": "plan+check ep7", "seconds": 59.79, "gpu_peak_torch_gib": 0.211, "gpu_peak_process_gib": 0.658, "time": "2026-11-09 12:05:36", "episode": 7}
+{"stage": "reconstruct ep3", "seconds": 28.73, "gpu_peak_torch_gib": 0.869, "gpu_peak_process_gib": 1.01, "time": "2026-11-09 12:05:58", "episode": 3}
+{"stage": "reconstruct ep8", "seconds": 28.51, "gpu_peak_torch_gib": 0.854, "gpu_peak_process_gib": 0.732, "time": "2026-11-09 12:06:04", "episode": 8}
+{"stage": "plan+check ep3", "seconds": 50.6, "gpu_peak_torch_gib": 0.203, "gpu_peak_process_gib": 0.65, "time": "2026-11-09 12:06:49", "episode": 3}
+{"stage": "plan+check ep8", "seconds": 56.01, "gpu_peak_torch_gib": 0.199, "gpu_peak_process_gib": 0.646, "time": "2026-11-09 12:07:00", "episode": 8}
+{"stage": "reconstruct ep4", "seconds": 19.52, "gpu_peak_torch_gib": 0.857, "gpu_peak_process_gib": 0.656, "time": "2026-11-09 12:07:08", "episode": 4}
+{"stage": "reconstruct ep9", "seconds": 19.73, "gpu_peak_torch_gib": 0.865, "gpu_peak_process_gib": 0.654, "time": "2026-11-09 12:07:20", "episode": 9}
+{"stage": "plan+check ep4", "seconds": 49.4, "gpu_peak_torch_gib": 0.209, "gpu_peak_process_gib": 0.656, "time": "2026-11-09 12:07:58", "episode": 4}
+{"stage": "plan+check ep9", "seconds": 50.22, "gpu_peak_torch_gib": 0.207, "gpu_peak_process_gib": 0.654, "time": "2026-11-09 12:08:10", "episode": 9}
+{"stage": "render ep5", "seconds": 35.12, "gpu_peak_torch_gib": 2.391, "gpu_peak_process_gib": 2.842, "time": "2026-11-09 12:13:18", "episode": 5}
+{"stage": "render ep6", "seconds": 53.43, "gpu_peak_torch_gib": 2.436, "gpu_peak_process_gib": 2.887, "time": "2026-11-09 12:14:19", "episode": 6}
+{"stage": "render ep0", "seconds": 120.83, "gpu_peak_torch_gib": 2.506, "gpu_peak_process_gib": 2.957, "time": "2026-11-09 12:14:44", "episode": 0}
+{"stage": "render ep1", "seconds": 83.54, "gpu_peak_torch_gib": 2.918, "gpu_peak_process_gib": 3.369, "time": "2026-11-09 12:16:14", "episode": 1}
+{"stage": "render ep2", "seconds": 63.31, "gpu_peak_torch_gib": 2.93, "gpu_peak_process_gib": 3.381, "time": "2026-11-09 12:17:26", "episode": 2}
+{"stage": "render ep7", "seconds": 180.21, "gpu_peak_torch_gib": 2.439, "gpu_peak_process_gib": 2.891, "time": "2026-11-09 12:17:27", "episode": 7}
+{"stage": "render ep8", "seconds": 76.14, "gpu_peak_torch_gib": 2.445, "gpu_peak_process_gib": 2.896, "time": "2026-11-09 12:18:48", "episode": 8}
+{"stage": "render ep3", "seconds": 118.16, "gpu_peak_torch_gib": 2.93, "gpu_peak_process_gib": 3.381, "time": "2026-11-09 12:19:28", "episode": 3}
+{"stage": "render ep9", "seconds": 63.71, "gpu_peak_torch_gib": 2.445, "gpu_peak_process_gib": 2.896, "time": "2026-11-09 12:20:00", "episode": 9}
+{"stage": "bench", "seconds": 548.94, "gpu_peak_torch_gib": 6.586, "gpu_peak_process_gib": 7.047, "time": "2026-11-09 12:40:07"}
+{"stage": "bench", "seconds": 49.21, "gpu_peak_torch_gib": 3.039, "gpu_peak_process_gib": 3.49, "time": "2026-11-09 13:16:27"}
+{"stage": "render ep5", "seconds": 35.51, "gpu_peak_torch_gib": 2.406, "gpu_peak_process_gib": 2.857, "time": "2026-11-09 13:17:43", "episode": 5}
+{"stage": "render ep6", "seconds": 51.04, "gpu_peak_torch_gib": 2.541, "gpu_peak_process_gib": 2.992, "time": "2026-11-09 13:18:44", "episode": 6}
+{"stage": "render ep0", "seconds": 112.49, "gpu_peak_torch_gib": 2.604, "gpu_peak_process_gib": 3.055, "time": "2026-11-09 13:19:01", "episode": 0}
+{"stage": "render ep1", "seconds": 76.18, "gpu_peak_torch_gib": 3.014, "gpu_peak_process_gib": 3.465, "time": "2026-11-09 13:20:27", "episode": 1}
+{"stage": "render ep2", "seconds": 62.93, "gpu_peak_torch_gib": 3.02, "gpu_peak_process_gib": 3.471, "time": "2026-11-09 13:21:38", "episode": 2}
+{"stage": "render ep7", "seconds": 185.97, "gpu_peak_torch_gib": 2.541, "gpu_peak_process_gib": 2.992, "time": "2026-11-09 13:21:59", "episode": 7}
+{"stage": "render ep8", "seconds": 75.34, "gpu_peak_torch_gib": 2.541, "gpu_peak_process_gib": 2.992, "time": "2026-11-09 13:23:23", "episode": 8}
+{"stage": "render ep3", "seconds": 124.72, "gpu_peak_torch_gib": 3.021, "gpu_peak_process_gib": 3.473, "time": "2026-11-09 13:23:53", "episode": 3}
+{"stage": "render ep9", "seconds": 71.09, "gpu_peak_torch_gib": 2.541, "gpu_peak_process_gib": 2.992, "time": "2026-11-09 13:24:40", "episode": 9}
+{"stage": "render ep4", "seconds": 61.46, "gpu_peak_torch_gib": 3.209, "gpu_peak_process_gib": 3.66, "time": "2026-11-09 13:25:01", "episode": 4}
+{"stage": "build", "seconds": 121.62, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 13:27:19"}
+{"stage": "verify", "seconds": 15.88, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 13:36:13"}
+{"stage": "video", "seconds": 27.35, "gpu_peak_torch_gib": 0, "gpu_peak_process_gib": 0.0, "time": "2026-11-09 14:01:40"}
+{"stage": "video", "seconds": 75.19, "gpu_peak_torch_gib": 0, "gpu_peak_process_gib": 0.0, "time": "2026-11-09 14:02:29"}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 0.73, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 14:12:37"}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 0.7, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 14:12:37"}
+{"stage": "reconstruct ep5", "seconds": 9.91, "gpu_peak_torch_gib": 0.164, "gpu_peak_process_gib": 0.611, "time": "2026-11-09 14:12:47", "episode": 5}
+{"stage": "reconstruct ep0", "seconds": 10.33, "gpu_peak_torch_gib": 0.154, "gpu_peak_process_gib": 0.602, "time": "2026-11-09 14:12:48", "episode": 0}
+{"stage": "plan+check ep0", "seconds": 48.3, "gpu_peak_torch_gib": 0.154, "gpu_peak_process_gib": 0.602, "time": "2026-11-09 14:13:36", "episode": 0}
+{"stage": "plan+check ep5", "seconds": 49.13, "gpu_peak_torch_gib": 0.164, "gpu_peak_process_gib": 0.611, "time": "2026-11-09 14:13:36", "episode": 5}
+{"stage": "reconstruct ep1", "seconds": 5.35, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-09 14:13:41", "episode": 1}
+{"stage": "reconstruct ep6", "seconds": 5.01, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:13:41", "episode": 6}
+{"stage": "plan+check ep1", "seconds": 51.74, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-09 14:14:33", "episode": 1}
+{"stage": "plan+check ep6", "seconds": 54.08, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:14:35", "episode": 6}
+{"stage": "reconstruct ep2", "seconds": 5.89, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-09 14:14:39", "episode": 2}
+{"stage": "reconstruct ep7", "seconds": 5.86, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:14:41", "episode": 7}
+{"stage": "plan+check ep2", "seconds": 54.98, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-09 14:15:34", "episode": 2}
+{"stage": "reconstruct ep3", "seconds": 4.77, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-09 14:15:39", "episode": 3}
+{"stage": "plan+check ep7", "seconds": 59.83, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:15:41", "episode": 7}
+{"stage": "reconstruct ep8", "seconds": 4.64, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:15:46", "episode": 8}
+{"stage": "plan+check ep3", "seconds": 50.87, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-09 14:16:29", "episode": 3}
+{"stage": "reconstruct ep4", "seconds": 4.28, "gpu_peak_torch_gib": 0.184, "gpu_peak_process_gib": 0.631, "time": "2026-11-09 14:16:34", "episode": 4}
+{"stage": "plan+check ep8", "seconds": 56.11, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:16:42", "episode": 8}
+{"stage": "reconstruct ep9", "seconds": 4.38, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:16:46", "episode": 9}
+{"stage": "plan+check ep4", "seconds": 49.95, "gpu_peak_torch_gib": 0.184, "gpu_peak_process_gib": 0.631, "time": "2026-11-09 14:17:24", "episode": 4}
+{"stage": "plan+check ep9", "seconds": 51.03, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:17:37", "episode": 9}
+{"stage": "render ep8", "seconds": 235.8, "gpu_peak_torch_gib": 2.389, "gpu_peak_process_gib": 2.84, "time": "2026-11-09 14:27:25", "episode": 8}
+{"stage": "render ep0", "seconds": 330.05, "gpu_peak_torch_gib": 2.736, "gpu_peak_process_gib": 3.188, "time": "2026-11-09 14:29:00", "episode": 0}
+{"stage": "render ep6", "seconds": 368.57, "gpu_peak_torch_gib": 2.523, "gpu_peak_process_gib": 2.975, "time": "2026-11-09 14:29:38", "episode": 6}
+{"stage": "render ep3", "seconds": 498.54, "gpu_peak_torch_gib": 2.975, "gpu_peak_process_gib": 3.426, "time": "2026-11-09 14:31:48", "episode": 3}
+{"stage": "render ep9", "seconds": 329.0, "gpu_peak_torch_gib": 2.561, "gpu_peak_process_gib": 3.012, "time": "2026-11-09 14:33:08", "episode": 9}
+{"stage": "render ep1", "seconds": 391.74, "gpu_peak_torch_gib": 3.299, "gpu_peak_process_gib": 3.75, "time": "2026-11-09 14:35:45", "episode": 1}
+{"stage": "render ep7", "seconds": 436.54, "gpu_peak_torch_gib": 2.527, "gpu_peak_process_gib": 2.979, "time": "2026-11-09 14:37:08", "episode": 7}
+{"stage": "render ep4", "seconds": 310.57, "gpu_peak_torch_gib": 2.975, "gpu_peak_process_gib": 3.426, "time": "2026-11-09 14:37:13", "episode": 4}
+{"stage": "render ep2", "seconds": 165.93, "gpu_peak_torch_gib": 3.301, "gpu_peak_process_gib": 3.752, "time": "2026-11-09 14:38:41", "episode": 2}
+{"stage": "render ep5", "seconds": 209.68, "gpu_peak_torch_gib": 3.219, "gpu_peak_process_gib": 3.67, "time": "2026-11-09 14:40:50", "episode": 5}
+{"stage": "build", "seconds": 291.51, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-09 14:45:55"}
+{"stage": "verify", "seconds": 33.56, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 14:46:37"}
+{"stage": "video", "seconds": 38.93, "gpu_peak_torch_gib": 0, "gpu_peak_process_gib": 0.0, "time": "2026-11-09 14:47:38"}
+{"stage": "video", "seconds": 160.03, "gpu_peak_torch_gib": 0, "gpu_peak_process_gib": 0.0, "time": "2026-11-09 14:49:39"}

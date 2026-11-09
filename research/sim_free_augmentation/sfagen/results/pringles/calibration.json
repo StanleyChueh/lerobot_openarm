@@ -1,0 +1,25 @@
+{
+ "params7": [
+  0.051979558879318974,
+  0.009296965716161678,
+  0.016824596205050276,
+  -0.030949290021156494,
+  0.0007019861918872001,
+  -0.009926881310387962,
+  0.020121677009833045
+ ],
+ "fit_iou": {
+  "initial": 0.2933454202569049,
+  "fitted": 0.35767260647338367
+ },
+ "heldout_iou": {
+  "initial": 0.30684290542489007,
+  "fitted": 0.36054536416417077
+ },
+ "heldout_frames_improved": 0.9523809523809523,
+ "n_fit": 23,
+ "n_heldout": 42,
+ "runtime_s": 144.43496870994568,
+ "adopted": true,
+ "rule": "adopted if held-out IoU improves by > 0.005; confirm with `sfagen bench --compare-camera`"
+}

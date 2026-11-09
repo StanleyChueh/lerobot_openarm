@@ -1,0 +1,4 @@
+{"stage": "replay-check envelope (all source episodes)", "seconds": 1.39, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-09 15:25:22"}
+{"stage": "reconstruct ep1", "seconds": 395.77, "gpu_peak_torch_gib": 7.031, "gpu_peak_process_gib": 7.484, "time": "2026-11-09 15:31:58", "episode": 1}
+{"stage": "plan+check ep1", "seconds": 158.7, "gpu_peak_torch_gib": 0.957, "gpu_peak_process_gib": 1.418, "time": "2026-11-09 15:34:37", "episode": 1}
+{"stage": "render ep1", "seconds": 416.57, "gpu_peak_torch_gib": 2.672, "gpu_peak_process_gib": 3.123, "time": "2026-11-09 15:41:51", "episode": 1}

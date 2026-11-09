@@ -1,0 +1,67 @@
+{
+ "z": 0.254249134048755,
+ "rule": "lowest arm point over the source demos - 5 mm (object silhouette fits not confident)",
+ "fits": [
+  {
+   "episode": 0,
+   "object": "battery",
+   "z": 0.16424913404875496,
+   "iou": 0.13615888615888616
+  },
+  {
+   "episode": 1,
+   "object": "battery",
+   "z": 0.17674913404875497,
+   "iou": 0.0996879334257975
+  },
+  {
+   "episode": 2,
+   "object": "battery",
+   "z": 0.23424913404875494,
+   "iou": 0.1449747998814112
+  },
+  {
+   "episode": 3,
+   "object": "battery",
+   "z": 0.17924913404875495,
+   "iou": 0.14763299170326988
+  },
+  {
+   "episode": 4,
+   "object": "battery",
+   "z": 0.19924913404875494,
+   "iou": 0.11078449384530589
+  },
+  {
+   "episode": 5,
+   "object": "battery",
+   "z": 0.13924913404875497,
+   "iou": 0.2117750439367311
+  },
+  {
+   "episode": 6,
+   "object": "battery",
+   "z": 0.21174913404875495,
+   "iou": 0.11219710853186723
+  },
+  {
+   "episode": 7,
+   "object": "battery",
+   "z": 0.16424913404875496,
+   "iou": 0.11356407857811038
+  },
+  {
+   "episode": 8,
+   "object": "battery",
+   "z": 0.24174913404875492,
+   "iou": 0.1425556096768956
+  },
+  {
+   "episode": 9,
+   "object": "battery",
+   "z": 0.22424913404875496,
+   "iou": 0.11719700921578856
+  }
+ ],
+ "lowest_arm_z": 0.259249134048755
+}
