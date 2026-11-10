@@ -1,0 +1,45 @@
+{
+ "n_query": 80,
+ "ref_frame": 149,
+ "layers": [
+  "L:hand_0",
+  "L:left_finger_0",
+  "L:link7_0",
+  "L:right_finger_0",
+  "R:hand_0",
+  "R:left_finger_0",
+  "R:link7_0",
+  "R:right_finger_0",
+  "can"
+ ],
+ "frames": 273,
+ "visible_frac_all": 0.9472069597069597,
+ "visible_frac_v1_saved_for_comparison": 0.9541552197802198,
+ "continuously_tracked_to_ends": {
+  "forward_to_last": 0.3375,
+  "backward_to_first": 0.4
+ },
+ "fb_error_px": {
+  "median": 0.10914570489211187,
+  "p95": 1.1690359662111578,
+  "fb_tol_px": 2.0
+ },
+ "geometry_disagreement_px_robot_points_visible": {
+  "median": 19.787329028648884,
+  "p90": 185.4022109606821
+ },
+ "runtime": {
+  "raft_flows_fwd_and_bwd_s": 12.37,
+  "flow_pairs": 544,
+  "track_s": 0.03
+ },
+ "model": "torchvision raft_large, weights Raft_Large_Weights.C_T_SKHT_V2, num_flow_updates=12, batch 8, full 480x640 frames",
+ "caveat": "no manual ground truth exists (gate1/gate1r annotation_eval.json = PENDING); visibility and FB error are self-consistency; geometry disagreement mixes tracker error, camera-calibration error and video/state lag",
+ "failure_example": {
+  "point": 77,
+  "layer": "can",
+  "frame": 57,
+  "fb_px": 31.143128686727895
+ }
+}
+EXIT 0

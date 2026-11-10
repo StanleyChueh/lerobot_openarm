@@ -1,0 +1,98 @@
+{
+ "replica_vs_published": {
+  "130": {
+   "identical_px_frac": 1.0,
+   "max_abs_diff": 0,
+   "info": {
+    "moved_parts": 21,
+    "warped_px": 102097,
+    "borrowed_px": 401,
+    "inpainted_px": 107
+   },
+   "published_info": {
+    "moved_parts": 21,
+    "warped_px": 102097,
+    "borrowed_px": 401,
+    "inpainted_px": 107
+   }
+  },
+  "180": {
+   "identical_px_frac": 1.0,
+   "max_abs_diff": 0,
+   "info": {
+    "moved_parts": 21,
+    "warped_px": 92418,
+    "borrowed_px": 555,
+    "inpainted_px": 4
+   },
+   "published_info": {
+    "moved_parts": 21,
+    "warped_px": 92418,
+    "borrowed_px": 555,
+    "inpainted_px": 4
+   }
+  },
+  "235": {
+   "identical_px_frac": 1.0,
+   "max_abs_diff": 0,
+   "info": {
+    "moved_parts": 21,
+    "warped_px": 94448,
+    "borrowed_px": 245,
+    "inpainted_px": 693
+   },
+   "published_info": {
+    "moved_parts": 21,
+    "warped_px": 94448,
+    "borrowed_px": 245,
+    "inpainted_px": 693
+   }
+  }
+ },
+ "rendered_frames": 148,
+ "copied_frames": 125,
+ "inpainted_px_over_all_rendered_frames": {
+  "frames": 14187,
+  "median": 5.0,
+  "p95": 532.6999999999989,
+  "max": 3760
+ },
+ "worst_frames": [
+  {
+   "render": "7_interact_x+0_y+5_z+0",
+   "frame": 241,
+   "inpainted_px": 3760,
+   "borrowed_px": 1351
+  },
+  {
+   "render": "8_interact_x+0_y+5_z+0",
+   "frame": 216,
+   "inpainted_px": 3097,
+   "borrowed_px": 1945
+  },
+  {
+   "render": "2_interact_x+0_y+5_z+0",
+   "frame": 239,
+   "inpainted_px": 2805,
+   "borrowed_px": 1289
+  }
+ ],
+ "wrist_valid_fraction": {
+  "observation.images.wrist_cam": 0.4615384638309479,
+  "observation.images.right_wrist_cam": 0.4615384638309479
+ },
+ "wrist_offset_max_cm": {
+  "L": 5.002584934234619,
+  "R": 5.003727436065674
+ },
+ "wrist_offset_max_deg": {
+  "L": 0.1528313010931015,
+  "R": 0.14294756948947906
+ },
+ "published_wrist_vs_real_source_mean_abs_diff_8bit": {
+  "observation.images.wrist_cam": 1.3798315183080807,
+  "observation.images.right_wrist_cam": 1.436568122632576
+ },
+ "frames_with_modified_state_but_reused_wrist": 147
+}
+EXIT 0

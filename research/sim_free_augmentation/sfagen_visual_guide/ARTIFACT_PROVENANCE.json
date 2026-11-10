@@ -1,0 +1,1151 @@
+{
+ "generated": "2026-11-10 16:12:22",
+ "purpose": "diagnostic-only visual walkthrough of the existing sfagen pipeline; no dataset, model, Hub or frozen-study modification",
+ "git": {
+  "repo": "/home/stanley/Stanley_ws/lerobot_openarm",
+  "branch": "docs/sfagen-visual-walkthrough",
+  "head": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+  "pipeline_commit": "50832b3a6342e5e342cbc91df39fd3d417c261a3 (research/sfagen-unified-pipeline)",
+  "sfagen_working_copy": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen (diff -rq vs research/sim_free_augmentation/sfagen/sfagen: identical)",
+  "historical": {
+   "v1": "e8abc26",
+   "v2": [
+    "b9b7dfe",
+    "03ba314"
+   ]
+  }
+ },
+ "datasets": {
+  "pringles": {
+   "published": "ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v00",
+   "published_revision_v3.0": "30533e672dc16c1a35f480cb56beb5882b7e3db9",
+   "source": "ethanCSL/openarm_pringles_lerobot_real_10_v00",
+   "source_revision_used": "cebdee98115ab6827a4ec2655335c536b5dd085b",
+   "representative_pair": {
+    "source_episode": 0,
+    "published_episode": 6,
+    "variation": "interact_x+5_y+0_z+0"
+   }
+  },
+  "battery": {
+   "published": "ethanCSL/openarm_insertbattery_lerobot_real_to_sim_10_3cam_v00",
+   "published_revision_v3.0": "c3c571d0d2474a2b64a4de412209b21d3bfff913",
+   "source": "ethanCSL/openarm_insertbattery_lerobot_real_10_v02",
+   "source_revision_used": "a1c29d77dabcaf5a0a9ff658ba742a2d941e1570",
+   "representative_pair": {
+    "source_episode": 1,
+    "published_episode": 14,
+    "variation": "battery_x+6_y+0"
+   }
+  }
+ },
+ "notes_on_revisions": "battery source v3.0 tag points at 92476e0e, sfagen read main a1c29d77; mixed datasets: pringles 9f5ed124, battery 2de75e9f (not re-read here)",
+ "models": {
+  "sam2": {
+   "id": "facebook/sam2.1-hiera-small",
+   "hf_revision": "ee5bba1d82bb8749febdf90f45e84b687142ba03",
+   "dtype": "bfloat16",
+   "package": "transformers Sam2VideoModel"
+  },
+  "raft_historical": {
+   "id": "torchvision raft_large",
+   "weights": "Raft_Large_Weights.C_T_SKHT_V2",
+   "num_flow_updates": 12
+  }
+ },
+ "libraries": {
+  "torch": "2.11.0+cu128",
+  "torchvision": "0.26.0+cu128",
+  "transformers": "5.5.4",
+  "pin": "3.7.0",
+  "opencv-python": "UNKNOWN",
+  "av": "15.1.0",
+  "lerobot": "0.6.2",
+  "numpy": "2.2.6",
+  "matplotlib": "3.10.8",
+  "huggingface_hub": "1.12.0"
+ },
+ "hardware": "2x NVIDIA GeForce RTX 4090 24 GB (one per diagnostic run)",
+ "existing_artifacts_read": {
+  "pringles": {
+   "config": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml",
+    "bytes": 3656,
+    "sha256": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197"
+   },
+   "calibration": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/calibration.json",
+    "bytes": 595,
+    "sha256": "b93d59b3afe1642ef8e8076d6fbdd22b9f1ed6d265e44ee5ae3f7b6c3e3a2772"
+   },
+   "table_height": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/table_height.json",
+    "bytes": 1191,
+    "sha256": "c730dc1393a3fa41601e519bc85fc37ff20e80d70ca1128444c735c98694a990"
+   },
+   "recon_cache": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep0.npz",
+    "bytes": 348338,
+    "sha256": "ce94c27976b3b1887a35386ba1f17e1e44c558e8cbfeb43fe4b5bff5f1a29a19"
+   },
+   "sam2_cache": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/sam2_ep0.npz",
+    "bytes": 1009599,
+    "sha256": "c22919a08a1d0465ccc6c1a960246ac6769b69221ecc2e1aac6bd527ee6762c6"
+   },
+   "candidate": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/candidates/ep0/interact_x+5_y+0_z+0.npz",
+    "bytes": 68219,
+    "sha256": "b26d3d7df0a95ddec8fcd283236bf0c4347d97a7120743f9ca485ec641b16776"
+   },
+   "checks": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/candidates/ep0/checks.json",
+    "bytes": 18920,
+    "sha256": "8c5aba73f985b30268931aecb53a7ba0496813ad1ffcffb9196866e81d6a5494"
+   },
+   "body_render": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/body/0_interact_x+5_y+0_z+0.npy",
+    "bytes": 251596928,
+    "sha256": "0bb926d2505e18ab42c9df2bc26691af3ccc7bb5876c061bbcb3098fd8aa1a7a"
+   },
+   "body_render_log": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/body/0_interact_x+5_y+0_z+0.json",
+    "bytes": 14291,
+    "sha256": "11fe756206617174ed0d561d0d4da2201c93f8f71969361d7883443b490d7180"
+   },
+   "verification": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/verification.json",
+    "bytes": 827,
+    "sha256": "5fc55ce91f7a8097c58e0f76c5d4d51f88c29a3f2c37c3875c85001cc66e4cdf"
+   },
+   "profile_production": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/profile.jsonl",
+    "bytes": 14212,
+    "sha256": "a380dd28db4561a038a98ccaa460c265fcbda34cd12e917e48be2b66a3832d6d"
+   },
+   "profile_clean_one_episode": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/logs/prof_openarm_pringles_handover/profile.jsonl",
+    "bytes": 615,
+    "sha256": "2978394f409f7dbef40a49e6f49e5b9c1664f04584b3bf98b473830353d9de83"
+   },
+   "benchmark": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/logs/xbench_pringles_final.json",
+    "bytes": 58386,
+    "sha256": "f04963f686af6c7a53a1f28dfed0943c420fab70027873a448295b035b89a298"
+   },
+   "dataset_provenance": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/dataset/meta/sfa_provenance.json",
+    "bytes": 180784,
+    "sha256": "54222a19fbc268403b59adb4df20ab7fe53f003e05a1b918f26a072f84eaa2c0"
+   },
+   "comparison_videos_local": [
+    {
+     "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/video_highlights.mp4",
+     "bytes": 20762656,
+     "sha256": "89773734238e8ec4733fe0b299e49769b0f3a3ab5b8217a5cae6e78288f525a1"
+    },
+    {
+     "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/video_all_2x.mp4",
+     "bytes": 175168315,
+     "sha256": "3b8f2ce1949ff8f353010fce836bc64bfa92d0dcb9753b8c68542bffaea07c35"
+    }
+   ]
+  },
+  "battery": {
+   "config": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml",
+    "bytes": 3660,
+    "sha256": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99"
+   },
+   "calibration": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/calibration.json",
+    "bytes": 594,
+    "sha256": "9b4f87d6f099c8565bbb5c7955aa9e6391538e6c52b6533bbb6b1fb7052af24f"
+   },
+   "table_height": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/table_height.json",
+    "bytes": 1260,
+    "sha256": "2cc67ad90ed50645a949ae9e71f6956b2acfd26dc724ee802fcd7fbf3da22d2d"
+   },
+   "recon_cache": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/recon_ep1.npz",
+    "bytes": 278565,
+    "sha256": "3f55d89ab69ea209838795f1b7a51cda3327f041d328990ae7d5a766e321a286"
+   },
+   "sam2_cache": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/sam2_ep1.npz",
+    "bytes": 2576085,
+    "sha256": "73c0354d82c69f1f294ecb803a0d275e799576902dab86829b132cc66a607437"
+   },
+   "candidate": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/candidates/ep1/battery_x+6_y+0.npz",
+    "bytes": 192783,
+    "sha256": "9948fe57eae0afba5d400609c5ac5b26e89376a2064d6b3bfbaa979c8423b9d7"
+   },
+   "checks": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/candidates/ep1/checks.json",
+    "bytes": 28498,
+    "sha256": "5342af9251a98eef06b708e912733fffb93478c247bbfdde2aa5d2cbc03c905d"
+   },
+   "body_render": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/body/1_battery_x+6_y+0.npy",
+    "bytes": 715161728,
+    "sha256": "6b5c5011615ebfe1ce21f91010bdbb89f664a820a8cd1b11247abd533c1e6173"
+   },
+   "body_render_log": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/body/1_battery_x+6_y+0.json",
+    "bytes": 33571,
+    "sha256": "6e5dc35a9f7eb17d4eab90a01466c0eb51a8d4db38bbb8881a60f18ffa6d480a"
+   },
+   "verification": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/verification.json",
+    "bytes": 828,
+    "sha256": "d9d54bf4c33de174e12ad2b13967e06049a3527e60109ef3ce92308ad7c821b9"
+   },
+   "profile_production": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/profile.jsonl",
+    "bytes": 12570,
+    "sha256": "0093b249c53d07661339f560be16c27c3d519835e5834109dbe611a1540483c5"
+   },
+   "profile_clean_one_episode": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/logs/prof_openarm_battery_insertion/profile.jsonl",
+    "bytes": 615,
+    "sha256": "1536e83776960f008d77e37efb9296db4fdd3bdd1ec0fb6ef86eebd7aca73d8a"
+   },
+   "benchmark": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/logs/xbench_battery_final.json",
+    "bytes": 78420,
+    "sha256": "bb2963b5a34a5f8cc55b1420eb4f5ce75fad331e0aa299cc30d3fc54b038d988"
+   },
+   "dataset_provenance": {
+    "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/dataset/meta/sfa_provenance.json",
+    "bytes": 217447,
+    "sha256": "949f9aa6734620fc0b9b94728e46d1390863d1d39e12afca0bce18d55856a4c5"
+   },
+   "comparison_videos_local": [
+    {
+     "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/video_highlights.mp4",
+     "bytes": 46617302,
+     "sha256": "7f13d03664d66a50445e3c37da81464fd87fa1fa2e7b4d41ee0f3ca018554f1e"
+    },
+    {
+     "path": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/video_all_2x.mp4",
+     "bytes": 461764532,
+     "sha256": "df2049ce09f4f880bbef3e970f9afbbb4419b2d74ae24bf172b9250cee486e04"
+    }
+   ]
+  },
+  "historical": {
+   "v1_track_py": {
+    "path": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/track.py",
+    "bytes": 4004,
+    "sha256": "828c12f7cd6e9f2818a95283df252edddb1cd920f34cc03b0e7f20d6df737936"
+   },
+   "v1_results_ep0": {
+    "path": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/outputs/ep0/results.json",
+    "bytes": 14239,
+    "sha256": "6a45b91f6dce5c995db0e49913696bd07e5ce52ebbfd2c0165e83eb4ed964d0f"
+   },
+   "gate1_annotation_eval": {
+    "path": "/home/stanley/Stanley_ws/lerobot_openarm/research/contact_aware_augmentation/outputs/gate1/annotation_eval.json",
+    "bytes": 150,
+    "sha256": "b2c340806f3c2dc5c8d6918b56378bb4a530a69f39227abd8591b41c645fb024"
+   },
+   "gate1r_annotation_eval": {
+    "path": "/home/stanley/Stanley_ws/lerobot_openarm/research/contact_aware_augmentation/outputs/gate1r/annotation_eval.json",
+    "bytes": 209,
+    "sha256": "5696f2bd1ba323944fcb5c88faf659b926da5517a4e30b11671c6f7dcac614b1"
+   }
+  }
+ },
+ "new_diagnostic_runs": {
+  "run_raft_pringles": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_raft.py",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 15:55:40",
+   "wall_time_s": 26.44,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "0",
+    "peak_torch_allocated_gib": 2.539
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+    "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/track.py": "828c12f7cd6e9f2818a95283df252edddb1cd920f34cc03b0e7f20d6df737936"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_02_tracking/raft_flow_colour.png": "1c1cee319f466ce900c69892feefdaee1c093f0e8830ad59d1447f304dca8308",
+    "stage_02_tracking/raft_survival_fb.png": "56b9718b3405c96e9d3e5aa08e063925bf8fa6554369cb48f73f3fdbd99611ae",
+    "stage_02_tracking/raft_failure_example.png": "99a759f341f1ecb5d59f6b4f1f8c021290d608f3805281ea0984acc2835f4cb3",
+    "stage_02_tracking/raft_tracking_trails.mp4": "ad1eaab2eea2a7430dfb2d586a1628e394b451cfe5d95c36e59bd15425769abb"
+   }
+  },
+  "run_recon_battery": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_reconstruction.py battery",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 16:00:21",
+   "wall_time_s": 42.67,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "1",
+    "peak_torch_allocated_gib": 0.12
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/calibration.json": "9b4f87d6f099c8565bbb5c7955aa9e6391538e6c52b6533bbb6b1fb7052af24f",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/table_height.json": "2cc67ad90ed50645a949ae9e71f6956b2acfd26dc724ee802fcd7fbf3da22d2d",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/recon_ep1.npz": "3f55d89ab69ea209838795f1b7a51cda3327f041d328990ae7d5a766e321a286"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_03_reconstruction/battery_calibration_before_after.png": "4a309c181b8939dd701f0ac9468f1ece5e49feb23a4ab6263a80d277d802d88b",
+    "stage_03_reconstruction/battery_fk_overlay.png": "8b9528c4b526d15498413d916ddc7e4c3616a2b0474649154fddd365e72ce6dc",
+    "stage_03_reconstruction/battery_3d_frames.png": "23759c811992649af9e12eadff5691fbacfb3e2d4068def77e8d8e097328ff0a",
+    "stage_03_reconstruction/battery_3d_fk_animation.mp4": "8c8732ab6f7a5466a25a62c3531b7fd507824fef2636526b8c885e8c830f8aa0",
+    "stage_03_reconstruction/battery_object_lag_table.png": "420fc32dc005195a941a9f2ea2984998dd9d06af499de012c5d3364de7b982f6"
+   }
+  },
+  "run_recon_pringles": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_reconstruction.py pringles",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 16:00:21",
+   "wall_time_s": 17.7,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "0",
+    "peak_torch_allocated_gib": 0.103
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/calibration.json": "b93d59b3afe1642ef8e8076d6fbdd22b9f1ed6d265e44ee5ae3f7b6c3e3a2772",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/table_height.json": "c730dc1393a3fa41601e519bc85fc37ff20e80d70ca1128444c735c98694a990",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep0.npz": "ce94c27976b3b1887a35386ba1f17e1e44c558e8cbfeb43fe4b5bff5f1a29a19"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_03_reconstruction/pringles_calibration_before_after.png": "8d33a9608cda7f77259fcbcd961edc0c9b9f0e67358e33745e5bcbf911e21a5e",
+    "stage_03_reconstruction/pringles_fk_overlay.png": "aa94521676b7e0501085379731cd12719fafe0c098b115ae7ce41361ea59f5ec",
+    "stage_03_reconstruction/pringles_3d_frames.png": "6b3e993f8f2d37909e9222891529172960ac1dad5a6b25e4dba9f203d9968c84",
+    "stage_03_reconstruction/pringles_3d_fk_animation.mp4": "cf56ba451a8e395985f82a3cd44aba87a3a38ad8e20e71f22b40ae051e952271",
+    "stage_03_reconstruction/pringles_object_lag_table.png": "9360664405e09c5f0e124528ca0bac6112c0ea4f599ea2fdd0e2be4ea0d4499d"
+   }
+  },
+  "run_render_battery": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_render.py battery",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 16:04:30",
+   "wall_time_s": 33.75,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "1",
+    "peak_torch_allocated_gib": 1.712
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/body/1_battery_x+6_y+0.npy": "6b5c5011615ebfe1ce21f91010bdbb89f664a820a8cd1b11247abd533c1e6173",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/candidates/ep1/battery_x+6_y+0.npz": "9948fe57eae0afba5d400609c5ac5b26e89376a2064d6b3bfbaa979c8423b9d7"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_05_rendering/battery_render_panels_frame150.png": "5f7e177e4e4b95778c4896f1bf48772c339e16aa7acdc00efc00dbfaa38497db",
+    "stage_05_rendering/battery_render_panels_frame262.png": "e75bff6eb14770bac19295c853f2338ead74b88e163830168686625017c6f328",
+    "stage_05_rendering/battery_render_panels_frame290.png": "112a7e916e15d1eb31ad3a28e86c8daf61c8349e2ccdb93543559c03bfbb778c",
+    "stage_05_rendering/battery_failure_frames.png": "0b2ded625fe628260d58d9cd6b856c81afa9202920d6f859723ec3d09342e8fd",
+    "stage_05_rendering/battery_pair_annotated.mp4": "ae30ef9abee8c6cc2ea6e5bff620654be753e7ec51a1c89b4f6dd2bafec0bf24",
+    "stage_06_cameras/battery_three_cameras.png": "a9a939b4ee760be610d628ad13666051c2167383875e3cd76697b00c021476cc",
+    "stage_06_cameras/battery_wrist_flags.png": "e01c91be95f955fd8e5a9d11170bdf20c55e7b28de98086bb0d6511971ad7d63"
+   }
+  },
+  "run_render_pringles": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_render.py pringles",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 16:04:30",
+   "wall_time_s": 20.55,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "0",
+    "peak_torch_allocated_gib": 1.517
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/body/0_interact_x+5_y+0_z+0.npy": "0bb926d2505e18ab42c9df2bc26691af3ccc7bb5876c061bbcb3098fd8aa1a7a",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/candidates/ep0/interact_x+5_y+0_z+0.npz": "b26d3d7df0a95ddec8fcd283236bf0c4347d97a7120743f9ca485ec641b16776"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_05_rendering/pringles_render_panels_frame130.png": "56c59c0a121de4c871cf1fd894ba1ff4af882d2c932562638e713d10f3cf5ba8",
+    "stage_05_rendering/pringles_render_panels_frame180.png": "af0fec432ac98e3ec9086bfa33c1573695239ea52bf64c5c6e1e619ee6097909",
+    "stage_05_rendering/pringles_render_panels_frame235.png": "ca3714460d3c1895aa88af416a7f42d6be9c67124144d5b880bf927af76a40dd",
+    "stage_05_rendering/pringles_failure_frames.png": "9e100775538b232349afd998828714eab2741904b3e48680be6e1283457e89b3",
+    "stage_05_rendering/pringles_pair_annotated.mp4": "dfcac34b4d2c6edb7b4d848cb0c832623d7bb3a2ecd4af97c00ad0c18f67943d",
+    "stage_06_cameras/pringles_three_cameras.png": "fe25e8dc9d956de9286b2d35039d2fdcdc2673bab07174278053e80861e43bbb",
+    "stage_06_cameras/pringles_wrist_flags.png": "e379d73b156f9641ddb34aec42208688ccd8a94251f2c566985519b57cccf026"
+   }
+  },
+  "run_seg_battery": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_segmentation.py battery --no-rerun",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 15:58:15",
+   "wall_time_s": 44.1,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "1",
+    "peak_torch_allocated_gib": 0.951
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/sam2_ep1.npz": "73c0354d82c69f1f294ecb803a0d275e799576902dab86829b132cc66a607437",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/recon_ep1.npz": "3f55d89ab69ea209838795f1b7a51cda3327f041d328990ae7d5a766e321a286"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_01_segmentation/battery_segmentation_panels.png": "90655c583f8ef4bb34d40c4a062ef5e19054c9e73343e457b7ed5b0ad5c289d6",
+    "stage_01_segmentation/battery_segmentation_stability.png": "13f837b094e6d7ff707dd30b623730afb9936f5cdc547392d880a54ca96fa956",
+    "stage_01_segmentation/battery_segmentation_failures.png": "377c25c300995fae0e371d9f08922c76e3da7cc84a68abe15e7ed4570a2fecaf",
+    "stage_01_segmentation/battery_segmentation_overlay.mp4": "b772162c6ae22e6b2db76e51345f33a16c3ceb3544a4c0539cd05ef83cbeb7cb"
+   }
+  },
+  "run_seg_battery_sam2rerun": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_segmentation.py battery",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 15:54:15",
+   "wall_time_s": 69.06,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "1",
+    "peak_torch_allocated_gib": 4.661
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/sam2_ep1.npz": "73c0354d82c69f1f294ecb803a0d275e799576902dab86829b132cc66a607437",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/recon_ep1.npz": "3f55d89ab69ea209838795f1b7a51cda3327f041d328990ae7d5a766e321a286"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_01_segmentation/battery_segmentation_panels.png": "90655c583f8ef4bb34d40c4a062ef5e19054c9e73343e457b7ed5b0ad5c289d6",
+    "stage_01_segmentation/battery_segmentation_stability.png": "b27e29a0d252b106c6020627abce4ab90dcbec9fc7b577d347b9a8fe91609c5e",
+    "stage_01_segmentation/battery_segmentation_failures.png": "2ccf05397cef50346e0a760ee71db8c78b69e94ee2332758432d951f2ed1876b",
+    "stage_01_segmentation/battery_segmentation_overlay.mp4": "b772162c6ae22e6b2db76e51345f33a16c3ceb3544a4c0539cd05ef83cbeb7cb"
+   }
+  },
+  "run_seg_pringles": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_segmentation.py pringles --no-rerun",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 15:57:54",
+   "wall_time_s": 19.31,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "1",
+    "peak_torch_allocated_gib": 0.237
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/sam2_ep0.npz": "c22919a08a1d0465ccc6c1a960246ac6769b69221ecc2e1aac6bd527ee6762c6",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep0.npz": "ce94c27976b3b1887a35386ba1f17e1e44c558e8cbfeb43fe4b5bff5f1a29a19"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_01_segmentation/pringles_segmentation_panels.png": "065ba317662704921e108eabfe40b3a2c36695e91fd9b0280727c4dd6ddae926",
+    "stage_01_segmentation/pringles_segmentation_stability.png": "eb2fb822174da0e31428e9dbf62e2b979bf85bb91f6dac46c459978bd4f4430f",
+    "stage_01_segmentation/pringles_segmentation_failures.png": "961932ef5f61edf562056e957416f24b50abdca37bcda8e6e600f76ee5505b3d",
+    "stage_01_segmentation/pringles_segmentation_overlay.mp4": "328002df1b6d346b8e05d2aaa44f95a67c9145dbf6821d780fe353af9e4c2ab8"
+   }
+  },
+  "run_seg_pringles_sam2rerun": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_segmentation.py pringles",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 15:54:15",
+   "wall_time_s": 30.85,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "0",
+    "peak_torch_allocated_gib": 4.628
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/sam2_ep0.npz": "c22919a08a1d0465ccc6c1a960246ac6769b69221ecc2e1aac6bd527ee6762c6",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep0.npz": "ce94c27976b3b1887a35386ba1f17e1e44c558e8cbfeb43fe4b5bff5f1a29a19"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_01_segmentation/pringles_segmentation_panels.png": "065ba317662704921e108eabfe40b3a2c36695e91fd9b0280727c4dd6ddae926",
+    "stage_01_segmentation/pringles_segmentation_stability.png": "460d094c5bb9de35cb76508efeae8cb3fbc8d7bc02afa076b89abbf52cca974a",
+    "stage_01_segmentation/pringles_segmentation_failures.png": "ef911050b0b51a5e44715b58c35676cb67e93efe1e1dcb8996d3fcf7f0349173",
+    "stage_01_segmentation/pringles_segmentation_overlay.mp4": "328002df1b6d346b8e05d2aaa44f95a67c9145dbf6821d780fe353af9e4c2ab8"
+   }
+  },
+  "run_traj_battery": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_trajectories.py battery",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 16:02:17",
+   "wall_time_s": 36.73,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "1",
+    "peak_torch_allocated_gib": 0.12
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/candidates/ep1/battery_x+6_y+0.npz": "9948fe57eae0afba5d400609c5ac5b26e89376a2064d6b3bfbaa979c8423b9d7",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/candidates/ep1/checks.json": "5342af9251a98eef06b708e912733fffb93478c247bbfdde2aa5d2cbc03c905d"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_04_trajectories/battery_tcp_desired_vs_ik.png": "414deac156aefc2bc7d2c5fba60bee226637b0e62beedb078ed7bfd1ee504bfc",
+    "stage_04_trajectories/battery_joints_real_vs_synthetic.png": "245f26c0a6256bd115b2ede84c72ac5283c3ae8d44007b962ced3ec9481280e7",
+    "stage_04_trajectories/battery_actions_real_vs_synthetic.png": "4fb6bca7a58eb2143a160a170fb04989cfc2df3f39fa43f470ddcc6bd6205143",
+    "stage_04_trajectories/battery_topdown_paths.png": "7cc916950e71505eef9f87c73b9d9f6cf43006b0e9e107074220c058115ff89e",
+    "stage_04_trajectories/battery_3d_recorded_vs_synthetic.mp4": "115382bac43d700b52225e790289303cc181af67b39116cc0b3b86abed3cb536"
+   }
+  },
+  "run_traj_pringles": {
+   "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_trajectories.py pringles",
+   "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "started": "2026-11-10 16:02:17",
+   "wall_time_s": 18.43,
+   "gpu": {
+    "device_name": "NVIDIA GeForce RTX 4090",
+    "cuda_visible_devices": "0",
+    "peak_torch_allocated_gib": 0.103
+   },
+   "inputs": {
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/candidates/ep0/interact_x+5_y+0_z+0.npz": "b26d3d7df0a95ddec8fcd283236bf0c4347d97a7120743f9ca485ec641b16776",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/candidates/ep0/checks.json": "8c5aba73f985b30268931aecb53a7ba0496813ad1ffcffb9196866e81d6a5494"
+   },
+   "error": null,
+   "outputs_at_run_time": {
+    "stage_04_trajectories/pringles_tcp_desired_vs_ik.png": "79629e4056e9841fa64f186411131bab16ca8deac89bf2fb81a6290aa4142fe0",
+    "stage_04_trajectories/pringles_joints_real_vs_synthetic.png": "4131458ef642e36475cf1edceb3322d64543a47e7fbe534d1d9aa57f589ac645",
+    "stage_04_trajectories/pringles_actions_real_vs_synthetic.png": "f2806372bd8e323a78454fe8cc5b7d718008e7a22fd312217c6c52e0ef8ebb35",
+    "stage_04_trajectories/pringles_topdown_paths.png": "ab626ae891aac4e9f8f2e16d29b2f4b65b8344f7dd316c7ff8f5a693aba5b06c",
+    "stage_04_trajectories/pringles_3d_recorded_vs_synthetic.mp4": "f5897f7b564282ea1ff1c029a1b231ebbf49e689633530dee8164f5ac875a287"
+   }
+  }
+ },
+ "post_processing": {
+  "videos": "all stage MP4s transcoded from OpenCV mp4v to H.264 (libx264 crf 26, yuv420p, faststart) for browser playback; hashes below are of the H.264 files, hashes at run time are in new_diagnostic_runs",
+  "images": "PNG figures > 250 kB converted to JPEG q88; original PNG SHA-256 in diagnostics/png_to_jpg_conversions.json"
+ },
+ "generated_files": [
+  {
+   "path": ".gitignore",
+   "bytes": 100,
+   "sha256": "1759e3bd19200d854d1f21d21108f6b764558efd945c413ac5c537e05c770f3e",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/.gitignore"
+  },
+  {
+   "path": "RESEARCH_LIMITATIONS.md",
+   "bytes": 9963,
+   "sha256": "ee9db99e628b2af8d3eece327310f79c23920f1e86b006492c0006e00fdbbc1d",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/RESEARCH_LIMITATIONS.md"
+  },
+  {
+   "path": "STAGE_BY_STAGE_VISUAL_GUIDE.md",
+   "bytes": 21603,
+   "sha256": "e561ca39aece12506a0a5508ac0e1b3af88b988b9152b46591edbeabd35b71d7",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/STAGE_BY_STAGE_VISUAL_GUIDE.md"
+  },
+  {
+   "path": "STAGE_TIMINGS_AND_METRICS.csv",
+   "bytes": 11593,
+   "sha256": "2c50a9b5a8a812df71dd8b064c528fedb6487837f80cb261eb46112df3d9d4ec",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/STAGE_TIMINGS_AND_METRICS.csv"
+  },
+  {
+   "path": "TECHNICAL_PIPELINE_REFERENCE.md",
+   "bytes": 23378,
+   "sha256": "c0e928420f8c71f48eef721f77a628af4053653292ae07e804b368fae8d8b5e7",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/TECHNICAL_PIPELINE_REFERENCE.md"
+  },
+  {
+   "path": "diagnostics/battery_wrist_cam_frame_deficit.md",
+   "bytes": 4228,
+   "sha256": "bcbe7e0cfe7a4a7cb811e0245d9793009c5a0c14f87e410a5d278fc2996d3388",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/battery_wrist_cam_frame_deficit.md"
+  },
+  {
+   "path": "diagnostics/log_raft.txt",
+   "bytes": 1195,
+   "sha256": "3842557561f0f2147a6105683f2ee2479a3bb56ed11b7b62d5da86bafb11f5b9",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_raft.txt"
+  },
+  {
+   "path": "diagnostics/log_recon_battery.txt",
+   "bytes": 2080,
+   "sha256": "10f44c47dad65c174ba12efb69018436fdcbf622cb52f55e7ce4777f0b3ab959",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_recon_battery.txt"
+  },
+  {
+   "path": "diagnostics/log_recon_pringles.txt",
+   "bytes": 1334,
+   "sha256": "f72ae17988be3e4a36572a054aef21dd04b727d424c3d91c7cdcef042efeab95",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_recon_pringles.txt"
+  },
+  {
+   "path": "diagnostics/log_render_battery.txt",
+   "bytes": 1997,
+   "sha256": "1f8458e2b5b2a14412679bd024b64a17b8194a5efc9c7eaa75aa5383fb3c4fc5",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_render_battery.txt"
+  },
+  {
+   "path": "diagnostics/log_render_pringles.txt",
+   "bytes": 2020,
+   "sha256": "6d594de61381036afea8d22504df6a897f98eb13c0e561a1cb91a32abe812f77",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_render_pringles.txt"
+  },
+  {
+   "path": "diagnostics/log_seg_battery.txt",
+   "bytes": 2475,
+   "sha256": "dfc43d8f673cd94035bc6f2bb19f75c2ec7285279984747b7d789dfd7b1fda8c",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_seg_battery.txt"
+  },
+  {
+   "path": "diagnostics/log_seg_battery_stats.txt",
+   "bytes": 1954,
+   "sha256": "ffe3d286ffce63bce0e790deeb6b7234938464dc213e8f4bacb5572c7f65f125",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_seg_battery_stats.txt"
+  },
+  {
+   "path": "diagnostics/log_seg_pringles.txt",
+   "bytes": 2281,
+   "sha256": "1b11859277ced94ef529b0b66b24d512ed45869d70605cbc47cd6c67bb6df8c8",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_seg_pringles.txt"
+  },
+  {
+   "path": "diagnostics/log_seg_pringles_stats.txt",
+   "bytes": 1760,
+   "sha256": "91ac7ecf97da831c291a47215960fa8fc10bf76d1459b3c1a67902deaa4b25dd",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_seg_pringles_stats.txt"
+  },
+  {
+   "path": "diagnostics/log_traj_battery.txt",
+   "bytes": 2069,
+   "sha256": "70aa3428ce0f39f9e74fcca6a2e4abba24b09a5d44aa096610afc1769043a24e",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_traj_battery.txt"
+  },
+  {
+   "path": "diagnostics/log_traj_pringles.txt",
+   "bytes": 2013,
+   "sha256": "17e43a91cb3938f8f4db362041489c7097450bbd95aab027ab3240208c0475f8",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/log_traj_pringles.txt"
+  },
+  {
+   "path": "diagnostics/png_to_jpg_conversions.json",
+   "bytes": 4160,
+   "sha256": "d1a84574d634d53dbf5b52dac2aa605365fad5aceb05f16f8887d409afc541c0",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/png_to_jpg_conversions.json"
+  },
+  {
+   "path": "diagnostics/raft_tracks_pringles_ep0.npz",
+   "bytes": 675137,
+   "sha256": "e1a75b718868a50a08cb0ef69504b6ece3dad55c22dfbd43cc69f424196aff15",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/raft_tracks_pringles_ep0.npz"
+  },
+  {
+   "path": "diagnostics/run_raft_pringles.json",
+   "bytes": 2649,
+   "sha256": "83e94eb6b304f40bf73a50242488ec32eb44a38779c1b75cc51f45030efb5cc4",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_raft_pringles.json"
+  },
+  {
+   "path": "diagnostics/run_recon_battery.json",
+   "bytes": 6318,
+   "sha256": "d5aa7254243f6ab74d92796b36908677c6493c828503f08e025f8ed44ce8deac",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_recon_battery.json"
+  },
+  {
+   "path": "diagnostics/run_recon_pringles.json",
+   "bytes": 4650,
+   "sha256": "8a0f23fa97c5e5a91ec93e1c93a808671baf36a1ccdf2ef6567c2e16977c730e",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_recon_pringles.json"
+  },
+  {
+   "path": "diagnostics/run_render_battery.json",
+   "bytes": 4128,
+   "sha256": "9c5040666fb877e44f5d94ef6083a3bf5c7800abb740296ab04cfecaa8647bc5",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_render_battery.json"
+  },
+  {
+   "path": "diagnostics/run_render_pringles.json",
+   "bytes": 4170,
+   "sha256": "aca248f1305639f3e1f7e5e721cf6fc414e4df84d622837947d80c258af9e7e1",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_render_pringles.json"
+  },
+  {
+   "path": "diagnostics/run_seg_battery.json",
+   "bytes": 3722,
+   "sha256": "7df1fe65ebe23a0c05567b959ca28e1e4cfddd34c1edd784b5162d8da6d9b025",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_seg_battery.json"
+  },
+  {
+   "path": "diagnostics/run_seg_battery_sam2rerun.json",
+   "bytes": 4099,
+   "sha256": "f3b44b57921e767251a82f6c79982c32d4b76e680a00ebae6b5a45f57bde111a",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_seg_battery_sam2rerun.json"
+  },
+  {
+   "path": "diagnostics/run_seg_pringles.json",
+   "bytes": 3526,
+   "sha256": "85dc18a9c287312f32cb173941c20193531dd36d41909df8fc88ec51add29291",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_seg_pringles.json"
+  },
+  {
+   "path": "diagnostics/run_seg_pringles_sam2rerun.json",
+   "bytes": 3903,
+   "sha256": "5fabf08e0c7b52e38cbfa9f19906e8da0b9eb924c35b1afa9a8b75209fd9bd81",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_seg_pringles_sam2rerun.json"
+  },
+  {
+   "path": "diagnostics/run_traj_battery.json",
+   "bytes": 3989,
+   "sha256": "a7c2c852618b9df76e0f4b79524c21a4ce4abf86e0a83d2ebc86e03ded9bfbba",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_traj_battery.json"
+  },
+  {
+   "path": "diagnostics/run_traj_pringles.json",
+   "bytes": 3938,
+   "sha256": "dddbd6365600dc7768c2999a167fb09624ee293b1176439aec91d25af66ea61a",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/run_traj_pringles.json"
+  },
+  {
+   "path": "diagnostics/sam2_rerun_battery_ep1.npz",
+   "bytes": 2576085,
+   "sha256": "73c0354d82c69f1f294ecb803a0d275e799576902dab86829b132cc66a607437",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/sam2_rerun_battery_ep1.npz"
+  },
+  {
+   "path": "diagnostics/sam2_rerun_pringles_ep0.npz",
+   "bytes": 1009599,
+   "sha256": "c22919a08a1d0465ccc6c1a960246ac6769b69221ecc2e1aac6bd527ee6762c6",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/diagnostics/sam2_rerun_pringles_ep0.npz"
+  },
+  {
+   "path": "index.html",
+   "bytes": 38947,
+   "sha256": "0389cf05712d391170fb15688f13c9bcd396ec59fed98b6f08d7f581013f821c",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/index.html"
+  },
+  {
+   "path": "scripts/_common.py",
+   "bytes": 4286,
+   "sha256": "781d85fceabc987b959eb275ed8efd56c6736d06332f8febb6d70a5c1be7cfbd",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts/_common.py"
+  },
+  {
+   "path": "scripts/diag_raft.py",
+   "bytes": 11437,
+   "sha256": "c091763c79ccb7f77cf75a3d9322bb1bb0ee386c104da77fa7d2c3cd99ef94a9",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts/diag_raft.py"
+  },
+  {
+   "path": "scripts/diag_reconstruction.py",
+   "bytes": 13081,
+   "sha256": "e0e2bcd5897fcba863eee467a28e755d30e28fb8ecfb76320db5fae251fb310a",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts/diag_reconstruction.py"
+  },
+  {
+   "path": "scripts/diag_render.py",
+   "bytes": 17730,
+   "sha256": "aba454fd56696e48c37cea5b41aeb1fbe1ee53dcacc864b70de388468e45cd68",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts/diag_render.py"
+  },
+  {
+   "path": "scripts/diag_segmentation.py",
+   "bytes": 15338,
+   "sha256": "62cd4c1e0b300e75c0795da074374964c0db8416c5e6201ebe14297b7b4ec946",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts/diag_segmentation.py"
+  },
+  {
+   "path": "scripts/diag_trajectories.py",
+   "bytes": 11571,
+   "sha256": "2d1bddf2d149c97f792f4a70c0b64c559f48ceb2bd6564cfdc5b30520ebaf763",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts/diag_trajectories.py"
+  },
+  {
+   "path": "scripts/make_index.py",
+   "bytes": 6389,
+   "sha256": "55872d1f493fdc478f22a39343da1f2ded3b6bb311a6538ed2316fe23bd6c8d7",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts/make_index.py"
+  },
+  {
+   "path": "scripts/make_provenance.py",
+   "bytes": 5796,
+   "sha256": "211bc9f30e7bba28d339d82609df5e8f570367d67690fbbbb33b111121ceb88c",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts/make_provenance.py"
+  },
+  {
+   "path": "stage_01_segmentation/battery_segmentation_failures.jpg",
+   "bytes": 154786,
+   "sha256": "2d747d3485dc9ec32085ec123cdd26cc952ef23c4ebc3c367e3ac1bd6ac13c7e",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_01_segmentation/battery_segmentation_failures.jpg"
+  },
+  {
+   "path": "stage_01_segmentation/battery_segmentation_overlay.mp4",
+   "bytes": 2075454,
+   "sha256": "179c0230c6c6482673daaadd11b187e3d1aeb8b8e793b31e6e66a91cb5a90c0f",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_01_segmentation/battery_segmentation_overlay.mp4"
+  },
+  {
+   "path": "stage_01_segmentation/battery_segmentation_panels.jpg",
+   "bytes": 293389,
+   "sha256": "180fdf81b09e922137c9444e8a1979ee7e3ae6348b86f6db79c22fb2997b2a7d",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_01_segmentation/battery_segmentation_panels.jpg"
+  },
+  {
+   "path": "stage_01_segmentation/battery_segmentation_stability.png",
+   "bytes": 184099,
+   "sha256": "13f837b094e6d7ff707dd30b623730afb9936f5cdc547392d880a54ca96fa956",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_01_segmentation/battery_segmentation_stability.png"
+  },
+  {
+   "path": "stage_01_segmentation/pringles_segmentation_failures.jpg",
+   "bytes": 170066,
+   "sha256": "d2207e2a12bd9395b27a2ac764a2c56bd6a19775361179b29d7f68e4e5148313",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_01_segmentation/pringles_segmentation_failures.jpg"
+  },
+  {
+   "path": "stage_01_segmentation/pringles_segmentation_overlay.mp4",
+   "bytes": 1522147,
+   "sha256": "27fbd221fe270e3d17b7bd3961e79b6136c8da4ed818d34894113b0a15e7089d",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_01_segmentation/pringles_segmentation_overlay.mp4"
+  },
+  {
+   "path": "stage_01_segmentation/pringles_segmentation_panels.jpg",
+   "bytes": 304676,
+   "sha256": "0648588eb90c10f0c8e3d81553b7b2bb45c21ff5f6081245245d66f0ffb3f111",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_01_segmentation/pringles_segmentation_panels.jpg"
+  },
+  {
+   "path": "stage_01_segmentation/pringles_segmentation_stability.png",
+   "bytes": 157747,
+   "sha256": "eb2fb822174da0e31428e9dbf62e2b979bf85bb91f6dac46c459978bd4f4430f",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_01_segmentation/pringles_segmentation_stability.png"
+  },
+  {
+   "path": "stage_02_tracking/raft_failure_example.jpg",
+   "bytes": 86115,
+   "sha256": "c4fb0c76ecb153f644c6cd2c87ffc61829173d39270c23244799b6ee36ed0239",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_02_tracking/raft_failure_example.jpg"
+  },
+  {
+   "path": "stage_02_tracking/raft_flow_colour.jpg",
+   "bytes": 117390,
+   "sha256": "6eb8ded245a4f7bd71163d6e1c98d973467290ff86f2838a7d74a662c70c5daf",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_02_tracking/raft_flow_colour.jpg"
+  },
+  {
+   "path": "stage_02_tracking/raft_survival_fb.png",
+   "bytes": 113047,
+   "sha256": "56b9718b3405c96e9d3e5aa08e063925bf8fa6554369cb48f73f3fdbd99611ae",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_02_tracking/raft_survival_fb.png"
+  },
+  {
+   "path": "stage_02_tracking/raft_tracking_trails.mp4",
+   "bytes": 2211897,
+   "sha256": "625003248d1867f033b8cc07475f72cb03c0921dc080cc3f28bdf5bfda967ab6",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_02_tracking/raft_tracking_trails.mp4"
+  },
+  {
+   "path": "stage_03_reconstruction/battery_3d_fk_animation.mp4",
+   "bytes": 582103,
+   "sha256": "999680d08f53c99a5ef9d9d86f19de48ea8fda96b89af1a5a8149997e0ddcd39",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/battery_3d_fk_animation.mp4"
+  },
+  {
+   "path": "stage_03_reconstruction/battery_3d_frames.png",
+   "bytes": 203068,
+   "sha256": "23759c811992649af9e12eadff5691fbacfb3e2d4068def77e8d8e097328ff0a",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/battery_3d_frames.png"
+  },
+  {
+   "path": "stage_03_reconstruction/battery_calibration_before_after.jpg",
+   "bytes": 106165,
+   "sha256": "de4503477e6b6af6f1c91eac646755d89aaff3adcc489a726a4fce93344e46a0",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/battery_calibration_before_after.jpg"
+  },
+  {
+   "path": "stage_03_reconstruction/battery_fk_overlay.jpg",
+   "bytes": 114609,
+   "sha256": "37dbc15fd435e9d347c3b7a61b2e2be15f662cf8f01d6caff75602ac598a87fa",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/battery_fk_overlay.jpg"
+  },
+  {
+   "path": "stage_03_reconstruction/battery_object_lag_table.png",
+   "bytes": 169447,
+   "sha256": "420fc32dc005195a941a9f2ea2984998dd9d06af499de012c5d3364de7b982f6",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/battery_object_lag_table.png"
+  },
+  {
+   "path": "stage_03_reconstruction/pringles_3d_fk_animation.mp4",
+   "bytes": 264788,
+   "sha256": "7f2bbe45a44fa072509afaa68baa472235a20516d3af81ebfaa1ac187308dfd4",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/pringles_3d_fk_animation.mp4"
+  },
+  {
+   "path": "stage_03_reconstruction/pringles_3d_frames.png",
+   "bytes": 206551,
+   "sha256": "6b3e993f8f2d37909e9222891529172960ac1dad5a6b25e4dba9f203d9968c84",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/pringles_3d_frames.png"
+  },
+  {
+   "path": "stage_03_reconstruction/pringles_calibration_before_after.jpg",
+   "bytes": 127769,
+   "sha256": "42af8c3f64d1daad6c6e6daa42ccec9a58f683662bf3e250d654e84b3e9908e4",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/pringles_calibration_before_after.jpg"
+  },
+  {
+   "path": "stage_03_reconstruction/pringles_fk_overlay.jpg",
+   "bytes": 123670,
+   "sha256": "3bb4f413f4303025909ac78b6b78104eea13053bd0561459393eaceb6c8a3833",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/pringles_fk_overlay.jpg"
+  },
+  {
+   "path": "stage_03_reconstruction/pringles_object_lag_table.png",
+   "bytes": 133854,
+   "sha256": "9360664405e09c5f0e124528ca0bac6112c0ea4f599ea2fdd0e2be4ea0d4499d",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_03_reconstruction/pringles_object_lag_table.png"
+  },
+  {
+   "path": "stage_04_trajectories/battery_3d_recorded_vs_synthetic.mp4",
+   "bytes": 307862,
+   "sha256": "39e0d0adba007913570e024cb50f14205991ea514569a9e480882269371e504b",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/battery_3d_recorded_vs_synthetic.mp4"
+  },
+  {
+   "path": "stage_04_trajectories/battery_actions_real_vs_synthetic.png",
+   "bytes": 92698,
+   "sha256": "4fb6bca7a58eb2143a160a170fb04989cfc2df3f39fa43f470ddcc6bd6205143",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/battery_actions_real_vs_synthetic.png"
+  },
+  {
+   "path": "stage_04_trajectories/battery_joints_real_vs_synthetic.png",
+   "bytes": 89369,
+   "sha256": "245f26c0a6256bd115b2ede84c72ac5283c3ae8d44007b962ced3ec9481280e7",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/battery_joints_real_vs_synthetic.png"
+  },
+  {
+   "path": "stage_04_trajectories/battery_tcp_desired_vs_ik.png",
+   "bytes": 144007,
+   "sha256": "414deac156aefc2bc7d2c5fba60bee226637b0e62beedb078ed7bfd1ee504bfc",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/battery_tcp_desired_vs_ik.png"
+  },
+  {
+   "path": "stage_04_trajectories/battery_topdown_paths.png",
+   "bytes": 71057,
+   "sha256": "7cc916950e71505eef9f87c73b9d9f6cf43006b0e9e107074220c058115ff89e",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/battery_topdown_paths.png"
+  },
+  {
+   "path": "stage_04_trajectories/pringles_3d_recorded_vs_synthetic.mp4",
+   "bytes": 186065,
+   "sha256": "003d4532b081e2d4f8495df5706f54748768b84c54d34646847aa68c7ad6508d",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/pringles_3d_recorded_vs_synthetic.mp4"
+  },
+  {
+   "path": "stage_04_trajectories/pringles_actions_real_vs_synthetic.png",
+   "bytes": 180913,
+   "sha256": "f2806372bd8e323a78454fe8cc5b7d718008e7a22fd312217c6c52e0ef8ebb35",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/pringles_actions_real_vs_synthetic.png"
+  },
+  {
+   "path": "stage_04_trajectories/pringles_joints_real_vs_synthetic.png",
+   "bytes": 174869,
+   "sha256": "4131458ef642e36475cf1edceb3322d64543a47e7fbe534d1d9aa57f589ac645",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/pringles_joints_real_vs_synthetic.png"
+  },
+  {
+   "path": "stage_04_trajectories/pringles_tcp_desired_vs_ik.png",
+   "bytes": 211738,
+   "sha256": "79629e4056e9841fa64f186411131bab16ca8deac89bf2fb81a6290aa4142fe0",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/pringles_tcp_desired_vs_ik.png"
+  },
+  {
+   "path": "stage_04_trajectories/pringles_topdown_paths.png",
+   "bytes": 69608,
+   "sha256": "ab626ae891aac4e9f8f2e16d29b2f4b65b8344f7dd316c7ff8f5a693aba5b06c",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_04_trajectories/pringles_topdown_paths.png"
+  },
+  {
+   "path": "stage_05_rendering/battery_failure_frames.jpg",
+   "bytes": 146611,
+   "sha256": "e88978dd8bc0624a971cb544c27ee0aee2acd713e55c6a1f68031f2e5157428a",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/battery_failure_frames.jpg"
+  },
+  {
+   "path": "stage_05_rendering/battery_pair_annotated.mp4",
+   "bytes": 3011646,
+   "sha256": "8139be43c8e068e5674befabfc7e375ebe622e918b00515e6e5f5d0051fe0053",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/battery_pair_annotated.mp4"
+  },
+  {
+   "path": "stage_05_rendering/battery_render_panels_frame150.jpg",
+   "bytes": 156924,
+   "sha256": "6df8d8ecbbbe675ac888e94361f0c5cbb4019ac0fb61eb08e5fcc55928fbd924",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/battery_render_panels_frame150.jpg"
+  },
+  {
+   "path": "stage_05_rendering/battery_render_panels_frame262.jpg",
+   "bytes": 149680,
+   "sha256": "a7120fd98105ce5188603f9e43cadc1dd784d1b3bcec29ea1f41d6809caa96a5",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/battery_render_panels_frame262.jpg"
+  },
+  {
+   "path": "stage_05_rendering/battery_render_panels_frame290.jpg",
+   "bytes": 150044,
+   "sha256": "49cfb5dbe8568f7347e567f24f027d4695480ef13ead17add27cf34c3c2cc674",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/battery_render_panels_frame290.jpg"
+  },
+  {
+   "path": "stage_05_rendering/pringles_failure_frames.jpg",
+   "bytes": 158102,
+   "sha256": "b655ef8e808fdad54cc733c797e3cf438d6e453324ed8d7f161ef267991b5211",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/pringles_failure_frames.jpg"
+  },
+  {
+   "path": "stage_05_rendering/pringles_pair_annotated.mp4",
+   "bytes": 3861811,
+   "sha256": "9647e552e85ff11ea25636bd4274d8871f6fc8be400131d3a07b8ad6c3b03359",
+   "in_git": false,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/pringles_pair_annotated.mp4"
+  },
+  {
+   "path": "stage_05_rendering/pringles_render_panels_frame130.jpg",
+   "bytes": 168450,
+   "sha256": "7948e9c481da2a5e6265032899d9ab839042f5e45009836921d1ab1a67ce27fb",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/pringles_render_panels_frame130.jpg"
+  },
+  {
+   "path": "stage_05_rendering/pringles_render_panels_frame180.jpg",
+   "bytes": 168460,
+   "sha256": "1437c9116acdd89059f2346ad58835b2708716b0ac8257d00e61cb0f2c729386",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/pringles_render_panels_frame180.jpg"
+  },
+  {
+   "path": "stage_05_rendering/pringles_render_panels_frame235.jpg",
+   "bytes": 167690,
+   "sha256": "ebcd105117b5bf57e769fe9cd681ab9d7aff5b8216721bf5c67a72883da51b84",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_05_rendering/pringles_render_panels_frame235.jpg"
+  },
+  {
+   "path": "stage_06_cameras/battery_three_cameras.jpg",
+   "bytes": 231572,
+   "sha256": "1bba7310da078ed7cc16caf866bbef9e163b37dcdbc76596ca2ab6d578595886",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_06_cameras/battery_three_cameras.jpg"
+  },
+  {
+   "path": "stage_06_cameras/battery_wrist_flags.png",
+   "bytes": 49913,
+   "sha256": "e01c91be95f955fd8e5a9d11170bdf20c55e7b28de98086bb0d6511971ad7d63",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_06_cameras/battery_wrist_flags.png"
+  },
+  {
+   "path": "stage_06_cameras/pringles_three_cameras.jpg",
+   "bytes": 228737,
+   "sha256": "33fb61074ccc90b88e477e9fb14a93168a0a790c332db3ea31d3bb4e5fe6ff3b",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_06_cameras/pringles_three_cameras.jpg"
+  },
+  {
+   "path": "stage_06_cameras/pringles_wrist_flags.png",
+   "bytes": 56368,
+   "sha256": "e379d73b156f9641ddb34aec42208688ccd8a94251f2c566985519b57cccf026",
+   "in_git": true,
+   "local_location": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/stage_06_cameras/pringles_wrist_flags.png"
+  }
+ ],
+ "not_done": [
+  "no dataset regeneration",
+  "no Hub writes",
+  "no VLA training",
+  "no robot/CAN",
+  "no simulator",
+  "no frozen study modified",
+  "no v4A withheld wrist streams (pool records 10/17/24/31/38/45) read"
+ ]
+}

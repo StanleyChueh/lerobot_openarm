@@ -1,0 +1,181 @@
+{
+ "name": "recon_pringles",
+ "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_reconstruction.py pringles",
+ "cwd": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts",
+ "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+ "sfagen_code": "sfa_hf_export/sfagen/sfagen (byte-identical to research/sim_free_augmentation/sfagen/sfagen @ 50832b3)",
+ "started": "2026-11-10 16:00:21",
+ "wall_time_s": 17.7,
+ "gpu": {
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "0",
+  "peak_torch_allocated_gib": 0.103
+ },
+ "inputs": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/calibration.json": "b93d59b3afe1642ef8e8076d6fbdd22b9f1ed6d265e44ee5ae3f7b6c3e3a2772",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/table_height.json": "c730dc1393a3fa41601e519bc85fc37ff20e80d70ca1128444c735c98694a990",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep0.npz": "ce94c27976b3b1887a35386ba1f17e1e44c558e8cbfeb43fe4b5bff5f1a29a19"
+ },
+ "outputs": {
+  "stage_03_reconstruction/pringles_calibration_before_after.png": "8d33a9608cda7f77259fcbcd961edc0c9b9f0e67358e33745e5bcbf911e21a5e",
+  "stage_03_reconstruction/pringles_fk_overlay.png": "aa94521676b7e0501085379731cd12719fafe0c098b115ae7ce41361ea59f5ec",
+  "stage_03_reconstruction/pringles_3d_frames.png": "6b3e993f8f2d37909e9222891529172960ac1dad5a6b25e4dba9f203d9968c84",
+  "stage_03_reconstruction/pringles_3d_fk_animation.mp4": "cf56ba451a8e395985f82a3cd44aba87a3a38ad8e20e71f22b40ae051e952271",
+  "stage_03_reconstruction/pringles_object_lag_table.png": "9360664405e09c5f0e124528ca0bac6112c0ea4f599ea2fdd0e2be4ea0d4499d"
+ },
+ "notes": {
+  "calibration_json": {
+   "params7": [
+    0.051979558879318974,
+    0.009296965716161678,
+    0.016824596205050276,
+    -0.030949290021156494,
+    0.0007019861918872001,
+    -0.009926881310387962,
+    0.020121677009833045
+   ],
+   "fit_iou": {
+    "initial": 0.2933454202569049,
+    "fitted": 0.35767260647338367
+   },
+   "heldout_iou": {
+    "initial": 0.30684290542489007,
+    "fitted": 0.36054536416417077
+   },
+   "heldout_frames_improved": 0.9523809523809523,
+   "n_fit": 23,
+   "n_heldout": 42,
+   "runtime_s": 144.43496870994568,
+   "adopted": true,
+   "rule": "adopted if held-out IoU improves by > 0.005; confirm with `sfagen bench --compare-camera`"
+  },
+  "calibration_correction": {
+   "rotation_deg": 3.1753314546050766,
+   "translation_mm": 32.50991095001318,
+   "focal_scale": 1.020325482627735
+  },
+  "example_frame": 13,
+  "example_iou": {
+   "initial": 0.3471009063196034,
+   "calibrated": 0.41389478917160033
+  },
+  "object_silhouette_residual": {
+   "can": {
+    "median_iou": 0.6354312354312355,
+    "p10": 0.4764591131255405
+   }
+  },
+  "lag_final": -0.5,
+  "lag_scan_range": [
+   -4.0,
+   1.5,
+   0.01622237210692118
+  ],
+  "photometric_range_db": 1.5844332681914732,
+  "table": 0.1997144684541088,
+  "table_rule": "median of known-size object silhouette fits (median IoU >= 0.5)",
+  "objects_info": {
+   "can": {
+    "name": "can",
+    "seg_px": 10609,
+    "tcp_at_grasp": [
+     0.24022745683562075,
+     0.027385262006766872,
+     0.28711993461510377
+    ],
+    "grasp_frame": 97,
+    "source": "render-and-compare (grasp-constrained)",
+    "silhouette_iou": 0.7774628369866465,
+    "table_z": 0.1997144684541088,
+    "offset_along_approach_m": 0.004999999999999961,
+    "proxy": "cylinder",
+    "dims": [
+     0.0375,
+     0.23
+    ],
+    "centre_xy": [
+     0.27214077952816174,
+     -0.00473233177882567
+    ],
+    "centre_vs_tcp_xy_mm": 45.27692564490863
+   }
+  },
+  "holders": {
+   "can": [
+    [
+     "table",
+     0,
+     100
+    ],
+    [
+     "R",
+     100,
+     181
+    ],
+    [
+     "L",
+     181,
+     273
+    ]
+   ]
+  },
+  "attachments": {
+   "can": [
+    [
+     [
+      0.388,
+      0.2302,
+      0.8924,
+      -0.0738
+     ],
+     [
+      0.6211,
+      -0.7807,
+      -0.0687,
+      0.0511
+     ],
+     [
+      0.6809,
+      0.581,
+      -0.4459,
+      0.0417
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    [
+     [
+      0.1708,
+      -0.049,
+      0.9841,
+      -0.1949
+     ],
+     [
+      -0.7738,
+      -0.625,
+      0.1032,
+      -0.0183
+     ],
+     [
+      0.61,
+      -0.7791,
+      -0.1446,
+      0.018
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ]
+   ]
+  }
+ },
+ "error": null
+}

@@ -1,0 +1,126 @@
+{
+ "name": "render_battery",
+ "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_render.py battery",
+ "cwd": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts",
+ "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+ "sfagen_code": "sfa_hf_export/sfagen/sfagen (byte-identical to research/sim_free_augmentation/sfagen/sfagen @ 50832b3)",
+ "started": "2026-11-10 16:04:30",
+ "wall_time_s": 33.75,
+ "gpu": {
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "1",
+  "peak_torch_allocated_gib": 1.712
+ },
+ "inputs": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/body/1_battery_x+6_y+0.npy": "6b5c5011615ebfe1ce21f91010bdbb89f664a820a8cd1b11247abd533c1e6173",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/candidates/ep1/battery_x+6_y+0.npz": "9948fe57eae0afba5d400609c5ac5b26e89376a2064d6b3bfbaa979c8423b9d7"
+ },
+ "outputs": {
+  "stage_05_rendering/battery_render_panels_frame150.png": "5f7e177e4e4b95778c4896f1bf48772c339e16aa7acdc00efc00dbfaa38497db",
+  "stage_05_rendering/battery_render_panels_frame262.png": "e75bff6eb14770bac19295c853f2338ead74b88e163830168686625017c6f328",
+  "stage_05_rendering/battery_render_panels_frame290.png": "112a7e916e15d1eb31ad3a28e86c8daf61c8349e2ccdb93543559c03bfbb778c",
+  "stage_05_rendering/battery_failure_frames.png": "0b2ded625fe628260d58d9cd6b856c81afa9202920d6f859723ec3d09342e8fd",
+  "stage_05_rendering/battery_pair_annotated.mp4": "ae30ef9abee8c6cc2ea6e5bff620654be753e7ec51a1c89b4f6dd2bafec0bf24",
+  "stage_06_cameras/battery_three_cameras.png": "a9a939b4ee760be610d628ad13666051c2167383875e3cd76697b00c021476cc",
+  "stage_06_cameras/battery_wrist_flags.png": "e01c91be95f955fd8e5a9d11170bdf20c55e7b28de98086bb0d6511971ad7d63"
+ },
+ "notes": {
+  "replica_vs_published": {
+   "150": {
+    "identical_px_frac": 1.0,
+    "max_abs_diff": 0,
+    "info": {
+     "moved_parts": 11,
+     "warped_px": 57047,
+     "borrowed_px": 2,
+     "inpainted_px": 2148
+    },
+    "published_info": {
+     "moved_parts": 11,
+     "warped_px": 57047,
+     "borrowed_px": 2,
+     "inpainted_px": 2148
+    }
+   },
+   "262": {
+    "identical_px_frac": 1.0,
+    "max_abs_diff": 0,
+    "info": {
+     "moved_parts": 11,
+     "warped_px": 37265,
+     "borrowed_px": 866,
+     "inpainted_px": 4388
+    },
+    "published_info": {
+     "moved_parts": 11,
+     "warped_px": 37265,
+     "borrowed_px": 866,
+     "inpainted_px": 4388
+    }
+   },
+   "290": {
+    "identical_px_frac": 1.0,
+    "max_abs_diff": 0,
+    "info": {
+     "moved_parts": 11,
+     "warped_px": 38246,
+     "borrowed_px": 1235,
+     "inpainted_px": 1127
+    },
+    "published_info": {
+     "moved_parts": 11,
+     "warped_px": 38246,
+     "borrowed_px": 1235,
+     "inpainted_px": 1127
+    }
+   }
+  },
+  "rendered_frames": 308,
+  "copied_frames": 468,
+  "inpainted_px_over_all_rendered_frames": {
+   "frames": 35658,
+   "median": 29.0,
+   "p95": 1496.1500000000015,
+   "max": 6282
+  },
+  "worst_frames": [
+   {
+    "render": "7_battery_x+6_y+0",
+    "frame": 299,
+    "inpainted_px": 6282,
+    "borrowed_px": 181
+   },
+   {
+    "render": "8_battery_x+6_y+0",
+    "frame": 259,
+    "inpainted_px": 5732,
+    "borrowed_px": 573
+   },
+   {
+    "render": "4_battery_x+6_y+0",
+    "frame": 289,
+    "inpainted_px": 5534,
+    "borrowed_px": 383
+   }
+  ],
+  "wrist_valid_fraction": {
+   "observation.images.wrist_cam": 0.6043814420700073,
+   "observation.images.right_wrist_cam": 0.6043814420700073
+  },
+  "wrist_offset_max_cm": {
+   "L": 0.0,
+   "R": 6.000720977783203
+  },
+  "wrist_offset_max_deg": {
+   "L": 1.707547198748216e-06,
+   "R": 0.1076953187584877
+  },
+  "published_wrist_vs_real_source_mean_abs_diff_8bit": {
+   "observation.images.wrist_cam": 1.341161329481337,
+   "observation.images.right_wrist_cam": 1.360807359483507
+  },
+  "frames_with_modified_state_but_reused_wrist": 307
+ },
+ "error": null
+}

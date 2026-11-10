@@ -1,0 +1,116 @@
+{
+ "name": "traj_battery",
+ "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_trajectories.py battery",
+ "cwd": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts",
+ "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+ "sfagen_code": "sfa_hf_export/sfagen/sfagen (byte-identical to research/sim_free_augmentation/sfagen/sfagen @ 50832b3)",
+ "started": "2026-11-10 16:02:17",
+ "wall_time_s": 36.73,
+ "gpu": {
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "1",
+  "peak_torch_allocated_gib": 0.12
+ },
+ "inputs": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/candidates/ep1/battery_x+6_y+0.npz": "9948fe57eae0afba5d400609c5ac5b26e89376a2064d6b3bfbaa979c8423b9d7",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/candidates/ep1/checks.json": "5342af9251a98eef06b708e912733fffb93478c247bbfdde2aa5d2cbc03c905d"
+ },
+ "outputs": {
+  "stage_04_trajectories/battery_tcp_desired_vs_ik.png": "414deac156aefc2bc7d2c5fba60bee226637b0e62beedb078ed7bfd1ee504bfc",
+  "stage_04_trajectories/battery_joints_real_vs_synthetic.png": "245f26c0a6256bd115b2ede84c72ac5283c3ae8d44007b962ced3ec9481280e7",
+  "stage_04_trajectories/battery_actions_real_vs_synthetic.png": "4fb6bca7a58eb2143a160a170fb04989cfc2df3f39fa43f470ddcc6bd6205143",
+  "stage_04_trajectories/battery_topdown_paths.png": "7cc916950e71505eef9f87c73b9d9f6cf43006b0e9e107074220c058115ff89e",
+  "stage_04_trajectories/battery_3d_recorded_vs_synthetic.mp4": "115382bac43d700b52225e790289303cc181af67b39116cc0b3b86abed3cb536"
+ },
+ "notes": {
+  "published_episode": 14,
+  "published_equals_candidate": true,
+  "replan_bit_identical": true,
+  "replan_s": 0.05,
+  "envelope_s": 1.01,
+  "check_s": 6.78,
+  "checks_saved": {
+   "ik_pos_err_mm_max": 0.09280322291477079,
+   "ik_rot_err_deg_max": 0.044983117173123824,
+   "speed_ratio_to_real_max": 1.0,
+   "accel_ratio_to_real_max": 1.0,
+   "min_mesh_distance_mm": 60.57992848305195,
+   "source_min_mesh_distance_same_frames_mm": 27.368750911197264,
+   "min_hand_distance_mm": 127.40547777867525,
+   "source_min_hand_distance_same_frames_mm": 126.72266715355354,
+   "lowest_arm_z_m": 0.26649116448713633,
+   "pass": true
+  },
+  "checks_rerun": {
+   "ik_pos_err_mm_max": 0.09280322291477079,
+   "ik_rot_err_deg_max": 0.044983117173123824,
+   "speed_ratio_to_real_max": 1.0,
+   "accel_ratio_to_real_max": 1.0,
+   "min_mesh_distance_mm": 60.57992848305195,
+   "source_min_mesh_distance_same_frames_mm": 27.368750911197264,
+   "min_hand_distance_mm": 127.40547777867525,
+   "source_min_hand_distance_same_frames_mm": 126.72266715355354,
+   "lowest_arm_z_m": 0.26649116448713633,
+   "pass": true
+  },
+  "marks": {
+   "t_motion": 8,
+   "t_grasp": 265,
+   "t_rejoin": 307,
+   "next_event": 434
+  },
+  "lead_frames": 2,
+  "placement": {
+   "in_view": true,
+   "on_table": true,
+   "plate_hsv_diff": [
+    1.0,
+    5.0,
+    4.0
+   ],
+   "gap_to_other_objects_m": 0.14983841342914483,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "moved_arms": [
+   "R"
+  ],
+  "shift_m": [
+   0.06,
+   0.0,
+   0.0
+  ],
+  "family": "object_position",
+  "all_candidates": {
+   "total": 240,
+   "passing": 114,
+   "by_family": {
+    "sum": {
+     "interaction_location": 52,
+     "object_position": 62
+    },
+    "count": {
+     "interaction_location": 80,
+     "object_position": 160
+    }
+   },
+   "failure_reason_counts": {
+    "clearance": 23,
+    "hands": 43,
+    "speed": 35,
+    "accel": 41,
+    "place:on_table": 10,
+    "place:robot_near": 53,
+    "ik_blend": 1,
+    "place:gap": 2
+   },
+   "ik_pos_err_mm_passing": {
+    "median": 0.0989144639019898,
+    "max": 0.09999790069840393
+   },
+   "source_clearance_zero_mm_candidates": 88
+  }
+ },
+ "error": null
+}

@@ -1,0 +1,98 @@
+{
+ "replica_vs_published": {
+  "150": {
+   "identical_px_frac": 1.0,
+   "max_abs_diff": 0,
+   "info": {
+    "moved_parts": 11,
+    "warped_px": 57047,
+    "borrowed_px": 2,
+    "inpainted_px": 2148
+   },
+   "published_info": {
+    "moved_parts": 11,
+    "warped_px": 57047,
+    "borrowed_px": 2,
+    "inpainted_px": 2148
+   }
+  },
+  "262": {
+   "identical_px_frac": 1.0,
+   "max_abs_diff": 0,
+   "info": {
+    "moved_parts": 11,
+    "warped_px": 37265,
+    "borrowed_px": 866,
+    "inpainted_px": 4388
+   },
+   "published_info": {
+    "moved_parts": 11,
+    "warped_px": 37265,
+    "borrowed_px": 866,
+    "inpainted_px": 4388
+   }
+  },
+  "290": {
+   "identical_px_frac": 1.0,
+   "max_abs_diff": 0,
+   "info": {
+    "moved_parts": 11,
+    "warped_px": 38246,
+    "borrowed_px": 1235,
+    "inpainted_px": 1127
+   },
+   "published_info": {
+    "moved_parts": 11,
+    "warped_px": 38246,
+    "borrowed_px": 1235,
+    "inpainted_px": 1127
+   }
+  }
+ },
+ "rendered_frames": 308,
+ "copied_frames": 468,
+ "inpainted_px_over_all_rendered_frames": {
+  "frames": 35658,
+  "median": 29.0,
+  "p95": 1496.1500000000015,
+  "max": 6282
+ },
+ "worst_frames": [
+  {
+   "render": "7_battery_x+6_y+0",
+   "frame": 299,
+   "inpainted_px": 6282,
+   "borrowed_px": 181
+  },
+  {
+   "render": "8_battery_x+6_y+0",
+   "frame": 259,
+   "inpainted_px": 5732,
+   "borrowed_px": 573
+  },
+  {
+   "render": "4_battery_x+6_y+0",
+   "frame": 289,
+   "inpainted_px": 5534,
+   "borrowed_px": 383
+  }
+ ],
+ "wrist_valid_fraction": {
+  "observation.images.wrist_cam": 0.6043814420700073,
+  "observation.images.right_wrist_cam": 0.6043814420700073
+ },
+ "wrist_offset_max_cm": {
+  "L": 0.0,
+  "R": 6.000720977783203
+ },
+ "wrist_offset_max_deg": {
+  "L": 1.707547198748216e-06,
+  "R": 0.1076953187584877
+ },
+ "published_wrist_vs_real_source_mean_abs_diff_8bit": {
+  "observation.images.wrist_cam": 1.341161329481337,
+  "observation.images.right_wrist_cam": 1.360807359483507
+ },
+ "frames_with_modified_state_but_reused_wrist": 307
+}
+EXIT 0

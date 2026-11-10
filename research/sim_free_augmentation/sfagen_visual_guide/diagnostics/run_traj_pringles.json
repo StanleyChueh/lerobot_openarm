@@ -1,0 +1,108 @@
+{
+ "name": "traj_pringles",
+ "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_trajectories.py pringles",
+ "cwd": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts",
+ "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+ "sfagen_code": "sfa_hf_export/sfagen/sfagen (byte-identical to research/sim_free_augmentation/sfagen/sfagen @ 50832b3)",
+ "started": "2026-11-10 16:02:17",
+ "wall_time_s": 18.43,
+ "gpu": {
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "0",
+  "peak_torch_allocated_gib": 0.103
+ },
+ "inputs": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/candidates/ep0/interact_x+5_y+0_z+0.npz": "b26d3d7df0a95ddec8fcd283236bf0c4347d97a7120743f9ca485ec641b16776",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/candidates/ep0/checks.json": "8c5aba73f985b30268931aecb53a7ba0496813ad1ffcffb9196866e81d6a5494"
+ },
+ "outputs": {
+  "stage_04_trajectories/pringles_tcp_desired_vs_ik.png": "79629e4056e9841fa64f186411131bab16ca8deac89bf2fb81a6290aa4142fe0",
+  "stage_04_trajectories/pringles_joints_real_vs_synthetic.png": "4131458ef642e36475cf1edceb3322d64543a47e7fbe534d1d9aa57f589ac645",
+  "stage_04_trajectories/pringles_actions_real_vs_synthetic.png": "f2806372bd8e323a78454fe8cc5b7d718008e7a22fd312217c6c52e0ef8ebb35",
+  "stage_04_trajectories/pringles_topdown_paths.png": "ab626ae891aac4e9f8f2e16d29b2f4b65b8344f7dd316c7ff8f5a693aba5b06c",
+  "stage_04_trajectories/pringles_3d_recorded_vs_synthetic.mp4": "f5897f7b564282ea1ff1c029a1b231ebbf49e689633530dee8164f5ac875a287"
+ },
+ "notes": {
+  "published_episode": 6,
+  "published_equals_candidate": true,
+  "replan_bit_identical": true,
+  "replan_s": 0.04,
+  "envelope_s": 0.36,
+  "check_s": 3.52,
+  "checks_saved": {
+   "ik_pos_err_mm_max": 0.09393257703217993,
+   "ik_rot_err_deg_max": 0.03206284952643964,
+   "speed_ratio_to_real_max": 1.117070051869426,
+   "accel_ratio_to_real_max": 0.9011035791014531,
+   "min_mesh_distance_mm": 27.519813454992473,
+   "source_min_mesh_distance_same_frames_mm": 27.48816679431524,
+   "min_hand_distance_mm": 102.59850124900566,
+   "source_min_hand_distance_same_frames_mm": 102.61535452538529,
+   "lowest_arm_z_m": 0.28784362504251165,
+   "pass": true
+  },
+  "checks_rerun": {
+   "ik_pos_err_mm_max": 0.09393257703217993,
+   "ik_rot_err_deg_max": 0.03206284952643964,
+   "speed_ratio_to_real_max": 1.117070051869426,
+   "accel_ratio_to_real_max": 0.9011035791014531,
+   "min_mesh_distance_mm": 27.519813454992473,
+   "source_min_mesh_distance_same_frames_mm": 27.48816679431524,
+   "min_hand_distance_mm": 102.59850124900566,
+   "source_min_hand_distance_same_frames_mm": 102.61535452538529,
+   "lowest_arm_z_m": 0.28784362504251165,
+   "pass": true
+  },
+  "marks": {
+   "t_ramp_in": 107,
+   "t_window_start": 152,
+   "t_window_end": 210,
+   "t_ramp_out_end": 255,
+   "min_tcp_distance_m": 0.10261535452538528
+  },
+  "lead_frames": 2,
+  "placement": null,
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "shift_m": [
+   0.05,
+   0.0,
+   0.0
+  ],
+  "family": "interaction_location",
+  "all_candidates": {
+   "total": 160,
+   "passing": 96,
+   "by_family": {
+    "sum": {
+     "interaction_location": 67,
+     "object_position": 29
+    },
+    "count": {
+     "interaction_location": 80,
+     "object_position": 80
+    }
+   },
+   "failure_reason_counts": {
+    "hands": 15,
+    "place:robot_near": 31,
+    "place:on_table": 10,
+    "accel": 30,
+    "speed": 16,
+    "place:in_view": 3,
+    "ik": 9,
+    "ik_blend": 7,
+    "object_low": 3
+   },
+   "ik_pos_err_mm_passing": {
+    "median": 0.09703218170234199,
+    "max": 0.09998560727483957
+   },
+   "source_clearance_zero_mm_candidates": 0
+  }
+ },
+ "error": null
+}

@@ -1,0 +1,90 @@
+{
+ "published_episode": 14,
+ "published_equals_candidate": true,
+ "replan_bit_identical": true,
+ "replan_s": 0.05,
+ "envelope_s": 1.01,
+ "check_s": 6.78,
+ "checks_saved": {
+  "ik_pos_err_mm_max": 0.09280322291477079,
+  "ik_rot_err_deg_max": 0.044983117173123824,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 60.57992848305195,
+  "source_min_mesh_distance_same_frames_mm": 27.368750911197264,
+  "min_hand_distance_mm": 127.40547777867525,
+  "source_min_hand_distance_same_frames_mm": 126.72266715355354,
+  "lowest_arm_z_m": 0.26649116448713633,
+  "pass": true
+ },
+ "checks_rerun": {
+  "ik_pos_err_mm_max": 0.09280322291477079,
+  "ik_rot_err_deg_max": 0.044983117173123824,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 60.57992848305195,
+  "source_min_mesh_distance_same_frames_mm": 27.368750911197264,
+  "min_hand_distance_mm": 127.40547777867525,
+  "source_min_hand_distance_same_frames_mm": 126.72266715355354,
+  "lowest_arm_z_m": 0.26649116448713633,
+  "pass": true
+ },
+ "marks": {
+  "t_motion": 8,
+  "t_grasp": 265,
+  "t_rejoin": 307,
+  "next_event": 434
+ },
+ "lead_frames": 2,
+ "placement": {
+  "in_view": true,
+  "on_table": true,
+  "plate_hsv_diff": [
+   1.0,
+   5.0,
+   4.0
+  ],
+  "gap_to_other_objects_m": 0.14983841342914483,
+  "robot_points_near_object_extra_vs_source": 0,
+  "ok": true
+ },
+ "moved_arms": [
+  "R"
+ ],
+ "shift_m": [
+  0.06,
+  0.0,
+  0.0
+ ],
+ "family": "object_position",
+ "all_candidates": {
+  "total": 240,
+  "passing": 114,
+  "by_family": {
+   "sum": {
+    "interaction_location": 52,
+    "object_position": 62
+   },
+   "count": {
+    "interaction_location": 80,
+    "object_position": 160
+   }
+  },
+  "failure_reason_counts": {
+   "clearance": 23,
+   "hands": 43,
+   "speed": 35,
+   "accel": 41,
+   "place:on_table": 10,
+   "place:robot_near": 53,
+   "ik_blend": 1,
+   "place:gap": 2
+  },
+  "ik_pos_err_mm_passing": {
+   "median": 0.0989144639019898,
+   "max": 0.09999790069840393
+  },
+  "source_clearance_zero_mm_candidates": 88
+ }
+}
+EXIT 0

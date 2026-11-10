@@ -1,0 +1,121 @@
+{
+ "calibration_correction": {
+  "rotation_deg": 1.5937084779462452,
+  "translation_mm": 22.87694401043056,
+  "focal_scale": 1.004447855160924
+ },
+ "example_frame": 416,
+ "example_iou": {
+  "initial": 0.22634458314069963,
+  "calibrated": 0.27871138693257097
+ },
+ "object_silhouette_residual": {
+  "station": {
+   "median_iou": 0.4058095304973074,
+   "p10": 0.3171689347136781
+  },
+  "battery": {
+   "median_iou": 0.16132178674172204,
+   "p10": 0.12194160886058306
+  }
+ },
+ "lag_final": -0.75,
+ "lag_scan_range": [
+  -4.0,
+  1.5,
+  0.004938625300091926
+ ],
+ "photometric_range_db": 1.2174552098367517,
+ "table": 0.254249134048755,
+ "table_rule": "lowest arm point over the source demos - 5 mm (object silhouette fits not confident)",
+ "objects_info": {
+  "station": {
+   "name": "station",
+   "seg_px": 6722,
+   "tcp_at_grasp": [
+    0.3238914271960869,
+    0.09293788524336913,
+    0.28574893700489695
+   ],
+   "grasp_frame": 101,
+   "source": "segmentation",
+   "proxy": "box",
+   "dims": [
+    0.12598079519772942,
+    0.06249168732424173,
+    0.06309787400979394
+   ],
+   "centre_xy": [
+    0.3211104601020951,
+    0.10224435953914851
+   ],
+   "centre_vs_tcp_xy_mm": 9.713096406186208
+  },
+  "battery": {
+   "name": "battery",
+   "seg_px": 1721,
+   "tcp_at_grasp": [
+    0.3238539899032876,
+    -0.0762640633500868,
+    0.2916942633056072
+   ],
+   "grasp_frame": 265,
+   "source": "render-and-compare (grasp-constrained)",
+   "silhouette_iou": 0.09345949535192563,
+   "table_z": 0.254249134048755,
+   "offset_along_approach_m": 0.012499999999999954,
+   "proxy": "cylinder",
+   "dims": [
+    0.00925,
+    0.065
+   ],
+   "centre_xy": [
+    0.3382663568541829,
+    -0.08323067501757475
+   ],
+   "centre_vs_tcp_xy_mm": 16.00781057024468
+  }
+ },
+ "holders": {
+  "station": [
+   [
+    "table",
+    0,
+    104
+   ],
+   [
+    "L",
+    104,
+    661
+   ],
+   [
+    "placed",
+    661,
+    776
+   ]
+  ],
+  "battery": [
+   [
+    "table",
+    0,
+    268
+   ],
+   [
+    "R",
+    268,
+    434
+   ],
+   [
+    "L",
+    434,
+    661
+   ],
+   [
+    "placed",
+    661,
+    776
+   ]
+  ]
+ }
+}
+EXIT 0
