@@ -1,54 +1,70 @@
-# This is the LeRobot-compatible VLA Training Pipeline
+# LeRobot OpenArm: collect, train and evaluate VLA policies on the real robot
 
-`official-lerobot-quest` is the shared integration baseline; `main` mirrors the same commit.
-Force and research tasks extend that baseline on separate branches. See [branch workflow](docs/BRANCH_WORKFLOW.md).
+This is the **robot execution branch**. `official-lerobot-quest` is the default branch and `main` is the same commit.
+Everything below the branch map covers how to set up, teleoperate, record, train and evaluate on OpenArm.
 
-### Choose a branch
+Research and experiments live on their own branches. Each research branch's README explains:
+- what the branch is for;
+- its results, with exact commits and dataset revisions;
+- the commands to reproduce them.
+
+## Branch map
 
 ```mermaid
-flowchart TB
-    BASE["official-lerobot-quest · DEFAULT<br/>Collect demonstrations → train VLA → evaluate<br/>Latest shared collection and evaluation fixes"]
-    MAIN["main<br/>Identical commit and code"]
-    BASE ---|mirror| MAIN
+flowchart LR
+    BASE["official-lerobot-quest = main<br/>RUN THE ROBOT<br/>teleop · record · train · evaluate"]
 
-    BASE -->|shared baseline| BENCH["force-aware/gate2a-bench-prep<br/>Prepare telemetry collection<br/>Check timing, freshness and bus health"]
-    BASE -->|shared baseline| NEXT["research/factr2-next-openarm<br/>Adapt FACTR2/NEXT<br/>Export data → train model → estimate residuals"]
-    BASE -->|shared baseline| SIMFREE["research/contact-aware-augmentation<br/>Sim-free dataset generation<br/>Real demo → new motion → video + candidate actions"]
+    BASE -->|shared baseline| HIST["research/contact-aware-augmentation<br/>FROZEN sim-free study history<br/>Gate 0/1/1R · v1 → v4B.1 · SD10"]
+    HIST --> G1["research/sd10-g1-generation<br/>FROZEN SD10-G1 screen<br/>INCONCLUSIVE"]
+    HIST --> SFAGEN["research/sfagen-unified-pipeline<br/>PUBLISHED generator<br/>4 HF datasets (v3.0)"]
+    SFAGEN --> F1W["research/sfagen-workspace-f1w<br/>ACTIVE sfagen development<br/>source-budget datasets · F1W · tests"]
 
-    BENCH -.->|"prerequisite: validated contact-free telemetry"| NEXT
-    NEXT --> FORCE["Goal: external-effort estimates<br/>Real-data estimation not yet validated"]
-    SIMFREE --> SYNTH["Goal: augmented training data<br/>One-episode prototype; validation still needed"]
+    BASE -->|shared baseline| BENCH["force-aware/gate2a-bench-prep<br/>motor telemetry + bench readiness<br/>hardware not run"]
+    BASE -->|shared baseline| NEXT["research/factr2-next-openarm<br/>FACTR2/NEXT effort estimation<br/>offline only"]
+    BENCH -.->|"needs validated contact-free telemetry"| NEXT
 
-    ARCHIVE["archive/official-lerobot-quest-real2sim2real-v0-codex<br/>Frozen real → sim replay experiment<br/>Historical reference only"]
+    ARCH["archive/official-lerobot-quest-real2sim2real-v0-codex<br/>FROZEN legacy real→sim replay"]
 
-    classDef baseline fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef run fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef active fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef frozen fill:#f3f4f6,stroke:#6b7280,color:#374151
     classDef force fill:#fef3c7,stroke:#d97706,color:#451a03
-    classDef generation fill:#dcfce7,stroke:#16a34a,color:#14532d
-    classDef archived fill:#f3f4f6,stroke:#6b7280,color:#374151
-    class BASE,MAIN baseline
-    class BENCH,NEXT,FORCE force
-    class SIMFREE,SYNTH generation
-    class ARCHIVE archived
+    class BASE run
+    class SFAGEN,F1W active
+    class HIST,G1,ARCH frozen
+    class BENCH,NEXT force
 ```
 
-**Read the arrows:** “shared baseline” means the task branch includes the default branch's code.
-The dotted arrow is a data prerequisite for NEXT, not an automatic branch merge or a completed hardware run.
-Reviewed collection/evaluation fixes return to the default branch, then propagate to `main` and the task branches.
+**How to read it.** An arrow means the lower branch contains the upper branch's commits. The dotted arrow is a data
+prerequisite, not a merge. Blue is robot execution, green is current simulation-free augmentation work, grey is frozen
+evidence (never rewritten), and amber is force-estimation work.
 
-| Branch | Purpose | Short pipeline |
-|---|---|---|
-| [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Latest shared dataset collection and evaluation functions, including evaluation timing fixes | Record demonstrations → train VLA → evaluate → inspect results |
-| [`main`](https://github.com/StanleyChueh/lerobot_openarm/tree/main) | Identical mirror of the default branch | Same pipeline as default; develop shared fixes on `official-lerobot-quest` |
-| [`force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/force-aware/gate2a-bench-prep) | Prepare motor telemetry collection and check signal reliability for later force estimation | Record telemetry → check timing, freshness and bus health → decide whether data collection can proceed |
-| [`research/factr2-next-openarm`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/factr2-next-openarm) | Adapt FACTR2/NEXT to OpenArm with data export and external-effort estimation tools | Validated contact-free telemetry → NEXT export → train model → estimate external-effort residuals |
-| [`research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/contact-aware-augmentation) | Sim-free dataset generation research; currently a one-episode prototype | Real demonstration → recover motion → modify hand-over → synthesize video + candidate actions → validate |
-| [`archive/official-lerobot-quest-real2sim2real-v0-codex`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/official-lerobot-quest-real2sim2real-v0-codex) | Frozen legacy replay and validation experiment | Real trajectory → replay in simulation → compare schema / visuals → validate replay dataset |
+| Branch | What it is for | Status | Key commit / data |
+|---|---|---|---|
+| [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Robot execution: Quest teleop, recording, training, real/sim evaluation | active | this README |
+| [`main`](https://github.com/StanleyChueh/lerobot_openarm/tree/main) | Mirror of the default branch | mirror | same commit as default |
+| [`research/sfagen-unified-pipeline`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-unified-pipeline) | `sfagen`: the simulation-free generator that produced the 4 public OpenArm synthetic datasets, plus its visual walkthrough | published; independent review pending | code of the datasets = `50832b3` |
+| [`research/sfagen-workspace-f1w`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-workspace-f1w) | Current sfagen development: 1–9-source budget datasets, workspace-wide object positions (F1W), tests, dataset provenance | active; F1W unreviewed | budget datasets = `5d81f2f` |
+| [`research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/contact-aware-augmentation) | All earlier sim-free research: contact verifier (Gate 0/1/1R), generation feasibility, sim-free v1–v4B.1, SD10 source selection and SD10-L1 | **frozen** (name kept: sealed protocols cite it) | last study `04968cb` |
+| [`research/sd10-g1-generation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sd10-g1-generation) | SD10-G1: generation yield of three fixed source sets | **frozen**; INCONCLUSIVE | `5c7a825` |
+| [`force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/force-aware/gate2a-bench-prep) | Read-only motor telemetry sidecar and Gate-2A bench readiness | offline done; bench not run | Gate 2A `f558bc2` |
+| [`research/factr2-next-openarm`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/factr2-next-openarm) | FACTR2/NEXT adapter: telemetry export, model, external-effort residuals | offline (Gate 3A); real data UNKNOWN | Gate 3A `94682a4` |
+| [`archive/official-lerobot-quest-real2sim2real-v0-codex`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/official-lerobot-quest-real2sim2real-v0-codex) | Legacy real→sim replay dataset and validation tools (uses a physics simulator) | **frozen**, historical only | `14c2376` |
 
-All active task branches extend the default baseline; archive refs preserve historical code.
-The force pipeline is prepared offline; hardware collection and real-data estimation remain unvalidated.
-NEXT requires motor telemetry that standard OpenArm datasets may not contain. Its residuals are not calibrated force measurements in Newtons.
-Sim-free outputs are not yet a validated training dataset; the branch also retains earlier verifier and simulation-feasibility experiments.
-The superseded telemetry Gate 1 milestone is preserved as tag `archive/force-aware/telemetry-gate1-2026-11-05`.
+**Superseded refs:**
+- `docs/sfagen-visual-walkthrough` was folded into `research/sfagen-unified-pipeline` on 2026-11-12 (tag
+  `archive/docs-sfagen-visual-walkthrough-2026-11-12`).
+- The telemetry Gate-1 milestone is tag `archive/force-aware/telemetry-gate1-2026-11-05`.
+
+**New branches** are named `<line>/<topic>`, where the line is one of:
+- `research/sfagen-*` (generator work);
+- `research/sfa-*` (sim-free studies);
+- `force-aware/*`, or `research/factr2-*` (force);
+- `docs/*`;
+- `archive/*`.
+
+Existing names are kept because frozen protocols, reviews and the research notes refer to them. Rules for syncing
+branches are in [docs/BRANCH_WORKFLOW.md](docs/BRANCH_WORKFLOW.md).
 
 ![Real and sim data collection, training and evaluation pipeline](docs/pipeline.svg)
 
