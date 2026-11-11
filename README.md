@@ -95,8 +95,22 @@ in `~/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_{pringles_handover,ba
 
 **Cost on one RTX 4090** (HANDOFF §6): Pringles ≈ 1.3 h, battery ≈ 3.2 h for a whole dataset.
 
-The cross-pipeline benchmark (`tools/xbench.py`) and the other `tools/` scripts on this branch still point at the old
-external paths. Use the fixed versions on `research/sfagen-workspace-f1w`.
+**The results tables above.** The `tools/` scripts on this branch still point at the old external paths. Run them from a
+`research/sfagen-workspace-f1w` checkout instead: its tools import the tracked code, and it has the same `sfagen/` code
+plus fixes. All of these need the `configs/work` and `logs` links (see that branch's README).
+
+```bash
+cd research/sim_free_augmentation/sfagen                 # in the research/sfagen-workspace-f1w checkout
+PY="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 $HOME/Stanley_ws/lerobot_openarm/.venv/bin/python"
+$PY -B tools/xbench.py pringles 0,2,3,4,6,7,9 cuda:0 xbench_pringles.json   # renderer fidelity, Pringles (GPU)
+$PY -B tools/xbench.py battery 3,5,8,9 cuda:0 xbench_battery.json            # renderer fidelity, battery (GPU)
+$PY -B tools/coverage.py                                                     # coverage table -> logs/coverage.json (CPU)
+$PY -B tools/make_cards.py pringles; $PY -B tools/make_cards.py battery      # dataset cards
+DRY_RUN=1 $PY -B tools/push_unified.py                                       # publication plan only; no upload
+```
+
+None of these were re-run after publication. The published numbers are in `results/xbench_*_final.json` and
+`results/coverage.json` on this branch.
 
 ## Limitations and known defects (keep these visible)
 
