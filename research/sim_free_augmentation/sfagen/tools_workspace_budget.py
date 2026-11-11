@@ -11,7 +11,9 @@ from sfagen.checks import Checker
 from sfagen.why import reasons
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('config');ap.add_argument('--pool-data',required=True);ap.add_argument('--exclude',required=True);ap.add_argument('--pool-revision',required=True);ap.add_argument('--comparison-work');a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('config');ap.add_argument('--pool-data',required=True);ap.add_argument('--exclude',required=True);ap.add_argument('--pool-revision',required=True);ap.add_argument('--comparison-work')
+ ap.add_argument('--max-shift-cm',type=float,help='keep only candidates whose object moved at most this far (R1 shift limit)')
+ ap.add_argument('--out',help='output JSON (default: <work>/source_budget.json)');a=ap.parse_args()
  ctx=Context(a.config);ck=Checker(ctx);r=ctx.robot;E=ctx.episodes();names=list(ctx.cfg['objects']);exclude=set(map(int,a.exclude.split(',')))
  def positions(S,A):
   ev=r.gripper_events(A);out={}
@@ -59,6 +61,7 @@ def main():
   except QhullError:area=0.
   return {'within_2cm':int((dist<=2).sum()),'median_nn_cm':float(np.median(dist)),'hull_cm2':area}
  methods={'workspace':candidates(ctx.work)}
+ if a.max_shift_cm is not None:methods[f'workspace_max{a.max_shift_cm:g}cm']=[c for c in methods['workspace'] if c['shift_cm']<=a.max_shift_cm+1e-9]
  if a.comparison_work:
   methods['legacy_dense']=candidates(Path(a.comparison_work),True)
   methods['legacy_dense_label_checked']=[c for c in methods['legacy_dense'] if c['legacy_label_error']<=2e-6]
@@ -72,5 +75,6 @@ def main():
     row[method]={'accepted_episodes':len(ok),'objects':{name:{'accepted_object_variants':sum(c['object']==name for c in ok),'max_shift_cm':max([c['shift_cm'] for c in ok if c['object']==name]+[0]),**score([src[e]['pos'][name] for e in sub]+[c['pos'][name] for c in ok if c['object']==name],name)} for name in names}}
    rows.append(row)
  out={'source_dataset':ctx.cfg['source'],'pool_revision':a.pool_revision,'pool_episode_ids':pool_ids,'metric':'FK at gripper close; geometric coverage proxy, not real object-pose truth','comparison_caveat':f"Different target locations (configured workspace budget {ctx.cfg.get('variations',{}).get('object_workspace',{}).get('n_targets')} vs 48 dense offsets per object) and hand-distance policies; coverage comparison is engineering, not isolated algorithm effect. Minimal retiming chosen with all configured sources, then stricter subset envelopes rechecked; small-N yield is conservative. Rig calibration reused.",'nested_first_n':[r for r in rows if r['subset']==E[:r['n']]],'all_subsets':rows}
- (ctx.work/'source_budget.json').write_text(json.dumps(out,indent=1));print(json.dumps(out['nested_first_n'],indent=1))
+ out['max_shift_cm']=a.max_shift_cm
+ Path(a.out or ctx.work/'source_budget.json').write_text(json.dumps(out,indent=1));print(json.dumps(out['nested_first_n'],indent=1))
 if __name__=='__main__':main()
