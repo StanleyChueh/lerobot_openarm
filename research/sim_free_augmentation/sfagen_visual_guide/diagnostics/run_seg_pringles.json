@@ -1,0 +1,89 @@
+{
+ "name": "seg_pringles",
+ "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_segmentation.py pringles --no-rerun",
+ "cwd": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts",
+ "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+ "sfagen_code": "sfa_hf_export/sfagen/sfagen (byte-identical to research/sim_free_augmentation/sfagen/sfagen @ 50832b3)",
+ "started": "2026-11-10 15:57:54",
+ "wall_time_s": 19.31,
+ "gpu": {
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "1",
+  "peak_torch_allocated_gib": 0.237
+ },
+ "inputs": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/sam2_ep0.npz": "c22919a08a1d0465ccc6c1a960246ac6769b69221ecc2e1aac6bd527ee6762c6",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep0.npz": "ce94c27976b3b1887a35386ba1f17e1e44c558e8cbfeb43fe4b5bff5f1a29a19"
+ },
+ "outputs": {
+  "stage_01_segmentation/pringles_segmentation_panels.png": "065ba317662704921e108eabfe40b3a2c36695e91fd9b0280727c4dd6ddae926",
+  "stage_01_segmentation/pringles_segmentation_stability.png": "eb2fb822174da0e31428e9dbf62e2b979bf85bb91f6dac46c459978bd4f4430f",
+  "stage_01_segmentation/pringles_segmentation_failures.png": "961932ef5f61edf562056e957416f24b50abdca37bcda8e6e600f76ee5505b3d",
+  "stage_01_segmentation/pringles_segmentation_overlay.mp4": "328002df1b6d346b8e05d2aaa44f95a67c9145dbf6821d780fe353af9e4c2ab8"
+ },
+ "notes": {
+  "sam2_cache": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/sam2_ep0.npz",
+  "sam2_model": "facebook/sam2.1-hiera-small",
+  "keyframe_every": 15,
+  "chunk": 150,
+  "exclude_links": [
+   "link0",
+   "link1",
+   "link2",
+   "link3"
+  ],
+  "lag_used_for_sam2_prompts": -1.75,
+  "lag_final_photometric": -0.5,
+  "cache_has_sam2_meta": false,
+  "sam2_meta_in_cache": null,
+  "statistics": {
+   "R": {
+    "frames": 273,
+    "frames_mesh_visible_gt300px": 273,
+    "frames_sam2_nonempty": 273,
+    "coverage_sam2_nonempty_when_mesh_visible": 1.0,
+    "iou_sam2_vs_mesh_silhouette": {
+     "median": 0.6541746175743736,
+     "p10": 0.587662308481939,
+     "min": 0.4888132497613217,
+     "argmin_frame": 67
+    },
+    "frame_to_frame_iou": {
+     "median": 0.9115090993575141,
+     "p5": 0.727909718371634,
+     "min": 0.3769494987003342,
+     "argmin_frame": 58
+    },
+    "frames_with_area_jump_gt_30pct": 0
+   },
+   "L": {
+    "frames": 273,
+    "frames_mesh_visible_gt300px": 273,
+    "frames_sam2_nonempty": 273,
+    "coverage_sam2_nonempty_when_mesh_visible": 1.0,
+    "iou_sam2_vs_mesh_silhouette": {
+     "median": 0.7221298528555989,
+     "p10": 0.615408717681141,
+     "min": 0.5837304423794774,
+     "argmin_frame": 194
+    },
+    "frame_to_frame_iou": {
+     "median": 0.9730074354512693,
+     "p5": 0.8798162990871535,
+     "min": 0.6818639744496603,
+     "argmin_frame": 150
+    },
+    "frames_with_area_jump_gt_30pct": 1
+   },
+   "objects": {
+    "can": {
+     "frames_nonempty": 273,
+     "median_px_when_nonempty": 12910.0
+    }
+   }
+  },
+  "statistics_caveat": "IoU vs the projected URDF mesh silhouette is AGREEMENT between two automatic estimates, not accuracy; no manual ground-truth masks exist for these episodes, so no mIoU/Dice/accuracy is reported."
+ },
+ "error": null
+}

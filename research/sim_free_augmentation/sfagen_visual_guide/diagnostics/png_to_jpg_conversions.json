@@ -1,0 +1,82 @@
+{
+ "stage_01_segmentation/battery_segmentation_failures.png": {
+  "png_sha256": "377c25c300995fae0e371d9f08922c76e3da7cc84a68abe15e7ed4570a2fecaf",
+  "jpg": "stage_01_segmentation/battery_segmentation_failures.jpg"
+ },
+ "stage_01_segmentation/battery_segmentation_panels.png": {
+  "png_sha256": "90655c583f8ef4bb34d40c4a062ef5e19054c9e73343e457b7ed5b0ad5c289d6",
+  "jpg": "stage_01_segmentation/battery_segmentation_panels.jpg"
+ },
+ "stage_01_segmentation/pringles_segmentation_failures.png": {
+  "png_sha256": "961932ef5f61edf562056e957416f24b50abdca37bcda8e6e600f76ee5505b3d",
+  "jpg": "stage_01_segmentation/pringles_segmentation_failures.jpg"
+ },
+ "stage_01_segmentation/pringles_segmentation_panels.png": {
+  "png_sha256": "065ba317662704921e108eabfe40b3a2c36695e91fd9b0280727c4dd6ddae926",
+  "jpg": "stage_01_segmentation/pringles_segmentation_panels.jpg"
+ },
+ "stage_02_tracking/raft_failure_example.png": {
+  "png_sha256": "99a759f341f1ecb5d59f6b4f1f8c021290d608f3805281ea0984acc2835f4cb3",
+  "jpg": "stage_02_tracking/raft_failure_example.jpg"
+ },
+ "stage_02_tracking/raft_flow_colour.png": {
+  "png_sha256": "1c1cee319f466ce900c69892feefdaee1c093f0e8830ad59d1447f304dca8308",
+  "jpg": "stage_02_tracking/raft_flow_colour.jpg"
+ },
+ "stage_03_reconstruction/battery_calibration_before_after.png": {
+  "png_sha256": "4a309c181b8939dd701f0ac9468f1ece5e49feb23a4ab6263a80d277d802d88b",
+  "jpg": "stage_03_reconstruction/battery_calibration_before_after.jpg"
+ },
+ "stage_03_reconstruction/battery_fk_overlay.png": {
+  "png_sha256": "8b9528c4b526d15498413d916ddc7e4c3616a2b0474649154fddd365e72ce6dc",
+  "jpg": "stage_03_reconstruction/battery_fk_overlay.jpg"
+ },
+ "stage_03_reconstruction/pringles_calibration_before_after.png": {
+  "png_sha256": "8d33a9608cda7f77259fcbcd961edc0c9b9f0e67358e33745e5bcbf911e21a5e",
+  "jpg": "stage_03_reconstruction/pringles_calibration_before_after.jpg"
+ },
+ "stage_03_reconstruction/pringles_fk_overlay.png": {
+  "png_sha256": "aa94521676b7e0501085379731cd12719fafe0c098b115ae7ce41361ea59f5ec",
+  "jpg": "stage_03_reconstruction/pringles_fk_overlay.jpg"
+ },
+ "stage_05_rendering/battery_failure_frames.png": {
+  "png_sha256": "0b2ded625fe628260d58d9cd6b856c81afa9202920d6f859723ec3d09342e8fd",
+  "jpg": "stage_05_rendering/battery_failure_frames.jpg"
+ },
+ "stage_05_rendering/battery_render_panels_frame150.png": {
+  "png_sha256": "5f7e177e4e4b95778c4896f1bf48772c339e16aa7acdc00efc00dbfaa38497db",
+  "jpg": "stage_05_rendering/battery_render_panels_frame150.jpg"
+ },
+ "stage_05_rendering/battery_render_panels_frame262.png": {
+  "png_sha256": "e75bff6eb14770bac19295c853f2338ead74b88e163830168686625017c6f328",
+  "jpg": "stage_05_rendering/battery_render_panels_frame262.jpg"
+ },
+ "stage_05_rendering/battery_render_panels_frame290.png": {
+  "png_sha256": "112a7e916e15d1eb31ad3a28e86c8daf61c8349e2ccdb93543559c03bfbb778c",
+  "jpg": "stage_05_rendering/battery_render_panels_frame290.jpg"
+ },
+ "stage_05_rendering/pringles_failure_frames.png": {
+  "png_sha256": "9e100775538b232349afd998828714eab2741904b3e48680be6e1283457e89b3",
+  "jpg": "stage_05_rendering/pringles_failure_frames.jpg"
+ },
+ "stage_05_rendering/pringles_render_panels_frame130.png": {
+  "png_sha256": "56c59c0a121de4c871cf1fd894ba1ff4af882d2c932562638e713d10f3cf5ba8",
+  "jpg": "stage_05_rendering/pringles_render_panels_frame130.jpg"
+ },
+ "stage_05_rendering/pringles_render_panels_frame180.png": {
+  "png_sha256": "af0fec432ac98e3ec9086bfa33c1573695239ea52bf64c5c6e1e619ee6097909",
+  "jpg": "stage_05_rendering/pringles_render_panels_frame180.jpg"
+ },
+ "stage_05_rendering/pringles_render_panels_frame235.png": {
+  "png_sha256": "ca3714460d3c1895aa88af416a7f42d6be9c67124144d5b880bf927af76a40dd",
+  "jpg": "stage_05_rendering/pringles_render_panels_frame235.jpg"
+ },
+ "stage_06_cameras/battery_three_cameras.png": {
+  "png_sha256": "a9a939b4ee760be610d628ad13666051c2167383875e3cd76697b00c021476cc",
+  "jpg": "stage_06_cameras/battery_three_cameras.jpg"
+ },
+ "stage_06_cameras/pringles_three_cameras.png": {
+  "png_sha256": "fe25e8dc9d956de9286b2d35039d2fdcdc2673bab07174278053e80861e43bbb",
+  "jpg": "stage_06_cameras/pringles_three_cameras.jpg"
+ }
+}

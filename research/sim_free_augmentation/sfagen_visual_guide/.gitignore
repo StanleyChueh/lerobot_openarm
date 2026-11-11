@@ -1,0 +1,5 @@
+# large media stay local (see ARTIFACT_PROVENANCE.json for paths + SHA-256)
+*.mp4
+*.gif
+*.npz
+*.npy

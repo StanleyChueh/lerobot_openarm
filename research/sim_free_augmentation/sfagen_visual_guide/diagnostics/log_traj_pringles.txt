@@ -1,0 +1,82 @@
+{
+ "published_episode": 6,
+ "published_equals_candidate": true,
+ "replan_bit_identical": true,
+ "replan_s": 0.04,
+ "envelope_s": 0.36,
+ "check_s": 3.52,
+ "checks_saved": {
+  "ik_pos_err_mm_max": 0.09393257703217993,
+  "ik_rot_err_deg_max": 0.03206284952643964,
+  "speed_ratio_to_real_max": 1.117070051869426,
+  "accel_ratio_to_real_max": 0.9011035791014531,
+  "min_mesh_distance_mm": 27.519813454992473,
+  "source_min_mesh_distance_same_frames_mm": 27.48816679431524,
+  "min_hand_distance_mm": 102.59850124900566,
+  "source_min_hand_distance_same_frames_mm": 102.61535452538529,
+  "lowest_arm_z_m": 0.28784362504251165,
+  "pass": true
+ },
+ "checks_rerun": {
+  "ik_pos_err_mm_max": 0.09393257703217993,
+  "ik_rot_err_deg_max": 0.03206284952643964,
+  "speed_ratio_to_real_max": 1.117070051869426,
+  "accel_ratio_to_real_max": 0.9011035791014531,
+  "min_mesh_distance_mm": 27.519813454992473,
+  "source_min_mesh_distance_same_frames_mm": 27.48816679431524,
+  "min_hand_distance_mm": 102.59850124900566,
+  "source_min_hand_distance_same_frames_mm": 102.61535452538529,
+  "lowest_arm_z_m": 0.28784362504251165,
+  "pass": true
+ },
+ "marks": {
+  "t_ramp_in": 107,
+  "t_window_start": 152,
+  "t_window_end": 210,
+  "t_ramp_out_end": 255,
+  "min_tcp_distance_m": 0.10261535452538528
+ },
+ "lead_frames": 2,
+ "placement": null,
+ "moved_arms": [
+  "R",
+  "L"
+ ],
+ "shift_m": [
+  0.05,
+  0.0,
+  0.0
+ ],
+ "family": "interaction_location",
+ "all_candidates": {
+  "total": 160,
+  "passing": 96,
+  "by_family": {
+   "sum": {
+    "interaction_location": 67,
+    "object_position": 29
+   },
+   "count": {
+    "interaction_location": 80,
+    "object_position": 80
+   }
+  },
+  "failure_reason_counts": {
+   "hands": 15,
+   "place:robot_near": 31,
+   "place:on_table": 10,
+   "accel": 30,
+   "speed": 16,
+   "place:in_view": 3,
+   "ik": 9,
+   "ik_blend": 7,
+   "object_low": 3
+  },
+  "ik_pos_err_mm_passing": {
+   "median": 0.09703218170234199,
+   "max": 0.09998560727483957
+  },
+  "source_clearance_zero_mm_candidates": 0
+ }
+}
+EXIT 0

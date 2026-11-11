@@ -1,0 +1,63 @@
+{
+ "sam2_cache": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/sam2_ep0.npz",
+ "sam2_model": "facebook/sam2.1-hiera-small",
+ "keyframe_every": 15,
+ "chunk": 150,
+ "exclude_links": [
+  "link0",
+  "link1",
+  "link2",
+  "link3"
+ ],
+ "lag_used_for_sam2_prompts": -1.75,
+ "lag_final_photometric": -0.5,
+ "cache_has_sam2_meta": false,
+ "sam2_meta_in_cache": null,
+ "statistics": {
+  "R": {
+   "frames": 273,
+   "frames_mesh_visible_gt300px": 273,
+   "frames_sam2_nonempty": 273,
+   "coverage_sam2_nonempty_when_mesh_visible": 1.0,
+   "iou_sam2_vs_mesh_silhouette": {
+    "median": 0.6541746175743736,
+    "p10": 0.587662308481939,
+    "min": 0.4888132497613217,
+    "argmin_frame": 67
+   },
+   "frame_to_frame_iou": {
+    "median": 0.9115090993575141,
+    "p5": 0.727909718371634,
+    "min": 0.3769494987003342,
+    "argmin_frame": 58
+   },
+   "frames_with_area_jump_gt_30pct": 0
+  },
+  "L": {
+   "frames": 273,
+   "frames_mesh_visible_gt300px": 273,
+   "frames_sam2_nonempty": 273,
+   "coverage_sam2_nonempty_when_mesh_visible": 1.0,
+   "iou_sam2_vs_mesh_silhouette": {
+    "median": 0.7221298528555989,
+    "p10": 0.615408717681141,
+    "min": 0.5837304423794774,
+    "argmin_frame": 194
+   },
+   "frame_to_frame_iou": {
+    "median": 0.9730074354512693,
+    "p5": 0.8798162990871535,
+    "min": 0.6818639744496603,
+    "argmin_frame": 150
+   },
+   "frames_with_area_jump_gt_30pct": 1
+  },
+  "objects": {
+   "can": {
+    "frames_nonempty": 273,
+    "median_px_when_nonempty": 12910.0
+   }
+  }
+ },
+ "statistics_caveat": "IoU vs the projected URDF mesh silhouette is AGREEMENT between two automatic estimates, not accuracy; no manual ground-truth masks exist for these episodes, so no mIoU/Dice/accuracy is reported."
+}

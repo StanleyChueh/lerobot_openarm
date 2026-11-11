@@ -1,0 +1,73 @@
+{
+ "calibration_correction": {
+  "rotation_deg": 3.1753314546050766,
+  "translation_mm": 32.50991095001318,
+  "focal_scale": 1.020325482627735
+ },
+ "example_frame": 13,
+ "example_iou": {
+  "initial": 0.3471009063196034,
+  "calibrated": 0.41389478917160033
+ },
+ "object_silhouette_residual": {
+  "can": {
+   "median_iou": 0.6354312354312355,
+   "p10": 0.4764591131255405
+  }
+ },
+ "lag_final": -0.5,
+ "lag_scan_range": [
+  -4.0,
+  1.5,
+  0.01622237210692118
+ ],
+ "photometric_range_db": 1.5844332681914732,
+ "table": 0.1997144684541088,
+ "table_rule": "median of known-size object silhouette fits (median IoU >= 0.5)",
+ "objects_info": {
+  "can": {
+   "name": "can",
+   "seg_px": 10609,
+   "tcp_at_grasp": [
+    0.24022745683562075,
+    0.027385262006766872,
+    0.28711993461510377
+   ],
+   "grasp_frame": 97,
+   "source": "render-and-compare (grasp-constrained)",
+   "silhouette_iou": 0.7774628369866465,
+   "table_z": 0.1997144684541088,
+   "offset_along_approach_m": 0.004999999999999961,
+   "proxy": "cylinder",
+   "dims": [
+    0.0375,
+    0.23
+   ],
+   "centre_xy": [
+    0.27214077952816174,
+    -0.00473233177882567
+   ],
+   "centre_vs_tcp_xy_mm": 45.27692564490863
+  }
+ },
+ "holders": {
+  "can": [
+   [
+    "table",
+    0,
+    100
+   ],
+   [
+    "R",
+    100,
+    181
+   ],
+   [
+    "L",
+    181,
+    273
+   ]
+  ]
+ }
+}
+EXIT 0

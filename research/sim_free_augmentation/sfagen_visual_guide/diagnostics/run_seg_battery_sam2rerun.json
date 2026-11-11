@@ -1,0 +1,119 @@
+{
+ "name": "seg_battery",
+ "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_segmentation.py battery",
+ "cwd": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts",
+ "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+ "sfagen_code": "sfa_hf_export/sfagen/sfagen (byte-identical to research/sim_free_augmentation/sfagen/sfagen @ 50832b3)",
+ "started": "2026-11-10 15:54:15",
+ "wall_time_s": 69.06,
+ "gpu": {
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "1",
+  "peak_torch_allocated_gib": 4.661
+ },
+ "inputs": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/sam2_ep1.npz": "73c0354d82c69f1f294ecb803a0d275e799576902dab86829b132cc66a607437",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/recon_ep1.npz": "3f55d89ab69ea209838795f1b7a51cda3327f041d328990ae7d5a766e321a286"
+ },
+ "outputs": {
+  "stage_01_segmentation/battery_segmentation_panels.png": "90655c583f8ef4bb34d40c4a062ef5e19054c9e73343e457b7ed5b0ad5c289d6",
+  "stage_01_segmentation/battery_segmentation_stability.png": "b27e29a0d252b106c6020627abce4ab90dcbec9fc7b577d347b9a8fe91609c5e",
+  "stage_01_segmentation/battery_segmentation_failures.png": "2ccf05397cef50346e0a760ee71db8c78b69e94ee2332758432d951f2ed1876b",
+  "stage_01_segmentation/battery_segmentation_overlay.mp4": "b772162c6ae22e6b2db76e51345f33a16c3ceb3544a4c0539cd05ef83cbeb7cb"
+ },
+ "notes": {
+  "sam2_cache": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/sam2_ep1.npz",
+  "sam2_model": "facebook/sam2.1-hiera-small",
+  "keyframe_every": 15,
+  "chunk": 150,
+  "exclude_links": [
+   "link0",
+   "link1",
+   "link2",
+   "link3"
+  ],
+  "lag_used_for_sam2_prompts": -1.75,
+  "lag_final_photometric": -0.75,
+  "cache_has_sam2_meta": true,
+  "sam2_meta_in_cache": {
+   "model": "facebook/sam2.1-hiera-small",
+   "keyframe_every": 15,
+   "chunk": 150,
+   "prompts": 104
+  },
+  "statistics": {
+   "R": {
+    "frames": 776,
+    "frames_mesh_visible_gt300px": 776,
+    "frames_sam2_nonempty": 776,
+    "coverage_sam2_nonempty_when_mesh_visible": 1.0,
+    "iou_sam2_vs_mesh_silhouette": {
+     "median": 0.7150296536133489,
+     "p10": 0.49604649003702506,
+     "min": 0.43523824476018524,
+     "argmin_frame": 452
+    },
+    "frame_to_frame_iou": {
+     "median": 0.9706891262514991,
+     "p5": 0.8822846751386896,
+     "min": 0.7033184342408235,
+     "argmin_frame": 549
+    },
+    "frames_with_area_jump_gt_30pct": 0
+   },
+   "L": {
+    "frames": 776,
+    "frames_mesh_visible_gt300px": 776,
+    "frames_sam2_nonempty": 776,
+    "coverage_sam2_nonempty_when_mesh_visible": 1.0,
+    "iou_sam2_vs_mesh_silhouette": {
+     "median": 0.4335834643124822,
+     "p10": 0.3036924726287473,
+     "min": 0.27351340126670526,
+     "argmin_frame": 125
+    },
+    "frame_to_frame_iou": {
+     "median": 0.9832207290815947,
+     "p5": 0.9244897962983749,
+     "min": 0.4004867759208178,
+     "argmin_frame": 150
+    },
+    "frames_with_area_jump_gt_30pct": 2
+   },
+   "objects": {
+    "station": {
+     "frames_nonempty": 776,
+     "median_px_when_nonempty": 4567.0
+    },
+    "battery": {
+     "frames_nonempty": 776,
+     "median_px_when_nonempty": 954.5
+    }
+   }
+  },
+  "statistics_caveat": "IoU vs the projected URDF mesh silhouette is AGREEMENT between two automatic estimates, not accuracy; no manual ground-truth masks exist for these episodes, so no mIoU/Dice/accuracy is reported.",
+  "sam2_rerun": {
+   "wall_s_incl_model_load": 31.08,
+   "frames": 776,
+   "ms_per_frame": 40.0,
+   "peak_torch_gib": 4.661,
+   "prompts": 104,
+   "dtype": "bfloat16",
+   "lag_used": -1.75,
+   "iou_rerun_vs_cache": {
+    "R": {
+     "median": 1.0,
+     "min": 1.0,
+     "frames_lt_0.9": 0
+    },
+    "L": {
+     "median": 1.0,
+     "min": 1.0,
+     "frames_lt_0.9": 0
+    }
+   }
+  }
+ },
+ "error": null
+}

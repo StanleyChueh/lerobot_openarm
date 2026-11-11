@@ -1,0 +1,309 @@
+{
+ "name": "recon_battery",
+ "command": "/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python diag_reconstruction.py battery",
+ "cwd": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen_visual_guide/scripts",
+ "git_sha": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+ "sfagen_code": "sfa_hf_export/sfagen/sfagen (byte-identical to research/sim_free_augmentation/sfagen/sfagen @ 50832b3)",
+ "started": "2026-11-10 16:00:21",
+ "wall_time_s": 42.67,
+ "gpu": {
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "cuda_visible_devices": "1",
+  "peak_torch_allocated_gib": 0.12
+ },
+ "inputs": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion.yaml": "7614d5dcc5519d8cb5b2bdda59dff8d332b8f484d88c8c11473a2e561e857e99",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/calibration.json": "9b4f87d6f099c8565bbb5c7955aa9e6391538e6c52b6533bbb6b1fb7052af24f",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/table_height.json": "2cc67ad90ed50645a949ae9e71f6956b2acfd26dc724ee802fcd7fbf3da22d2d",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/cache/recon_ep1.npz": "3f55d89ab69ea209838795f1b7a51cda3327f041d328990ae7d5a766e321a286"
+ },
+ "outputs": {
+  "stage_03_reconstruction/battery_calibration_before_after.png": "4a309c181b8939dd701f0ac9468f1ece5e49feb23a4ab6263a80d277d802d88b",
+  "stage_03_reconstruction/battery_fk_overlay.png": "8b9528c4b526d15498413d916ddc7e4c3616a2b0474649154fddd365e72ce6dc",
+  "stage_03_reconstruction/battery_3d_frames.png": "23759c811992649af9e12eadff5691fbacfb3e2d4068def77e8d8e097328ff0a",
+  "stage_03_reconstruction/battery_3d_fk_animation.mp4": "8c8732ab6f7a5466a25a62c3531b7fd507824fef2636526b8c885e8c830f8aa0",
+  "stage_03_reconstruction/battery_object_lag_table.png": "420fc32dc005195a941a9f2ea2984998dd9d06af499de012c5d3364de7b982f6"
+ },
+ "notes": {
+  "calibration_json": {
+   "params7": [
+    0.0015469948124627595,
+    0.005519908321183343,
+    -0.02721832560042549,
+    -0.015474508416521982,
+    -0.014230284961237199,
+    0.009021815030544096,
+    0.004437992686914391
+   ],
+   "fit_iou": {
+    "initial": 0.24835104026964733,
+    "fitted": 0.30051685337509426
+   },
+   "heldout_iou": {
+    "initial": 0.24823223905903952,
+    "fitted": 0.299332058429718
+   },
+   "heldout_frames_improved": 0.9857142857142858,
+   "n_fit": 70,
+   "n_heldout": 70,
+   "runtime_s": 433.29066824913025,
+   "adopted": true,
+   "rule": "adopted if held-out IoU improves by > 0.005; confirm with `sfagen bench --compare-camera`"
+  },
+  "calibration_correction": {
+   "rotation_deg": 1.5937084779462452,
+   "translation_mm": 22.87694401043056,
+   "focal_scale": 1.004447855160924
+  },
+  "example_frame": 416,
+  "example_iou": {
+   "initial": 0.22634458314069963,
+   "calibrated": 0.27871138693257097
+  },
+  "object_silhouette_residual": {
+   "station": {
+    "median_iou": 0.4058095304973074,
+    "p10": 0.3171689347136781
+   },
+   "battery": {
+    "median_iou": 0.16132178674172204,
+    "p10": 0.12194160886058306
+   }
+  },
+  "lag_final": -0.75,
+  "lag_scan_range": [
+   -4.0,
+   1.5,
+   0.004938625300091926
+  ],
+  "photometric_range_db": 1.2174552098367517,
+  "table": 0.254249134048755,
+  "table_rule": "lowest arm point over the source demos - 5 mm (object silhouette fits not confident)",
+  "objects_info": {
+   "station": {
+    "name": "station",
+    "seg_px": 6722,
+    "tcp_at_grasp": [
+     0.3238914271960869,
+     0.09293788524336913,
+     0.28574893700489695
+    ],
+    "grasp_frame": 101,
+    "source": "segmentation",
+    "proxy": "box",
+    "dims": [
+     0.12598079519772942,
+     0.06249168732424173,
+     0.06309787400979394
+    ],
+    "centre_xy": [
+     0.3211104601020951,
+     0.10224435953914851
+    ],
+    "centre_vs_tcp_xy_mm": 9.713096406186208
+   },
+   "battery": {
+    "name": "battery",
+    "seg_px": 1721,
+    "tcp_at_grasp": [
+     0.3238539899032876,
+     -0.0762640633500868,
+     0.2916942633056072
+    ],
+    "grasp_frame": 265,
+    "source": "render-and-compare (grasp-constrained)",
+    "silhouette_iou": 0.09345949535192563,
+    "table_z": 0.254249134048755,
+    "offset_along_approach_m": 0.012499999999999954,
+    "proxy": "cylinder",
+    "dims": [
+     0.00925,
+     0.065
+    ],
+    "centre_xy": [
+     0.3382663568541829,
+     -0.08323067501757475
+    ],
+    "centre_vs_tcp_xy_mm": 16.00781057024468
+   }
+  },
+  "holders": {
+   "station": [
+    [
+     "table",
+     0,
+     104
+    ],
+    [
+     "L",
+     104,
+     661
+    ],
+    [
+     "placed",
+     661,
+     776
+    ]
+   ],
+   "battery": [
+    [
+     "table",
+     0,
+     268
+    ],
+    [
+     "R",
+     268,
+     434
+    ],
+    [
+     "L",
+     434,
+     661
+    ],
+    [
+     "placed",
+     661,
+     776
+    ]
+   ]
+  },
+  "attachments": {
+   "station": [
+    [
+     [
+      -0.5128,
+      0.1885,
+      0.8375,
+      -0.0288
+     ],
+     [
+      0.3007,
+      0.9532,
+      -0.0304,
+      -0.0111
+     ],
+     [
+      -0.8041,
+      0.2363,
+      -0.5455,
+      0.0122
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    [
+     [
+      -0.9668,
+      0.2156,
+      -0.137,
+      0.3515
+     ],
+     [
+      -0.2291,
+      -0.969,
+      0.0924,
+      0.1228
+     ],
+     [
+      -0.1129,
+      0.1207,
+      0.9863,
+      0.2597
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ]
+   ],
+   "battery": [
+    [
+     [
+      0.6672,
+      -0.0967,
+      -0.7385,
+      0.0131
+     ],
+     [
+      -0.1454,
+      -0.9894,
+      -0.0018,
+      0.0139
+     ],
+     [
+      -0.7305,
+      0.1086,
+      -0.6742,
+      0.0493
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    [
+     [
+      0.553,
+      0.0062,
+      0.8332,
+      -0.0224
+     ],
+     [
+      0.2336,
+      0.9587,
+      -0.1622,
+      0.0218
+     ],
+     [
+      -0.7998,
+      0.2844,
+      0.5287,
+      -0.0415
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    [
+     [
+      -0.508,
+      0.1817,
+      0.842,
+      0.3029
+     ],
+     [
+      -0.1497,
+      -0.9813,
+      0.1214,
+      0.0953
+     ],
+     [
+      0.8482,
+      -0.0644,
+      0.5257,
+      0.2896
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ]
+   ]
+  }
+ },
+ "error": null
+}
