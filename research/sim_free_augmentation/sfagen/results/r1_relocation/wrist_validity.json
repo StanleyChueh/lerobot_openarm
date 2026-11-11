@@ -1,0 +1,893 @@
+[
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 0,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4652014652014652,
+  "invalid_frac_right": 0.4652014652014652,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 1,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5384615384615384,
+  "invalid_frac_right": 0.5384615384615384,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 2,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5384615384615384,
+  "invalid_frac_right": 0.5384615384615384,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 3,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5384615384615384,
+  "invalid_frac_right": 0.5384615384615384,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 4,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5384615384615384,
+  "invalid_frac_right": 0.5384615384615384,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 5,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5384615384615384,
+  "invalid_frac_right": 0.5384615384615384,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 6,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5384615384615384,
+  "invalid_frac_right": 0.5384615384615384,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 7,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5384615384615384,
+  "invalid_frac_right": 0.5384615384615384,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 8,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5384615384615384,
+  "invalid_frac_right": 0.5384615384615384,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 9,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4448669201520912,
+  "invalid_frac_right": 0.4448669201520912,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 10,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4448669201520912,
+  "invalid_frac_right": 0.4448669201520912,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 11,
+  "shift_cm": 6.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4448669201520912,
+  "invalid_frac_right": 0.4448669201520912,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 12,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.623574144486692,
+  "invalid_frac_right": 0.623574144486692,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 13,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.623574144486692,
+  "invalid_frac_right": 0.623574144486692,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 14,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.623574144486692,
+  "invalid_frac_right": 0.623574144486692,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 15,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.623574144486692,
+  "invalid_frac_right": 0.623574144486692,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 16,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.623574144486692,
+  "invalid_frac_right": 0.623574144486692,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 17,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.623574144486692,
+  "invalid_frac_right": 0.623574144486692,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 18,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.623574144486692,
+  "invalid_frac_right": 0.623574144486692,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 19,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.623574144486692,
+  "invalid_frac_right": 0.623574144486692,
+  "frames": 263
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 20,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.48928571428571427,
+  "invalid_frac_right": 0.48928571428571427,
+  "frames": 280
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 21,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.48928571428571427,
+  "invalid_frac_right": 0.48928571428571427,
+  "frames": 280
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 22,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5607142857142857,
+  "invalid_frac_right": 0.5607142857142857,
+  "frames": 280
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 23,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5607142857142857,
+  "invalid_frac_right": 0.5607142857142857,
+  "frames": 280
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 24,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5607142857142857,
+  "invalid_frac_right": 0.5607142857142857,
+  "frames": 280
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 25,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.5607142857142857,
+  "invalid_frac_right": 0.5607142857142857,
+  "frames": 280
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 26,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.496,
+  "invalid_frac_right": 0.496,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 27,
+  "shift_cm": 6.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.496,
+  "invalid_frac_right": 0.496,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 28,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.496,
+  "invalid_frac_right": 0.496,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 29,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.496,
+  "invalid_frac_right": 0.496,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 30,
+  "shift_cm": 6.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.496,
+  "invalid_frac_right": 0.496,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 31,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.592,
+  "invalid_frac_right": 0.592,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 32,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.592,
+  "invalid_frac_right": 0.592,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 33,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.592,
+  "invalid_frac_right": 0.592,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 34,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.592,
+  "invalid_frac_right": 0.592,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 35,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.592,
+  "invalid_frac_right": 0.592,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 36,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.592,
+  "invalid_frac_right": 0.592,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 37,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.592,
+  "invalid_frac_right": 0.592,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 38,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.592,
+  "invalid_frac_right": 0.592,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 39,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.468,
+  "invalid_frac_right": 0.468,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 40,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.468,
+  "invalid_frac_right": 0.468,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 41,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.596,
+  "invalid_frac_right": 0.596,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 42,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.596,
+  "invalid_frac_right": 0.596,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 43,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.596,
+  "invalid_frac_right": 0.596,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 44,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.596,
+  "invalid_frac_right": 0.596,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 45,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.596,
+  "invalid_frac_right": 0.596,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 46,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.596,
+  "invalid_frac_right": 0.596,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 47,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.596,
+  "invalid_frac_right": 0.596,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 48,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.596,
+  "invalid_frac_right": 0.596,
+  "frames": 250
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 49,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4549019607843137,
+  "invalid_frac_right": 0.4549019607843137,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 50,
+  "shift_cm": 6.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4549019607843137,
+  "invalid_frac_right": 0.4549019607843137,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 51,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4549019607843137,
+  "invalid_frac_right": 0.4549019607843137,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 52,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.615686274509804,
+  "invalid_frac_right": 0.615686274509804,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 53,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.615686274509804,
+  "invalid_frac_right": 0.615686274509804,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 54,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.615686274509804,
+  "invalid_frac_right": 0.615686274509804,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 55,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.615686274509804,
+  "invalid_frac_right": 0.615686274509804,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 56,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.615686274509804,
+  "invalid_frac_right": 0.615686274509804,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 57,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.615686274509804,
+  "invalid_frac_right": 0.615686274509804,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 58,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.615686274509804,
+  "invalid_frac_right": 0.615686274509804,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 59,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.615686274509804,
+  "invalid_frac_right": 0.615686274509804,
+  "frames": 255
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 60,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.6224066390041494,
+  "invalid_frac_right": 0.6224066390041494,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 61,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6099585062240664,
+  "invalid_frac_right": 0.6099585062240664,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 62,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6099585062240664,
+  "invalid_frac_right": 0.6099585062240664,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 63,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6099585062240664,
+  "invalid_frac_right": 0.6099585062240664,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 64,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6099585062240664,
+  "invalid_frac_right": 0.6099585062240664,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 65,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6099585062240664,
+  "invalid_frac_right": 0.6099585062240664,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 66,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6099585062240664,
+  "invalid_frac_right": 0.6099585062240664,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 67,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6099585062240664,
+  "invalid_frac_right": 0.6099585062240664,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 68,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6099585062240664,
+  "invalid_frac_right": 0.6099585062240664,
+  "frames": 241
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 69,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.6091954022988506,
+  "invalid_frac_right": 0.6091954022988506,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 70,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.6091954022988506,
+  "invalid_frac_right": 0.6091954022988506,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 71,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.6091954022988506,
+  "invalid_frac_right": 0.6091954022988506,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 72,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.6091954022988506,
+  "invalid_frac_right": 0.6091954022988506,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 73,
+  "shift_cm": 6.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.6091954022988506,
+  "invalid_frac_right": 0.6091954022988506,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 74,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6206896551724138,
+  "invalid_frac_right": 0.6206896551724138,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 75,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6206896551724138,
+  "invalid_frac_right": 0.6206896551724138,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 76,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6206896551724138,
+  "invalid_frac_right": 0.6206896551724138,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 77,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6206896551724138,
+  "invalid_frac_right": 0.6206896551724138,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 78,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6206896551724138,
+  "invalid_frac_right": 0.6206896551724138,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 79,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6206896551724138,
+  "invalid_frac_right": 0.6206896551724138,
+  "frames": 261
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 80,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.5742971887550201,
+  "invalid_frac_right": 0.5742971887550201,
+  "frames": 249
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 81,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.5742971887550201,
+  "invalid_frac_right": 0.5742971887550201,
+  "frames": 249
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 82,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.5742971887550201,
+  "invalid_frac_right": 0.5742971887550201,
+  "frames": 249
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 83,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6184738955823293,
+  "invalid_frac_right": 0.6184738955823293,
+  "frames": 249
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 84,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6184738955823293,
+  "invalid_frac_right": 0.6184738955823293,
+  "frames": 249
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 85,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6184738955823293,
+  "invalid_frac_right": 0.6184738955823293,
+  "frames": 249
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 86,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.6184738955823293,
+  "invalid_frac_right": 0.6184738955823293,
+  "frames": 249
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 87,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4743083003952569,
+  "invalid_frac_right": 0.4743083003952569,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 88,
+  "shift_cm": 6.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4743083003952569,
+  "invalid_frac_right": 0.4743083003952569,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 89,
+  "shift_cm": 3.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4743083003952569,
+  "invalid_frac_right": 0.4743083003952569,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 90,
+  "shift_cm": 6.0,
+  "family": "object_position",
+  "invalid_frac_left": 0.4743083003952569,
+  "invalid_frac_right": 0.4743083003952569,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 91,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.616600790513834,
+  "invalid_frac_right": 0.616600790513834,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 92,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.616600790513834,
+  "invalid_frac_right": 0.616600790513834,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 93,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.616600790513834,
+  "invalid_frac_right": 0.616600790513834,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 94,
+  "shift_cm": 3.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.616600790513834,
+  "invalid_frac_right": 0.616600790513834,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover",
+  "episode": 95,
+  "shift_cm": 5.0,
+  "family": "interaction_location",
+  "invalid_frac_left": 0.616600790513834,
+  "invalid_frac_right": 0.616600790513834,
+  "frames": 253
+ },
+ {
+  "dataset": "openarm_pringles_handover_workspace",
+  "episode": 0,
+  "shift_cm": 12.693241574243796,
+  "family": "object_workspace",
+  "invalid_frac_left": 0.8245083207261724,
+  "invalid_frac_right": 0.8245083207261724,
+  "frames": 661
+ },
+ {
+  "dataset": "openarm_pringles_handover_workspace",
+  "episode": 1,
+  "shift_cm": 3.8263455607861214,
+  "family": "object_workspace",
+  "invalid_frac_left": 0.4652014652014652,
+  "invalid_frac_right": 0.4652014652014652,
+  "frames": 273
+ },
+ {
+  "dataset": "openarm_pringles_handover_workspace",
+  "episode": 2,
+  "shift_cm": 15.790759134027285,
+  "family": "object_workspace",
+  "invalid_frac_left": 0.7800751879699248,
+  "invalid_frac_right": 0.7800751879699248,
+  "frames": 532
+ }
+]

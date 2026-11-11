@@ -1,0 +1,85 @@
+{
+ "git": {
+  "commit": "72fe6c57ee80b6889636e02032107355a1e88c46",
+  "dirty_files": [
+   "?? research/sim_free_augmentation/sfagen/results/r1_relocation/wrist_validity.json"
+  ]
+ },
+ "code": [
+  {
+   "module": "__main__",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/tools/xfer_bench.py",
+   "sha256": "0b023578841058fc6a63cf257861b9ac22d93d94a78046ce5328ef388b2f8567",
+   "in_repo": true
+  },
+  {
+   "module": "__mp_main__",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/tools/xfer_bench.py",
+   "sha256": "0b023578841058fc6a63cf257861b9ac22d93d94a78046ce5328ef388b2f8567",
+   "in_repo": true
+  },
+  {
+   "module": "_provenance",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/tools/_provenance.py",
+   "sha256": "4eb7cf56688570a87bb7901c7fe7fa62635e5b5ab875a81d4cd51e4196e6caa9",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/__init__.py",
+   "sha256": "45958242be26abf721dd965f3e400243274270f59e59141c7af34e2f17d2fe11",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.bench",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/bench.py",
+   "sha256": "f162069ef92bb12ca7341dfefe88df1d018a4d6a8164bd85d45bd5a218a1512e",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.camera",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/camera.py",
+   "sha256": "1f8ccd256a8095bf4123cc89172ecc0d9149de33107b37e1cc566a77d4a05e60",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.context",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/context.py",
+   "sha256": "be0c53056499b445773bbafeed19e61bbe366ccf95ce422581e7f9499d6b4a2e",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.data",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/data.py",
+   "sha256": "e66b17925266a5946946e62bb5f3ba7e12ea5f59fc34cb0497600e3458ef3083",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.mesh",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/mesh.py",
+   "sha256": "bba0beaee2a92f9266a8640957187cc8e794f53720d5a8665f8b638a8ad42af9",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.recon",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/recon.py",
+   "sha256": "632090d52014bc8b34d33f538e88da902bee3facb08431afb24b569a19a126e3",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.render",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/render.py",
+   "sha256": "fa88c6fc3251a90a740b247776e61654fd5dba16b8d98cda0a64b3cc4fa1f16a",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.robot",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/sfagen/robot.py",
+   "sha256": "77df0fb6f1e5d49e637134910ca3922b6c3705001cacd439981cc6be59c36340",
+   "in_repo": true
+  }
+ ],
+ "device": "NVIDIA GeForce RTX 4090",
+ "config": "/home/stanley/Stanley_ws/lerobot_openarm_fewsrc/research/sim_free_augmentation/sfagen/configs/openarm_pringles_handover.yaml",
+ "work": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover"
+}
