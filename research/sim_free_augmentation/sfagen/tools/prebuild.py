@@ -1,5 +1,5 @@
 import sys, time
-sys.path.insert(0, "/home/stanley/Stanley_ws/sfa_hf_export/sfagen")
+from pathlib import Path; sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from sfagen.context import Context
 from sfagen.recon import Recon
 ctx = Context(sys.argv[1])

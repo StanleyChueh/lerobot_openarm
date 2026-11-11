@@ -3,7 +3,7 @@ import json, sys
 from pathlib import Path
 import numpy as np
 import yaml
-X = Path("/home/stanley/Stanley_ws/sfa_hf_export"); S = X / "sfagen"
+S = Path(__file__).resolve().parents[1]
 TASKS = {"pringles": dict(cfg="openarm_pringles_handover", syn="ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v00",
                           mix="ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v00", name="bimanual hand-over", tag="handover",
                           prev_syn=("v04-65ep-two-pipelines", "7179061"), prev_mix=("v00-75ep-two-pipelines", "13d7231"),

@@ -131,9 +131,13 @@ if MODE == "push":
     api = HfApi(); T = dict(repo_type="dataset"); DRY = os.environ.get("DRY_RUN") == "1"
     code = sorted(S.glob("sfagen/*.py")) + [S / "README.md", S / "tools_budget_select.py", S / "tools_budget_build.py", S / "tools_budget_figs.py", S / "tools_budget_publish.py",
                                            S / "tools_source_budget.py", S / "configs/_openarm_robot.yaml", S / "configs/openarm_pringles_handover_dense.yaml"]
+    for n in NS:  # check every export before the first write to any repo
+        root = W(n) / "dataset"
+        if not ((root / "meta/info.json").is_file() and any((root / "data").rglob("*.parquet")) and any((root / "videos").rglob("*.mp4"))):
+            raise RuntimeError(f"export {root} is empty or incomplete; nothing was uploaded")
     for n in NS:
         R = REPO.format(n); root = W(n) / "dataset"
-        ops = [CommitOperationAdd(path_in_repo=str(p.relative_to(root)), path_or_fileobj=str(p)) for p in sorted(root.rglob("*")) if p.is_file()]
+        ops =[CommitOperationAdd(path_in_repo=str(p.relative_to(root)), path_or_fileobj=str(p)) for p in sorted(root.rglob("*")) if p.is_file()]
         ops += [CommitOperationAdd(path_in_repo="README.md", path_or_fileobj=str(W(n) / "README_budget.md")),
                 CommitOperationAdd(path_in_repo="PIPELINE.md", path_or_fileobj=str(S / "PIPELINE.md")),
                 CommitOperationAdd(path_in_repo="NOVELTY.md", path_or_fileobj=str(S / "NOVELTY.md")),

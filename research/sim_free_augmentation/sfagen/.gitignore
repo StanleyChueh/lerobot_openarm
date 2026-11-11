@@ -1,0 +1,4 @@
+# machine-local data (symlinks to the work/log directories, see README "Data directories")
+/configs/work
+/logs
+__pycache__/

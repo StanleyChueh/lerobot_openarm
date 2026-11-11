@@ -10,11 +10,11 @@ import numpy as np, pandas as pd
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from scipy.spatial import ConvexHull
-sys.path.insert(0, "/home/stanley/Stanley_ws/sfa_hf_export/sfagen")
+S = Path(__file__).resolve().parents[1]; sys.path.insert(0, str(S))  # tracked sfagen
 from sfagen.robot import Robot
 import yaml
-X = Path("/home/stanley/Stanley_ws/sfa_hf_export"); W = X / "sfagen/configs/work"
-rob = Robot(yaml.safe_load(open(X / "sfagen/configs/_openarm_robot.yaml")))
+X = Path("/home/stanley/Stanley_ws/sfa_hf_export"); W = S / "configs/work"  # X: old data roots only
+rob = Robot(yaml.safe_load(open(S / "configs/_openarm_robot.yaml")))
 SETS = {"pringles": {"source": Path.home() / ".cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/snapshots/cebdee98115ab6827a4ec2655335c536b5dd085b/data",
                      "published": X / "3cam_v4/dataset/data", "unified": W / "openarm_pringles_handover/dataset/data",
                      "pool": Path.home() / ".cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/snapshots/2c1bc860347c44fc0fbae7567469d36ee49baa8d/data",
@@ -68,7 +68,7 @@ for task, c in SETS.items():
                 ax.scatter(Y[:, 0], Y[:, 1], s=16, color="#eb6834", edgecolor="#fcfcfb", lw=0.8, zorder=4, label="synthetic")
             ax.scatter(S[:, 0], S[:, 1], s=30, color="#2a78d6", edgecolor="#fcfcfb", lw=1.2, zorder=5, label="source")
             ax.set_title(name, fontsize=10); ax.set_aspect("equal"); ax.grid(color="#e4e3df", lw=0.5); ax.set_xlabel("world x (cm)"); ax.set_ylabel("world y (cm)"); ax.legend(fontsize=7, loc="upper left")
-        fig.suptitle(f"{task}: {key} position (top-down)", fontweight="bold"); fig.savefig(X / f"sfagen/logs/coverage_{task}_{key}.png", dpi=130); plt.close(fig)
-(X / "sfagen/logs/coverage.json").write_text(json.dumps(res, indent=1))
+        fig.suptitle(f"{task}: {key} position (top-down)", fontweight="bold"); fig.savefig(S / f"logs/coverage_{task}_{key}.png", dpi=130); plt.close(fig)
+(S / "logs/coverage.json").write_text(json.dumps(res, indent=1))
 for k, v in res.items():
     print(k, "| other real", v["n_other_real"], "hull", round(v["other_real_hull_cm2"]), "|", " | ".join(f"{s}: n={v[s]['n']} hull={v[s]['hull_cm2']:.0f} within2cm={v[s]['within_2cm']} med={v[s]['median_nn_cm']:.2f}" + (f" new={v[s]['new_positions_gt_1cm']}" if 'new_positions_gt_1cm' in v[s] else "") for s in ("source", "published", "unified")))

@@ -2,7 +2,7 @@ import hashlib
 from pathlib import Path
 from huggingface_hub import HfApi, snapshot_download
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
-api = HfApi(); W = Path("/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work")
+api = HfApi(); W = Path(__file__).resolve().parents[1] / "configs/work"
 h = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
 for R, loc in (("ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v00", W / "openarm_pringles_handover/dataset"),
                ("ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v00", W / "openarm_pringles_handover/dataset_mixed"),
