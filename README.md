@@ -44,7 +44,14 @@ R="env -u PYTHONPATH LD_LIBRARY_PATH=/usr/local/cuda/lib64 HF_HUB_OFFLINE=1 .ven
 $R plugins/tests/test_telemetry.py <scratch>/u          # tests 1-15 Gate 1, 16-20 Gate 2A
 $R plugins/tests/test_telemetry_record.py <scratch>/e2e  # official lerobot-record + analyzer on its session/dataset
 $R plugins/tests/test_telemetry_fixture.py               # committed mock fixture still matches the producer
+# unchanged baseline suites, re-run in Gate 2A:
+$R plugins/tests/test_robot_guard.py; $R plugins/tests/test_return_lag.py; $R plugins/tests/test_quest_safety.py; $R plugins/tests/test_teleoperate_mock.py
+$R plugins/tests/test_record_mock.py <scratch>/rec; $R plugins/tests/test_record_gate.py <scratch>/gate; $R plugins/tests/test_rerun_status.py <scratch>/rr
 ```
+
+Run from the repository root (CPU, no robot, no CAN). `<scratch>` is any empty temporary folder. The bench session
+itself (Gate 2: telemetry OFF / ON / OFF, no contact) is a hardware procedure in `GATE2_HARDWARE_READINESS.md` §6 (safety prerequisites §5, analysis §3)
+that needs operator approval; it is not listed here as a command.
 
 Analyze a real bench session (only after an approved session):
 
