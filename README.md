@@ -18,6 +18,7 @@ flowchart LR
     HIST --> G1["research/sd10-g1-generation<br/>FROZEN SD10-G1 screen<br/>INCONCLUSIVE"]
     HIST --> SFAGEN["research/sfagen-unified-pipeline<br/>PUBLISHED generator<br/>4 HF datasets (v3.0)"]
     SFAGEN --> F1W["research/sfagen-workspace-f1w<br/>ACTIVE sfagen development<br/>source-budget datasets · F1W · tests"]
+    F1W --> FEW["research/sfagen-few-source<br/>ACTIVE few-source study<br/>R1 shift limit · R2 fewest demos"]
 
     BASE -->|shared baseline| BENCH["force-aware/gate2a-bench-prep<br/>motor telemetry + bench readiness<br/>hardware not run"]
     BASE -->|shared baseline| NEXT["research/factr2-next-openarm<br/>FACTR2/NEXT effort estimation<br/>offline only"]
@@ -30,7 +31,7 @@ flowchart LR
     classDef frozen fill:#f3f4f6,stroke:#6b7280,color:#374151
     classDef force fill:#fef3c7,stroke:#d97706,color:#451a03
     class BASE run
-    class SFAGEN,F1W active
+    class SFAGEN,F1W,FEW active
     class HIST,G1,ARCH frozen
     class BENCH,NEXT force
 ```
@@ -44,7 +45,8 @@ evidence (never rewritten), and amber is force-estimation work.
 | [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Robot execution: Quest teleop, recording, training, real/sim evaluation | active | this README |
 | [`main`](https://github.com/StanleyChueh/lerobot_openarm/tree/main) | Mirror of the default branch | mirror | same commit as default |
 | [`research/sfagen-unified-pipeline`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-unified-pipeline) | `sfagen`: the simulation-free generator that produced the 4 public OpenArm synthetic datasets, plus its visual walkthrough | published; independent review pending | code of the datasets = `50832b3` |
-| [`research/sfagen-workspace-f1w`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-workspace-f1w) | Current sfagen development: 1–9-source budget datasets, workspace-wide object positions (F1W), tests, dataset provenance | active; F1W unreviewed | budget datasets = `5d81f2f` |
+| [`research/sfagen-workspace-f1w`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-workspace-f1w) | Current sfagen development: 1–9-source budget datasets, workspa| [`research/sfagen-few-source`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-few-source) | Newest sfagen work: how far the object can move (R1, r* = 11 cm) and how few source demos suffice (R2) | active; pending review | R1/R2 results `171c12c` |
+ce-wide object positions (F1W), tests, dataset provenance | active; F1W unreviewed | budget datasets = `5d81f2f` |
 | [`research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/contact-aware-augmentation) | All earlier sim-free research: contact verifier (Gate 0/1/1R), generation feasibility, sim-free v1–v4B.1, SD10 source selection and SD10-L1 | **frozen** (name kept: sealed protocols cite it) | last study `04968cb` |
 | [`research/sd10-g1-generation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sd10-g1-generation) | SD10-G1: generation yield of three fixed source sets | **frozen**; INCONCLUSIVE | `5c7a825` |
 | [`force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/force-aware/gate2a-bench-prep) | Read-only motor telemetry sidecar and Gate-2A bench readiness | offline done; bench not run | Gate 2A `f558bc2` |
@@ -57,7 +59,7 @@ evidence (never rewritten), and amber is force-estimation work.
 - The telemetry Gate-1 milestone is tag `archive/force-aware/telemetry-gate1-2026-11-05`.
 
 **New branches** are named `<line>/<topic>`, where the line is one of:
-- `research/sfagen-*` (generator work);
+- `research/sfagen-*` (generator work; start new sfagen work from `research/sfagen-few-source`, the newest);
 - `research/sfa-*` (sim-free studies);
 - `force-aware/*`, or `research/factr2-*` (force);
 - `docs/*`;
