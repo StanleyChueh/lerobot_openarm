@@ -1,4 +1,4 @@
-# sfagen development: few-source budget, workspace-wide object positions (F1W), provenance
+# sfagen few-source study: how far can the object move, and how few demos are enough?
 
 > **Research branch.** Robot setup, teleoperation, recording, training and evaluation commands are on
 > [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map),
@@ -6,119 +6,82 @@
 
 ```mermaid
 flowchart LR
-    SFAGEN["research/sfagen-unified-pipeline<br/>published generator (50832b3)"] --> THIS["research/sfagen-workspace-f1w<br/>THIS BRANCH · active development"]
-    THIS -.-> NEXTB["next: shift-vs-distortion experiment (R1)<br/>planned on its own branch"]
+    F1W["research/sfagen-workspace-f1w<br/>sfagen + budget + F1W"] --> THIS["research/sfagen-few-source<br/>THIS BRANCH · R1 shift limit · R2 few sources"]
     classDef me fill:#dcfce7,stroke:#16a34a,color:#14532d
     class THIS me
 ```
 
 ## Purpose
 
-**Research question:** can **fewer than 10** real source demonstrations give a VLA-usable synthetic dataset? With few
-sources, the object must be moved far from where it was recorded. So this branch develops and measures:
+The goal is a usable synthetic Pringles dataset from **fewer than 10 real demos**, ideally 1–2. That needs large object
+shifts, and large shifts cost image quality. This branch answers two questions:
 
-1. **The source-budget study.** The same pipeline is run on the first N = 1…9 real Pringles demos. These datasets are
-   published.
-2. **F1W (object-position family F1, Workspace-wide).** The object can move anywhere on the visible support surface,
-   instead of ±3–6 cm:
-   - targets come from the estimated support region;
-   - the approach and grasp move rigidly with the object, and a slower clock is used when needed;
-   - the renderer and export work in continuous time.
+- **R1:** how far can the can move before the body-camera RGB stops being valid?
+- **R2:** at that shift limit, how few source demos give good coverage?
 
-   Not published.
-3. **Reproducibility infrastructure:**
-   - the tools run tracked code only;
-   - safe Hub upload;
-   - CPU tests;
-   - dataset-to-commit provenance;
-   - a read-only check of the published data.
-
-**Status:**
-- Budget datasets: published, pending review.
-- F1W: engineering previews, **self-validated only**, independent review pending; not training-ready.
-- Nothing here has policy or robot evidence.
-
-## Commits on this branch
-
-| Commit | What it is |
-|---|---|
-| `5d81f2f` | Exact code of the nine budget datasets (byte-identical to their Hub upload) |
-| `7135527` | Two budget helpers that were never uploaded |
-| `4af01a6` | F1W snapshot: matches `WORKSPACE_F1W_INSTALL_MANIFEST.json`, 25/25 files |
-| `bf1cdfa` | Battery baseline renderer for the benchmark (`legacy/target`, verbatim) |
-| `4389492` | The tools import tracked code; push safety; provenance guard; CPU tests |
-| `c0225f0` | `results/hub_provenance.json` and `results/published_check_2026-11-11/` |
+**Status:** both executed 2026-11-12 (offline), pending independent review. No VLA training or robot evidence yet.
 
 ## Results
 
-**Published source-budget datasets** `ethanCSL/openarm_pringles_lerobot_real_to_sim_{N}_3cam_v00`, N = 1…9, tag `v3.0`.
-Code is `5d81f2f`: 30/30 uploaded files equal it. Sources are real demos 0…N−1. Synthetic episodes per N: 9, 20, 28,
-46, 59, 69, 79, 97, 111.
+Full report: [`research/sim_free_augmentation/sfagen/results/RESULTS_R1_R2.md`](research/sim_free_augmentation/sfagen/results/RESULTS_R1_R2.md).
 
-Can coverage: unseen real recordings (out of 40) with a training position within 2 cm (`logs/budget/diversity.json`):
+**R1: the protocol was frozen before any rendering** (`results/r1_relocation/PROTOCOL.md`, `327d38f`). The method is
+cross-episode pose transfer: re-render source A with episode B's real joints and can pose, and compare with B's real
+frame (90 ordered pairs).
 
-| N sources | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-|---|---|---|---|---|---|---|---|---|---|
-| sources only | 2 | 3 | 3 | 6 | 7 | 8 | 9 | 9 | 9 |
-| sources + synthetic | 4 | 10 | 13 | 23 | 23 | 24 | 24 | 25 | 27 |
+| Can shift (cm) | 0–3 | 3–5 | 5–7 | 7–9 | 9–11 | 11–15 | 15–21 |
+|---|---|---|---|---|---|---|---|
+| Median PSNR (dB) | 16.43 | 16.28 | 16.28 | 15.97 | 16.01 | 15.61 | 15.34 |
+| Δ vs 0–3 cm | ref | −0.16 | −0.16 | −0.47 | −0.42 | **−0.82** | **−1.09** |
+| Can region (dB) | 14.9 | 14.6 | 13.6 | 13.3 | 13.3 | 12.0 | 11.5 |
 
-**F1W** (`WORKSPACE_F1W_RESULTS.md`; FK-proxy positions; development data):
+- **Registered r\* = 11 cm**, which is decision A: keep wide shifts up to 11 cm, and fix the worst sub-region first.
+- The can region is that worst sub-region: it degrades steadily with distance, down 3.4 dB at 15–21 cm.
+- Every synthetic episode has ≥ 50 % invalid wrist-camera frames, at any shift size.
 
-| Object | Accepted / attempts (sources 0–4) | Max shift | Coverage ≤ 2 cm, 1 source (old → F1W) | 5 sources (old → F1W) |
-|---|---|---|---|---|
-| Pringles can | 171 / 240 | 15.8 cm | 4 → 22 /40 | 23 → 32 /40 |
-| Battery station | 163 / 240 | 22.6 cm | 15 → 21 /45 | 39 → 44 /45 |
-| Battery | 107 / 240 | 25.8 cm | 12 → 19 /45 | 38 → 34 /45 (**worse**) |
+**R2:** Pringles coverage of 40 unseen real recordings (within 2 cm), from F1W candidates capped at 11 cm.
 
-The decoded F1W frames show relocated objects, but also stretched or fragmented robot surfaces, dark fills and ghosts.
-The RGB fidelity of large shifts **has not been measured**; that is the next experiment (R1). Wrist cameras are
-time-remapped source frames, not new views.
+| Sources | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| Fixed rule (sources 0…N−1) | 10 | 16 | 21 | 28 | 28 |
+| Best subset (post hoc, upper bound) | 19 | 25 | 27 | 28 | 28 |
 
-**Published-data check** (`results/published_check_2026-11-11/`, read-only; the local exports equal the Hub `v3.0` files):
-
-| Dataset | Clipped action labels (max error) | Camera frame gaps |
-|---|---|---|
-| Pringles real_to_sim_10 and real_and_sim_10 | 12 / 96 episodes (0.0169 rad, joint 10) | none |
-| Battery real_to_sim_10 and real_and_sim_10 | 45 / 114 episodes (0.057 rad, joints 10–12) | `wrist_cam` episode 91 (mixed: 101), 1 frame |
-
-`label_cause.py` shows that every mismatch is exactly the action clip in `plan.py` at `50832b3`. F1W's `plan.py` rejects such
-candidates instead of clipping them.
+The published 10-source dataset covers 24/40. Source placement matters more than source count. A source-only selection
+rule is the next test.
 
 ## Reproduce
 
 ```bash
 cd research/sim_free_augmentation/sfagen
-ln -s ~/Stanley_ws/sfa_hf_export/sfagen/configs/work configs/work   # generated data, git-ignored
+ln -s ~/Stanley_ws/sfa_hf_export/sfagen/configs/work configs/work   # generated data (git-ignored)
 ln -s ~/Stanley_ws/sfa_hf_export/sfagen/logs logs
 PY="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 $HOME/Stanley_ws/lerobot_openarm/.venv/bin/python"
 
-$PY -B -m unittest discover -s tests                       # 26 CPU tests, ~10 s
-$PY -B tools/xbench.py battery --imports-only              # which files the benchmark loads (CPU)
-$PY -I results/hub_provenance.py /tmp/hub_provenance.json  # re-derive dataset → commit (reads the Hub)
-$PY -I results/published_check_2026-11-11/published_check.py   # label + frame-span check (reads local exports)
+$PY -B -m unittest discover -s tests                                         # 32 CPU tests (~10 s)
 
-# F1W generation (GPU). The configs' work_dir points at the existing F1W results; pass a fresh --work-dir
-# (with the rig calibration/table/caches copied in) to re-run without touching them.
-W=~/sfagen_rerun/pringles_workspace
-$PY -m sfagen generate configs/openarm_pringles_handover_workspace.yaml --work-dir $W --episodes 0,1,2,3,4
-$PY -m sfagen render   configs/openarm_pringles_handover_workspace.yaml --work-dir $W --episodes 0 --keys CAN_KEY
-$PY -m sfagen build    configs/openarm_pringles_handover_workspace.yaml --work-dir $W --repo-id local/pringles_workspace
-$PY -m sfagen verify   configs/openarm_pringles_handover_workspace.yaml --work-dir $W
-# one-source run: configs/*_workspace_strict1.yaml
+# R1: shift limit (GPU; about 10 min of rendering on one RTX 4090; needs the cached Pringles reconstructions)
+(cd tools && $PY -B xfer_bench.py run cuda:0 ../results/r1_relocation/run)
+(cd tools && $PY -B xfer_bench.py summarize ../results/r1_relocation/run)    # statistics only (CPU)
+(cd tools && $PY -B xfer_bench.py wrist ../results/r1_relocation)            # wrist validity vs shift (CPU)
 
-# budget datasets (GPU): tools_budget_select.py → tools_budget_build.py → tools_budget_publish.py check|cards
-# Renderer benchmark (GPU, not re-run since publication):
-$PY -B tools/xbench.py pringles 0,2,3,4,6,7,9 cuda:0 xbench_pringles.json
+# R2: few-source coverage at the 11 cm cap (CPU; reads the existing F1W candidates)
+$PY -B tools_workspace_budget.py configs/openarm_pringles_handover_workspace.yaml \
+   --pool-data ~/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/snapshots/2c1bc860347c44fc0fbae7567469d36ee49baa8d/data \
+   --exclude 0,1,2,3,4,5,6,7,8,9 --pool-revision 2c1bc860347c44fc0fbae7567469d36ee49baa8d \
+   --comparison-work configs/work/openarm_pringles_handover_dense --max-shift-cm 11 \
+   --out results/r2_fewsource/source_budget_cap11.json
 ```
 
-The `published_check.py` and `label_cause.py` scripts use absolute paths of this machine; edit `REPO`/`WORK` at the top
-for another clone.
+**Data:**
+- `ethanCSL/openarm_pringles_lerobot_real_10_v00@cebdee98` (sources).
+- `ethanCSL/openarm_pringles_lerobot_real_v00@2c1bc860` (pool; episodes 10–49 are reused development data).
+
+**Earlier work:** everything from `research/sfagen-workspace-f1w` is included (published-dataset provenance, F1W, tests);
+see that branch's README for those commands.
 
 ## Limitations
 
-- Coverage counts are FK proxies at gripper events, measured on reused development recordings, not untouched test data.
-- F1W changes published-pipeline behaviour (checks, planner, renderer, export). Regenerating the published datasets with
-  this branch gives different data; tag the old Hub revision first.
-- No VLA training, hardware replay or robot run on any of this.
-- The F1W evidence folder `artifacts/codex_workspace_f1w_20261110` is untracked; it is backed up in
-  `~/Stanley_ws/backups/repro_2026-11-11` (SHA256SUMS).
+- Sources and pool are development data, not a held-out test.
+- Can poses are reconstructions, and coverage positions are FK proxies.
+- The R1 reference bin has 5 unordered pairs, so the CIs are wide.
+- PSNR and coverage are proxies. VLA usefulness needs a separately authorized SmolVLA screen.
