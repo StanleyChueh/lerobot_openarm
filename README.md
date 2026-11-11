@@ -50,14 +50,25 @@ Production code is unchanged: follower, wrapper, telemetry, teleop, gains, guard
 
 ## Reproduce
 
+All commands run from the repository root of this branch's checkout. The source is `NEXT_OPENARM_ADAPTATION.md` §3 (pipeline) and §5 (offline results).
+
+**Offline tests** (CPU, no robot, no Hub):
+
 ```bash
-PYTHONPATH=$PWD/plugins/lerobot_robot_openarm_umeow:$PWD/plugins/lerobot_teleoperator_openarm_quest \
-  env HF_HUB_OFFLINE=1 .venv/bin/python plugins/tests/test_next_export.py
-PYTHONPATH=... .venv/bin/python plugins/tests/test_next_model.py
-# on real sessions (only after Gate 2 GO + Gate 3B data):
+export PYTHONPATH=$PWD/plugins/lerobot_robot_openarm_umeow:$PWD/plugins/lerobot_teleoperator_openarm_quest
+R="env HF_HUB_OFFLINE=1 .venv/bin/python"
+$R plugins/tests/test_next_export.py      # 49 checks: exporter on the committed Gate-2A fixture + 20 corrupted copies
+$R plugins/tests/test_next_model.py       # 16 checks: mock-only model smoke tests (official parity P0-P4 skipped)
+$R plugins/tests/test_eval_obs_reuse.py   # 5 checks: evaluation observation reuse
+```
+
+**On real sessions** (only after a Gate-2 bench report of GO and approved Gate-3B contact-free collection):
+
+```bash
 python tools/force_aware/next_export.py <telemetry session> --out <export root> ...
 python tools/force_aware/next_model.py train --arm left --exports <exp>/<s1> ... --val-sessions <sX> --out <runs>
 python tools/force_aware/next_model.py estimate --run <run> --export <exp>/<s> --arm left --out residual.parquet
+python tools/force_aware/next_export.py --h5 <exp>/<s1> <exp>/<s2> --arm left --out next_left_train.h5   # FACTR2 H5 view
 ```
 
 The `PYTHONPATH` override is needed because the venv's editable install points at the main checkout.
