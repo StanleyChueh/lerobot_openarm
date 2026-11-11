@@ -1,0 +1,114 @@
+{
+ "_about": {
+  "generated": "2026-11-11, read-only Hub query (huggingface_hub list_repo_refs/list_repo_files/get_paths_info)",
+  "rule": "a dataset's code_commit is exact when files_equal_to_commit == code_files (every uploaded sfagen/ file is byte-identical)",
+  "visibility": "the nine source-budget repos are public by the owner's decision (confirmed 2026-11-11), although tools_budget_publish.py creates them private",
+  "known_data_issues": "see results/published_check_2026-11-11/published_check.json: clipped action labels and one missing battery wrist frame (episode 91; mixed 101)"
+ },
+ "datasets": {
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v00": {
+   "v3.0": "30533e672dc16c1a35f480cb56beb5882b7e3db9",
+   "private": false,
+   "code_commit": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "code_files": 25,
+   "files_equal_to_commit": 25,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v00": {
+   "v3.0": "9f5ed12439246e57c683054dafd2caae616212ef",
+   "private": false,
+   "code_commit": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "code_files": 25,
+   "files_equal_to_commit": 25,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_insertbattery_lerobot_real_to_sim_10_3cam_v00": {
+   "v3.0": "c3c571d0d2474a2b64a4de412209b21d3bfff913",
+   "private": false,
+   "code_commit": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "code_files": 25,
+   "files_equal_to_commit": 25,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_insertbattery_lerobot_real_and_sim_10_3cam_v00": {
+   "v3.0": "2de75e9f738384ae59bf02ad5b751bcbee6636cc",
+   "private": false,
+   "code_commit": "50832b3a6342e5e342cbc91df39fd3d417c261a3",
+   "code_files": 25,
+   "files_equal_to_commit": 25,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_1_3cam_v00": {
+   "v3.0": "efdee6c202be091fea840410a4b41a9149138144",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_2_3cam_v00": {
+   "v3.0": "88b4072ef4d3814d68d9b6c2a42d86b2a80fbbec",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_3_3cam_v00": {
+   "v3.0": "1173d78ce3790fbeedbccec0f255a546a1cc50cc",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_4_3cam_v00": {
+   "v3.0": "dae8f55edea31992f58648c727f129b6243d3829",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_5_3cam_v00": {
+   "v3.0": "67f1ae9bdc8a99f587d74e497c2398ca4f5c2666",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_6_3cam_v00": {
+   "v3.0": "a041516f4a6b664f860a3b22365659d5e189f953",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_7_3cam_v00": {
+   "v3.0": "3538ab17a2ede13f34f3892f1d437e35a36c0118",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_8_3cam_v00": {
+   "v3.0": "c93310534ae3830e0ffe0a99bfe234d0835b3e68",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_9_3cam_v00": {
+   "v3.0": "f5c87414bd2d9595e109e6ae4a4e06d7117cf037",
+   "private": false,
+   "code_commit": "5d81f2ff76fdb0ff9165a9e36ed3a15a2f43ac9c",
+   "code_files": 30,
+   "files_equal_to_commit": 30,
+   "not_equal": []
+  }
+ }
+}

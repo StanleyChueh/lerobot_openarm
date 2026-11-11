@@ -32,11 +32,25 @@ real demos ─► calibrate (once per rig) ─► table (once per rig) ─► ge
 - huggingface_hub
 - lerobot (for `build`)
 
-On this machine:
+On this machine, run from this tracked directory (not from the old untracked copy in `~/Stanley_ws/sfa_hf_export/sfagen`):
 ```bash
-cd ~/Stanley_ws/sfa_hf_export/sfagen
+cd <repo>/research/sim_free_augmentation/sfagen
 PY="env -u PYTHONPATH -u LD_LIBRARY_PATH $HOME/Stanley_ws/lerobot_openarm/.venv/bin/python"
+$PY -B -m unittest discover -s tests          # CPU tests, about 10 s
 ```
+
+### Data directories
+
+Code, configs and tests are in git. Generated data is not: `configs/work/` (about 210 GB) and `logs/` stay in the old
+data location and are linked here (both are git-ignored):
+```bash
+ln -s ~/Stanley_ws/sfa_hf_export/sfagen/configs/work configs/work
+ln -s ~/Stanley_ws/sfa_hf_export/sfagen/logs logs
+```
+The tools import `sfagen` from this directory and the published baselines from `legacy/`. `tools/xbench.py <task>
+--imports-only` lists every research file it loads and stops if one is not tracked. `tools/push_unified.py` refuses an
+empty or incomplete export before any Hub write and uploads a `provenance.json` (git commit, uncommitted files, file
+hashes, `uv.lock` hash, SAM2 revision). `results/hub_provenance.json` maps each published dataset to the commit of its code.
 
 ## Commands
 

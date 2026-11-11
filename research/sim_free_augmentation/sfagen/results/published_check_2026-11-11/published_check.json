@@ -1,0 +1,1288 @@
+{
+ "ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v00": {
+  "repo": "ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v00",
+  "local": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/dataset",
+  "hub": {
+   "hub_files": 10,
+   "mismatches": [],
+   "local_only": []
+  },
+  "labels": {
+   "synthetic_episodes": 96,
+   "label_mismatch_episodes": 12,
+   "max_err_rad": 0.016884446144104004,
+   "mismatches": [
+    {
+     "episode": 21,
+     "synthetic_index": 21,
+     "source": 2,
+     "variation": "can_x-3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.005934596061706543,
+     "frames_over_tol": 7,
+     "n_frames": 280
+    },
+    {
+     "episode": 24,
+     "synthetic_index": 24,
+     "source": 2,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015986144542694092,
+     "frames_over_tol": 94,
+     "n_frames": 280
+    },
+    {
+     "episode": 70,
+     "synthetic_index": 70,
+     "source": 7,
+     "variation": "can_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.004605531692504883,
+     "frames_over_tol": 5,
+     "n_frames": 261
+    },
+    {
+     "episode": 76,
+     "synthetic_index": 76,
+     "source": 7,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.014998018741607666,
+     "frames_over_tol": 24,
+     "n_frames": 261
+    },
+    {
+     "episode": 77,
+     "synthetic_index": 77,
+     "source": 7,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015824615955352783,
+     "frames_over_tol": 28,
+     "n_frames": 261
+    },
+    {
+     "episode": 81,
+     "synthetic_index": 81,
+     "source": 8,
+     "variation": "can_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.016884446144104004,
+     "frames_over_tol": 42,
+     "n_frames": 249
+    },
+    {
+     "episode": 82,
+     "synthetic_index": 82,
+     "source": 8,
+     "variation": "can_x+3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.016884446144104004,
+     "frames_over_tol": 25,
+     "n_frames": 249
+    },
+    {
+     "episode": 85,
+     "synthetic_index": 85,
+     "source": 8,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015771090984344482,
+     "frames_over_tol": 57,
+     "n_frames": 249
+    },
+    {
+     "episode": 88,
+     "synthetic_index": 88,
+     "source": 9,
+     "variation": "can_x+0_y-6",
+     "family": "object_position",
+     "max_err_rad": 0.005333423614501953,
+     "frames_over_tol": 9,
+     "n_frames": 253
+    },
+    {
+     "episode": 93,
+     "synthetic_index": 93,
+     "source": 9,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015387475490570068,
+     "frames_over_tol": 25,
+     "n_frames": 253
+    },
+    {
+     "episode": 94,
+     "synthetic_index": 94,
+     "source": 9,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015387475490570068,
+     "frames_over_tol": 31,
+     "n_frames": 253
+    },
+    {
+     "episode": 95,
+     "synthetic_index": 95,
+     "source": 9,
+     "variation": "interact_x+5_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015387475490570068,
+     "frames_over_tol": 37,
+     "n_frames": 253
+    }
+   ]
+  },
+  "cameras": {
+   "observation.images.body_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 2
+   },
+   "observation.images.wrist_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 1
+   },
+   "observation.images.right_wrist_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 1
+   }
+  }
+ },
+ "ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v00": {
+  "repo": "ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v00",
+  "local": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/dataset_mixed",
+  "hub": {
+   "hub_files": 13,
+   "mismatches": [],
+   "local_only": []
+  },
+  "labels": {
+   "synthetic_episodes": 96,
+   "label_mismatch_episodes": 12,
+   "max_err_rad": 0.016884446144104004,
+   "mismatches": [
+    {
+     "episode": 31,
+     "synthetic_index": 21,
+     "source": 2,
+     "variation": "can_x-3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.005934596061706543,
+     "frames_over_tol": 7,
+     "n_frames": 280
+    },
+    {
+     "episode": 34,
+     "synthetic_index": 24,
+     "source": 2,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015986144542694092,
+     "frames_over_tol": 94,
+     "n_frames": 280
+    },
+    {
+     "episode": 80,
+     "synthetic_index": 70,
+     "source": 7,
+     "variation": "can_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.004605531692504883,
+     "frames_over_tol": 5,
+     "n_frames": 261
+    },
+    {
+     "episode": 86,
+     "synthetic_index": 76,
+     "source": 7,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.014998018741607666,
+     "frames_over_tol": 24,
+     "n_frames": 261
+    },
+    {
+     "episode": 87,
+     "synthetic_index": 77,
+     "source": 7,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015824615955352783,
+     "frames_over_tol": 28,
+     "n_frames": 261
+    },
+    {
+     "episode": 91,
+     "synthetic_index": 81,
+     "source": 8,
+     "variation": "can_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.016884446144104004,
+     "frames_over_tol": 42,
+     "n_frames": 249
+    },
+    {
+     "episode": 92,
+     "synthetic_index": 82,
+     "source": 8,
+     "variation": "can_x+3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.016884446144104004,
+     "frames_over_tol": 25,
+     "n_frames": 249
+    },
+    {
+     "episode": 95,
+     "synthetic_index": 85,
+     "source": 8,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015771090984344482,
+     "frames_over_tol": 57,
+     "n_frames": 249
+    },
+    {
+     "episode": 98,
+     "synthetic_index": 88,
+     "source": 9,
+     "variation": "can_x+0_y-6",
+     "family": "object_position",
+     "max_err_rad": 0.005333423614501953,
+     "frames_over_tol": 9,
+     "n_frames": 253
+    },
+    {
+     "episode": 103,
+     "synthetic_index": 93,
+     "source": 9,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015387475490570068,
+     "frames_over_tol": 25,
+     "n_frames": 253
+    },
+    {
+     "episode": 104,
+     "synthetic_index": 94,
+     "source": 9,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015387475490570068,
+     "frames_over_tol": 31,
+     "n_frames": 253
+    },
+    {
+     "episode": 105,
+     "synthetic_index": 95,
+     "source": 9,
+     "variation": "interact_x+5_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015387475490570068,
+     "frames_over_tol": 37,
+     "n_frames": 253
+    }
+   ]
+  },
+  "cameras": {
+   "observation.images.body_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 3
+   },
+   "observation.images.wrist_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 2
+   },
+   "observation.images.right_wrist_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 2
+   }
+  }
+ },
+ "ethanCSL/openarm_insertbattery_lerobot_real_to_sim_10_3cam_v00": {
+  "repo": "ethanCSL/openarm_insertbattery_lerobot_real_to_sim_10_3cam_v00",
+  "local": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/dataset",
+  "hub": {
+   "hub_files": 16,
+   "mismatches": [],
+   "local_only": []
+  },
+  "labels": {
+   "synthetic_episodes": 114,
+   "label_mismatch_episodes": 45,
+   "max_err_rad": 0.05697011947631836,
+   "mismatches": [
+    {
+     "episode": 0,
+     "synthetic_index": 0,
+     "source": 0,
+     "variation": "battery_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.002550959587097168,
+     "frames_over_tol": 1,
+     "n_frames": 768
+    },
+    {
+     "episode": 3,
+     "synthetic_index": 3,
+     "source": 0,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.011184871196746826,
+     "frames_over_tol": 8,
+     "n_frames": 768
+    },
+    {
+     "episode": 4,
+     "synthetic_index": 4,
+     "source": 0,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.0184364914894104,
+     "frames_over_tol": 43,
+     "n_frames": 768
+    },
+    {
+     "episode": 5,
+     "synthetic_index": 5,
+     "source": 0,
+     "variation": "interact_x+0_y-5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.018822908401489258,
+     "frames_over_tol": 75,
+     "n_frames": 768
+    },
+    {
+     "episode": 6,
+     "synthetic_index": 6,
+     "source": 0,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05696982145309448,
+     "frames_over_tol": 62,
+     "n_frames": 768
+    },
+    {
+     "episode": 15,
+     "synthetic_index": 15,
+     "source": 1,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.017681002616882324,
+     "frames_over_tol": 16,
+     "n_frames": 776
+    },
+    {
+     "episode": 16,
+     "synthetic_index": 16,
+     "source": 1,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.0199662446975708,
+     "frames_over_tol": 110,
+     "n_frames": 776
+    },
+    {
+     "episode": 17,
+     "synthetic_index": 17,
+     "source": 1,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.048474907875061035,
+     "frames_over_tol": 122,
+     "n_frames": 776
+    },
+    {
+     "episode": 23,
+     "synthetic_index": 23,
+     "source": 2,
+     "variation": "battery_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.003120124340057373,
+     "frames_over_tol": 1,
+     "n_frames": 785
+    },
+    {
+     "episode": 24,
+     "synthetic_index": 24,
+     "source": 2,
+     "variation": "battery_x+0_y-6",
+     "family": "object_position",
+     "max_err_rad": 0.006300091743469238,
+     "frames_over_tol": 1,
+     "n_frames": 785
+    },
+    {
+     "episode": 26,
+     "synthetic_index": 26,
+     "source": 2,
+     "variation": "battery_x-3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.007050931453704834,
+     "frames_over_tol": 1,
+     "n_frames": 785
+    },
+    {
+     "episode": 27,
+     "synthetic_index": 27,
+     "source": 2,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.01469510793685913,
+     "frames_over_tol": 13,
+     "n_frames": 785
+    },
+    {
+     "episode": 28,
+     "synthetic_index": 28,
+     "source": 2,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.019585132598876953,
+     "frames_over_tol": 175,
+     "n_frames": 785
+    },
+    {
+     "episode": 29,
+     "synthetic_index": 29,
+     "source": 2,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05379229784011841,
+     "frames_over_tol": 171,
+     "n_frames": 785
+    },
+    {
+     "episode": 37,
+     "synthetic_index": 37,
+     "source": 3,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.021506845951080322,
+     "frames_over_tol": 15,
+     "n_frames": 718
+    },
+    {
+     "episode": 38,
+     "synthetic_index": 38,
+     "source": 3,
+     "variation": "interact_x+0_y+5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.03303009271621704,
+     "frames_over_tol": 18,
+     "n_frames": 718
+    },
+    {
+     "episode": 39,
+     "synthetic_index": 39,
+     "source": 3,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.019966304302215576,
+     "frames_over_tol": 82,
+     "n_frames": 718
+    },
+    {
+     "episode": 40,
+     "synthetic_index": 40,
+     "source": 3,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.049112141132354736,
+     "frames_over_tol": 102,
+     "n_frames": 718
+    },
+    {
+     "episode": 48,
+     "synthetic_index": 48,
+     "source": 4,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.01248401403427124,
+     "frames_over_tol": 17,
+     "n_frames": 717
+    },
+    {
+     "episode": 49,
+     "synthetic_index": 49,
+     "source": 4,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.018440544605255127,
+     "frames_over_tol": 140,
+     "n_frames": 717
+    },
+    {
+     "episode": 50,
+     "synthetic_index": 50,
+     "source": 4,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05697011947631836,
+     "frames_over_tol": 143,
+     "n_frames": 717
+    },
+    {
+     "episode": 56,
+     "synthetic_index": 56,
+     "source": 5,
+     "variation": "battery_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.005335867404937744,
+     "frames_over_tol": 3,
+     "n_frames": 715
+    },
+    {
+     "episode": 57,
+     "synthetic_index": 57,
+     "source": 5,
+     "variation": "battery_x+0_y-6",
+     "family": "object_position",
+     "max_err_rad": 0.012530267238616943,
+     "frames_over_tol": 3,
+     "n_frames": 715
+    },
+    {
+     "episode": 60,
+     "synthetic_index": 60,
+     "source": 5,
+     "variation": "battery_x-3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.010917365550994873,
+     "frames_over_tol": 3,
+     "n_frames": 715
+    },
+    {
+     "episode": 62,
+     "synthetic_index": 62,
+     "source": 5,
+     "variation": "interact_x+0_y+5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.007926881313323975,
+     "frames_over_tol": 5,
+     "n_frames": 715
+    },
+    {
+     "episode": 63,
+     "synthetic_index": 63,
+     "source": 5,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.0199662446975708,
+     "frames_over_tol": 77,
+     "n_frames": 715
+    },
+    {
+     "episode": 64,
+     "synthetic_index": 64,
+     "source": 5,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.019967317581176758,
+     "frames_over_tol": 97,
+     "n_frames": 715
+    },
+    {
+     "episode": 76,
+     "synthetic_index": 76,
+     "source": 6,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.005463123321533203,
+     "frames_over_tol": 6,
+     "n_frames": 687
+    },
+    {
+     "episode": 77,
+     "synthetic_index": 77,
+     "source": 6,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.019967257976531982,
+     "frames_over_tol": 102,
+     "n_frames": 687
+    },
+    {
+     "episode": 78,
+     "synthetic_index": 78,
+     "source": 6,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.03949612379074097,
+     "frames_over_tol": 123,
+     "n_frames": 687
+    },
+    {
+     "episode": 83,
+     "synthetic_index": 83,
+     "source": 7,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.020545244216918945,
+     "frames_over_tol": 17,
+     "n_frames": 815
+    },
+    {
+     "episode": 84,
+     "synthetic_index": 84,
+     "source": 7,
+     "variation": "interact_x+0_y+5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.03192406892776489,
+     "frames_over_tol": 19,
+     "n_frames": 815
+    },
+    {
+     "episode": 85,
+     "synthetic_index": 85,
+     "source": 7,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.02034825086593628,
+     "frames_over_tol": 166,
+     "n_frames": 815
+    },
+    {
+     "episode": 86,
+     "synthetic_index": 86,
+     "source": 7,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05065631866455078,
+     "frames_over_tol": 178,
+     "n_frames": 815
+    },
+    {
+     "episode": 95,
+     "synthetic_index": 95,
+     "source": 8,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.03130859136581421,
+     "frames_over_tol": 21,
+     "n_frames": 700
+    },
+    {
+     "episode": 96,
+     "synthetic_index": 96,
+     "source": 8,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.0165327787399292,
+     "frames_over_tol": 153,
+     "n_frames": 700
+    },
+    {
+     "episode": 97,
+     "synthetic_index": 97,
+     "source": 8,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05017578601837158,
+     "frames_over_tol": 161,
+     "n_frames": 700
+    },
+    {
+     "episode": 103,
+     "synthetic_index": 103,
+     "source": 9,
+     "variation": "battery_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.016151905059814453,
+     "frames_over_tol": 12,
+     "n_frames": 759
+    },
+    {
+     "episode": 104,
+     "synthetic_index": 104,
+     "source": 9,
+     "variation": "battery_x+0_y-6",
+     "family": "object_position",
+     "max_err_rad": 0.016151905059814453,
+     "frames_over_tol": 20,
+     "n_frames": 759
+    },
+    {
+     "episode": 105,
+     "synthetic_index": 105,
+     "source": 9,
+     "variation": "battery_x-3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.01444244384765625,
+     "frames_over_tol": 26,
+     "n_frames": 759
+    },
+    {
+     "episode": 106,
+     "synthetic_index": 106,
+     "source": 9,
+     "variation": "battery_x-6_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.015722692012786865,
+     "frames_over_tol": 26,
+     "n_frames": 759
+    },
+    {
+     "episode": 107,
+     "synthetic_index": 107,
+     "source": 9,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.01323544979095459,
+     "frames_over_tol": 10,
+     "n_frames": 759
+    },
+    {
+     "episode": 108,
+     "synthetic_index": 108,
+     "source": 9,
+     "variation": "interact_x+0_y+5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.013989925384521484,
+     "frames_over_tol": 12,
+     "n_frames": 759
+    },
+    {
+     "episode": 109,
+     "synthetic_index": 109,
+     "source": 9,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.016151905059814453,
+     "frames_over_tol": 128,
+     "n_frames": 759
+    },
+    {
+     "episode": 110,
+     "synthetic_index": 110,
+     "source": 9,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015828192234039307,
+     "frames_over_tol": 127,
+     "n_frames": 759
+    }
+   ]
+  },
+  "cameras": {
+   "observation.images.body_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 5
+   },
+   "observation.images.wrist_cam": {
+    "episodes_span_ne_length": [
+     91
+    ],
+    "files_with_frame_deficit": {
+     "videos/observation.images.wrist_cam/chunk-000/file-001.mp4": {
+      "packets": 36789,
+      "expected": 36790
+     }
+    },
+    "files": 2
+   },
+   "observation.images.right_wrist_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 3
+   }
+  }
+ },
+ "ethanCSL/openarm_insertbattery_lerobot_real_and_sim_10_3cam_v00": {
+  "repo": "ethanCSL/openarm_insertbattery_lerobot_real_and_sim_10_3cam_v00",
+  "local": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/dataset_mixed",
+  "hub": {
+   "hub_files": 23,
+   "mismatches": [],
+   "local_only": []
+  },
+  "labels": {
+   "synthetic_episodes": 114,
+   "label_mismatch_episodes": 45,
+   "max_err_rad": 0.05697011947631836,
+   "mismatches": [
+    {
+     "episode": 10,
+     "synthetic_index": 0,
+     "source": 0,
+     "variation": "battery_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.002550959587097168,
+     "frames_over_tol": 1,
+     "n_frames": 768
+    },
+    {
+     "episode": 13,
+     "synthetic_index": 3,
+     "source": 0,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.011184871196746826,
+     "frames_over_tol": 8,
+     "n_frames": 768
+    },
+    {
+     "episode": 14,
+     "synthetic_index": 4,
+     "source": 0,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.0184364914894104,
+     "frames_over_tol": 43,
+     "n_frames": 768
+    },
+    {
+     "episode": 15,
+     "synthetic_index": 5,
+     "source": 0,
+     "variation": "interact_x+0_y-5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.018822908401489258,
+     "frames_over_tol": 75,
+     "n_frames": 768
+    },
+    {
+     "episode": 16,
+     "synthetic_index": 6,
+     "source": 0,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05696982145309448,
+     "frames_over_tol": 62,
+     "n_frames": 768
+    },
+    {
+     "episode": 25,
+     "synthetic_index": 15,
+     "source": 1,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.017681002616882324,
+     "frames_over_tol": 16,
+     "n_frames": 776
+    },
+    {
+     "episode": 26,
+     "synthetic_index": 16,
+     "source": 1,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.0199662446975708,
+     "frames_over_tol": 110,
+     "n_frames": 776
+    },
+    {
+     "episode": 27,
+     "synthetic_index": 17,
+     "source": 1,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.048474907875061035,
+     "frames_over_tol": 122,
+     "n_frames": 776
+    },
+    {
+     "episode": 33,
+     "synthetic_index": 23,
+     "source": 2,
+     "variation": "battery_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.003120124340057373,
+     "frames_over_tol": 1,
+     "n_frames": 785
+    },
+    {
+     "episode": 34,
+     "synthetic_index": 24,
+     "source": 2,
+     "variation": "battery_x+0_y-6",
+     "family": "object_position",
+     "max_err_rad": 0.006300091743469238,
+     "frames_over_tol": 1,
+     "n_frames": 785
+    },
+    {
+     "episode": 36,
+     "synthetic_index": 26,
+     "source": 2,
+     "variation": "battery_x-3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.007050931453704834,
+     "frames_over_tol": 1,
+     "n_frames": 785
+    },
+    {
+     "episode": 37,
+     "synthetic_index": 27,
+     "source": 2,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.01469510793685913,
+     "frames_over_tol": 13,
+     "n_frames": 785
+    },
+    {
+     "episode": 38,
+     "synthetic_index": 28,
+     "source": 2,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.019585132598876953,
+     "frames_over_tol": 175,
+     "n_frames": 785
+    },
+    {
+     "episode": 39,
+     "synthetic_index": 29,
+     "source": 2,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05379229784011841,
+     "frames_over_tol": 171,
+     "n_frames": 785
+    },
+    {
+     "episode": 47,
+     "synthetic_index": 37,
+     "source": 3,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.021506845951080322,
+     "frames_over_tol": 15,
+     "n_frames": 718
+    },
+    {
+     "episode": 48,
+     "synthetic_index": 38,
+     "source": 3,
+     "variation": "interact_x+0_y+5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.03303009271621704,
+     "frames_over_tol": 18,
+     "n_frames": 718
+    },
+    {
+     "episode": 49,
+     "synthetic_index": 39,
+     "source": 3,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.019966304302215576,
+     "frames_over_tol": 82,
+     "n_frames": 718
+    },
+    {
+     "episode": 50,
+     "synthetic_index": 40,
+     "source": 3,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.049112141132354736,
+     "frames_over_tol": 102,
+     "n_frames": 718
+    },
+    {
+     "episode": 58,
+     "synthetic_index": 48,
+     "source": 4,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.01248401403427124,
+     "frames_over_tol": 17,
+     "n_frames": 717
+    },
+    {
+     "episode": 59,
+     "synthetic_index": 49,
+     "source": 4,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.018440544605255127,
+     "frames_over_tol": 140,
+     "n_frames": 717
+    },
+    {
+     "episode": 60,
+     "synthetic_index": 50,
+     "source": 4,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05697011947631836,
+     "frames_over_tol": 143,
+     "n_frames": 717
+    },
+    {
+     "episode": 66,
+     "synthetic_index": 56,
+     "source": 5,
+     "variation": "battery_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.005335867404937744,
+     "frames_over_tol": 3,
+     "n_frames": 715
+    },
+    {
+     "episode": 67,
+     "synthetic_index": 57,
+     "source": 5,
+     "variation": "battery_x+0_y-6",
+     "family": "object_position",
+     "max_err_rad": 0.012530267238616943,
+     "frames_over_tol": 3,
+     "n_frames": 715
+    },
+    {
+     "episode": 70,
+     "synthetic_index": 60,
+     "source": 5,
+     "variation": "battery_x-3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.010917365550994873,
+     "frames_over_tol": 3,
+     "n_frames": 715
+    },
+    {
+     "episode": 72,
+     "synthetic_index": 62,
+     "source": 5,
+     "variation": "interact_x+0_y+5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.007926881313323975,
+     "frames_over_tol": 5,
+     "n_frames": 715
+    },
+    {
+     "episode": 73,
+     "synthetic_index": 63,
+     "source": 5,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.0199662446975708,
+     "frames_over_tol": 77,
+     "n_frames": 715
+    },
+    {
+     "episode": 74,
+     "synthetic_index": 64,
+     "source": 5,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.019967317581176758,
+     "frames_over_tol": 97,
+     "n_frames": 715
+    },
+    {
+     "episode": 86,
+     "synthetic_index": 76,
+     "source": 6,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.005463123321533203,
+     "frames_over_tol": 6,
+     "n_frames": 687
+    },
+    {
+     "episode": 87,
+     "synthetic_index": 77,
+     "source": 6,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.019967257976531982,
+     "frames_over_tol": 102,
+     "n_frames": 687
+    },
+    {
+     "episode": 88,
+     "synthetic_index": 78,
+     "source": 6,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.03949612379074097,
+     "frames_over_tol": 123,
+     "n_frames": 687
+    },
+    {
+     "episode": 93,
+     "synthetic_index": 83,
+     "source": 7,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.020545244216918945,
+     "frames_over_tol": 17,
+     "n_frames": 815
+    },
+    {
+     "episode": 94,
+     "synthetic_index": 84,
+     "source": 7,
+     "variation": "interact_x+0_y+5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.03192406892776489,
+     "frames_over_tol": 19,
+     "n_frames": 815
+    },
+    {
+     "episode": 95,
+     "synthetic_index": 85,
+     "source": 7,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.02034825086593628,
+     "frames_over_tol": 166,
+     "n_frames": 815
+    },
+    {
+     "episode": 96,
+     "synthetic_index": 86,
+     "source": 7,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05065631866455078,
+     "frames_over_tol": 178,
+     "n_frames": 815
+    },
+    {
+     "episode": 105,
+     "synthetic_index": 95,
+     "source": 8,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.03130859136581421,
+     "frames_over_tol": 21,
+     "n_frames": 700
+    },
+    {
+     "episode": 106,
+     "synthetic_index": 96,
+     "source": 8,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.0165327787399292,
+     "frames_over_tol": 153,
+     "n_frames": 700
+    },
+    {
+     "episode": 107,
+     "synthetic_index": 97,
+     "source": 8,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.05017578601837158,
+     "frames_over_tol": 161,
+     "n_frames": 700
+    },
+    {
+     "episode": 113,
+     "synthetic_index": 103,
+     "source": 9,
+     "variation": "battery_x+0_y-3",
+     "family": "object_position",
+     "max_err_rad": 0.016151905059814453,
+     "frames_over_tol": 12,
+     "n_frames": 759
+    },
+    {
+     "episode": 114,
+     "synthetic_index": 104,
+     "source": 9,
+     "variation": "battery_x+0_y-6",
+     "family": "object_position",
+     "max_err_rad": 0.016151905059814453,
+     "frames_over_tol": 20,
+     "n_frames": 759
+    },
+    {
+     "episode": 115,
+     "synthetic_index": 105,
+     "source": 9,
+     "variation": "battery_x-3_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.01444244384765625,
+     "frames_over_tol": 26,
+     "n_frames": 759
+    },
+    {
+     "episode": 116,
+     "synthetic_index": 106,
+     "source": 9,
+     "variation": "battery_x-6_y+0",
+     "family": "object_position",
+     "max_err_rad": 0.015722692012786865,
+     "frames_over_tol": 26,
+     "n_frames": 759
+    },
+    {
+     "episode": 117,
+     "synthetic_index": 107,
+     "source": 9,
+     "variation": "interact_x+0_y+3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.01323544979095459,
+     "frames_over_tol": 10,
+     "n_frames": 759
+    },
+    {
+     "episode": 118,
+     "synthetic_index": 108,
+     "source": 9,
+     "variation": "interact_x+0_y+5_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.013989925384521484,
+     "frames_over_tol": 12,
+     "n_frames": 759
+    },
+    {
+     "episode": 119,
+     "synthetic_index": 109,
+     "source": 9,
+     "variation": "interact_x+0_y-3_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.016151905059814453,
+     "frames_over_tol": 128,
+     "n_frames": 759
+    },
+    {
+     "episode": 120,
+     "synthetic_index": 110,
+     "source": 9,
+     "variation": "interact_x+3_y+0_z+0",
+     "family": "interaction_location",
+     "max_err_rad": 0.015828192234039307,
+     "frames_over_tol": 127,
+     "n_frames": 759
+    }
+   ]
+  },
+  "cameras": {
+   "observation.images.body_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 8
+   },
+   "observation.images.wrist_cam": {
+    "episodes_span_ne_length": [
+     101
+    ],
+    "files_with_frame_deficit": {
+     "videos/observation.images.wrist_cam/chunk-000/file-003.mp4": {
+      "packets": 36789,
+      "expected": 36790
+     }
+    },
+    "files": 4
+   },
+   "observation.images.right_wrist_cam": {
+    "episodes_span_ne_length": [],
+    "files_with_frame_deficit": {},
+    "files": 5
+   }
+  }
+ }
+}

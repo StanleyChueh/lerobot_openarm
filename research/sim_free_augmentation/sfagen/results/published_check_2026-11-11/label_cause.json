@@ -1,0 +1,650 @@
+{
+ "ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v00": {
+  "mismatch_episodes": 12,
+  "all_explained_by_clip": true,
+  "rows": [
+   {
+    "episode": 21,
+    "variation": "can_x-3_y+0",
+    "family": "object_position",
+    "max_err_rad": 0.005934596061706543,
+    "frames_over_tol": 7,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 24,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.015986144542694092,
+    "frames_over_tol": 94,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 70,
+    "variation": "can_x+0_y-3",
+    "family": "object_position",
+    "max_err_rad": 0.004605531692504883,
+    "frames_over_tol": 5,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 76,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.014998018741607666,
+    "frames_over_tol": 24,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 77,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.015824615955352783,
+    "frames_over_tol": 28,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 81,
+    "variation": "can_x+0_y-3",
+    "family": "object_position",
+    "max_err_rad": 0.016884446144104004,
+    "frames_over_tol": 42,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 82,
+    "variation": "can_x+3_y+0",
+    "family": "object_position",
+    "max_err_rad": 0.016884446144104004,
+    "frames_over_tol": 25,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 85,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.015771090984344482,
+    "frames_over_tol": 57,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 88,
+    "variation": "can_x+0_y-6",
+    "family": "object_position",
+    "max_err_rad": 0.005333423614501953,
+    "frames_over_tol": 9,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 93,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.015387475490570068,
+    "frames_over_tol": 25,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 94,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.015387475490570068,
+    "frames_over_tol": 31,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 95,
+    "variation": "interact_x+5_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.015387475490570068,
+    "frames_over_tol": 37,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   }
+  ]
+ },
+ "ethanCSL/openarm_insertbattery_lerobot_real_to_sim_10_3cam_v00": {
+  "mismatch_episodes": 45,
+  "all_explained_by_clip": true,
+  "rows": [
+   {
+    "episode": 0,
+    "variation": "battery_x+0_y-3",
+    "family": "object_position",
+    "max_err_rad": 0.002550959587097168,
+    "frames_over_tol": 1,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 3,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.011184871196746826,
+    "frames_over_tol": 8,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 4,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.0184364914894104,
+    "frames_over_tol": 43,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 5,
+    "variation": "interact_x+0_y-5_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.018822908401489258,
+    "frames_over_tol": 75,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 6,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.05696982145309448,
+    "frames_over_tol": 62,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 15,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.017681002616882324,
+    "frames_over_tol": 16,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 16,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.0199662446975708,
+    "frames_over_tol": 110,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 17,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.048474907875061035,
+    "frames_over_tol": 122,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 23,
+    "variation": "battery_x+0_y-3",
+    "family": "object_position",
+    "max_err_rad": 0.003120124340057373,
+    "frames_over_tol": 1,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 24,
+    "variation": "battery_x+0_y-6",
+    "family": "object_position",
+    "max_err_rad": 0.006300091743469238,
+    "frames_over_tol": 1,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 26,
+    "variation": "battery_x-3_y+0",
+    "family": "object_position",
+    "max_err_rad": 0.007050931453704834,
+    "frames_over_tol": 1,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 27,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.01469510793685913,
+    "frames_over_tol": 13,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 28,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.019585132598876953,
+    "frames_over_tol": 175,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 29,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.05379229784011841,
+    "frames_over_tol": 171,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 37,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.021506845951080322,
+    "frames_over_tol": 15,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 38,
+    "variation": "interact_x+0_y+5_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.03303009271621704,
+    "frames_over_tol": 18,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 39,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.019966304302215576,
+    "frames_over_tol": 82,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 40,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.049112141132354736,
+    "frames_over_tol": 102,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 48,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.01248401403427124,
+    "frames_over_tol": 17,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 49,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.018440544605255127,
+    "frames_over_tol": 140,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 50,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.05697011947631836,
+    "frames_over_tol": 143,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 56,
+    "variation": "battery_x+0_y-3",
+    "family": "object_position",
+    "max_err_rad": 0.005335867404937744,
+    "frames_over_tol": 3,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 57,
+    "variation": "battery_x+0_y-6",
+    "family": "object_position",
+    "max_err_rad": 0.012530267238616943,
+    "frames_over_tol": 3,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 60,
+    "variation": "battery_x-3_y+0",
+    "family": "object_position",
+    "max_err_rad": 0.010917365550994873,
+    "frames_over_tol": 3,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 62,
+    "variation": "interact_x+0_y+5_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.007926881313323975,
+    "frames_over_tol": 5,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 63,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.0199662446975708,
+    "frames_over_tol": 77,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 64,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.019967317581176758,
+    "frames_over_tol": 97,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 76,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.005463123321533203,
+    "frames_over_tol": 6,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 77,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.019967257976531982,
+    "frames_over_tol": 102,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 78,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.03949612379074097,
+    "frames_over_tol": 123,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 83,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.020545244216918945,
+    "frames_over_tol": 17,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 84,
+    "variation": "interact_x+0_y+5_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.03192406892776489,
+    "frames_over_tol": 19,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 85,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.02034825086593628,
+    "frames_over_tol": 166,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 86,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.05065631866455078,
+    "frames_over_tol": 178,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 95,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.03130859136581421,
+    "frames_over_tol": 21,
+    "explained_by_action_clip": true,
+    "joints": [
+     11
+    ]
+   },
+   {
+    "episode": 96,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.0165327787399292,
+    "frames_over_tol": 153,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 97,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.05017578601837158,
+    "frames_over_tol": 161,
+    "explained_by_action_clip": true,
+    "joints": [
+     10,
+     11
+    ]
+   },
+   {
+    "episode": 103,
+    "variation": "battery_x+0_y-3",
+    "family": "object_position",
+    "max_err_rad": 0.016151905059814453,
+    "frames_over_tol": 12,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 104,
+    "variation": "battery_x+0_y-6",
+    "family": "object_position",
+    "max_err_rad": 0.016151905059814453,
+    "frames_over_tol": 20,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 105,
+    "variation": "battery_x-3_y+0",
+    "family": "object_position",
+    "max_err_rad": 0.01444244384765625,
+    "frames_over_tol": 26,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 106,
+    "variation": "battery_x-6_y+0",
+    "family": "object_position",
+    "max_err_rad": 0.015722692012786865,
+    "frames_over_tol": 26,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 107,
+    "variation": "interact_x+0_y+3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.01323544979095459,
+    "frames_over_tol": 10,
+    "explained_by_action_clip": true,
+    "joints": [
+     12
+    ]
+   },
+   {
+    "episode": 108,
+    "variation": "interact_x+0_y+5_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.013989925384521484,
+    "frames_over_tol": 12,
+    "explained_by_action_clip": true,
+    "joints": [
+     12
+    ]
+   },
+   {
+    "episode": 109,
+    "variation": "interact_x+0_y-3_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.016151905059814453,
+    "frames_over_tol": 128,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   },
+   {
+    "episode": 110,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "max_err_rad": 0.015828192234039307,
+    "frames_over_tol": 127,
+    "explained_by_action_clip": true,
+    "joints": [
+     10
+    ]
+   }
+  ]
+ }
+}
