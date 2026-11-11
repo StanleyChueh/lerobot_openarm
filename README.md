@@ -106,7 +106,22 @@ $PY -m sfagen build    configs/openarm_pringles_handover_workspace.yaml --work-d
 $PY -m sfagen verify   configs/openarm_pringles_handover_workspace.yaml --work-dir $W
 # one-source run: configs/*_workspace_strict1.yaml
 
-# budget datasets (GPU): tools_budget_select.py → tools_budget_build.py → tools_budget_publish.py check|cards
+# source-budget datasets (GPU; the dense candidates feed all nine budgets)
+$PY -m sfagen generate configs/openarm_pringles_handover_dense.yaml && $PY -m sfagen render configs/openarm_pringles_handover_dense.yaml  # derived from the config/work-dir names, not re-run
+$PY -B tools_budget_select.py                              # -> logs/budget_selection.json
+for N in 1 2 3 4 5 6 7 8 9; do
+  $PY -B tools_budget_build.py $N                          # work dir + configs/pringles_src$N.yaml
+  $PY -m sfagen build  configs/pringles_src$N.yaml --repo-id local/pringles_src$N   # derived from logs/budget/build_N.log, not re-run
+  $PY -m sfagen verify configs/pringles_src$N.yaml
+done
+$PY -B tools_budget_figs.py                                # -> logs/budget/diversity.json, positions_*.png
+$PY -B tools_budget_publish.py check && $PY -B tools_budget_publish.py cards   # independent re-check, dataset cards
+DRY_RUN=1 $PY -B tools_budget_publish.py push              # publication plan only
+$PY -B tools_source_budget.py pringles                     # coverage for all 1,023 source subsets
+# F1W 1..5-source coverage (from the F1W validation notes)
+$PY -B tools_workspace_budget.py configs/openarm_pringles_handover_workspace.yaml \
+   --pool-data ~/.cache/huggingface/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_v00/snapshots/2c1bc860347c44fc0fbae7567469d36ee49baa8d/data \
+   --exclude 0,1,2,3,4,5,6,7,8,9 --pool-revision 2c1bc860347c44fc0fbae7567469d36ee49baa8d
 # Renderer benchmark (GPU, not re-run since publication):
 $PY -B tools/xbench.py pringles 0,2,3,4,6,7,9 cuda:0 xbench_pringles.json
 ```
