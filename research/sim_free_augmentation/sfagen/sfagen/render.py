@@ -183,6 +183,7 @@ class Renderer:
             out[pixb[filled][:, 0], pixb[filled][:, 1]] = col[filled]; filled_n = int(filled.sum()); big[pixb[filled][:, 0], pixb[filled][:, 1]] = False
         info["borrowed_px"] = filled_n
         img = out.clamp(0, 255).byte().cpu().numpy(); rest = small | big.cpu().numpy()
+        info['part_filled_px']=0
         if self.cfg["part_fill"]:
             full = tmask.cpu().numpy() & ~hitn & ~(~rest & tm)
             if full.any() and hitn.any():
@@ -193,6 +194,7 @@ class Renderer:
                         continue
                     sel = full & (labn == p_); img.reshape(-1, 3)[np.flatnonzero(sel)] = img.reshape(-1, 3)[_nearest(src, W)[sel]]; done |= sel
                 rest &= ~done
+                info['part_filled_px']=int(done.sum())
                 if done.any():
                     bl = cv2.GaussianBlur(img, (5, 5), 1.2); img[done] = bl[done]
         if rest.any():
@@ -206,16 +208,27 @@ class Renderer:
         return img, info
 
 
-def candidate_frames(rec, c):
-    """per output frame i: (source frame, target joints, gripper openness, object poses) at state time i + lag."""
-    out = []; T = rec.T
-    for i in range(T):
-        ts = i + rec.lag
-        q = {s: interp_rows(c["q"][s], np.array([ts]))[0] for s in rec.arms}
-        sp = rec.robot.split(c["state"]); g = {s: float(interp_rows(sp["g" + s][:, None], np.array([ts]))[0, 0]) for s in rec.arms if "g" + s in sp}
-        objs = []
-        for P in c["objects"]:
-            t0 = int(np.clip(np.floor(ts), 0, T - 1)); t1 = min(t0 + 1, T - 1); f = float(np.clip(ts - t0, 0, 1))
-            M = P[t0 if f < 0.5 else t1].copy(); M[:3, 3] = (1 - f) * P[t0][:3, 3] + f * P[t1][:3, 3]; objs.append(M)
-        out.append((i, q, g, objs))
-    return out
+def candidate_frames_tw(rec,c):
+    """Output index, source RGB index and continuous generated scene at the exposure time."""
+    from .timing import source_frame_map, pose_at, source_time_at
+    from .plan import _attach
+    jm=source_frame_map(rec,c);sp=rec.robot.split(c['state'])
+    for i,j in enumerate(jm):
+        ts=i+rec.lag
+        q={a:interp_rows(c['q'][a],np.array([ts]))[0] for a in rec.arms}
+        g={a:float(interp_rows(sp['g'+a][:,None],np.array([ts]))[0,0]) for a in rec.arms if 'g'+a in sp}
+        # FK of interpolated joints, rather than interpolating object translations independently,
+        # keeps a held object exactly attached at fractional camera-exposure times.
+        source_time=float(np.clip(source_time_at(rec,c,ts),0,rec.T-1))
+        rec.robot.fk(q,g);tcp={a:rec.robot.frame(rec.robot.tcp[a]) for a in rec.arms}
+        objects=[]
+        for k,P in enumerate(c['objects']):
+            holder=rec.holder_at(k,source_time)
+            if holder in rec.arms:objects.append(tcp[holder]@_attach(rec.objects[k],rec,holder,source_time))
+            elif holder=='table':objects.append(P[0].copy())
+            else:objects.append(pose_at(P,ts))
+        yield i,int(j),q,g,objects
+
+
+def candidate_frames(rec,c):
+    return [(i,q,g,objs) for i,j,q,g,objs in candidate_frames_tw(rec,c)]

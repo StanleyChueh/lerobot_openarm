@@ -41,7 +41,7 @@ def ik(robot, side, T_target, q0, q_all, lo, hi, iters=100, damp=1e-3):
         e = pin.log6(robot.d.oMf[fid].inverse() * target).vector
         if np.linalg.norm(e[:3]) < 1e-4 and np.linalg.norm(e[3:]) < 1e-3:
             break
-        J = pin.computeFrameJacobian(robot.m, robot.d, x, fid, pin.LOCAL)[:, robot.vidx[side]]
+        J = np.asarray(pin.computeFrameJacobian(robot.m, robot.d, x, fid, pin.LOCAL)).reshape(6,robot.m.nv)[:, robot.vidx[side]]
         q = np.clip(q + J.T @ np.linalg.solve(J @ J.T + damp * np.eye(6), e), lo, hi)
     return q
 
@@ -75,8 +75,8 @@ def _retarget(rec, W, d, sides):
     for s in sides:
         Sn[:, robot.sidx[s]] = qn[s]
         An[:, robot.sidx[s]] = A[:, robot.sidx[s]] + (qn[s] - q[s])[idx]
-        alo = np.minimum(robot.lo[s], A[:, robot.sidx[s]].min(0)); ahi = np.maximum(robot.hi[s], A[:, robot.sidx[s]].max(0))
-        An[:, robot.sidx[s]] = np.clip(An[:, robot.sidx[s]], alo, ahi)
+        # Keep the exact nominal label. Out-of-limit actions must be rejected, never clipped away
+        # from the planned future state while retaining its RGB/state supervision.
     return Sn, An, qn, err, k
 
 

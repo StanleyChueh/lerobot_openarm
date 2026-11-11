@@ -1,5 +1,10 @@
 # sfagen: simulation-free real-to-real demonstration augmentation
 
+## Workspace-wide initial-position mode (2026-11-10)
+
+Use [WORKSPACE_F1W.md](WORKSPACE_F1W.md) and the new `*_workspace.yaml` configurations for broad initial-object variation. [WORKSPACE_F1W_RESULTS.md](WORKSPACE_F1W_RESULTS.md) records the 1–5-source checks and local export tests. Legacy dense configurations and public datasets are preserved. The body camera is rendered; copied wrist views require validity masking and must not be treated as generated multiview RGB.
+
+
 **What it does.** One pipeline turns a handful of real LeRobot demonstrations into many new, replay-checked
 demonstrations, for any task and any robot that has a URDF. It uses no simulator, no generative model and no manual
 labels.

@@ -1,0 +1,40 @@
+{
+ "validation_completed": true,
+ "target": "/home/stanley/Stanley_ws/sfa_hf_export/sfagen",
+ "files": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/build.py": "a06492684338f522e759eece4f18ff4e74ebae08b41b7a9db7c67b8f694d8751",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/checks.py": "0467afb65b5ce79a752de979678bfdce0324b0dbdb4027140672d3ab5c92a705",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/compare_video.py": "203b263669b2f53d3eec7acbd94d12c884c6728b8eb2843a6a7915353cf24e4b",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/generate.py": "d65d7d193983cd9ba419bab7bb876fe3279d6e6f6e8031f0b0f48b3a382bc9c7",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/plan.py": "a9822b9b7cdbf0b613550e792d0979e9377f8d3471e990d0bbf6450dd0175ee2",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/render.py": "fa88c6fc3251a90a740b247776e61654fd5dba16b8d98cda0a64b3cc4fa1f16a",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/render_stage.py": "b9f190fabd5a0fd4f966040d29d05b1fbb21c46e9ed1c6e91558f09fa7e81bab",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/timing.py": "2cead4545c2d260e42938cd0035499e4adb48950c4157c0032f408f2cb513e20",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/verify.py": "08145425119e183c159390acc7b309387009f7caf49999639092ee8458e2fcdc",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/why.py": "e46124d5c422f5cb2924d53f1d0e833e634fad42e576ae49a283f9d22f2b9a9a",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/sfagen/workspace_plan.py": "efd4ef0a05aaf5921257ceb216bd74c7780f0b56e59b3a3e737acdc08de80d4a",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/tests/test_workspace_distance.py": "d4a5228a1a154b11a9228a7f0818004b9558243a43de09d2d06430f3a60c59df",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/tests/test_workspace_exposure.py": "451fea5552b4ba909b32da46288a9db11749e943042d233dd9f6799dc901c1a5",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/tests/test_workspace_integrity.py": "5537ad152c8baf88c1b42d12af88fad80fd240f876a2c5f6d9ca43457b602d15",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/tests/test_workspace_legacy_actions.py": "400787a21dfbd116566219e1e0bc8498cbfcc75ea7916c31bf34978a08cdc398",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/tests/test_workspace_timing.py": "d4586ca7e066c0c532598e4bcbc5ac52754df3e614d53fe3ede505e55d08a584",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/tools_workspace_budget.py": "d8f95dfb6ff6a5c0e9ab7170f41cd027ac0456a76062c7bedcd99546fa90c881",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/WORKSPACE_F1W.md": "a44a6797e2b9596329402064f3a045789a24acf1082cb664c708e334bf5656ac",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/WORKSPACE_F1W_RESULTS.md": "1921f1f2d49ac9af7bea2cfdb12c1c3eb63005183ae5d4c45940774a099e7bd9",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/README.md": "ca7528c777bbd374d52bc9c762c161db8b0dcaeab8f6bcec23639ba8a182a0d2",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/HANDOFF_WORKSPACE_F1W.md": "bc3b576509eed094f61fa29becb6ce2503da0a504c71d5d82bfa4eb948c6181c"
+ },
+ "configs": {
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover_workspace.yaml": "c43d55964f294fbb7fe5465f5f685b4624c98797abb28a4b53eb4b6d2bb38b9c",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_pringles_handover_workspace_strict1.yaml": "c416775a713454c03cb53310f5aa045a50124e874b7b0c9db40ece65f9a92e39",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion_workspace.yaml": "ff417ca6c220f6c8d53047299239bb66b99fcfa4675bb069a2ce5381436bcaad",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/openarm_battery_insertion_workspace_strict1.yaml": "3d612f36f31aaa538bfb4c7a6c19933beec3bea7727ad889e34d6cc902e41077"
+ },
+ "work_dirs": [
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover_workspace",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover_workspace_strict1",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion_workspace",
+  "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_battery_insertion_workspace_strict1"
+ ],
+ "public_datasets_changed": false
+}

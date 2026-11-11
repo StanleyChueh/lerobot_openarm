@@ -4,6 +4,8 @@ from .checks import DEFAULTS
 
 def reasons(ck, cfg_checks, env_min_z):
     c = {**DEFAULTS, **(cfg_checks or {})}; r = []
+    if ck.get("action_reference_error_max",0)>2e-6:r.append("action_alignment")
+    if not ck.get("finite_arrays",True):r.append("nonfinite")
     if "error" in ck:
         return [ck["error"]]
     if ck["ik_pos_err_mm_max"] > c["ik_pos_mm"] or ck["ik_rot_err_deg_max"] > c["ik_rot_deg"]: r.append("ik")
