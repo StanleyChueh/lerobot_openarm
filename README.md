@@ -1,828 +1,124 @@
-# This is the LeRobot-compatible VLA Training Pipeline
+# sfagen development: few-source budget, workspace-wide object positions (F1W), provenance
 
-`official-lerobot-quest` is the shared integration baseline; `main` mirrors the same commit.
-Force and research tasks extend that baseline on separate branches. See [branch workflow](docs/BRANCH_WORKFLOW.md).
-
-### Choose a branch
+> **Research branch.** Robot setup, teleoperation, recording, training and evaluation commands are on
+> [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map),
+> together with the full branch map.
 
 ```mermaid
-flowchart TB
-    BASE["official-lerobot-quest · DEFAULT<br/>Collect demonstrations → train VLA → evaluate<br/>Latest shared collection and evaluation fixes"]
-    MAIN["main<br/>Identical commit and code"]
-    BASE ---|mirror| MAIN
-
-    BASE -->|shared baseline| BENCH["force-aware/gate2a-bench-prep<br/>Prepare telemetry collection<br/>Check timing, freshness and bus health"]
-    BASE -->|shared baseline| NEXT["research/factr2-next-openarm<br/>Adapt FACTR2/NEXT<br/>Export data → train model → estimate residuals"]
-    BASE -->|shared baseline| SIMFREE["research/contact-aware-augmentation<br/>Sim-free dataset generation<br/>Real demo → new motion → video + candidate actions"]
-
-    BENCH -.->|"prerequisite: validated contact-free telemetry"| NEXT
-    NEXT --> FORCE["Goal: external-effort estimates<br/>Real-data estimation not yet validated"]
-    SIMFREE --> SYNTH["Goal: augmented training data<br/>One-episode prototype; validation still needed"]
-
-    ARCHIVE["archive/official-lerobot-quest-real2sim2real-v0-codex<br/>Frozen real → sim replay experiment<br/>Historical reference only"]
-
-    classDef baseline fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef force fill:#fef3c7,stroke:#d97706,color:#451a03
-    classDef generation fill:#dcfce7,stroke:#16a34a,color:#14532d
-    classDef archived fill:#f3f4f6,stroke:#6b7280,color:#374151
-    class BASE,MAIN baseline
-    class BENCH,NEXT,FORCE force
-    class SIMFREE,SYNTH generation
-    class ARCHIVE archived
+flowchart LR
+    SFAGEN["research/sfagen-unified-pipeline<br/>published generator (50832b3)"] --> THIS["research/sfagen-workspace-f1w<br/>THIS BRANCH · active development"]
+    THIS -.-> NEXTB["next: shift-vs-distortion experiment (R1)<br/>planned on its own branch"]
+    classDef me fill:#dcfce7,stroke:#16a34a,color:#14532d
+    class THIS me
 ```
 
-**Read the arrows:** “shared baseline” means the task branch includes the default branch's code.
-The dotted arrow is a data prerequisite for NEXT, not an automatic branch merge or a completed hardware run.
-Reviewed collection/evaluation fixes return to the default branch, then propagate to `main` and the task branches.
+## Purpose
 
-| Branch | Purpose | Short pipeline |
-|---|---|---|
-| [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Latest shared dataset collection and evaluation functions, including evaluation timing fixes | Record demonstrations → train VLA → evaluate → inspect results |
-| [`main`](https://github.com/StanleyChueh/lerobot_openarm/tree/main) | Identical mirror of the default branch | Same pipeline as default; develop shared fixes on `official-lerobot-quest` |
-| [`force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/force-aware/gate2a-bench-prep) | Prepare motor telemetry collection and check signal reliability for later force estimation | Record telemetry → check timing, freshness and bus health → decide whether data collection can proceed |
-| [`research/factr2-next-openarm`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/factr2-next-openarm) | Adapt FACTR2/NEXT to OpenArm with data export and external-effort estimation tools | Validated contact-free telemetry → NEXT export → train model → estimate external-effort residuals |
-| [`research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/contact-aware-augmentation) | Sim-free dataset generation research; currently a one-episode prototype | Real demonstration → recover motion → modify hand-over → synthesize video + candidate actions → validate |
-| [`archive/official-lerobot-quest-real2sim2real-v0-codex`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/official-lerobot-quest-real2sim2real-v0-codex) | Frozen legacy replay and validation experiment | Real trajectory → replay in simulation → compare schema / visuals → validate replay dataset |
+**Research question:** can **fewer than 10** real source demonstrations give a VLA-usable synthetic dataset? With few
+sources, the object must be moved far from where it was recorded. So this branch develops and measures:
 
-All active task branches extend the default baseline; archive refs preserve historical code.
-The force pipeline is prepared offline; hardware collection and real-data estimation remain unvalidated.
-NEXT requires motor telemetry that standard OpenArm datasets may not contain. Its residuals are not calibrated force measurements in Newtons.
-Sim-free outputs are not yet a validated training dataset; the branch also retains earlier verifier and simulation-feasibility experiments.
-The superseded telemetry Gate 1 milestone is preserved as tag `archive/force-aware/telemetry-gate1-2026-11-05`.
+1. **The source-budget study.** The same pipeline is run on the first N = 1…9 real Pringles demos. These datasets are
+   published.
+2. **F1W (object-position family F1, Workspace-wide).** The object can move anywhere on the visible support surface,
+   instead of ±3–6 cm:
+   - targets come from the estimated support region;
+   - the approach and grasp move rigidly with the object, and a slower clock is used when needed;
+   - the renderer and export work in continuous time.
 
-![Real and sim data collection, training and evaluation pipeline](docs/pipeline.svg)
+   Not published.
+3. **Reproducibility infrastructure:**
+   - the tools run tracked code only;
+   - safe Hub upload;
+   - CPU tests;
+   - dataset-to-commit provenance;
+   - a read-only check of the published data.
 
-Collect data on the real robot (Steps 0-5) or in Isaac Sim ([Sim Steps 1-6](#isaac-sim---robottypeopenarm_isaac)),
-train, then evaluate on the real arm or in sim.
+**Status:**
+- Budget datasets: published, pending review.
+- F1W: engineering previews, **self-validated only**, independent review pending; not training-ready.
+- Nothing here has policy or robot evidence.
 
-```
-Quest app (UDP :5006) -> openarm_quest teleop (mink IK) -> lerobot-record (30 Hz) -> openarm_umeow robot -> CAN
-```
+## Commits on this branch
 
-> ⚠️ Do **not** use the official `--robot.type=openarm_follower` / `lerobot-calibrate` on this robot: its
-> calibration writes a new zero into the motors and breaks `calibration.json`.
-
-### Step 0. One-time setup
-
-```bash
-cd ~/Stanley_ws/lerobot_openarm
-git checkout official-lerobot-quest
-uv sync                      # installs lerobot, both plugins and the IK libraries
-```
-
-### Step 1. CAN-FD links up (once per boot)
-
-```bash
-cd ~/Stanley_ws/openarm_can/setup && sudo ./my_arm
-```
-
-### Step 2. Teleoperate the real arm (no recording)
-
-```bash
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-lerobot-teleoperate \
-  --robot.type=openarm_umeow \
-  --robot.right_port=can0 --robot.left_port=can1 \
-  --teleop.type=openarm_quest \
-  --fps=30
-```
-
-Type `YES` (the arms go home), press **X** in the headset to start, **Ctrl-C** to stop.
-
-### Step 3. Record a dataset
-
-```bash
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-lerobot-record \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --teleop.type=openarm_quest \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 --dataset.no_stamp=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=50 --dataset.fps=30 \
-  --dataset.episode_time_s=120 --dataset.reset_time_s=15 \
-  --dataset.streaming_encoding=true --dataset.encoder_threads=2 \
-  --display_data=true  --teleop.smoothing_beta=1.0
-```
-
-Run the same command again to continue the local dataset (only a local copy is continued, never the Hub's). `--dataset.num_episodes` is the total to reach: with 21 episodes recorded, `--dataset.num_episodes=40` records 19 more. `--dataset.push_to_hub=false` keeps it local.
-
-### Quest controls
-
-| Quest | state | what happens |
-|---|---|---|
-| **1st X** | `HELD` | start recording (`LIVE`) |
-| **2nd X** | `LIVE` | return home slowly, then save the episode |
-| **Y** | `LIVE` / `PAUSED` / `HELD` (episode open) | discard the episode and return home |
-| **Triggers** | `LIVE` | close the grippers |
-
-Check the recorded data:
-
-```bash
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-lerobot-dataset-viz --repo-id ethanCSL/openarm_pringles_lerobot_real_v00 --episode-index 0
-```
-
-### Step 4. Train
-
-Training runs on the training machine with the lerobot fork
-[`StanleyChueh/lerobot`](https://github.com/StanleyChueh/lerobot), branch `update_dev` (commit `1e5f2049e`)
-or `update_dev_v2`; this machine runs collection and evaluation with official lerobot `3f2c29ef` (`.venv`).
-The training branch decides the evaluation venv: see [Step 5](#which-venv).
-On a 16 GB GPU, SmolVLA needs `--batch_size=32 --steps=40000` (batch 64 runs out of memory).
-`--dataset.image_transforms.enable=true` turns on image augmentation.
-
-**SmolVLA**:
-
-```bash
-lerobot-train \
-  --policy.path=lerobot/smolvla_base \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_smolvla_v00 \
-  --job_name=openarm_pringles_lerobot_real_smolvla_v00 \
-  --wandb.enable=true --dataset.image_transforms.enable=true --dataset.image_transforms.random_order=true --dataset.image_transforms.max_num_transforms=6
-```
-
-**GR00T N1.7** (does not fit a 16 GB GPU):
-
-```bash
-lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B \
-  --policy.chunk_size=16 --policy.n_action_steps=16 \
-  --policy.use_relative_actions=true --policy.relative_exclude_joints='["LJ8", "RJ8"]' \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_gr00t_v00 --job_name=openarm_pringles_lerobot_real_gr00t_v00 \
-  --wandb.enable=true --dataset.image_transforms.enable=true --dataset.image_transforms.random_order=true --dataset.image_transforms.max_num_transforms=6
-```
-
-**pi0.5**:
-
-```bash
-PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
-  --policy.path=lerobot/pi05_base \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
-  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
-  --policy.dtype=bfloat16 --policy.gradient_checkpointing=true \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --batch_size=32 --steps=30000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_pi05_v00 --job_name=openarm_pringles_lerobot_real_pi05_v00 \
-  --wandb.enable=true --dataset.image_transforms.enable=true --dataset.image_transforms.random_order=true --dataset.image_transforms.max_num_transforms=6
-```
-
-### Step 5. Evaluate on the real robot: normal, RTC, async, async + RTC
-
-| mode | tool |
+| Commit | What it is |
 |---|---|
-| normal | `lerobot-rollout` |
-| RTC | `lerobot-rollout --inference.type=rtc` |
-| async | `policy_server` + `robot_client` |
-| async + RTC | `policy_server --rtc=true` + `robot_client` |
+| `5d81f2f` | Exact code of the nine budget datasets (byte-identical to their Hub upload) |
+| `7135527` | Two budget helpers that were never uploaded |
+| `4af01a6` | F1W snapshot: matches `WORKSPACE_F1W_INSTALL_MANIFEST.json`, 25/25 files |
+| `bf1cdfa` | Battery baseline renderer for the benchmark (`legacy/target`, verbatim) |
+| `4389492` | The tools import tracked code; push safety; provenance guard; CPU tests |
+| `c0225f0` | `results/hub_provenance.json` and `results/published_check_2026-11-11/` |
 
-Models: SmolVLA `ethanCSL/openarm_pringles_lerobot_real_smolvla_v00`, GR00T N1.7
-`ethanCSL/openarm_pringles_lerobot_real_gr00t_v00`, pi0.5 `ethanCSL/openarm_pringles_lerobot_real_pi05_v00`.
+## Results
 
-During an episode: **Enter** ends it, **Left arrow** reruns it, **Esc** stops. `--display_data=false` turns
-off the rerun window.
+**Published source-budget datasets** `ethanCSL/openarm_pringles_lerobot_real_to_sim_{N}_3cam_v00`, N = 1…9, tag `v3.0`.
+Code is `5d81f2f`: 30/30 uploaded files equal it. Sources are real demos 0…N−1. Synthetic episodes per N: 9, 20, 28,
+46, 59, 69, 79, 97, 111.
 
-Every evaluation command below (real arm and Isaac) records the episodes as a LeRobot dataset and pushes it to the
-Hugging Face Hub (log in once with `hf auth login`):
+Can coverage: unseen real recordings (out of 40) with a training position within 2 cm (`logs/budget/diversity.json`):
 
-| mode | dataset flag | name | pushed |
-|---|---|---|---|
-| normal, RTC (`lerobot-rollout`, native) | `--dataset.repo_id=<user>/rollout_<name> --dataset.push_to_hub=true` | must start with `rollout_` (lerobot's rule); a date-time suffix is added, so every run is a new dataset | when the run ends, also after Esc |
-| async, async + RTC (`robot_client`, ours) | `--record_repo_id=<user>/eval_<name>` | must start with `eval_`; a rerun replaces it (`--resume=true` adds to it) | only once all `--num_episodes` episodes have run; stopped early, it stays local |
+| N sources | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|---|---|---|---|---|---|---|---|---|---|
+| sources only | 2 | 3 | 3 | 6 | 7 | 8 | 9 | 9 | 9 |
+| sources + synthetic | 4 | 10 | 13 | 23 | 23 | 24 | 24 | 25 | 27 |
 
-Details of `--record_repo_id`: [Recording the evaluation](#recording-the-evaluation).
+**F1W** (`WORKSPACE_F1W_RESULTS.md`; FK-proxy positions; development data):
 
-<a id="which-venv"></a>
-#### Which venv: the lerobot branch the model was trained on
+| Object | Accepted / attempts (sources 0–4) | Max shift | Coverage ≤ 2 cm, 1 source (old → F1W) | 5 sources (old → F1W) |
+|---|---|---|---|---|
+| Pringles can | 171 / 240 | 15.8 cm | 4 → 22 /40 | 23 → 32 /40 |
+| Battery station | 163 / 240 | 22.6 cm | 15 → 21 /45 | 39 → 44 /45 |
+| Battery | 107 / 240 | 25.8 cm | 12 → 19 /45 | 38 → 34 /45 (**worse**) |
 
-All four modes use the same commands for both. Only the `source` line differs:
+The decoded F1W frames show relocated objects, but also stretched or fragmented robot surfaces, dark fills and ghosts.
+The RGB fidelity of large shifts **has not been measured**; that is the next experiment (R1). Wrist cameras are
+time-remapped source frames, not new views.
 
-| trained on | `source` line |
-|---|---|
-| `update_dev` | `source .venv/bin/activate` |
-| `update_dev_v2` | `source .venv-v2/bin/activate` |
+**Published-data check** (`results/published_check_2026-11-11/`, read-only; the local exports equal the Hub `v3.0` files):
 
-`.venv-v2` has the fork (`~/Stanley_ws/lerobot_experiment/lerobot`, branch `update_dev_v2`) installed editable,
-plus both plugins. Never run `uv sync` / `uv run` in it. Run the policy server and the robot client in the same venv.
+| Dataset | Clipped action labels (max error) | Camera frame gaps |
+|---|---|---|
+| Pringles real_to_sim_10 and real_and_sim_10 | 12 / 96 episodes (0.0169 rad, joint 10) | none |
+| Battery real_to_sim_10 and real_and_sim_10 | 45 / 114 episodes (0.057 rad, joints 10–12) | `wrist_cam` episode 91 (mixed: 101), 1 frame |
 
-#### Normal
+`label_cause.py` shows that every mismatch is exactly the action clip in `plan.py` at `50832b3`. F1W's `plan.py` rejects such
+candidates instead of clipping them.
 
-`--dataset.repo_id` must start with `rollout_`; `--dataset.push_to_hub=true` pushes it when the run ends.
-
-```bash
-# SmolVLA
-lerobot-rollout --strategy.type=episodic \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_smolvla_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
-  --display_data=true
-
-# GR00T N1.7
-lerobot-rollout --strategy.type=episodic \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_gr00t_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
-  --display_data=true
-
-# pi0.5
-lerobot-rollout --strategy.type=episodic \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_openarm_pringles_lerobot_real_pi05_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=100 --dataset.episode_time_s=15 --dataset.reset_time_s=5 \
-  --display_data=true
-```
-
-#### RTC
-
-pi0.5 on the real arm: use async + RTC instead (here it gets no actions through).
+## Reproduce
 
 ```bash
-# SmolVLA
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-lerobot-rollout --strategy.type=episodic \
-  --inference.type=rtc --inference.rtc.mode=guided \
-  --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0 \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_rtc_pringles_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
-  --display_data=true
+cd research/sim_free_augmentation/sfagen
+ln -s ~/Stanley_ws/sfa_hf_export/sfagen/configs/work configs/work   # generated data, git-ignored
+ln -s ~/Stanley_ws/sfa_hf_export/sfagen/logs logs
+PY="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 $HOME/Stanley_ws/lerobot_openarm/.venv/bin/python"
 
-# GR00T N1.7
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-lerobot-rollout --strategy.type=episodic \
-  --inference.type=rtc --inference.rtc.mode=guided \
-  --inference.rtc.execution_horizon=8 --inference.rtc.max_guidance_weight=10.0 \
-  --inference.queue_threshold=8 \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_groot_rtc_pringles_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
-  --display_data=true
+$PY -B -m unittest discover -s tests                       # 26 CPU tests, ~10 s
+$PY -B tools/xbench.py battery --imports-only              # which files the benchmark loads (CPU)
+$PY -I results/hub_provenance.py /tmp/hub_provenance.json  # re-derive dataset → commit (reads the Hub)
+$PY -I results/published_check_2026-11-11/published_check.py   # label + frame-span check (reads local exports)
 
-# pi0.5
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-lerobot-rollout --strategy.type=episodic \
-  --inference.type=rtc --inference.rtc.mode=guided \
-  --inference.rtc.execution_horizon=20 --inference.rtc.max_guidance_weight=10.0 \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_pi05_rtc_pringles_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=60 \
-  --display_data=true
+# F1W generation (GPU). The configs' work_dir points at the existing F1W results; pass a fresh --work-dir
+# (with the rig calibration/table/caches copied in) to re-run without touching them.
+W=~/sfagen_rerun/pringles_workspace
+$PY -m sfagen generate configs/openarm_pringles_handover_workspace.yaml --work-dir $W --episodes 0,1,2,3,4
+$PY -m sfagen render   configs/openarm_pringles_handover_workspace.yaml --work-dir $W --episodes 0 --keys CAN_KEY
+$PY -m sfagen build    configs/openarm_pringles_handover_workspace.yaml --work-dir $W --repo-id local/pringles_workspace
+$PY -m sfagen verify   configs/openarm_pringles_handover_workspace.yaml --work-dir $W
+# one-source run: configs/*_workspace_strict1.yaml
+
+# budget datasets (GPU): tools_budget_select.py → tools_budget_build.py → tools_budget_publish.py check|cards
+# Renderer benchmark (GPU, not re-run since publication):
+$PY -B tools/xbench.py pringles 0,2,3,4,6,7,9 cuda:0 xbench_pringles.json
 ```
 
-#### Async
-
-Terminal 1, the policy server (keep it running across episodes and evaluations):
-
-```bash
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
-```
-
-Terminal 2, the robot client:
-
-```bash
-# SmolVLA
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_smolvla_v00
-
-# GR00T N1.7
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_groot_v00
-
-# pi0.5
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_pi05_v00
-```
-
-Use our `lerobot_robot_openarm_umeow.policy_server` / `robot_client`, not lerobot's own.
-
-#### Async + RTC
-
-Terminal 1:
-
-```bash
-# SmolVLA
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
-  --rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
-
-# GR00T N1.7
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
-  --rtc=true --rtc_execution_horizon=8 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
-
-# pi0.5
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
-  --rtc=true --rtc_execution_horizon=20 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
-```
-
-Terminal 2:
-
-```bash
-# SmolVLA
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_rtc_smolvla_v00
-
-# GR00T N1.7
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_rtc_groot_v00
-
-# pi0.5
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 \
-  --robot.cameras="{body_cam: {type: opencv, index_or_path: /dev/rs_body, width: 640, height: 480, fps: 30}, wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_left, width: 640, height: 480, fps: 30}, right_wrist_cam: {type: opencv, index_or_path: /dev/rs_wrist_right, width: 640, height: 480, fps: 30}}" \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=60 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_real_async_rtc_pi05_v00
-```
-
-#### Timing report
-
-Every evaluation saves a timing report to `outputs/eval_logs/<date>_<mode>_<policy>/` (table + `report.png`).
-Compare runs:
-
-```bash
-python -m lerobot_robot_openarm_umeow.eval_report              # latest run of each mode and policy
-python -m lerobot_robot_openarm_umeow.eval_report outputs/eval_logs/RUN_A outputs/eval_logs/RUN_B
-```
-
-#### Recording the evaluation
-
-The async / async + RTC commands above carry `--record_repo_id=<user>/eval_<name>` (it needs `--num_episodes`):
-every evaluation episode is saved as a LeRobot dataset (same features as lerobot-record's), pushed to the Hub once
-all episodes have run. The name must start with `eval_`, so a training dataset is never written over. If that eval dataset already exists:
-
-- `--resume=true` adds `--num_episodes` more episodes to it (from the local copy, or downloaded from the Hub);
-  a local copy with fewer episodes than the Hub's is refused as stale, and so is a run whose cameras/joints/fps differ.
-- without it, a fresh evaluation replaces it: the local copy is deleted at start, the Hub copy only when the new one
-  is pushed (it is kept if the run stops early).
-
-A rerun episode (Left arrow) is discarded; a run stopped early stays local, not pushed (`--resume=true` continues
-it). `meta/openarm_eval.json` lists each episode's outcome (in Isaac, the task success condition).
-`--record_root=<dir>` (named `eval_...`) stores it outside `~/.cache/huggingface/lerobot`. On the real arm,
-recording reads the robot every tick (36-53 ms), which slows the control loop; in Isaac the read is free.
-`--push_to_hub=false` records locally only (the Hub is neither checked nor written).
-
-**Matched evaluation (Isaac only).** To compare policies on the same can poses for the same simulated time, replace
-`--episode_time_s` with `--episode_steps=330 --poses=<poses.json> --results_dir=<dir>`: trial i places the can at
-`poses[i]` (checked against the simulator's ground truth; a pose that cannot be applied stops the run), the policy
-runs exactly 330 simulation steps, and `<dir>/trials.jsonl` gets each trial's any-step success, stable hand-over and
-holding-at-the-end, measured before the return home (`matched_eval.py`). An existing `<dir>` needs `--resume=true`,
-which runs only the trials not yet complete. Needs `lerobot_sim_server.py` with its `handover` reply. Example:
-`research/generated_data_diagnosis/matched_evaluation/run_eval.sh`.
-
-## Isaac Sim (`--robot.type=openarm_isaac`)
-
-Same commands as the real arm, with `--robot.type=openarm_isaac` in place of
-`--robot.type=openarm_umeow --robot.right_port=can0 --robot.left_port=can1 --robot.cameras=...`.
-No CAN step, no `YES`.
-
-### Sim Step 1. Start the simulator (terminal 1, keep it running)
-
-```bash
-cd ~/Stanley_ws/IsaacLab
-conda activate env_isaaclab
-./isaaclab.sh -p scripts/tools/lerobot_sim_server.py --enable_cameras --headless \
-  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-v1 --task_mode handover \
-  --domain_randomization none \
-  --mimic_hdf5 logs/demos/pringles_sim_src_v00.hdf5
-```
-
-Wait for `[lerobot_sim_server] ready on 127.0.0.1:5710`. Leave out `--mimic_hdf5` for teleoperation and
-evaluation.
-
-### Sim Step 2. Teleoperate in sim (no recording)
-
-```bash
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-lerobot-teleoperate \
-  --robot.type=openarm_isaac \
-  --teleop.type=openarm_quest \
-  --fps=30 --display_data=true
-```
-
-### Sim Step 3. Record sim demos (lerobot dataset + Mimic source demos)
-
-```bash
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-lerobot-record \
-  --robot.type=openarm_isaac \
-  --teleop.type=openarm_quest \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_sim_v00 --dataset.no_stamp=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=20 --dataset.fps=30 \
-  --dataset.episode_time_s=120 --dataset.reset_time_s=1 \
-  --dataset.streaming_encoding=true --dataset.encoder_threads=2 \
-  --display_data=true
-```
-
-End each demo with the can in the LEFT hand, then press X.
-If the arm stops with `SAFETY HOLD` in sim, add `--robot.max_tracking_error=1.0`.
-
-### Sim Step 4. Generate a synthetic dataset with Isaac Lab Mimic
-
-Stop the sim server first (Ctrl-C), then:
-
-```bash
-cd ~/Stanley_ws/IsaacLab && conda activate env_isaaclab
-
-# 4a. Annotate
-./isaaclab.sh -p scripts/imitation_learning/isaaclab_mimic/annotate_demos.py \
-  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v1 \
-  --task_mode handover --auto --from_states \
-  --enable_cameras --headless \
-  --input_file logs/demos/pringles_sim_src_v00.hdf5 \
-  --output_file logs/demos/pringles_sim_src_v00_annotated.hdf5
-
-# 4b. Generate (with domain randomization)
-./isaaclab.sh -p scripts/imitation_learning/isaaclab_mimic/generate_dataset.py \
-  --task Isaac-PickUp-RedCube-OpenArm-IK-Abs-Mimic-v1 --task_mode handover \
-  --input_file logs/demos/pringles_sim_src_v00_annotated.hdf5 \
-  --output_file logs/demos/pringles_sim_mimic_v00.hdf5 \
-  --generation_num_trials 500 --num_envs 4 --enable_cameras --headless \
-  --enable_domain_randomization --domain_randomization_profile visual
-
-# 4c. Check for jolts no source demo has (~15% of episodes), then run the remove command it prints
-./isaaclab.sh -p scripts/tools/check_mimic_demos.py --dataset_file logs/demos/pringles_sim_mimic_v00.hdf5
-```
-
-Convert to a lerobot dataset (if 4c flagged nothing, use `pringles_sim_mimic_v00.hdf5`):
-
-```bash
-cd ~/Stanley_ws/lerobot_openarm
-source .venv/bin/activate
-unset PYTHONPATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-python mimic_to_lerobot.py \
-  --hdf5 ~/Stanley_ws/IsaacLab/logs/demos/pringles_sim_mimic_v00_clean.hdf5 \
-  --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v00 --push_to_hub
-```
-
-If the push fails or you stop it, push the converted dataset again without converting:
-
-```bash
-python mimic_to_lerobot.py --repo_id ethanCSL/openarm_pringles_lerobot_mimic_v00 --push_only
-```
-
-### Sim Step 5. Train: synthetic only, or co-train sim + real
-
-```bash
-# merge real + synthetic (+ sim teleop)
-lerobot-edit-dataset --operation.type=merge \
-  --operation.repo_ids='["ethanCSL/openarm_pringles_lerobot_real_v00", "ethanCSL/openarm_pringles_lerobot_mimic_v00", "ethanCSL/openarm_pringles_lerobot_sim_v00"]' \
-  --new_repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 --push_to_hub=true
-
-# SmolVLA
-lerobot-train \
-  --policy.path=lerobot/smolvla_base \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_smolvla_v00 \
-  --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_smolvla_v00 \
-  --job_name=openarm_pringles_lerobot_real_mimic_smolvla_v00 \
-  --wandb.enable=true
-
-# GR00T N1.7
-lerobot-train --policy.type=groot --policy.base_model_path=nvidia/GR00T-N1.7-3B \
-  --policy.chunk_size=16 --policy.n_action_steps=16 \
-  --policy.use_relative_actions=true --policy.relative_exclude_joints='["LJ8", "RJ8"]' \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_gr00t_v00 \
-  --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_gr00t_v00 --job_name=openarm_pringles_lerobot_real_mimic_gr00t_v00 \
-  --wandb.enable=true
-
-# pi0.5
-PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True lerobot-train \
-  --policy.path=lerobot/pi05_base \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_v00 \
-  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
-  --policy.dtype=bfloat16 --policy.gradient_checkpointing=true \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_mimic_pi05_v00 \
-  --batch_size=32 --steps=30000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_mimic_pi05_v00 --job_name=openarm_pringles_lerobot_real_mimic_pi05_v00 \
-  --wandb.enable=true
-```
-
-### Sim Step 6. Evaluate in sim: normal, RTC, async, async + RTC
-
-The simulator from Sim Step 1 (without `--mimic_hdf5`) in terminal 1, then the commands below. Models trained on
-`update_dev_v2`: the same commands in `.venv-v2` ([which venv](#which-venv)).
-
-Every command records the evaluation and pushes it to the Hub, as on the real arm (see the table in Step 5). In
-Isaac, the `robot_client` dataset's `meta/openarm_eval.json` also stores each episode's task success.
-
-**Normal**:
-
-```bash
-# SmolVLA
-lerobot-rollout --strategy.type=episodic \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --robot.type=openarm_isaac \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_pringles_sim_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
-  --display_data=true
-
-# GR00T N1.7
-lerobot-rollout --strategy.type=episodic \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --robot.type=openarm_isaac \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_groot_pringles_sim_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
-  --display_data=true
-
-# pi0.5
-lerobot-rollout --strategy.type=episodic \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --robot.type=openarm_isaac \
-  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_pi05_pringles_sim_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
-  --display_data=true
-```
-
-**RTC**:
-
-```bash
-# SmolVLA
-lerobot-rollout --strategy.type=episodic \
-  --inference.type=rtc --inference.rtc.mode=guided \
-  --inference.rtc.execution_horizon=10 --inference.rtc.max_guidance_weight=10.0 \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --robot.type=openarm_isaac \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_smolvla_rtc_pringles_sim_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
-  --display_data=true
-
-# GR00T N1.7
-lerobot-rollout --strategy.type=episodic \
-  --inference.type=rtc --inference.rtc.mode=guided \
-  --inference.rtc.execution_horizon=8 --inference.rtc.max_guidance_weight=10.0 \
-  --inference.queue_threshold=8 \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --robot.type=openarm_isaac \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_groot_rtc_pringles_sim_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
-  --display_data=true
-
-# pi0.5
-lerobot-rollout --strategy.type=episodic \
-  --inference.type=rtc --inference.rtc.mode=guided \
-  --inference.rtc.execution_horizon=20 --inference.rtc.max_guidance_weight=10.0 \
-  --policy.path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --robot.type=openarm_isaac \
-  --rename_map='{"observation.images.body_cam": "observation.images.base_0_rgb", "observation.images.wrist_cam": "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_cam": "observation.images.right_wrist_0_rgb"}' \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.repo_id=ethanCSL/rollout_pi05_rtc_pringles_sim_v00 --dataset.push_to_hub=true \
-  --dataset.single_task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --dataset.num_episodes=10 --dataset.episode_time_s=60 --dataset.reset_time_s=1 \
-  --display_data=true
-```
-
-**Async**: terminal 2, the policy server:
-
-```bash
-python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080
-```
-
-Terminal 3, the robot client:
-
-```bash
-# SmolVLA
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_isaac \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_smolvla_v00
-
-# GR00T N1.7
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_isaac \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_groot_v00
-
-# pi0.5
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_isaac \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=weighted_average --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_pi05_v00
-```
-
-**Async + RTC**: terminal 2, the policy server:
-
-```bash
-# SmolVLA
-python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
-  --rtc=true --rtc_execution_horizon=10 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
-
-# GR00T N1.7
-python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
-  --rtc=true --rtc_execution_horizon=8 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
-
-# pi0.5
-python -m lerobot_robot_openarm_umeow.policy_server --host=127.0.0.1 --port=8080 \
-  --rtc=true --rtc_execution_horizon=20 --rtc_max_guidance_weight=10.0 --rtc_prefix_attention_schedule=EXP
-```
-
-Terminal 3, the robot client:
-
-```bash
-# SmolVLA
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_isaac \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=smolvla --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_rtc_smolvla_v00
-
-# GR00T N1.7
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_isaac \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=groot --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_gr00t_v00 \
-  --policy_device=cuda --actions_per_chunk=16 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_rtc_groot_v00
-
-# pi0.5
-python -m lerobot_robot_openarm_umeow.robot_client \
-  --server_address=127.0.0.1:8080 \
-  --robot.type=openarm_isaac \
-  --task="Pick up the Pringles can with the right arm, hand it to the left arm" \
-  --policy_type=pi05 --pretrained_name_or_path=ethanCSL/openarm_pringles_lerobot_real_pi05_v00 \
-  --policy_device=cuda --actions_per_chunk=50 --chunk_size_threshold=0.5 \
-  --aggregate_fn_name=latest_only --fps=30 \
-  --num_episodes=10 --episode_time_s=60 --reset_time_s=1 \
-  --record_repo_id=ethanCSL/eval_openarm_pringles_sim_async_rtc_pi05_v00
-```
+The `published_check.py` and `label_cause.py` scripts use absolute paths of this machine; edit `REPO`/`WORK` at the top
+for another clone.
+
+## Limitations
+
+- Coverage counts are FK proxies at gripper events, measured on reused development recordings, not untouched test data.
+- F1W changes published-pipeline behaviour (checks, planner, renderer, export). Regenerating the published datasets with
+  this branch gives different data; tag the old Hub revision first.
+- No VLA training, hardware replay or robot run on any of this.
+- The F1W evidence folder `artifacts/codex_workspace_f1w_20261110` is untracked; it is backed up in
+  `~/Stanley_ws/backups/repro_2026-11-11` (SHA256SUMS).

@@ -1,7 +1,8 @@
 """Map each published sfagen dataset (tag v3.0) to the git commit whose sfagen/ files equal the uploaded code snapshot."""
 import hashlib, json, subprocess, sys
+from pathlib import Path
 from huggingface_hub import HfApi, hf_hub_download
-api = HfApi(); T = dict(repo_type="dataset"); WT = "/home/stanley/Stanley_ws/lerobot_openarm_f1w"
+api = HfApi(); T = dict(repo_type="dataset"); WT = str(Path(__file__).resolve().parents[4])  # repository root
 def git_sha(commit, rel):
     p = subprocess.run(["git", "-C", WT, "show", f"{commit}:research/sim_free_augmentation/sfagen/{rel}"], capture_output=True)
     return hashlib.sha256(p.stdout).hexdigest() if p.returncode == 0 else None
