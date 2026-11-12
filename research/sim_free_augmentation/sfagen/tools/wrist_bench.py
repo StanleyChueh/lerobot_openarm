@@ -62,12 +62,12 @@ def summarize(out):
         res["T1"] = {"frames": sum(len(v) for v in t1.values()), "render_psnr": float(np.mean([a for v in t1.values() for a, _ in v])) if t1 else None,
                      "copy_psnr": float(np.mean([b for v in t1.values() for _, b in v])) if t1 else None, "render_minus_copy_db": m, "ci95": ci,
                      "by_region": {g: float(np.nanmean([(x["render"][g] - x["copy"][g]) for x in R if x["kind"] == "T1" and x["render"].get(g) is not None and x["copy"].get(g) is not None] or [np.nan])) for g in REGIONS}}
-        pairs = {}
+        pairs = {}                                  # frames binned by their own camera translation; pair-level means within a bin
         for r in (x for x in R if x["kind"] == "T2" and x["rot_deg"] <= MAX_ROT):
-            pairs.setdefault((r["a"], r["b"]), []).append(r)
+            pairs.setdefault((r["a"], r["b"], bin_of(r["trans_cm"])), []).append(r)
         bins = []
         for k in range(len(EDGES) - 1):
-            P = {key: v for key, v in pairs.items() if bin_of(float(np.mean([x["trans_cm"] for x in v]))) == k}
+            P = {key[:2]: v for key, v in pairs.items() if key[2] == k}
             g = [float(np.mean([x["render"]["all"] - x["copy"]["all"] for x in v])) for v in P.values()]
             m2, ci2 = boot_mean(list(P), g, eps) if P else (None, [None, None])
             bins.append({"bin_cm": EDGES[k:k + 2], "pairs": len(P), "frames": sum(len(v) for v in P.values()),
