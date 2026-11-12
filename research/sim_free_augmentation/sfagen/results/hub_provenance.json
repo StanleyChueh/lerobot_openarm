@@ -109,6 +109,51 @@
    "code_files": 30,
    "files_equal_to_commit": 30,
    "not_equal": []
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_1_3cam_v01": {
+   "code_commit": "92f602004232598a2642e97a7b24e950e7829e8e",
+   "branch": "research/sfagen-wrist-render",
+   "main": "7c4a1579e7a2b4daa07642c4daf485fc0fd9dd7b",
+   "v3.0": "7c4a1579e7a2b4daa07642c4daf485fc0fd9dd7b",
+   "published": "2026-11-12",
+   "exact": "code uploaded under sfagen/ from commit 92f6020 (cards record it); hubcheck.json verifies tag + file sizes",
+   "quality_report": "results/datasets_v01/fewsrc1/quality_report.json"
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_2_3cam_v01": {
+   "code_commit": "92f602004232598a2642e97a7b24e950e7829e8e",
+   "branch": "research/sfagen-wrist-render",
+   "main": "d5227d69fe89c613d06aae8acf64be436e379161",
+   "v3.0": "d5227d69fe89c613d06aae8acf64be436e379161",
+   "published": "2026-11-12",
+   "exact": "code uploaded under sfagen/ from commit 92f6020 (cards record it); hubcheck.json verifies tag + file sizes",
+   "quality_report": "results/datasets_v01/fewsrc2/quality_report.json"
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_4_3cam_v01": {
+   "code_commit": "92f602004232598a2642e97a7b24e950e7829e8e",
+   "branch": "research/sfagen-wrist-render",
+   "main": "66d802e30bf091dc2cd9540932b8163518cfe47e",
+   "v3.0": "66d802e30bf091dc2cd9540932b8163518cfe47e",
+   "published": "2026-11-12",
+   "exact": "code uploaded under sfagen/ from commit 92f6020 (cards record it); hubcheck.json verifies tag + file sizes",
+   "quality_report": "results/datasets_v01/fewsrc4/quality_report.json"
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v01": {
+   "code_commit": "92f602004232598a2642e97a7b24e950e7829e8e",
+   "branch": "research/sfagen-wrist-render",
+   "main": "1d64b8e7aeed7585b54c776f6b60e26610b37947",
+   "v3.0": "1d64b8e7aeed7585b54c776f6b60e26610b37947",
+   "published": "2026-11-12",
+   "exact": "code uploaded under sfagen/ from commit 92f6020 (cards record it); hubcheck.json verifies tag + file sizes",
+   "quality_report": "results/datasets_v01/fewsrc10/quality_report.json"
+  },
+  "ethanCSL/openarm_pringles_lerobot_real_to_sim_1_3cam_wristrender_v01": {
+   "code_commit": "92f602004232598a2642e97a7b24e950e7829e8e",
+   "branch": "research/sfagen-wrist-render",
+   "main": "309d2081f8ad10f0210a496bd109e621f69f5d07",
+   "v3.0": "309d2081f8ad10f0210a496bd109e621f69f5d07",
+   "published": "2026-11-12",
+   "exact": "code uploaded under sfagen/ from commit 92f6020 (cards record it); hubcheck.json verifies tag + file sizes",
+   "quality_report": "results/datasets_v01/fewsrc1_wristrender/quality_report.json"
   }
  }
 }
