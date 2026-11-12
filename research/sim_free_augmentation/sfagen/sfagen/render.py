@@ -243,13 +243,15 @@ class Renderer:
         return img, info
 
 
-def candidate_frames_tw(rec,c):
-    """Output index, source RGB index and continuous generated scene at the exposure time."""
+def candidate_frames_tw(rec,c,lag=None):
+    """Output index, source RGB index and continuous generated scene at the exposure time of a camera with `lag`
+    (default: the body camera's)."""
     from .timing import source_frame_map, pose_at, source_time_at
     from .plan import _attach
-    jm=source_frame_map(rec,c);sp=rec.robot.split(c['state'])
+    lag=rec.lag if lag is None else float(lag)
+    jm=source_frame_map(rec,c,lag);sp=rec.robot.split(c['state'])
     for i,j in enumerate(jm):
-        ts=i+rec.lag
+        ts=i+lag
         q={a:interp_rows(c['q'][a],np.array([ts]))[0] for a in rec.arms}
         g={a:float(interp_rows(sp['g'+a][:,None],np.array([ts]))[0,0]) for a in rec.arms if 'g'+a in sp}
         # FK of interpolated joints, rather than interpolating object translations independently,

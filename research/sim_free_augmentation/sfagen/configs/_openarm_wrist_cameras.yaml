@@ -1,0 +1,20 @@
+# OpenArm wrist cameras (shared by every OpenArm task config via `wrist_cameras_model: _openarm_wrist_cameras.yaml`).
+# Camera pose = FK(parent_frame) . X, ROS optical axes (z forward, x right, y down), at state time = video frame + lag.
+# X and lag: v3_2 adopted calibration (research/sim_free_augmentation/v3_2/outputs/calibration/wrist_calibration.json):
+#   rotation + translation from the held-out-validated can-silhouette fits (consistency calibration, NOT a ChArUco
+#   extrinsic); lags from the mount-independent rotation-magnitude scan.
+# Intrinsics: measured with `rs-enumerate-devices -c` (v3_2/sfa32/wristcam.py).
+observation.images.wrist_cam:
+  arm: L
+  parent_frame: openarm_left_link7
+  lag: 0.0
+  pos: [0.03329, 0.00736, 0.07879]
+  R: [[-0.149056, -0.881313, -0.448407], [0.980587, -0.073315, -0.181862], [0.127402, -0.46681, 0.875133]]
+  intrinsics: {fx: 605.44, fy: 605.13, cx: 322.85, cy: 246.44, width: 640, height: 480}
+observation.images.right_wrist_cam:
+  arm: R
+  parent_frame: openarm_right_link7
+  lag: -1.5
+  pos: [0.07721, 0.05237, 0.06584]
+  R: [[0.053784, -0.771654, -0.633764], [0.994609, -0.014949, 0.102609], [-0.088653, -0.635866, 0.766691]]
+  intrinsics: {fx: 607.79, fy: 607.61, cx: 322.58, cy: 248.52, width: 640, height: 480}

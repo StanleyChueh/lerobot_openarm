@@ -1,0 +1,20 @@
+observation.images.wrist_cam T1 ep 0
+observation.images.wrist_cam T1 ep 1
+observation.images.wrist_cam T1 ep 2
+observation.images.wrist_cam T1 ep 3
+observation.images.wrist_cam T1 ep 4
+observation.images.right_wrist_cam T1 ep 0
+observation.images.right_wrist_cam T1 ep 1
+observation.images.right_wrist_cam T1 ep 2
+observation.images.right_wrist_cam T1 ep 3
+observation.images.right_wrist_cam T1 ep 4
+observation.images.right_wrist_cam T1 {'frames': 288, 'render_psnr': 16.282763854219397, 'copy_psnr': 15.717773551058675, 'render_minus_copy_db': 0.5631763942068414, 'ci95': [0.36452806680066574, 0.7411298200630541]} gate {'T1_ok': True, 'T2_ok': False, 'T2_bins_tested': [], 'pass': False}
+   T2 {'bin_cm': [0, 3], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [3, 6], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [6, 11], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [11, 30], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+observation.images.wrist_cam T1 {'frames': 187, 'render_psnr': 18.920050687674927, 'copy_psnr': 17.856752184355724, 'render_minus_copy_db': 1.0260911137031865, 'ci95': [0.7283777381578529, 1.3553521559741581]} gate {'T1_ok': True, 'T2_ok': False, 'T2_bins_tested': [], 'pass': False}
+   T2 {'bin_cm': [0, 3], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [3, 6], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [6, 11], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [11, 30], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}

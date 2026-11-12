@@ -51,3 +51,36 @@ def run_episode(ctx,rec,device='cuda:0',log=print,keys=None):
         (out/f'{rec.e}_{key}.fingerprint').write_text(digest)
         log(rec.e,key,N,'frames',sum(not x.get('copied',False) for x in infos),'rendered',round(time.time()-t0,1),'s')
     return n_rendered
+
+
+def wrist_fingerprint(ctx,rec,key,cam,spec):
+    h=hashlib.sha256((ctx.work/f'candidates/ep{rec.e}/{key}.npz').read_bytes())
+    h.update(json.dumps({'camera':cam,'spec':spec,'renderer':ctx.cfg.get('wrist_render',{}).get('renderer',{}),'lag':rec.lag},sort_keys=True,default=float).encode())
+    for name in ('wrist.py','render.py','render_stage.py','timing.py','mesh.py'):
+        h.update((__import__('pathlib').Path(__file__).parent/name).read_bytes())
+    return h.hexdigest()
+
+
+def run_wrist_episode(ctx,rec,device='cuda:0',log=print,keys=None):
+    """Render the wrist cameras listed in wrist_render.cameras (those that passed the wrist gate) for passing candidates."""
+    cams=ctx.cfg.get('wrist_render',{}).get('cameras',[])
+    if not cams:return 0
+    from .wrist import load_spec,WristCam,WristRenderer
+    spec=load_spec(ctx);out=ctx.work/'wrist';out.mkdir(exist_ok=True);n=0
+    checks=json.loads((ctx.work/f'candidates/ep{rec.e}/checks.json').read_text())
+    for cam in cams:
+        wc=WristCam(cam,spec[cam],ctx.robot);short=cam.split('.')[-1];todo=[]
+        for key,ck in checks.items():
+            if not ck['pass'] or (keys is not None and key not in keys):continue
+            stem=out/f'{rec.e}_{key}_{short}';digest=wrist_fingerprint(ctx,rec,key,cam,spec[cam])
+            if stem.with_suffix('.npy').exists() and stem.with_suffix('.fingerprint').exists() and stem.with_suffix('.fingerprint').read_text()==digest:continue
+            todo.append((key,stem,digest))
+        if not todo:continue
+        R=WristRenderer(rec,ctx.src.load(rec.e,cams=[cam]).frames[cam],wc,ctx.cfg['wrist_render'].get('renderer',{}),device)
+        for key,stem,digest in todo:
+            t0=time.time();c=load_candidate(ctx,rec,key);frames=[];infos=[]
+            for i,j,q,g,objs in candidate_frames_tw(rec,c,wc.lag):
+                img,info=R.render(j,q,g,objs);frames.append(img);infos.append({**info,'source_frame':int(j)})
+            np.save(stem.with_suffix('.npy'),np.stack(frames));stem.with_suffix('.json').write_text(json.dumps(infos));stem.with_suffix('.fingerprint').write_text(digest);n+=1
+            log(rec.e,key,short,len(frames),'frames',sum(not x.get('copied',False) for x in infos),'rendered',round(time.time()-t0,1),'s')
+    return n

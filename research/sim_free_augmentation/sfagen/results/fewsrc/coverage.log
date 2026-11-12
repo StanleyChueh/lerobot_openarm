@@ -1,0 +1,537 @@
+[
+ {
+  "n": 1,
+  "subset": [
+   0
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 2,
+    "median_nn_cm": 6.522598866576872,
+    "hull_cm2": 0.0
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 9,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 9,
+     "max_shift_cm": 3.769107323032754,
+     "within_2cm": 9,
+     "median_nn_cm": 4.566156365506906,
+     "hull_cm2": 14.998393387026809
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 2,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 2,
+     "max_shift_cm": 4.242640687119286,
+     "within_2cm": 4,
+     "median_nn_cm": 5.537340402806576,
+     "hull_cm2": 4.499977540526065
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 2,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 2,
+     "max_shift_cm": 4.242640687119286,
+     "within_2cm": 4,
+     "median_nn_cm": 5.537340402806576,
+     "hull_cm2": 4.499977540526065
+    }
+   }
+  }
+ },
+ {
+  "n": 2,
+  "subset": [
+   0,
+   1
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 3,
+    "median_nn_cm": 5.51250882143032,
+    "hull_cm2": 0.0
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 38,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 38,
+     "max_shift_cm": 10.897410774280235,
+     "within_2cm": 16,
+     "median_nn_cm": 2.4840335057211043,
+     "hull_cm2": 136.85773477884965
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 5,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 5,
+     "max_shift_cm": 6.708203932499369,
+     "within_2cm": 10,
+     "median_nn_cm": 4.584256136232822,
+     "hull_cm2": 27.776186077471163
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 5,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 5,
+     "max_shift_cm": 6.708203932499369,
+     "within_2cm": 10,
+     "median_nn_cm": 4.584256136232822,
+     "hull_cm2": 27.776186077471163
+    }
+   }
+  }
+ },
+ {
+  "n": 3,
+  "subset": [
+   0,
+   1,
+   2
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 3,
+    "median_nn_cm": 4.371122318400149,
+    "hull_cm2": 10.527291250901085
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 54,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 54,
+     "max_shift_cm": 10.897410774280235,
+     "within_2cm": 21,
+     "median_nn_cm": 1.852829154452756,
+     "hull_cm2": 273.7134915295991
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 10,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 10,
+     "max_shift_cm": 6.708203932499369,
+     "within_2cm": 13,
+     "median_nn_cm": 3.1366319091066472,
+     "hull_cm2": 139.6556184901246
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 8,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 8,
+     "max_shift_cm": 6.708203932499369,
+     "within_2cm": 12,
+     "median_nn_cm": 3.6249718760387903,
+     "hull_cm2": 116.91225422194347
+    }
+   }
+  }
+ },
+ {
+  "n": 4,
+  "subset": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 6,
+    "median_nn_cm": 3.882041494464648,
+    "hull_cm2": 19.643207524257107
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 83,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 83,
+     "max_shift_cm": 10.897410774280235,
+     "within_2cm": 28,
+     "median_nn_cm": 1.2235176774671852,
+     "hull_cm2": 278.74622762867574
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 20,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 20,
+     "max_shift_cm": 6.708203932499369,
+     "within_2cm": 23,
+     "median_nn_cm": 1.7589812215561047,
+     "hull_cm2": 173.07277938886529
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 18,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 18,
+     "max_shift_cm": 6.708203932499369,
+     "within_2cm": 22,
+     "median_nn_cm": 1.7944697418266666,
+     "hull_cm2": 154.75062782553042
+    }
+   }
+  }
+ },
+ {
+  "n": 5,
+  "subset": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 7,
+    "median_nn_cm": 3.8471110133453896,
+    "hull_cm2": 25.53613293881796
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 116,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 116,
+     "max_shift_cm": 10.897410774280235,
+     "within_2cm": 28,
+     "median_nn_cm": 1.1516500786642903,
+     "hull_cm2": 300.907084405297
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 23,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 23,
+     "max_shift_cm": 6.708203932499369,
+     "within_2cm": 23,
+     "median_nn_cm": 1.71104022216514,
+     "hull_cm2": 180.31204133940201
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 21,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 21,
+     "max_shift_cm": 6.708203932499369,
+     "within_2cm": 22,
+     "median_nn_cm": 1.7944697418266666,
+     "hull_cm2": 161.9898897760671
+    }
+   }
+  }
+ },
+ {
+  "n": 6,
+  "subset": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 8,
+    "median_nn_cm": 3.3245281794731323,
+    "hull_cm2": 65.97120814488825
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 142,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 142,
+     "max_shift_cm": 10.897410774280235,
+     "within_2cm": 31,
+     "median_nn_cm": 1.085508168528702,
+     "hull_cm2": 331.06335459226204
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 26,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 26,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 24,
+     "median_nn_cm": 1.6255879810960407,
+     "hull_cm2": 189.76214922643265
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 24,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 24,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 23,
+     "median_nn_cm": 1.7332228039176902,
+     "hull_cm2": 174.38147582816512
+    }
+   }
+  }
+ },
+ {
+  "n": 7,
+  "subset": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 9,
+    "median_nn_cm": 3.202746170073559,
+    "hull_cm2": 65.97120814488825
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 176,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 176,
+     "max_shift_cm": 10.897410774280235,
+     "within_2cm": 31,
+     "median_nn_cm": 1.0457067300152731,
+     "hull_cm2": 338.7581054734677
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 28,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 28,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 24,
+     "median_nn_cm": 1.5461543978805459,
+     "hull_cm2": 190.09103385122646
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 26,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 26,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 23,
+     "median_nn_cm": 1.6477705628485908,
+     "hull_cm2": 174.71036045295895
+    }
+   }
+  }
+ },
+ {
+  "n": 8,
+  "subset": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 9,
+    "median_nn_cm": 2.9211909628712425,
+    "hull_cm2": 66.28861975792006
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 187,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 187,
+     "max_shift_cm": 10.897410774280235,
+     "within_2cm": 31,
+     "median_nn_cm": 0.989760547796088,
+     "hull_cm2": 338.7581054734677
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 40,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 40,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 25,
+     "median_nn_cm": 1.3129892836169355,
+     "hull_cm2": 190.09103385122646
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 37,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 37,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 24,
+     "median_nn_cm": 1.3129892836169355,
+     "hull_cm2": 175.8958318100735
+    }
+   }
+  }
+ },
+ {
+  "n": 9,
+  "subset": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 9,
+    "median_nn_cm": 2.795689739474243,
+    "hull_cm2": 80.1343618136142
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 248,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 248,
+     "max_shift_cm": 10.914359729486547,
+     "within_2cm": 31,
+     "median_nn_cm": 0.7371398925281851,
+     "hull_cm2": 344.94106689053064
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 46,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 46,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 27,
+     "median_nn_cm": 1.1812225463051607,
+     "hull_cm2": 214.56640671118785
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 41,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 41,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 26,
+     "median_nn_cm": 1.2225975134214266,
+     "hull_cm2": 200.7614796509113
+    }
+   }
+  }
+ },
+ {
+  "n": 10,
+  "subset": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "real": {
+   "can": {
+    "within_2cm": 9,
+    "median_nn_cm": 2.7147856234753194,
+    "hull_cm2": 95.50506021065621
+   }
+  },
+  "workspace": {
+   "accepted_episodes": 269,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 269,
+     "max_shift_cm": 10.914359729486547,
+     "within_2cm": 31,
+     "median_nn_cm": 0.7371398925281851,
+     "hull_cm2": 346.307087465254
+    }
+   }
+  },
+  "legacy_dense": {
+   "accepted_episodes": 54,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 54,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 28,
+     "median_nn_cm": 1.1812225463051607,
+     "hull_cm2": 218.25746059063087
+    }
+   }
+  },
+  "legacy_dense_label_checked": {
+   "accepted_episodes": 48,
+   "objects": {
+    "can": {
+     "accepted_object_variants": 48,
+     "max_shift_cm": 9.486832980505138,
+     "within_2cm": 27,
+     "median_nn_cm": 1.2225975134214266,
+     "hull_cm2": 203.84841036906911
+    }
+   }
+  }
+ }
+]

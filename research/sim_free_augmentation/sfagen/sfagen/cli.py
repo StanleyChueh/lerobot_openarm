@@ -107,6 +107,7 @@ def main():
                 continue
             rec = Recon(ctx, e, a.device)
             prof.stage(f"render ep{e}", lambda: render_stage.run_episode(ctx, rec, a.device, keys=a.keys.split(",") if a.keys else None), episode=e)
+            prof.stage(f"render wrist ep{e}", lambda: render_stage.run_wrist_episode(ctx, rec, a.device, keys=a.keys.split(",") if a.keys else None), episode=e)
     if a.cmd in ("build", "run"):
         from . import build
         assert a.repo_id, "--repo-id required"

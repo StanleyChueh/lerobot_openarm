@@ -48,13 +48,25 @@ def run(ctx, out_repo, device="cuda:0", mixed_repo=None, log=print):
             off = np.zeros((N, 2 * len(ctx.src.wrists)), np.float32)
             valid=np.zeros((N,len(ctx.src.wrists)),np.float32);wrist_maps={}
 
+            wr=ctx.cfg.get('wrist_render',{}).get('cameras',[]);wrist_img={}
+            if wr:
+                from .wrist import load_spec
+                from .render_stage import wrist_fingerprint
+                wspec=load_spec(ctx)
             for i,w in enumerate(ctx.src.wrists):
                 # Body-camera lag is not an independently calibrated wrist-camera lag.
-                lag=float(ctx.cfg['source'].get('wrist_camera_lags',{}).get(w,0.))
+                lag=float(wspec[w]['lag']) if w in wr else float(ctx.cfg['source'].get('wrist_camera_lags',{}).get(w,0.))
                 jm=source_frame_map(rec,c,lag);wrist_maps[w]=jm
                 x=np.clip(np.arange(N)+lag,0,N-1);a=np.floor(x).astype(int);b=np.ceil(x).astype(int)
                 exact=np.abs(source_time_at(rec,c,np.arange(N)+lag)-lag-jm)<1e-8
                 valid[:,i]=(same[a]&same[b]&exact).astype(np.float32)
+                if w in wr:   # rendered wrist view (camera passed the wrist gate): valid if copied or <= wrist_valid_max_inpaint
+                    stem=ctx.work/f"wrist/{e}_{key}_{w.split('.')[-1]}"
+                    if not stem.with_suffix('.fingerprint').exists() or stem.with_suffix('.fingerprint').read_text()!=wrist_fingerprint(ctx,rec,key,w,wspec[w]):raise ValueError(f'Stale wrist rendering: {stem}')
+                    wrist_img[w]=np.load(stem.with_suffix('.npy'),mmap_mode='r');winfo=json.loads(stem.with_suffix('.json').read_text())
+                    if wrist_img[w].shape!=(N,)+ep.frames[w].shape[1:] or [x['source_frame'] for x in winfo]!=jm.tolist():raise ValueError(f'Wrist render does not match the export clock: {stem}')
+                    thr=ctx.cfg['wrist_render'].get('valid_max_inpaint',0.05)
+                    valid[:,i]=np.array([x.get('copied',False) or x.get('inpainted_frac',1.)<=thr for x in winfo],np.float32)
                 arm=wa.get(w)
                 if arm:
                     generated=interp_rows(c['state'],np.arange(N)+lag)
@@ -67,7 +79,7 @@ def run(ctx, out_repo, device="cuda:0", mixed_repo=None, log=print):
                 fr = {"observation.state": st[t], "action": ac[t], ctx.src.body: np.ascontiguousarray(body[t]),
                       "wrist_view_valid": valid[t], "wrist_view_pose_offset": off[t], "task": ctx.src.task}
                 for w in ctx.src.wrists:
-                    fr[w] = ep.frames[w][wrist_maps[w][t]]
+                    fr[w] = np.ascontiguousarray(wrist_img[w][t]) if w in wrist_img else ep.frames[w][wrist_maps[w][t]]
                 ds.add_frame(fr)
             ds.save_episode()
             eps.append({"export_episode_index": n, "synthetic": True, "source_dataset": ctx.cfg["source"].get("repo_id"), "source_revision": ctx.cfg["source"].get("revision"),
@@ -75,7 +87,7 @@ def run(ctx, out_repo, device="cuda:0", mixed_repo=None, log=print):
                         "render_fingerprint":fingerprint.read_text(),"n_frames": N,"source_frames":rec.T,"frames_added":N-rec.T,"time_scale":ck['marks'].get('time_scale',1.),
                         "source_state_time":tau.tolist(),"source_frame_index":source_frame_map(rec,c).tolist(),
                         "wrist_source_frame_index":{w:j.tolist() for w,j in wrist_maps.items()},
-                        "wrist_rendering":"time-remapped source RGB; changed scenes are explicitly invalid, not generated wrist views",
+                        "wrist_rendering":{w:("sfagen.wrist re-rendered (moving-camera MGW); valid = copied or inpainted <= %g"%ctx.cfg.get('wrist_render',{}).get('valid_max_inpaint',0.05) if w in wrist_img else "time-remapped source RGB; changed scenes are explicitly invalid, not generated wrist views") for w in ctx.src.wrists},
                         "wrist_lag_status":{w:('configured' if w in ctx.cfg['source'].get('wrist_camera_lags',{}) else 'assumed zero; unvalidated') for w in ctx.src.wrists}, "frames_edited": int((~same).sum()), "t_rejoin": ck["t_rejoin"],
                         "state_sha256": hashlib.sha256(st.tobytes()).hexdigest(), "action_sha256": hashlib.sha256(ac.tobytes()).hexdigest(),
                         "replay_checks": {k: v for k, v in ck.items() if k not in ("marks",)}, "schedule": ck["marks"]})
@@ -83,7 +95,7 @@ def run(ctx, out_repo, device="cuda:0", mixed_repo=None, log=print):
     if not eps:raise ValueError('No passing, current rendered candidates were available for export')
     ds.finalize()
     prov = {"name": out_repo, "task": ctx.src.task, "contains_real_episodes": False, "physics_used": False, "generator": "sfagen",
-            "validation_scope":{"state_action_labels":"nominal kinematic consistency; not measured execution","body_rgb":"pixel warping; fidelity not independently validated","wrist_rgb":"copied source frames; mask invalid wrist_view_valid entries","robot_success":"not tested","force_contact":"not validated"},
+            "validation_scope":{"state_action_labels":"nominal kinematic consistency; not measured execution","body_rgb":"pixel warping; fidelity not independently validated","wrist_rgb":"re-rendered for wrist_render.cameras (geometry + depth warping, see per-episode wrist_rendering), else copied source frames; mask invalid wrist_view_valid entries","robot_success":"not tested","force_contact":"not validated"},
             "config": ctx.cfg, "camera_calibration": ctx.calib, "table_height_m": ctx.table_height, "episodes": eps}
     (out / "meta/sfa_provenance.json").write_text(json.dumps(prov, indent=1, default=float))
     from .verify import video_span_report

@@ -1,0 +1,488 @@
+{
+ "meta": {
+  "git": {
+   "commit": "2453d8864a9c2e9a3d64bdf3fedc14d3dd50170f",
+   "dirty_files": [
+    "M research/sim_free_augmentation/sfagen/sfagen/render.py",
+    "?? research/sim_free_augmentation/sfagen/configs/_openarm_wrist_cameras.yaml",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A0_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A0_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A0_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A0_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A1_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A1_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A1_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A1_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A2_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A2_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A2_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A2_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A3_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A3_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A3_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A3_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A4_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A4_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A4_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A4_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A0_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A0_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A0_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A0_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A1_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A1_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A1_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A1_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A2_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A2_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A2_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A2_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A3_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A3_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A3_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A3_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A4_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A4_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A4_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A4_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A0_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A0_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A0_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A0_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A1_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A1_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A1_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A1_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A2_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A2_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A2_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A2_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A3_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A3_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A3_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A3_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A4_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A4_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A4_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A4_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A0_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A0_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A0_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A0_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A1_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A1_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A1_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A1_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A2_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A2_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A2_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A2_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A3_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A3_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A3_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A3_B4.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A4_B0.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A4_B1.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A4_B2.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A4_B3.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A5_B6.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A5_B7.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A5_B8.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A5_B9.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A6_B5.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A6_B7.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A6_B8.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A6_B9.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A7_B5.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A7_B6.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A7_B8.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A7_B9.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A8_B5.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A8_B6.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A8_B7.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A8_B9.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A9_B5.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A9_B6.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A9_B7.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A9_B8.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A5_B6.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A5_B7.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A5_B8.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A5_B9.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A6_B5.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A6_B7.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A6_B8.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A6_B9.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A7_B5.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A7_B6.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A7_B8.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A7_B9.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A8_B5.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A8_B6.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A8_B7.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A8_B9.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A9_B5.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A9_B6.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A9_B7.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A9_B8.jpg",
+    "?? research/sim_free_augmentation/sfagen/results/wrist/dev_t1_da2/",
+    "?? research/sim_free_augmentation/sfagen/results/wrist/dev_t1_plane/",
+    "?? research/sim_free_augmentation/sfagen/sfagen/wrist.py",
+    "?? research/sim_free_augmentation/sfagen/tools/wrist_bench.py"
+   ]
+  },
+  "code": [
+   {
+    "module": "__main__",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/tools/wrist_bench.py",
+    "sha256": "63063d4657da8fe504d682cf46926fa3f71258d21d1b9fb3e95e72b42963d4e2",
+    "in_repo": true
+   },
+   {
+    "module": "__mp_main__",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/tools/wrist_bench.py",
+    "sha256": "63063d4657da8fe504d682cf46926fa3f71258d21d1b9fb3e95e72b42963d4e2",
+    "in_repo": true
+   },
+   {
+    "module": "_provenance",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/tools/_provenance.py",
+    "sha256": "4eb7cf56688570a87bb7901c7fe7fa62635e5b5ab875a81d4cd51e4196e6caa9",
+    "in_repo": true
+   },
+   {
+    "module": "sfagen",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/__init__.py",
+    "sha256": "45958242be26abf721dd965f3e400243274270f59e59141c7af34e2f17d2fe11",
+    "in_repo": true
+   },
+   {
+    "module": "sfagen.camera",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/camera.py",
+    "sha256": "1f8ccd256a8095bf4123cc89172ecc0d9149de33107b37e1cc566a77d4a05e60",
+    "in_repo": true
+   },
+   {
+    "module": "sfagen.context",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/context.py",
+    "sha256": "be0c53056499b445773bbafeed19e61bbe366ccf95ce422581e7f9499d6b4a2e",
+    "in_repo": true
+   },
+   {
+    "module": "sfagen.data",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/data.py",
+    "sha256": "e66b17925266a5946946e62bb5f3ba7e12ea5f59fc34cb0497600e3458ef3083",
+    "in_repo": true
+   },
+   {
+    "module": "sfagen.mesh",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/mesh.py",
+    "sha256": "bba0beaee2a92f9266a8640957187cc8e794f53720d5a8665f8b638a8ad42af9",
+    "in_repo": true
+   },
+   {
+    "module": "sfagen.recon",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/recon.py",
+    "sha256": "632090d52014bc8b34d33f538e88da902bee3facb08431afb24b569a19a126e3",
+    "in_repo": true
+   },
+   {
+    "module": "sfagen.robot",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/robot.py",
+    "sha256": "77df0fb6f1e5d49e637134910ca3922b6c3705001cacd439981cc6be59c36340",
+    "in_repo": true
+   },
+   {
+    "module": "sfagen.wrist",
+    "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/wrist.py",
+    "sha256": "ed2eefc5ac258868fa292ff407c8d277322350382be1da2342e2d39258f9a80b",
+    "in_repo": true
+   }
+  ],
+  "task": "pringles",
+  "split": "dev",
+  "render_cfg": {
+   "cache": 40,
+   "depth": "raft"
+  },
+  "spec": {
+   "observation.images.wrist_cam": {
+    "arm": "L",
+    "parent_frame": "openarm_left_link7",
+    "lag": 0.0,
+    "pos": [
+     0.03329,
+     0.00736,
+     0.07879
+    ],
+    "R": [
+     [
+      -0.149056,
+      -0.881313,
+      -0.448407
+     ],
+     [
+      0.980587,
+      -0.073315,
+      -0.181862
+     ],
+     [
+      0.127402,
+      -0.46681,
+      0.875133
+     ]
+    ],
+    "intrinsics": {
+     "fx": 605.44,
+     "fy": 605.13,
+     "cx": 322.85,
+     "cy": 246.44,
+     "width": 640,
+     "height": 480
+    }
+   },
+   "observation.images.right_wrist_cam": {
+    "arm": "R",
+    "parent_frame": "openarm_right_link7",
+    "lag": -1.5,
+    "pos": [
+     0.07721,
+     0.05237,
+     0.06584
+    ],
+    "R": [
+     [
+      0.053784,
+      -0.771654,
+      -0.633764
+     ],
+     [
+      0.994609,
+      -0.014949,
+      0.102609
+     ],
+     [
+      -0.088653,
+      -0.635866,
+      0.766691
+     ]
+    ],
+    "intrinsics": {
+     "fx": 607.79,
+     "fy": 607.61,
+     "cx": 322.58,
+     "cy": 248.52,
+     "width": 640,
+     "height": 480
+    }
+   }
+  },
+  "protocol_sha256": "cd29de30c6b5a53a0d2790fa15cb6dcb654fcf23e5ef882cf1f52902d36c0993"
+ },
+ "cameras": {
+  "observation.images.right_wrist_cam": {
+   "T1": {
+    "frames": 288,
+    "render_psnr": 16.316192284863348,
+    "copy_psnr": 15.717773551058675,
+    "render_minus_copy_db": 0.5938131504142217,
+    "ci95": [
+     0.43028514390678524,
+     0.77064813730761
+    ],
+    "by_region": {
+     "all": 0.5984187338046724,
+     "own_arm": -0.7288781976145517,
+     "other_arm": 0.565159950177132,
+     "objects": -0.04388576504935239,
+     "world": 0.9006394237107328
+    }
+   },
+   "T2": {
+    "bins": [
+     {
+      "bin_cm": [
+       0,
+       3
+      ],
+      "pairs": 0,
+      "frames": 0,
+      "render_psnr": null,
+      "copy_psnr": null,
+      "render_minus_copy_db": null,
+      "ci95": [
+       null,
+       null
+      ]
+     },
+     {
+      "bin_cm": [
+       3,
+       6
+      ],
+      "pairs": 0,
+      "frames": 0,
+      "render_psnr": null,
+      "copy_psnr": null,
+      "render_minus_copy_db": null,
+      "ci95": [
+       null,
+       null
+      ]
+     },
+     {
+      "bin_cm": [
+       6,
+       11
+      ],
+      "pairs": 0,
+      "frames": 0,
+      "render_psnr": null,
+      "copy_psnr": null,
+      "render_minus_copy_db": null,
+      "ci95": [
+       null,
+       null
+      ]
+     },
+     {
+      "bin_cm": [
+       11,
+       30
+      ],
+      "pairs": 0,
+      "frames": 0,
+      "render_psnr": null,
+      "copy_psnr": null,
+      "render_minus_copy_db": null,
+      "ci95": [
+       null,
+       null
+      ]
+     }
+    ],
+    "frames_rot_ok": 0,
+    "frames_total": 0
+   },
+   "gate": {
+    "T1_ok": true,
+    "T2_ok": false,
+    "T2_bins_tested": [],
+    "pass": false
+   },
+   "inpainted_frac_median": 0.08953776041666667
+  },
+  "observation.images.wrist_cam": {
+   "T1": {
+    "frames": 187,
+    "render_psnr": 19.131267752539753,
+    "copy_psnr": 17.856752184355724,
+    "render_minus_copy_db": 1.2460280638613865,
+    "ci95": [
+     0.8937008321120844,
+     1.5449046476734756
+    ],
+    "by_region": {
+     "all": 1.2745155681840317,
+     "own_arm": -0.34604861222582695,
+     "other_arm": -1.1262569641045792,
+     "objects": 0.3522494953744582,
+     "world": 1.3674754725269764
+    }
+   },
+   "T2": {
+    "bins": [
+     {
+      "bin_cm": [
+       0,
+       3
+      ],
+      "pairs": 0,
+      "frames": 0,
+      "render_psnr": null,
+      "copy_psnr": null,
+      "render_minus_copy_db": null,
+      "ci95": [
+       null,
+       null
+      ]
+     },
+     {
+      "bin_cm": [
+       3,
+       6
+      ],
+      "pairs": 0,
+      "frames": 0,
+      "render_psnr": null,
+      "copy_psnr": null,
+      "render_minus_copy_db": null,
+      "ci95": [
+       null,
+       null
+      ]
+     },
+     {
+      "bin_cm": [
+       6,
+       11
+      ],
+      "pairs": 0,
+      "frames": 0,
+      "render_psnr": null,
+      "copy_psnr": null,
+      "render_minus_copy_db": null,
+      "ci95": [
+       null,
+       null
+      ]
+     },
+     {
+      "bin_cm": [
+       11,
+       30
+      ],
+      "pairs": 0,
+      "frames": 0,
+      "render_psnr": null,
+      "copy_psnr": null,
+      "render_minus_copy_db": null,
+      "ci95": [
+       null,
+       null
+      ]
+     }
+    ],
+    "frames_rot_ok": 0,
+    "frames_total": 0
+   },
+   "gate": {
+    "T1_ok": true,
+    "T2_ok": false,
+    "T2_bins_tested": [],
+    "pass": false
+   },
+   "inpainted_frac_median": 0.05050130208333333
+  }
+ }
+}
