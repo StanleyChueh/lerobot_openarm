@@ -18,7 +18,7 @@ def variation_list(cfg, rec):
         from .workspace_plan import support_targets
         names = [o["name"] for o in rec.objects]
         for name in ow["objects"]:
-            D, info, _ = support_targets(rec, names.index(name), cfg.get("checks", {}), ow.get("n_targets", 48), ow.get("grid_step_m", 0.01), ow.get("min_shift_m", 0.02),near_fraction=ow.get("near_fraction",.5))
+            D, info, _ = support_targets(rec, names.index(name), cfg.get("checks", {}), ow.get("n_targets", 48), ow.get("grid_step_m", 0.01), ow.get("min_shift_m", 0.02),near_fraction=ow.get("near_fraction",.5),max_shift=ow.get("max_shift_m"))
             rec.info.setdefault("workspace", {})[name] = info
             c0 = info.get("original_centre_xy", [0, 0])
             for d in D:

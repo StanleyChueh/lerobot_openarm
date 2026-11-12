@@ -50,7 +50,7 @@ def footprint_coverage(rec,o,T,support):
     return float(support[m>0].mean()) if m.any() else 0.
 
 
-def support_targets(rec,k,checks_cfg,n_targets=48,step=.01,min_shift=.02,log=print,near_fraction=.5):
+def support_targets(rec,k,checks_cfg,n_targets=48,step=.01,min_shift=.02,log=print,near_fraction=.5,max_shift=None):
     if not (0<step<=.1 and int(n_targets)==n_targets and n_targets>=1 and min_shift>=0 and 0<=near_fraction<=1):raise ValueError('Invalid workspace grid settings')
     o=rec.objects[k];T0=o['table'];arm=o['arm'];tg=o['grasp_frame'];cam=rec.cam
     support,ref=support_model(rec,k,checks_cfg);c0=_centre(o,T0)
@@ -71,11 +71,12 @@ def support_targets(rec,k,checks_cfg,n_targets=48,step=.01,min_shift=.02,log=pri
     hull0=np.concatenate([Q for n,a,Q in rec.robot.link_points() if a!='B'])
     plo,phi=o['points'].min(0)-.01,o['points'].max(0)+.01
     TG=rec.tcp(arm,tg);qg=rec.q_at(tg);lo_q=np.minimum(rec.robot.lo[arm],qg[arm]);hi_q=np.maximum(rec.robot.hi[arm],qg[arm])
-    keep=[];why={x:0 for x in ('grid','view','surface','gap','robot_start','ik','near_original')}
+    keep=[];why={x:0 for x in ('grid','view','surface','gap','robot_start','ik','near_original','beyond_max_shift')}
     for x in xs:
       for y in ys:
         why['grid']+=1;d=np.array([x-c0[0],y-c0[1],0.])
         if np.linalg.norm(d)<min_shift:why['near_original']+=1;continue
+        if max_shift is not None and np.linalg.norm(d)>max_shift+1e-9:why['beyond_max_shift']+=1;continue  # R1 shift limit
         Tn=T0.copy();Tn[:3,3]+=d;Pn=o['points']@Tn[:3,:3].T+Tn[:3,3];u,depth=cam.project(Pn)
         if not (np.isfinite(u).all() and (depth>0).all() and (u[:,0]>10).all() and (u[:,0]<rec.W-10).all() and (u[:,1]>10).all() and (u[:,1]<rec.H-10).all()):why['view']+=1;continue
         if footprint_coverage(rec,o,Tn,support)<checks_cfg.get('support_coverage_min',.95):why['surface']+=1;continue
