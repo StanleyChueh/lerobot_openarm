@@ -4,6 +4,16 @@
 - [`openarm_pringles_lerobot_real_to_sim_10_3cam_v00`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v00) @ `30533e67`;
 - [`openarm_insertbattery_lerobot_real_to_sim_10_3cam_v00`](https://huggingface.co/datasets/ethanCSL/openarm_insertbattery_lerobot_real_to_sim_10_3cam_v00) @ `c3c571d0`.
 
+**Update 2026-11-12 (v01, branch `research/sfagen-wrist-render`).** Stages 1–6 describe the v00 pipeline. Stages 7–9
+add the latest method:
+- re-rendered wrist cameras;
+- an 11 cm object-shift limit;
+- generation from 1, 2, 4 or 10 real demos.
+
+The decisions log (Stage 9) records what was tried, the result, and why each choice was made. v01 datasets:
+`ethanCSL/openarm_pringles_lerobot_real_to_sim_{1,2,4,10}_3cam_v01` (copied wrists with flags) and
+`..._{1,2,4,10}_3cam_wristrender_v01` (rendered-wrist ablation).
+
 **Where the images come from.** Every image here was computed from the real source data, the saved pipeline caches, and the published files. Nothing is drawn by hand or illustrative. Where an image required new computation, the run is logged in `diagnostics/run_*.json`; see "How these figures were made" at the end.
 
 **How to view it.**
@@ -215,6 +225,74 @@ Video with point trails: `stage_02_tracking/raft_tracking_trails.mp4`.
 ![Pringles wrist flags](stage_06_cameras/pringles_wrist_flags.png)
 ![Battery three cameras](stage_06_cameras/battery_three_cameras.jpg)
 ![Battery wrist flags](stage_06_cameras/battery_wrist_flags.png)
+
+---
+
+## Stage 7: Re-rendering the wrist cameras (v01, new)
+
+**Why:** copying the source wrist frame is wrong whenever an object or the camera changes position relative to the
+hand, for example a battery going into another slot. In v00, at least 49 % of synthetic wrist frames were therefore
+flagged invalid.
+
+**How (`sfagen/wrist.py`, task-agnostic):**
+- The wrist camera pose is FK(link7) · mount.
+- Every pixel of the source wrist frame gets an element from the robot and object geometry seen by that camera: own
+  hand, other arm, object, or static world.
+- Each pixel moves rigidly with its element, P' = C'⁻¹ M'ₑ Mₑ⁻¹ C P. Parts rigid with the camera (fingers, the held
+  can) stay still automatically.
+- **Depth:** geometry for modelled parts, and RAFT two-view triangulation for the room. Depth Anything V2 and a plain
+  table plane were tested and lost.
+- **Pixels the projections miss at close range:** a colour test (does the pixel stay put, or move like the world?)
+  assigns them to the hand.
+- **Filling:** revealed areas come from the nearest-pose source frames, and the rest is inpainted. Every pixel is
+  labelled (green warped, yellow other frame, red inpainted).
+
+![Pringles left wrist, held-out: real | copy | render | provenance](stage_07_wrist_rendering/pringles_left_wrist_T1_ep8.jpg)
+![Pringles right wrist, held-out, can in the gripper](stage_07_wrist_rendering/pringles_right_wrist_T1_ep6.jpg)
+![Render − copy PSNR per task and camera](stage_08_few_source/wrist_render_vs_copy.png)
+
+**Result (frozen protocol, `sfagen/results/wrist/RESULTS.md`):**
+- **Within an episode the render beats copying in 4 of 4 task–camera cells:** +0.8 to +1.6 dB, all CIs above 0.
+- **Across episodes at camera moves of 3 cm or more, it often loses** (disocclusions, the other episode's arm).
+- **Registered gate:** passed only for the battery right wrist.
+- **So the primary v01 datasets keep copied wrists with validity flags.** A rendered-wrist ablation is published next
+  to them, so that policy training can decide.
+
+---
+
+## Stage 8: Fewer real demos (v01, new)
+
+1. **R1, how far can the object move?** Re-render one real episode with another episode's real arm motion and can
+   position, and compare with that episode's real frame.
+   - Up to **11 cm** the image stays within 0.5 dB of small moves.
+   - Beyond 11 cm it fails, so F1W targets are capped at 11 cm.
+2. **Which demos to record?** A rule frozen before any evaluation: k-center over the demos' can positions. It picks
+   demo 3, then 8, 5, 1.
+3. **Coverage of 40 unseen real recordings** (can within 2 cm):
+   - 1 demo → 16;
+   - 2 demos → 24, as many as the published 10-demo v00;
+   - 4 demos → 27;
+   - 10 demos → 31.
+   - Randomly chosen pairs reach a median of only 8: **which** demos you record matters more than how many.
+
+![Coverage vs number of demos](stage_08_few_source/coverage_vs_demos.png)
+
+---
+
+## Stage 9: Decisions log (what we tried, what happened, what we decided, why)
+
+| # | Question | Tried | Result | Decision | Why |
+|---|---|---|---|---|---|
+| R1 | How far can the can move? | cross-episode pose transfer, 90 pairs, frozen rule | r* = 11 cm; the can region falls 14.9 → 11.5 dB | cap F1W at 11 cm | larger moves fail the frozen −0.5 dB rule |
+| R2/C | How few demos? | F1W candidates for all 10 demos, frozen k-center selection | 1/2/4/10 demos → 16/24/27/31 of 40 | publish 1/2/4/10-demo candidates | 2 rule-chosen demos match v00 coverage |
+| A | Fix the moved can's look | grow the object mask (ghost lid), fill the silhouette edge, per-point colour atlas | registered cross-episode test −0.16 dB (fail); same-can lift test +0.53 dB | keep the published body renderer | frozen rule; the residual error is 1–2 cm object **pose**, not rendering |
+| B | Render the wrist cameras | moving-camera warp; 3 depth options; mount refinement | T1 better than copy in 4/4; T2 gate fails 3 of 4 | copy + flags in v01; rendered wrists only as an ablation | frozen gate; disocclusions across episodes |
+| B2 | Refine the wrist mounts? | bounded photometric search on dev | dev +1.0/+1.1 dB, held-out +0.3/+0.5 dB | adopt | the pre-registered rule passed |
+| D | Is the data fit to train? | gate recomputed from the exported files | all hard gates pass (`sfagen/results/datasets_v01/`) | push to the Hub | |
+
+![Can fix, held-out](stage_09_decisions/canfix_heldout.png)
+![Why the can looked torn: the source mask (green) misses the lid, which stays behind](stage_09_decisions/canfix_ghost_lid_debug.jpg)
+![R1 largest-shift contact sheet](stage_09_decisions/r1_largest_shift_sheet.jpg)
 
 ---
 

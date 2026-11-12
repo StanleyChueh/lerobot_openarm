@@ -5,7 +5,8 @@ from pathlib import Path
 G = Path(__file__).resolve().parents[1]
 md = (G / "STAGE_BY_STAGE_VISUAL_GUIDE.md").read_text().splitlines()
 STAGE_DIR = {"Stage 1": "stage_01_segmentation", "Stage 2": "stage_02_tracking", "Stage 3": "stage_03_reconstruction", "Stage 4": "stage_04_trajectories",
-             "Stage 5": "stage_05_rendering", "Stage 6": "stage_06_cameras"}
+             "Stage 5": "stage_05_rendering", "Stage 6": "stage_06_cameras",
+             "Stage 7": "stage_07_wrist_rendering", "Stage 8": "stage_08_few_source", "Stage 9": "stage_09_decisions"}
 EXTRA_VIDEOS = {"Stage 5": [("../../../../sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/video_highlights.mp4", "Pringles: all-episode highlights (existing, also on the Hub)"),
                             ("../../../../sfa_hf_export/sfagen/configs/work/openarm_battery_insertion/video_highlights.mp4", "Battery: all-episode highlights (existing, also on the Hub)")]}
 

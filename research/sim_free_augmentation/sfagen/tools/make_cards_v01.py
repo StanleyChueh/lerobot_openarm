@@ -1,12 +1,22 @@
 """Dataset cards (Hub README.md) for the v01 few-source candidates, filled from the quality report, the frozen selection
-and the wrist gate. usage: make_cards_v01.py N [N ...]"""
+and the wrist gate. usage: make_cards_v01.py N [N ...]   (N or N_wristrender)"""
+WRIST_MAIN = ("copied: the time-remapped real source frame. The registered wrist gate failed for Pringles, so the frames are not "
+              "re-rendered, and `wrist_view_valid` = 0 wherever the scene changed.")
+WRIST_AB = ("both cameras re-rendered by the moving-camera warp (study B), ablation. `wrist_view_valid` = 1 where a frame "
+            "is an exact copy or has <= 5 % inpainted pixels.")
+BANNER = """
+> **Ablation.** Here both wrist cameras are **re-rendered** (sfagen.wrist), although the registered wrist gate FAILED
+> for Pringles (it beat copying within episodes, +0.8 to +1.0 dB, but not reliably across episodes at camera moves of
+> 3 cm or more). It is otherwise identical to `..._{n}_3cam_v01`, which has copied wrist frames and validity flags.
+> Train both to test whether rendered wrist views help.
+"""
 import json, subprocess, sys
 from pathlib import Path
 S = Path(__file__).resolve().parents[1]; R = S / "results"
 
 
-def card(n):
-    q = json.loads((R / f"datasets_v01/fewsrc{n}/quality_report.json").read_text()); sel = json.loads((R / "fewsrc/datasets.json").read_text())[str(n)]
+def card(n, v=""):
+    q = json.loads((R / f"datasets_v01/fewsrc{n}{v}/quality_report.json").read_text()); sel = json.loads((R / "fewsrc/datasets.json").read_text())[str(n)]
     gate = {}
     for p in sorted(R.glob("wrist/final_*/summary.json")):
         for cam, r in json.loads(p.read_text())["cameras"].items():
@@ -23,8 +33,8 @@ configs:
 - config_name: default
   data_files: data/*/*.parquet
 ---
-# OpenArm Pringles hand-over: synthetic-only, from {n} real demo{'s' if n > 1 else ''} (sfagen v01 candidate)
-
+# OpenArm Pringles hand-over: synthetic-only, from {n} real demo{'s' if n > 1 else ''} (sfagen v01 candidate{", rendered-wrist ABLATION" if v else ""})
+{BANNER.format(n=n) if v else ""}
 **{q['episodes']} synthetic episodes / {q['frames']} frames, 3 cameras, 30 fps, LeRobot v3.0.** These are generated from the real demos
 {sel['sources']} of [`ethanCSL/openarm_pringles_lerobot_real_10_v00@cebdee98`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_10_v00).
 The dataset contains **no real episodes**. No simulator and no learned generator were used.
@@ -32,7 +42,7 @@ The dataset contains **no real episodes**. No simulator and no learned generator
 
 ```python
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
-ds = LeRobotDataset("ethanCSL/openarm_pringles_lerobot_real_to_sim_{n}_3cam_v01", revision="v3.0")
+ds = LeRobotDataset("ethanCSL/openarm_pringles_lerobot_real_to_sim_{n}_3cam{v}_v01", revision="v3.0")
 # mask wrist cameras where batch["wrist_view_valid"] == 0 (order: wrist_cam, right_wrist_cam)
 ```
 
@@ -41,12 +51,10 @@ ds = LeRobotDataset("ethanCSL/openarm_pringles_lerobot_real_to_sim_{n}_3cam_v01"
   3, 8, 5, 1, …, so N=1 → {{3}}, N=2 → {{3, 8}}, N=4 → {{1, 3, 5, 8}}.
 - **Variation (F1W):** the can starts elsewhere on the table, **shifted at most 11 cm**. That is the measured
   body-camera limit r* (study R1). The grasping arm's reach is translated rigidly by IK, and the time is retimed to fit
-  the speed and acceleration envelope of **these {n} demos only**. Up to {sel['per_demo_cap']} variants per demo are kept,
-  spread by k-center over the target positions.
+  the speed and acceleration envelope of **{'this demo' if n == 1 else f'these {n} demos'} only**. Every variant that passes that envelope is kept.
 - **Body camera:** mesh-guided forward warping of the real pixels, with a clean plate and real-pixel borrowing. This is
   the published renderer, unchanged: the can-fix candidates did not pass their registered test (study A).
-- **Wrist cameras:** re-rendered by the moving-camera warp (study B) for the cameras that passed the wrist gate.
-  Otherwise the time-remapped source frame is copied and flagged invalid where the scene changed.
+- **Wrist cameras:** {WRIST_AB if v else WRIST_MAIN}
 
 ## Quality gate (recomputed from this export; `quality_report.json`)
 | Check | Result |
@@ -83,4 +91,5 @@ Full study, protocols and reproduction commands: [GitHub `research/sfagen-wrist-
 
 if __name__ == "__main__":
     for n in sys.argv[1:]:
-        (R / f"datasets_v01/fewsrc{n}/README.md").write_text(card(int(n))); print("card", n)
+        k, _, v = n.partition("_"); v = f"_{v}" if v else ""
+        (R / f"datasets_v01/fewsrc{k}{v}/README.md").write_text(card(int(k), v)); print("card", n)

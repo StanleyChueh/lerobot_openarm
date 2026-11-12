@@ -13,7 +13,7 @@ import numpy as np
 import yaml
 HERE = Path(__file__).resolve().parents[1]; sys.path.insert(0, str(HERE)); sys.path.insert(0, str(HERE / "tools"))
 from select_sources import kcenter
-BASE = HERE / "configs/openarm_pringles_fewsrc.yaml"; WBASE = HERE / "configs/openarm_pringles_fewsrc_wristrender.yaml"; OUT = HERE / "results/fewsrc/datasets.json"; PER_DEMO = 16
+BASE = HERE / "configs/openarm_pringles_fewsrc.yaml"; WBASE = HERE / "configs/openarm_pringles_fewsrc_wristrender.yaml"; OUT = HERE / "results/fewsrc/datasets.json"; PER_DEMO = None   # None: every variant passing the N-demo envelope (16 was a compute cap; it cut N=2 coverage 24 -> 19)
 
 
 def select():
@@ -37,9 +37,9 @@ def select():
         for e in sub:
             ok = [(k, float((v / ev).max()), float((a / ea).max()), d) for k, v, a, z, d in cands.get(e, [])
                   if (v / ev).max() <= cs["speed_ratio"] + 1e-9 and (a / ea).max() <= cs["accel_ratio"] + 1e-9 and z >= mz - cs["table_tol_m"]]
-            keep = [ok[i] for i in sorted(kcenter([d for *_, d in ok], PER_DEMO))] if ok else []
+            keep = ok if PER_DEMO is None else ([ok[i] for i in sorted(kcenter([d for *_, d in ok], PER_DEMO))] if ok else [])
             eps += [[e, k, {"speed_ratio_to_subset_max": sr, "accel_ratio_to_subset_max": ar, "subset_lowest_arm_z_m": mz, "envelope_sources": sub}] for k, sr, ar, _ in keep]
-        out[n] = {"sources": sub, "per_demo_cap": PER_DEMO, "passing_before_cap": {str(e): sum(1 for k, v, a, z, d in cands.get(e, []) if (v / ev).max() <= cs["speed_ratio"] + 1e-9 and (a / ea).max() <= cs["accel_ratio"] + 1e-9 and z >= mz - cs["table_tol_m"]) for e in sub},
+        out[n] = {"sources": sub, "per_demo_cap": PER_DEMO or "none", "passing_before_cap": {str(e): sum(1 for k, v, a, z, d in cands.get(e, []) if (v / ev).max() <= cs["speed_ratio"] + 1e-9 and (a / ea).max() <= cs["accel_ratio"] + 1e-9 and z >= mz - cs["table_tol_m"]) for e in sub},
                   "episodes": eps}
         print("N", n, "sources", sub, "episodes", len(eps), out[n]["passing_before_cap"], flush=True)
     OUT.write_text(json.dumps(out, indent=1))

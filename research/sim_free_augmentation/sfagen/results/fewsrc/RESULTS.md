@@ -26,15 +26,16 @@ Source: `source_budget10.json`. Chart: `../figs/coverage_vs_demos.png`.
 - This is a coverage proxy on reused development recordings. It is not policy evidence.
 
 ## Candidate datasets (`datasets.json`)
-- Each N re-checks speed, acceleration and the table limit against **its own N demos**.
-- At most 16 variants per demo, spread by k-center over the target positions.
+- Each N keeps **every** variant that passes the speed, acceleration and table envelope of **its own N demos**.
+- A first selection capped each demo at 16 spread variants as a compute guard (`datasets_cap16.json`). That cap cut
+  N=2 dataset coverage from 24 to 19 of 40, so it was removed before any dataset was published.
 
-| N | Demos | Variants passing the N-demo envelope (per demo) | Episodes kept |
-|---|---|---|---|
-| 1 | {3} | 25 | 16 |
-| 2 | {3, 8} | 43, 8 | 24 |
-| 4 | {1, 3, 5, 8} | 39, 46, 13, 13 | 58 |
-| 10 | all | 33, 39, 14, 46, 39, 22, 34, 8, 13, 21 | 147 |
+| N | Demos | Episodes (per demo) | Frames | Dataset coverage (of 40) |
+|---|---|---|---|---|
+| 1 | {3} | 25 | 7,328 | 16 |
+| 2 | {3, 8} | 51 (43 + 8) | 15,934 | 24 |
+| 4 | {1, 3, 5, 8} | 111 (39 + 46 + 13 + 13) | 32,668 | 27 |
+| 10 | all | 269 | 84,587 | 31 |
 
 ## Reproduce
 ```bash

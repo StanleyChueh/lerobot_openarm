@@ -1,4 +1,4 @@
-# Few-source candidate dataset: 2 real demo(s) [3, 8] (frozen k-center rule), F1W capped at 11 cm, <= 16 variants per demo, replay limits from these 2 demos only.
+# Few-source candidate dataset: 2 real demo(s) [3, 8] (frozen k-center rule), F1W capped at 11 cm, <= none variants per demo, replay limits from these 2 demos only.
 source:
   repo_id: ethanCSL/openarm_pringles_lerobot_real_10_v00
   revision: cebdee98115ab6827a4ec2655335c536b5dd085b
