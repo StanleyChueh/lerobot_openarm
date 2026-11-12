@@ -51,3 +51,25 @@ All three must hold:
 ## Not claimed
 - PSNR is a proxy. The can poses are reconstructions, so they are ground truth up to reconstruction error.
 - Episodes 0–9 are reused development data.
+
+## Amendment 1 (2026-11-12, after dev runs, before any held-out render)
+**Dev finding:**
+- On the cross-episode test, the can region is dominated by **reconstruction pose misalignment**. Allowing the render a
+  best 2-D shift recovers +2.4 dB. The median best shift is 9–16 px at every distance, including 0–3 cm.
+- The renderer candidates change the can region by less than 0.1 dB there.
+
+**Added test** (`kind = lift` in `tools/canfix_bench.py`):
+- render pre-grasp frames (t_g − 15, −10, −5) with the scene after the lift (t_g + 15, +25, +35);
+- borrowing and atlas exclude frames within ±20 of the target;
+- held-can motion is hand-relative, so the scene differs only by the real lift (median 11 cm).
+
+**Dev result:** the misalignment is still about 14–16 px. The real can moves inside the gripper during the grasp, so a
+renderer cannot remove this part of the error either.
+
+**Dev choice, by the frozen choice rule** (the highest dev can gain with whole-image ≥ −0.1):
+- `object_mask_grow 60, object_erode 3, object_texture true`;
+- dev cross can-region gain +0.04 dB, whole image −0.03 dB;
+- dev lift can-region gain +0.09 dB, whole image +0.08 dB.
+
+**Unchanged:** the adoption rule. It is applied to the cross test as frozen. The lift test is reported next to it, and
+its whole-image gain must also be ≥ −0.1 dB.

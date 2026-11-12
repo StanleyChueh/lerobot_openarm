@@ -27,7 +27,8 @@ def _nearest(okn, W):
 
 class Renderer:
     def __init__(self, rec, device="cuda:0", cfg=None):
-        cfg = {"tm_erode": 21, "despeckle": True, "part_fill": True, "plate_adapt": 10, **(cfg or {})}
+        # object_erode None: objects share tm_erode; object_texture False: no per-point colour atlas (both = old behaviour)
+        cfg = {"tm_erode": 21, "despeckle": True, "part_fill": True, "plate_adapt": 10, "object_erode": None, "object_texture": False, "object_mask_grow": None, **(cfg or {})}
         self.cfg, self.rec, self.dev = cfg, rec, device
         self.robot, self.cam = rec.robot, rec.cam; self.H, self.W = rec.H, rec.W
         self.G = mesh.Geometry(self.robot, device=device)
@@ -42,7 +43,20 @@ class Renderer:
         self.cat_of = np.array(cat_of); self.cat_of_t = torch.tensor(self.cat_of, device=device)
         self.movable = torch.tensor(self.cat_of >= 0, device=device)
         self.F = torch.tensor(rec.F, device="cpu"); self.plate = torch.tensor(rec.plate, dtype=torch.float32, device=device)
-        self._cache = {}
+        self._cache = {}; self._atlas = None; self.last_prov = None
+
+    def atlas(self, exclude=None, step=6):
+        """Per object-proxy-point colour: median over every `step`-th source frame in which the point is visible (z-test,
+        same point label, inside its object's robust mask), skipping frames in `exclude`. NaN where never seen."""
+        if self._atlas is None:
+            idx = torch.nonzero(self.gid >= self.OBJ0)[:, 0]; labs = self.gid[idx]; self._atlas = (idx, {})
+            for j in range(0, self.rec.T, step):
+                rgb, v = self.lookup(j, lambda Ms: self.world(Ms)[idx], labs, tol=0.01)
+                self._atlas[1][j] = torch.where(v[:, None], rgb, torch.full_like(rgb, float("nan")))
+        idx, cols = self._atlas
+        use = [c for j, c in cols.items() if exclude is None or not (exclude[0] <= j <= exclude[1])]
+        A = torch.full((len(self.local), 3), float("nan"), device=self.dev); A[idx] = torch.nanmedian(torch.stack(use), 0).values
+        return A
 
     # ------------------------------------------------------------------ geometry
     def placements(self, q, g, objs):
@@ -101,6 +115,16 @@ class Renderer:
         inside = (rs >= 0) & (np.abs(img - rec.plate.astype(np.int16)).max(2) > 12); cat[inside] = rs[inside]
         for c, name in enumerate(self.cats):
             cat[rec.masks[name][j] > 0] = c
+        G = self.cfg.get("object_mask_grow")
+        if G:   # proxy pose errors leave real object pixels outside the mask (ghost at the old place, cut-off object)
+            robot = np.any([rec.masks[a][j] > 0 for a in rec.arms], axis=0)
+            _, comp = cv2.connectedComponents((diff & ~robot).astype(np.uint8))
+            for c in range(len(rec.arms), nc):
+                own = cat == c
+                if not own.any():
+                    continue
+                ids = np.unique(comp[own & (comp > 0)]); near = cv2.distanceTransform((~own).astype(np.uint8), cv2.DIST_L2, 3) <= G
+                cat[np.isin(comp, ids) & near & (cat < 0)] = c
         return cat
 
     def lookup(self, j, fn, labels, tol=0.015):
@@ -164,7 +188,16 @@ class Renderer:
             hit = (h | fm).view(H, W)
         dt, lt, pt = self.zbuf(Mt)
         tmask = (lt >= 0) & moved[lt.clamp(min=0)] & (dt < zb - 0.005)
-        tm = cv2.erode(tmask.cpu().numpy().astype(np.uint8), np.ones((self.cfg["tm_erode"],) * 2, np.uint8)) > 0
+        er = lambda m, k: cv2.erode(m.astype(np.uint8), np.ones((k, k), np.uint8)) > 0  # noqa: E731
+        tmn = tmask.cpu().numpy(); objpx = (self.cat_of_t[lt.clamp(min=0)] >= len(self.rec.arms)).cpu().numpy() & tmn
+        oe = self.cfg["object_erode"]
+        tm = er(tmn, self.cfg["tm_erode"]) if oe is None else (er(tmn & ~objpx, self.cfg["tm_erode"]) | er(objpx, oe))
+        prov = np.zeros((H, W), np.uint8); prov[rm.cpu().numpy()] = 1; prov[hit.cpu().numpy()] = 2  # 0 source 1 plate 2 warped
+        info["atlas_px"] = 0
+        if self.cfg["object_texture"]:
+            A = self.atlas(exclude); sel = torch.tensor(objpx & ~hit.cpu().numpy(), device=dev)
+            c = A[pt.clamp(min=0)]; sel &= (pt >= 0) & ~torch.isnan(c[..., 0])
+            out[sel] = c[sel]; hit = hit | sel; s_ = sel.cpu().numpy(); prov[s_] = 6; info["atlas_px"] = int(s_.sum())
         hn = tm & ~hit.cpu().numpy(); hitn = hit.cpu().numpy()
         small = hn & (cv2.dilate(hitn.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0) & (cv2.blur(hitn.astype(np.float32), (5, 5)) > 0.6)
         big = torch.tensor(hn & ~small, device=dev); pixb = big.nonzero(); filled_n = 0
@@ -181,6 +214,7 @@ class Renderer:
                 fn = lambda Ms, ri=ri: torch.einsum("nij,nj->ni", torch.tensor(Ms, dtype=torch.float32, device=dev)[labs[ri]][:, :3, :3], loc[ri]) + torch.tensor(Ms, dtype=torch.float32, device=dev)[labs[ri]][:, :3, 3]  # noqa: E731
                 rgb, v = self.lookup(jj, fn, labs[ri]); col[ri[v]] = rgb[v]; filled[ri[v]] = True
             out[pixb[filled][:, 0], pixb[filled][:, 1]] = col[filled]; filled_n = int(filled.sum()); big[pixb[filled][:, 0], pixb[filled][:, 1]] = False
+            pf = pixb[filled].cpu().numpy(); prov[pf[:, 0], pf[:, 1]] = 3                                    # 3 borrowed
         info["borrowed_px"] = filled_n
         img = out.clamp(0, 255).byte().cpu().numpy(); rest = small | big.cpu().numpy()
         info['part_filled_px']=0
@@ -194,12 +228,13 @@ class Renderer:
                         continue
                     sel = full & (labn == p_); img.reshape(-1, 3)[np.flatnonzero(sel)] = img.reshape(-1, 3)[_nearest(src, W)[sel]]; done |= sel
                 rest &= ~done
-                info['part_filled_px']=int(done.sum())
+                info['part_filled_px']=int(done.sum()); prov[done] = 4                                     # 4 part fill
                 if done.any():
                     bl = cv2.GaussianBlur(img, (5, 5), 1.2); img[done] = bl[done]
         if rest.any():
             img = cv2.inpaint(img, rest.astype(np.uint8), 3, cv2.INPAINT_TELEA)
-        info["inpainted_px"] = int(rest.sum()); wm = (hitn | rest).astype(np.uint8)
+        info["inpainted_px"] = int(rest.sum()); prov[rest] = 5; self.last_prov = prov                  # 5 inpainted, 6 atlas
+        wm = (hitn | rest).astype(np.uint8)
         if self.cfg["despeckle"]:
             reg = cv2.dilate(wm, np.ones((5, 5), np.uint8)) > 0; med = cv2.medianBlur(img, 3)
             sel = reg & (np.abs(img.astype(np.int16) - med.astype(np.int16)).max(2) > 40); img[sel] = med[sel]
