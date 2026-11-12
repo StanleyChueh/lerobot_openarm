@@ -1,4 +1,23 @@
-# sfagen v01: rendered wrist cameras, the can fix, and synthetic data from 1–10 real demos
+# sfagen: simulation-free synthetic robot data, the latest method (start here)
+
+> **Docs branch: the showcase of the newest sfagen method.** It follows `research/sfagen-wrist-render` (v01).
+> Robot execution commands are on [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map).
+
+**Read in this order:**
+1. **Visual walkthrough:** [`research/sim_free_augmentation/sfagen_visual_guide/STAGE_BY_STAGE_VISUAL_GUIDE.md`](research/sim_free_augmentation/sfagen_visual_guide/STAGE_BY_STAGE_VISUAL_GUIDE.md).
+   For the one-page version with videos, open `sfagen_visual_guide/index.html` locally.
+   - Stages 1–6: how a real demo becomes synthetic data.
+   - Stage 7: re-rendered wrist cameras.
+   - Stage 8: generation from 1, 2, 4 or 10 demos.
+   - Stage 9: the decisions log (what we tried, the result, the decision, and why).
+2. **The latest results, datasets and exact reproduction commands:** the v01 study below. It is the same content as the
+   `research/sfagen-wrist-render` README.
+3. **Method reference:** `research/sim_free_augmentation/sfagen/PIPELINE.md`, `NOVELTY.md`, `HANDOFF.md`.
+4. **Literature positioning:** `research/sim_free_augmentation/sfagen/results/LITERATURE.md`.
+
+---
+
+## sfagen v01: rendered wrist cameras, the can fix, and synthetic data from 1–10 real demos
 
 > **Research branch.** Robot setup, teleoperation, recording, training and evaluation commands are on
 > [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map),
