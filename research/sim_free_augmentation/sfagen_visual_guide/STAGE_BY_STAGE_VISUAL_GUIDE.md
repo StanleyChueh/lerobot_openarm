@@ -12,7 +12,7 @@ add the latest method:
 
 The decisions log (Stage 9) records what was tried, the result, and why each choice was made. v01 datasets:
 `ethanCSL/openarm_pringles_lerobot_real_to_sim_{1,2,4,10}_3cam_v01` (copied wrists with flags) and
-`..._{1,2,4,10}_3cam_wristrender_v01` (rendered-wrist ablation).
+`..._1_3cam_wristrender_v01` (rendered-wrist ablation; N = 2/4/10 ablations failed the codec gate and are local only).
 
 **Where the images come from.** Every image here was computed from the real source data, the saved pipeline caches, and the published files. Nothing is drawn by hand or illustrative. Where an image required new computation, the run is logged in `diagnostics/run_*.json`; see "How these figures were made" at the end.
 

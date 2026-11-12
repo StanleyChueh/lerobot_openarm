@@ -1,0 +1,47 @@
+{
+ "ethanCSL/openarm_pringles_lerobot_real_to_sim_1_3cam_v01": {
+  "main": "7c4a1579e7a2b4daa07642c4daf485fc0fd9dd7b",
+  "v3.0": "7c4a1579e7a2b4daa07642c4daf485fc0fd9dd7b",
+  "tag_ok": true,
+  "export_files": 10,
+  "missing_or_size_mismatch": [],
+  "private": false,
+  "pass": true
+ },
+ "ethanCSL/openarm_pringles_lerobot_real_to_sim_2_3cam_v01": {
+  "main": "d5227d69fe89c613d06aae8acf64be436e379161",
+  "v3.0": "d5227d69fe89c613d06aae8acf64be436e379161",
+  "tag_ok": true,
+  "export_files": 10,
+  "missing_or_size_mismatch": [],
+  "private": false,
+  "pass": true
+ },
+ "ethanCSL/openarm_pringles_lerobot_real_to_sim_4_3cam_v01": {
+  "main": "66d802e30bf091dc2cd9540932b8163518cfe47e",
+  "v3.0": "66d802e30bf091dc2cd9540932b8163518cfe47e",
+  "tag_ok": true,
+  "export_files": 11,
+  "missing_or_size_mismatch": [],
+  "private": false,
+  "pass": true
+ },
+ "ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v01": {
+  "main": "1d64b8e7aeed7585b54c776f6b60e26610b37947",
+  "v3.0": "1d64b8e7aeed7585b54c776f6b60e26610b37947",
+  "tag_ok": true,
+  "export_files": 17,
+  "missing_or_size_mismatch": [],
+  "private": false,
+  "pass": true
+ },
+ "ethanCSL/openarm_pringles_lerobot_real_to_sim_1_3cam_wristrender_v01": {
+  "main": "309d2081f8ad10f0210a496bd109e621f69f5d07",
+  "v3.0": "309d2081f8ad10f0210a496bd109e621f69f5d07",
+  "tag_ok": true,
+  "export_files": 10,
+  "missing_or_size_mismatch": [],
+  "private": false,
+  "pass": true
+ }
+}

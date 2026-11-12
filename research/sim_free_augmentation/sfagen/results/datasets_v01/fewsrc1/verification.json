@@ -1,0 +1,710 @@
+{
+ "synthetic": {
+  "episodes": 25,
+  "frames": 7328,
+  "loads_in_lerobot": true,
+  "labels_sha_ok": true,
+  "episodes_identical_to_a_real_episode": 0,
+  "sources_used": [
+   3
+  ],
+  "families": {
+   "object_workspace": 25
+  },
+  "all_replay_checks_pass": true,
+  "observation.images.body_cam": {
+   "decoded": 7328,
+   "any_all_black_frame": false,
+   "psnr_vs_rendered_db": 40.29
+  },
+  "observation.images.wrist_cam": {
+   "decoded": 7328,
+   "any_all_black_frame": false
+  },
+  "observation.images.right_wrist_cam": {
+   "decoded": 7328,
+   "any_all_black_frame": false
+  },
+  "video_spans": {
+   "pass": true,
+   "spans": [
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 0,
+     "length": 630,
+     "metadata_span_frames": 630.0,
+     "decoded_span_frames": 630,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 1,
+     "length": 440,
+     "metadata_span_frames": 439.99999999999994,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 2,
+     "length": 440,
+     "metadata_span_frames": 439.99999999999994,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 3,
+     "length": 282,
+     "metadata_span_frames": 281.99999999999994,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 4,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000006,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 5,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 6,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 7,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 8,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 9,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 10,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 11,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 12,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 13,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 14,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 15,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 16,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 17,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 18,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 19,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 20,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 21,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 22,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 23,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.body_cam",
+     "episode": 24,
+     "length": 440,
+     "metadata_span_frames": 439.9999999999997,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 0,
+     "length": 630,
+     "metadata_span_frames": 630.0,
+     "decoded_span_frames": 630,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 1,
+     "length": 440,
+     "metadata_span_frames": 439.99999999999994,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 2,
+     "length": 440,
+     "metadata_span_frames": 439.99999999999994,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 3,
+     "length": 282,
+     "metadata_span_frames": 281.99999999999994,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 4,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000006,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 5,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 6,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 7,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 8,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 9,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 10,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 11,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 12,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 13,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 14,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 15,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 16,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 17,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 18,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 19,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 20,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 21,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 22,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 23,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.wrist_cam",
+     "episode": 24,
+     "length": 440,
+     "metadata_span_frames": 439.9999999999997,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 0,
+     "length": 630,
+     "metadata_span_frames": 630.0,
+     "decoded_span_frames": 630,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 1,
+     "length": 440,
+     "metadata_span_frames": 439.99999999999994,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 2,
+     "length": 440,
+     "metadata_span_frames": 439.99999999999994,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 3,
+     "length": 282,
+     "metadata_span_frames": 281.99999999999994,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 4,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000006,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 5,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 6,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 7,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 8,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 9,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 10,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 11,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 12,
+     "length": 250,
+     "metadata_span_frames": 249.99999999999986,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 13,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 14,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 15,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 16,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 17,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 18,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 19,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 20,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 21,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 22,
+     "length": 250,
+     "metadata_span_frames": 250.00000000000028,
+     "decoded_span_frames": 250,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 23,
+     "length": 282,
+     "metadata_span_frames": 282.00000000000017,
+     "decoded_span_frames": 282,
+     "pts_aligned": true,
+     "pass": true
+    },
+    {
+     "camera": "observation.images.right_wrist_cam",
+     "episode": 24,
+     "length": 440,
+     "metadata_span_frames": 439.9999999999997,
+     "decoded_span_frames": 440,
+     "pts_aligned": true,
+     "pass": true
+    }
+   ]
+  },
+  "lerobot_getitem_boundary_midpoint_samples": 75
+ }
+}
