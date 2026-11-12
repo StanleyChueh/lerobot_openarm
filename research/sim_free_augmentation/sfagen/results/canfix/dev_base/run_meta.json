@@ -1,0 +1,91 @@
+{
+ "git": {
+  "commit": "0a43e747f721bbf3329a930aeb3e7b0b6da91e0d",
+  "dirty_files": [
+   "M research/sim_free_augmentation/sfagen/sfagen/render.py",
+   "?? research/sim_free_augmentation/sfagen/tools/canfix_bench.py"
+  ]
+ },
+ "code": [
+  {
+   "module": "__main__",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/tools/canfix_bench.py",
+   "sha256": "63e7116d296eb98efd9216e08ab217d6386b90085ae72113b21c76b18575e148",
+   "in_repo": true
+  },
+  {
+   "module": "__mp_main__",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/tools/canfix_bench.py",
+   "sha256": "63e7116d296eb98efd9216e08ab217d6386b90085ae72113b21c76b18575e148",
+   "in_repo": true
+  },
+  {
+   "module": "_provenance",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/tools/_provenance.py",
+   "sha256": "4eb7cf56688570a87bb7901c7fe7fa62635e5b5ab875a81d4cd51e4196e6caa9",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/__init__.py",
+   "sha256": "45958242be26abf721dd965f3e400243274270f59e59141c7af34e2f17d2fe11",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.camera",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/camera.py",
+   "sha256": "1f8ccd256a8095bf4123cc89172ecc0d9149de33107b37e1cc566a77d4a05e60",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.context",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/context.py",
+   "sha256": "be0c53056499b445773bbafeed19e61bbe366ccf95ce422581e7f9499d6b4a2e",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.data",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/data.py",
+   "sha256": "e66b17925266a5946946e62bb5f3ba7e12ea5f59fc34cb0497600e3458ef3083",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.mesh",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/mesh.py",
+   "sha256": "bba0beaee2a92f9266a8640957187cc8e794f53720d5a8665f8b638a8ad42af9",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.recon",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/recon.py",
+   "sha256": "632090d52014bc8b34d33f538e88da902bee3facb08431afb24b569a19a126e3",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.render",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/render.py",
+   "sha256": "452e9b6086f62ff37b6ec61349d57103a8417d37ab4eecfeea727a6b74637f26",
+   "in_repo": true
+  },
+  {
+   "module": "sfagen.robot",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/sfagen/robot.py",
+   "sha256": "77df0fb6f1e5d49e637134910ca3922b6c3705001cacd439981cc6be59c36340",
+   "in_repo": true
+  },
+  {
+   "module": "xfer_bench",
+   "file": "/home/stanley/Stanley_ws/lerobot_openarm_wrist/research/sim_free_augmentation/sfagen/tools/xfer_bench.py",
+   "sha256": "0b023578841058fc6a63cf257861b9ac22d93d94a78046ce5328ef388b2f8567",
+   "in_repo": true
+  }
+ ],
+ "split": "dev",
+ "render_cfg": {
+  "tm_erode": 21,
+  "despeckle": true,
+  "part_fill": false,
+  "plate_adapt": 10
+ },
+ "protocol_sha256": "09aac1caae583e523e8370f7707f87af3d6605dcd100c43106a2865121596b1c"
+}
