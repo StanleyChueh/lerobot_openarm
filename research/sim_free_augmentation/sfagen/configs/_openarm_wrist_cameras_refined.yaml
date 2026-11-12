@@ -1,0 +1,51 @@
+# B2-refined OpenArm wrist mounts (results/wrist/calib/DECISION.md): v3_2 mounts + photometric refinement on Pringles dev T1, adopted after the held-out check.
+observation.images.wrist_cam:
+  arm: L
+  parent_frame: openarm_left_link7
+  lag: -0.25
+  pos:
+  - 0.02079
+  - 0.019860000000000003
+  - 0.09129
+  R:
+  - - -0.07939170195487488
+    - -0.8988151634497688
+    - -0.4310770144272062
+  - - 0.991321709848971
+    - -0.025734135072926843
+    - -0.12891378014844126
+  - - 0.10477585025694762
+    - -0.4375709881409497
+    - 0.8930589369875241
+  intrinsics:
+    fx: 605.44
+    fy: 605.13
+    cx: 322.85
+    cy: 246.44
+    width: 640
+    height: 480
+observation.images.right_wrist_cam:
+  arm: R
+  parent_frame: openarm_right_link7
+  lag: -1.0
+  pos:
+  - 0.07721
+  - 0.02737
+  - 0.09084
+  R:
+  - - 0.0006543856699459004
+    - -0.788715552192108
+    - -0.614757490054162
+  - - 0.9979285595643256
+    - -0.03902702443807006
+    - 0.05113339155953432
+  - - -0.06432201762466405
+    - -0.6135173854377785
+    - 0.787057246749107
+  intrinsics:
+    fx: 607.79
+    fy: 607.61
+    cx: 322.58
+    cy: 248.52
+    width: 640
+    height: 480
