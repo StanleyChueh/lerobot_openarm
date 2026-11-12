@@ -38,7 +38,7 @@ def main(cfg_path, out, pool=None, exclude=()):
     for e in eps:
         d = df[df.episode_index == e["export_episode_index"]].sort_values("frame_index")
         S = np.stack(d["observation.state"].to_numpy()).astype(float); A = np.stack(d.action.to_numpy()).astype(float)
-        S0, A0 = src[e["source_real_episode"]]; v, a = ck.kin(A); sp = r.split(S); tau = np.asarray(e["source_state_time"])
+        S0, A0 = src[e["source_real_episode"]]; v, a = ck.kin(A); sp = r.split(S); tau = np.asarray(e.get("source_state_time", np.arange(len(S))), float)
         gi = [r.grip[s]["state_index"] for s in r.arms if r.grip[s]]; idx = np.clip(np.floor(tau + 1e-9).astype(int), 0, len(A0) - 1)
         T.append({"episode": e["export_episode_index"], "source": e["source_real_episode"], "variation": e["variation"], "frames": len(S),
                   "finite": bool(np.isfinite(S).all() and np.isfinite(A).all()),

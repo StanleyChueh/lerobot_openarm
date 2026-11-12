@@ -1,0 +1,1442 @@
+{
+ "git": {
+  "commit": "4b2e0ebead66c3704ae6b06d16829b1e759a33fb",
+  "dirty_files": [
+   "M research/sim_free_augmentation/sfagen/sfagen/build.py",
+   " M research/sim_free_augmentation/sfagen/sfagen/cli.py",
+   " M research/sim_free_augmentation/sfagen/sfagen/render.py",
+   " M research/sim_free_augmentation/sfagen/sfagen/render_stage.py",
+   "?? research/sim_free_augmentation/sfagen/configs/_openarm_wrist_cameras.yaml",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/lift_4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A0_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A0_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A0_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A0_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A1_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A1_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A1_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A1_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A2_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A2_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A2_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A2_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A3_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A3_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A3_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A3_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A4_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A4_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A4_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_base/sheet_A4_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/lift_4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A0_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A0_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A0_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A0_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A1_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A1_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A1_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A1_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A2_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A2_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A2_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A2_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A3_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A3_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A3_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A3_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A4_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A4_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A4_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_e3_tex/sheet_A4_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/lift_4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A0_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A0_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A0_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A0_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A1_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A1_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A1_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A1_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A2_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A2_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A2_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A2_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A3_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A3_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A3_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A3_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A4_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A4_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A4_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60/sheet_A4_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/lift_4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A0_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A0_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A0_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A0_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A1_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A1_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A1_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A1_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A2_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A2_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A2_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A2_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A3_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A3_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A3_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A3_B4.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A4_B0.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A4_B1.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A4_B2.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/dev_g60_e3_tex/sheet_A4_B3.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A5_B6.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A5_B7.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A5_B8.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A5_B9.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A6_B5.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A6_B7.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A6_B8.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A6_B9.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A7_B5.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A7_B6.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A7_B8.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A7_B9.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A8_B5.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A8_B6.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A8_B7.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A8_B9.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A9_B5.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A9_B6.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A9_B7.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_base/sheet_A9_B8.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A5_B6.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A5_B7.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A5_B8.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A5_B9.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A6_B5.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A6_B7.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A6_B8.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A6_B9.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A7_B5.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A7_B6.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A7_B8.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A7_B9.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A8_B5.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A8_B6.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A8_B7.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A8_B9.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A9_B5.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A9_B6.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A9_B7.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/canfix/heldout_g60_e3_tex/sheet_A9_B8.jpg",
+   "?? research/sim_free_augmentation/sfagen/results/fewsrc/source_budget10.json",
+   "?? research/sim_free_augmentation/sfagen/results/wrist/dev_t1_da2/",
+   "?? research/sim_free_augmentation/sfagen/results/wrist/dev_t1_plane/",
+   "?? research/sim_free_augmentation/sfagen/results/wrist/dev_t1_raft/",
+   "?? research/sim_free_augmentation/sfagen/sfagen/wrist.py",
+   "?? research/sim_free_augmentation/sfagen/tools/wrist_bench.py",
+   "?? research/sim_free_augmentation/sfagen/tools/wrist_calib.py"
+  ]
+ },
+ "split": "dev",
+ "cameras": {
+  "observation.images.wrist_cam": {
+   "initial_psnr": 18.898724123256798,
+   "refined_psnr": 20.035362939798805,
+   "gain_db": 1.136638816542007,
+   "offset_lag_t_m_r_deg": [
+    -0.25,
+    -0.0125,
+    0.0125,
+    0.0125,
+    1.5,
+    3.0,
+    -3.0
+   ],
+   "evaluations": [
+    {
+     "p": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.898724123256798
+    },
+    {
+     "p": [
+      -1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.65400490168992
+    },
+    {
+     "p": [
+      -0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.865428864846255
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.8179480242322
+    },
+    {
+     "p": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.641779993090935
+    },
+    {
+     "p": [
+      0.0,
+      -0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 19.148098377508163
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 19.402175111675295
+    },
+    {
+     "p": [
+      0.0,
+      0.025,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.431074799161557
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      -0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.14647477795936
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      -0.025,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.582034729300315
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.025,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 19.053558451560335
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 17.612419326044524
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      -0.05,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.016734376732888
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.728759580557433
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.025,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 19.094605216385705
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.05,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 18.509930792115767
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      -3.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 19.34292057076638
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      -1.5,
+      0.0,
+      0.0
+     ],
+     "psnr": 19.343619625441896
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      0.0,
+      0.0
+     ],
+     "psnr": 19.412938950252954
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      3.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 19.349925263857443
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      -3.0,
+      0.0
+     ],
+     "psnr": 19.14655635976436
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      -1.5,
+      0.0
+     ],
+     "psnr": 19.336386068206927
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      1.5,
+      0.0
+     ],
+     "psnr": 19.464757985545038
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      0.0
+     ],
+     "psnr": 19.479665576440418
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.570898197169956
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -1.5
+     ],
+     "psnr": 19.508322174210292
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      0.0
+     ],
+     "psnr": 19.479665576440418
+    },
+    {
+     "p": [
+      -0.5,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.538090006979584
+    },
+    {
+     "p": [
+      -0.25,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.67436444625271
+    },
+    {
+     "p": [
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.570898197169956
+    },
+    {
+     "p": [
+      0.25,
+      -0.025,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.462274629930405
+    },
+    {
+     "p": [
+      -0.25,
+      -0.05,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.309650399098707
+    },
+    {
+     "p": [
+      -0.25,
+      -0.037500000000000006,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.41124561850274
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.676360807171974
+    },
+    {
+     "p": [
+      -0.25,
+      0.0125,
+      0.0,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 18.855037696561247
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      -0.025,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 18.600599001980928
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      -0.0125,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.080960354540466
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.924784868609898
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.037500000000000006,
+      0.0,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 18.29513291377579
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      -0.025,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 18.365009793133463
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      -0.0125,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.477914662242544
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 20.035362939798805
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.037500000000000006,
+      1.5,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.276543382810928
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      0.0,
+      3.0,
+      -3.0
+     ],
+     "psnr": 20.012862683014284
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      0.75,
+      3.0,
+      -3.0
+     ],
+     "psnr": 20.02972342243342
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      2.25,
+      3.0,
+      -3.0
+     ],
+     "psnr": 20.01660393958092
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      3.0,
+      3.0,
+      -3.0
+     ],
+     "psnr": 19.947431736136792
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      1.5,
+      1.5,
+      -3.0
+     ],
+     "psnr": 19.917409633671294
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      1.5,
+      2.25,
+      -3.0
+     ],
+     "psnr": 19.983095870784013
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      1.5,
+      3.0,
+      -2.25
+     ],
+     "psnr": 19.99520088227926
+    },
+    {
+     "p": [
+      -0.25,
+      -0.0125,
+      0.0125,
+      0.0125,
+      1.5,
+      3.0,
+      -1.5
+     ],
+     "psnr": 19.970599592149767
+    }
+   ]
+  },
+  "observation.images.right_wrist_cam": {
+   "initial_psnr": 15.993290825554894,
+   "refined_psnr": 16.94824407435293,
+   "gain_db": 0.9549532487980379,
+   "offset_lag_t_m_r_deg": [
+    0.5,
+    0.0,
+    -0.025,
+    0.025,
+    1.5,
+    -3.0,
+    1.5
+   ],
+   "evaluations": [
+    {
+     "p": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 15.993290825554894
+    },
+    {
+     "p": [
+      -1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 15.978986660972183
+    },
+    {
+     "p": [
+      -0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 15.894379422022729
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.098154169114874
+    },
+    {
+     "p": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.031432488314632
+    },
+    {
+     "p": [
+      0.5,
+      -0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.068862101748856
+    },
+    {
+     "p": [
+      0.5,
+      -0.025,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 15.817333339215027
+    },
+    {
+     "p": [
+      0.5,
+      0.025,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 15.890559256425094
+    },
+    {
+     "p": [
+      0.5,
+      0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.081263376119406
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.348655974065178
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.36328878057781
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      0.025,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 14.604175727094415
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      -0.05,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 15.312484523852088
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      -0.025,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 15.692406756018377
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.78615564196559
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.05,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.70967553572755
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      -3.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.7227276756854
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      -1.5,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.760139036926464
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.801271186312267
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      3.0,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.784269472932642
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      0.0
+     ],
+     "psnr": 16.945709228915693
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -1.5,
+      0.0
+     ],
+     "psnr": 16.905361489896393
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      0.0,
+      0.0
+     ],
+     "psnr": 16.801271186312267
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      -3.0
+     ],
+     "psnr": 16.89931461044366
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      -1.5
+     ],
+     "psnr": 16.925969012586307
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.94824407435293
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      3.0
+     ],
+     "psnr": 16.936512504895585
+    },
+    {
+     "p": [
+      0.0,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.78750868760504
+    },
+    {
+     "p": [
+      0.25,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.867983448748596
+    },
+    {
+     "p": [
+      0.75,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.937816467171405
+    },
+    {
+     "p": [
+      1.0,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.90573578570709
+    },
+    {
+     "p": [
+      0.5,
+      -0.025,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.846370108523555
+    },
+    {
+     "p": [
+      0.5,
+      -0.0125,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.89779651686022
+    },
+    {
+     "p": [
+      0.5,
+      0.0125,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.878882098546708
+    },
+    {
+     "p": [
+      0.5,
+      0.025,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.755613070427223
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.05,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.411768290617506
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.037500000000000006,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.674682769467395
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.0125,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.671689498446536
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      0.0,
+      0.025,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.39943887972421
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.0,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.43827545977077
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.0125,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.729935957885438
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.037500000000000006,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.921066107937065
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.05,
+      1.5,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.766716531388383
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      0.0,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.91967730463381
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      0.75,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.93316236261357
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      2.25,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.918958049491067
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      3.0,
+      -3.0,
+      1.5
+     ],
+     "psnr": 16.947539117985585
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -2.25,
+      1.5
+     ],
+     "psnr": 16.92925713107096
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -1.5,
+      1.5
+     ],
+     "psnr": 16.90411205911127
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      0.0
+     ],
+     "psnr": 16.945709228915693
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      0.75
+     ],
+     "psnr": 16.943460092510342
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      2.25
+     ],
+     "psnr": 16.93296464455408
+    },
+    {
+     "p": [
+      0.5,
+      0.0,
+      -0.025,
+      0.025,
+      1.5,
+      -3.0,
+      3.0
+     ],
+     "psnr": 16.936512504895585
+    }
+   ]
+  }
+ }
+}
