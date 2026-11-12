@@ -1,0 +1,22 @@
+observation.images.wrist_cam T1 ep 5
+observation.images.wrist_cam T1 ep 6
+observation.images.wrist_cam T1 ep 7
+observation.images.wrist_cam T1 ep 8
+observation.images.wrist_cam T1 ep 9
+observation.images.wrist_cam T2 done
+observation.images.right_wrist_cam T1 ep 5
+observation.images.right_wrist_cam T1 ep 6
+observation.images.right_wrist_cam T1 ep 7
+observation.images.right_wrist_cam T1 ep 8
+observation.images.right_wrist_cam T1 ep 9
+observation.images.right_wrist_cam T2 done
+observation.images.right_wrist_cam T1 {'frames': 298, 'render_psnr': 15.82577106249926, 'copy_psnr': 14.820013684924696, 'render_minus_copy_db': 1.0058005857414538, 'ci95': [0.6650252749929825, 1.3098050142881648]} gate {'T1_ok': True, 'T2_ok': False, 'T2_bins_tested': [[0, 3], [3, 6]], 'pass': False}
+   T2 {'bin_cm': [0, 3], 'pairs': 20, 'frames': 82, 'render_psnr': 16.181157244471446, 'copy_psnr': 16.24360299100539, 'render_minus_copy_db': 0.19319884278640154, 'ci95': [-1.1219201538586432, 1.2998753555741327]}
+   T2 {'bin_cm': [3, 6], 'pairs': 6, 'frames': 10, 'render_psnr': 19.707501253683304, 'copy_psnr': 25.02901651651855, 'render_minus_copy_db': -4.917320683163437, 'ci95': [-6.491845411567358, -2.3323095055799925]}
+   T2 {'bin_cm': [6, 11], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [11, 30], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+observation.images.wrist_cam T1 {'frames': 172, 'render_psnr': 19.50737250591729, 'copy_psnr': 18.689608825689476, 'render_minus_copy_db': 0.8187887512453426, 'ci95': [0.739345411738892, 0.8982320907517929]} gate {'T1_ok': True, 'T2_ok': False, 'T2_bins_tested': [[0, 3], [3, 6]], 'pass': False}
+   T2 {'bin_cm': [0, 3], 'pairs': 20, 'frames': 194, 'render_psnr': 20.229935182052124, 'copy_psnr': 16.839226070783962, 'render_minus_copy_db': 3.3988240103220932, 'ci95': [2.0134626368560684, 4.572602897381893]}
+   T2 {'bin_cm': [3, 6], 'pairs': 6, 'frames': 8, 'render_psnr': 12.956190473322662, 'copy_psnr': 11.399991830259156, 'render_minus_copy_db': 1.2684656501653073, 'ci95': [-0.5367175863097389, 2.4193976217581037]}
+   T2 {'bin_cm': [6, 11], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [11, 30], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}

@@ -4,7 +4,7 @@ select     For N in the frozen subsets (results/fewsrc/selection.json): every ca
            checks except speed/accel/table, re-checked against the speed/accel/table envelope of those N demos only;
            then at most PER_DEMO variants per demo, spread by k-center over the target positions (nearest-to-centroid
            first). Writes results/fewsrc/datasets.json and prints the per-demo render key lists (union over N).
-setup N    Work dir configs/work/pringles_fewsrc{N} (symlinks to candidates, body/wrist renders and recon cache of the
+setup N [--wrist]  Work dir configs/work/pringles_fewsrc{N} (symlinks to candidates, body/wrist renders and recon cache of the
            base work dir) + configs/pringles_fewsrc{N}.yaml (episodes = the N demos), so `sfagen build` exports it.
 usage: fewsrc_build.py select | setup N"""
 import json, os, shutil, sys
@@ -13,7 +13,7 @@ import numpy as np
 import yaml
 HERE = Path(__file__).resolve().parents[1]; sys.path.insert(0, str(HERE)); sys.path.insert(0, str(HERE / "tools"))
 from select_sources import kcenter
-BASE = HERE / "configs/openarm_pringles_fewsrc.yaml"; OUT = HERE / "results/fewsrc/datasets.json"; PER_DEMO = 16
+BASE = HERE / "configs/openarm_pringles_fewsrc.yaml"; WBASE = HERE / "configs/openarm_pringles_fewsrc_wristrender.yaml"; OUT = HERE / "results/fewsrc/datasets.json"; PER_DEMO = 16
 
 
 def select():
@@ -51,9 +51,10 @@ def select():
     print("render union", sum(len(v) for v in keys.values()), {e: len(v) for e, v in sorted(keys.items())})
 
 
-def setup(n):
-    sel = json.loads(OUT.read_text())[str(n)]; base = yaml.safe_load(BASE.read_text()); D = Path(base["work_dir"])
-    W = D.parent / f"pringles_fewsrc{n}"
+def setup(n, wrist=False):
+    """wrist=True: the rendered-wrist ablation variant (base config with wrist_render), own work dir, shared renders."""
+    sel = json.loads(OUT.read_text())[str(n)]; base = yaml.safe_load((WBASE if wrist else BASE).read_text()); D = Path(base["work_dir"])
+    name = f"pringles_fewsrc{n}" + ("_wristrender" if wrist else ""); W = D.parent / name
     if W.exists():
         shutil.rmtree(W)
     W.mkdir(parents=True)
@@ -70,10 +71,10 @@ def setup(n):
                 out[key] = c; os.symlink(D / f"candidates/ep{e}/{key}.npz", W / f"candidates/ep{e}/{key}.npz")
         (W / f"candidates/ep{e}/checks.json").write_text(json.dumps(out, indent=1, default=float))
     c = dict(base); c["source"] = {**base["source"], "episodes": sel["sources"]}; c["work_dir"] = str(W)
-    (HERE / f"configs/pringles_fewsrc{n}.yaml").write_text(f"# Few-source candidate dataset: {n} real demo(s) {sel['sources']} (frozen k-center rule), F1W capped at 11 cm, "
+    (HERE / f"configs/{name}.yaml").write_text(("# ABLATION: wrist views re-rendered although the registered wrist gate failed (results/wrist/RESULTS.md).\n" if wrist else "") + f"# Few-source candidate dataset: {n} real demo(s) {sel['sources']} (frozen k-center rule), F1W capped at 11 cm, "
                                                          f"<= {sel['per_demo_cap']} variants per demo, replay limits from these {n} demos only.\n" + yaml.safe_dump(c, sort_keys=False, width=160))
     print("ready", n, len(sel["episodes"]), "episodes from", sel["sources"], "->", W)
 
 
 if __name__ == "__main__":
-    select() if sys.argv[1] == "select" else setup(int(sys.argv[2]))
+    select() if sys.argv[1] == "select" else setup(int(sys.argv[2]), "--wrist" in sys.argv)

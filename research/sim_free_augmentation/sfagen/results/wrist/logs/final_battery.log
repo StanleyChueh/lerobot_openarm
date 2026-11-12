@@ -1,0 +1,32 @@
+observation.images.wrist_cam T1 ep 0
+observation.images.wrist_cam T1 ep 1
+observation.images.wrist_cam T1 ep 2
+observation.images.wrist_cam T1 ep 3
+observation.images.wrist_cam T1 ep 4
+observation.images.wrist_cam T1 ep 5
+observation.images.wrist_cam T1 ep 6
+observation.images.wrist_cam T1 ep 7
+observation.images.wrist_cam T1 ep 8
+observation.images.wrist_cam T1 ep 9
+observation.images.wrist_cam T2 done
+observation.images.right_wrist_cam T1 ep 0
+observation.images.right_wrist_cam T1 ep 1
+observation.images.right_wrist_cam T1 ep 2
+observation.images.right_wrist_cam T1 ep 3
+observation.images.right_wrist_cam T1 ep 4
+observation.images.right_wrist_cam T1 ep 5
+observation.images.right_wrist_cam T1 ep 6
+observation.images.right_wrist_cam T1 ep 7
+observation.images.right_wrist_cam T1 ep 8
+observation.images.right_wrist_cam T1 ep 9
+observation.images.right_wrist_cam T2 done
+observation.images.right_wrist_cam T1 {'frames': 1130, 'render_psnr': 16.819343940489816, 'copy_psnr': 15.180072775599866, 'render_minus_copy_db': 1.6390217802732512, 'ci95': [1.3489936382738643, 1.9326758658160474]} gate {'T1_ok': True, 'T2_ok': True, 'T2_bins_tested': [[0, 3], [3, 6]], 'pass': True}
+   T2 {'bin_cm': [0, 3], 'pairs': 90, 'frames': 816, 'render_psnr': 17.17349914463009, 'copy_psnr': 15.533711494788287, 'render_minus_copy_db': 1.6018721555236906, 'ci95': [1.2170042414915698, 1.984301868558205]}
+   T2 {'bin_cm': [3, 6], 'pairs': 8, 'frames': 10, 'render_psnr': 13.812481488969516, 'copy_psnr': 11.709150894604736, 'render_minus_copy_db': 2.12176937939339, 'ci95': [1.9055866948245619, 2.6351349323800717]}
+   T2 {'bin_cm': [6, 11], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+   T2 {'bin_cm': [11, 30], 'pairs': 0, 'frames': 0, 'render_psnr': None, 'copy_psnr': None, 'render_minus_copy_db': None, 'ci95': [None, None]}
+observation.images.wrist_cam T1 {'frames': 874, 'render_psnr': 20.21258925510796, 'copy_psnr': 18.76476919241211, 'render_minus_copy_db': 1.4716523773268746, 'ci95': [1.0927251839203327, 1.8030042578436056]} gate {'T1_ok': True, 'T2_ok': False, 'T2_bins_tested': [[0, 3], [3, 6], [6, 11]], 'pass': False}
+   T2 {'bin_cm': [0, 3], 'pairs': 90, 'frames': 304, 'render_psnr': 22.635166542550333, 'copy_psnr': 21.88463471172665, 'render_minus_copy_db': 0.853051579681239, 'ci95': [-0.2798404599726882, 1.9819600945386358]}
+   T2 {'bin_cm': [3, 6], 'pairs': 18, 'frames': 56, 'render_psnr': 13.233599384090452, 'copy_psnr': 16.117435401083103, 'render_minus_copy_db': -3.1447068196988877, 'ci95': [-7.022339486925524, -0.9545883543934051]}
+   T2 {'bin_cm': [6, 11], 'pairs': 10, 'frames': 30, 'render_psnr': 11.98011807888586, 'copy_psnr': 13.564251862157194, 'render_minus_copy_db': -1.5841337832713327, 'ci95': [-3.252324472379719, -0.1080555740753167]}
+   T2 {'bin_cm': [11, 30], 'pairs': 4, 'frames': 12, 'render_psnr': 12.491884686788863, 'copy_psnr': 14.168335993702142, 'render_minus_copy_db': -1.676451306913281, 'ci95': [-2.25120184335669, -1.1017007704698718]}
