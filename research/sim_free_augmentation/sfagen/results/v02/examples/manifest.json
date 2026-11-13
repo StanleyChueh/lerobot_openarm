@@ -1,0 +1,82 @@
+[
+  {
+    "source": 7,
+    "variation": "can_target_012",
+    "family": "object_position",
+    "output_frames": [
+      72,
+      87,
+      170,
+      179,
+      260
+    ],
+    "source_state_times": [
+      72,
+      87,
+      170,
+      179,
+      260
+    ],
+    "path": "examples/src7_can_target_012.png"
+  },
+  {
+    "source": 0,
+    "variation": "can_target_025",
+    "family": "object_position",
+    "output_frames": [
+      82,
+      97,
+      176,
+      181,
+      272
+    ],
+    "source_state_times": [
+      82,
+      97,
+      176,
+      181,
+      272
+    ],
+    "path": "examples/src0_can_target_025.png"
+  },
+  {
+    "source": 0,
+    "variation": "interact_x+3_y+0_z+0",
+    "family": "interaction_location",
+    "output_frames": [
+      82,
+      97,
+      176,
+      181,
+      272
+    ],
+    "source_state_times": [
+      82,
+      97,
+      176,
+      181,
+      272
+    ],
+    "path": "examples/src0_interact_x+3_y+0_z+0.png"
+  },
+  {
+    "source": 0,
+    "variation": "timing_-10",
+    "family": "interaction_timing",
+    "output_frames": [
+      82,
+      97,
+      166,
+      171,
+      272
+    ],
+    "source_state_times": [
+      82.0,
+      97.0,
+      176.0,
+      181.0,
+      272.0
+    ],
+    "path": "examples/src0_timing_-10.png"
+  }
+]

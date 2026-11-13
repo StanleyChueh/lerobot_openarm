@@ -110,7 +110,7 @@ class Checker:
         cfg=self.cfg;r=self.robot;S,A=c['state'],c['action'];S0,A0=c.get('ref_state',rec.state),c.get('ref_action',rec.action)
         idx=[j for arm in r.arms for j in r.sidx[arm]]
         lo=np.concatenate([r.lo[arm] for arm in r.arms]);hi=np.concatenate([r.hi[arm] for arm in r.arms])
-        lim=int(sum(((X[:,idx]<np.minimum(lo,Y[:,idx].min(0))-1e-6)|(X[:,idx]>np.maximum(hi,Y[:,idx].max(0))+1e-6)).sum() for X,Y in ((S,S0),(A,A0))))
+        lim=int(sum(((X[:,idx]<np.minimum(lo,Y[:,idx].min(0))-1e-6)|(X[:,idx]>np.maximum(hi,Y[:,idx].max(0))+1e-6)).sum() for X,Y in ((S,rec.state),(A,rec.action))))
         v,a=self.kin(A);vr=float((v/np.maximum(self.env['speed'],1e-9)).max());ar=float((a/np.maximum(self.env['accel'],1e-9)).max())
         hold=c['w']>=.999;err=c['ik_err'];failed=[]
         if not all(np.isfinite(x).all() for x in (S,A,err)):failed.append('nonfinite')
@@ -141,7 +141,7 @@ class Checker:
         idx = [i for s in r.arms for i in r.sidx[s]]
         lo = np.concatenate([r.lo[s] for s in r.arms]); hi = np.concatenate([r.hi[s] for s in r.arms])
         lim = int(sum(((X[:, idx] < np.minimum(lo, Y[:, idx].min(0)) - 1e-6) | (X[:, idx] > np.maximum(hi, Y[:, idx].max(0)) + 1e-6)).sum()
-                      for X, Y in ((S, S0), (A, A0))))
+                      for X, Y in ((S, rec.state), (A, rec.action))))
         v, a = self.kin(A); ed = c["edited"]
         dmin = self.min_dist(S[ed]) if ed.any() else np.array([np.inf]); dsrc = self.min_dist(S0[ed]) if ed.any() else np.array([np.inf])
         hold = c["w"] >= 0.999                                    # contact-relevant frames: full offset (at the object / in the interaction)
@@ -195,8 +195,17 @@ class Checker:
         ring &= ~np.isin(rec.robot_sil(0, sides=True), rec.arms)
         dv = np.abs(np.median(hsv[new], 0) - np.median(hsv[ring], 0)) if ring.any() and new.any() else np.array([999, 999, 999])
         on_table = bool(dv[1] <= self.cfg["plate_appearance_tol"] and dv[2] <= self.cfg["plate_appearance_tol"])
+        if self.cfg.get("plate_appearance_space", "hsv") == "lab":
+            # v03 amendment 3: HSV saturation is unstable on near-black surfaces; same tolerance as a fraction of range,
+            # applied to CIELAB lightness and chroma (L 0-100)
+            lab = cv2.cvtColor(rec.plate, cv2.COLOR_RGB2LAB).astype(float); lab[..., 0] *= 100 / 255; lab[..., 1:] -= 128
+            tol = self.cfg["plate_appearance_tol"] / 255 * 100
+            dl = np.median(lab[new], 0) - np.median(lab[ring], 0) if ring.any() and new.any() else np.array([999., 999., 999.])
+            dv = np.array([abs(dl[0]), float(np.hypot(dl[1], dl[2])), abs(dl[0])])  # [dL, dChroma, dL]
+            on_table = bool(dv[0] <= tol and dv[1] <= tol)
         support_fraction = None
-        if c['family']=='object_workspace':
+        # support_check 'appearance' = the v00/v02 plate-appearance rule above for every family (v03 amendment 1)
+        if c['family']=='object_workspace' and self.cfg.get('support_check','footprint')=='footprint':
             from .workspace_plan import support_model,footprint_coverage
             support,_=support_model(rec,k,self.cfg);support_fraction=footprint_coverage(rec,o,T0,support)
             on_table=support_fraction>=self.cfg.get('support_coverage_min',.95)
@@ -220,6 +229,7 @@ class Checker:
         # Include the rigid approach and guard the same source-time interval after slowing.
         te=pregrasp_guard_end(rec,c,k)
         extra = int(np.maximum(near(c["state"], T0, te) - near(rec.state if S_src is None else S_src, o["table"], te), 0).sum())
-        return {"in_view": inside, "on_table": on_table, "support_footprint_fraction": support_fraction, "plate_hsv_diff": dv.tolist(), "gap_to_other_objects_m": gap,
+        return {"in_view": inside, "on_table": on_table, "support_footprint_fraction": support_fraction, "plate_hsv_diff": dv.tolist(),
+                "appearance_space": self.cfg.get("plate_appearance_space", "hsv"), "gap_to_other_objects_m": gap,
                 "robot_points_near_object_extra_vs_source": extra,
                 "ok": inside and on_table and gap >= self.cfg["object_gap_m"] and extra == 0}

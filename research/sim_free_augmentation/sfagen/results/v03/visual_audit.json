@@ -1,0 +1,184 @@
+{
+ "method": "Claude visual review of decoded body renders at mid-reach, grasp, grasp+25 frames; not blinded; subjective",
+ "flags": [
+  {
+   "source": 2,
+   "key": "can_target_019",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 8,
+   "key": "can_target_019",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_020",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 8,
+   "key": "can_target_020",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_021",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 8,
+   "key": "can_target_021",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_022",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 8,
+   "key": "can_target_022",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_028",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_030",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_031",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 8,
+   "key": "can_target_031",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 9,
+   "key": "can_target_033",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_039",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_040",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 9,
+   "key": "can_target_067",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 6,
+   "key": "can_target_081",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_029",
+   "flag": "smeared can at lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_030",
+   "flag": "smeared can at lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_039",
+   "flag": "smeared can at lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_040",
+   "flag": "smeared can at lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_041",
+   "flag": "smeared can at lift"
+  }
+ ],
+ "widespread": "reaching arm partly transparent/dark at mid-reach in many episodes (mild)",
+ "reviewed": 84,
+ "flagged_in_strict": [
+  {
+   "source": 2,
+   "key": "can_target_028",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_030",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_031",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 9,
+   "key": "can_target_033",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_039",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 2,
+   "key": "can_target_040",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 9,
+   "key": "can_target_067",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 6,
+   "key": "can_target_081",
+   "flag": "ghost lid / duplicate can at grasp or lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_029",
+   "flag": "smeared can at lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_030",
+   "flag": "smeared can at lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_039",
+   "flag": "smeared can at lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_040",
+   "flag": "smeared can at lift"
+  },
+  {
+   "source": 7,
+   "key": "can_target_041",
+   "flag": "smeared can at lift"
+  }
+ ]
+}

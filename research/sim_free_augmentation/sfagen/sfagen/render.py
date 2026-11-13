@@ -234,6 +234,9 @@ class Renderer:
         if rest.any():
             img = cv2.inpaint(img, rest.astype(np.uint8), 3, cv2.INPAINT_TELEA)
         info["inpainted_px"] = int(rest.sum()); prov[rest] = 5; self.last_prov = prov                  # 5 inpainted, 6 atlas
+        # distortion diagnostics (sfagen/distortion.py): target silhouette not covered by real pixels, warped pixels outside it
+        info["tmask_px"] = int(tmn.sum()); info["miss_px"] = int((tmn & ~np.isin(prov, (2, 3, 6))).sum())
+        info["spill_px"] = int((hitn & ~(cv2.dilate(tmn.astype(np.uint8), np.ones((7, 7), np.uint8)) > 0)).sum())
         wm = (hitn | rest).astype(np.uint8)
         if self.cfg["despeckle"]:
             reg = cv2.dilate(wm, np.ones((5, 5), np.uint8)) > 0; med = cv2.medianBlur(img, 3)

@@ -1,0 +1,10 @@
+{
+  "timestamp_utc": "2026-11-13T02:21:44.800161+00:00",
+  "scope": "Packaging-only correction after both synthetic exports completed: retain AV1 original and H264 synthetic containers; report heterogeneous codec/pix_fmt as null in mixture metadata and preserve per-source encoding info. No generation/render/gate changes.",
+  "files": {
+    "/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v02_worktree/research/sim_free_augmentation/sfagen/sfagen/build.py": {
+      "frozen_sha256": "598929100bfc5e89c0b8f49445d4af0b9be1b6c7b65ae6c98f8d62be7175c356",
+      "current_sha256": "ea39019bb96effccc0fe17b008ccfaaa103770e89016dfd1d997fc033aa62b79"
+    }
+  }
+}

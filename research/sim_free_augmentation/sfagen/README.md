@@ -1,3 +1,10 @@
+# Current branch: v03 (latest), v02b, v02
+
+v03 (even arena coverage with strict/loose distortion caps): [RESULTS.md](results/v03/RESULTS.md),
+[PROTOCOL.md](results/v03/PROTOCOL.md). 8 datasets `ethanCSL/openarm_pringles_lerobot_*_v03_{strict,loose}`.
+
+v02: see [the v02 visual report](results/v02/index.html) and [frozen protocol](results/v02/PROTOCOL.md). Generation accepted 104/189 attempts and 18/35 grid targets; rear coverage remains incomplete. Both local exports per condition pass verification/quality checks; visible RGB artifacts and incomplete rear coverage remain.
+
 # sfagen: simulation-free real-to-real demonstration augmentation
 
 ## Workspace-wide initial-position mode (2026-11-10)

@@ -1,0 +1,26 @@
+{
+ "copied": {
+  "syn_episodes": 108,
+  "syn_frames": 27820,
+  "mix_episodes": 118,
+  "mix_frames": 30395,
+  "mix_is_synthetic_real": 0.0,
+  "mix_is_synthetic_syn": 1.0,
+  "duration_mismatch": [],
+  "envelope_violations": [],
+  "identical_to_real": [],
+  "mixed_syn_equals_syn": true
+ },
+ "right_wrist": {
+  "syn_episodes": 108,
+  "syn_frames": 27820,
+  "mix_episodes": 118,
+  "mix_frames": 30395,
+  "mix_is_synthetic_real": 0.0,
+  "mix_is_synthetic_syn": 1.0,
+  "duration_mismatch": [],
+  "envelope_violations": [],
+  "identical_to_real": [],
+  "mixed_syn_equals_syn": true
+ }
+}

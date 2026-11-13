@@ -1,0 +1,302 @@
+{
+  "local_can_point_m": [
+    0.1219293371301641,
+    0.026479699507785247,
+    -0.06818367786130955
+  ],
+  "source_local_offsets_m": [
+    [
+      0.12795322876506057,
+      0.03158356882931874,
+      -0.06814820473178479
+    ],
+    [
+      0.13132493062535902,
+      0.023363321439605483,
+      -0.05438341290969559
+    ],
+    [
+      0.11482648608563846,
+      0.028664515292135685,
+      -0.07838808275410085
+    ],
+    [
+      0.11674611999038907,
+      0.03751340746609567,
+      -0.06267232881852937
+    ],
+    [
+      0.12711255426993914,
+      0.026105859112383403,
+      -0.04523895784337304
+    ],
+    [
+      0.12812619794429866,
+      0.020139688555988057,
+      -0.05599953221447767
+    ],
+    [
+      0.13271447815151632,
+      0.02780505834054233,
+      -0.0682191509908343
+    ],
+    [
+      0.11139829537662022,
+      0.02685353990318709,
+      -0.08154989025274856
+    ],
+    [
+      0.10447747326042638,
+      0.011708574061690565,
+      -0.08744034954241815
+    ],
+    [
+      0.10629869488860692,
+      0.026073289451239153,
+      -0.06880519719862335
+    ]
+  ],
+  "rows": [
+    {
+      "model": "real",
+      "episode": 0,
+      "group": "front-right",
+      "orientation_aware_error_cm": 3.419198896497433
+    },
+    {
+      "model": "real",
+      "episode": 1,
+      "group": "front-right",
+      "orientation_aware_error_cm": 3.7888939632846874
+    },
+    {
+      "model": "real",
+      "episode": 2,
+      "group": "front-right",
+      "orientation_aware_error_cm": 3.121488728450293
+    },
+    {
+      "model": "real",
+      "episode": 3,
+      "group": "front-right",
+      "orientation_aware_error_cm": 3.584157441977248
+    },
+    {
+      "model": "real",
+      "episode": 4,
+      "group": "rear-right",
+      "orientation_aware_error_cm": 8.765134369993405
+    },
+    {
+      "model": "real",
+      "episode": 5,
+      "group": "rear-right",
+      "orientation_aware_error_cm": 12.354876972563398
+    },
+    {
+      "model": "real",
+      "episode": 6,
+      "group": "rear-right",
+      "orientation_aware_error_cm": 8.071093421606946
+    },
+    {
+      "model": "real",
+      "episode": 7,
+      "group": "rear-right",
+      "orientation_aware_error_cm": 9.524159171841108
+    },
+    {
+      "model": "real",
+      "episode": 8,
+      "group": "rear-left",
+      "orientation_aware_error_cm": 7.457461915990722
+    },
+    {
+      "model": "real",
+      "episode": 9,
+      "group": "rear-left",
+      "orientation_aware_error_cm": 7.559180023257659
+    },
+    {
+      "model": "real",
+      "episode": 10,
+      "group": "rear-left",
+      "orientation_aware_error_cm": 6.053456596036792
+    },
+    {
+      "model": "real",
+      "episode": 11,
+      "group": "front-left",
+      "orientation_aware_error_cm": 3.912336793870188
+    },
+    {
+      "model": "real",
+      "episode": 12,
+      "group": "front-left",
+      "orientation_aware_error_cm": 3.4120011892791577
+    },
+    {
+      "model": "real",
+      "episode": 13,
+      "group": "front-left",
+      "orientation_aware_error_cm": 3.25240147418731
+    },
+    {
+      "model": "real",
+      "episode": 14,
+      "group": "front-left",
+      "orientation_aware_error_cm": 3.1190034266564495
+    },
+    {
+      "model": "real",
+      "episode": 15,
+      "group": "front-left",
+      "orientation_aware_error_cm": 2.502482381788024
+    },
+    {
+      "model": "real",
+      "episode": 16,
+      "group": "middle",
+      "orientation_aware_error_cm": 1.3560519370405861
+    },
+    {
+      "model": "real",
+      "episode": 17,
+      "group": "middle",
+      "orientation_aware_error_cm": 2.6125437556758255
+    },
+    {
+      "model": "real",
+      "episode": 18,
+      "group": "middle",
+      "orientation_aware_error_cm": 2.3629866934196175
+    },
+    {
+      "model": "real",
+      "episode": 19,
+      "group": "middle",
+      "orientation_aware_error_cm": 3.052254061564487
+    },
+    {
+      "model": "mixed",
+      "episode": 0,
+      "group": "front-right",
+      "orientation_aware_error_cm": 2.3263480277811155
+    },
+    {
+      "model": "mixed",
+      "episode": 1,
+      "group": "front-right",
+      "orientation_aware_error_cm": 4.282042890530676
+    },
+    {
+      "model": "mixed",
+      "episode": 2,
+      "group": "front-right",
+      "orientation_aware_error_cm": 2.942966514076234
+    },
+    {
+      "model": "mixed",
+      "episode": 3,
+      "group": "front-right",
+      "orientation_aware_error_cm": 2.195672975998775
+    },
+    {
+      "model": "mixed",
+      "episode": 4,
+      "group": "rear-right",
+      "orientation_aware_error_cm": 6.259637040124083
+    },
+    {
+      "model": "mixed",
+      "episode": 5,
+      "group": "rear-right",
+      "orientation_aware_error_cm": 5.407743059202728
+    },
+    {
+      "model": "mixed",
+      "episode": 6,
+      "group": "rear-right",
+      "orientation_aware_error_cm": 5.995505567866417
+    },
+    {
+      "model": "mixed",
+      "episode": 7,
+      "group": "rear-right",
+      "orientation_aware_error_cm": 4.901131240483699
+    },
+    {
+      "model": "mixed",
+      "episode": 8,
+      "group": "rear-left",
+      "orientation_aware_error_cm": 4.883810328967664
+    },
+    {
+      "model": "mixed",
+      "episode": 9,
+      "group": "rear-left",
+      "orientation_aware_error_cm": 4.84325990473728
+    },
+    {
+      "model": "mixed",
+      "episode": 10,
+      "group": "rear-left",
+      "orientation_aware_error_cm": 2.4370992542861014
+    },
+    {
+      "model": "mixed",
+      "episode": 11,
+      "group": "front-left",
+      "orientation_aware_error_cm": 0.8482061231813776
+    },
+    {
+      "model": "mixed",
+      "episode": 12,
+      "group": "front-left",
+      "orientation_aware_error_cm": 0.43478460070486386
+    },
+    {
+      "model": "mixed",
+      "episode": 13,
+      "group": "front-left",
+      "orientation_aware_error_cm": 0.8056831118446625
+    },
+    {
+      "model": "mixed",
+      "episode": 14,
+      "group": "front-left",
+      "orientation_aware_error_cm": 0.5610308509506803
+    },
+    {
+      "model": "mixed",
+      "episode": 15,
+      "group": "front-left",
+      "orientation_aware_error_cm": 0.29927264115172586
+    },
+    {
+      "model": "mixed",
+      "episode": 16,
+      "group": "middle",
+      "orientation_aware_error_cm": 3.5642501748847533
+    },
+    {
+      "model": "mixed",
+      "episode": 17,
+      "group": "middle",
+      "orientation_aware_error_cm": 3.090765310628438
+    },
+    {
+      "model": "mixed",
+      "episode": 18,
+      "group": "middle",
+      "orientation_aware_error_cm": 3.9673980892908842
+    },
+    {
+      "model": "mixed",
+      "episode": 19,
+      "group": "middle",
+      "orientation_aware_error_cm": 2.962687311510762
+    }
+  ],
+  "scope": "Secondary check: offset rotates with TCP instead of fixed world offset; no gate change."
+}

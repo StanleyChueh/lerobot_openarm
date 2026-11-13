@@ -8,6 +8,9 @@ from . import plan
 
 def variation_list(cfg, rec):
     V = cfg.get("variations", {}); out = []
+    if V.get("object_targets"):
+        from .target_plan import target_offsets
+        out.extend(target_offsets(rec, V["object_targets"]))
     op = V.get("object_position")
     if op:
         for name in op["objects"]:
@@ -28,6 +31,10 @@ def variation_list(cfg, rec):
         for s in il["shifts_cm"]:
             s3 = list(s) + [0.0] * (3 - len(s))
             out.append((f"interact_x{s3[0]:+g}_y{s3[1]:+g}_z{s3[2]:+g}", "interaction_location", None, np.array(s3) / 100))
+    for offset in V.get("interaction_timing", {}).get("offsets_frames", []):
+        if not isinstance(offset, int) or offset == 0:
+            raise ValueError("Timing offsets must be nonzero integer frames")
+        out.append((f"timing_{offset:+d}", "interaction_timing", None, np.array([offset, 0, 0], float)))
     keys=[row[0] for row in out]
     if len(keys)!=len(set(keys)):raise ValueError('Variation IDs collide; use distinct shifts and at least a 1 cm workspace grid')
     return out
@@ -45,17 +52,25 @@ def run_episode(ctx, rec, checker, log=print):
     il = ctx.cfg.get("variations", {}).get("interaction_location", {})
     names = [o["name"] for o in rec.objects]
     for key, fam, obj, d in variation_list(ctx.cfg, rec):
-        if fam == "object_workspace":
+        if fam == "interaction_timing":
+            from .handover_timing import plan as timing_plan
+            c = timing_plan(rec, int(d[0]))
+            d = np.zeros(3)
+        elif fam == "object_workspace":
             from .workspace_plan import plan_with_time_scale
-            ow = ctx.cfg["variations"]["object_workspace"]
-            c = plan_with_time_scale(rec, names.index(obj), d, checker, tuple(ow.get("time_scales", (1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0))), ow.get("approach_margin_m", 0.10))
+            ow = ctx.cfg["variations"].get("object_workspace", {})
+            c = plan_with_time_scale(rec, names.index(obj), d, checker, tuple(ow.get("time_scales", (1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0))), ow.get("approach_margin_m", 0.10),
+                                     action_bounds=bool(ctx.cfg.get("plan", {}).get("action_aware_bounds", False)),
+                                     margin=float(ctx.cfg.get("plan", {}).get("action_bound_margin_rad", 0.0)))
         elif fam == "object_position":
-            c = plan.f1_plan(rec, names.index(obj), d)
+            c = plan.f1_plan(rec, names.index(obj), d, bool(ctx.cfg.get("plan", {}).get("action_aware_bounds", False)))
         else:
             c = plan.f2_plan(rec, d, il.get("d_interact_m", 0.20), il.get("ramp_frames", 45))
         if c is None:
             checks[key] = {"pass": False, "family": fam, "error": "no valid schedule (see plan.py rules)"}; log(rec.e, key, "NO SCHEDULE"); continue
         ck = checker.check(rec, c)
+        if key.startswith(f"{obj}_target_"):
+            c["marks"]["target_xy_m"] = (np.asarray(rec.objects[names.index(obj)]["table"])[:2, 3] + d[:2]).tolist()
         ck.update({"family": fam, "object": obj, "shift_m": d.tolist(), "marks": c["marks"], "lead": c["lead"], "t_rejoin": c["t_rejoin"]})
         checks[key] = ck
         np.savez_compressed(out / f"{key}.npz", state=c["state"].astype(np.float32), action=c["action"].astype(np.float32),

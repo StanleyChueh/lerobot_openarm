@@ -1,0 +1,21 @@
+{
+  "reviewed_utc": "2026-11-13T02:36:01.066933+00:00",
+  "raw_sheets": [
+    "examples/src7_can_target_012.png",
+    "examples/src0_can_target_025.png",
+    "examples/src0_interact_x+3_y+0_z+0.png",
+    "examples/src0_timing_-10.png"
+  ],
+  "decoded_sheets": [
+    "quality_copied/sheets/ep080_src7_can_target_023.jpg",
+    "quality_copied/sheets/ep061_src5_interact_x-3_y+0_z+0.jpg",
+    "quality_right_wrist/sheets/ep080_src7_can_target_023.jpg",
+    "quality_right_wrist/sheets/ep061_src5_interact_x-3_y+0_z+0.jpg"
+  ],
+  "observations": [
+    "Local can/background warping and holes remain visible in rendered right-wrist views.",
+    "Block-like body fill artifacts are visible during handover-location edits.",
+    "Codec quality and validity flags do not establish physical fidelity."
+  ],
+  "scope": "Eight sheets inspected; no blinded quality rating or prevalence claim."
+}

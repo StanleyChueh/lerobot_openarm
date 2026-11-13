@@ -1,0 +1,2364 @@
+{
+  "episodes": [
+    {
+      "episode": 10,
+      "source": 0,
+      "variation": "timing_early",
+      "frames": 269,
+      "right_invalid_frac": 0.5390334572490706,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.8357955024824485e-15,
+        "can_delta_px": null
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.226972129016022e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.872130813265474e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.03956600145271491,
+        "camera_rotation_deg": 0.04776494849771284,
+        "can_delta_px": 1.7419169285135556e-13
+      }
+    },
+    {
+      "episode": 11,
+      "source": 0,
+      "variation": "timing_late",
+      "frames": 269,
+      "right_invalid_frac": 0.5390334572490706,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.8357955024824485e-15,
+        "can_delta_px": null
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.226972129016022e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.872130813265474e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.010379593141218795,
+        "camera_rotation_deg": 0.03763333583063112,
+        "can_delta_px": 1.8198773652309366e-13
+      }
+    },
+    {
+      "episode": 12,
+      "source": 0,
+      "variation": "init_x-3",
+      "frames": 269,
+      "right_invalid_frac": 0.6245353159851301,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.5297240091339077,
+        "camera_rotation_deg": 0.00017688711313164866,
+        "can_delta_px": null
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.999056589385292,
+        "camera_rotation_deg": 0.0002597466727464878,
+        "can_delta_px": 0.03992158021818544
+      },
+      "grasp": {
+        "camera_translation_cm": 2.999549709052446,
+        "camera_rotation_deg": 0.00015276296761498187,
+        "can_delta_px": 0.03367749683500431
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.057062731071113e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 13,
+      "source": 0,
+      "variation": "init_x-6",
+      "frames": 269,
+      "right_invalid_frac": 0.6245353159851301,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.059918167827738,
+        "camera_rotation_deg": 0.0009074465519037813,
+        "can_delta_px": null
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.998015284096361,
+        "camera_rotation_deg": 0.0014389917134091264,
+        "can_delta_px": 0.15156471260949578
+      },
+      "grasp": {
+        "camera_translation_cm": 5.999218912753515,
+        "camera_rotation_deg": 0.0009664815883726956,
+        "can_delta_px": 0.13928682837971007
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.057062731071113e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 14,
+      "source": 0,
+      "variation": "init_y+3",
+      "frames": 269,
+      "right_invalid_frac": 0.6245353159851301,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.5303400712395847,
+        "camera_rotation_deg": 0.0001374909054634474,
+        "can_delta_px": null
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9990969097094826,
+        "camera_rotation_deg": 0.00034657872407630786,
+        "can_delta_px": 0.027230163806207075
+      },
+      "grasp": {
+        "camera_translation_cm": 2.998074601090069,
+        "camera_rotation_deg": 0.0005971795693443476,
+        "can_delta_px": 0.11503741920322288
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.057062731071113e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 15,
+      "source": 0,
+      "variation": "init_y+6",
+      "frames": 269,
+      "right_invalid_frac": 0.6245353159851301,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.060516636703934,
+        "camera_rotation_deg": 0.0007963367110667655,
+        "can_delta_px": null
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.998200574226767,
+        "camera_rotation_deg": 0.0013224816984910603,
+        "can_delta_px": 0.08402983832136171
+      },
+      "grasp": {
+        "camera_translation_cm": 5.994399032081812,
+        "camera_rotation_deg": 0.011978232648992183,
+        "can_delta_px": 0.47079292317548516
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.057062731071113e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 16,
+      "source": 0,
+      "variation": "init_y-3",
+      "frames": 269,
+      "right_invalid_frac": 0.6245353159851301,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.5301120579168623,
+        "camera_rotation_deg": 0.00031943205719377546,
+        "can_delta_px": null
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.999375123707584,
+        "camera_rotation_deg": 0.00022414333195122792,
+        "can_delta_px": 0.040692147251680175
+      },
+      "grasp": {
+        "camera_translation_cm": 2.999765351993171,
+        "camera_rotation_deg": 0.00017212675616134742,
+        "can_delta_px": 0.030042997355327644
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.057062731071113e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 17,
+      "source": 1,
+      "variation": "pos_left_down",
+      "frames": 259,
+      "right_invalid_frac": 0.5057915057915058,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.021894167826177e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.5892391411453174e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.043288928706803e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.99885487071019,
+        "camera_rotation_deg": 0.00016616054646097873,
+        "can_delta_px": 2.2467716115537902e-13
+      }
+    },
+    {
+      "episode": 18,
+      "source": 1,
+      "variation": "timing_early",
+      "frames": 259,
+      "right_invalid_frac": 0.583011583011583,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.021894167826177e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.5892391411453174e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.043288928706803e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.008362437589720818,
+        "camera_rotation_deg": 0.016039893279141848,
+        "can_delta_px": 1.2710574864626038e-13
+      }
+    },
+    {
+      "episode": 19,
+      "source": 1,
+      "variation": "timing_late",
+      "frames": 259,
+      "right_invalid_frac": 0.583011583011583,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.021894167826177e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.5892391411453174e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.043288928706803e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.010902656403443399,
+        "camera_rotation_deg": 0.02153137068837547,
+        "can_delta_px": 1.7536471211413207e-13
+      }
+    },
+    {
+      "episode": 20,
+      "source": 1,
+      "variation": "init_x-3",
+      "frames": 259,
+      "right_invalid_frac": 0.6332046332046332,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.998402955602254,
+        "camera_rotation_deg": 0.000387215712420237,
+        "can_delta_px": 0.048401431934923383
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.99935845637165,
+        "camera_rotation_deg": 0.00015750201721936017,
+        "can_delta_px": 0.028765808276047404
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9982871659195443,
+        "camera_rotation_deg": 0.00030585953916799255,
+        "can_delta_px": 0.06604778203548231
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.084728924939037e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 21,
+      "source": 1,
+      "variation": "init_x-6",
+      "frames": 259,
+      "right_invalid_frac": 0.6332046332046332,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.997125532512268,
+        "camera_rotation_deg": 0.0018065103389529216,
+        "can_delta_px": 0.1696931376359801
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.998868110031207,
+        "camera_rotation_deg": 0.0009936365941035513,
+        "can_delta_px": 0.1401682652119547
+      },
+      "grasp": {
+        "camera_translation_cm": 5.998690119150997,
+        "camera_rotation_deg": 0.0005430193025281134,
+        "can_delta_px": 0.09813073218399951
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.084728924939037e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 22,
+      "source": 1,
+      "variation": "init_y+3",
+      "frames": 259,
+      "right_invalid_frac": 0.6332046332046332,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9990927980958233,
+        "camera_rotation_deg": 0.00022777990034373376,
+        "can_delta_px": 0.016949771428537982
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.999265809576792,
+        "camera_rotation_deg": 0.00043195568094003405,
+        "can_delta_px": 0.05637149918609841
+      },
+      "grasp": {
+        "camera_translation_cm": 2.999577984374833,
+        "camera_rotation_deg": 0.00017746505178087516,
+        "can_delta_px": 0.03440751320471494
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.084728924939037e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 23,
+      "source": 1,
+      "variation": "init_y+6",
+      "frames": 259,
+      "right_invalid_frac": 0.6332046332046332,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 4.198712248474862,
+        "camera_rotation_deg": 0.0005634062699974413,
+        "can_delta_px": 0.0353478368041347
+      },
+      "final_approach": {
+        "camera_translation_cm": 4.1989771747171085,
+        "camera_rotation_deg": 0.0006745984435575811,
+        "can_delta_px": 0.07274452594849085
+      },
+      "grasp": {
+        "camera_translation_cm": 4.199235508862677,
+        "camera_rotation_deg": 0.00028050808229549714,
+        "can_delta_px": 0.05424518239845817
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.084728924939037e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 24,
+      "source": 1,
+      "variation": "init_y-3",
+      "frames": 259,
+      "right_invalid_frac": 0.6332046332046332,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 1.4695327898815553,
+        "camera_rotation_deg": 0.00011820217492980243,
+        "can_delta_px": 0.014931737518820792
+      },
+      "final_approach": {
+        "camera_translation_cm": 1.4698800268576249,
+        "camera_rotation_deg": 0.00013223677229516132,
+        "can_delta_px": 0.021455592083891827
+      },
+      "grasp": {
+        "camera_translation_cm": 1.4699384297620417,
+        "camera_rotation_deg": 8.169525395052525e-05,
+        "can_delta_px": 0.01553614080948038
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.084728924939037e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 25,
+      "source": 2,
+      "variation": "pos_left_down",
+      "frames": 277,
+      "right_invalid_frac": 0.5054151624548736,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.7706980984802966e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.751185963051079e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.820759915065941e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.9987812099613,
+        "camera_rotation_deg": 0.0002511757134351799,
+        "can_delta_px": 2.0495186137532011e-13
+      }
+    },
+    {
+      "episode": 26,
+      "source": 2,
+      "variation": "init_x+3",
+      "frames": 277,
+      "right_invalid_frac": 0.6534296028880866,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9979251250975913,
+        "camera_rotation_deg": 0.0003734307182210078,
+        "can_delta_px": 0.0652923259627679
+      },
+      "final_approach": {
+        "camera_translation_cm": 3.0028281481437293,
+        "camera_rotation_deg": 0.03195840170419166,
+        "can_delta_px": 0.48416482242540565
+      },
+      "grasp": {
+        "camera_translation_cm": 3.0023868098055218,
+        "camera_rotation_deg": 0.03476138678111702,
+        "can_delta_px": 0.5221965209787853
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.677153046734726e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 27,
+      "source": 2,
+      "variation": "init_x+6",
+      "frames": 277,
+      "right_invalid_frac": 0.6534296028880866,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.999546609160374,
+        "camera_rotation_deg": 0.00014477633603649068,
+        "can_delta_px": 0.019950432566472234
+      },
+      "final_approach": {
+        "camera_translation_cm": 6.002829335474608,
+        "camera_rotation_deg": 0.03203180427980557,
+        "can_delta_px": 0.4772898401570146
+      },
+      "grasp": {
+        "camera_translation_cm": 6.002238680690866,
+        "camera_rotation_deg": 0.036761129261789746,
+        "can_delta_px": 0.5455173332615713
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.677153046734726e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 28,
+      "source": 2,
+      "variation": "init_x-3",
+      "frames": 277,
+      "right_invalid_frac": 0.6534296028880866,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.99781401534557,
+        "camera_rotation_deg": 0.000508397329138179,
+        "can_delta_px": 0.05790580754229898
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.999297896756128,
+        "camera_rotation_deg": 0.00017468056748650706,
+        "can_delta_px": 0.035261359022740676
+      },
+      "grasp": {
+        "camera_translation_cm": 2.999113621002815,
+        "camera_rotation_deg": 0.00019713229924006804,
+        "can_delta_px": 0.041282236924656185
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.677153046734726e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 29,
+      "source": 2,
+      "variation": "init_x-6",
+      "frames": 277,
+      "right_invalid_frac": 0.6534296028880866,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.996117267643905,
+        "camera_rotation_deg": 0.002697641493060082,
+        "can_delta_px": 0.15704882669635287
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.999066267321997,
+        "camera_rotation_deg": 0.0012009322268396023,
+        "can_delta_px": 0.1634034291795913
+      },
+      "grasp": {
+        "camera_translation_cm": 5.999297305142819,
+        "camera_rotation_deg": 0.0007986635905213246,
+        "can_delta_px": 0.138182720503093
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.677153046734726e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 30,
+      "source": 2,
+      "variation": "init_y+3",
+      "frames": 277,
+      "right_invalid_frac": 0.6534296028880866,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9992684561014133,
+        "camera_rotation_deg": 0.0001671568906215977,
+        "can_delta_px": 0.014458009140417064
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9994096185185324,
+        "camera_rotation_deg": 0.0005921551656433653,
+        "can_delta_px": 0.07643822638975852
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9996655723547403,
+        "camera_rotation_deg": 0.00020305353344569684,
+        "can_delta_px": 0.032812193776392315
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.677153046734726e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 31,
+      "source": 2,
+      "variation": "init_y+6",
+      "frames": 277,
+      "right_invalid_frac": 0.6534296028880866,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.939284584725717,
+        "camera_rotation_deg": 0.00015854049407415776,
+        "can_delta_px": 0.01344265065218972
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.939428962441578,
+        "camera_rotation_deg": 0.0005695855063054652,
+        "can_delta_px": 0.07423748130647995
+      },
+      "grasp": {
+        "camera_translation_cm": 2.939676031523725,
+        "camera_rotation_deg": 0.00019800478411395914,
+        "can_delta_px": 0.03226267454733048
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.677153046734726e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 32,
+      "source": 2,
+      "variation": "init_y-3",
+      "frames": 277,
+      "right_invalid_frac": 0.6534296028880866,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9981403491739202,
+        "camera_rotation_deg": 0.0007575485240553846,
+        "can_delta_px": 0.10765171645433859
+      },
+      "final_approach": {
+        "camera_translation_cm": 3.0015278397869705,
+        "camera_rotation_deg": 0.03117760898357055,
+        "can_delta_px": 0.47134720962498405
+      },
+      "grasp": {
+        "camera_translation_cm": 3.0014952097813503,
+        "camera_rotation_deg": 0.035892669333532475,
+        "can_delta_px": 0.5339990995467867
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.677153046734726e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 33,
+      "source": 2,
+      "variation": "init_y-6",
+      "frames": 277,
+      "right_invalid_frac": 0.6534296028880866,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.999429478588499,
+        "camera_rotation_deg": 0.00021252312503586645,
+        "can_delta_px": 0.033432296738764376
+      },
+      "final_approach": {
+        "camera_translation_cm": 6.00149786493886,
+        "camera_rotation_deg": 0.03416922867041763,
+        "can_delta_px": 0.48308293713814193
+      },
+      "grasp": {
+        "camera_translation_cm": 6.001411235990618,
+        "camera_rotation_deg": 0.03732524614313975,
+        "can_delta_px": 0.5354971927798414
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.677153046734726e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 34,
+      "source": 3,
+      "variation": "pos_left_down",
+      "frames": 246,
+      "right_invalid_frac": 0.5121951219512195,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.576850493393008e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.049779180472126e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.489649878225955e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.999121281161332,
+        "camera_rotation_deg": 0.0001519726124282628,
+        "can_delta_px": 2.0495186137532011e-13
+      }
+    },
+    {
+      "episode": 35,
+      "source": 3,
+      "variation": "timing_early",
+      "frames": 246,
+      "right_invalid_frac": 0.5487804878048781,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.576850493393008e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.049779180472126e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.489649878225955e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.014338785290574408,
+        "camera_rotation_deg": 0.020795438921927457,
+        "can_delta_px": 1.2710574864626038e-13
+      }
+    },
+    {
+      "episode": 36,
+      "source": 3,
+      "variation": "timing_late",
+      "frames": 246,
+      "right_invalid_frac": 0.5487804878048781,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.576850493393008e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.049779180472126e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.489649878225955e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.0518237246569667,
+        "camera_rotation_deg": 0.07137909188545333,
+        "can_delta_px": 1.797546735911271e-13
+      }
+    },
+    {
+      "episode": 37,
+      "source": 3,
+      "variation": "init_x+3",
+      "frames": 246,
+      "right_invalid_frac": 0.6016260162601627,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.997875456697118,
+        "camera_rotation_deg": 0.0004557700832013284,
+        "can_delta_px": 0.06380875704184763
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.998196880850817,
+        "camera_rotation_deg": 0.0005240069747597527,
+        "can_delta_px": 0.08824620723077581
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9990648797847954,
+        "camera_rotation_deg": 0.0002418681797232307,
+        "can_delta_px": 0.03733651039621663
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.4485649611117098e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 38,
+      "source": 3,
+      "variation": "init_x+6",
+      "frames": 246,
+      "right_invalid_frac": 0.6016260162601627,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.999371232094111,
+        "camera_rotation_deg": 0.0001311188256675345,
+        "can_delta_px": 0.01726817959276548
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.999308937452211,
+        "camera_rotation_deg": 0.00023801237377003075,
+        "can_delta_px": 0.03473805648286862
+      },
+      "grasp": {
+        "camera_translation_cm": 5.99788033045173,
+        "camera_rotation_deg": 0.0004157537224542278,
+        "can_delta_px": 0.07560282899556557
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.4485649611117098e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 39,
+      "source": 3,
+      "variation": "init_x-3",
+      "frames": 246,
+      "right_invalid_frac": 0.6016260162601627,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9982561493160294,
+        "camera_rotation_deg": 0.000398474274908842,
+        "can_delta_px": 0.04517630881800208
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.999337098323665,
+        "camera_rotation_deg": 0.00021188651664058795,
+        "can_delta_px": 0.03244441749833906
+      },
+      "grasp": {
+        "camera_translation_cm": 2.999203768378315,
+        "camera_rotation_deg": 0.00013477443036994573,
+        "can_delta_px": 0.02887003551109201
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.4485649611117098e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 40,
+      "source": 3,
+      "variation": "init_x-6",
+      "frames": 246,
+      "right_invalid_frac": 0.6016260162601627,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.996756470833537,
+        "camera_rotation_deg": 0.002062114707721251,
+        "can_delta_px": 0.15028913390790832
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.998900295234517,
+        "camera_rotation_deg": 0.001138007102283585,
+        "can_delta_px": 0.13970520634767097
+      },
+      "grasp": {
+        "camera_translation_cm": 5.99917037528288,
+        "camera_rotation_deg": 0.0008315206596439163,
+        "can_delta_px": 0.11768227253122833
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.4485649611117098e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 41,
+      "source": 3,
+      "variation": "init_y+3",
+      "frames": 246,
+      "right_invalid_frac": 0.6016260162601627,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.999174975385244,
+        "camera_rotation_deg": 0.00019488218078887853,
+        "can_delta_px": 0.008975160048614502
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9993816334200107,
+        "camera_rotation_deg": 0.0004558000782549919,
+        "can_delta_px": 0.05989723544583553
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9986442335881325,
+        "camera_rotation_deg": 0.0006847319603818224,
+        "can_delta_px": 0.08866286079000736
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.4485649611117098e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 42,
+      "source": 3,
+      "variation": "init_y+6",
+      "frames": 246,
+      "right_invalid_frac": 0.6016260162601627,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.998104410991202,
+        "camera_rotation_deg": 0.0014840522764114567,
+        "can_delta_px": 0.06842713000562377
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.999682004306987,
+        "camera_rotation_deg": 0.0001561101989240999,
+        "can_delta_px": 0.01827031034090204
+      },
+      "grasp": {
+        "camera_translation_cm": 5.998874111500526,
+        "camera_rotation_deg": 0.0003580141515456259,
+        "can_delta_px": 0.05460691196267178
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.4485649611117098e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 43,
+      "source": 3,
+      "variation": "init_y-3",
+      "frames": 246,
+      "right_invalid_frac": 0.6016260162601627,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.99894704683415,
+        "camera_rotation_deg": 0.00044691325526137357,
+        "can_delta_px": 0.06684860094802726
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9995042214714536,
+        "camera_rotation_deg": 0.00047590208288670813,
+        "can_delta_px": 0.06712236866041353
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9997981518851575,
+        "camera_rotation_deg": 0.0002527101119271928,
+        "can_delta_px": 0.04105144025762722
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.4485649611117098e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 44,
+      "source": 3,
+      "variation": "init_y-6",
+      "frames": 246,
+      "right_invalid_frac": 0.6016260162601627,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.999732976781705,
+        "camera_rotation_deg": 0.0001255873531619929,
+        "can_delta_px": 0.019129846210484573
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.9998020985064855,
+        "camera_rotation_deg": 0.00014340496320729975,
+        "can_delta_px": 0.02342045751668668
+      },
+      "grasp": {
+        "camera_translation_cm": 5.999313036689718,
+        "camera_rotation_deg": 0.0012929390205743958,
+        "can_delta_px": 0.20565982602613375
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.4485649611117098e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 45,
+      "source": 4,
+      "variation": "pos_right_up",
+      "frames": 246,
+      "right_invalid_frac": 0.5040650406504065,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.906454627805256e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.69843134921909e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.609046183952164e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.209550938184458,
+        "camera_rotation_deg": 0.0015808398831146655,
+        "can_delta_px": 2.3437142008433856e-13
+      }
+    },
+    {
+      "episode": 46,
+      "source": 5,
+      "variation": "pos_left_down",
+      "frames": 251,
+      "right_invalid_frac": 0.50199203187251,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.389002302687254e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.399349177638822e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.789614547252418e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.998881416867868,
+        "camera_rotation_deg": 0.0001645979633519351,
+        "can_delta_px": 1.7288250917028504e-13
+      }
+    },
+    {
+      "episode": 47,
+      "source": 5,
+      "variation": "init_x-3",
+      "frames": 251,
+      "right_invalid_frac": 0.6215139442231076,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9987803201158467,
+        "camera_rotation_deg": 0.000314192027871224,
+        "can_delta_px": 0.0348948478197405
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9992464480890106,
+        "camera_rotation_deg": 0.00017431021743088168,
+        "can_delta_px": 0.024808847723209963
+      },
+      "grasp": {
+        "camera_translation_cm": 2.998666222927529,
+        "camera_rotation_deg": 0.00028747028244644396,
+        "can_delta_px": 0.05105461181678071
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.702791768444892e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 48,
+      "source": 5,
+      "variation": "init_x-6",
+      "frames": 251,
+      "right_invalid_frac": 0.6215139442231076,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 4.198285313630149,
+        "camera_rotation_deg": 0.0006654610851982908,
+        "can_delta_px": 0.06822824031758531
+      },
+      "final_approach": {
+        "camera_translation_cm": 4.199085876062007,
+        "camera_rotation_deg": 0.0002910404654135227,
+        "can_delta_px": 0.04382665422073813
+      },
+      "grasp": {
+        "camera_translation_cm": 4.197993869479514,
+        "camera_rotation_deg": 0.00046604693080242777,
+        "can_delta_px": 0.08163180709915872
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.702791768444892e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 49,
+      "source": 5,
+      "variation": "init_y-3",
+      "frames": 251,
+      "right_invalid_frac": 0.6215139442231076,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.999211570618745,
+        "camera_rotation_deg": 0.00041003965603696256,
+        "can_delta_px": 0.055722678167593624
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9997981860149285,
+        "camera_rotation_deg": 0.00021477239023026928,
+        "can_delta_px": 0.032443478178001514
+      },
+      "grasp": {
+        "camera_translation_cm": 2.99905801420513,
+        "camera_rotation_deg": 0.00040140801054129675,
+        "can_delta_px": 0.07714252395271438
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 6.702791768444892e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 50,
+      "source": 6,
+      "variation": "pos_left_down",
+      "frames": 236,
+      "right_invalid_frac": 0.538135593220339,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.433526540641101e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.754811937826003e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.508063424803403e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.998818686536775,
+        "camera_rotation_deg": 0.00017143368523280168,
+        "can_delta_px": 2.3437142008433856e-13
+      }
+    },
+    {
+      "episode": 51,
+      "source": 6,
+      "variation": "pos_right_up",
+      "frames": 236,
+      "right_invalid_frac": 0.538135593220339,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.433526540641101e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 3.754811937826003e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.508063424803403e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 2.9462456983881187,
+        "camera_rotation_deg": 0.0009581617782832802,
+        "can_delta_px": 1.797546735911271e-13
+      }
+    },
+    {
+      "episode": 52,
+      "source": 7,
+      "variation": "pos_left_down",
+      "frames": 258,
+      "right_invalid_frac": 0.5232558139534884,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.523921382361417e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.037536660759274e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.765409439474201e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.998864824497635,
+        "camera_rotation_deg": 0.00023014821739752487,
+        "can_delta_px": 2.5421149729252077e-13
+      }
+    },
+    {
+      "episode": 53,
+      "source": 7,
+      "variation": "timing_early",
+      "frames": 258,
+      "right_invalid_frac": 0.5387596899224806,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.523921382361417e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.037536660759274e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.765409439474201e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.007011039789605042,
+        "camera_rotation_deg": 0.012152251685085031,
+        "can_delta_px": 1.2710574864626038e-13
+      }
+    },
+    {
+      "episode": 54,
+      "source": 7,
+      "variation": "timing_late",
+      "frames": 258,
+      "right_invalid_frac": 0.5387596899224806,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.523921382361417e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.037536660759274e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.765409439474201e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.003959011413564788,
+        "camera_rotation_deg": 0.007742434567758546,
+        "can_delta_px": 1.9895196601282805e-13
+      }
+    },
+    {
+      "episode": 55,
+      "source": 7,
+      "variation": "init_x-3",
+      "frames": 258,
+      "right_invalid_frac": 0.6317829457364341,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9981442604223068,
+        "camera_rotation_deg": 0.0004671561793578561,
+        "can_delta_px": 0.047215251149864974
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9991897340416522,
+        "camera_rotation_deg": 0.00018961394869279375,
+        "can_delta_px": 0.03295632531581377
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9985485301215977,
+        "camera_rotation_deg": 0.000309406394639483,
+        "can_delta_px": 0.06036864535701798
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.376781320930237e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 56,
+      "source": 7,
+      "variation": "init_x-6",
+      "frames": 258,
+      "right_invalid_frac": 0.6317829457364341,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.9963399548348875,
+        "camera_rotation_deg": 0.0022796583331727,
+        "can_delta_px": 0.15483561588083986
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.998749093654696,
+        "camera_rotation_deg": 0.0011557949109774692,
+        "can_delta_px": 0.1414162425633153
+      },
+      "grasp": {
+        "camera_translation_cm": 5.998764363891677,
+        "camera_rotation_deg": 0.0007311207598264324,
+        "can_delta_px": 0.10852039882167706
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.376781320930237e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 57,
+      "source": 7,
+      "variation": "init_y+3",
+      "frames": 258,
+      "right_invalid_frac": 0.6317829457364341,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 1.4697375901922074,
+        "camera_rotation_deg": 5.480620220273734e-05,
+        "can_delta_px": 0.005544555857381407
+      },
+      "final_approach": {
+        "camera_translation_cm": 1.469792239748726,
+        "camera_rotation_deg": 0.00017408358708232346,
+        "can_delta_px": 0.029327665776299763
+      },
+      "grasp": {
+        "camera_translation_cm": 1.4690507163749362,
+        "camera_rotation_deg": 0.000589646140578694,
+        "can_delta_px": 0.09814504854356049
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.376781320930237e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 58,
+      "source": 7,
+      "variation": "init_y-3",
+      "frames": 258,
+      "right_invalid_frac": 0.6317829457364341,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9986127453131664,
+        "camera_rotation_deg": 0.0006996479679381507,
+        "can_delta_px": 0.10421762112955055
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.999040923640995,
+        "camera_rotation_deg": 0.0007210677590352741,
+        "can_delta_px": 0.1215755871278511
+      },
+      "grasp": {
+        "camera_translation_cm": 2.999697540151343,
+        "camera_rotation_deg": 0.0003595484541742762,
+        "can_delta_px": 0.06134760989723107
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.376781320930237e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 59,
+      "source": 7,
+      "variation": "init_y-6",
+      "frames": 258,
+      "right_invalid_frac": 0.6317829457364341,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.99953093734572,
+        "camera_rotation_deg": 0.00019280474890256575,
+        "can_delta_px": 0.03187095219963514
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.999487343225135,
+        "camera_rotation_deg": 0.00030169044435725354,
+        "can_delta_px": 0.05646222770078843
+      },
+      "grasp": {
+        "camera_translation_cm": 6.001899600782943,
+        "camera_rotation_deg": 0.032884928334055825,
+        "can_delta_px": 0.5018583173673892
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.376781320930237e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 60,
+      "source": 8,
+      "variation": "pos_left_down",
+      "frames": 246,
+      "right_invalid_frac": 0.5040650406504065,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.117336272044827e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.9665055750284845e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.930825497831862e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.998981403729596,
+        "camera_rotation_deg": 0.00020952480654488494,
+        "can_delta_px": 1.6077746776921858e-13
+      }
+    },
+    {
+      "episode": 61,
+      "source": 8,
+      "variation": "init_x+3",
+      "frames": 246,
+      "right_invalid_frac": 0.6219512195121951,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.8386741132471323,
+        "camera_rotation_deg": 0.0003499155051608693,
+        "can_delta_px": 0.0713012965769812
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9982802121839103,
+        "camera_rotation_deg": 0.00024190699452388388,
+        "can_delta_px": 0.07532759544459348
+      },
+      "grasp": {
+        "camera_translation_cm": 3.003774997385491,
+        "camera_rotation_deg": 0.02975019081640169,
+        "can_delta_px": 0.47134017556056407
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.4510477453253914e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 62,
+      "source": 8,
+      "variation": "init_x+6",
+      "frames": 246,
+      "right_invalid_frac": 0.6219512195121951,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.681533851038577,
+        "camera_rotation_deg": 0.0001181623440594554,
+        "can_delta_px": 0.01931946609793049
+      },
+      "final_approach": {
+        "camera_translation_cm": 6.003778923131743,
+        "camera_rotation_deg": 0.027666064495049325,
+        "can_delta_px": 0.43244542935138297
+      },
+      "grasp": {
+        "camera_translation_cm": 6.003654831039692,
+        "camera_rotation_deg": 0.030235317694655785,
+        "can_delta_px": 0.478249774866338
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.4510477453253914e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 63,
+      "source": 8,
+      "variation": "init_x-3",
+      "frames": 246,
+      "right_invalid_frac": 0.6219512195121951,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.8393516881716567,
+        "camera_rotation_deg": 0.00043010346341913107,
+        "can_delta_px": 0.04639546828221089
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.999159423310897,
+        "camera_rotation_deg": 0.0003094924165618861,
+        "can_delta_px": 0.04783174591132207
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9994642962847187,
+        "camera_rotation_deg": 0.0002222154507400518,
+        "can_delta_px": 0.03525642637325822
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.4510477453253914e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 64,
+      "source": 8,
+      "variation": "init_y+3",
+      "frames": 246,
+      "right_invalid_frac": 0.6219512195121951,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.8403129214028606,
+        "camera_rotation_deg": 0.00014715954839222684,
+        "can_delta_px": 0.016501978647011556
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9993486363750548,
+        "camera_rotation_deg": 0.0003102890439610774,
+        "can_delta_px": 0.04016743150461617
+      },
+      "grasp": {
+        "camera_translation_cm": 2.998533849662631,
+        "camera_rotation_deg": 0.0007806259209456333,
+        "can_delta_px": 0.0988107386616634
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.4510477453253914e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 65,
+      "source": 8,
+      "variation": "init_y+6",
+      "frames": 246,
+      "right_invalid_frac": 0.6219512195121951,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.783509545248039,
+        "camera_rotation_deg": 0.00013853389190961153,
+        "can_delta_px": 0.015748328617683615
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.939364135688766,
+        "camera_rotation_deg": 0.00029380694474968557,
+        "can_delta_px": 0.038593293951189114
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9385803595988422,
+        "camera_rotation_deg": 0.000755569484447265,
+        "can_delta_px": 0.09626969469953525
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.4510477453253914e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 66,
+      "source": 8,
+      "variation": "init_y-3",
+      "frames": 246,
+      "right_invalid_frac": 0.6219512195121951,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.8400430661938065,
+        "camera_rotation_deg": 0.0005470133547517198,
+        "can_delta_px": 0.07687489273265484
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9988045370145286,
+        "camera_rotation_deg": 0.000640680080970683,
+        "can_delta_px": 0.10337643362616097
+      },
+      "grasp": {
+        "camera_translation_cm": 3.001603880281887,
+        "camera_rotation_deg": 0.030656313864137922,
+        "can_delta_px": 0.47940599031219605
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.4510477453253914e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 67,
+      "source": 9,
+      "variation": "pos_left_down",
+      "frames": 249,
+      "right_invalid_frac": 0.5060240963855421,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.814199978478929e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.759680294759585e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.174075773733813e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 4.9989549496272945,
+        "camera_rotation_deg": 0.00019815954726715954,
+        "can_delta_px": 2.3437142008433856e-13
+      }
+    },
+    {
+      "episode": 68,
+      "source": 9,
+      "variation": "timing_late",
+      "frames": 249,
+      "right_invalid_frac": 0.5421686746987951,
+      "mapping_nonunit_steps": 20,
+      "approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.814199978478929e-15,
+        "can_delta_px": 0.0
+      },
+      "final_approach": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 5.759680294759585e-15,
+        "can_delta_px": 0.0
+      },
+      "grasp": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 4.174075773733813e-15,
+        "can_delta_px": 0.0
+      },
+      "handover": {
+        "camera_translation_cm": 0.07946789097685802,
+        "camera_rotation_deg": 0.13353854576889437,
+        "can_delta_px": 1.3406493525361332e-13
+      }
+    },
+    {
+      "episode": 69,
+      "source": 9,
+      "variation": "init_x+3",
+      "frames": 249,
+      "right_invalid_frac": 0.606425702811245,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 1.4689033726016378,
+        "camera_rotation_deg": 0.00018193428705245052,
+        "can_delta_px": 0.03891432976163377
+      },
+      "final_approach": {
+        "camera_translation_cm": 1.4682674115681678,
+        "camera_rotation_deg": 0.0004949285407887948,
+        "can_delta_px": 0.09410877545191146
+      },
+      "grasp": {
+        "camera_translation_cm": 1.4690056937798364,
+        "camera_rotation_deg": 0.00023725947905012097,
+        "can_delta_px": 0.04603931530525772
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 2.7259248830000256e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 70,
+      "source": 9,
+      "variation": "init_x-3",
+      "frames": 249,
+      "right_invalid_frac": 0.606425702811245,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9982553836706205,
+        "camera_rotation_deg": 0.00036347289300209907,
+        "can_delta_px": 0.042042151641883595
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9990924795760554,
+        "camera_rotation_deg": 0.00019082467298383877,
+        "can_delta_px": 0.03313689062940873
+      },
+      "grasp": {
+        "camera_translation_cm": 2.99813778888332,
+        "camera_rotation_deg": 0.0003638103429517359,
+        "can_delta_px": 0.07745056297548056
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 2.7259248830000256e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 71,
+      "source": 9,
+      "variation": "init_x-6",
+      "frames": 249,
+      "right_invalid_frac": 0.606425702811245,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 5.996579932346666,
+        "camera_rotation_deg": 0.002196071197651566,
+        "can_delta_px": 0.14659639060977486
+      },
+      "final_approach": {
+        "camera_translation_cm": 5.9987083930659395,
+        "camera_rotation_deg": 0.0011169095792633809,
+        "can_delta_px": 0.13401940311704236
+      },
+      "grasp": {
+        "camera_translation_cm": 5.9986155952697295,
+        "camera_rotation_deg": 0.0007846575348702814,
+        "can_delta_px": 0.10385293827281727
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 2.7259248830000256e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 72,
+      "source": 9,
+      "variation": "init_y+3",
+      "frames": 249,
+      "right_invalid_frac": 0.606425702811245,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9993182309985302,
+        "camera_rotation_deg": 0.000169470416365225,
+        "can_delta_px": 0.02006762259243805
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9992678427365576,
+        "camera_rotation_deg": 0.0005572420906294127,
+        "can_delta_px": 0.08738256553354734
+      },
+      "grasp": {
+        "camera_translation_cm": 2.999451524681738,
+        "camera_rotation_deg": 0.0002197398917409262,
+        "can_delta_px": 0.039662564592059524
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 2.7259248830000256e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 73,
+      "source": 9,
+      "variation": "init_y+6",
+      "frames": 249,
+      "right_invalid_frac": 0.606425702811245,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.9393354633105573,
+        "camera_rotation_deg": 0.00016091871889135272,
+        "can_delta_px": 0.0189669623037722
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.939291256169504,
+        "camera_rotation_deg": 0.0005412367588231661,
+        "can_delta_px": 0.08511612997945998
+      },
+      "grasp": {
+        "camera_translation_cm": 2.9393101343530406,
+        "camera_rotation_deg": 0.000261716005171182,
+        "can_delta_px": 0.047555632743818646
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 2.7259248830000256e-15,
+        "can_delta_px": 0.0
+      }
+    },
+    {
+      "episode": 74,
+      "source": 9,
+      "variation": "init_y-3",
+      "frames": 249,
+      "right_invalid_frac": 0.606425702811245,
+      "mapping_nonunit_steps": 0,
+      "approach": {
+        "camera_translation_cm": 2.998704822199191,
+        "camera_rotation_deg": 0.0005291115399604838,
+        "can_delta_px": 0.10580393979004477
+      },
+      "final_approach": {
+        "camera_translation_cm": 2.9994511687975067,
+        "camera_rotation_deg": 0.0004995182490536943,
+        "can_delta_px": 0.08435872598516546
+      },
+      "grasp": {
+        "camera_translation_cm": 2.999695090378083,
+        "camera_rotation_deg": 0.00015338913811202632,
+        "can_delta_px": 0.030658612832536514
+      },
+      "handover": {
+        "camera_translation_cm": 0.0,
+        "camera_rotation_deg": 2.7259248830000256e-15,
+        "can_delta_px": 0.0
+      }
+    }
+  ],
+  "summary": {
+    "all": {
+      "approach": {
+        "camera_translation_cm": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 2.99781401534557,
+          "ci95": [
+            2.5302260645782235,
+            2.9982561493160294
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 0.00017688711313164866,
+          "ci95": [
+            0.00014276456331991063,
+            0.00021252312503586645
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 9,
+          "n_descendants": 58,
+          "median": 0.019634949332201362,
+          "ci95": [
+            0.016125153632347587,
+            0.033432296738764376
+          ]
+        }
+      },
+      "final_approach": {
+        "camera_translation_cm": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 2.999159423310897,
+          "ci95": [
+            2.9982802121839103,
+            2.9993486363750548
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 0.00024190699452388388,
+          "ci95": [
+            0.00017431021743088168,
+            0.00047590208288670813
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 0.038593293951189114,
+          "ci95": [
+            0.028765808276047404,
+            0.07423748130647995
+          ]
+        }
+      },
+      "grasp": {
+        "camera_translation_cm": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 2.99905801420513,
+          "ci95": [
+            2.998105405139279,
+            2.999549709052446
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 0.0002527101119271928,
+          "ci95": [
+            0.00017746505178087516,
+            0.0003638103429517359
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 0.04603931530525772,
+          "ci95": [
+            0.03440751320471494,
+            0.06924506692497273
+          ]
+        }
+      },
+      "handover": {
+        "camera_translation_cm": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 5.677153046734726e-15,
+          "ci95": [
+            4.084728924939037e-15,
+            6.057062731071113e-15
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 10,
+          "n_descendants": 65,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "object_position": {
+      "approach": {
+        "camera_translation_cm": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 2.9987425711575186,
+          "ci95": [
+            2.99781401534557,
+            2.999174975385244
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 0.00036845180561155343,
+          "ci95": [
+            0.00031943205719377546,
+            0.00041003965603696256
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 7,
+          "n_descendants": 41,
+          "median": 0.04517630881800208,
+          "ci95": [
+            0.03713108328288423,
+            0.050449493492797856
+          ]
+        }
+      },
+      "final_approach": {
+        "camera_translation_cm": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 2.9993783785637973,
+          "ci95": [
+            2.9992464480890106,
+            3.0006630129009495
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 0.00046585108057085,
+          "ci95": [
+            0.00029377236375798357,
+            0.0005921551656433653
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 0.0699334473044522,
+          "ci95": [
+            0.04382665422073813,
+            0.08473742798231272
+          ]
+        }
+      },
+      "grasp": {
+        "camera_translation_cm": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 2.999696315264713,
+          "ci95": [
+            2.9994579104832284,
+            3.0014952097813503
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 0.0004085808664977623,
+          "ci95": [
+            0.00029666491080721825,
+            0.000755569484447265
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 0.07729654346409748,
+          "ci95": [
+            0.05442604718056497,
+            0.0988107386616634
+          ]
+        }
+      },
+      "handover": {
+        "camera_translation_cm": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 4.376781320930237e-15,
+          "ci95": [
+            3.4485649611117098e-15,
+            5.677153046734726e-15
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 8,
+          "n_descendants": 46,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "timing": {
+      "approach": {
+        "camera_translation_cm": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 4.8357955024824485e-15,
+          "ci95": [
+            4.523921382361417e-15,
+            5.576850493393008e-15
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 4,
+          "n_descendants": 7,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "final_approach": {
+        "camera_translation_cm": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 5.049779180472126e-15,
+          "ci95": [
+            4.037536660759274e-15,
+            5.5892391411453174e-15
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "grasp": {
+        "camera_translation_cm": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 4.765409439474201e-15,
+          "ci95": [
+            3.872130813265474e-15,
+            6.043288928706803e-15
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "handover": {
+        "camera_translation_cm": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 0.010902656403443399,
+          "ci95": [
+            0.007011039789605042,
+            0.0518237246569667
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 0.02153137068837547,
+          "ci95": [
+            0.012152251685085031,
+            0.07137909188545333
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 5,
+          "n_descendants": 9,
+          "median": 1.7419169285135556e-13,
+          "ci95": [
+            1.3406493525361332e-13,
+            1.7697318322124135e-13
+          ]
+        }
+      }
+    },
+    "handover_location": {
+      "approach": {
+        "camera_translation_cm": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 4.8603273031420925e-15,
+          "ci95": [
+            4.433526540641101e-15,
+            5.576850493393008e-15
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "final_approach": {
+        "camera_translation_cm": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 4.8588457690397816e-15,
+          "ci95": [
+            3.896174299292638e-15,
+            5.5892391411453174e-15
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "grasp": {
+        "camera_translation_cm": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 4.6872278117131825e-15,
+          "ci95": [
+            4.5038885791650335e-15,
+            5.489649878225955e-15
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "handover": {
+        "camera_translation_cm": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 4.998859847603912,
+          "ci95": [
+            4.9987812099613,
+            4.9989549496272945
+          ]
+        },
+        "camera_rotation_deg": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 0.00020384217690602225,
+          "ci95": [
+            0.00016537925490645692,
+            0.0002511757134351799
+          ]
+        },
+        "can_delta_px": {
+          "n_sources": 9,
+          "n_descendants": 10,
+          "median": 2.1481451126534958e-13,
+          "ci95": [
+            1.797546735911271e-13,
+            2.3437142008433856e-13
+          ]
+        }
+      }
+    }
+  },
+  "rgb_copy_checks": [
+    {
+      "episode": 12,
+      "source": 0,
+      "source_frame": 97,
+      "target_frame": 95,
+      "copy_psnr_db": 43.0312305238888
+    },
+    {
+      "episode": 13,
+      "source": 0,
+      "source_frame": 97,
+      "target_frame": 95,
+      "copy_psnr_db": 43.0312305238888
+    },
+    {
+      "episode": 15,
+      "source": 0,
+      "source_frame": 97,
+      "target_frame": 95,
+      "copy_psnr_db": 43.0312305238888
+    },
+    {
+      "episode": 27,
+      "source": 2,
+      "source_frame": 101,
+      "target_frame": 100,
+      "copy_psnr_db": 40.84462676745295
+    },
+    {
+      "episode": 29,
+      "source": 2,
+      "source_frame": 101,
+      "target_frame": 100,
+      "copy_psnr_db": 40.84462676745295
+    },
+    {
+      "episode": 35,
+      "source": 3,
+      "source_frame": 82,
+      "target_frame": 80,
+      "copy_psnr_db": 42.0861910332105
+    },
+    {
+      "episode": 55,
+      "source": 7,
+      "source_frame": 87,
+      "target_frame": 86,
+      "copy_psnr_db": 40.31151713633567
+    },
+    {
+      "episode": 65,
+      "source": 8,
+      "source_frame": 83,
+      "target_frame": 82,
+      "copy_psnr_db": 39.67216155484181
+    },
+    {
+      "episode": 74,
+      "source": 9,
+      "source_frame": 85,
+      "target_frame": 83,
+      "copy_psnr_db": 39.47081310961036
+    }
+  ],
+  "assumptions": "Calibrated FK; provenance source-row mapping; median displacement of visible can-surface points from native legacy lid origin; rigid attachment after close+8; no slip model; CIs cluster source episodes."
+}

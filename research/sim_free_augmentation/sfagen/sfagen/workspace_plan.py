@@ -11,7 +11,7 @@ execution or physical contact evidence. Source-to-output exposure times are hand
 """
 from __future__ import annotations
 import cv2, numpy as np
-from .plan import ik, smoothstep, action_lead, _attach
+from .plan import ik, smoothstep, action_lead, _attach, state_bounds
 from .recon import interp_rows
 from .timing import replay_reference
 
@@ -200,9 +200,10 @@ def _clock(m,T,scale,clock,fps):
     return time_map(m,T,scale)
 
 
-def _native_spatial(rec,k,d,m):
+def _native_spatial(rec,k,d,m,action_bounds=False,margin=0.0):
     """Retarget a Cartesian path; route transit above a relocated object if a straight blend crosses it."""
     r=rec.robot;arm=rec.objects[k]['arm'];sp=r.split(rec.state);q={a:sp[a].copy() for a in rec.arms}
+    lo,hi=state_bounds(rec,arm,sp[arm],action_bounds,margin)
     P=r.tcp_traj(q,arm);t=np.arange(rec.T);W=_w_src(m,t);field=W[:,None]*d
     obj=rec.objects[k];centre=_centre(obj,obj['table'])+d
     world=obj['points']@obj['table'][:3,:3].T+obj['table'][:3,3]+d
@@ -216,7 +217,7 @@ def _native_spatial(rec,k,d,m):
     for i in np.flatnonzero(act):
         target=P[i].copy();target[:3,3]+=field[i]
         q0=q[arm][i-1]+sp[arm][i]-sp[arm][i-1] if i>0 and act[i-1] else sp[arm][i]
-        q[arm][i]=ik(r,arm,target,q0,{a:sp[a][i] for a in rec.arms},np.minimum(r.lo[arm],sp[arm][i]),np.maximum(r.hi[arm],sp[arm][i]))
+        q[arm][i]=ik(r,arm,target,q0,{a:sp[a][i] for a in rec.arms},lo[i],hi[i])
     m={**m,'transit_lift_m':lift}
     return m,q,field
 
@@ -272,12 +273,12 @@ def f1w_plan(rec, k, d, s=1.0, approach_margin=0.10, spatial=None, clock='local'
             "tau": tau, "ref_state": Sw, "ref_action": Aref,"native_q":base_q,"native_offset":field}
 
 
-def plan_with_time_scale(rec, k, d, checker, scales=(1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0), approach_margin=0.10,spatial=None):
+def plan_with_time_scale(rec, k, d, checker, scales=(1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0), approach_margin=0.10,spatial=None,action_bounds=False,margin=0.0):
     """Shortest tested clock meeting commanded speed/acceleration limits; other checks remain mandatory."""
     cfg, env = checker.cfg, checker.env; last = None
     m=f1w_schedule(rec,k,approach_margin) if spatial is None else spatial[0]
     if m is None:return None
-    if spatial is None:spatial=_native_spatial(rec,k,np.asarray(d,float),m)
+    if spatial is None:spatial=_native_spatial(rec,k,np.asarray(d,float),m,action_bounds,margin)
     trials=[(s,'local') for s in scales if s<=3]+[(s,'window') for s in scales if s>1]+[(s,'uniform') for s in scales if s>1]
     trials.sort(key=lambda trial:len(_clock(m,rec.T,*trial,rec.ctx.src.fps)[0]))
     chosen=trials[-1]

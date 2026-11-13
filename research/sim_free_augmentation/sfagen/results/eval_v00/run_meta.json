@@ -1,0 +1,80 @@
+{
+  "pins": {
+    "real": [
+      "eval_openarm_pringles_lerobot_real_smolvla_10_v00_async_rtc_smolvla_v00",
+      "de1bbf51fdac10218dd5602260ad65dd9da2aca5"
+    ],
+    "mixed": [
+      "eval_openarm_pringles_lerobot_real_and_sim_10_3cam_async_rtc_smolvla_v00",
+      "af877eb5294e1e747a0eee113e824bf888bd625e"
+    ],
+    "training_v00": [
+      "openarm_pringles_lerobot_real_and_sim_10_3cam_v00",
+      "13d7231a48866069001f4a0635259dd7d80b1e17"
+    ],
+    "training_v01": [
+      "openarm_pringles_lerobot_real_to_sim_10_3cam_v01",
+      "1d64b8e7aeed7585b54c776f6b60e26610b37947"
+    ]
+  },
+  "git": "efda1cbe4b2e896aacb92bac34b788a91433b8d5",
+  "hashes": {
+    "artifacts/eval_v00_inputs/real/.gitattributes": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb",
+    "artifacts/eval_v00_inputs/real/README.md": "875e68f9eac3b6c98cb024b84cf1f2c54a34240517a4feebc27a782e352fa35b",
+    "artifacts/eval_v00_inputs/real/meta/stats.json": "0d351d490f95540a7d0bea486ec55609d182e087ad4b81f88be056774aa79889",
+    "artifacts/eval_v00_inputs/real/meta/info.json": "681ae51c6e85621fc1a48289f7c97cb6919182ce7fbcefc9c94f5951f7804907",
+    "artifacts/eval_v00_inputs/real/meta/tasks.parquet": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+    "artifacts/eval_v00_inputs/real/meta/openarm_eval.json": "651d3926e4495803c0a342eb1b1bf38f9a127eb536cc528f9950bf62b08fb936",
+    "artifacts/eval_v00_inputs/real/videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4": "f24213697d4eda5ab6fc12d767d34f45fd924a949f0ce7e4aefd860c1e806313",
+    "artifacts/eval_v00_inputs/real/videos/observation.images.wrist_cam/chunk-000/file-000.mp4": "34e0ab97d0a80deee26f2d7e25d18dc53b66516a9fca063fc620436c2960105d",
+    "artifacts/eval_v00_inputs/real/videos/observation.images.body_cam/chunk-000/file-000.mp4": "563feeac65057ec517dff6c0eee1bb4fb38331f31889358161c114c645f4df3e",
+    "artifacts/eval_v00_inputs/real/data/chunk-000/file-000.parquet": "f48bd999527fee66cf735d6deffa5bbb846805b099ef9ef96dae2d4c64f02ac9",
+    "artifacts/eval_v00_inputs/real/meta/episodes/chunk-000/file-000.parquet": "cddd3961bbf9bde94205deecdd028f6ea53bbbe3106093210621f4daa1833b62",
+    "artifacts/eval_v00_inputs/mixed/.gitattributes": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb",
+    "artifacts/eval_v00_inputs/mixed/README.md": "f032f26dd74e8c5cc22db956039d45d039516eb0dd5b0cb2d27190e855f82185",
+    "artifacts/eval_v00_inputs/mixed/meta/stats.json": "0b1df0ad99871b8725a33339e23df7896e44e114d1e347267cff1799e2a15fe7",
+    "artifacts/eval_v00_inputs/mixed/meta/info.json": "f15c730358ee44fe72b5f3298ffe0b0444933208607cbc908cb21cf88626125f",
+    "artifacts/eval_v00_inputs/mixed/meta/tasks.parquet": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+    "artifacts/eval_v00_inputs/mixed/meta/openarm_eval.json": "3344d060b4bf2d52bb6925639eddb9e72457ef3cd7c8847c97775fd486b9119b",
+    "artifacts/eval_v00_inputs/mixed/videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4": "9be28c5be21497f5a8f976617a1b2594d792c55fd37774f62caa70d932e6ab8b",
+    "artifacts/eval_v00_inputs/mixed/videos/observation.images.wrist_cam/chunk-000/file-000.mp4": "75b8ca15e057b2fac7307554e4a9a88616193a3fdbd5e59a4eb209d1a34e7f9b",
+    "artifacts/eval_v00_inputs/mixed/videos/observation.images.body_cam/chunk-000/file-000.mp4": "21370c17323d7dc39e6e7882aae1490d53d72b2bc1529836b9f92829fdeadd1e",
+    "artifacts/eval_v00_inputs/mixed/data/chunk-000/file-000.parquet": "2f5b4181045c28aeb12a9bb20710a4f5ab0bc29a9f9f358c75d65ddf809ac38e",
+    "artifacts/eval_v00_inputs/mixed/meta/episodes/chunk-000/file-000.parquet": "efc348ae9b655fab6c1ceb103d8a076e60b6b4f036526d72f50c0201ab9fe56c",
+    "artifacts/eval_v00_inputs/training_v00/PIPELINE.md": "9c0ca17dc4e711d5592aabb073a98c8d95d7b7f11aea234351d227a5173d96f0",
+    "artifacts/eval_v00_inputs/training_v00/.gitattributes": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb",
+    "artifacts/eval_v00_inputs/training_v00/README.md": "0ad8a2da80a6ab846829ba5ea21c3ba965024ad18ff2b264e3d1998d8361e468",
+    "artifacts/eval_v00_inputs/training_v00/meta/sfa_provenance.json": "c28ab1b28e8f601008c2445d9586ebbe33eb07a1e02f6bfa3a9393a08487b72e",
+    "artifacts/eval_v00_inputs/training_v00/meta/stats.json": "707b1cfecd9658987c7fb6b8b6bd0545c4462dbcbe9dd120079f2919bc78356d",
+    "artifacts/eval_v00_inputs/training_v00/meta/info.json": "d29cab3a6239f535c88008dee6ef5cbd42192051dd3b565361b41009b89ec6ec",
+    "artifacts/eval_v00_inputs/training_v00/meta/tasks.parquet": "87a109f924fbf68aa105998a2906b9695655f7e6cf3c5065ac4996262c3bd732",
+    "artifacts/eval_v00_inputs/training_v00/videos/observation.images.right_wrist_cam/chunk-000/file-000.mp4": "2cce747bd6de83a222cb8ea62aed054326991bc7466f2ababbcf8b9bce5eef33",
+    "artifacts/eval_v00_inputs/training_v00/videos/observation.images.right_wrist_cam/chunk-000/file-001.mp4": "504f47d552d275535673c3f5e2bd0eed8b88d3d08eb1e0db353d0bc9a0424a75",
+    "artifacts/eval_v00_inputs/training_v00/videos/observation.images.wrist_cam/chunk-000/file-000.mp4": "80fccbca892809c1a1bc88ec74877b1defcdf54b0659773e469b4a9e38f190e6",
+    "artifacts/eval_v00_inputs/training_v00/videos/observation.images.wrist_cam/chunk-000/file-001.mp4": "e9269ea8b7f24987ff2e1d30ad54707b684273e71c1635977ac271fd4e865cd5",
+    "artifacts/eval_v00_inputs/training_v00/videos/observation.images.body_cam/chunk-000/file-000.mp4": "44ba7ce5325b2c1f549f4fdac546bfbe18295c7197bc62070a30bd6ce642f3a3",
+    "artifacts/eval_v00_inputs/training_v00/videos/observation.images.body_cam/chunk-000/file-001.mp4": "d171e6163f5c1fb0d221b103f5d7e9124a4e2e6d4d52104027b6544f8bad1e26",
+    "artifacts/eval_v00_inputs/training_v00/data/chunk-000/file-000.parquet": "9ab1ae8beade14aa86b4ee9676add3005174de109169c9211bf7f86c44a64d90",
+    "artifacts/eval_v00_inputs/training_v00/meta/episodes/chunk-000/file-000.parquet": "ef93398b8a619a34b7b2d2e70e6f5a63b141084624851515236e01e4b5cb0dcb",
+    "artifacts/eval_v00_inputs/training_v01/meta/sfa_provenance.json": "fc84e0c6ea66eb0d4a0bb496a6b31d31c289fd74a65d71b366dae1d5fc12bc79",
+    "artifacts/eval_v00_inputs/training_v01/meta/info.json": "12d42791a8f03e28cda5f243d274313cccca893cad9682efd3ffbfd79459cbc9",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep0.npz": "ce94c27976b3b1887a35386ba1f17e1e44c558e8cbfeb43fe4b5bff5f1a29a19",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep3.npz": "4bb1074887966ec937f7ee8d24f9182a7072c52b0bf89c1319035406a23c8c6c",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep6.npz": "53c369ba07854ec2954c7211ade884cc9c629a07ee2e0e5f138bb7ca446014ef",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep5.npz": "e6513e61d5783252a04d525ce8935e262625a753f7cfbd652022c35f46c56b37",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep2.npz": "0e09fcbd714a209c3c0f1e2fac8a62c1a98b369e835d3e570001d55a0ad84489",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep1.npz": "c6bad599829ffe939e29e42ba632a65f1324b9e674ecc085e60c3a1e6a57299a",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep8.npz": "551599727b79367e99ae989ee9a458b13c68bf620aaf1cd8a85659316ba40b07",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep4.npz": "f97db3821d1b570162d70ed2783eedc4483b3650e861f4bdab9a17eb597cb87f",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep7.npz": "a578b2cb82a20118a00d8a9ad8e49b3c2135bf0199f8eb3e913f4f8269d045a7",
+    "/home/stanley/Stanley_ws/sfa_hf_export/sfagen/configs/work/openarm_pringles_handover/cache/recon_ep9.npz": "75bd338706b95234e7732d3d57d1cc76d9d6a386b65a4f31c82b971cd7909f2b",
+    "research/sim_free_augmentation/sfagen/tools/rollout_report.py": "2e3327010cc3f14f36270aca7490e6d84a57403bb27b55d5abb12513e7da0462",
+    "research/sim_free_augmentation/sfagen/results/eval_v00/PROTOCOL.md": "b6e3d2b4aeaf6f415efe5f033f44a36d8372a585b8cca486d3fa9551d603a045",
+    "research/sim_free_augmentation/sfagen/configs/openarm_pringles_handover.yaml": "e39f6450a5e12abf730113beb582f9ed5fadbd69ae18d59a1ca86a204ab95197",
+    "research/sim_free_augmentation/sfagen/results/pringles/calibration.json": "b93d59b3afe1642ef8e8076d6fbdd22b9f1ed6d265e44ee5ae3f7b6c3e3a2772",
+    "research/sim_free_augmentation/sfagen/results/pringles/table_height.json": "c730dc1393a3fa41601e519bc85fc37ff20e80d70ca1128444c735c98694a990"
+  },
+  "command": [
+    "research/sim_free_augmentation/sfagen/tools/rollout_report.py"
+  ]
+}

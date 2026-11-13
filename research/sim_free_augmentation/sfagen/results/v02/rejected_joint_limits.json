@@ -1,0 +1,212 @@
+[
+  {
+    "source": 2,
+    "variation": "can_target_002",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.6329604605742516
+  },
+  {
+    "source": 2,
+    "variation": "can_target_003",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.4497406360886596
+  },
+  {
+    "source": 2,
+    "variation": "can_target_005",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.9254735570638027
+  },
+  {
+    "source": 2,
+    "variation": "can_target_006",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.846871740095296
+  },
+  {
+    "source": 2,
+    "variation": "can_target_007",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.5650069085217948
+  },
+  {
+    "source": 2,
+    "variation": "can_target_008",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.22671105402564823
+  },
+  {
+    "source": 2,
+    "variation": "can_target_010",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.8931087056816973
+  },
+  {
+    "source": 2,
+    "variation": "can_target_011",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.9254735570638027
+  },
+  {
+    "source": 2,
+    "variation": "can_target_012",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.24596194220132916
+  },
+  {
+    "source": 2,
+    "variation": "can_target_015",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.8931087056816973
+  },
+  {
+    "source": 2,
+    "variation": "can_target_016",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.8931087056816973
+  },
+  {
+    "source": 2,
+    "variation": "can_target_017",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.7982442082993902
+  },
+  {
+    "source": 2,
+    "variation": "can_target_023",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.26672230218358295
+  },
+  {
+    "source": 7,
+    "variation": "can_target_020",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.8107950498387845
+  },
+  {
+    "source": 7,
+    "variation": "can_target_021",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.1101439994951215
+  },
+  {
+    "source": 7,
+    "variation": "can_target_025",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.8107950498387845
+  },
+  {
+    "source": 7,
+    "variation": "can_target_026",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.7846046894663706
+  },
+  {
+    "source": 8,
+    "variation": "can_target_000",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.903616951719762
+  },
+  {
+    "source": 8,
+    "variation": "can_target_001",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.8851412900148774
+  },
+  {
+    "source": 8,
+    "variation": "can_target_002",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.7933401324753211
+  },
+  {
+    "source": 8,
+    "variation": "can_target_003",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.5103005083645776
+  },
+  {
+    "source": 8,
+    "variation": "can_target_004",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.23939130021977692
+  },
+  {
+    "source": 8,
+    "variation": "can_target_005",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.967407503473096
+  },
+  {
+    "source": 8,
+    "variation": "can_target_006",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.903616951719762
+  },
+  {
+    "source": 8,
+    "variation": "can_target_007",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.3046435124554937
+  },
+  {
+    "source": 8,
+    "variation": "can_target_010",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.967407503473096
+  },
+  {
+    "source": 8,
+    "variation": "can_target_011",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.967407503473096
+  },
+  {
+    "source": 8,
+    "variation": "can_target_012",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.7041378619149545
+  },
+  {
+    "source": 8,
+    "variation": "can_target_017",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.967407503473096
+  },
+  {
+    "source": 8,
+    "variation": "can_target_018",
+    "field": "action",
+    "joint": "openarm_right_joint6",
+    "max_excess_deg": 0.39154742436015094
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "pass_all": true,
+  "viewports": [
+    {
+      "broken": [],
+      "width": 1425,
+      "viewport": 1440,
+      "images": 16,
+      "h1": "v02: coverage without longer episodes"
+    },
+    {
+      "broken": [],
+      "width": 390,
+      "viewport": 390,
+      "images": 16,
+      "h1": "v02: coverage without longer episodes"
+    }
+  ]
+}

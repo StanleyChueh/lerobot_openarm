@@ -46,14 +46,34 @@ def ik(robot, side, T_target, q0, q_all, lo, hi, iters=100, damp=1e-3):
     return q
 
 
-def _retarget(rec, W, d, sides):
-    """W: (T,) weight per frame; d: (3,) world offset; sides: arms that get T(t) + W(t) d."""
+def state_bounds(rec, s, qs, action_bounds=False, margin=0.0):
+    """Per-frame IK bounds for arm s: URDF ∪ recorded state; with action_bounds also keep each shifted label
+    A(t) + dq(t + k) inside the checker's URDF ∪ source-action envelope, `margin` rad inside it (retiming
+    interpolation can add ~0.1 deg); never tighter than the recorded pose."""
+    robot, S, A = rec.robot, rec.state, rec.action
+    lo = np.minimum(robot.lo[s][None], qs); hi = np.maximum(robot.hi[s][None], qs)
+    if action_bounds:
+        a = A[:, robot.sidx[s]]; k = action_lead(S, A); tgt = np.minimum(np.arange(len(S)) + k, len(S) - 1)
+        amax = np.full_like(qs, -np.inf); amin = np.full_like(qs, np.inf)
+        np.maximum.at(amax, tgt, a); np.minimum.at(amin, tgt, a)  # labels that read dq at frame t'
+        with np.errstate(invalid="ignore"):
+            hi = np.minimum(hi, np.where(np.isfinite(amax), qs + np.maximum(robot.hi[s], a.max(0)) - amax - margin, np.inf))
+            lo = np.maximum(lo, np.where(np.isfinite(amin), qs + np.minimum(robot.lo[s], a.min(0)) - amin + margin, -np.inf))
+        if margin:
+            hi = np.maximum(hi, qs); lo = np.minimum(lo, qs)
+    return lo, hi
+
+
+def _retarget(rec, W, d, sides, action_bounds=False):
+    """W: (T,) weight per frame; d: (3,) world offset; sides: arms that get T(t) + W(t) d.
+    action_bounds: also bound each IK state so its shifted label A(t) + dq(t + k) stays inside the checker's
+    URDF ∪ source-action envelope (a feasibility constraint on the solve; labels are never clipped afterwards)."""
     robot, S, A = rec.robot, rec.state, rec.action
     sp = robot.split(S); q = {s: sp[s].copy() for s in robot.arms}; qn = {s: sp[s].copy() for s in robot.arms}
     TT = {s: robot.tcp_traj({a: sp[a] for a in robot.arms}, s) for s in sides}
     act = W > 1e-9; err = np.zeros((len(S), 2))
     for s in sides:
-        lo = np.minimum(robot.lo[s][None], q[s]); hi = np.maximum(robot.hi[s][None], q[s])
+        lo, hi = state_bounds(rec, s, q[s], action_bounds)
         for t in np.flatnonzero(act):
             Tt = TT[s][t].copy(); Tt[:3, 3] += W[t] * d
             q0 = qn[s][t - 1] + (q[s][t] - q[s][t - 1]) if t > 0 and act[t - 1] else q[s][t]
@@ -125,7 +145,7 @@ def f1_schedule(rec, k):
     return {"t_motion": t0, "t_grasp": tg, "t_rejoin": tr, "next_event": int(nxt)}
 
 
-def f1_plan(rec, k, d):
+def f1_plan(rec, k, d, action_bounds=False):
     m = f1_schedule(rec, k)
     if m is None:
         return None
@@ -133,7 +153,7 @@ def f1_plan(rec, k, d):
     W = np.where(t < tin, smoothstep((t - m["t_motion"]) / (tin - m["t_motion"])), 1.0)
     W = np.where(t > tout, 1 - smoothstep((t - tout) / (m["t_rejoin"] - tout)), W)
     d = np.asarray(d, float); arm = rec.objects[k]["arm"]
-    Sn, An, qn, err, lead = _retarget(rec, W, d, [arm])
+    Sn, An, qn, err, lead = _retarget(rec, W, d, [arm], action_bounds)
     return {"family": "object_position", "object": rec.objects[k]["name"], "shift_m": d.tolist(), "marks": m, "w": W,
             "state": Sn, "action": An, "q": qn, "ik_err": err, "lead": lead, "moved_arms": [arm],
             "objects": object_tracks(rec, qn, k, d), "edited": (W > 1e-9), "t_rejoin": m["t_rejoin"]}

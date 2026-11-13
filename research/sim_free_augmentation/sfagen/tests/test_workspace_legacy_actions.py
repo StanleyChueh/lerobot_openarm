@@ -20,4 +20,10 @@ class LegacyActionTests(unittest.TestCase):
   self.assertGreater(An[-1,0],.29)
   c=dict(state=Sn,action=An,lead=lead,moved_arms=['R']);self.assertLess(nominal_action_error(rec,c),1e-12)
   c['action']=np.minimum(An,.2);self.assertGreater(nominal_action_error(rec,c),.09)
+  # v02b flag: the solve itself keeps the exact label inside URDF ∪ source actions; unreachable pose shows as IK error
+  Sb,Ab,qb,errb,leadb=_retarget(rec,np.ones(10),np.array([.1,0.,0.]),['R'],action_bounds=True)
+  self.assertLessEqual(Ab.max(),max(.2,A.max())+1e-12);self.assertGreater(errb[:,0].max(),.05)
+  self.assertLess(nominal_action_error(rec,dict(state=Sb,action=Ab,lead=leadb,moved_arms=['R'])),1e-12)
+  Sz,Az,_,errz,_=_retarget(rec,np.ones(10),np.zeros(3),['R'],action_bounds=True)  # zero shift stays bit-identical
+  self.assertTrue(np.array_equal(Sz,S) and np.array_equal(Az,A))
 if __name__=='__main__':unittest.main()

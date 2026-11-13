@@ -1,0 +1,80 @@
+{
+ "n_synthetic": 65,
+ "n_envelope_violations": 0,
+ "max_excess_deg": 0.0,
+ "violations": [],
+ "closest_to_rear_right": [
+  {
+   "ep": 66,
+   "variation": "init_y-3",
+   "family": "C_new_initial_position",
+   "xy_cm": [
+    15.37,
+    0.31
+   ],
+   "excess_deg": 0.0,
+   "where": null,
+   "nn_rear_right_cm": 2.61
+  },
+  {
+   "ep": 33,
+   "variation": "init_y-6",
+   "family": "C_new_initial_position",
+   "xy_cm": [
+    19.78,
+    -2.78
+   ],
+   "excess_deg": 0.0,
+   "where": null,
+   "nn_rear_right_cm": 4.17
+  },
+  {
+   "ep": 32,
+   "variation": "init_y-3",
+   "family": "C_new_initial_position",
+   "xy_cm": [
+    19.78,
+    0.22
+   ],
+   "excess_deg": 0.0,
+   "where": null,
+   "nn_rear_right_cm": 4.86
+  },
+  {
+   "ep": 13,
+   "variation": "init_x-6",
+   "family": "C_new_initial_position",
+   "xy_cm": [
+    20.45,
+    -0.57
+   ],
+   "excess_deg": 0.0,
+   "where": null,
+   "nn_rear_right_cm": 5.12
+  },
+  {
+   "ep": 60,
+   "variation": "pos_left_down",
+   "family": "A_original_geometry",
+   "xy_cm": [
+    15.37,
+    3.31
+   ],
+   "excess_deg": 0.0,
+   "where": null,
+   "nn_rear_right_cm": 5.6
+  },
+  {
+   "ep": 28,
+   "variation": "init_x-3",
+   "family": "C_new_initial_position",
+   "xy_cm": [
+    16.78,
+    3.22
+   ],
+   "excess_deg": 0.0,
+   "where": null,
+   "nn_rear_right_cm": 5.66
+  }
+ ]
+}

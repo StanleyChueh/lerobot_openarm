@@ -1,0 +1,737 @@
+{
+ "strict": 2.288940368525415,
+ "loose": 4.57788073705083,
+ "rule": "strict = max v02 score at |shift| <= 4 cm; loose = 2 x strict",
+ "n_calibration": 104,
+ "n_le_4cm": 66,
+ "rows": [
+  {
+   "source": 0,
+   "key": "can_target_025",
+   "family": "object_position",
+   "shift_cm": 2.5358193830072744,
+   "score": 0.9700887950626468
+  },
+  {
+   "source": 0,
+   "key": "can_target_026",
+   "family": "object_position",
+   "shift_cm": 0.5194025515251117,
+   "score": 0.8972728913407322
+  },
+  {
+   "source": 0,
+   "key": "can_target_030",
+   "family": "object_position",
+   "shift_cm": 3.761105186821866,
+   "score": 0.6866204057837189
+  },
+  {
+   "source": 0,
+   "key": "can_target_031",
+   "family": "object_position",
+   "shift_cm": 2.825829310774759,
+   "score": 0.7153955150745501
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.718249526312309
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.6499723252769761
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7932422180537755
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7111807462757993
+  },
+  {
+   "source": 0,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.49850912511616036
+  },
+  {
+   "source": 0,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.43272022880305566
+  },
+  {
+   "source": 0,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.0838691032136094
+  },
+  {
+   "source": 0,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.367169044043928
+  },
+  {
+   "source": 0,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8170491719195374
+  },
+  {
+   "source": 0,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.7671965761777029
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8833598459844402
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7755451750900747
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8948942618778705
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7948932911464871
+  },
+  {
+   "source": 1,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.4956000826197568
+  },
+  {
+   "source": 1,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4757903262627028
+  },
+  {
+   "source": 1,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.3051722776381594
+  },
+  {
+   "source": 1,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.4818260417272369
+  },
+  {
+   "source": 1,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8802689656465904
+  },
+  {
+   "source": 1,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8832314200575717
+  },
+  {
+   "source": 2,
+   "key": "can_target_013",
+   "family": "object_position",
+   "shift_cm": 2.9179803986862716,
+   "score": 1.7316500806206547
+  },
+  {
+   "source": 2,
+   "key": "can_target_018",
+   "family": "object_position",
+   "shift_cm": 2.8959414744738186,
+   "score": 1.5979332259173273
+  },
+  {
+   "source": 2,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5506195061157504
+  },
+  {
+   "source": 2,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4955491262259235
+  },
+  {
+   "source": 2,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.099125150075608
+  },
+  {
+   "source": 2,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.672091467923722
+  },
+  {
+   "source": 3,
+   "key": "can_target_022",
+   "family": "object_position",
+   "shift_cm": 3.050349068377404,
+   "score": 1.3176978861118394
+  },
+  {
+   "source": 3,
+   "key": "can_target_027",
+   "family": "object_position",
+   "shift_cm": 1.4771238540635203,
+   "score": 1.050983857848533
+  },
+  {
+   "source": 3,
+   "key": "can_target_028",
+   "family": "object_position",
+   "shift_cm": 4.454608810207321,
+   "score": 0.9388870101605303
+  },
+  {
+   "source": 3,
+   "key": "can_target_032",
+   "family": "object_position",
+   "shift_cm": 3.61374602338571,
+   "score": 0.7853345252113966
+  },
+  {
+   "source": 3,
+   "key": "can_target_033",
+   "family": "object_position",
+   "shift_cm": 5.542635211997021,
+   "score": 0.7801495694468935
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8420544275248616
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7429303965858374
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8931305036973184
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8152896461655711
+  },
+  {
+   "source": 3,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.45414136016171325
+  },
+  {
+   "source": 3,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.439159206560945
+  },
+  {
+   "source": 3,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.7295752243024194
+  },
+  {
+   "source": 3,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.8665571124506029
+  },
+  {
+   "source": 3,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9357806883496821
+  },
+  {
+   "source": 3,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9225102003325274
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7832735669640029
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.6947916686102157
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9372272880816468
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8473331191901363
+  },
+  {
+   "source": 4,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5082585004369892
+  },
+  {
+   "source": 4,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4451552354948389
+  },
+  {
+   "source": 4,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.3067449798388155
+  },
+  {
+   "source": 4,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.564821497516353
+  },
+  {
+   "source": 4,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.941117739906475
+  },
+  {
+   "source": 4,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9691386542176615
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7879946860229038
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.6629098976703536
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.0277597483250935
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.9499070094009885
+  },
+  {
+   "source": 5,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5998487623784815
+  },
+  {
+   "source": 5,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4565474775468262
+  },
+  {
+   "source": 5,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.445486023719229
+  },
+  {
+   "source": 5,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.618135970785526
+  },
+  {
+   "source": 5,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.860621421749788
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.808935638051839
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7591983144404395
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9375162447367054
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8405910859327008
+  },
+  {
+   "source": 6,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5656915202977782
+  },
+  {
+   "source": 6,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4331258635770152
+  },
+  {
+   "source": 6,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.2825910758467707
+  },
+  {
+   "source": 6,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.5297610175386298
+  },
+  {
+   "source": 6,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9544418316609524
+  },
+  {
+   "source": 6,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.0025839332810607
+  },
+  {
+   "source": 7,
+   "key": "can_target_012",
+   "family": "object_position",
+   "shift_cm": 6.761067549238605,
+   "score": 1.939027400641817
+  },
+  {
+   "source": 7,
+   "key": "can_target_013",
+   "family": "object_position",
+   "shift_cm": 7.276673041424618,
+   "score": 1.8216545397026258
+  },
+  {
+   "source": 7,
+   "key": "can_target_016",
+   "family": "object_position",
+   "shift_cm": 4.994595078733651,
+   "score": 2.176117893520191
+  },
+  {
+   "source": 7,
+   "key": "can_target_017",
+   "family": "object_position",
+   "shift_cm": 3.7661540259180706,
+   "score": 2.031283138918346
+  },
+  {
+   "source": 7,
+   "key": "can_target_018",
+   "family": "object_position",
+   "shift_cm": 4.62837469241281,
+   "score": 1.817834571845267
+  },
+  {
+   "source": 7,
+   "key": "can_target_022",
+   "family": "object_position",
+   "shift_cm": 0.8098134899533671,
+   "score": 1.4317171400177833
+  },
+  {
+   "source": 7,
+   "key": "can_target_023",
+   "family": "object_position",
+   "shift_cm": 2.8095789782348057,
+   "score": 1.309312915978582
+  },
+  {
+   "source": 7,
+   "key": "can_target_027",
+   "family": "object_position",
+   "shift_cm": 2.2644380384726865,
+   "score": 0.8142225735743289
+  },
+  {
+   "source": 7,
+   "key": "can_target_028",
+   "family": "object_position",
+   "shift_cm": 3.516477751459621,
+   "score": 0.796036690896504
+  },
+  {
+   "source": 7,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8841913526986867
+  },
+  {
+   "source": 7,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7729636048526863
+  },
+  {
+   "source": 7,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.6172462170558173
+  },
+  {
+   "source": 7,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 2.0515330358428097
+  },
+  {
+   "source": 7,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9799279144916729
+  },
+  {
+   "source": 7,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.616430513811364
+  },
+  {
+   "source": 8,
+   "key": "can_target_013",
+   "family": "object_position",
+   "shift_cm": 3.0409352936874687,
+   "score": 2.288940368525415
+  },
+  {
+   "source": 8,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9653386719685295
+  },
+  {
+   "source": 8,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8512180161233789
+  },
+  {
+   "source": 8,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.9339813000545165
+  },
+  {
+   "source": 9,
+   "key": "can_target_019",
+   "family": "object_position",
+   "shift_cm": 6.754367745272153,
+   "score": 1.6249321135611925
+  },
+  {
+   "source": 9,
+   "key": "can_target_022",
+   "family": "object_position",
+   "shift_cm": 3.6984229063965333,
+   "score": 1.479361768150845
+  },
+  {
+   "source": 9,
+   "key": "can_target_023",
+   "family": "object_position",
+   "shift_cm": 2.8073870866969846,
+   "score": 1.4816202429351197
+  },
+  {
+   "source": 9,
+   "key": "can_target_024",
+   "family": "object_position",
+   "shift_cm": 4.481574780648805,
+   "score": 1.3117590356798037
+  },
+  {
+   "source": 9,
+   "key": "can_target_027",
+   "family": "object_position",
+   "shift_cm": 2.478176924824606,
+   "score": 1.0090718928069742
+  },
+  {
+   "source": 9,
+   "key": "can_target_028",
+   "family": "object_position",
+   "shift_cm": 0.586899591691412,
+   "score": 1.1329304439334018
+  },
+  {
+   "source": 9,
+   "key": "can_target_029",
+   "family": "object_position",
+   "shift_cm": 3.5422508932488035,
+   "score": 1.0296921546358575
+  },
+  {
+   "source": 9,
+   "key": "can_target_032",
+   "family": "object_position",
+   "shift_cm": 4.074848432384657,
+   "score": 0.5922320401556128
+  },
+  {
+   "source": 9,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8128720502894827
+  },
+  {
+   "source": 9,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.729659716931295
+  },
+  {
+   "source": 9,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.0923527803931479
+  }
+ ]
+}

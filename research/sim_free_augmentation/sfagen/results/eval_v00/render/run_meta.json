@@ -1,0 +1,186 @@
+{
+  "git": {
+    "commit": "efda1cbe4b2e896aacb92bac34b788a91433b8d5",
+    "dirty_files": [
+      "?? research/sim_free_augmentation/sfagen/graphify-out/",
+      "?? research/sim_free_augmentation/sfagen/results/eval_v00/",
+      "?? research/sim_free_augmentation/sfagen/tests/test_rollout_report.py",
+      "?? research/sim_free_augmentation/sfagen/tools/eval_v00_render.py",
+      "?? research/sim_free_augmentation/sfagen/tools/eval_v00_wrist.py",
+      "?? research/sim_free_augmentation/sfagen/tools/rollout_report.py"
+    ]
+  },
+  "code": [
+    {
+      "module": "__main__",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/tools/eval_v00_render.py",
+      "sha256": "70bfe9f5aa77b3180347dc726692a9dc37990abbb4d8aa8f72b76ed31f40ace7",
+      "in_repo": true
+    },
+    {
+      "module": "__mp_main__",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/tools/eval_v00_render.py",
+      "sha256": "70bfe9f5aa77b3180347dc726692a9dc37990abbb4d8aa8f72b76ed31f40ace7",
+      "in_repo": true
+    },
+    {
+      "module": "_provenance",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/tools/_provenance.py",
+      "sha256": "4eb7cf56688570a87bb7901c7fe7fa62635e5b5ab875a81d4cd51e4196e6caa9",
+      "in_repo": true
+    },
+    {
+      "module": "canfix_bench",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/tools/canfix_bench.py",
+      "sha256": "63e7116d296eb98efd9216e08ab217d6386b90085ae72113b21c76b18575e148",
+      "in_repo": true
+    },
+    {
+      "module": "mesh",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/legacy/render_v4/mesh.py",
+      "sha256": "5d0af7b1d1ce3aadd7baa15bd227ee57405a85c329c3f22a6654ded1ef40e229",
+      "in_repo": true
+    },
+    {
+      "module": "mgw",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/legacy/render_v4/mgw.py",
+      "sha256": "abeb489e6ce80dc28d948e6dec44131a28654e64e1a48dec6727aecddf066ce4",
+      "in_repo": true
+    },
+    {
+      "module": "sfa",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "in_repo": true
+    },
+    {
+      "module": "sfa.data",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/data.py",
+      "sha256": "18168059858994842db132509e56226142f775ef424bd7f58a2a7f8d2d4dbf0e",
+      "in_repo": true
+    },
+    {
+      "module": "sfa.recover",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/recover.py",
+      "sha256": "5c0a55bb104e7ce18bc8d2fe5261c7f32a5a1ab5d0d2fd8e9eee6c6b24b47d9c",
+      "in_repo": true
+    },
+    {
+      "module": "sfa.render",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/render.py",
+      "sha256": "9ec64d744c1568fb49a66258d16fa6097383fef9773bd4671d5d2a242efc5b27",
+      "in_repo": true
+    },
+    {
+      "module": "sfa.robot",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/robot.py",
+      "sha256": "170b90df85bc3ee21c0e234a3618f96f6ea952d74a2f56cbc8f4259b248e365f",
+      "in_repo": true
+    },
+    {
+      "module": "sfa.segment",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfa/segment.py",
+      "sha256": "55fee28694fb342fadc63446fe7767e92c0efba51932e9f71b4182331ce56c61",
+      "in_repo": true
+    },
+    {
+      "module": "sfa2",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v2/sfa2/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "in_repo": true
+    },
+    {
+      "module": "sfa2.recon",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v2/sfa2/recon.py",
+      "sha256": "55db25134a038dfad312ff82ff2b63ec25861b3c9bdcdff29dfabe5cfad37ffa",
+      "in_repo": true
+    },
+    {
+      "module": "sfa2.render2",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v2/sfa2/render2.py",
+      "sha256": "ef40b65695f5c3fc33aa29fb302b775765b08a0dd0652e152dc6f2be42c2bead",
+      "in_repo": true
+    },
+    {
+      "module": "sfa2.se3",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v2/sfa2/se3.py",
+      "sha256": "1649823b8beb0f47028eb6e0b2164162531038e9727d7910d49f0568709de040",
+      "in_repo": true
+    },
+    {
+      "module": "sfa3",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3/sfa3/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "in_repo": true
+    },
+    {
+      "module": "sfa3.recon3",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3/sfa3/recon3.py",
+      "sha256": "55dbde96b5bd3c63c39654b420d8dd6d2a8ba19cb281ae455707d35db500e135",
+      "in_repo": true
+    },
+    {
+      "module": "sfa3.render3",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/v3/sfa3/render3.py",
+      "sha256": "fe09728f7eea4669d0910d1ddbf2e196fa2d3ac193ab42703f4eb0e53ad3f90b",
+      "in_repo": true
+    },
+    {
+      "module": "sfagen",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/sfagen/__init__.py",
+      "sha256": "45958242be26abf721dd965f3e400243274270f59e59141c7af34e2f17d2fe11",
+      "in_repo": true
+    },
+    {
+      "module": "sfagen.camera",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/sfagen/camera.py",
+      "sha256": "1f8ccd256a8095bf4123cc89172ecc0d9149de33107b37e1cc566a77d4a05e60",
+      "in_repo": true
+    },
+    {
+      "module": "sfagen.context",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/sfagen/context.py",
+      "sha256": "be0c53056499b445773bbafeed19e61bbe366ccf95ce422581e7f9499d6b4a2e",
+      "in_repo": true
+    },
+    {
+      "module": "sfagen.data",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/sfagen/data.py",
+      "sha256": "e66b17925266a5946946e62bb5f3ba7e12ea5f59fc34cb0497600e3458ef3083",
+      "in_repo": true
+    },
+    {
+      "module": "sfagen.mesh",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/sfagen/mesh.py",
+      "sha256": "bba0beaee2a92f9266a8640957187cc8e794f53720d5a8665f8b638a8ad42af9",
+      "in_repo": true
+    },
+    {
+      "module": "sfagen.recon",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/sfagen/recon.py",
+      "sha256": "632090d52014bc8b34d33f538e88da902bee3facb08431afb24b569a19a126e3",
+      "in_repo": true
+    },
+    {
+      "module": "sfagen.render",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/sfagen/render.py",
+      "sha256": "3198417286b07554df7173a6890f7be6c692d5e8d2f82a418b6cfbb8eac65624",
+      "in_repo": true
+    },
+    {
+      "module": "sfagen.robot",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/sfagen/robot.py",
+      "sha256": "77df0fb6f1e5d49e637134910ca3922b6c3705001cacd439981cc6be59c36340",
+      "in_repo": true
+    },
+    {
+      "module": "xfer_bench",
+      "file": "/home/stanley/Stanley_ws/lerobot_openarm/research/sim_free_augmentation/sfagen/tools/xfer_bench.py",
+      "sha256": "0b023578841058fc6a63cf257861b9ac22d93d94a78046ce5328ef388b2f8567",
+      "in_repo": true
+    }
+  ],
+  "device": "NVIDIA GeForce RTX 4090",
+  "protocol_sha256": "b6e3d2b4aeaf6f415efe5f033f44a36d8372a585b8cca486d3fa9551d603a045",
+  "models_sha256": "13619fb966ce9af44497fef6b889b06a9ffccaf0493b42bbf65648b49d16dd0b"
+}

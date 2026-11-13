@@ -1,0 +1,30 @@
+[
+  {
+    "condition": "copied",
+    "backend": "torchcodec",
+    "samples": [
+      0,
+      2575,
+      29355
+    ],
+    "action_chunk_shape": [
+      50,
+      16
+    ],
+    "pass_all": true
+  },
+  {
+    "condition": "right_wrist",
+    "backend": "torchcodec",
+    "samples": [
+      0,
+      2575,
+      29355
+    ],
+    "action_chunk_shape": [
+      50,
+      16
+    ],
+    "pass_all": true
+  }
+]

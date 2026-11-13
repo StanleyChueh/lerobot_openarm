@@ -1,0 +1,2776 @@
+{
+ "selection": {
+  "strict": {
+   "threshold": 2.288940368525415,
+   "episodes": [
+    [
+     0,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     0,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     0,
+     "timing_+10"
+    ],
+    [
+     0,
+     "timing_-10"
+    ],
+    [
+     1,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     1,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     1,
+     "timing_+10"
+    ],
+    [
+     1,
+     "timing_-10"
+    ],
+    [
+     2,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     2,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     2,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     2,
+     "timing_+10"
+    ],
+    [
+     3,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     3,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     3,
+     "timing_+10"
+    ],
+    [
+     3,
+     "timing_-10"
+    ],
+    [
+     4,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     4,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     4,
+     "timing_+10"
+    ],
+    [
+     4,
+     "timing_-10"
+    ],
+    [
+     5,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     5,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     5,
+     "timing_-10"
+    ],
+    [
+     6,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     6,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     6,
+     "timing_+10"
+    ],
+    [
+     6,
+     "timing_-10"
+    ],
+    [
+     7,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     7,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     7,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     7,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     7,
+     "timing_+10"
+    ],
+    [
+     7,
+     "timing_-10"
+    ],
+    [
+     8,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     8,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     8,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     9,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     9,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     9,
+     "timing_+10"
+    ],
+    [
+     0,
+     "can_target_057"
+    ],
+    [
+     3,
+     "can_target_057"
+    ],
+    [
+     9,
+     "can_target_059"
+    ],
+    [
+     7,
+     "can_target_059"
+    ],
+    [
+     7,
+     "can_target_049"
+    ],
+    [
+     3,
+     "can_target_049"
+    ],
+    [
+     4,
+     "can_target_074"
+    ],
+    [
+     1,
+     "can_target_074"
+    ],
+    [
+     3,
+     "can_target_058"
+    ],
+    [
+     7,
+     "can_target_058"
+    ],
+    [
+     2,
+     "can_target_040"
+    ],
+    [
+     7,
+     "can_target_040"
+    ],
+    [
+     2,
+     "can_target_031"
+    ],
+    [
+     6,
+     "can_target_075"
+    ],
+    [
+     4,
+     "can_target_075"
+    ],
+    [
+     1,
+     "can_target_083"
+    ],
+    [
+     4,
+     "can_target_083"
+    ],
+    [
+     6,
+     "can_target_084"
+    ],
+    [
+     5,
+     "can_target_084"
+    ],
+    [
+     0,
+     "can_target_056"
+    ],
+    [
+     3,
+     "can_target_056"
+    ],
+    [
+     6,
+     "can_target_085"
+    ],
+    [
+     1,
+     "can_target_085"
+    ],
+    [
+     9,
+     "can_target_050"
+    ],
+    [
+     7,
+     "can_target_050"
+    ],
+    [
+     0,
+     "can_target_066"
+    ],
+    [
+     3,
+     "can_target_066"
+    ],
+    [
+     2,
+     "can_target_041"
+    ],
+    [
+     7,
+     "can_target_041"
+    ],
+    [
+     2,
+     "can_target_032"
+    ],
+    [
+     3,
+     "can_target_048"
+    ],
+    [
+     0,
+     "can_target_048"
+    ],
+    [
+     1,
+     "can_target_073"
+    ],
+    [
+     4,
+     "can_target_073"
+    ],
+    [
+     9,
+     "can_target_060"
+    ],
+    [
+     3,
+     "can_target_060"
+    ],
+    [
+     1,
+     "can_target_082"
+    ],
+    [
+     4,
+     "can_target_082"
+    ],
+    [
+     3,
+     "can_target_067"
+    ],
+    [
+     9,
+     "can_target_067"
+    ],
+    [
+     0,
+     "can_target_065"
+    ],
+    [
+     4,
+     "can_target_065"
+    ],
+    [
+     2,
+     "can_target_039"
+    ],
+    [
+     7,
+     "can_target_039"
+    ],
+    [
+     2,
+     "can_target_030"
+    ],
+    [
+     7,
+     "can_target_030"
+    ],
+    [
+     0,
+     "can_target_047"
+    ],
+    [
+     3,
+     "can_target_047"
+    ],
+    [
+     9,
+     "can_target_051"
+    ],
+    [
+     3,
+     "can_target_051"
+    ],
+    [
+     4,
+     "can_target_064"
+    ],
+    [
+     3,
+     "can_target_068"
+    ],
+    [
+     1,
+     "can_target_076"
+    ],
+    [
+     3,
+     "can_target_076"
+    ],
+    [
+     2,
+     "can_target_029"
+    ],
+    [
+     7,
+     "can_target_029"
+    ],
+    [
+     0,
+     "can_target_038"
+    ],
+    [
+     3,
+     "can_target_038"
+    ],
+    [
+     9,
+     "can_target_042"
+    ],
+    [
+     3,
+     "can_target_042"
+    ],
+    [
+     4,
+     "can_target_081"
+    ],
+    [
+     6,
+     "can_target_081"
+    ],
+    [
+     3,
+     "can_target_077"
+    ],
+    [
+     4,
+     "can_target_055"
+    ],
+    [
+     3,
+     "can_target_046"
+    ],
+    [
+     4,
+     "can_target_046"
+    ],
+    [
+     3,
+     "can_target_069"
+    ],
+    [
+     0,
+     "can_target_037"
+    ],
+    [
+     3,
+     "can_target_037"
+    ],
+    [
+     9,
+     "can_target_033"
+    ],
+    [
+     3,
+     "can_target_033"
+    ],
+    [
+     2,
+     "can_target_028"
+    ],
+    [
+     0,
+     "can_target_028"
+    ],
+    [
+     5,
+     "can_target_072"
+    ]
+   ],
+   "n": 149,
+   "grid_targets": 41
+  },
+  "loose": {
+   "threshold": 4.57788073705083,
+   "episodes": [
+    [
+     0,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     0,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     0,
+     "timing_+10"
+    ],
+    [
+     0,
+     "timing_-10"
+    ],
+    [
+     1,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     1,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     1,
+     "timing_+10"
+    ],
+    [
+     1,
+     "timing_-10"
+    ],
+    [
+     2,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     2,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     2,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     2,
+     "timing_+10"
+    ],
+    [
+     3,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     3,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     3,
+     "timing_+10"
+    ],
+    [
+     3,
+     "timing_-10"
+    ],
+    [
+     4,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     4,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     4,
+     "timing_+10"
+    ],
+    [
+     4,
+     "timing_-10"
+    ],
+    [
+     5,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     5,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     5,
+     "timing_-10"
+    ],
+    [
+     6,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     6,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     6,
+     "timing_+10"
+    ],
+    [
+     6,
+     "timing_-10"
+    ],
+    [
+     7,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     7,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     7,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     7,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     7,
+     "timing_+10"
+    ],
+    [
+     7,
+     "timing_-10"
+    ],
+    [
+     8,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     8,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     8,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     9,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     9,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     9,
+     "timing_+10"
+    ],
+    [
+     0,
+     "can_target_057"
+    ],
+    [
+     3,
+     "can_target_057"
+    ],
+    [
+     9,
+     "can_target_059"
+    ],
+    [
+     7,
+     "can_target_059"
+    ],
+    [
+     7,
+     "can_target_049"
+    ],
+    [
+     3,
+     "can_target_049"
+    ],
+    [
+     4,
+     "can_target_074"
+    ],
+    [
+     1,
+     "can_target_074"
+    ],
+    [
+     8,
+     "can_target_022"
+    ],
+    [
+     2,
+     "can_target_022"
+    ],
+    [
+     3,
+     "can_target_058"
+    ],
+    [
+     7,
+     "can_target_058"
+    ],
+    [
+     2,
+     "can_target_040"
+    ],
+    [
+     7,
+     "can_target_040"
+    ],
+    [
+     2,
+     "can_target_031"
+    ],
+    [
+     8,
+     "can_target_031"
+    ],
+    [
+     6,
+     "can_target_075"
+    ],
+    [
+     4,
+     "can_target_075"
+    ],
+    [
+     1,
+     "can_target_083"
+    ],
+    [
+     4,
+     "can_target_083"
+    ],
+    [
+     6,
+     "can_target_084"
+    ],
+    [
+     5,
+     "can_target_084"
+    ],
+    [
+     0,
+     "can_target_056"
+    ],
+    [
+     3,
+     "can_target_056"
+    ],
+    [
+     6,
+     "can_target_085"
+    ],
+    [
+     1,
+     "can_target_085"
+    ],
+    [
+     9,
+     "can_target_050"
+    ],
+    [
+     7,
+     "can_target_050"
+    ],
+    [
+     0,
+     "can_target_066"
+    ],
+    [
+     3,
+     "can_target_066"
+    ],
+    [
+     2,
+     "can_target_041"
+    ],
+    [
+     7,
+     "can_target_041"
+    ],
+    [
+     2,
+     "can_target_032"
+    ],
+    [
+     8,
+     "can_target_032"
+    ],
+    [
+     3,
+     "can_target_048"
+    ],
+    [
+     0,
+     "can_target_048"
+    ],
+    [
+     1,
+     "can_target_073"
+    ],
+    [
+     4,
+     "can_target_073"
+    ],
+    [
+     9,
+     "can_target_060"
+    ],
+    [
+     3,
+     "can_target_060"
+    ],
+    [
+     1,
+     "can_target_082"
+    ],
+    [
+     4,
+     "can_target_082"
+    ],
+    [
+     3,
+     "can_target_067"
+    ],
+    [
+     9,
+     "can_target_067"
+    ],
+    [
+     0,
+     "can_target_065"
+    ],
+    [
+     4,
+     "can_target_065"
+    ],
+    [
+     8,
+     "can_target_021"
+    ],
+    [
+     2,
+     "can_target_021"
+    ],
+    [
+     2,
+     "can_target_039"
+    ],
+    [
+     7,
+     "can_target_039"
+    ],
+    [
+     2,
+     "can_target_030"
+    ],
+    [
+     7,
+     "can_target_030"
+    ],
+    [
+     0,
+     "can_target_047"
+    ],
+    [
+     3,
+     "can_target_047"
+    ],
+    [
+     9,
+     "can_target_051"
+    ],
+    [
+     3,
+     "can_target_051"
+    ],
+    [
+     4,
+     "can_target_064"
+    ],
+    [
+     3,
+     "can_target_068"
+    ],
+    [
+     1,
+     "can_target_076"
+    ],
+    [
+     3,
+     "can_target_076"
+    ],
+    [
+     8,
+     "can_target_020"
+    ],
+    [
+     2,
+     "can_target_020"
+    ],
+    [
+     2,
+     "can_target_029"
+    ],
+    [
+     7,
+     "can_target_029"
+    ],
+    [
+     0,
+     "can_target_038"
+    ],
+    [
+     3,
+     "can_target_038"
+    ],
+    [
+     9,
+     "can_target_042"
+    ],
+    [
+     3,
+     "can_target_042"
+    ],
+    [
+     4,
+     "can_target_081"
+    ],
+    [
+     6,
+     "can_target_081"
+    ],
+    [
+     3,
+     "can_target_077"
+    ],
+    [
+     4,
+     "can_target_055"
+    ],
+    [
+     3,
+     "can_target_046"
+    ],
+    [
+     4,
+     "can_target_046"
+    ],
+    [
+     3,
+     "can_target_069"
+    ],
+    [
+     0,
+     "can_target_037"
+    ],
+    [
+     3,
+     "can_target_037"
+    ],
+    [
+     9,
+     "can_target_033"
+    ],
+    [
+     3,
+     "can_target_033"
+    ],
+    [
+     2,
+     "can_target_028"
+    ],
+    [
+     0,
+     "can_target_028"
+    ],
+    [
+     8,
+     "can_target_019"
+    ],
+    [
+     2,
+     "can_target_019"
+    ],
+    [
+     5,
+     "can_target_072"
+    ]
+   ],
+   "n": 159,
+   "grid_targets": 45
+  }
+ },
+ "rendered": [
+  {
+   "source": 0,
+   "key": "can_target_028",
+   "family": "object_workspace",
+   "shift_cm": 10.744504829289767,
+   "score": 1.4703270521983973,
+   "target_xy_m": [
+    0.18,
+    -0.06
+   ]
+  },
+  {
+   "source": 0,
+   "key": "can_target_037",
+   "family": "object_workspace",
+   "shift_cm": 8.31624412278368,
+   "score": 1.0730726965203943,
+   "target_xy_m": [
+    0.21,
+    -0.06
+   ]
+  },
+  {
+   "source": 0,
+   "key": "can_target_038",
+   "family": "object_workspace",
+   "shift_cm": 6.708152903521915,
+   "score": 1.043445276192149,
+   "target_xy_m": [
+    0.21,
+    -0.03
+   ]
+  },
+  {
+   "source": 0,
+   "key": "can_target_047",
+   "family": "object_workspace",
+   "shift_cm": 4.088379588557359,
+   "score": 0.9287462665096019,
+   "target_xy_m": [
+    0.24,
+    -0.03
+   ]
+  },
+  {
+   "source": 0,
+   "key": "can_target_048",
+   "family": "object_workspace",
+   "shift_cm": 3.2487300176265563,
+   "score": 0.904995032999531,
+   "target_xy_m": [
+    0.24,
+    0.0
+   ]
+  },
+  {
+   "source": 0,
+   "key": "can_target_056",
+   "family": "object_workspace",
+   "shift_cm": 2.5358193830072744,
+   "score": 0.9712937842561229,
+   "target_xy_m": [
+    0.27,
+    -0.03
+   ]
+  },
+  {
+   "source": 0,
+   "key": "can_target_057",
+   "family": "object_workspace",
+   "shift_cm": 0.5194025515251117,
+   "score": 0.8974751558560029,
+   "target_xy_m": [
+    0.27,
+    0.0
+   ]
+  },
+  {
+   "source": 0,
+   "key": "can_target_065",
+   "family": "object_workspace",
+   "shift_cm": 3.761105186821866,
+   "score": 0.6863915715539948,
+   "target_xy_m": [
+    0.3,
+    -0.03
+   ]
+  },
+  {
+   "source": 0,
+   "key": "can_target_066",
+   "family": "object_workspace",
+   "shift_cm": 2.825829310774759,
+   "score": 0.7143655144352941,
+   "target_xy_m": [
+    0.3,
+    0.0
+   ]
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.718249526312309,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.6499723252769761,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7932422180537755,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7111807462757993,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.49850912511616036,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.43272022880305566,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.0838691032136094,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.367169044043928,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8170491719195374,
+   "target_xy_m": null
+  },
+  {
+   "source": 0,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.7671965761777029,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "shift_cm": 3.2472269614376326,
+   "score": 0.7322942436957044,
+   "target_xy_m": [
+    0.33,
+    -0.06
+   ]
+  },
+  {
+   "source": 1,
+   "key": "can_target_074",
+   "family": "object_workspace",
+   "shift_cm": 1.122007064720321,
+   "score": 0.8454996524617046,
+   "target_xy_m": [
+    0.33,
+    -0.03
+   ]
+  },
+  {
+   "source": 1,
+   "key": "can_target_076",
+   "family": "object_workspace",
+   "shift_cm": 6.057040009911771,
+   "score": 0.6350424598269687,
+   "target_xy_m": [
+    0.33,
+    0.030000000000000002
+   ]
+  },
+  {
+   "source": 1,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "shift_cm": 3.58029338246932,
+   "score": 0.4631529298052298,
+   "target_xy_m": [
+    0.36,
+    -0.06
+   ]
+  },
+  {
+   "source": 1,
+   "key": "can_target_083",
+   "family": "object_workspace",
+   "shift_cm": 1.8796057083198148,
+   "score": 0.5990259125637573,
+   "target_xy_m": [
+    0.36,
+    -0.03
+   ]
+  },
+  {
+   "source": 1,
+   "key": "can_target_085",
+   "family": "object_workspace",
+   "shift_cm": 6.241934912119646,
+   "score": 0.6104150170012577,
+   "target_xy_m": [
+    0.36,
+    0.030000000000000002
+   ]
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8833598459844402,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7755451750900747,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8948942618778705,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7948932911464871,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.4956000826197568,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4757903262627028,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.3051722776381594,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.4818260417272369,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8802689656465904,
+   "target_xy_m": null
+  },
+  {
+   "source": 1,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8832314200575717,
+   "target_xy_m": null
+  },
+  {
+   "source": 2,
+   "key": "can_target_019",
+   "family": "object_workspace",
+   "shift_cm": 10.530090388206004,
+   "score": 3.0621955475028013,
+   "target_xy_m": [
+    0.15,
+    -0.060000000000000005
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_020",
+   "family": "object_workspace",
+   "shift_cm": 7.926082780005871,
+   "score": 2.926651261997867,
+   "target_xy_m": [
+    0.15,
+    -0.030000000000000006
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_021",
+   "family": "object_workspace",
+   "shift_cm": 5.723877434678587,
+   "score": 2.9730930224164447,
+   "target_xy_m": [
+    0.15,
+    0.0
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_022",
+   "family": "object_workspace",
+   "shift_cm": 4.550028300894386,
+   "score": 3.082108729317352,
+   "target_xy_m": [
+    0.15,
+    0.03
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_028",
+   "family": "object_workspace",
+   "shift_cm": 9.630922645325771,
+   "score": 1.8005311820882959,
+   "target_xy_m": [
+    0.18,
+    -0.060000000000000005
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_029",
+   "family": "object_workspace",
+   "shift_cm": 6.68540616955813,
+   "score": 1.9217986688313629,
+   "target_xy_m": [
+    0.18,
+    -0.030000000000000006
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_030",
+   "family": "object_workspace",
+   "shift_cm": 3.8255248402909414,
+   "score": 1.9951281471566906,
+   "target_xy_m": [
+    0.18,
+    0.0
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_031",
+   "family": "object_workspace",
+   "shift_cm": 1.6045637897572538,
+   "score": 1.89349376725704,
+   "target_xy_m": [
+    0.18,
+    0.03
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_032",
+   "family": "object_workspace",
+   "shift_cm": 2.9179803986862716,
+   "score": 1.7068165113004716,
+   "target_xy_m": [
+    0.18,
+    0.06
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_039",
+   "family": "object_workspace",
+   "shift_cm": 3.8087409625942446,
+   "score": 1.9115220948130784,
+   "target_xy_m": [
+    0.21,
+    0.0
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_040",
+   "family": "object_workspace",
+   "shift_cm": 1.5641267122137088,
+   "score": 1.9295060033639373,
+   "target_xy_m": [
+    0.21,
+    0.03
+   ]
+  },
+  {
+   "source": 2,
+   "key": "can_target_041",
+   "family": "object_workspace",
+   "shift_cm": 2.8959414744738186,
+   "score": 1.6311606805601615,
+   "target_xy_m": [
+    0.21,
+    0.06
+   ]
+  },
+  {
+   "source": 2,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5506195061157504,
+   "target_xy_m": null
+  },
+  {
+   "source": 2,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4955491262259235,
+   "target_xy_m": null
+  },
+  {
+   "source": 2,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.099125150075608,
+   "target_xy_m": null
+  },
+  {
+   "source": 2,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.672091467923722,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "can_target_033",
+   "family": "object_workspace",
+   "shift_cm": 11.43999073862528,
+   "score": 1.3075636288635437,
+   "target_xy_m": [
+    0.18,
+    0.09
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_037",
+   "family": "object_workspace",
+   "shift_cm": 9.457400788930258,
+   "score": 1.5289696770989294,
+   "target_xy_m": [
+    0.21,
+    -0.05999999999999999
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_038",
+   "family": "object_workspace",
+   "shift_cm": 7.287254246572703,
+   "score": 1.51978915861292,
+   "target_xy_m": [
+    0.21,
+    -0.03
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_042",
+   "family": "object_workspace",
+   "shift_cm": 9.367531880977229,
+   "score": 1.1213112222395132,
+   "target_xy_m": [
+    0.21,
+    0.09
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_046",
+   "family": "object_workspace",
+   "shift_cm": 8.019956054976312,
+   "score": 1.329774792247826,
+   "target_xy_m": [
+    0.24,
+    -0.05999999999999999
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_047",
+   "family": "object_workspace",
+   "shift_cm": 5.289739114123158,
+   "score": 1.506208354910741,
+   "target_xy_m": [
+    0.24,
+    -0.03
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_048",
+   "family": "object_workspace",
+   "shift_cm": 3.1053155503455163,
+   "score": 1.4624839789525697,
+   "target_xy_m": [
+    0.24,
+    0.0
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_049",
+   "family": "object_workspace",
+   "shift_cm": 3.050349068377404,
+   "score": 1.314154811335402,
+   "target_xy_m": [
+    0.24,
+    0.03
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_051",
+   "family": "object_workspace",
+   "shift_cm": 7.91378032184476,
+   "score": 1.0721806957394695,
+   "target_xy_m": [
+    0.24,
+    0.09
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_056",
+   "family": "object_workspace",
+   "shift_cm": 4.567122216098123,
+   "score": 0.9589075114933526,
+   "target_xy_m": [
+    0.27,
+    -0.03
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_057",
+   "family": "object_workspace",
+   "shift_cm": 1.5875295614602738,
+   "score": 1.1117744072779594,
+   "target_xy_m": [
+    0.27,
+    0.0
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_058",
+   "family": "object_workspace",
+   "shift_cm": 1.4771238540635203,
+   "score": 1.0511848917459314,
+   "target_xy_m": [
+    0.27,
+    0.03
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_060",
+   "family": "object_workspace",
+   "shift_cm": 7.450180160486719,
+   "score": 0.9412912820998729,
+   "target_xy_m": [
+    0.27,
+    0.09
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_066",
+   "family": "object_workspace",
+   "shift_cm": 3.660261677776989,
+   "score": 0.7132492186115456,
+   "target_xy_m": [
+    0.3,
+    0.0
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_067",
+   "family": "object_workspace",
+   "shift_cm": 3.61374602338571,
+   "score": 0.770985108037055,
+   "target_xy_m": [
+    0.3,
+    0.03
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_068",
+   "family": "object_workspace",
+   "shift_cm": 5.542635211997021,
+   "score": 0.775622888319437,
+   "target_xy_m": [
+    0.3,
+    0.06
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_069",
+   "family": "object_workspace",
+   "shift_cm": 8.14754256601354,
+   "score": 0.8271187210683786,
+   "target_xy_m": [
+    0.3,
+    0.09
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_076",
+   "family": "object_workspace",
+   "shift_cm": 6.47583398203109,
+   "score": 0.9266995221798646,
+   "target_xy_m": [
+    0.33,
+    0.03
+   ]
+  },
+  {
+   "source": 3,
+   "key": "can_target_077",
+   "family": "object_workspace",
+   "shift_cm": 7.7199786615353965,
+   "score": 0.9266995221798646,
+   "target_xy_m": [
+    0.33,
+    0.06
+   ]
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8420544275248616,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7429303965858374,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8931305036973184,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8152896461655711,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.45414136016171325,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.439159206560945,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.7295752243024194,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.8665571124506029,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9357806883496821,
+   "target_xy_m": null
+  },
+  {
+   "source": 3,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9225102003325274,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "can_target_046",
+   "family": "object_workspace",
+   "shift_cm": 10.46182610799028,
+   "score": 0.8674199812789111,
+   "target_xy_m": [
+    0.24,
+    -0.06
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_055",
+   "family": "object_workspace",
+   "shift_cm": 7.7365966332690235,
+   "score": 0.8597319272725163,
+   "target_xy_m": [
+    0.27,
+    -0.06
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_064",
+   "family": "object_workspace",
+   "shift_cm": 5.316018192029837,
+   "score": 0.7783073546069051,
+   "target_xy_m": [
+    0.3,
+    -0.06
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_065",
+   "family": "object_workspace",
+   "shift_cm": 3.8401942273349547,
+   "score": 0.8583629253382479,
+   "target_xy_m": [
+    0.3,
+    -0.03
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "shift_cm": 3.8295132027549825,
+   "score": 0.573647985489063,
+   "target_xy_m": [
+    0.33,
+    -0.06
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_074",
+   "family": "object_workspace",
+   "shift_cm": 1.073412155576441,
+   "score": 0.777731817721345,
+   "target_xy_m": [
+    0.33,
+    -0.03
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_075",
+   "family": "object_workspace",
+   "shift_cm": 2.374711759646589,
+   "score": 0.7820928323260465,
+   "target_xy_m": [
+    0.33,
+    0.0
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_081",
+   "family": "object_workspace",
+   "shift_cm": 7.112190312167746,
+   "score": 0.29514836698226704,
+   "target_xy_m": [
+    0.36,
+    -0.09
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "shift_cm": 4.366954696600056,
+   "score": 0.39785876887659066,
+   "target_xy_m": [
+    0.36,
+    -0.06
+   ]
+  },
+  {
+   "source": 4,
+   "key": "can_target_083",
+   "family": "object_workspace",
+   "shift_cm": 2.3574001798213686,
+   "score": 0.5559980671980584,
+   "target_xy_m": [
+    0.36,
+    -0.03
+   ]
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7832735669640029,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.6947916686102157,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9372272880816468,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8473331191901363,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5082585004369892,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4451552354948389,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.3067449798388155,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.564821497516353,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.941117739906475,
+   "target_xy_m": null
+  },
+  {
+   "source": 4,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9691386542176615,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "can_target_072",
+   "family": "object_workspace",
+   "shift_cm": 11.992321065834949,
+   "score": 0.6749916081089725,
+   "target_xy_m": [
+    0.33,
+    -0.09
+   ]
+  },
+  {
+   "source": 5,
+   "key": "can_target_084",
+   "family": "object_workspace",
+   "shift_cm": 2.540329435768422,
+   "score": 0.7784347692082162,
+   "target_xy_m": [
+    0.36,
+    0.0
+   ]
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7879946860229038,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.6629098976703536,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.0277597483250935,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.9499070094009885,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5998487623784815,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4565474775468262,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.445486023719229,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.618135970785526,
+   "target_xy_m": null
+  },
+  {
+   "source": 5,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.860621421749788,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "can_target_075",
+   "family": "object_workspace",
+   "shift_cm": 1.7183794544080138,
+   "score": 0.9445100935499754,
+   "target_xy_m": [
+    0.33,
+    0.0
+   ]
+  },
+  {
+   "source": 6,
+   "key": "can_target_081",
+   "family": "object_workspace",
+   "shift_cm": 10.546484291560155,
+   "score": 0.5302712411668827,
+   "target_xy_m": [
+    0.36,
+    -0.09
+   ]
+  },
+  {
+   "source": 6,
+   "key": "can_target_084",
+   "family": "object_workspace",
+   "shift_cm": 2.3833263766705888,
+   "score": 0.6357716766307452,
+   "target_xy_m": [
+    0.36,
+    0.0
+   ]
+  },
+  {
+   "source": 6,
+   "key": "can_target_085",
+   "family": "object_workspace",
+   "shift_cm": 2.5490290673646654,
+   "score": 0.7255647247114796,
+   "target_xy_m": [
+    0.36,
+    0.03
+   ]
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.808935638051839,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7591983144404395,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9375162447367054,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8405910859327008,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5656915202977782,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4331258635770152,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.2825910758467707,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.5297610175386298,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9544418316609524,
+   "target_xy_m": null
+  },
+  {
+   "source": 6,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.0025839332810607,
+   "target_xy_m": null
+  },
+  {
+   "source": 7,
+   "key": "can_target_029",
+   "family": "object_workspace",
+   "shift_cm": 9.232343262276938,
+   "score": 2.0930955374771956,
+   "target_xy_m": [
+    0.18,
+    -0.03
+   ]
+  },
+  {
+   "source": 7,
+   "key": "can_target_030",
+   "family": "object_workspace",
+   "shift_cm": 7.514925033487615,
+   "score": 2.042712948914319,
+   "target_xy_m": [
+    0.18,
+    0.0
+   ]
+  },
+  {
+   "source": 7,
+   "key": "can_target_039",
+   "family": "object_workspace",
+   "shift_cm": 4.994595078733651,
+   "score": 2.1874820633818324,
+   "target_xy_m": [
+    0.21,
+    0.0
+   ]
+  },
+  {
+   "source": 7,
+   "key": "can_target_040",
+   "family": "object_workspace",
+   "shift_cm": 3.7661540259180706,
+   "score": 2.038745986410545,
+   "target_xy_m": [
+    0.21,
+    0.03
+   ]
+  },
+  {
+   "source": 7,
+   "key": "can_target_041",
+   "family": "object_workspace",
+   "shift_cm": 4.62837469241281,
+   "score": 1.8347216953971293,
+   "target_xy_m": [
+    0.21,
+    0.06
+   ]
+  },
+  {
+   "source": 7,
+   "key": "can_target_049",
+   "family": "object_workspace",
+   "shift_cm": 0.8098134899533671,
+   "score": 1.428369758444003,
+   "target_xy_m": [
+    0.24,
+    0.03
+   ]
+  },
+  {
+   "source": 7,
+   "key": "can_target_050",
+   "family": "object_workspace",
+   "shift_cm": 2.8095789782348057,
+   "score": 1.3100410451496647,
+   "target_xy_m": [
+    0.24,
+    0.06
+   ]
+  },
+  {
+   "source": 7,
+   "key": "can_target_058",
+   "family": "object_workspace",
+   "shift_cm": 2.2644380384726865,
+   "score": 0.8072142926497718,
+   "target_xy_m": [
+    0.27,
+    0.03
+   ]
+  },
+  {
+   "source": 7,
+   "key": "can_target_059",
+   "family": "object_workspace",
+   "shift_cm": 3.516477751459621,
+   "score": 0.810292438666558,
+   "target_xy_m": [
+    0.27,
+    0.06
+   ]
+  },
+  {
+   "source": 7,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8841913526986867,
+   "target_xy_m": null
+  },
+  {
+   "source": 7,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7729636048526863,
+   "target_xy_m": null
+  },
+  {
+   "source": 7,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.6172462170558173,
+   "target_xy_m": null
+  },
+  {
+   "source": 7,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 2.0515330358428097,
+   "target_xy_m": null
+  },
+  {
+   "source": 7,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9799279144916729,
+   "target_xy_m": null
+  },
+  {
+   "source": 7,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.616430513811364,
+   "target_xy_m": null
+  },
+  {
+   "source": 8,
+   "key": "can_target_019",
+   "family": "object_workspace",
+   "shift_cm": 9.650703410209708,
+   "score": 3.285006083445412,
+   "target_xy_m": [
+    0.15,
+    -0.06
+   ]
+  },
+  {
+   "source": 8,
+   "key": "can_target_020",
+   "family": "object_workspace",
+   "shift_cm": 6.682035421899621,
+   "score": 3.32709148992812,
+   "target_xy_m": [
+    0.15,
+    -0.03
+   ]
+  },
+  {
+   "source": 8,
+   "key": "can_target_021",
+   "family": "object_workspace",
+   "shift_cm": 3.763391880632313,
+   "score": 3.570892808130824,
+   "target_xy_m": [
+    0.15,
+    0.0
+   ]
+  },
+  {
+   "source": 8,
+   "key": "can_target_022",
+   "family": "object_workspace",
+   "shift_cm": 1.2948511554990352,
+   "score": 3.302204906445479,
+   "target_xy_m": [
+    0.15,
+    0.03
+   ]
+  },
+  {
+   "source": 8,
+   "key": "can_target_031",
+   "family": "object_workspace",
+   "shift_cm": 1.9322956276683245,
+   "score": 2.5843875220565136,
+   "target_xy_m": [
+    0.18,
+    0.03
+   ]
+  },
+  {
+   "source": 8,
+   "key": "can_target_032",
+   "family": "object_workspace",
+   "shift_cm": 3.0409352936874687,
+   "score": 2.294650242026132,
+   "target_xy_m": [
+    0.18,
+    0.06
+   ]
+  },
+  {
+   "source": 8,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9653386719685295,
+   "target_xy_m": null
+  },
+  {
+   "source": 8,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8512180161233789,
+   "target_xy_m": null
+  },
+  {
+   "source": 8,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.9339813000545165,
+   "target_xy_m": null
+  },
+  {
+   "source": 9,
+   "key": "can_target_033",
+   "family": "object_workspace",
+   "shift_cm": 9.442375483012643,
+   "score": 1.8657444297299226,
+   "target_xy_m": [
+    0.18,
+    0.09
+   ]
+  },
+  {
+   "source": 9,
+   "key": "can_target_042",
+   "family": "object_workspace",
+   "shift_cm": 6.754367745272153,
+   "score": 1.6186782079078377,
+   "target_xy_m": [
+    0.21,
+    0.09
+   ]
+  },
+  {
+   "source": 9,
+   "key": "can_target_050",
+   "family": "object_workspace",
+   "shift_cm": 2.8073870866969846,
+   "score": 1.4458866780347037,
+   "target_xy_m": [
+    0.24,
+    0.06
+   ]
+  },
+  {
+   "source": 9,
+   "key": "can_target_051",
+   "family": "object_workspace",
+   "shift_cm": 4.481574780648805,
+   "score": 1.30455732751979,
+   "target_xy_m": [
+    0.24,
+    0.09
+   ]
+  },
+  {
+   "source": 9,
+   "key": "can_target_059",
+   "family": "object_workspace",
+   "shift_cm": 0.586899591691412,
+   "score": 1.1302169087125722,
+   "target_xy_m": [
+    0.27,
+    0.06
+   ]
+  },
+  {
+   "source": 9,
+   "key": "can_target_060",
+   "family": "object_workspace",
+   "shift_cm": 3.5422508932488035,
+   "score": 1.0332112245276532,
+   "target_xy_m": [
+    0.27,
+    0.09
+   ]
+  },
+  {
+   "source": 9,
+   "key": "can_target_067",
+   "family": "object_workspace",
+   "shift_cm": 4.074848432384657,
+   "score": 0.583372259233463,
+   "target_xy_m": [
+    0.3,
+    0.03
+   ]
+  },
+  {
+   "source": 9,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8128720502894827,
+   "target_xy_m": null
+  },
+  {
+   "source": 9,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.729659716931295,
+   "target_xy_m": null
+  },
+  {
+   "source": 9,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.0923527803931479,
+   "target_xy_m": null
+  }
+ ]
+}

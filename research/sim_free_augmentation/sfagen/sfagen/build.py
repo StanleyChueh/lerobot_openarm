@@ -10,6 +10,19 @@ from .timing import source_frame_map,time_coordinates,source_time_at
 from .recon import interp_rows
 
 
+def mixed_video_features(features):
+    """A heterogeneous mixture has no single codec/pixel format; keep each container unchanged."""
+    import copy
+    result=copy.deepcopy(features)
+    for cam,feature in features[0].items():
+        if feature.get('dtype')!='video':continue
+        for field in ('video.codec','video.pix_fmt'):
+            values=[f[cam].get('info',{}).get(field) for f in features]
+            if any(v!=values[0] for v in values[1:]):
+                for f in result:f[cam].setdefault('info',{})[field]=None
+    return result
+
+
 def _features(ctx):
     inf = ctx.src.info["features"]; cams = [ctx.src.body] + ctx.src.wrists; nw = len(ctx.src.wrists)
     f = {k: {kk: inf[k][kk] for kk in ("dtype", "shape", "names") if kk in inf[k]} for k in ["observation.state", "action"] + cams}
@@ -22,11 +35,13 @@ def _features(ctx):
 
 def run(ctx, out_repo, device="cuda:0", mixed_repo=None, log=print):
     from lerobot.datasets.lerobot_dataset import LeRobotDataset
+    from lerobot.configs.video import RGBEncoderConfig
     out = ctx.work / "dataset"
     if out.exists():
         raise FileExistsError(f"Refusing to replace an existing export: {out}; choose a new work directory")
     ds = LeRobotDataset.create(repo_id=out_repo, fps=ctx.src.fps, features=_features(ctx), root=out,
-                               robot_type=ctx.src.info.get("robot_type"), use_videos=True, streaming_encoding=False, image_writer_threads=4, encoder_threads=2)
+                               robot_type=ctx.src.info.get("robot_type"), use_videos=True, streaming_encoding=False, image_writer_threads=4, encoder_threads=2,
+                               rgb_encoder=RGBEncoderConfig(**ctx.cfg["video_encoding"]) if ctx.cfg.get("video_encoding") else None)
     wa = ctx.cfg["source"].get("wrist_camera_arms", {}); eps = []; n = 0
     for e in ctx.episodes():
         p = ctx.work / f"candidates/ep{e}/checks.json"
@@ -123,11 +138,18 @@ def build_mixed(ctx, syn_repo, mixed_repo, log=print):
                              "wrist_view_pose_offset": (np.zeros((nr, 2 * len(ctx.src.wrists)), np.float32), syn.meta.features["wrist_view_pose_offset"]),
                              "is_synthetic": (np.zeros((nr, 1), np.float32), f1)}, output_dir=W / "real", repo_id="tmp/real")
     s2 = add_features(syn, {"is_synthetic": (np.ones((ns, 1), np.float32), f1)}, output_dir=W / "syn", repo_id="tmp/syn")
+    layouts=[{w:d.meta.features[w].get('info',{}) for w in ctx.src.wrists+[ctx.src.body]} for d in (r2,s2)]
+    from lerobot.datasets.io_utils import write_info
+    for d,features in zip((r2,s2),mixed_video_features([r2.meta.features,s2.meta.features])):
+        d.meta.info.features=features
+        write_info(d.meta.info,d.root)
     out = ctx.work / "dataset_mixed"
     m = merge_datasets([r2, s2], output_repo_id=mixed_repo, output_dir=out, concatenate_videos=False)
     sp = json.loads((ctx.work / "dataset/meta/sfa_provenance.json").read_text())
     nre = real.meta.total_episodes
-    sp.update({"name": mixed_repo, "contains_real_episodes": True, "real_episodes": list(range(nre)), "per_frame_flag": "is_synthetic"})
+    sp.update({"name": mixed_repo, "contains_real_episodes": True, "real_episodes": list(range(nre)), "per_frame_flag": "is_synthetic",
+               "source_video_feature_info":dict(real=layouts[0],synthetic=layouts[1]),
+               "mixed_video_layout":"Codec/pixel-format fields are null when heterogeneous; containers copied unchanged, use per-source info above."})
     sp["episodes"] = [{"episode_index": i, "synthetic": False, "source_real_episode": e} for i, e in enumerate(ctx.src.episode_ids)] + \
                      [{**e, "episode_index": nre + e["export_episode_index"]} for e in sp["episodes"]]
     (out / "meta/sfa_provenance.json").write_text(json.dumps(sp, indent=1, default=float)); shutil.rmtree(W)

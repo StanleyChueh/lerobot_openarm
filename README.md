@@ -1,147 +1,114 @@
-# sfagen v01: rendered wrist cameras, the can fix, and synthetic data from 1–10 real demos
+# sfagen v02 / v02b / v03: arena augmentation for the OpenArm Pringles hand-over
 
 > **Research branch.** Robot setup, teleoperation, recording, training and evaluation commands are on
-> [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map),
-> together with the full branch map. A visual walkthrough of this method is on
-> [`docs/sfagen-visual-walkthrough`](https://github.com/StanleyChueh/lerobot_openarm/tree/docs/sfagen-visual-walkthrough).
+> [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map).
 
-```mermaid
-flowchart LR
-    F1W["research/sfagen-workspace-f1w<br/>budget datasets · F1W"] --> FEW["research/sfagen-few-source<br/>R1 shift limit · R2 few sources"]
-    FEW --> THIS["research/sfagen-wrist-render<br/>THIS BRANCH · v01<br/>A can fix · B wrist render · C 1/2/4/10 demos · D quality · E Hub"]
-    THIS --> DOCS["docs/sfagen-visual-walkthrough<br/>showcase of the latest method"]
-    classDef me fill:#dcfce7,stroke:#16a34a,color:#14532d
-    class THIS me
+## v03: even arena coverage with a pre-registered distortion cap (2026-11-13, latest)
+
+**Goal:** cover the arena evenly (corners, edges, middle) instead of staying near the 10 real demos. Reject only
+episodes whose body-camera distortion exceeds a threshold that was frozen before rendering.
+
+**How the data are made** (code under `research/sim_free_augmentation/sfagen`):
+1. Targets: a 3 cm grid of can start positions over x 9–36 cm, y −9 to 15 cm (90 cells).
+2. Planning: for each cell, the F1W planner (`sfagen/workspace_plan.py`) re-plans the reach of the 10 nearest real
+   demos within 12 cm:
+   - rigid near-object reach and vertical transit;
+   - action-aware IK bounds;
+   - kinematic, speed, view and table gates (`sfagen/checks.py`).
+3. Rendering: the body camera is re-rendered by forward-warping the source video (`sfagen/render.py`). The left wrist
+   is copied from the source; the right wrist is either copied or rendered (`_wristrender`, an ablation).
+4. Distortion score (`sfagen/distortion.py`): per frame, (missing + spilled robot/can silhouette pixels) / silhouette;
+   the episode score is the 95th percentile over frames.
+   - **strict** ≤ 2.289, the worst v02 episode with shift ≤ 4 cm;
+   - **loose** ≤ 4.578, twice strict.
+5. The v02 hand-over location/timing variants are added; the result is exported as LeRobot v3.0. The 10 real demos
+   are added only in the separate `real_and_sim` repos.
+
+**Results** ([RESULTS.md](research/sim_free_augmentation/sfagen/results/v03/RESULTS.md),
+[protocol + amendments](research/sim_free_augmentation/sfagen/results/v03/PROTOCOL.md)):
+- **Episodes:** strict 149 (41 grid cells); loose 159 (45 cells).
+- **Coverage of the 40 eval starts** (worst nearest can start):
+  - strict 4.91 cm (31/40 within 2 cm);
+  - loose 2.70 cm (36/40);
+  - v00 3.91 cm (28/40).
+- **Checks:** all 8 exports pass verify, quality and an independent export check.
+- **Negative findings:**
+  - the loose cap removed nothing;
+  - loose's rear-right gain comes only from visually flagged ghost-can episodes;
+  - 13 strict episodes carry visual flags, so the score misses split/duplicate cans.
+- No policy, physics or hardware result yet.
+
+![v03 coverage](research/sim_free_augmentation/sfagen/results/v03/coverage.png)
+
+| Hugging Face dataset | contents |
+|---|---|
+| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_strict) | 149 synthetic, copied wrists |
+| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_strict) | 10 real + 149 synthetic |
+| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_strict) | 149 synthetic, rendered right wrist |
+| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_strict) | 10 real + 149, rendered right wrist |
+| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_loose) | 159 synthetic, copied wrists |
+| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_loose) | 10 real + 159 synthetic |
+| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_loose) | 159 synthetic, rendered right wrist |
+| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_loose) | 10 real + 159, rendered right wrist |
+
+Reproduce v03 (configs `configs/openarm_pringles_v03*.yaml`; same environment as below):
+```bash
+cd research/sim_free_augmentation/sfagen
+P="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 /home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python -B"
+$P -m sfagen generate configs/openarm_pringles_v03_gen.yaml          # grid candidates + checks
+$P -m sfagen render configs/openarm_pringles_v03.yaml                # body renders + distortion diagnostics
+$P -m sfagen render configs/openarm_pringles_v03_wristrender.yaml    # rendered right wrist
+# score/threshold/selection (results/v03/thresholds.json, selection.json) then per export, e.g. strict:
+$P -m sfagen build configs/openarm_pringles_v03_strict.yaml --repo-id <id> --mixed-repo-id <mixed id>
+$P -m sfagen verify configs/openarm_pringles_v03_strict.yaml
+$P tools/quality_report.py configs/openarm_pringles_v03_strict.yaml results/v03/quality_strict_copied
 ```
+The merge/selection helper scripts lived in the untracked run directory (`artifacts/sfagen_v03_run/`). Their outputs are
+committed under `results/v03/`.
 
-## Purpose
-Build **usable synthetic training data from fewer than 10 real demos** (OpenArm Pringles hand-over), and make the
-synthetic data fit a 3-camera VLA. Each study has a protocol frozen before its test data were rendered.
+## v02: fixed-duration arena augmentation
 
-| Study | Question | Registered outcome | Decision |
-|---|---|---|---|
-| R1 (`research/sfagen-few-source`) | How far can the object move? | r* = 11 cm | F1W shifts capped at 11 cm |
-| **A** | Fix the moved can's appearance | not adopted (cross test −0.16 dB; lift test +0.53 dB) | published body renderer kept; the real limit is object **pose** (1–2 cm) |
-| **B** | Render the wrist cameras for any task | T1 better than copy in 4/4 task–camera cells; the full gate passes only for the battery right wrist | v01 keeps copied wrists + flags; rendered wrists as an ablation |
-| **C** | Fewest demos | the frozen k-center rule gives 16 / 24 / 27 / 31 of 40 for 1 / 2 / 4 / 10 demos | publish the 1/2/4/10-demo candidates |
-| **D** | Is the data fit to train? | every hard gate recomputed from the exported files | see the table below |
+This research branch implements the approved Step 2 batch from `research/sfagen-wrist-render@77e52d4`.
+It adds absolute can targets and v00-style ±10-frame handover timing, keeping sfagen F1/F2 geometry and the body renderer.
 
-**Status:** offline only (no VLA training, no robot, no physics), pending independent review.
+**Current result:** 104/189 candidates passed generation: 29/89 positions, 60/80 handover locations, 15/20 timing variants.
+Only **18/35 target positions** survived. This batch does not achieve full rear-arena coverage and is not a validated
+policy improvement. Both matched synthetic-only and mixed exports pass local verification and the frozen quality gates (53 CPU tests). The existing wrist fidelity limitation and visible image artifacts remain. No training, robot operation or publication.
 
-## Results
+[Visual evidence](research/sim_free_augmentation/sfagen/results/v02/index.html) ·
+[Frozen protocol](research/sim_free_augmentation/sfagen/results/v02/PROTOCOL.md) ·
+[Exact input/code hashes](research/sim_free_augmentation/sfagen/results/v02/FREEZE.json) ·
+[Step 1 diagnosis](research/sim_free_augmentation/sfagen/results/eval_v00/index.html)
 
-### A: can appearance (`research/sim_free_augmentation/sfagen/results/canfix/RESULTS.md`)
-![can fix](research/sim_free_augmentation/sfagen/results/figs/canfix_heldout.png)
+![Accepted versus rejected positions](research/sim_free_augmentation/sfagen/results/v02/accepted_coverage.png)
 
-- **Dev diagnosis:**
-  - 86–95 % of the moved can's pixels are real warped pixels.
-  - Their error comes from the reconstructed can pose: a best 2-D shift recovers +2.4 dB, and the shift is 9–16 px at
-    every distance.
-- **Candidates:** mask growth (removes the ghost lid), object-edge fill, and a per-point colour atlas.
-- **Held-out:** cross-episode can −0.16 dB [−0.36, −0.01], so the change is **not adopted**. The same-can lift test
-  gives +0.53 dB [0.37, 0.89].
+![Timing and duration checks](research/sim_free_augmentation/sfagen/results/v02/duration_gate.png)
 
-### B: wrist cameras (`.../results/wrist/RESULTS.md`)
-![wrist](research/sim_free_augmentation/sfagen/results/figs/wrist_render_vs_copy.png)
+## Reproduce locally
 
-| Task / camera | T1 render − copy (same episode) | T2 0–3 cm (cross episode) | T2 3–6 cm | Gate |
-|---|---|---|---|---|
-| Pringles held-out / right | +1.01 [0.67, 1.31] dB | +0.19 [−1.12, 1.30] | −4.92 (10 frames) | fail |
-| Pringles held-out / left | +0.82 [0.74, 0.90] | +3.40 [2.01, 4.57] | +1.27 [−0.54, 2.42] (8 frames) | fail |
-| Battery (never used for design) / right | +1.64 [1.35, 1.93] | +1.60 [1.22, 1.98] | +2.12 [1.91, 2.64] | **pass** |
-| Battery / left | +1.47 [1.09, 1.80] | +0.85 [−0.28, 1.98] | −3.14 [−7.02, −0.95] | fail |
-
-**Design choices, made on dev only:**
-- RAFT depth (beat Depth Anything V2 and the table plane);
-- a colour test that assigns hand-rigid pixels the projections miss;
-- photometric mount refinement (`calib/DECISION.md`): adopted, +0.3 / +0.5 dB on held-out.
-
-### C: fewest demos (`.../results/fewsrc/RESULTS.md`)
-![coverage](research/sim_free_augmentation/sfagen/results/figs/coverage_vs_demos.png)
-
-### D/E: candidate datasets on the Hub (public, `v3.0` tag; `.../results/datasets_v01/*/quality_report.json`)
-| Repo (`ethanCSL/...`) | Demos | Episodes / frames | Coverage /40 | max speed / accel ratio | body decode | wrist valid (L / R) | Gate |
-|---|---|---|---|---|---|---|---|
-| [`openarm_pringles_lerobot_real_to_sim_1_3cam_v01`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_1_3cam_v01) | [3] | 25 / 7,328 | 16 | 1.09 / 1.50 | 40.29 dB | 0.40 / 0.40 | pass |
-| [`openarm_pringles_lerobot_real_to_sim_2_3cam_v01`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_2_3cam_v01) | [3, 8] | 51 / 15,934 | 24 | 1.08 / 1.49 | 39.58 dB | 0.36 / 0.36 | pass |
-| [`openarm_pringles_lerobot_real_to_sim_4_3cam_v01`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_4_3cam_v01) | [1, 3, 5, 8] | 111 / 32,668 | 27 | 1.02 / 1.50 | 39.85 dB | 0.41 / 0.41 | pass |
-| [`openarm_pringles_lerobot_real_to_sim_10_3cam_v01`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v01) | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] | 269 / 84,587 | 31 | 1.23 / 1.50 | 39.83 dB | 0.37 / 0.37 | pass |
-| [`openarm_pringles_lerobot_real_to_sim_1_3cam_wristrender_v01`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_1_3cam_wristrender_v01) | [3] | 25 / 7,328 | 16 | 1.09 / 1.50 | 40.29 dB | 1.00 / 0.82 | pass |
-| `openarm_pringles_lerobot_real_to_sim_2_3cam_wristrender_v01` (not published) | [3, 8] | 51 / 15,934 | 24 | 1.08 / 1.49 | 39.58 dB | 1.00 / 0.81 | FAIL: wrist_decode_psnr (min 29.1 dB < 30) |
-| `openarm_pringles_lerobot_real_to_sim_4_3cam_wristrender_v01` (not published) | [1, 3, 5, 8] | 111 / 32,668 | 27 | 1.02 / 1.50 | 39.85 dB | 1.00 / 0.82 | FAIL: wrist_decode_psnr (min 29.0 dB < 30) |
-| `openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v01` (not published) | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] | 269 / 84,587 | 31 | 1.23 / 1.50 | 39.83 dB | 1.00 / 0.81 | FAIL: wrist_decode_psnr (min 28.6 dB < 30) |
-
-`_wristrender` = rendered-wrist **ablation** (the registered wrist gate failed for Pringles); otherwise identical to the main repo. Mask wrist cameras where `wrist_view_valid == 0`.
-
-**Rendered-wrist ablations for N = 2, 4 and 10 are not published.** Their worst sampled wrist frame decodes at 28.6–29.1 dB against the rendered frame. The pre-set codec gate requires ≥ 30 dB, and fragmented render texture compresses poorly. Only the N = 1 ablation (32.6 dB) passed. The exports are kept locally.
-
-Hub check (read-only, `hubcheck.json`): `v3.0` tag = main, every export file present with its local size, public. The N = 1 repo was also loaded from the Hub with LeRobot (`revision="v3.0"`) and a 50-step action chunk.
-
-## Reproduce
-All commands run from `research/sim_free_augmentation/sfagen`. Generated data lives outside Git:
+Use the existing main-checkout `.venv`, clear `PYTHONPATH` and `LD_LIBRARY_PATH`, and set `HF_HUB_OFFLINE=1`.
+Source revision is `cebdee98115ab6827a4ec2655335c536b5dd085b`; cached inputs and exact paths are frozen in FREEZE.json.
+The local configs point at separate output directories; choose fresh work directories for a new export. Never overwrite
+an existing dataset. The current protocol is frozen: a new experiment requires a new protocol, not changing its gates.
 
 ```bash
-ln -s ~/Stanley_ws/sfa_hf_export/sfagen/configs/work configs/work; ln -s ~/Stanley_ws/sfa_hf_export/sfagen/logs logs
-PY="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 $HOME/Stanley_ws/lerobot_openarm/.venv/bin/python -B"
-$PY -m unittest discover -s tests                                                     # 38 CPU tests
+cd research/sim_free_augmentation/sfagen
+TASK_PY=/home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B -m unittest discover -s tests -q
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B -m sfagen generate configs/openarm_pringles_v02.yaml
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B -m sfagen render configs/openarm_pringles_v02.yaml
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B -m sfagen render configs/openarm_pringles_v02_wristrender.yaml
+# Build each condition only after every passing candidate has current raw renders.
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B -m sfagen build configs/openarm_pringles_v02.yaml --repo-id local/v02-copied --mixed-repo-id local/v02-copied-mixed
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B -m sfagen build configs/openarm_pringles_v02_wristrender.yaml --repo-id local/v02-right-wrist --mixed-repo-id local/v02-right-wrist-mixed
+# Verify and quality-check both conditions:
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B -m sfagen verify configs/openarm_pringles_v02.yaml
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B tools/quality_report.py configs/openarm_pringles_v02.yaml results/v02/quality_copied
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B -m sfagen verify configs/openarm_pringles_v02_wristrender.yaml
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B tools/quality_report.py configs/openarm_pringles_v02_wristrender.yaml results/v02/quality_right_wrist
+env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 "$TASK_PY" -B tools/v02_report.py
 ```
 
-**A: can fix** (GPU, about 4 min per run):
-```bash
-(cd tools && C='{"object_mask_grow":60,"object_erode":3,"object_texture":true}' && \
- $PY canfix_bench.py run cuda:0 ../results/canfix/heldout_base heldout '{}' && \
- $PY canfix_bench.py run cuda:0 ../results/canfix/heldout_g60_e3_tex heldout "$C" && \
- $PY canfix_bench.py compare ../results/canfix/heldout_base ../results/canfix/heldout_g60_e3_tex --rule)
-```
-
-**B: wrist gate** (GPU). The depth choice, calibration and dev runs are in `results/wrist/RESULTS.md`.
-```bash
-(cd tools && $PY wrist_bench.py run cuda:0 ../results/wrist/final_pringles_heldout pringles heldout '{"depth":"raft"}' --spec configs/_openarm_wrist_cameras_refined.yaml && \
- $PY wrist_bench.py run cuda:1 ../results/wrist/final_battery battery all '{"depth":"raft"}' --spec configs/_openarm_wrist_cameras_refined.yaml)
-```
-
-**C: generation, selection and coverage** (CPU/GPU; full commands in `results/fewsrc/RESULTS.md`):
-```bash
-(cd tools && $PY select_sources.py configs/openarm_pringles_fewsrc.yaml ../results/fewsrc/selection.json)
-$PY -m sfagen generate configs/openarm_pringles_fewsrc.yaml
-$PY tools/fewsrc_build.py select
-```
-
-**Render, build, gate and publish.** Body rendering takes about 1 min per episode on an RTX 4090; wrist rendering
-about 6 s per episode and camera.
-```bash
-tools/fewsrc_render.sh cuda:0 3 0 2 4 7 & tools/fewsrc_render.sh cuda:1 1 5 6 8 9; wait                # body
-CFG=configs/openarm_pringles_fewsrc_wristrender.yaml tools/fewsrc_render.sh cuda:0 0 1 2 3 4 5 6 7 8 9  # wrist (ablation)
-for n in 1 2 4 10; do
-  $PY tools/fewsrc_build.py setup $n && $PY -m sfagen build configs/pringles_fewsrc$n.yaml --repo-id ethanCSL/openarm_pringles_lerobot_real_to_sim_${n}_3cam_v01
-  $PY tools/fewsrc_build.py setup $n --wrist && $PY -m sfagen build configs/pringles_fewsrc${n}_wristrender.yaml --repo-id ethanCSL/openarm_pringles_lerobot_real_to_sim_${n}_3cam_wristrender_v01
-  tools/fewsrc_qa.sh $n && tools/fewsrc_qa.sh $n _wristrender                 # verify + quality gate
-done
-$PY tools/make_cards_v01.py 1 2 4 10 1_wristrender 2_wristrender 4_wristrender 10_wristrender
-(cd tools && DRY_RUN=1 $PY push_fewsrc.py 1 2 4 10 1_wristrender 2_wristrender 4_wristrender 10_wristrender)   # drop DRY_RUN to publish
-$PY tools/make_figs_v01.py                                                                     # charts
-```
-
-**Data:**
-- Sources: `ethanCSL/openarm_pringles_lerobot_real_10_v00@cebdee98` and `ethanCSL/openarm_insertbattery_lerobot_real_10_v02@a1c29d77`.
-- Coverage pool: `ethanCSL/openarm_pringles_lerobot_real_v00@2c1bc860`, episodes 10–49, reused development data.
-
-**Earlier work:**
-- R1/R2: `results/RESULTS_R1_R2.md`.
-- Everything from `research/sfagen-few-source` and `research/sfagen-workspace-f1w` is included. See those READMEs.
-
-## Literature check (`results/LITERATURE.md`)
-- **Real2Edit2Real** (CVPR 2026): 1–5 demos with a depth-conditioned video model, and its finding that depth quality
-  decides output quality. It shaped our depth comparison.
-- **Augmentron:** wrist rendering from FK and a table plane.
-- **WristWorld:** generative wrist views. This is the fallback for the disocclusions that fail T2.
-- **Bi-JCR:** markerless wrist calibration.
-- **ConCent:** object shadows.
-- **RoboSplat / NeRF-Aug:** dense object models. They address the object-pose limit found in A.
-
-## Limitations
-- PSNR, coverage and kinematic checks are proxies. Policy usefulness needs the SmolVLA screen, which the user runs.
-- Labels are nominal kinematic labels. There is no physics, force or hardware evidence.
-- Pringles demos 0–9 and the pool are reused development data. Battery is a held-out task for the wrist gate only.
-- The wrist mounts are photometric consistency calibrations (some offsets at the ±3° search bound), not ChArUco.
-- T2 has few frames at camera moves of 3 cm or more, because real cross-episode pairs rarely share a camera orientation.
+The matching condition uses the same states/actions/body images, and only re-renders the right wrist. Copied wrists
+carry validity flags. The existing Pringles wrist fidelity gate failed; codec quality does not fix that limitation.
+Labels and mesh checks are kinematic proxies, not contact-force or physical robot validation.
