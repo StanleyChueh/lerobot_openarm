@@ -30,7 +30,9 @@ def publish(api, R, new, extra, dry):
 
 def overwrite(api, R, new, extra, dry):
     """Amendment 4: keep rev 1 reachable at tag v03-rev1, then replace all files and move v3.0 (user decision 2026-11-14)."""
-    tags = {t.name: t.target_commit for t in api.list_repo_refs(R, **TYPE).tags}
+    # annotated tags list the tag-object id as target_commit, so resolve every tag to its commit through repo_info
+    tag_commits = lambda: {t.name: api.repo_info(R, revision=t.name, **TYPE).sha for t in api.list_repo_refs(R, **TYPE).tags}  # noqa: E731
+    tags = tag_commits()
     if 'v3.0' not in tags: raise RuntimeError(f'{R}: no v3.0 tag to preserve')
     old = tags.get('v03-rev1') or tags['v3.0']   # resumable: an existing v03-rev1 tag is the revision to preserve
     ops = [CommitOperationAdd(path_in_repo=k, path_or_fileobj=str(p)) for k, p in new.items()] + extra
@@ -41,12 +43,12 @@ def overwrite(api, R, new, extra, dry):
         return None
     if 'v03-rev1' not in tags:
         api.create_tag(R, tag='v03-rev1', revision=old, tag_message='v03 revision 1 (time-scaled grid episodes), kept for reproducibility', **TYPE)
-    if {t.name: t.target_commit for t in api.list_repo_refs(R, **TYPE).tags}.get('v03-rev1') != old:
+    if tag_commits().get('v03-rev1') != old:
         raise RuntimeError(f'{R}: v03-rev1 tag missing; nothing overwritten')
     c = api.create_commit(R, operations=[CommitOperationDelete(path_in_repo=f) for f in stale] + ops,
                           commit_message='sfagen v03 revision 2: every synthetic episode has its source demo\'s duration and speed (amendment 4)', **TYPE)
     api.delete_tag(R, tag='v3.0', **TYPE); api.create_tag(R, tag='v3.0', revision=c.oid, **TYPE)
-    T = {t.name: t.target_commit for t in api.list_repo_refs(R, **TYPE).tags}
+    T = tag_commits()
     if T.get('v3.0') != c.oid or T.get('v03-rev1') != old: raise RuntimeError(f'{R}: tags not as expected {T}')
     return c.oid
 
