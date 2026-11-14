@@ -90,6 +90,10 @@ def jobs():
                        "Pre-registered as amendment 4 in `results/v03/PROTOCOL.md`; amendment 5 grows the old-can mask (`object_mask_grow: 60`) to remove a ghost lid at the old can position."
                        "\n- **Revision 1:** tag `v03-rev1` (kept for reproducibility; do not train on it).\n") if R2 else ''
                 repo = f'ethanCSL/openarm_pringles_lerobot_{kind}_10_3cam{suf}_v03_{th}'
+                copy_repo = f'ethanCSL/openarm_pringles_lerobot_{kind}_10_3cam_v03_{th}'
+                ablation = (f"> **Ablation only. Not the recommended training set.** The right wrist is re-rendered and the Pringles wrist-fidelity gate failed "
+                            f"(`results/wrist/RESULTS.md`). For training use the copied-wrist repo [`{copy_repo}`](https://huggingface.co/datasets/{copy_repo}), "
+                            f"where every wrist camera is a real copied frame (user decision 2026-11-14).\n\n") if R2 and cond == 'right_wrist' else ''
                 ts = cov['table'][f'+v03 {th}']; flagged = sum((f['source'], f['key']) in {tuple(x) for x in sel[th]['episodes']} for f in aud['flags'])
                 card = f"""---
 license: apache-2.0
@@ -98,7 +102,7 @@ tags: [LeRobot, openarm, synthetic, sfagen]
 ---
 # OpenArm Pringles hand-over: {'10 real + ' if mixed else ''}synthetic even-coverage demos (sfagen v03, {th} distortion cap{', rendered right wrist' if cond == 'right_wrist' else ''})
 
-{'Real + synthetic mixture' if mixed else '**Synthetic only (no real episodes).**'} {info['total_episodes']} episodes, {info['total_frames']:,} frames, {info['fps']} fps, LeRobot v3.0.
+{ablation}{'Real + synthetic mixture' if mixed else '**Synthetic only (no real episodes).**'} {info['total_episodes']} episodes, {info['total_frames']:,} frames, {info['fps']} fps, LeRobot v3.0.
 Generated without a simulator from the 10 real demos of [`{SRC}`](https://huggingface.co/datasets/{SRC}) (rev cebdee98).
 
 {dur}
@@ -148,6 +152,15 @@ if __name__ == '__main__':
     for j in J: (V / 'cards' / (j['repo'].split('/')[1] + '.md')).write_text(j['card'])
     if sys.argv[1] == 'cards':
         print('\n'.join(f"{j['repo']}  gates={'PASS' if j['ok'] else 'FAIL'}" for j in J)); sys.exit()
+    if sys.argv[1] == 'readme':   # README-only update of the wristrender (ablation) repos on main; data and the v3.0 tag untouched
+        assert R2
+        from huggingface_hub import HfApi
+        api = HfApi()
+        for j in (j for j in J if '_wristrender_' in j['repo']):
+            p = V / 'cards' / (j['repo'].split('/')[1] + '.md'); assert 'Ablation only' in p.read_text()
+            print(j['repo'], 'README ->', 'dry run' if os.environ.get('PUBLISH') != '1' else
+                  api.upload_file(path_or_fileobj=str(p), path_in_repo='README.md', repo_id=j['repo'], commit_message='Mark as ablation: use the copied-wrist repo for training', **TYPE).oid)
+        sys.exit()
     assert sys.argv[1] in ('push', 'overwrite') and (sys.argv[1] == 'overwrite') == R2
     dirty = [l for l in git_state()['dirty_files'] if l[3:].startswith(('sfagen/', 'configs/', 'tools/push_v03.py'))]
     if dirty: raise RuntimeError(f'uncommitted code would not match the cited commit: {dirty}')

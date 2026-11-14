@@ -8,6 +8,10 @@
 > **Revision 2 (Hub tag `v3.0`).** Every synthetic episode is exactly as long as its source demo (8.0–9.3 s), and the
 > robot moves at the source speed. Revision 1 slowed some reaches down instead (up to 3.56× the source length, ~33 s)
 > and is kept at the Hub tag `v03-rev1` as a negative result. The changes are Amendments 4–5 in the protocol.
+>
+> **Recommended training set:** the copied-wrist repos (every wrist camera is a real copied frame).
+> `…_real_and_sim_10_3cam_v03_loose` gives the most even coverage. The `_wristrender` repos are an ablation, parked by
+> user decision on 2026-11-14 until the real-robot evaluation.
 
 **Goal:** cover the arena evenly (corners, edges, middle) instead of staying near the 10 real demos. Reject only
 episodes whose body-camera distortion exceeds a threshold that was frozen before rendering.

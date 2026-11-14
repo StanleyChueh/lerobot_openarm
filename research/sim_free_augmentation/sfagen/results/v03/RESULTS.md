@@ -193,3 +193,30 @@ All 4 export pairs pass `verify`, every quality gate (including `duration` and `
 - `results/v03r2/review/{strict,loose}/index.html`: real source vs synthetic side by side, with a running clock (corners,
   middle, largest shift, one hand-over variant).
 - Viewer: `results/v03r2/viewer/index.html`.
+
+### Wrist cameras and the next evaluation (decision 2026-11-14)
+- **Decision:** copied wrist frames for every wrist camera.
+  - The `_wristrender` repos stay as a labelled ablation; their cards point to the copied repos.
+  - Rendering is parked until the real-robot evaluation shows whether even coverage helps.
+- **Evidence behind the decision** (`results/wrist/final_*/frames.jsonl`): same-episode novel view, render − copy PSNR
+  for the Pringles right wrist, by camera move:
+
+  | Camera move | Render − copy |
+  |---|---|
+  | < 1.5 cm | +2.5 dB |
+  | 1.5–3 cm | +0.7 dB |
+  | 3–6 cm | +0.2 dB (48 % of frames better) |
+  | 6–20 cm | +0.9 dB |
+
+  - Render's gain is on the background (correct geometry). It is worse on the camera's own gripper (−0.4 to −0.9 dB),
+    which copy keeps exact.
+  - In the cross-episode check, render is worse at ≥ 3 cm (−5.3 dB, 10 frames).
+  - In v03r2 the right wrist camera moves in 54 % of frames: median 3 cm, 90th percentile 6.4 cm, max 11.5 cm.
+  - Rendering only one hand-picked camera is not a general method. A later renderer, if needed, renders every moved
+    wrist by a fixed rule.
+- **Suggested evaluation:** train on `ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_loose` (148
+  episodes; worst 2.70 cm, 35/40 starts within 2 cm). Compare against the existing results: real 10 = 10/20,
+  real + v00 = 15/20.
+  - **Exposure:** the 15/20 run used batch 16 vs 8 for real only. Keep batch size and steps equal to the v00 run.
+  - **Placement:** evaluate at evenly placed starts (corners, edges, middle) and report per region.
+  - **Strict** leaves the rear-right uncovered (6.63 cm), so loose is the set that tests even coverage.
