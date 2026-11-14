@@ -20,3 +20,21 @@ shows and what it changed here.
 - shadow and appearance harmonisation for relocated objects.
 
 **Not read in full:** the papers' own limitation sections, except where quoted.
+
+# Update 2026-11-14 (SIM_BENCHMARK_PLAN S0, Opus 5.5)
+
+Papers read for the benchmark plan (`SIM_BENCHMARK_PLAN.md` §9) and a code-release check made on 2026-11-14
+(project pages and the GitHub API).
+
+| Paper | Needs beyond one RGB camera + URDF | Code released? (checked 2026-11-14) | Effect on sfagen |
+|---|---|---|---|
+| **DemoGen** (arXiv 2502.16932) | depth; point-cloud policy | (not re-checked) | 3-D policies only; not a baseline for 2-D VLAs |
+| **R2RGen** (arXiv 2510.08547, RSS 2026) | depth; scanned object templates | **No.** `github.com/r2rgen/R2RGen` holds only `README.md` + `demo.ipynb` (19 KB, last push 2026-04-29); page says "Code (coming soon)" | compare on input requirements only |
+| **Real2Edit2Real** (arXiv 2512.19402, CVPR 2026) | 3 cameras; VGGT; video model tuned on ~7K episodes | **Yes.** `github.com/Real2Edit2Real/Real2Edit2Real`, Apache-2.0, last push 2026-08-04 (`editing/`, `videogen/`, `vggt/`, `configs/`); also a Hugging Face page | **Changes §9:** "none of the real-to-real pages links code" is no longer true. A runnable generative baseline exists; whether it runs on RoboTwin (3 cameras: yes) within 24 GB is an open question for the user |
+| **R2RDreamer** (arXiv 2606.17040) | depth; tuned image-to-video model | No (project page anonymous, "ICRA 2027 Submission", no code link) | input-requirement comparison |
+| **RoboSplat** (2504.13175), **Real2Render2Real** (2505.09601) | dense multi-view capture / object scan + IsaacLab | (not re-checked) | not post-hoc on teleop data |
+| **MimicGen** (2310.17596) / **DexMimicGen** (2410.24185) | simulator + digital twin | yes (known) | basis of the R10+M reference arm |
+| **Real2Sem2Real** (arXiv 2610.28880, new) | one human RGB video; Gaussian-splat tracking; IsaacSim / MuJoCo rendered robot demos | No ("Paper and code coming soon") | uses a simulator to render; different input class |
+
+Searches: "R2RGen github code release", "Real2Edit2Real github", "R2RDreamer 2606.17040 code", "Real2Sem2Real 2610.28880";
+then each project page and `gh api repos/<owner>/<repo>/contents`.

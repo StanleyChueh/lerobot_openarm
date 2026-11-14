@@ -1,5 +1,7 @@
 # LIBERO design study: scoping (2026-11-13, Claude). Nothing installed or run.
 
+> **Superseded 2026-11-14** by `results/SIM_BENCHMARK_PLAN.md` (LeRobot-native benchmarks: RoboTwin 2.0, LIBERO, LIBERO-plus).
+
 ## Why simulation
 On the real robot, each design question (wrist copy vs render, distortion cap, coverage pattern, number of sources)
 costs a training run plus about 45 robot trials, and the answer is noisy (v00: 10/20 → 15/20, p = 0.19). In simulation:
