@@ -3,68 +3,85 @@
 > **Research branch.** Robot setup, teleoperation, recording, training and evaluation commands are on
 > [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map).
 
-## v03: even arena coverage with a pre-registered distortion cap (2026-11-13, latest)
+## v03: even arena coverage with a pre-registered distortion cap (revision 2, 2026-11-14, latest)
+
+> **Revision 2 (Hub tag `v3.0`).** Every synthetic episode is exactly as long as its source demo (8.0–9.3 s), and the
+> robot moves at the source speed. Revision 1 slowed some reaches down instead (up to 3.56× the source length, ~33 s)
+> and is kept at the Hub tag `v03-rev1` as a negative result. The changes are Amendments 4–5 in the protocol.
 
 **Goal:** cover the arena evenly (corners, edges, middle) instead of staying near the 10 real demos. Reject only
 episodes whose body-camera distortion exceeds a threshold that was frozen before rendering.
 
 **How the data are made** (code under `research/sim_free_augmentation/sfagen`):
 1. Targets: a 3 cm grid of can start positions over x 9–36 cm, y −9 to 15 cm (90 cells).
-2. Planning: for each cell, the F1W planner (`sfagen/workspace_plan.py`) re-plans the reach of the 10 nearest real
-   demos within 12 cm:
+2. Planning: for each cell, the F1W planner (`sfagen/workspace_plan.py`) re-plans the reach of every real demo
+   within 12 cm:
+   - no retiming: frame count == source;
+   - the shift is spread over a wide blend, from the previous gripper event to just before the next one;
    - rigid near-object reach and vertical transit;
    - action-aware IK bounds;
-   - kinematic, speed, view and table gates (`sfagen/checks.py`).
+   - kinematic, speed, view and table gates (`sfagen/checks.py`), plus `duration` (== source frames) and
+     `speed_similarity` (moved-arm TCP peak and mean speed 0.8–1.25× the source).
 3. Rendering: the body camera is re-rendered by forward-warping the source video (`sfagen/render.py`). The left wrist
    is copied from the source; the right wrist is either copied or rendered (`_wristrender`, an ablation).
 4. Distortion score (`sfagen/distortion.py`): per frame, (missing + spilled robot/can silhouette pixels) / silhouette;
    the episode score is the 95th percentile over frames.
    - **strict** ≤ 2.289, the worst v02 episode with shift ≤ 4 cm;
    - **loose** ≤ 4.578, twice strict.
+   - Each cell keeps its 2 lowest-score candidates.
 5. The v02 hand-over location/timing variants are added; the result is exported as LeRobot v3.0. The 10 real demos
    are added only in the separate `real_and_sim` repos.
 
 **Results** ([RESULTS.md](research/sim_free_augmentation/sfagen/results/v03/RESULTS.md),
 [protocol + amendments](research/sim_free_augmentation/sfagen/results/v03/PROTOCOL.md)):
-- **Episodes:** strict 149 (41 grid cells); loose 159 (45 cells).
+- **Episodes:**
+  - strict 130 synthetic (71 hand-over + 59 grid, 35 cells);
+  - loose 138 (71 + 67, 39 cells).
+- **Duration:** length / source = 1.000 for every synthetic episode. TCP speed vs source: peak 0.86–1.16×, mean
+  0.92–1.15×.
 - **Coverage of the 40 eval starts** (worst nearest can start):
-  - strict 4.91 cm (31/40 within 2 cm);
-  - loose 2.70 cm (36/40);
+  - loose 2.70 cm (35/40 within 2 cm);
+  - strict 6.63 cm (28/40; rear-right uncovered);
   - v00 3.91 cm (28/40).
-- **Checks:** all 8 exports pass verify, quality and an independent export check.
+- **Checks:** all 8 exports pass verify, quality (including duration and speed similarity) and an independent export
+  check.
 - **Negative findings:**
-  - the loose cap removed nothing;
-  - loose's rear-right gain comes only from visually flagged ghost-can episodes;
-  - 13 strict episodes carry visual flags, so the score misses split/duplicate cans.
+  - without slow-down, only 92/416 grid candidates pass (rev 1: 189);
+  - strict cannot cover the rear-right;
+  - 4 hand-over timing variants are excluded for being too slow;
+  - 13 episodes (11 strict) carry small visual flags (notched can top, ghost sliver, dark lid arc).
 - No policy, physics or hardware result yet.
 
-![v03 coverage](research/sim_free_augmentation/sfagen/results/v03/coverage.png)
+![v03 coverage](research/sim_free_augmentation/sfagen/results/v03r2/coverage.png)
 
 | Hugging Face dataset | contents |
 |---|---|
-| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_strict) | 149 synthetic, copied wrists |
-| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_strict) | 10 real + 149 synthetic |
-| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_strict) | 149 synthetic, rendered right wrist |
-| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_strict) | 10 real + 149, rendered right wrist |
-| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_loose) | 159 synthetic, copied wrists |
-| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_loose) | 10 real + 159 synthetic |
-| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_loose) | 159 synthetic, rendered right wrist |
-| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_loose) | 10 real + 159, rendered right wrist |
+| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_strict) | 130 synthetic, copied wrists |
+| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_strict) | 10 real + 130 synthetic |
+| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_strict) | 130 synthetic, rendered right wrist |
+| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_strict`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_strict) | 10 real + 130, rendered right wrist |
+| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v03_loose) | 138 synthetic, copied wrists |
+| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v03_loose) | 10 real + 138 synthetic |
+| [`ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_wristrender_v03_loose) | 138 synthetic, rendered right wrist |
+| [`ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_loose`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_wristrender_v03_loose) | 10 real + 138, rendered right wrist |
 
-Reproduce v03 (configs `configs/openarm_pringles_v03*.yaml`; same environment as below):
+Reproduce v03 revision 2 (configs `configs/openarm_pringles_v03r2*.yaml`, written by
+`results/v03/run_scripts/make_configs.py`; same environment as below). The full driver sequence is in
+`results/v03/run_scripts/` (`REV=2` selects revision 2). The core steps are:
 ```bash
 cd research/sim_free_augmentation/sfagen
 P="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 /home/stanley/Stanley_ws/lerobot_openarm/.venv/bin/python -B"
-$P -m sfagen generate configs/openarm_pringles_v03_gen.yaml          # grid candidates + checks
-$P -m sfagen render configs/openarm_pringles_v03.yaml                # body renders + distortion diagnostics
-$P -m sfagen render configs/openarm_pringles_v03_wristrender.yaml    # rendered right wrist
+$P -m sfagen generate configs/openarm_pringles_v03r2_gen.yaml         # grid candidates + checks
+$P -m sfagen render configs/openarm_pringles_v03r2.yaml               # body renders + distortion diagnostics
+$P -m sfagen render configs/openarm_pringles_v03r2_wristrender.yaml    # rendered right wrist
 # score/threshold/selection (results/v03/thresholds.json, selection.json) then per export, e.g. strict:
-$P -m sfagen build configs/openarm_pringles_v03_strict.yaml --repo-id <id> --mixed-repo-id <mixed id>
-$P -m sfagen verify configs/openarm_pringles_v03_strict.yaml
-$P tools/quality_report.py configs/openarm_pringles_v03_strict.yaml results/v03/quality_strict_copied
+$P -m sfagen build configs/openarm_pringles_v03r2_strict.yaml --repo-id <id> --mixed-repo-id <mixed id>
+$P -m sfagen verify configs/openarm_pringles_v03r2_strict.yaml
+$P tools/quality_report.py configs/openarm_pringles_v03r2_strict.yaml results/v03r2/quality_strict_copied
 ```
-The merge/selection helper scripts lived in the untracked run directory (`artifacts/sfagen_v03_run/`). Their outputs are
-committed under `results/v03/`.
+Selection, merge, export, timing and review helpers: `results/v03/run_scripts/` (`v03_steps.py`, `merge_v03.py`,
+`make_exports.py`, `build_all.sh`, `interaction_timing.py`, `review_clips.py`). Revision-2 outputs are in `results/v03r2/`;
+revision 1 is reproduced with `REV=1` and the `openarm_pringles_v03*.yaml` configs.
 
 ## v02: fixed-duration arena augmentation
 

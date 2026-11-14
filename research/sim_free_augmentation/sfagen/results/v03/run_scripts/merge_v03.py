@@ -2,9 +2,11 @@
 instrumented) + amended v03 grid candidates (gen_a1/). all_wrist/ shares cache/candidates/body with all/ via symlinks.
 v02 object_position candidates are excluded (replaced by the grid). Nothing under sfagen_v02_run is modified."""
 import hashlib, json, os, shutil
+R2 = os.environ.get('REV', '1') == '2'  # amendment 4: rev-2 grid from sfagen_v03r2_run/gen; interaction renders still from rev-1 calib/
 from pathlib import Path
 
-RUN = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03_run'); CAL = RUN / 'calib'; GEN = RUN / 'gen_a3'
+RUN1 = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03_run'); CAL = RUN1 / 'calib'
+RUN = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03r2_run') if R2 else RUN1; GEN = RUN / ('gen' if R2 else 'gen_a3')
 A = RUN / 'all'; W = RUN / 'all_wrist'
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()  # noqa: E731
 for d in (A, W):

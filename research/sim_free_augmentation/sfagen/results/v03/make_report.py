@@ -1,16 +1,19 @@
 """v03 coverage table + arena map (CPU). usage: python results/v03/make_report.py  (run from sfagen/)"""
-import json, collections, numpy as np, matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
+import json, os, glob, collections, numpy as np, matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 from pathlib import Path
-O = Path('results/v03'); RUN = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03_run')
+R2 = os.environ.get('REV', '1') == '2'  # amendment 4
+O = Path('results/v03r2' if R2 else 'results/v03'); RUN1 = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03_run')
+RUN = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03r2_run') if R2 else RUN1
 pl = json.loads(Path('results/v02/planned_targets.json').read_text()); P = np.array(pl['eval_xy_m']) * 100
 cov = json.loads(Path('results/eval_v00/coverage.json').read_text()); real = np.array(cov['real_xy_cm']); v00 = np.array(cov['v00_xy_cm'])
 v2b = json.loads(Path('results/v02b/coverage.json').read_text()); G2 = np.array(pl['targets']['positions_xy_m']) * 100
 G = np.array(json.loads((RUN / 'grid.json').read_text())['positions_xy_m']) * 100
-sel = json.loads((O / 'selection.json').read_text()); a3 = set(json.loads((RUN / 'amendment3_targets.json').read_text())['added_by_amendment3'])
+sel = json.loads((O / 'selection.json').read_text()); a3 = set(json.loads((RUN1 / 'amendment3_targets.json').read_text())['added_by_amendment3'])
 rend = {(r['source'], r['key']): r for r in sel['rendered']}
 tgt = lambda name: sorted({int(k.split('_')[2]) for e, k in sel['selection'][name]['episodes'] if k.startswith('can_target')})  # noqa: E731
 S, L = tgt('strict'), tgt('loose')
 sets = {'real': real, '+v00': np.vstack([real, v00]), '+v02b': np.vstack([real, G2[v2b['v02_targets'] + v2b['v02b_new_targets']]]),
+        **({'+v03 rev1 loose': np.vstack([real, G[json.loads((RUN1.parent / 'sfagen_v02_worktree/research/sim_free_augmentation/sfagen/results/v03/coverage.json').read_text())['loose_targets']]])} if R2 else {}),
         '+v03 strict': np.vstack([real, G[S]]), '+v03 loose': np.vstack([real, G[L]])}
 grp = [('① front-right', 0, 4), ('② rear-right', 4, 8), ('③ rear-left', 8, 11), ('④ front-left', 11, 16), ('⑤ middle', 16, 20)]
 nn = lambda D: np.linalg.norm(P[:, None] - D[None], axis=2).min(1)  # noqa: E731
@@ -18,7 +21,23 @@ table = {k: dict(per_position_worst_cm={g: round(float(nn(D)[a:b].max()), 2) for
                  median_cm=round(float(np.median(nn(D))), 2), within_2cm=int((nn(D) <= 2).sum()), synthetic_can_positions=int(len(D) - len(real)))
          for k, D in sets.items()}
 # grid cell status from the final generation
-gen = json.loads((RUN / 'gen_a3_table.json').read_text()); status = {}
+def gen_table(work):
+    """target -> [[source, shift_cm, 'PASS' | first failing gate]] (same format as rev 1's gen_a3_table.json)."""
+    out = collections.defaultdict(list)
+    for f in sorted(glob.glob(str(work / 'candidates/ep*/checks.json'))):
+        s = int(Path(f).parent.name[2:])
+        for k, v in json.loads(Path(f).read_text()).items():
+            if not k.startswith('can_target'): continue
+            pl = v.get('placement') or {}
+            w = ('PASS' if v['pass'] else ','.join(v.get('fast_rejection_reasons') or [])
+                 or ('timing' if v.get('timing_ok') is False else '') or ','.join(g for g in ('in_view', 'on_table') if pl.get(g) is False)
+                 or ('robot_near' if pl.get('robot_points_near_object_extra_vs_source', 0) > 0 else 'other'))
+            out[str(int(k.split('_')[2]))].append([s, round(100 * float(np.hypot(*v['shift_m'][:2])), 1), w])
+    return dict(out)
+
+
+if R2: (RUN / 'gen_table.json').write_text(json.dumps(gen_table(RUN / "gen"), indent=1))
+gen = json.loads((RUN / ('gen_table.json' if R2 else 'gen_a3_table.json')).read_text()); status = {}
 for t in range(len(G)):
     a = gen.get(str(t), [])
     if not a: status[t] = 'no source within 12 cm'
@@ -31,9 +50,9 @@ for t in range(len(G)):
                                                  grid_status={str(t): s for t, s in status.items()}), indent=1, ensure_ascii=False))
 col = {'covered (strict)': '#1f6f3f', 'covered (loose only)': '#7fc28f', 'passed checks, over loose': '#d4a017', 'no source within 12 cm': '#eeeeee'}
 fig, ax = plt.subplots(1, 2, figsize=(14, 5.4)); w = .16; x = np.arange(5)
-pal = {'real': '#9aa3b5', '+v00': '#df8434', '+v02b': '#6c8ebf', '+v03 strict': '#1f6f3f', '+v03 loose': '#7fc28f'}
+pal = {'real': '#9aa3b5', '+v00': '#df8434', '+v02b': '#6c8ebf', '+v03 rev1 loose': '#c9b6e4', '+v03 strict': '#1f6f3f', '+v03 loose': '#7fc28f'}
 for i, k in enumerate(sets):
-    ax[0].bar(x + (i - 2) * w, [table[k]['per_position_worst_cm'][g] for g, _, _ in grp], w, label=k, color=pal[k])
+    ax[0].bar(x + (i - (len(sets) - 1) / 2) * w, [table[k]['per_position_worst_cm'][g] for g, _, _ in grp], w, label=k, color=pal[k])
 ax[0].set_xticks(x, [g for g, _, _ in grp]); ax[0].set_ylabel('Worst nearest can start (cm)'); ax[0].axhline(2, color='grey', ls=':')
 ax[0].set_title('Coverage of the 40 evaluation starts (lower is better)'); ax[0].legend(fontsize=8)
 seen = set()

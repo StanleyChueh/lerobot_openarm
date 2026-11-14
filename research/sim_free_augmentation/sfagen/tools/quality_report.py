@@ -16,6 +16,22 @@ from pathlib import Path
 import numpy as np
 
 
+def _timing(r, S, S0, fps):
+    """Duration and moved-arm TCP speed vs the source episode (same definition as Checker.timing_similarity; arms whose
+    state equals the source are skipped). Recomputed from the exported state."""
+    out = {"source_frames": int(len(S0)), "length_ratio": float(len(S) / len(S0)), "tcp_peak_speed_ratio": [], "tcp_mean_speed_ratio_edited": []}
+    if len(S) != len(S0):
+        return out
+    for arm in r.arms:
+        cols = r.sidx[arm]; ed = np.abs(S[:, cols] - S0[:, cols]).max(1) > 1e-9
+        if not ed.any():
+            continue
+        sp = lambda X: np.linalg.norm(np.diff(r.tcp_from_state(X, arm)[:, :3, 3], axis=0), axis=1) * fps  # noqa: E731
+        v, v0 = sp(S), sp(S0); e = (ed[1:] | ed[:-1])
+        out["tcp_peak_speed_ratio"].append(float(v.max() / max(v0.max(), 1e-9))); out["tcp_mean_speed_ratio_edited"].append(float(v[e].mean() / max(v0[e].mean(), 1e-9)))
+    return out
+
+
 def main(cfg_path, out, pool=None, exclude=()):
     import cv2, pandas as pd, av
     from _provenance import HERE, git_state
@@ -46,11 +62,16 @@ def main(cfg_path, out, pool=None, exclude=()):
                   "speed_ratio": float((v / np.maximum(env_v, 1e-9)).max()), "accel_ratio": float((a / np.maximum(env_a, 1e-9)).max()),
                   "jerk_ratio": float((jerk(A) / np.maximum(env_j, 1e-9)).max()), "lowest_z_m": float(ck.lowest(S).min()),
                   "start_state_equal": bool(np.abs(S[0] - S0[0]).max() < 1e-6), "gripper_identical": bool(np.array_equal(A[:, gi], A0[idx][:, gi])),
-                  "shift_cm": float(100 * np.linalg.norm(e["shift_m"][:2]))})
+                  "shift_cm": float(100 * np.linalg.norm(e["shift_m"][:2])), **_timing(r, S, S0, ctx.src.fps)})
     gate_t = {"finite": all(t["finite"] for t in T), "joint_limits": all(t["joint_limits"] for t in T),
               "speed": max(t["speed_ratio"] for t in T) <= cs["speed_ratio"] + 1e-6, "accel": max(t["accel_ratio"] for t in T) <= cs["accel_ratio"] + 1e-6,
               "table": min(t["lowest_z_m"] for t in T) >= z_src - cs["table_tol_m"] - 1e-9, "start_state": all(t["start_state_equal"] for t in T),
               "gripper": all(t["gripper_identical"] for t in T), "labels_sha": bool(ver["labels_sha_ok"]), "no_real_episode": ver["episodes_identical_to_a_real_episode"] == 0}
+    if cs.get("fixed_duration"):                     # v03 amendment 4
+        gate_t["duration"] = all(t["frames"] == t["source_frames"] for t in T)
+    if cs.get("speed_similarity"):
+        lo_r, hi_r = cs["speed_similarity"]
+        gate_t["speed_similarity"] = all(t["frames"] == t["source_frames"] and all(lo_r - 1e-9 <= x <= hi_r + 1e-9 for x in t["tcp_peak_speed_ratio"] + t["tcp_mean_speed_ratio_edited"]) for t in T)
     rep["trajectories"] = {"gate": gate_t, "max_speed_ratio": max(t["speed_ratio"] for t in T), "max_accel_ratio": max(t["accel_ratio"] for t in T),
                            "max_jerk_ratio": max(t["jerk_ratio"] for t in T), "min_lowest_z_m": min(t["lowest_z_m"] for t in T), "source_lowest_z_m": z_src,
                            "length_frames": {"synthetic_median": float(np.median([t["frames"] for t in T])), "synthetic_max": max(t["frames"] for t in T),

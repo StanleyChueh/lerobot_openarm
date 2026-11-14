@@ -4,20 +4,22 @@ Reads the loose exports (a superset of strict). Writes results/v03/viewer/index.
 - every episode with demo / family / variation / shift / distortion score / strict-loose membership / visual-audit flag;
 - for each grid (can-position) episode, decoded frames at t=0 and grasp (synthetic body, source body, copied wrist,
   rendered wrist) plus lift."""
-import base64, collections, html, json
+import base64, collections, html, json, os
 from pathlib import Path
 import av, cv2, numpy as np, pandas as pd
 
-RUN = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03_run'); V = Path('results/v03'); O = V / 'viewer'; O.mkdir(exist_ok=True)
+R2 = os.environ.get('REV', '1') == '2'  # amendment 4 (rev 2): same-duration datasets
+RUN = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/' + ('sfagen_v03r2_run' if R2 else 'sfagen_v03_run')); V = Path('results/v03r2' if R2 else 'results/v03'); O = V / 'viewer'; O.mkdir(exist_ok=True)
+RUN1 = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03_run')
 C, R, M = RUN / 'loose_copied/dataset', RUN / 'loose_right_wrist/dataset', RUN / 'loose_copied/dataset_mixed'
 BODY, RW = 'observation.images.body_cam', 'observation.images.right_wrist_cam'
 eps = json.loads((C / 'meta/sfa_provenance.json').read_text())['episodes']; info = json.loads((C / 'meta/info.json').read_text())
 sel = json.loads((V / 'selection.json').read_text()); strict = {tuple(x) for x in sel['selection']['strict']['episodes']}
-score = {(r['source'], r['key']): r['score'] for r in sel['rendered']}; T = json.loads((V / 'thresholds.json').read_text())
-flags = {(f['source'], f['key']): f['flag'] for f in json.loads((V / 'visual_audit.json').read_text())['flags']}
-a3 = set(json.loads((RUN / 'amendment3_targets.json').read_text())['added_by_amendment3'])
+score = {(r['source'], r['key']): r['score'] for r in sel['rendered']}; T = json.loads(Path('results/v03/thresholds.json').read_text())
+flags = {(f['source'], f['key']): f['flag'] for f in json.loads((V / 'visual_audit.json').read_text())['flags']} if (V / 'visual_audit.json').exists() else {}
+a3 = set(json.loads((RUN1 / 'amendment3_targets.json').read_text())['added_by_amendment3'])
 meta = lambda root: pd.read_parquet(sorted((root / 'meta/episodes').rglob('*.parquet')))  # noqa: E731
-MC, MR, MM = meta(C), meta(R), meta(M)
+MC, MR, MM = meta(C), meta(R), meta(M); LEN = dict(zip(MC.episode_index, MC.length)); SRCLEN = dict(zip(MM.episode_index, MM.length))
 mix = json.loads((M / 'meta/sfa_provenance.json').read_text())['episodes']
 real_idx = {e['source_real_episode']: e['episode_index'] for e in mix if not e['synthetic']}
 
@@ -48,7 +50,7 @@ for e in eps:
     sc = score[(s, k)]; ins = (s, k) in strict; fl = flags.get((s, k), '')
     tag = ('strict + loose' if ins else 'loose only') + (' · amendment 3 cell' if k.startswith('can_target') and int(k.split('_')[2]) in a3 else '')
     rows.append(f"<tr data-src='{s}' data-set='{'strict' if ins else 'loose'}'><td>{i}</td><td>{s}</td><td>{FAM.get(e['family'], e['family'])}</td><td>{html.escape(k)}</td>"
-                f"<td>{sh[0]:+.1f}, {sh[1]:+.1f}</td><td>{e['n_frames']}</td><td>{sc:.2f}</td><td>{tag}</td><td>{html.escape(fl)}</td></tr>")
+                f"<td>{sh[0]:+.1f}, {sh[1]:+.1f}</td><td>{LEN[i]} / {SRCLEN[real_idx[s]]} ({LEN[i] / 30:.1f} s, ×{LEN[i] / SRCLEN[real_idx[s]]:.3f})</td><td>{sc:.2f}</td><td>{tag}</td><td>{html.escape(fl)}</td></tr>")
     if e['family'] != 'object_workspace': continue
     m = e['schedule']; tg = int(m.get('t_grasp_out', m['t_grasp'])); N = e['n_frames']; K = [0, tg, min(tg + 25, N - 1)]
     sfi = e['source_frame_index']; src_k = [int(round(sfi[x])) for x in K]
@@ -77,7 +79,7 @@ Families (loose): {', '.join(f'{a} {b}' for a, b in fam_n.items())}. Distortion 
 strict ≤ {T['strict']:.2f} (worst v02 episode), loose ≤ {T['loose']:.2f}. Local only, nothing uploaded. Flags are Claude's visual audit (not blinded).</p>
 <h2>Coverage</h2><img class='map' src='data:image/png;base64,{cov}' alt='coverage'>
 <h2>All episodes</h2><p>Demo: <select id='f'><option value=''>all</option>{opts}</select> Set: <select id='g'><option value=''>loose (all)</option><option value='strict'>strict only</option><option value='loose'>loose-only extras</option></select></p>
-<div class='scroll'><table><thead><tr><th>ep</th><th>demo</th><th>family</th><th>variation</th><th>shift x, y (cm)</th><th>frames</th><th>score</th><th>set</th><th>visual flag</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
+<div class='scroll'><table><thead><tr><th>ep</th><th>demo</th><th>family</th><th>variation</th><th>shift x, y (cm)</th><th>frames / source (seconds, ratio)</th><th>score</th><th>set</th><th>visual flag</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 <h2>Grid episodes: decoded frames</h2>{''.join(cards)}
 <script>const f=document.getElementById('f'),g=document.getElementById('g');const up=()=>document.querySelectorAll('[data-src]').forEach(n=>n.style.display=(!f.value||n.dataset.src===f.value)&&(!g.value||n.dataset.set===g.value)?'':'none');f.onchange=up;g.onchange=up</script>
 </body></html>"""

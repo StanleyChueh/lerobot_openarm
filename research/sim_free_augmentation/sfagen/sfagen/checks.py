@@ -120,6 +120,7 @@ class Checker:
         if hold.any() and ((err[hold,0]*1000).max()>cfg['ik_pos_mm'] or err[hold,1].max()>cfg['ik_rot_deg']):failed.append('ik')
         if (err[:,0]*1000).max()>cfg['ik_blend_pos_mm'] or err[:,1].max()>cfg['ik_blend_rot_deg']:failed.append('ik_blend')
         if nominal_action_error(rec,c)>2e-6:failed.append('action_alignment')
+        if cfg.get('fixed_duration') and len(S)!=rec.T:failed.append('duration')
         if not failed:return None
         return {'pass':False,'error':'necessary-condition failure before mesh/placement checks: '+','.join(failed),'fast_rejection_reasons':failed,
                 'limit_violations':lim,'speed_ratio_to_real_max':vr,'accel_ratio_to_real_max':ar,
@@ -152,6 +153,7 @@ class Checker:
               "min_mesh_distance_mm": float(1000 * dmin.min()), "source_min_mesh_distance_same_frames_mm": float(1000 * dsrc.min()),
               "lowest_arm_z_m": float(self.lowest(S[ed]).min()) if ed.any() else np.inf, "real_lowest_arm_z_m": env["min_z_m"],
               "start_state_err_rad": float(np.abs(S[0] - S0[0]).max())}
+        ck.update(self.timing_similarity(rec, c))
         if len(r.arms) > 1:
             P = {s: r.tcp_from_state(S, s)[:, :3, 3] for s in r.arms}; P0 = {s: r.tcp_from_state(S0, s)[:, :3, 3] for s in r.arms}
             pairs = [(a_, b_) for i, a_ in enumerate(r.arms) for b_ in r.arms[i + 1:]]
@@ -182,8 +184,28 @@ class Checker:
                           and ck["min_mesh_distance_mm"] >= min(ck["source_min_mesh_distance_same_frames_mm"], 1000 * cfg["clearance_floor_m"]) - 1.0
                           and ck.get("min_hand_distance_mm", np.inf) >= ck.get("source_min_hand_distance_same_frames_mm", 0) - 1000 * cfg["hand_tol_m"]
                           and ck["lowest_arm_z_m"] >= env["min_z_m"] - cfg["table_tol_m"] and ck["start_state_err_rad"] <= cfg["start_tol_rad"]
-                          and ck["untouched_bit_identical"] and ck["identical_after_rejoin"] and ok_obj)
+                          and ck["untouched_bit_identical"] and ck["identical_after_rejoin"] and ok_obj and ck["timing_ok"])
         return ck
+
+    def timing_similarity(self, rec, c):
+        """v03 amendment 4: same frame count as the source and moved-arm TCP speed similar to the source (opt-in gates)."""
+        cfg, S = self.cfg, c["state"]; out = {"frames_out": int(len(S)), "source_frames": int(rec.T)}; ok = True
+        if cfg.get("fixed_duration"):
+            ok &= len(S) == rec.T
+        if cfg.get("speed_similarity") and len(S) == rec.T:
+            lo, hi = cfg["speed_similarity"]; fps = self.ctx.src.fps; e = np.asarray(c["edited"], bool)[1:]
+            sp = lambda X, arm: np.linalg.norm(np.diff(self.robot.tcp_from_state(X, arm)[:, :3, 3], axis=0), axis=1) * fps  # noqa: E731
+            pk, mn = [], []
+            for arm in c["moved_arms"]:
+                v, v0 = sp(S, arm), sp(rec.state, arm); pk.append(v.max() / max(v0.max(), 1e-9))
+                if e.any(): mn.append(v[e].mean() / max(v0[e].mean(), 1e-9))
+            out["tcp_peak_speed_ratio"] = [float(min(pk)), float(max(pk))] if pk else [1.0, 1.0]
+            out["tcp_mean_speed_ratio_edited"] = [float(min(mn)), float(max(mn))] if mn else [1.0, 1.0]
+            ok &= all(lo <= x <= hi for x in out["tcp_peak_speed_ratio"] + out["tcp_mean_speed_ratio_edited"])
+        elif cfg.get("speed_similarity"):
+            ok = False
+        out["timing_ok"] = bool(ok)
+        return out
 
     def placement(self, rec, c, S_src=None):
         k = [o["name"] for o in rec.objects].index(c["object"]); o = rec.objects[k]; T0 = c["objects"][k][0]

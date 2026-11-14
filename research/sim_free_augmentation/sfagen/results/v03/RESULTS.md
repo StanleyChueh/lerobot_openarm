@@ -110,3 +110,86 @@ corner therefore cannot be covered cleanly from the current 10 demos. The clean 
 - **Unvalidated:** there is no policy evidence yet that distortion-capped coverage beats near-source-only data. That
   is the main experiment: train on strict vs loose vs v00 and evaluate on the 40 starts, real and LIBERO
   (`../libero_scoping/PLAN.md`).
+
+---
+
+# Revision 2 (2026-11-14): episodes as long and as fast as the source demo
+
+**Why.** The user inspected the published rev-1 datasets.
+- The rev-1 grid episodes were in slow motion: the median was 1.09× the source length, 20/84 grid episodes were
+  > 1.5×, and the worst was 3.56× (998 frames, about 33 s against an 8–9 s demo).
+- Cause: when a shifted reach broke the speed/accel envelope, the F1W planner picked a slower clock from its bank
+  (`local` ≤ 3×, `window` / `uniform` ≤ 6×).
+- Rev 1 is kept as a negative result: it stays at Hub tag `v03-rev1` and in the local `artifacts/sfagen_v03_run`.
+- **Disclosed miss:** the rev-1 independent check recorded 39 `duration_mismatch` per export, but my wrapper did not
+  gate on them. The rev-2 check gates on `duration_mismatch`, `envelope_violations`, `identical_to_real` and
+  `mixed_syn_equals_syn`.
+
+**What changed** (pre-registered in `PROTOCOL.md`, Amendments 4–5; `FREEZE.json`):
+
+| Change | Rule |
+|---|---|
+| No retiming (Am. 4) | `time_scales: [1.0]`: the identity clock |
+| Wide spatial blend (Am. 4) | The shift is absorbed from the previous gripper event +12 frames (or frame 0) until `next_event − 10` |
+| `duration` gate (Am. 4) | Every synthetic frame count == its source frame count |
+| `speed_similarity` gate (Am. 4) | Moved-arm TCP peak speed and edited-span mean speed must be 0.8–1.25× the source |
+| Minimum distortion (Am. 4) | Per target, render all passing candidates; keep the 2 lowest-score ones (ties: smaller shift) |
+| `object_mask_grow: 60` (Am. 5) | Removes the ghost lid crescent at the old can position (found in the visual audit) |
+
+**Unchanged:**
+- joint speed ≤ 1.25× and accel ≤ 1.5× of the real envelope;
+- the distortion thresholds (strict 2.289 / loose 4.578, from `thresholds.json`);
+- the grid and the coverage metric.
+
+**Generation.** 92/416 grid candidates pass, on 39 targets (rev 1: 189/416). The loss comes from the speed/accel
+gates, which rev 1 had passed by slowing down.
+
+**Hand-over variants.** 75 were re-checked (`results/v03r2/interaction_timing.json`). 4 `timing_-10` variants
+(sources 4–7) fail the peak-speed ratio (0.72–0.79) and are excluded (`timing_excluded.json`).
+
+### Duration and speed (exported data, `results/v03r2/duration_check.json` + quality reports)
+
+| | v00 | v03 rev 1 (loose) | **v03 rev 2** (strict and loose) |
+|---|---|---|---|
+| Length / source | 1.000 (96/96) | median 1.09, max 3.56 | **1.000 for 130/130 (strict) and 138/138 (loose)** |
+| Episode seconds | = source | up to ~33 s | **8.03–9.33 s (source 8.03–9.33 s)** |
+| TCP peak speed / source | — | — | 0.86–1.16 |
+| TCP mean speed (edited span) / source | — | — | 0.92–1.15 |
+| Max joint speed / accel vs real envelope | ≤ 1.25 / 1.5 | ≤ 1.25 / 1.5 | 1.22 / 1.49 |
+
+### Exports (`artifacts/sfagen_v03r2_run/{strict,loose}_{copied,right_wrist}`)
+
+| Export | Synthetic-only | Mixed | Synthetic content |
+|---|---|---|---|
+| strict | 130 | 140 | 71 hand-over + 59 grid, 35 targets |
+| loose | 138 | 148 | 71 hand-over + 67 grid, 39 targets |
+
+All 4 export pairs pass `verify`, every quality gate (including `duration` and `speed_similarity`) and the gated
+`check_exports`. 0 real episodes are in the synthetic-only sets.
+
+### Coverage (40 eval starts, worst nearest can start in cm; `results/v03r2/coverage.png`)
+
+| Set | Worst | Within 2 cm | ① front-right | ② rear-right | ③ rear-left | ④ front-left | ⑤ middle |
+|---|---|---|---|---|---|---|---|
+| real only | 6.63 | 14/40 | 2.98 | 6.63 | 5.59 | 3.30 | 3.33 |
+| +v00 | 3.91 | 28/40 | 1.12 | 3.91 | 2.81 | 1.44 | 1.23 |
+| +v03 rev 1 loose | 2.70 | 36/40 | 1.03 | 1.91 | 2.70 | 1.37 | 1.68 |
+| **+v03 rev 2 strict** | 6.63 | 28/40 | 1.03 | **6.63** | 2.70 | 1.37 | 1.68 |
+| **+v03 rev 2 loose** | **2.70** | **35/40** | 1.03 | 1.91 | 2.70 | 1.37 | 1.68 |
+
+- **Strict leaves rear-right (②) uncovered:** no rear-right cell scores under 2.289.
+- **Loose covers rear-right** with targets 20–22, from demos 2 and 8. Unlike rev 1, these episodes are **not**
+  visually flagged.
+
+### Visual audit (`results/v03r2/visual_audit.json`, `audit_sheets_grow/`)
+- 13 flags, 11 of them inside strict:
+  - notched can top at t=0 (sources 4/5/6, near the left arm);
+  - small ghost sliver at lift (7/038, 7/048);
+  - dark arc on the lid at grasp (source 9, targets 030–040).
+- The ghost-lid crescent seen with the rev-1 renderer is gone after Amendment 5.
+- The audit is single-rater and not blinded.
+
+### Review sample (shown to the user before any upload)
+- `results/v03r2/review/{strict,loose}/index.html`: real source vs synthetic side by side, with a running clock (corners,
+  middle, largest shift, one hand-over variant).
+- Viewer: `results/v03r2/viewer/index.html`.

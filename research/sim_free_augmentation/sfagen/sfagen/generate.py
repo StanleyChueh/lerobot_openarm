@@ -58,10 +58,10 @@ def run_episode(ctx, rec, checker, log=print):
             d = np.zeros(3)
         elif fam == "object_workspace":
             from .workspace_plan import plan_with_time_scale
-            ow = ctx.cfg["variations"].get("object_workspace", {})
+            ow = ctx.cfg["variations"].get("object_workspace") or ctx.cfg["variations"].get("object_targets", {})
             c = plan_with_time_scale(rec, names.index(obj), d, checker, tuple(ow.get("time_scales", (1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0))), ow.get("approach_margin_m", 0.10),
                                      action_bounds=bool(ctx.cfg.get("plan", {}).get("action_aware_bounds", False)),
-                                     margin=float(ctx.cfg.get("plan", {}).get("action_bound_margin_rad", 0.0)))
+                                     margin=float(ctx.cfg.get("plan", {}).get("action_bound_margin_rad", 0.0)), wide=bool(ow.get("wide_blend", False)))
         elif fam == "object_position":
             c = plan.f1_plan(rec, names.index(obj), d, bool(ctx.cfg.get("plan", {}).get("action_aware_bounds", False)))
         else:

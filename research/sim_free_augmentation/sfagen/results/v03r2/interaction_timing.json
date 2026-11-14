@@ -1,0 +1,1427 @@
+[
+ {
+  "source": 0,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0052450920561844
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9661176166349733,
+   1.0083709657480302
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   0.9997353313445052,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9681715372980271,
+   1.0240889994540279
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "interact_x+0_y-3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   0.9932991109652135,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.01646284340823,
+   1.0745221526571305
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "interact_x+0_y-5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0001707482147124
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0375654180596527,
+   1.132105760023272
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "interact_x+3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   0.9999276277029879,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9848412545307694,
+   0.9997576140026567
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "interact_x+5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   0.9998303162684548,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9912950280319393,
+   1.0129983948912213
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   0.9999914732607241,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0230366469684367,
+   1.0620072958717062
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "interact_x-5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   0.9999393982043128,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0456493776391962,
+   1.1175941850112883
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "timing_+10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0888488892208212
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9742548041718369,
+   0.9933375756616918
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 0,
+  "key": "timing_-10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 273,
+  "source_frames": 273,
+  "tcp_peak_speed_ratio": [
+   0.8635810116769352,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9760018776558518,
+   0.9944240433556749
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0000358968479142
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9574724115448462,
+   1.0124646057758566
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0000330800338002
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9471516706965096,
+   1.027071584673543
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "interact_x+0_y-3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   0.9999331665860541,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0022761922756254,
+   1.0716512790345947
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "interact_x+0_y-5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   0.9998796727839455,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0144509674291577,
+   1.1241074389826735
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "interact_x+3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0000334346837612
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9667884112851505,
+   0.9893005002560836
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "interact_x+5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   0.9999479368486012,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9575948296875544,
+   0.9928081565254526
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   0.9997610437388076,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0279735542764223,
+   1.068335842891106
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "interact_x-5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   0.9994820671872353,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0529298515617849,
+   1.12252998325663
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "timing_+10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.136327814269642
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9596993430059969,
+   0.9948216312973204
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 1,
+  "key": "timing_-10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 263,
+  "source_frames": 263,
+  "tcp_peak_speed_ratio": [
+   0.890445698010314,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9531738206433047,
+   0.995273677633499
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 2,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 280,
+  "source_frames": 280,
+  "tcp_peak_speed_ratio": [
+   0.9999387927170473,
+   1.0000429551419265
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9591021744924925,
+   1.006025630625042
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 2,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 280,
+  "source_frames": 280,
+  "tcp_peak_speed_ratio": [
+   0.9998886268522433,
+   1.0000565667640327
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9566582579234157,
+   1.0247686375970575
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 2,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 280,
+  "source_frames": 280,
+  "tcp_peak_speed_ratio": [
+   0.9996514015275879,
+   0.9999530501805056
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0121839124579732,
+   1.0521361451210547
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 2,
+  "key": "timing_+10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 280,
+  "source_frames": 280,
+  "tcp_peak_speed_ratio": [
+   0.9740439667231966,
+   1.1342702840316037
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9747244122111768,
+   0.9958607236116471
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   1.000019669980387,
+   1.0000217131141493
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9739019776447521,
+   1.0236918520352338
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   1.0000055052983516,
+   1.0000111591473482
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9774252674349649,
+   1.0504659094442914
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "interact_x+0_y-3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9999238238615793,
+   0.9999435881738369
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0164062483789715,
+   1.066023524538765
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "interact_x+0_y-5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9998308510893729,
+   0.9998977828256069
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.042090922499508,
+   1.117460475353006
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "interact_x+3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9999940219065178,
+   1.0002746903060518
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9767154084396257,
+   0.9964912286544029
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "interact_x+5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9998867399753253,
+   1.0006773849724082
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9776363106597865,
+   1.010037125731551
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9995335899801038,
+   0.9997791521462495
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0395129869340565,
+   1.0664543087600302
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "interact_x-5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9994800476354645,
+   0.9998928610116046
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0752894589293083,
+   1.1199347075105277
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "timing_+10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   1.0824194495982693,
+   1.1201544749055317
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9772120316111743,
+   0.9940667751516215
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 3,
+  "key": "timing_-10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.8868178100389728,
+   0.9613806884714068
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9782885235027773,
+   0.9947926653061933
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9997825850039249,
+   1.0000386920780777
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9545040687099127,
+   1.0193242458371843
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9996176760781441,
+   1.0000542437941535
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9518796037743418,
+   1.0416290945831188
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "interact_x+0_y-3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9999377047407368,
+   1.0001775602802148
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0076605780907915,
+   1.0771656737284363
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "interact_x+0_y-5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9998789558038915,
+   1.0002706479840155
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0266469218212688,
+   1.1374891016787358
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "interact_x+3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   1.0004931950481941,
+   1.0036319821682294
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9581591132787389,
+   0.9925010240152071
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "interact_x+5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9999975603733867,
+   1.0006642319755867
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9501241318239297,
+   1.0001333026119978
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9968804392498611,
+   0.9993254241891935
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0333147190185343,
+   1.0814719868117888
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "interact_x-5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9953144655475987,
+   0.9988424485367454
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.064717418164298,
+   1.1464143723458131
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "timing_+10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.9709972129455375,
+   1.1497329697896574
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.979839093653809,
+   0.9936571300335514
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 4,
+  "key": "timing_-10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 250,
+  "source_frames": 250,
+  "tcp_peak_speed_ratio": [
+   0.7670884320663091,
+   0.8760118977981611
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9770337375240395,
+   0.9944754090404391
+  ],
+  "timing_ok": false
+ },
+ {
+  "source": 5,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   0.9999692921640619,
+   1.0001795617275069
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9656151860301142,
+   1.0187762832343477
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 5,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   0.9999204654859857,
+   1.0002802596496796
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9667468837368904,
+   1.0370370537714446
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 5,
+  "key": "interact_x+0_y-3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   0.9997817401115067,
+   0.9999952779115008
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9971577221631229,
+   1.0686424608123692
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 5,
+  "key": "interact_x+0_y-5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   0.9996167301862243,
+   0.9999825177361017
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0041721959400467,
+   1.1212661214784154
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 5,
+  "key": "interact_x+3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   1.00000328304518,
+   1.0008350469078868
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9660093840144671,
+   0.9910439141254109
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 5,
+  "key": "interact_x+5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   0.9999193493750981,
+   1.001283835714879
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9672179116005207,
+   0.9936701568317446
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 5,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   0.9990563876212999,
+   0.9997961583950193
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0256774192790394,
+   1.070277205124
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 5,
+  "key": "interact_x-5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   0.9984129903062062,
+   0.9995199829084407
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0485897186091249,
+   1.1249435871718976
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 5,
+  "key": "timing_-10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 255,
+  "source_frames": 255,
+  "tcp_peak_speed_ratio": [
+   0.7480983348441684,
+   0.8607830393736688
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9322578651914387,
+   0.9912347760203627
+  ],
+  "timing_ok": false
+ },
+ {
+  "source": 6,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.9998398383371657,
+   1.0007116589770633
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9527444940368602,
+   1.0156522481202646
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.9996930216936428,
+   1.0009275697482187
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9498304715354484,
+   1.034638056311939
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "interact_x+0_y-3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.9988082302221317,
+   1.0001030630032632
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.00247165427387,
+   1.0781704017564084
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "interact_x+0_y-5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.997740731957119,
+   1.000147534704686
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0154706151019786,
+   1.1363517225104887
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "interact_x+3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.999924668884126,
+   1.008335031230396
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9600247833515874,
+   1.0025295462473554
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "interact_x+5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.9997777728193911,
+   1.0145953930891352
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9557285436365024,
+   1.015925742720077
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.9927384857177725,
+   0.999902464702401
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0185075967148616,
+   1.0785876832624308
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "interact_x-5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.9883802582754477,
+   0.9997348455634003
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0397616847786995,
+   1.1399105280235373
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "timing_+10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   1.0015234147158965,
+   1.1576072395740875
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9650917647642835,
+   0.9930234187653676
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 6,
+  "key": "timing_-10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 241,
+  "source_frames": 241,
+  "tcp_peak_speed_ratio": [
+   0.7912910424408142,
+   0.9310986887042213
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9642174935726958,
+   0.9935647533238837
+  ],
+  "timing_ok": false
+ },
+ {
+  "source": 7,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 261,
+  "source_frames": 261,
+  "tcp_peak_speed_ratio": [
+   0.9998788777254268,
+   0.9999905741091438
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9474851028993534,
+   1.0168351083786376
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 7,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 261,
+  "source_frames": 261,
+  "tcp_peak_speed_ratio": [
+   0.9997770893520402,
+   0.999990212378023
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9361369857305321,
+   1.03706654529129
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 7,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 261,
+  "source_frames": 261,
+  "tcp_peak_speed_ratio": [
+   0.9990394645330821,
+   0.9997824792261156
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0252431322356126,
+   1.0606595225500985
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 7,
+  "key": "interact_x-5_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 261,
+  "source_frames": 261,
+  "tcp_peak_speed_ratio": [
+   0.9995049799534509,
+   0.9995328414016771
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0518632965853758,
+   1.1105393951318263
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 7,
+  "key": "timing_+10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 261,
+  "source_frames": 261,
+  "tcp_peak_speed_ratio": [
+   1.0002672738937284,
+   1.152086750667917
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.960146991054451,
+   0.9952163183194185
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 7,
+  "key": "timing_-10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 261,
+  "source_frames": 261,
+  "tcp_peak_speed_ratio": [
+   0.7155793353511849,
+   0.8810421022463634
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9668686963618484,
+   0.9957165763355359
+  ],
+  "timing_ok": false
+ },
+ {
+  "source": 8,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.000013335257356,
+   1.0004431245892833
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9671836631480073,
+   1.0313768278315554
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 8,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0000039227492048,
+   1.000706364161487
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9621042838886024,
+   1.056836505168532
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 8,
+  "key": "interact_x-3_y+0_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   0.9989685421413219,
+   0.9998278053562463
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0156540567373775,
+   1.056761430352187
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 9,
+  "key": "interact_x+0_y+3_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 253,
+  "source_frames": 253,
+  "tcp_peak_speed_ratio": [
+   0.9998158258606504,
+   1.0006885287074812
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9436230341046645,
+   1.0253337455651081
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 9,
+  "key": "interact_x+0_y+5_z+0",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 253,
+  "source_frames": 253,
+  "tcp_peak_speed_ratio": [
+   0.9996614108337359,
+   1.0010345239795824
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9233469809298446,
+   1.0466490917430888
+  ],
+  "timing_ok": true
+ },
+ {
+  "source": 9,
+  "key": "timing_+10",
+  "moved_arms": [
+   "R",
+   "L"
+  ],
+  "frames_out": 253,
+  "source_frames": 253,
+  "tcp_peak_speed_ratio": [
+   1.1271648586520682,
+   1.1337771765320932
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9684860905599291,
+   0.9953798883380223
+  ],
+  "timing_ok": true
+ }
+]

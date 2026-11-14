@@ -116,7 +116,7 @@ def approach_distances(o,P):
     return np.linalg.norm(np.maximum(0,np.maximum(lo-local,local-hi)),axis=1)
 
 
-def f1w_schedule(rec, k, approach_margin=0.10):
+def f1w_schedule(rec, k, approach_margin=0.10, wide=False):
     o = rec.objects[k]; arm = o["arm"]; tg = o["grasp_frame"]
     P = rec.robot.tcp_from_state(rec.state, arm)[:, :3, 3]
     v = np.r_[0, np.linalg.norm(np.diff(P, axis=0), axis=1)] * rec.ctx.src.fps
@@ -133,11 +133,15 @@ def f1w_schedule(rec, k, approach_margin=0.10):
     # Do not clamp the rigid approach to an earlier frame where the hand is still far from the object.
     # If no sufficiently long transit exists, retain the failure instead of disguising a swept approach.
     ta = max(ta,t0+10)
+    if wide:
+        # v03 amendment 4 (fixed duration): absorb the shift over the longest event-free span instead of slowing the clock.
+        prev=[e for s in rec.ev for kind in ("closes","opens") for e in rec.ev[s][kind] if e<ta]
+        t0=min(t0,max(prev)+12 if prev else 0)
     nxt = min([e for s in rec.ev for kind in ("closes", "opens") for e in rec.ev[s][kind] if e > tg] + [rec.T])
     win = np.arange(tg + 30, min(tg + 4 * int(rec.ctx.src.fps), nxt - 10))
     if len(win) == 0 or not (t0 + 10 <= ta <= tg - 3):
         return None
-    tr = int(win[np.argmax(P[win, 2])])
+    tr = int(nxt - 10) if wide else int(win[np.argmax(P[win, 2])])
     events=sorted({e for s in rec.ev.values() for key in ('closes','opens') for e in s[key]})
     return {"t_motion": t0, "t_approach": ta, "t_grasp": tg, "t_rejoin": tr,
             "next_event": int(nxt), "r_app_m": r_app,"approach_metric":"3D distance to object bounds; final travel bout",
@@ -273,10 +277,10 @@ def f1w_plan(rec, k, d, s=1.0, approach_margin=0.10, spatial=None, clock='local'
             "tau": tau, "ref_state": Sw, "ref_action": Aref,"native_q":base_q,"native_offset":field}
 
 
-def plan_with_time_scale(rec, k, d, checker, scales=(1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0), approach_margin=0.10,spatial=None,action_bounds=False,margin=0.0):
+def plan_with_time_scale(rec, k, d, checker, scales=(1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0), approach_margin=0.10,spatial=None,action_bounds=False,margin=0.0,wide=False):
     """Shortest tested clock meeting commanded speed/acceleration limits; other checks remain mandatory."""
     cfg, env = checker.cfg, checker.env; last = None
-    m=f1w_schedule(rec,k,approach_margin) if spatial is None else spatial[0]
+    m=f1w_schedule(rec,k,approach_margin,wide) if spatial is None else spatial[0]
     if m is None:return None
     if spatial is None:spatial=_native_spatial(rec,k,np.asarray(d,float),m,action_bounds,margin)
     trials=[(s,'local') for s in scales if s<=3]+[(s,'window') for s in scales if s>1]+[(s,'uniform') for s in scales if s>1]

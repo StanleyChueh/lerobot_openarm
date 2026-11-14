@@ -3,15 +3,16 @@ Each dir: copies of the small rig files, symlinks to all/{cache,candidates}, and
 so `sfagen build` (which exports every passing candidate that has a current render) exports exactly the selection.
 Prints the build commands (run by the caller). usage: python make_exports.py"""
 import json, os, shutil
+R2 = os.environ.get('REV', '1') == '2'
 from pathlib import Path
 S = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v02_worktree/research/sim_free_augmentation/sfagen')
-R = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/sfagen_v03_run')
-sel = json.loads((S / 'results/v03/selection.json').read_text())['selection']
+R = Path('/home/stanley/Stanley_ws/lerobot_openarm/artifacts/' + ('sfagen_v03r2_run' if R2 else 'sfagen_v03_run'))
+sel = json.loads((S / ('results/v03r2' if R2 else 'results/v03') / 'selection.json').read_text())['selection']; P = 'openarm_pringles_v03r2' if R2 else 'openarm_pringles_v03'
 cmds = []
 for name in ('strict', 'loose'):
     eps = sel[name]['episodes']
-    for cond, cfg, rid, mid in (('copied', 'configs/openarm_pringles_v03.yaml', f'real_to_sim_10_3cam_v03_{name}', f'real_and_sim_10_3cam_v03_{name}'),
-                                ('right_wrist', 'configs/openarm_pringles_v03_wristrender.yaml', f'real_to_sim_10_3cam_wristrender_v03_{name}', f'real_and_sim_10_3cam_wristrender_v03_{name}')):
+    for cond, cfg, rid, mid in (('copied', f'configs/{P}.yaml', f'real_to_sim_10_3cam_v03_{name}', f'real_and_sim_10_3cam_v03_{name}'),
+                                ('right_wrist', f'configs/{P}_wristrender.yaml', f'real_to_sim_10_3cam_wristrender_v03_{name}', f'real_and_sim_10_3cam_wristrender_v03_{name}')):
         d = R / f'{name}_{cond}'
         if d.exists(): raise FileExistsError(d)
         d.mkdir(); (d / 'body').mkdir()

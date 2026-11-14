@@ -1,0 +1,2835 @@
+{
+ "selection": {
+  "strict": {
+   "threshold": 2.288940368525415,
+   "episodes": [
+    [
+     0,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     0,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     0,
+     "timing_+10"
+    ],
+    [
+     0,
+     "timing_-10"
+    ],
+    [
+     1,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     1,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     1,
+     "timing_+10"
+    ],
+    [
+     1,
+     "timing_-10"
+    ],
+    [
+     2,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     2,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     2,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     2,
+     "timing_+10"
+    ],
+    [
+     3,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     3,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     3,
+     "timing_+10"
+    ],
+    [
+     3,
+     "timing_-10"
+    ],
+    [
+     4,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     4,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     4,
+     "timing_+10"
+    ],
+    [
+     5,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     5,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     6,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     6,
+     "timing_+10"
+    ],
+    [
+     7,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     7,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     7,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     7,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     7,
+     "timing_+10"
+    ],
+    [
+     8,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     8,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     8,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     9,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     9,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     9,
+     "timing_+10"
+    ],
+    [
+     4,
+     "can_target_081"
+    ],
+    [
+     5,
+     "can_target_081"
+    ],
+    [
+     0,
+     "can_target_073"
+    ],
+    [
+     4,
+     "can_target_073"
+    ],
+    [
+     3,
+     "can_target_063"
+    ],
+    [
+     4,
+     "can_target_082"
+    ],
+    [
+     6,
+     "can_target_082"
+    ],
+    [
+     3,
+     "can_target_064"
+    ],
+    [
+     0,
+     "can_target_064"
+    ],
+    [
+     4,
+     "can_target_072"
+    ],
+    [
+     6,
+     "can_target_083"
+    ],
+    [
+     4,
+     "can_target_083"
+    ],
+    [
+     3,
+     "can_target_065"
+    ],
+    [
+     0,
+     "can_target_065"
+    ],
+    [
+     9,
+     "can_target_067"
+    ],
+    [
+     1,
+     "can_target_067"
+    ],
+    [
+     4,
+     "can_target_084"
+    ],
+    [
+     1,
+     "can_target_084"
+    ],
+    [
+     1,
+     "can_target_076"
+    ],
+    [
+     3,
+     "can_target_066"
+    ],
+    [
+     0,
+     "can_target_066"
+    ],
+    [
+     1,
+     "can_target_075"
+    ],
+    [
+     4,
+     "can_target_075"
+    ],
+    [
+     6,
+     "can_target_074"
+    ],
+    [
+     4,
+     "can_target_074"
+    ],
+    [
+     0,
+     "can_target_054"
+    ],
+    [
+     0,
+     "can_target_059"
+    ],
+    [
+     3,
+     "can_target_059"
+    ],
+    [
+     9,
+     "can_target_057"
+    ],
+    [
+     0,
+     "can_target_057"
+    ],
+    [
+     0,
+     "can_target_058"
+    ],
+    [
+     7,
+     "can_target_058"
+    ],
+    [
+     3,
+     "can_target_055"
+    ],
+    [
+     0,
+     "can_target_055"
+    ],
+    [
+     0,
+     "can_target_050"
+    ],
+    [
+     3,
+     "can_target_050"
+    ],
+    [
+     0,
+     "can_target_049"
+    ],
+    [
+     3,
+     "can_target_049"
+    ],
+    [
+     0,
+     "can_target_048"
+    ],
+    [
+     7,
+     "can_target_048"
+    ],
+    [
+     0,
+     "can_target_041"
+    ],
+    [
+     9,
+     "can_target_041"
+    ],
+    [
+     0,
+     "can_target_047"
+    ],
+    [
+     3,
+     "can_target_060"
+    ],
+    [
+     9,
+     "can_target_060"
+    ],
+    [
+     0,
+     "can_target_056"
+    ],
+    [
+     3,
+     "can_target_056"
+    ],
+    [
+     0,
+     "can_target_046"
+    ],
+    [
+     3,
+     "can_target_051"
+    ],
+    [
+     9,
+     "can_target_051"
+    ],
+    [
+     9,
+     "can_target_042"
+    ],
+    [
+     2,
+     "can_target_032"
+    ],
+    [
+     9,
+     "can_target_038"
+    ],
+    [
+     7,
+     "can_target_038"
+    ],
+    [
+     9,
+     "can_target_040"
+    ],
+    [
+     9,
+     "can_target_033"
+    ],
+    [
+     2,
+     "can_target_031"
+    ],
+    [
+     9,
+     "can_target_031"
+    ],
+    [
+     9,
+     "can_target_039"
+    ]
+   ],
+   "n": 130,
+   "grid_targets": 35
+  },
+  "loose": {
+   "threshold": 4.57788073705083,
+   "episodes": [
+    [
+     0,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     0,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     0,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     0,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     0,
+     "timing_+10"
+    ],
+    [
+     0,
+     "timing_-10"
+    ],
+    [
+     1,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     1,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     1,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     1,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     1,
+     "timing_+10"
+    ],
+    [
+     1,
+     "timing_-10"
+    ],
+    [
+     2,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     2,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     2,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     2,
+     "timing_+10"
+    ],
+    [
+     3,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     3,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     3,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     3,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     3,
+     "timing_+10"
+    ],
+    [
+     3,
+     "timing_-10"
+    ],
+    [
+     4,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     4,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     4,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     4,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     4,
+     "timing_+10"
+    ],
+    [
+     5,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     5,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     5,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     5,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y-3_z+0"
+    ],
+    [
+     6,
+     "interact_x+0_y-5_z+0"
+    ],
+    [
+     6,
+     "interact_x+3_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x+5_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     6,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     6,
+     "timing_+10"
+    ],
+    [
+     7,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     7,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     7,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     7,
+     "interact_x-5_y+0_z+0"
+    ],
+    [
+     7,
+     "timing_+10"
+    ],
+    [
+     8,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     8,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     8,
+     "interact_x-3_y+0_z+0"
+    ],
+    [
+     9,
+     "interact_x+0_y+3_z+0"
+    ],
+    [
+     9,
+     "interact_x+0_y+5_z+0"
+    ],
+    [
+     9,
+     "timing_+10"
+    ],
+    [
+     4,
+     "can_target_081"
+    ],
+    [
+     5,
+     "can_target_081"
+    ],
+    [
+     0,
+     "can_target_073"
+    ],
+    [
+     4,
+     "can_target_073"
+    ],
+    [
+     3,
+     "can_target_063"
+    ],
+    [
+     4,
+     "can_target_082"
+    ],
+    [
+     6,
+     "can_target_082"
+    ],
+    [
+     3,
+     "can_target_064"
+    ],
+    [
+     0,
+     "can_target_064"
+    ],
+    [
+     4,
+     "can_target_072"
+    ],
+    [
+     6,
+     "can_target_083"
+    ],
+    [
+     4,
+     "can_target_083"
+    ],
+    [
+     3,
+     "can_target_065"
+    ],
+    [
+     0,
+     "can_target_065"
+    ],
+    [
+     9,
+     "can_target_067"
+    ],
+    [
+     1,
+     "can_target_067"
+    ],
+    [
+     4,
+     "can_target_084"
+    ],
+    [
+     1,
+     "can_target_084"
+    ],
+    [
+     1,
+     "can_target_076"
+    ],
+    [
+     3,
+     "can_target_066"
+    ],
+    [
+     0,
+     "can_target_066"
+    ],
+    [
+     1,
+     "can_target_075"
+    ],
+    [
+     4,
+     "can_target_075"
+    ],
+    [
+     6,
+     "can_target_074"
+    ],
+    [
+     4,
+     "can_target_074"
+    ],
+    [
+     0,
+     "can_target_054"
+    ],
+    [
+     0,
+     "can_target_059"
+    ],
+    [
+     3,
+     "can_target_059"
+    ],
+    [
+     9,
+     "can_target_057"
+    ],
+    [
+     0,
+     "can_target_057"
+    ],
+    [
+     0,
+     "can_target_058"
+    ],
+    [
+     7,
+     "can_target_058"
+    ],
+    [
+     3,
+     "can_target_055"
+    ],
+    [
+     0,
+     "can_target_055"
+    ],
+    [
+     0,
+     "can_target_050"
+    ],
+    [
+     3,
+     "can_target_050"
+    ],
+    [
+     0,
+     "can_target_049"
+    ],
+    [
+     3,
+     "can_target_049"
+    ],
+    [
+     0,
+     "can_target_048"
+    ],
+    [
+     7,
+     "can_target_048"
+    ],
+    [
+     0,
+     "can_target_041"
+    ],
+    [
+     9,
+     "can_target_041"
+    ],
+    [
+     0,
+     "can_target_047"
+    ],
+    [
+     3,
+     "can_target_060"
+    ],
+    [
+     9,
+     "can_target_060"
+    ],
+    [
+     0,
+     "can_target_056"
+    ],
+    [
+     3,
+     "can_target_056"
+    ],
+    [
+     0,
+     "can_target_046"
+    ],
+    [
+     3,
+     "can_target_051"
+    ],
+    [
+     9,
+     "can_target_051"
+    ],
+    [
+     9,
+     "can_target_042"
+    ],
+    [
+     2,
+     "can_target_032"
+    ],
+    [
+     9,
+     "can_target_032"
+    ],
+    [
+     9,
+     "can_target_038"
+    ],
+    [
+     7,
+     "can_target_038"
+    ],
+    [
+     9,
+     "can_target_040"
+    ],
+    [
+     9,
+     "can_target_033"
+    ],
+    [
+     2,
+     "can_target_031"
+    ],
+    [
+     9,
+     "can_target_031"
+    ],
+    [
+     9,
+     "can_target_039"
+    ],
+    [
+     2,
+     "can_target_030"
+    ],
+    [
+     9,
+     "can_target_030"
+    ],
+    [
+     2,
+     "can_target_022"
+    ],
+    [
+     8,
+     "can_target_022"
+    ],
+    [
+     2,
+     "can_target_021"
+    ],
+    [
+     8,
+     "can_target_021"
+    ],
+    [
+     2,
+     "can_target_020"
+    ]
+   ],
+   "n": 138,
+   "grid_targets": 39
+  }
+ },
+ "rendered": [
+  {
+   "source": 0,
+   "key": "can_target_041",
+   "family": "object_workspace",
+   "shift_cm": 8.973155107258298,
+   "score": 0.9575228653269776,
+   "target_xy_m": [
+    0.21,
+    0.060000000000000005
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_046",
+   "family": "object_workspace",
+   "shift_cm": 6.393391008912018,
+   "score": 1.0291785412418664,
+   "target_xy_m": [
+    0.24,
+    -0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_047",
+   "family": "object_workspace",
+   "shift_cm": 4.088379588557359,
+   "score": 0.9810345060485841,
+   "target_xy_m": [
+    0.24,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_048",
+   "family": "object_workspace",
+   "shift_cm": 3.2487300176265563,
+   "score": 0.9373194854375781,
+   "target_xy_m": [
+    0.24,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_049",
+   "family": "object_workspace",
+   "shift_cm": 4.73219249341394,
+   "score": 0.8954631214028056,
+   "target_xy_m": [
+    0.24,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_050",
+   "family": "object_workspace",
+   "shift_cm": 7.227243240822786,
+   "score": 0.8643599369828673,
+   "target_xy_m": [
+    0.24,
+    0.060000000000000005
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_054",
+   "family": "object_workspace",
+   "shift_cm": 8.529453781376892,
+   "score": 0.8090070638084045,
+   "target_xy_m": [
+    0.27,
+    -0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_055",
+   "family": "object_workspace",
+   "shift_cm": 5.53091139650058,
+   "score": 1.025553934928034,
+   "target_xy_m": [
+    0.27,
+    -0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_056",
+   "family": "object_workspace",
+   "shift_cm": 2.5358193830072744,
+   "score": 1.0187233196998908,
+   "target_xy_m": [
+    0.27,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_057",
+   "family": "object_workspace",
+   "shift_cm": 0.5194025515251117,
+   "score": 0.9330989225333112,
+   "target_xy_m": [
+    0.27,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_058",
+   "family": "object_workspace",
+   "shift_cm": 3.47982443204053,
+   "score": 0.8312015952602149,
+   "target_xy_m": [
+    0.27,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_059",
+   "family": "object_workspace",
+   "shift_cm": 6.4767721239149365,
+   "score": 0.8197541596491352,
+   "target_xy_m": [
+    0.27,
+    0.060000000000000005
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_064",
+   "family": "object_workspace",
+   "shift_cm": 6.189225570218211,
+   "score": 0.618780568799256,
+   "target_xy_m": [
+    0.3,
+    -0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_065",
+   "family": "object_workspace",
+   "shift_cm": 3.761105186821866,
+   "score": 0.7150603797872702,
+   "target_xy_m": [
+    0.3,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_066",
+   "family": "object_workspace",
+   "shift_cm": 2.825829310774759,
+   "score": 0.7467574361700442,
+   "target_xy_m": [
+    0.3,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "shift_cm": 8.001377721501838,
+   "score": 0.37016555606933327,
+   "target_xy_m": [
+    0.33,
+    -0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7390423350399682,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.6685798624846512,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8119403973021085,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7307616496275837,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5192682818106241,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.45615892909758543,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.1082632783931003,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.404647001170372,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8316784647527613,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 0,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8016809320724851,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_065",
+   "family": "object_workspace",
+   "shift_cm": 4.12127190170901,
+   "score": 0.8369494382465916,
+   "target_xy_m": [
+    0.3,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_066",
+   "family": "object_workspace",
+   "shift_cm": 5.069447603241504,
+   "score": 0.7616269771555836,
+   "target_xy_m": [
+    0.3,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_067",
+   "family": "object_workspace",
+   "shift_cm": 7.239731757199701,
+   "score": 0.6842226860538693,
+   "target_xy_m": [
+    0.3,
+    0.030000000000000002
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "shift_cm": 3.2472269614376326,
+   "score": 0.7324358616811886,
+   "target_xy_m": [
+    0.33,
+    -0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_074",
+   "family": "object_workspace",
+   "shift_cm": 1.122007064720321,
+   "score": 0.8708040924109464,
+   "target_xy_m": [
+    0.33,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_075",
+   "family": "object_workspace",
+   "shift_cm": 3.1580558524948765,
+   "score": 0.7611803052428111,
+   "target_xy_m": [
+    0.33,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_076",
+   "family": "object_workspace",
+   "shift_cm": 6.057040009911771,
+   "score": 0.6641985590548005,
+   "target_xy_m": [
+    0.33,
+    0.030000000000000002
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "shift_cm": 3.58029338246932,
+   "score": 0.5247681274747609,
+   "target_xy_m": [
+    0.36,
+    -0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_083",
+   "family": "object_workspace",
+   "shift_cm": 1.8796057083198148,
+   "score": 0.6250819458912179,
+   "target_xy_m": [
+    0.36,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "can_target_084",
+   "family": "object_workspace",
+   "shift_cm": 3.4996191982761875,
+   "score": 0.617459371960692,
+   "target_xy_m": [
+    0.36,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8963177274840848,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7846916135938732,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8948942618778705,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7965455625829923,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5052463177213707,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.48182680395862404,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.325104446794038,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.4909954478437963,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.8901484078044609,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 1,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9008364296271134,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "can_target_020",
+   "family": "object_workspace",
+   "shift_cm": 7.926082780005871,
+   "score": 3.3283784033305026,
+   "target_xy_m": [
+    0.15,
+    -0.030000000000000006
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "can_target_021",
+   "family": "object_workspace",
+   "shift_cm": 5.723877434678587,
+   "score": 3.112650819388302,
+   "target_xy_m": [
+    0.15,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "can_target_022",
+   "family": "object_workspace",
+   "shift_cm": 4.550028300894386,
+   "score": 3.082108729317352,
+   "target_xy_m": [
+    0.15,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "can_target_030",
+   "family": "object_workspace",
+   "shift_cm": 3.8255248402909414,
+   "score": 2.332435595302136,
+   "target_xy_m": [
+    0.18,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "can_target_031",
+   "family": "object_workspace",
+   "shift_cm": 1.6045637897572538,
+   "score": 2.1939765689913884,
+   "target_xy_m": [
+    0.18,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "can_target_032",
+   "family": "object_workspace",
+   "shift_cm": 2.9179803986862716,
+   "score": 1.9682940440657797,
+   "target_xy_m": [
+    0.18,
+    0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5997073463285684,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.532453806733553,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.1356330281867089,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 2,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.6856118230352268,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_049",
+   "family": "object_workspace",
+   "shift_cm": 3.050349068377404,
+   "score": 1.410646389701997,
+   "target_xy_m": [
+    0.24,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_050",
+   "family": "object_workspace",
+   "shift_cm": 5.1929061430651835,
+   "score": 1.2334215431192865,
+   "target_xy_m": [
+    0.24,
+    0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_051",
+   "family": "object_workspace",
+   "shift_cm": 7.91378032184476,
+   "score": 1.1558566050553765,
+   "target_xy_m": [
+    0.24,
+    0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_055",
+   "family": "object_workspace",
+   "shift_cm": 7.562867218525246,
+   "score": 0.8478130591456888,
+   "target_xy_m": [
+    0.27,
+    -0.05999999999999999
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_056",
+   "family": "object_workspace",
+   "shift_cm": 4.567122216098123,
+   "score": 1.032075919821461,
+   "target_xy_m": [
+    0.27,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_057",
+   "family": "object_workspace",
+   "shift_cm": 1.5875295614602738,
+   "score": 1.1563236948450075,
+   "target_xy_m": [
+    0.27,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_058",
+   "family": "object_workspace",
+   "shift_cm": 1.4771238540635203,
+   "score": 1.1006231842747665,
+   "target_xy_m": [
+    0.27,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_059",
+   "family": "object_workspace",
+   "shift_cm": 4.454608810207321,
+   "score": 0.9882212748559389,
+   "target_xy_m": [
+    0.27,
+    0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_060",
+   "family": "object_workspace",
+   "shift_cm": 7.450180160486719,
+   "score": 0.9919809567457165,
+   "target_xy_m": [
+    0.27,
+    0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_063",
+   "family": "object_workspace",
+   "shift_cm": 11.064021928512394,
+   "score": 0.3898985711589053,
+   "target_xy_m": [
+    0.3,
+    -0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_064",
+   "family": "object_workspace",
+   "shift_cm": 8.250710636444376,
+   "score": 0.46887683964529925,
+   "target_xy_m": [
+    0.3,
+    -0.05999999999999999
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_065",
+   "family": "object_workspace",
+   "shift_cm": 5.633459929569891,
+   "score": 0.5799718067608159,
+   "target_xy_m": [
+    0.3,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_066",
+   "family": "object_workspace",
+   "shift_cm": 3.660261677776989,
+   "score": 0.7140507731415431,
+   "target_xy_m": [
+    0.3,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "can_target_067",
+   "family": "object_workspace",
+   "shift_cm": 3.61374602338571,
+   "score": 0.764412589486634,
+   "target_xy_m": [
+    0.3,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8531738580408426,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7559292328098475,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9059031059593134,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.829439068980602,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.48567988113131916,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.47150261921005143,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.749226484987456,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.8910290057837795,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9661616481844078,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 3,
+   "key": "timing_-10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9432462713014667,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_065",
+   "family": "object_workspace",
+   "shift_cm": 3.8401942273349547,
+   "score": 0.8618572895660379,
+   "target_xy_m": [
+    0.3,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_066",
+   "family": "object_workspace",
+   "shift_cm": 4.385673721256661,
+   "score": 0.8302560528443287,
+   "target_xy_m": [
+    0.3,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_072",
+   "family": "object_workspace",
+   "shift_cm": 6.795449145156645,
+   "score": 0.47884096632771833,
+   "target_xy_m": [
+    0.33,
+    -0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "shift_cm": 3.8295132027549825,
+   "score": 0.6371247703990447,
+   "target_xy_m": [
+    0.33,
+    -0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_074",
+   "family": "object_workspace",
+   "shift_cm": 1.073412155576441,
+   "score": 0.8422283020553032,
+   "target_xy_m": [
+    0.33,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_075",
+   "family": "object_workspace",
+   "shift_cm": 2.374711759646589,
+   "score": 0.8064666232006759,
+   "target_xy_m": [
+    0.33,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_081",
+   "family": "object_workspace",
+   "shift_cm": 7.112190312167746,
+   "score": 0.3698984259465658,
+   "target_xy_m": [
+    0.36,
+    -0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "shift_cm": 4.366954696600056,
+   "score": 0.4660187769866208,
+   "target_xy_m": [
+    0.36,
+    -0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_083",
+   "family": "object_workspace",
+   "shift_cm": 2.3574001798213686,
+   "score": 0.6247907066852617,
+   "target_xy_m": [
+    0.36,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "can_target_084",
+   "family": "object_workspace",
+   "shift_cm": 3.1692866537260964,
+   "score": 0.6113190553310632,
+   "target_xy_m": [
+    0.36,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7969317484949475,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7104928773664914,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9506548493253347,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.86039583244249,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.5219748156434347,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.49883826553249627,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.324477200951906,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.5831484176193094,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 4,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 0.9449242123632827,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "can_target_081",
+   "family": "object_workspace",
+   "shift_cm": 11.522254277105002,
+   "score": 0.394444659205711,
+   "target_xy_m": [
+    0.36,
+    -0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "shift_cm": 8.524043658865992,
+   "score": 0.4867400382327183,
+   "target_xy_m": [
+    0.36,
+    -0.05999999999999999
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "can_target_083",
+   "family": "object_workspace",
+   "shift_cm": 5.5277750470006035,
+   "score": 0.641170055403955,
+   "target_xy_m": [
+    0.36,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "can_target_084",
+   "family": "object_workspace",
+   "shift_cm": 2.540329435768422,
+   "score": 0.7867105797592882,
+   "target_xy_m": [
+    0.36,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.7954917111844791,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.6675604409701636,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.035518949570722,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.9551335633734954,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.602046110872495,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.46560639068234605,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.452553504544935,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 5,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.6280537728761748,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "shift_cm": 7.437621851926806,
+   "score": 0.6608410220014195,
+   "target_xy_m": [
+    0.33,
+    -0.05999999999999999
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "can_target_074",
+   "family": "object_workspace",
+   "shift_cm": 4.487262348113308,
+   "score": 0.7879868740191183,
+   "target_xy_m": [
+    0.33,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "can_target_075",
+   "family": "object_workspace",
+   "shift_cm": 1.7183794544080138,
+   "score": 0.9571844877830082,
+   "target_xy_m": [
+    0.33,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "can_target_081",
+   "family": "object_workspace",
+   "shift_cm": 10.546484291560155,
+   "score": 0.4000102540439386,
+   "target_xy_m": [
+    0.36,
+    -0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "shift_cm": 7.618768632834397,
+   "score": 0.48212569093967794,
+   "target_xy_m": [
+    0.36,
+    -0.05999999999999999
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "can_target_083",
+   "family": "object_workspace",
+   "shift_cm": 4.78152068375716,
+   "score": 0.5633112830753869,
+   "target_xy_m": [
+    0.36,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "can_target_084",
+   "family": "object_workspace",
+   "shift_cm": 2.3833263766705888,
+   "score": 0.6628158244680851,
+   "target_xy_m": [
+    0.36,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8659024807527802,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8168869386546866,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y-3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.9884663341645885,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "interact_x+0_y-5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.8920700344040604,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.6055683170508953,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.4945162978946159,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.3509440388258585,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 1.5882876694904475,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 6,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.0104771825794303,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "can_target_038",
+   "family": "object_workspace",
+   "shift_cm": 7.328577205302672,
+   "score": 2.239996963024827,
+   "target_xy_m": [
+    0.21,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "can_target_048",
+   "family": "object_workspace",
+   "shift_cm": 3.379032663660114,
+   "score": 1.3988996594183913,
+   "target_xy_m": [
+    0.24,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "can_target_049",
+   "family": "object_workspace",
+   "shift_cm": 0.8098134899533671,
+   "score": 1.5236431885720243,
+   "target_xy_m": [
+    0.24,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "can_target_050",
+   "family": "object_workspace",
+   "shift_cm": 2.8095789782348057,
+   "score": 1.3795735343223776,
+   "target_xy_m": [
+    0.24,
+    0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "can_target_058",
+   "family": "object_workspace",
+   "shift_cm": 2.2644380384726865,
+   "score": 0.846281229750162,
+   "target_xy_m": [
+    0.27,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8994822808808517,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.7845846072547465,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.792629949568083,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "interact_x-5_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 2.24076535501221,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 7,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.056061240811974,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 8,
+   "key": "can_target_021",
+   "family": "object_workspace",
+   "shift_cm": 3.763391880632313,
+   "score": 3.758748219871954,
+   "target_xy_m": [
+    0.15,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 8,
+   "key": "can_target_022",
+   "family": "object_workspace",
+   "shift_cm": 1.2948511554990352,
+   "score": 3.4539460654158876,
+   "target_xy_m": [
+    0.15,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 8,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.0117962930685256,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 8,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.9512210859424242,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 8,
+   "key": "interact_x-3_y+0_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 1.9706569732892707,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_030",
+   "family": "object_workspace",
+   "shift_cm": 10.322266416936499,
+   "score": 2.3822635314052425,
+   "target_xy_m": [
+    0.18,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_031",
+   "family": "object_workspace",
+   "shift_cm": 9.096827702128333,
+   "score": 2.2495813348290894,
+   "target_xy_m": [
+    0.18,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_032",
+   "family": "object_workspace",
+   "shift_cm": 8.772420675173064,
+   "score": 2.3103778183483747,
+   "target_xy_m": [
+    0.18,
+    0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_033",
+   "family": "object_workspace",
+   "shift_cm": 9.442375483012643,
+   "score": 2.1535214108824663,
+   "target_xy_m": [
+    0.18,
+    0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_038",
+   "family": "object_workspace",
+   "shift_cm": 10.237632665728693,
+   "score": 2.1142249415839554,
+   "target_xy_m": [
+    0.21,
+    -0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_039",
+   "family": "object_workspace",
+   "shift_cm": 7.938023233676607,
+   "score": 2.277137648029542,
+   "target_xy_m": [
+    0.21,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_040",
+   "family": "object_workspace",
+   "shift_cm": 6.26221231821343,
+   "score": 2.152976122382609,
+   "target_xy_m": [
+    0.21,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_041",
+   "family": "object_workspace",
+   "shift_cm": 5.780864414460732,
+   "score": 1.949950993337982,
+   "target_xy_m": [
+    0.21,
+    0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_042",
+   "family": "object_workspace",
+   "shift_cm": 6.754367745272153,
+   "score": 1.7047943560116445,
+   "target_xy_m": [
+    0.21,
+    0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_048",
+   "family": "object_workspace",
+   "shift_cm": 6.121702519280414,
+   "score": 1.420445846261395,
+   "target_xy_m": [
+    0.24,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_049",
+   "family": "object_workspace",
+   "shift_cm": 3.6984229063965333,
+   "score": 1.578913122731228,
+   "target_xy_m": [
+    0.24,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_050",
+   "family": "object_workspace",
+   "shift_cm": 2.8073870866969846,
+   "score": 1.7118275503523581,
+   "target_xy_m": [
+    0.24,
+    0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_051",
+   "family": "object_workspace",
+   "shift_cm": 4.481574780648805,
+   "score": 1.452084073747391,
+   "target_xy_m": [
+    0.24,
+    0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_057",
+   "family": "object_workspace",
+   "shift_cm": 5.4715875768134,
+   "score": 0.8285004639997232,
+   "target_xy_m": [
+    0.27,
+    0.0
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_058",
+   "family": "object_workspace",
+   "shift_cm": 2.478176924824606,
+   "score": 1.0275140493431214,
+   "target_xy_m": [
+    0.27,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_059",
+   "family": "object_workspace",
+   "shift_cm": 0.586899591691412,
+   "score": 1.1715112994326013,
+   "target_xy_m": [
+    0.27,
+    0.06
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_060",
+   "family": "object_workspace",
+   "shift_cm": 3.5422508932488035,
+   "score": 1.0458895975029447,
+   "target_xy_m": [
+    0.27,
+    0.09
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "can_target_067",
+   "family": "object_workspace",
+   "shift_cm": 4.074848432384657,
+   "score": 0.5815090041420694,
+   "target_xy_m": [
+    0.3,
+    0.03
+   ],
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "interact_x+0_y+3_z+0",
+   "family": "interaction_location",
+   "shift_cm": 3.0,
+   "score": 0.8301244094974749,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "shift_cm": 5.0,
+   "score": 0.747413364245332,
+   "target_xy_m": null,
+   "timing_excluded": false
+  },
+  {
+   "source": 9,
+   "key": "timing_+10",
+   "family": "interaction_timing",
+   "shift_cm": 0.0,
+   "score": 1.2134827015039602,
+   "target_xy_m": null,
+   "timing_excluded": false
+  }
+ ]
+}

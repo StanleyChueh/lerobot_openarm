@@ -125,3 +125,61 @@ every source.
   HSV-rule-only dataset can be rebuilt from `gen_a2` if preferred.
 
 Generation goes to `gen_a3`.
+
+## Amendment 4 (2026-11-14, after v03 rev 1 was published; before any rev-2 generation): same duration and speed as the source
+
+**Finding (user inspection of the published rev-1 data):**
+- Real demos last 241–280 frames (8.0–9.3 s at 30 fps). v00 synthetic episodes are exactly 1.000× their source
+  (96/96, checked on the Hub).
+- Rev-1 grid episodes are 1.09× their source at the median, but 20/84 (loose) are >1.5× and the worst is 3.56×
+  (998 frames, 33 s). Among all 189 passing rev-1 candidates, 98 are >1.3×.
+- Cause: `plan_with_time_scale` passes the speed/accel gate by slowing the clock (`window` / `uniform`, up to 6×).
+  The robot then reaches and lifts in slow motion. The user rates this as more harmful to VLA training than mild
+  visual distortion.
+
+**Changes** (stricter; no rev-1 gate is loosened; rev-1 data are kept as a negative result, tag `v03-rev1`):
+1. **Identity clock:** `object_targets.time_scales: [1.0]`. No time scaling.
+2. **Wide spatial blend** (`object_targets.wide_blend: true`, `workspace_plan.f1w_schedule(wide=True)`). The shift
+   ramps in from the end of the previous gripper event +12 frames, or frame 0 if there is none, and blends back out
+   at `next_event − 10`. The robot absorbs the shift over the longest event-free span instead of moving faster.
+3. **New hard gate `duration`** (`checks.fixed_duration`): the synthetic frame count equals the source frame count.
+4. **New hard gate `speed_similarity`** (`checks.speed_similarity: [0.8, 1.25]`): for every moved arm, the TCP
+   (Cartesian) peak speed and the mean speed over the edited frames are 0.8–1.25× of the same arm in its source episode.
+   The per-joint speed ≤ 1.25× / accel ≤ 1.5× envelope gates are unchanged.
+5. **Applies to every exported episode.** The hand-over variants (reused from v02) are re-checked from the exported
+   state by `tools/quality_report.py`. Any that fail are excluded before export, and the exclusion is reported.
+6. **Minimal-distortion selection:** per grid target, all passing candidates are rendered. The up to 2 with the
+   lowest distortion score are kept per threshold, with ties broken by the smaller shift. Rev 1 used the 2 smallest
+   shifts instead.
+7. **Unchanged:** thresholds (strict 2.289 / loose 4.578, `thresholds.json`), grid, sources, every other gate,
+   the coverage metric and the reporting.
+
+Rev 2 goes to `artifacts/sfagen_v03r2_run/`, with results in `results/v03r2/`. Configs:
+`configs/openarm_pringles_v03r2*.yaml`. The published repos keep their names and are overwritten after tagging the
+rev-1 revision `v03-rev1` (user decision).
+
+## Amendment 5 (2026-11-14, after the rev-2 body renders and before any rev-2 export): remove the ghost lid
+
+**Finding:** a visual audit of all 67 loose rev-2 grid renders (`results/v03r2/audit_sheets/`) shows a ghost
+crescent, lid or duplicate can at the source can's position during grasp and lift in most episodes. It is present in
+nearly all episodes with score ≥ 1. The distortion score does not measure it, because the ghost lies outside the
+target silhouette.
+
+**Cause:** the source can's plate-difference region (mostly the pale lid) extends beyond the proxy-pose mask, so it is
+not replaced by the plate.
+
+**Existing fix:** `render.object_mask_grow: 60` (`sfagen/render.py`, from the can-fix study
+`results/canfix/RESULTS.md`). It grows the object mask over the connected plate-difference region. It was not adopted
+for v01 only because the registered whole-can PSNR gain was below +0.5 dB; that rule is insensitive to a small ghost.
+
+**Dev check:** 6 rev-2 episodes, 5 with ghosts plus 1 clean one, compared frame by frame in
+`results/v03r2/amendment5/grow60_dev.jpg`.
+- The ghost is removed in 4/5. Source 7 / target 038 keeps a small sliver.
+- The clean episode is unchanged.
+- The distortion score rises by 0.07–0.40, because the larger removal region is counted.
+
+**Change:** rev 2 uses `object_mask_grow: 60` for every body render, grid and hand-over alike. All body renders are
+redone, and selection is re-run with the unchanged thresholds. These are now slightly stricter, since scores rise.
+
+**Unchanged:** wrist renders (their fingerprint does not include body render settings), thresholds, and all gates.
+The base-renderer rev-2 renders are kept in `artifacts/sfagen_v03r2_run/body_base/` and reported.

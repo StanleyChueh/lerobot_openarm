@@ -1,0 +1,74 @@
+{
+ "strict_copied": {
+  "n_syn": 130,
+  "ratio_min": 1.0,
+  "ratio_max": 1.0,
+  "mixed_syn_ratio": [
+   1.0,
+   1.0
+  ],
+  "n_real_in_synthetic_only": 0,
+  "syn_seconds": [
+   8.033333333333333,
+   9.333333333333334
+  ],
+  "real_seconds": [
+   8.033333333333333,
+   9.333333333333334
+  ]
+ },
+ "strict_right_wrist": {
+  "n_syn": 130,
+  "ratio_min": 1.0,
+  "ratio_max": 1.0,
+  "mixed_syn_ratio": [
+   1.0,
+   1.0
+  ],
+  "n_real_in_synthetic_only": 0,
+  "syn_seconds": [
+   8.033333333333333,
+   9.333333333333334
+  ],
+  "real_seconds": [
+   8.033333333333333,
+   9.333333333333334
+  ]
+ },
+ "loose_copied": {
+  "n_syn": 138,
+  "ratio_min": 1.0,
+  "ratio_max": 1.0,
+  "mixed_syn_ratio": [
+   1.0,
+   1.0
+  ],
+  "n_real_in_synthetic_only": 0,
+  "syn_seconds": [
+   8.033333333333333,
+   9.333333333333334
+  ],
+  "real_seconds": [
+   8.033333333333333,
+   9.333333333333334
+  ]
+ },
+ "loose_right_wrist": {
+  "n_syn": 138,
+  "ratio_min": 1.0,
+  "ratio_max": 1.0,
+  "mixed_syn_ratio": [
+   1.0,
+   1.0
+  ],
+  "n_real_in_synthetic_only": 0,
+  "syn_seconds": [
+   8.033333333333333,
+   9.333333333333334
+  ],
+  "real_seconds": [
+   8.033333333333333,
+   9.333333333333334
+  ]
+ }
+}

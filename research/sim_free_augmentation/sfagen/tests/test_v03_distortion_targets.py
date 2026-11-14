@@ -42,5 +42,41 @@ class V03Tests(unittest.TestCase):
         np.testing.assert_array_equal(state_bounds(rec, 'R', S.copy(), False, 0.01)[1], np.maximum(0.55, S))
 
 
+def _fake_rec(T=280, tg=80, nxt=200):
+    """Right TCP rests at (.3,0,.1) for 20 frames, reaches the can at the origin by frame 60, holds, lifts after grasp."""
+    P = np.zeros((T, 3)); P[:20] = [.3, 0, .1]; P[20:60] = np.linspace([.3, 0, .1], [0, 0, .02], 40); P[60:tg + 1] = [0, 0, .02]
+    P[tg + 1:] = np.linspace([0, 0, .02], [0, 0, .25], T - tg - 1)
+
+    def tcp(S, arm):
+        out = np.tile(np.eye(4), (len(S), 1, 1)); out[:, :3, 3] = S[:, :3]; return out
+    robot = SimpleNamespace(tcp_from_state=tcp)
+    obj = dict(arm="R", grasp_frame=tg, table=np.eye(4), points=np.array([[-.03, -.03, 0], [.03, .03, .1]]))
+    ev = {"R": dict(closes=[tg], opens=[230]), "L": dict(closes=[nxt], opens=[])}
+    return SimpleNamespace(objects=[obj], robot=robot, state=P, T=T, ev=ev, ctx=SimpleNamespace(src=SimpleNamespace(fps=30)))
+
+
+class V03Rev2Tests(unittest.TestCase):
+    def test_wide_schedule_absorbs_shift_over_longest_event_free_span(self):
+        from sfagen.workspace_plan import f1w_schedule
+        rec = _fake_rec(); m0 = f1w_schedule(rec, 0); m1 = f1w_schedule(rec, 0, wide=True)
+        self.assertEqual((m0["t_approach"], m0["t_grasp"]), (m1["t_approach"], m1["t_grasp"]))
+        self.assertEqual(m1["t_motion"], 0); self.assertLessEqual(m1["t_motion"], m0["t_motion"])
+        self.assertEqual(m1["t_rejoin"], 200 - 10); self.assertGreaterEqual(m1["t_rejoin"], m0["t_rejoin"])
+        rec.ev["L"]["opens"] = [5]                                             # earlier gripper event: ramp starts after it
+        self.assertEqual(f1w_schedule(rec, 0, wide=True)["t_motion"], min(5 + 12, m0["t_motion"]))
+
+    def test_duration_and_speed_similarity_gates(self):
+        from sfagen.checks import Checker
+        rec = _fake_rec(); ck = object.__new__(Checker); ck.robot = rec.robot; ck.ctx = rec.ctx
+        ck.cfg = dict(fixed_duration=True, speed_similarity=[0.8, 1.25])
+        ed = np.zeros(rec.T, bool); ed[10:190] = True
+        same = dict(state=rec.state.copy(), edited=ed, moved_arms=["R"])
+        r = ck.timing_similarity(rec, same); self.assertTrue(r["timing_ok"]); self.assertEqual(r["tcp_peak_speed_ratio"], [1.0, 1.0])
+        fast = dict(same, state=rec.state * np.r_[1.4, 1.4, 1.4]); self.assertFalse(ck.timing_similarity(rec, fast)["timing_ok"])
+        longer = dict(same, state=np.vstack([rec.state, rec.state[-1:]]), edited=np.r_[ed, False])
+        self.assertFalse(ck.timing_similarity(rec, longer)["timing_ok"])                    # one extra frame fails
+        ck.cfg = {}; self.assertTrue(ck.timing_similarity(rec, longer)["timing_ok"])        # gates are opt-in (rev 1 unchanged)
+
+
 if __name__ == "__main__":
     unittest.main()
