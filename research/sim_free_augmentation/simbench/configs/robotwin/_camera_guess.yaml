@@ -1,0 +1,8 @@
+camera:
+  intrinsics: {width: 640, height: 480, fx: 717.284, fy: 717.284, cx: 320.0, cy: 240.0}
+  extrinsics:
+    position: [0.21282, -0.03345, 1.39418]
+    quat_wxyz: [0.256183, -0.624331, 0.708151, -0.207613]
+  note: initial guess = nominal RoboTwin head-camera mount + seeded error (seed 0,
+    8.0 deg, 0.08 m); refined by `sfagen calibrate --search`
+

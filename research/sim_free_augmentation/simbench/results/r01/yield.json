@@ -1,0 +1,4392 @@
+[
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_000",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_001",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_002",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_003",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_007",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_008",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_009",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_010",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_012",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_013",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_014",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_015",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_018",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_024",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_025",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "cup_target_030",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 3,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_022",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_023",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_027",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_028",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_029",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_031",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_032",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_033",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_034",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_035",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_036",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_037",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_038",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_039",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_040",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "mesh_clearance",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_041",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_042",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_043",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_044",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_045",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_046",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "object",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_047",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_049",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_050",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_051",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_052",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "cup_target_053",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 5,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_000",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_001",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_002",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_003",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_004",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_005",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_006",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_007",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_008",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_009",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_010",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_011",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_012",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_013",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_014",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_015",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_016",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 8,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_001",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_002",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_003",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_004",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_006",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_007",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_008",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_009",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_010",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_011",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_012",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_013",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_014",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_015",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_016",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_017",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_018",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "mesh_clearance",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_022",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_023",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_024",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_025",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_027",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_028",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_029",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_030",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_031",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_032",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_033",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_034",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_035",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_036",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_037",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_038",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_039",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_040",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_041",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_044",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_045",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "cup_target_046",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "L",
+  "episode": 9,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_022",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_023",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_024",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_025",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_027",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_028",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_029",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_030",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_031",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_032",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_033",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_034",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_035",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_036",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_037",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_038",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_039",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "mesh_clearance",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_040",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_041",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_042",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_043",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_044",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_045",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_046",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_047",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_048",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_049",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_050",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_051",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_052",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "cup_target_053",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 0,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_003",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_004",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_005",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_007",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_008",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_009",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_010",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_011",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_013",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_014",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_015",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_016",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_017",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_022",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "mesh_clearance",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_023",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_025",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_027",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_028",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_029",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_031",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_032",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_033",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_034",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_035",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_037",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_038",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_039",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_040",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_041",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_045",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_046",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "cup_target_047",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 1,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_007",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_008",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_012",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_013",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_014",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_015",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_016",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_018",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_022",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_023",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_024",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_025",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_027",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_028",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_029",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_030",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_031",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_032",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "object",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_033",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_034",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_035",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_036",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_037",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_038",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_039",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_040",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_041",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_042",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_043",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_044",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_045",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_046",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_047",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_048",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_049",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_050",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_051",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "cup_target_052",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 2,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_007",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_008",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_009",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_012",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_013",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_014",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_015",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_016",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_018",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_022",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_023",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_024",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_025",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_027",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_028",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_029",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_030",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_031",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_032",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "object",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_033",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_034",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_035",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_036",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_037",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_038",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_039",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_040",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_041",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_042",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_043",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_044",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_045",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_046",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_047",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_048",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_049",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_050",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_051",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "cup_target_052",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 4,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_002",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_003",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_004",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_006",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_007",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_008",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_009",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_010",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_011",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_012",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_013",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_014",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_015",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_016",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_017",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_018",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "mesh_clearance",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_022",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_023",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_024",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_025",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_027",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "object",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_028",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_029",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_030",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_031",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_032",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_033",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "accel",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_034",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_035",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_036",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_037",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_038",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_039",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_040",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_041",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_043",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_044",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_045",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "cup_target_046",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 6,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_000",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_001",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_002",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_003",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_004",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_005",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_006",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_007",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_008",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_009",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_010",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_011",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_012",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_013",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_014",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_015",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_016",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_017",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_018",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_019",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_020",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_021",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_022",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_023",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_024",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_025",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_026",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_027",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "cup_target_028",
+  "family": "object_workspace",
+  "pass": false,
+  "first_failed_gate": "speed",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "interact_x+3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "interact_x-3_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "interact_x+0_y+3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "interact_x+0_y-3_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "interact_x+5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "interact_x-5_y+0_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "interact_x+0_y+5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "interact_x+0_y-5_z+0",
+  "family": "interaction_location",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "timing_-10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ },
+ {
+  "task": "place_empty_cup",
+  "group": "R",
+  "episode": 7,
+  "key": "timing_+10",
+  "family": "interaction_timing",
+  "pass": false,
+  "first_failed_gate": "no_schedule",
+  "rendered": false
+ }
+]

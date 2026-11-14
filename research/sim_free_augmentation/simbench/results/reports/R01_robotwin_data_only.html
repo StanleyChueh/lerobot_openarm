@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R01 RoboTwin pilot</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#666;--line:#ddd;--bad:#b3261e;--ok:#1e6b3a;--card:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161615;--fg:#e8e6e1;--mut:#a09d97;--line:#333;--bad:#f2867e;--ok:#7fd19b;--card:#1f1f1d}}
+:root[data-theme="dark"]{--bg:#161615;--fg:#e8e6e1;--mut:#a09d97;--line:#333;--bad:#f2867e;--ok:#7fd19b;--card:#1f1f1d}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,sans-serif;margin:0;padding:0 16px}
+main{max-width:1100px;margin:32px auto}h1{font-size:1.6rem;margin-bottom:.2rem}h2{margin-top:2.2rem;border-top:1px solid var(--line);padding-top:1rem}
+.sub{color:var(--mut)}.kpis{display:flex;flex-wrap:wrap;gap:12px;margin:1rem 0}.k{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-width:150px}
+.k b{display:block;font-size:1.5rem}.bad{color:var(--bad)}.ok{color:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:.6rem 0;display:block;overflow-x:auto}td,th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;white-space:nowrap}
+img{max-width:100%;border:1px solid var(--line);border-radius:6px;margin:.4rem 0}code{font-size:.88em}
+</style></head><body><main>
+<h1>R01 · RoboTwin 2.0 data-only pilot (S1)</h1>
+<p class="sub">2026-11-15 · Opus 5.5 · branch research/sfagen-simbench (sfagen unchanged from 49957aa) · first-party, pending review · full text: <code>R01_robotwin_data_only.md</code></p>
+<div class="kpis">
+<div class="k">Stop rule<b class="bad">yield &lt; 10 %</b></div>
+<div class="k">place_empty_cup<b class="bad">0 / 439</b>pass</div>
+<div class="k">Camera fit adopted<b class="ok">3 / 3</b>tasks</div>
+<div class="k">Gripper speed vs source<b>1.00×</b>median</div>
+<div class="k">Wrist joint sets the max<b>275 / 339</b></div>
+</div>
+<p><b>In plain words.</b> sfagen moves the object to a new spot and bends the recorded arm motion to reach it. In RoboTwin, every
+demo starts with the arm folded straight (all joints 0). sfagen starts bending the motion right there, and from that folded pose a
+sideways shift of a few centimetres makes the wrist swing (up to 0.8 rad) and swing back. The gripper itself moves no faster than in
+the demo, but RoboTwin's planner never turns that wrist joint fast, so the speed check rejects every candidate. I stopped as the plan says;
+the fix is a method change and is your call.</p>
+
+<h2>1 · Why nothing passed</h2>
+<img src="../r01/speed_gate_cup_L_ep3.png" alt="Joint angles, wrist speed and gripper speed for source vs synthetic, cup episode 3">
+<table><tr><th>shift</th><th>n</th><th>median max joint-speed ratio (gate 1.25)</th><th>≤ 1.25</th><th>median gripper peak-speed ratio</th></tr>
+<tr><td>0–4 cm</td><td>51</td><td>1.88</td><td>19</td><td>1.00</td></tr>
+<tr><td>4–8 cm</td><td>134</td><td>4.47</td><td>6</td><td>1.01</td></tr>
+<tr><td>8–12 cm</td><td>154</td><td>7.10</td><td>0</td><td>0.99</td></tr></table>
+<table><tr><th>task</th><th>family</th><th>candidates</th><th>pass</th><th>first failed gate</th></tr>
+<tr><td>place_empty_cup</td><td>object position (3 cm grid)</td><td>339</td><td>0</td><td>speed 314, accel 16, mesh 5, object 4</td></tr>
+<tr><td>place_empty_cup</td><td>interaction location / timing</td><td>100</td><td>0</td><td>not applicable (hands never within 20 cm)</td></tr>
+<tr><td>handover_block</td><td colspan="4">stopped at reconstruction (6/10 episodes)</td></tr>
+<tr><td>stack_blocks_two</td><td colspan="4">not started</td></tr></table>
+<p>Start pose is near-singular: manipulability 1.2e-3 vs 1.7–2.4e-2 during the reach. 91 % of the worst frames fall before motion onset + 0.5 s.
+Cause: <code>workspace_plan.py:136-138</code> (wide blend starts at frame 0) + <code>checks.py:151</code> (per-joint envelope from 4–6 demos).</p>
+<table><tr><th>Option</th><th>What</th><th>Counterfactual / risk</th></tr>
+<tr><td><b>A (recommended)</b></td><td>Start the blend only once the arm is well conditioned; ramp through the approach to t_grasp − 3. One rule for every robot, no retiming.</td><td>Removes the cause; TCP speed may rise (speed_similarity decides); OpenArm regression needed</td></tr>
+<tr><td>B</td><td>Robot-level speed envelope (p95 of 11 000 demos of other RoboTwin tasks)</td><td>190/339 pass speed+accel; admits the wrist swing; changes a gate after seeing data</td></tr>
+<tr><td>C</td><td>Report RoboTwin object-position yield 0 %</td><td>Loses or weakens the benchmark</td></tr></table>
+
+<h2>2 · Camera fit: adopted, still far from truth</h2>
+<p>Rows: initial guess (truth + 8°/8 cm offset) · fitted · truth (evaluation only). Fitted reprojection median 35 / 26 / 16 px (initial 81).</p>
+<img src="../r01/calib_overlay_handover_block.jpg" alt="Calibration overlay handover_block">
+<img src="../r01/calib_overlay_place_empty_cup.jpg" alt="Calibration overlay place_empty_cup">
+<img src="../r01/calib_overlay_stack_blocks_two.jpg" alt="Calibration overlay stack_blocks_two">
+<table><tr><th>task</th><th>held-out IoU</th><th>rot err</th><th>centre err</th><th>focal ratio</th><th>table est. (truth 0.74 m)</th></tr>
+<tr><td>handover_block</td><td>0.242 → 0.496</td><td>5.2°</td><td>12.9 cm</td><td>0.947</td><td>0.736 (−0.4 cm)</td></tr>
+<tr><td>place_empty_cup</td><td>0.208 → 0.477</td><td>8.8°</td><td>8.3 cm</td><td>0.941</td><td class="bad">0.783 (+4.3 cm)</td></tr>
+<tr><td>stack_blocks_two</td><td>0.382 → 0.632</td><td>6.1°</td><td>6.7 cm</td><td>0.962</td><td>0.724 (−1.6 cm)</td></tr></table>
+
+<h2>3 · Source demos (40 % into each episode)</h2>
+<img src="../r01/source_contact_sheet.jpg" alt="Contact sheet of 30 source episodes">
+<p>Note the large robot shadows on the table (not modelled by the renderer) and the handover block cut off at the top edge.</p>
+
+<h2>Videos</h2>
+<p>None: no candidate passed, so nothing was rendered. Side-by-side videos come after a fix.</p>
+</main></body></html>
