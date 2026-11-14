@@ -85,7 +85,8 @@ def jobs():
                 rev = ("\n## Revision history\n- **Revision 2 (2026-11-14, current `v3.0`):** fixes slow-motion grid episodes. In revision 1 the planner slowed the clock to pass the speed gate "
                        "(grid episodes up to 3.56× the source length, 33 s vs 8–9 s). Now the clock is never changed: the shift is absorbed over the longest event-free span, "
                        "with hard gates on duration (= source) and TCP speed similarity (0.8–1.25× of the source). Grid candidates are chosen by lowest distortion. "
-                       f"Pre-registered as amendment 4 in `results/v03/PROTOCOL.md`.\n- **Revision 1:** tag `v03-rev1` (kept for reproducibility; do not train on it).\n") if R2 else ''
+                       "Pre-registered as amendment 4 in `results/v03/PROTOCOL.md`; amendment 5 grows the old-can mask (`object_mask_grow: 60`) to remove a ghost lid at the old can position."
+                       "\n- **Revision 1:** tag `v03-rev1` (kept for reproducibility; do not train on it).\n") if R2 else ''
                 repo = f'ethanCSL/openarm_pringles_lerobot_{kind}_10_3cam{suf}_v03_{th}'
                 ts = cov['table'][f'+v03 {th}']; flagged = sum((f['source'], f['key']) in {tuple(x) for x in sel[th]['episodes']} for f in aud['flags'])
                 card = f"""---
@@ -102,7 +103,7 @@ Generated without a simulator from the 10 real demos of [`{SRC}`](https://huggin
 - **Variation:** can start positions on a 3 cm arena grid ({sel[th]['grid_targets']} targets, F1W planner) + v02 hand-over location/timing variants.
 - **Distortion cap ({th}):** body-camera score (missing + spilled silhouette pixels, 95th percentile over frames) ≤ {sel[th]['threshold']:.2f}
   (strict = worst v02 episode {T['strict']:.2f}; loose = 2 × strict). The score misses some ghost/duplicate-can artifacts:
-  {flagged} kept episodes carry a visual-audit flag (`results/v03/visual_audit.json`).
+  {flagged} kept episodes carry a visual-audit flag (`results/v03{'r2' if R2 else ''}/visual_audit.json`).
 - **Wrist cameras:** {'right wrist rendered by sfagen (ablation; the Pringles wrist-fidelity gate failed); left wrist copied' if cond == 'right_wrist' else 'copied from the source demo (can-relative geometry exact; table/background off by the shift)'}; `wrist_view_valid` flags invalid frames.
 - **Coverage proxy** (40 measured eval starts): worst nearest can start {ts['worst_all40_cm']} cm, {ts['within_2cm']}/40 within 2 cm (real only: 6.63 cm, 14/40).
 - **Checks:** sfagen verify {'PASS' if verify_pass(ver) else 'FAIL'}; quality gates {'PASS' if q['pass'] else 'FAIL'}. Kinematic/geometric only:
