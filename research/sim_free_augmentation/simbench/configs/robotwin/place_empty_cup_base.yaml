@@ -149,7 +149,8 @@ video_encoding:
   crf: 12
   preset: fast
   g: 2
-work_dir: /home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_runs/s1/place_empty_cup/rig
+work_dir: /home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_runs/s1d/place_empty_cup/rig
 plan:
   action_aware_bounds: true
   action_bound_margin_rad: 0.005
+  blend_space: joint_fallback

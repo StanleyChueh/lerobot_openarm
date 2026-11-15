@@ -38,3 +38,16 @@ Papers read for the benchmark plan (`SIM_BENCHMARK_PLAN.md` §9) and a code-rele
 
 Searches: "R2RGen github code release", "Real2Edit2Real github", "R2RDreamer 2606.17040 code", "Real2Sem2Real 2610.28880";
 then each project page and `gh api repos/<owner>/<repo>/contents`.
+
+# Update 2026-11-15 (R01 Problem 1: near-singular start poses; Opus 5.5)
+Question: how do demo-generation methods retarget the free-space transit vs the contact segments?
+| Method | Contact / skill segment | Free-space transit | Source |
+|---|---|---|---|
+| MimicGen (CoRL 2023) | object-frame segment replayed in Cartesian EE space | linear EE interpolation between segments (scene-unaware; collisions = generation failures) | Isaac AutoData docs "Generation Algorithms" |
+| SkillMimicGen / SkillGen (CoRL 2024, arXiv 2410.18907) | skill segment replayed relative to the object | collision-free motion planning to the segment start (held object attached); planning failure = attempt failure | arXiv 2410.18907; isaac-sim.github.io/AutoData skillgen |
+| DemoGen (RSS 2025, arXiv 2502.16932) | skill segment transformed with the object (MimicGen strategy) | motion segments re-planned (TAMP-style) | arXiv 2502.16932 |
+Consequence for sfagen: enforcing the shifted Cartesian path on transit frames is not required by any of these; they only
+keep the contact segment exact. sfagen "pipeline v1" therefore keeps exact IK only on full-shift (contact/hold) frames and
+blends the transit in joint space (no planner; collisions are judged by the unchanged mesh-clearance gate). This is
+standard practice, not a novelty claim. Joint-space transit avoids Cartesian-path singularities by construction
+(RoboTwin start pose all-zero, near-singular; R01).

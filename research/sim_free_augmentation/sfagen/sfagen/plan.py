@@ -17,7 +17,14 @@ F2 interaction location (coordinated multi-arm transform, cf. DexMimicGen)
 Both: orientation unchanged; joints by damped-least-squares IK bounded by [URDF limits U recorded pose], warm-started
 along the source motion; joint offsets Gaussian-smoothed (sigma 3 frames), then refined by IK on the full-offset (contact)
 frames so the hand is exact where it touches, and re-verified by FK; actions
-a'(t) = a(t) + dq(t + k) with the recorded command-to-state lead k; grippers bit-identical to the recording."""
+a'(t) = a(t) + dq(t + k) with the recorded command-to-state lead k; grippers bit-identical to the recording.
+
+blend_space (config `plan.blend_space`, default "cartesian" = the behaviour above). "joint" (pipeline v1): exact IK only
+on full-offset frames (w >= 0.999: approach end / grasp / hold / interaction window), each contiguous block warm-started
+from the SOURCE joints at its first frame; every blending frame gets q_src(t) + w(t) dq(nearest full-offset frame).
+Free-space transit is thus a joint-space blend (as MimicGen / SkillMimicGen / DemoGen treat transit separately from the
+contact segment), so Cartesian-path singularities (e.g. a folded all-zero start pose) cannot twist the wrist; the
+blend frames have no Cartesian target and are reported with zero blend IK error (ik_blend scope = full-offset frames)."""
 from __future__ import annotations
 import numpy as np
 import pinocchio as pin
@@ -46,6 +53,44 @@ def ik(robot, side, T_target, q0, q_all, lo, hi, iters=100, damp=1e-3):
     return q
 
 
+def _hermite(s, p1, m1):
+    """cubic Hermite from (value 0, slope 0) at s = 0 to (p1, slope m1 per unit s) at s = 1."""
+    s = np.asarray(s, float)[:, None]; return (3 * s ** 2 - 2 * s ** 3) * p1 + (s ** 3 - s ** 2) * m1
+
+
+def joint_blend_ik(robot, side, TT, W, field, q_src, q_all, lo, hi, exact_from=None):
+    """blend_space 'joint' (R02 + Amendment 1). Exact segment = frames with W >= 0.999 at or after `exact_from`
+    (object families: t_grasp - 15, the F1 convention; None = the first full-offset frame): IK, each contiguous block
+    warm-started from the SOURCE joints at its first frame, then along the source motion. Every other edited frame is a
+    joint-space blend of the offset dq = q - q_src: a cubic Hermite from (0, slope 0) at the last unedited frame to
+    (dq, dq') at the exact-segment edge (ramp-in; mirrored for the ramp-out), so joint velocity is continuous at both
+    edges; edited frames between exact blocks are linearly interpolated. TT (T,4,4) source TCP poses, field (T,3) TCP
+    offsets, q_src (T,n), q_all {arm: (T,n)}. Returns (q (T,n), exact mask (T,)) or None if fewer than 2 exact frames."""
+    T = len(W); edited = W > 1e-9; hold = W >= 0.999
+    exact = hold & (np.arange(T) >= (exact_from if exact_from is not None else 0))
+    ex = np.flatnonzero(exact)
+    if len(ex) < 2:
+        return None
+    qn = q_src.copy(); dq = np.zeros_like(q_src)
+    for i, t in enumerate(ex):
+        Tt = TT[t].copy(); Tt[:3, 3] += field[t]
+        q0 = qn[t - 1] + q_src[t] - q_src[t - 1] if i and ex[i - 1] == t - 1 else q_src[t]
+        qn[t] = ik(robot, side, Tt, q0, {a: q_all[a][t] for a in q_all}, lo[t], hi[t]); dq[t] = qn[t] - q_src[t]
+    e, h = ex[0], ex[-1]; ed = np.flatnonzero(edited)
+    a = min(ed[0], e) - 1                                     # last unedited frame before the ramp-in (dq = 0 there)
+    if e - a > 1:
+        t = np.arange(a + 1, e); L = e - a
+        dq[t] = _hermite((t - a) / L, dq[e], (dq[e + 1] - dq[e]) * L)
+    b = max(ed[-1], h) + 1                                    # first unedited frame after the ramp-out
+    if b - h > 1:
+        t = np.arange(h + 1, min(b, T)); L = b - h
+        dq[t] = _hermite((b - t) / L, dq[h], -(dq[h] - dq[h - 1]) * L)
+    mid = np.flatnonzero(~exact & (np.arange(T) > e) & (np.arange(T) < h))
+    for j in range(dq.shape[1]):
+        dq[mid, j] = np.interp(mid, ex, dq[ex, j])
+    return q_src + dq, exact
+
+
 def state_bounds(rec, s, qs, action_bounds=False, margin=0.0):
     """Per-frame IK bounds for arm s: URDF ∪ recorded state; with action_bounds also keep each shifted label
     A(t) + dq(t + k) inside the checker's URDF ∪ source-action envelope, `margin` rad inside it (retiming
@@ -64,15 +109,27 @@ def state_bounds(rec, s, qs, action_bounds=False, margin=0.0):
     return lo, hi
 
 
-def _retarget(rec, W, d, sides, action_bounds=False):
+def _retarget(rec, W, d, sides, action_bounds=False, blend_space="cartesian"):
     """W: (T,) weight per frame; d: (3,) world offset; sides: arms that get T(t) + W(t) d.
     action_bounds: also bound each IK state so its shifted label A(t) + dq(t + k) stays inside the checker's
-    URDF ∪ source-action envelope (a feasibility constraint on the solve; labels are never clipped afterwards)."""
+    URDF ∪ source-action envelope (a feasibility constraint on the solve; labels are never clipped afterwards).
+    blend_space: 'cartesian' (default) or 'joint' (see module docstring)."""
     robot, S, A = rec.robot, rec.state, rec.action
     sp = robot.split(S); q = {s: sp[s].copy() for s in robot.arms}; qn = {s: sp[s].copy() for s in robot.arms}
     TT = {s: robot.tcp_traj({a: sp[a] for a in robot.arms}, s) for s in sides}
     act = W > 1e-9; err = np.zeros((len(S), 2))
+    jb = {}
+    if blend_space == "joint":                                   # pipeline v1; falls back to cartesian without an exact segment
+        for s in sides:
+            lo, hi = state_bounds(rec, s, q[s], action_bounds)
+            jb[s] = joint_blend_ik(robot, s, TT[s], W, W[:, None] * np.asarray(d, float)[None], q[s], q, lo, hi)
+        if any(v is None for v in jb.values()):
+            jb = {}
+    joint = bool(jb)
     for s in sides:
+        if joint:
+            qn[s] = jb[s][0]
+            continue
         lo, hi = state_bounds(rec, s, q[s], action_bounds)
         for t in np.flatnonzero(act):
             Tt = TT[s][t].copy(); Tt[:3, 3] += W[t] * d
@@ -85,7 +142,7 @@ def _retarget(rec, W, d, sides, action_bounds=False):
         for t in np.flatnonzero(W >= 0.999):
             Tt = TT[s][t].copy(); Tt[:3, 3] += W[t] * d
             qn[s][t] = ik(robot, s, Tt, qn[s][t], {a: (qn[a][t] if a in sides else q[a][t]) for a in robot.arms}, lo[t], hi[t], iters=30)
-    for t in np.flatnonzero(act):
+    for t in np.flatnonzero(np.any([v[1] for v in jb.values()], 0) if joint else act):  # joint: exact segment only
         robot.fk({a: qn[a][t] for a in robot.arms})
         for s in sides:
             Tt = TT[s][t].copy(); Tt[:3, 3] += W[t] * d; cur = robot.frame(robot.tcp[s])
@@ -145,7 +202,7 @@ def f1_schedule(rec, k):
     return {"t_motion": t0, "t_grasp": tg, "t_rejoin": tr, "next_event": int(nxt)}
 
 
-def f1_plan(rec, k, d, action_bounds=False):
+def f1_plan(rec, k, d, action_bounds=False, blend_space="cartesian"):
     m = f1_schedule(rec, k)
     if m is None:
         return None
@@ -153,7 +210,7 @@ def f1_plan(rec, k, d, action_bounds=False):
     W = np.where(t < tin, smoothstep((t - m["t_motion"]) / (tin - m["t_motion"])), 1.0)
     W = np.where(t > tout, 1 - smoothstep((t - tout) / (m["t_rejoin"] - tout)), W)
     d = np.asarray(d, float); arm = rec.objects[k]["arm"]
-    Sn, An, qn, err, lead = _retarget(rec, W, d, [arm], action_bounds)
+    Sn, An, qn, err, lead = _retarget(rec, W, d, [arm], action_bounds, blend_space)
     return {"family": "object_position", "object": rec.objects[k]["name"], "shift_m": d.tolist(), "marks": m, "w": W,
             "state": Sn, "action": An, "q": qn, "ik_err": err, "lead": lead, "moved_arms": [arm],
             "objects": object_tracks(rec, qn, k, d), "edited": (W > 1e-9), "t_rejoin": m["t_rejoin"]}
@@ -179,14 +236,14 @@ def f2_schedule(rec, d_interact=0.20, ramp=45):
             "min_tcp_distance_m": float(dist.min())}
 
 
-def f2_plan(rec, d, d_interact=0.20, ramp=45):
+def f2_plan(rec, d, d_interact=0.20, ramp=45, blend_space="cartesian"):
     m = f2_schedule(rec, d_interact, ramp)
     if m is None:
         return None
     t = np.arange(rec.T, dtype=float)
     W = np.minimum(smoothstep((t - m["t_ramp_in"]) / ramp), 1 - smoothstep((t - m["t_window_end"]) / ramp))
     d = np.asarray(d, float)
-    Sn, An, qn, err, lead = _retarget(rec, W, d, list(rec.arms))
+    Sn, An, qn, err, lead = _retarget(rec, W, d, list(rec.arms), blend_space=blend_space)
     return {"family": "interaction_location", "shift_m": d.tolist(), "marks": m, "w": W, "state": Sn, "action": An, "q": qn,
             "ik_err": err, "lead": lead, "moved_arms": list(rec.arms), "objects": object_tracks(rec, qn),
             "edited": (W > 1e-9), "t_rejoin": m["t_ramp_out_end"]}

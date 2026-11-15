@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R02 pipeline v1</title>
+<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#666;--line:#ddd;--bad:#b3261e;--ok:#1e6b3a;--card:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161615;--fg:#e8e6e1;--mut:#a09d97;--line:#333;--bad:#f2867e;--ok:#7fd19b;--card:#1f1f1d}}
+:root[data-theme="dark"]{--bg:#161615;--fg:#e8e6e1;--mut:#a09d97;--line:#333;--bad:#f2867e;--ok:#7fd19b;--card:#1f1f1d}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,sans-serif;margin:0;padding:0 16px}main{max-width:1100px;margin:32px auto}
+h2{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem}.k{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 14px;margin:4px}.k b{display:block;font-size:1.4rem}
+.ok{color:var(--ok)}.bad{color:var(--bad)}table{border-collapse:collapse;display:block;overflow-x:auto;font-size:.92rem}td,th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;white-space:nowrap}
+img,video{max-width:100%;border:1px solid var(--line);border-radius:6px}</style></head><body><main>
+<h1>R02 · pipeline v1 (joint-space fallback)</h1><p style="color:var(--mut)">2026-11-16 · Opus 5.5 · local, pending review · full text: R02_blend_space_pipeline_v1.md</p>
+<div><span class="k">OpenArm v0 episodes unchanged<b class="ok">163/163</b></span><span class="k">OpenArm grid passes<b>92 → 154</b></span><span class="k">RoboTwin cup<b>0 → 71</b></span><span class="k">RoboTwin stack<b>145/261</b></span><span class="k">LeRobot episodes<b>222</b></span><span class="k">RGB quality<b class="bad">fragments</b></span></div>
+<p><b>In plain words:</b> each episode is first made exactly as before. Only when that fails a check is the motion re-made with a joint-space transit (exact gripper pose only near the grasp), which avoids the wrist twist at RoboTwin's folded start pose. It needs only the URDF. OpenArm's earlier episodes are unchanged; RoboTwin now yields episodes. The trajectories are valid, but RoboTwin's rendered images still show arm fragments, so the RGB is not yet training-quality.</p>
+<h2>OpenArm regression</h2><table><tr><th></th><th>v0</th><th>v1</th></tr><tr><td>grid passes</td><td>92/416</td><td>154/416</td></tr><tr><td>grid targets</td><td>39</td><td>46</td></tr><tr><td>interaction loc / timing</td><td>60 · 11</td><td>62 · 11</td></tr><tr><td>added episodes' distortion (median / max)</td><td>0.868 / 3.759</td><td>0.847 / 3.721</td></tr></table>
+<h2>RoboTwin datasets (LeRobot v3.0)</h2><table><tr><th>task</th><th>object-position yield</th><th>episodes</th><th>frames</th></tr><tr><td>place_empty_cup</td><td>71/339</td><td>60</td><td>10,401</td></tr><tr><td>stack_blocks_two</td><td>145/261</td><td>99</td><td>31,036</td></tr><tr><td>handover_block</td><td>0/363 (out of view); 63 interaction episodes</td><td>63</td><td>17,849</td></tr></table>
+<h2>What the frames look like</h2><img src="../r02/stack_handover_compare_frames.jpg" alt="stack and handover real vs synthetic"><img src="../r02/cup_L_compare_frames.jpg" alt="cup real vs synthetic">
+<h2>Videos (local)</h2>
+<video controls src="../../../../../artifacts/simbench_runs/s1d/stack_blocks_two/LR_export/compare_eps_0-18-35_1x.mp4"></video>
+<video controls src="../../../../../artifacts/simbench_runs/s1d/place_empty_cup/L_export/compare_eps_0-10-20_1x.mp4"></video>
+<video controls src="../../../../../artifacts/simbench_runs/s1d/handover_block/L_export/compare_eps_0-31-62_1x.mp4"></video>
+</main></body></html>

@@ -51,27 +51,45 @@ def run_episode(ctx, rec, checker, log=print):
     mp=out/'generation_manifest.json';mp.write_text(json.dumps(manifest,indent=1))
     il = ctx.cfg.get("variations", {}).get("interaction_location", {})
     names = [o["name"] for o in rec.objects]
-    for key, fam, obj, d in variation_list(ctx.cfg, rec):
+    bs = ctx.cfg.get("plan", {}).get("blend_space", "cartesian")
+    # 'cartesian' = v0; 'joint' = R02 joint-space transit; 'joint_fallback' = pipeline v1 (R02 Amendment 2): plan v0 first and
+    # only if that candidate fails a gate, try the joint-space blend; keep the v0 record unless the joint one passes.
+    assert bs in ("cartesian", "joint", "joint_fallback"), bs
+    pa = ctx.cfg.get("plan", {}); ab = bool(pa.get("action_aware_bounds", False))
+
+    def plan_one(fam, obj, d, mode):
         if fam == "interaction_timing":
             from .handover_timing import plan as timing_plan
-            c = timing_plan(rec, int(d[0]))
-            d = np.zeros(3)
-        elif fam == "object_workspace":
+            return timing_plan(rec, int(d[0]))
+        if fam == "object_workspace":
             from .workspace_plan import plan_with_time_scale
             ow = ctx.cfg["variations"].get("object_workspace") or ctx.cfg["variations"].get("object_targets", {})
-            c = plan_with_time_scale(rec, names.index(obj), d, checker, tuple(ow.get("time_scales", (1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0))), ow.get("approach_margin_m", 0.10),
-                                     action_bounds=bool(ctx.cfg.get("plan", {}).get("action_aware_bounds", False)),
-                                     margin=float(ctx.cfg.get("plan", {}).get("action_bound_margin_rad", 0.0)), wide=bool(ow.get("wide_blend", False)))
-        elif fam == "object_position":
-            c = plan.f1_plan(rec, names.index(obj), d, bool(ctx.cfg.get("plan", {}).get("action_aware_bounds", False)))
-        else:
-            c = plan.f2_plan(rec, d, il.get("d_interact_m", 0.20), il.get("ramp_frames", 45))
+            return plan_with_time_scale(rec, names.index(obj), d, checker, tuple(ow.get("time_scales", (1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0))), ow.get("approach_margin_m", 0.10),
+                                        action_bounds=ab, margin=float(pa.get("action_bound_margin_rad", 0.0)), wide=bool(ow.get("wide_blend", False)), blend_space=mode)
+        if fam == "object_position":
+            return plan.f1_plan(rec, names.index(obj), d, ab, mode)
+        return plan.f2_plan(rec, d, il.get("d_interact_m", 0.20), il.get("ramp_frames", 45), mode)
+
+    for key, fam, obj, d in variation_list(ctx.cfg, rec):
+        mode = "cartesian" if bs == "joint_fallback" else bs
+        c = plan_one(fam, obj, d, mode)
+        if fam == "interaction_timing":
+            d = np.zeros(3)
+        ck = checker.check(rec, c) if c is not None else None
+        if bs == "joint_fallback" and fam != "interaction_timing" and not (ck or {}).get("pass", False):
+            cj = plan_one(fam, obj, d, "joint")
+            ckj = checker.check(rec, cj) if cj is not None else None
+            if ckj is not None and ckj["pass"]:
+                c, ck, mode = cj, ckj, "joint"
         if c is None:
             checks[key] = {"pass": False, "family": fam, "error": "no valid schedule (see plan.py rules)"}; log(rec.e, key, "NO SCHEDULE"); continue
-        ck = checker.check(rec, c)
         if key.startswith(f"{obj}_target_"):
             c["marks"]["target_xy_m"] = (np.asarray(rec.objects[names.index(obj)]["table"])[:2, 3] + d[:2]).tolist()
         ck.update({"family": fam, "object": obj, "shift_m": d.tolist(), "marks": c["marks"], "lead": c["lead"], "t_rejoin": c["t_rejoin"]})
+        if bs != "cartesian":
+            ck["blend_space"] = mode
+        if mode == "joint" and fam != "interaction_timing":
+            ck["ik_blend_scope"] = "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
         checks[key] = ck
         np.savez_compressed(out / f"{key}.npz", state=c["state"].astype(np.float32), action=c["action"].astype(np.float32),
                             w=c["w"], edited=c["edited"], ik_err=c["ik_err"], objects=np.stack(c["objects"]) if c["objects"] else np.zeros((0,)),

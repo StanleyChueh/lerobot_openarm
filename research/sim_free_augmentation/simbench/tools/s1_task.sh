@@ -8,8 +8,12 @@ PY="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 CUDA_VISIBLE_DEVICES=$
 GRPS=$(ls $C | sed -n "s/^${T}_\(.*\)\.yaml$/\1/p" | grep -v '^base$')
 mkdir -p $RUN/positions
 cd $SF
-$PY $HERE/tools/source_positions.py $RUN/positions/$T.json $(for g in $GRPS; do echo $C/${T}_$g.yaml; done) > $L/positions_$T.log 2>&1
+# configs must point at THIS run dir before anything reads them (s1c bug: positions ran against the previous run's work dirs)
+$PY $C/make_configs.py $RUN $RUN/no_positions_yet $T > $L/positions_$T.log 2>&1
+$PY $HERE/tools/source_positions.py $RUN/positions/$T.json $(for g in $GRPS; do echo $C/${T}_$g.yaml; done) >> $L/positions_$T.log 2>&1
 $PY $C/make_configs.py $RUN $RUN/positions $T >> $L/positions_$T.log 2>&1
+for g in $GRPS; do grep -q "work_dir: $RUN/$T/$g\$" $C/${T}_$g.yaml && for f in calibration.json table_height.json lowest_arm.json; do
+  [ -f $RUN/$T/$g/$f ] || { echo "missing $RUN/$T/$g/$f" >&2; exit 3; }; done || { echo "config $T/$g not pointing at $RUN" >&2; exit 3; }; done
 for g in $GRPS; do
   $PY -m sfagen generate $C/${T}_$g.yaml --device cuda:0 > $L/generate_${T}_$g.log 2>&1
   $PY -m sfagen render $C/${T}_$g.yaml --device cuda:0 > $L/render_${T}_$g.log 2>&1

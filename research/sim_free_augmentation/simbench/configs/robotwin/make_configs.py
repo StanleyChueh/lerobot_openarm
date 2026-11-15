@@ -56,6 +56,7 @@ TASKS = {
                                     "LR": ([2, 9], {"block_a": {"grasped_by": "L", "grasp_index": 0, "proxy": box(0.05)}, "block_b": {"grasped_by": "R", "grasp_index": 0, "proxy": box(0.05)}})}},
 }
 
+BLEND = "joint_fallback"  # pipeline v1 (R02 Amendment 2): v0 Cartesian blend, joint-space blend only if v0 fails; same for every robot/task
 only = sys.argv[3] if len(sys.argv) > 3 else None  # rewrite one task only (drivers run tasks in parallel)
 for task, t in TASKS.items():
     if only and task != only:
@@ -66,7 +67,7 @@ for task, t in TASKS.items():
            "wrist_camera_arms": {"observation.images.cam_left_wrist": "L", "observation.images.cam_right_wrist": "R"}}
     base = {"source": {**src, "episodes": list(range(10))}, "robot": robot, "camera": cam, "reconstruction": recon,
             "render": ref["render"], "checks": checks, "calibration": ref["calibration"], "objects": {}, "variations": {},
-            "video_encoding": ref["video_encoding"], "work_dir": str(run_dir / task / "rig"), "plan": ref["plan"]}
+            "video_encoding": ref["video_encoding"], "work_dir": str(run_dir / task / "rig"), "plan": {**ref["plan"], "blend_space": BLEND}}
     (HERE / f"{task}_base.yaml").write_text(yaml.safe_dump(base, sort_keys=False))
     for g, (eps, objs) in t["groups"].items():
         c = copy.deepcopy(base); c["source"]["episodes"] = eps; c["objects"] = objs; c["work_dir"] = str(run_dir / task / g)

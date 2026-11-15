@@ -1,0 +1,45 @@
+{
+ "place_empty_cup": {
+  "episodes": 60,
+  "frames": 10401,
+  "fps": 30,
+  "length_ratio": [
+   1.0,
+   1.0
+  ],
+  "real_episodes": 0,
+  "families": {
+   "object_workspace": 60
+  },
+  "samples_loaded": 7
+ },
+ "stack_blocks_two": {
+  "episodes": 99,
+  "frames": 31036,
+  "fps": 30,
+  "length_ratio": [
+   1.0,
+   1.0
+  ],
+  "real_episodes": 0,
+  "families": {
+   "object_workspace": 99
+  },
+  "samples_loaded": 7
+ },
+ "handover_block": {
+  "episodes": 63,
+  "frames": 17849,
+  "fps": 30,
+  "length_ratio": [
+   1.0,
+   1.0
+  ],
+  "real_episodes": 0,
+  "families": {
+   "interaction_location": 43,
+   "interaction_timing": 20
+  },
+  "samples_loaded": 7
+ }
+}

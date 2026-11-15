@@ -11,7 +11,7 @@ execution or physical contact evidence. Source-to-output exposure times are hand
 """
 from __future__ import annotations
 import cv2, numpy as np
-from .plan import ik, smoothstep, action_lead, _attach, state_bounds
+from .plan import ik, joint_blend_ik, smoothstep, action_lead, _attach, state_bounds
 from .recon import interp_rows
 from .timing import replay_reference
 
@@ -204,8 +204,10 @@ def _clock(m,T,scale,clock,fps):
     return time_map(m,T,scale)
 
 
-def _native_spatial(rec,k,d,m,action_bounds=False,margin=0.0):
-    """Retarget a Cartesian path; route transit above a relocated object if a straight blend crosses it."""
+def _native_spatial(rec,k,d,m,action_bounds=False,margin=0.0,blend_space='cartesian'):
+    """Retarget a Cartesian path; route transit above a relocated object if a straight blend crosses it.
+    blend_space 'joint' (pipeline v1, plan.py docstring): exact IK only where the full offset applies; the transit is a
+    joint-space blend (the computed lift is kept in the marks for reporting but does not route the joint blend)."""
     r=rec.robot;arm=rec.objects[k]['arm'];sp=r.split(rec.state);q={a:sp[a].copy() for a in rec.arms}
     lo,hi=state_bounds(rec,arm,sp[arm],action_bounds,margin)
     P=r.tcp_traj(q,arm);t=np.arange(rec.T);W=_w_src(m,t);field=W[:,None]*d
@@ -218,6 +220,11 @@ def _native_spatial(rec,k,d,m,action_bounds=False,margin=0.0):
     lift=float(np.max(need[risk]/bump[risk],initial=0))
     field[:,2]+=lift*bump
     act=np.linalg.norm(field,axis=1)>1e-9
+    if blend_space=='joint' and (W>=.999).any():
+        res=joint_blend_ik(r,arm,P,W,field,sp[arm],sp,lo,hi,exact_from=m['t_grasp']-15)  # F1 convention: exact from grasp-15
+        if res is not None:
+            q[arm]=res[0]
+            return {**m,'transit_lift_m':lift,'blend_space':'joint','exact_from':int(np.flatnonzero(res[1])[0])},q,field
     for i in np.flatnonzero(act):
         target=P[i].copy();target[:3,3]+=field[i]
         q0=q[arm][i-1]+sp[arm][i]-sp[arm][i-1] if i>0 and act[i-1] else sp[arm][i]
@@ -244,6 +251,7 @@ def f1w_plan(rec, k, d, s=1.0, approach_margin=0.10, spatial=None, clock='local'
     for t in np.flatnonzero(act):
         robot.fk({a: qn[a][t] for a in robot.arms}); cur = robot.frame(robot.tcp[arm]); Tt = TT[t].copy(); Tt[:3, 3] += offsets[t]
         err[t] = [np.linalg.norm(cur[:3, 3] - Tt[:3, 3]), np.degrees(np.arccos(np.clip((np.trace(cur[:3, :3].T @ Tt[:3, :3]) - 1) / 2, -1, 1)))]
+    if m.get('blend_space')=='joint':err[(w<.999)|(tau<m['exact_from']-1e-9)]=0.0  # joint blend: target only on the exact segment
     # actions with the recorded command lead k: a'(n) = A(tau_n) + [q'(n+k) - S(tau_n + k)]
     idx = np.minimum(np.arange(Tn) + kl, Tn - 1)
     Sn = Sw.copy(); An = Aref.copy()
@@ -277,12 +285,12 @@ def f1w_plan(rec, k, d, s=1.0, approach_margin=0.10, spatial=None, clock='local'
             "tau": tau, "ref_state": Sw, "ref_action": Aref,"native_q":base_q,"native_offset":field}
 
 
-def plan_with_time_scale(rec, k, d, checker, scales=(1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0), approach_margin=0.10,spatial=None,action_bounds=False,margin=0.0,wide=False):
+def plan_with_time_scale(rec, k, d, checker, scales=(1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 6.0), approach_margin=0.10,spatial=None,action_bounds=False,margin=0.0,wide=False,blend_space='cartesian'):
     """Shortest tested clock meeting commanded speed/acceleration limits; other checks remain mandatory."""
     cfg, env = checker.cfg, checker.env; last = None
     m=f1w_schedule(rec,k,approach_margin,wide) if spatial is None else spatial[0]
     if m is None:return None
-    if spatial is None:spatial=_native_spatial(rec,k,np.asarray(d,float),m,action_bounds,margin)
+    if spatial is None:spatial=_native_spatial(rec,k,np.asarray(d,float),m,action_bounds,margin,blend_space)
     trials=[(s,'local') for s in scales if s<=3]+[(s,'window') for s in scales if s>1]+[(s,'uniform') for s in scales if s>1]
     trials.sort(key=lambda trial:len(_clock(m,rec.T,*trial,rec.ctx.src.fps)[0]))
     chosen=trials[-1]

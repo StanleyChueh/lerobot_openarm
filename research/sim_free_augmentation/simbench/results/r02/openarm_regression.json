@@ -1,0 +1,8 @@
+{"config": "sfagen/configs/openarm_pringles_v03r2_loose.yaml + plan.blend_space (simbench/configs/r02/)",
+ "cartesian_v0": {"object_workspace": "92/416", "grid_targets": 39, "interaction_location": "60/80", "interaction_timing": "11/20"},
+ "joint_A1": {"object_workspace": "111/416", "grid_targets": 38, "interaction_location": "62/80", "interaction_timing": "11/20"},
+ "joint_fallback_v1": {"object_workspace": "154/416", "grid_targets": 46, "interaction_location": "62/80", "interaction_timing": "11/20",
+   "v0_passing_candidates_bit_identical": "163/163"},
+ "render_check_ep5": {"byte_identical_to_published": "9/12", "differing": "3 interaction_location episodes, 1-17 px of 78,336,000; fresh v0-config render differs by the same amount (GPU nondeterminism)"},
+ "distortion_grid": {"v0_published_n92": {"median": 0.868, "p90": 2.249, "max": 3.759}, "v1_added_n62": {"median": 0.847, "p90": 2.364, "max": 3.721}, "loose_threshold": 4.578, "strict_threshold": 2.289},
+ "guard_default": "28/28 candidates, 4/4 bodies bit-identical (artifacts/simbench_runs/guard_blendspace_a1)"}

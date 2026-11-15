@@ -278,7 +278,37 @@ variations:
       - 0.2
     - - 0.89
       - 0.23
-    source_positions_xy_m: {}
+    source_positions_xy_m:
+      0:
+      - 0.7771708538166711
+      - 0.1768683989006739
+      1:
+      - 0.707958870107515
+      - 0.08289725287973888
+      2:
+      - 0.7836787200216638
+      - 0.10766143884255044
+      3:
+      - 0.6955420579753998
+      - 0.094866320028394
+      4:
+      - 0.7022108474427061
+      - 0.19315924533551918
+      5:
+      - 0.7404080861489608
+      - 0.15820472324941356
+      6:
+      - 0.7706088491291019
+      - 0.1914978125226119
+      7:
+      - 0.7761290750597004
+      - 0.09198401016786059
+      8:
+      - 0.8670602260512936
+      - 0.250713368049907
+      9:
+      - 0.7364749291252551
+      - 0.13367189028840298
     nearest_sources: 10
     min_shift_m: 0.005
     max_shift_m: 0.12
@@ -316,7 +346,8 @@ video_encoding:
   crf: 12
   preset: fast
   g: 2
-work_dir: /home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_runs/s1/handover_block/L
+work_dir: /home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_runs/s1d/handover_block/L
 plan:
   action_aware_bounds: true
   action_bound_margin_rad: 0.005
+  blend_space: joint_fallback
