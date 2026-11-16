@@ -1,6 +1,6 @@
 # Shared baseline and task branches
 
-`official-lerobot-quest` is the integration branch. `main` is a compatibility mirror: advance both to the same commit after baseline changes. Do not develop separate features on `main`.
+`official-lerobot-quest` is the integration branch (robot execution). `main-pipeline` is the sfagen research branch. The former `main` mirror was archived on 2026-11-16 as `archive/main`.
 
 The shared baseline includes the evaluation fixes originally delivered in `8e43f49` and `21388b0`:
 - background observation sending;
@@ -25,7 +25,7 @@ Target control rate is `--fps=30`; measure the achieved rate from evaluation log
 - Historical `archive/*` refs and the frozen study branches are exempt from baseline synchronization.
 
 **READMEs.**
-- Only `official-lerobot-quest` and `main` carry the robot execution README.
+- Only `official-lerobot-quest` carries the robot execution README; `main-pipeline` has its own results/reproduction README.
 - Every other branch replaces the root `README.md` with its own purpose, results (with exact commits and dataset revisions) and reproduction commands.
 - When the baseline is merged into a task branch, `README.md` will conflict. Keep the task branch's version, and update the branch map on the default branch instead.
 
@@ -38,7 +38,7 @@ Use one writing device per task branch. On a clean tracking branch, use `git pul
 
 **Promoting fixes.**
 - Promote general evaluation/runtime fixes to the integration branch and validate them.
-- Then advance `main` to the same commit and merge that baseline into active task branches.
+- Then merge that baseline into `main-pipeline` when the pipeline needs it.
 - Keep force-specific changes and experiment outputs on their task branches.
 - Push before handing work to another device, and record the pushed SHA and next step.
 - Untracked files are not backed up by a branch push.

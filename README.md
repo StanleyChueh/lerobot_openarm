@@ -1,76 +1,58 @@
 # LeRobot OpenArm: collect, train and evaluate VLA policies on the real robot
 
-This is the **robot execution branch**. `official-lerobot-quest` is the default branch and `main` is the same commit.
-Everything below the branch map covers how to set up, teleoperate, record, train and evaluate on OpenArm.
+This is the **robot execution branch** (the default branch). Everything below the branch map covers how to set up,
+teleoperate, record, train and evaluate on OpenArm.
 
-Research and experiments live on their own branches. Each research branch's README explains:
-- what the branch is for;
-- its results, with exact commits and dataset revisions;
-- the commands to reproduce them.
+The simulation-free data augmentation pipeline (sfagen) lives on **`main-pipeline`**. Its README lists the published
+datasets, results and the exact commands to reproduce them. All older research branches are archived under `archive/*`
+(every commit is kept).
 
 ## Branch map
 
 ```mermaid
 flowchart LR
-    BASE["official-lerobot-quest = main<br/>RUN THE ROBOT<br/>teleop · record · train · evaluate"]
-
-    BASE -->|shared baseline| HIST["research/contact-aware-augmentation<br/>FROZEN sim-free study history<br/>Gate 0/1/1R · v1 → v4B.1 · SD10"]
-    HIST --> G1["research/sd10-g1-generation<br/>FROZEN SD10-G1 screen<br/>INCONCLUSIVE"]
-    HIST --> SFAGEN["research/sfagen-unified-pipeline<br/>PUBLISHED generator<br/>4 HF datasets (v3.0)"]
-    SFAGEN --> F1W["research/sfagen-workspace-f1w<br/>ACTIVE sfagen development<br/>source-budget datasets · F1W · tests"]
-    F1W --> FEW["research/sfagen-few-source<br/>few-source study<br/>R1 shift limit · R2 fewest demos"]
-    FEW --> WR["research/sfagen-wrist-render<br/>NEWEST sfagen v01<br/>wrist render · 1/2/4/10-demo datasets"]
-    WR --> DOCS["docs/sfagen-visual-walkthrough<br/>START HERE: method showcase"]
-
-    BASE -->|shared baseline| BENCH["force-aware/gate2a-bench-prep<br/>motor telemetry + bench readiness<br/>hardware not run"]
-    BASE -->|shared baseline| NEXT["research/factr2-next-openarm<br/>FACTR2/NEXT effort estimation<br/>offline only"]
-    BENCH -.->|"needs validated contact-free telemetry"| NEXT
-
-    ARCH["archive/official-lerobot-quest-real2sim2real-v0-codex<br/>FROZEN legacy real→sim replay"]
-
+    BASE["official-lerobot-quest (default)<br/>RUN THE ROBOT<br/>teleop · record · train · evaluate"]
+    MAIN["main-pipeline<br/>sfagen pipeline v1 + v04 even spread<br/>OpenArm v04 + RoboTwin 2.0 datasets"]
+    DOCS["docs/sfagen-visual-walkthrough<br/>visual guide of the method"]
+    ARCH["archive/*<br/>earlier research branches (frozen)"]
+    BASE -->|"real demos (recording)"| MAIN
+    ARCH -->|"history: v00 → v03"| MAIN
+    MAIN --> DOCS
     classDef run fill:#dbeafe,stroke:#2563eb,color:#172554
     classDef active fill:#dcfce7,stroke:#16a34a,color:#14532d
     classDef frozen fill:#f3f4f6,stroke:#6b7280,color:#374151
-    classDef force fill:#fef3c7,stroke:#d97706,color:#451a03
     class BASE run
-    class SFAGEN,F1W,FEW,WR,DOCS active
-    class HIST,G1,ARCH frozen
-    class BENCH,NEXT force
+    class MAIN,DOCS active
+    class ARCH frozen
 ```
-
-**How to read it.** An arrow means the lower branch contains the upper branch's commits. The dotted arrow is a data
-prerequisite, not a merge. Blue is robot execution, green is current simulation-free augmentation work, grey is frozen
-evidence (never rewritten), and amber is force-estimation work.
 
 | Branch | What it is for | Status | Key commit / data |
 |---|---|---|---|
 | [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest) **(default)** | Robot execution: Quest teleop, recording, training, real/sim evaluation | active | this README |
-| [`main`](https://github.com/StanleyChueh/lerobot_openarm/tree/main) | Mirror of the default branch | mirror | same commit as default |
-| [`research/sfagen-unified-pipeline`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-unified-pipeline) | `sfagen`: the simulation-free generator that produced the 4 public OpenArm synthetic datasets, plus its visual walkthrough | published; independent review pending | code of the datasets = `50832b3` |
-| [`research/sfagen-workspace-f1w`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-workspace-f1w) | sfagen development: 1–9-source budget datasets, workspace-wide object positions (F1W), tests, dataset provenance | active; F1W unreviewed | budget datasets = `5d81f2f` |
-| [`research/sfagen-few-source`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-few-source) | How far the object can move (R1, r* = 11 cm) and how few source demos suffice (R2) | done; pending review | R1/R2 results `171c12c` |
-| [`research/sfagen-wrist-render`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sfagen-wrist-render) | **Newest sfagen work (v01):** rendered wrist cameras, can-appearance study, 1/2/4/10-demo candidate datasets on the Hub, quality gate | active; pending review | `ethanCSL/openarm_pringles_lerobot_real_to_sim_{1,2,4,10}_3cam[_wristrender]_v01` |
-| [`docs/sfagen-visual-walkthrough`](https://github.com/StanleyChueh/lerobot_openarm/tree/docs/sfagen-visual-walkthrough) | **Start here for the method:** stage-by-stage visual guide of the latest sfagen, with results, decisions and why | showcase; follows the newest sfagen branch | `research/sim_free_augmentation/sfagen_visual_guide/index.html` |
-| [`research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/contact-aware-augmentation) | All earlier sim-free research: contact verifier (Gate 0/1/1R), generation feasibility, sim-free v1–v4B.1, SD10 source selection and SD10-L1 | **frozen** (name kept: sealed protocols cite it) | last study `04968cb` |
-| [`research/sd10-g1-generation`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/sd10-g1-generation) | SD10-G1: generation yield of three fixed source sets | **frozen**; INCONCLUSIVE | `5c7a825` |
-| [`force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/force-aware/gate2a-bench-prep) | Read-only motor telemetry sidecar and Gate-2A bench readiness | offline done; bench not run | Gate 2A `f558bc2` |
-| [`research/factr2-next-openarm`](https://github.com/StanleyChueh/lerobot_openarm/tree/research/factr2-next-openarm) | FACTR2/NEXT adapter: telemetry export, model, external-effort residuals | offline (Gate 3A); real data UNKNOWN | Gate 3A `94682a4` |
-| [`archive/official-lerobot-quest-real2sim2real-v0-codex`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/official-lerobot-quest-real2sim2real-v0-codex) | Legacy real→sim replay dataset and validation tools (uses a physics simulator) | **frozen**, historical only | `14c2376` |
+| [`main-pipeline`](https://github.com/StanleyChueh/lerobot_openarm/tree/main-pipeline) | **sfagen main pipeline**: simulation-free augmentation for OpenArm and RoboTwin 2.0 (pipeline v1, targets from the source demos, exactly 100 evenly spread synthetic episodes per dataset) | active | `ethanCSL/openarm_pringles_lerobot_{real_to_sim,real_and_sim}_10_3cam_v04`; `ethanCSL/robotwin_*_lerobot_*_10` |
+| [`docs/sfagen-visual-walkthrough`](https://github.com/StanleyChueh/lerobot_openarm/tree/docs/sfagen-visual-walkthrough) | Stage-by-stage visual guide of the sfagen method | showcase | `research/sim_free_augmentation/sfagen_visual_guide/index.html` |
 
-**Superseded refs:**
-- The first version of `docs/sfagen-visual-walkthrough` (v00 pipeline only) is kept as tag
-  `archive/docs-sfagen-visual-walkthrough-2026-11-12`. The branch itself now follows the newest sfagen work.
-- The telemetry Gate-1 milestone is tag `archive/force-aware/telemetry-gate1-2026-11-05`.
+**Archived 2026-11-16** (branch moved to `archive/<old name>`, commit unchanged; sealed protocols and notes that cite
+the old names resolve through the archive branch):
 
-**New branches** are named `<line>/<topic>`, where the line is one of:
-- `research/sfagen-*` (generator work; start new sfagen work from `research/sfagen-wrist-render`, the newest);
-- `research/sfa-*` (sim-free studies);
-- `force-aware/*`, or `research/factr2-*` (force);
-- `docs/*`;
-- `archive/*`.
+| Archive branch | Was | Key commit |
+|---|---|---|
+| [`archive/main`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/main) | mirror of the default branch | `5e203ea` |
+| [`archive/research/sfagen-v02`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/research/sfagen-v02) | sfagen v02 → v03 rev 2 (published v03 datasets); contained in `main-pipeline` | `49957aa` |
+| [`archive/research/sfagen-wrist-render`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/research/sfagen-wrist-render) | sfagen v01: rendered wrists, 1/2/4/10-demo datasets; contained in `main-pipeline` | `77e52d4` |
+| [`archive/research/sfagen-few-source`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/research/sfagen-few-source) | shift limit and fewest-demos study; contained in `main-pipeline` | `b8a60e9` |
+| [`archive/research/sfagen-workspace-f1w`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/research/sfagen-workspace-f1w) | F1W planner, source-budget datasets | `eaabf55` |
+| [`archive/research/sfagen-unified-pipeline`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/research/sfagen-unified-pipeline) | first published generator (4 HF datasets) | `f27358c` |
+| [`archive/research/contact-aware-augmentation`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/research/contact-aware-augmentation) | earlier sim-free studies (Gate 0/1/1R, v1–v4B.1, SD10), frozen | `6ac0f79` |
+| [`archive/research/sd10-g1-generation`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/research/sd10-g1-generation) | SD10-G1 screen, INCONCLUSIVE, frozen | `6474bee` |
+| [`archive/force-aware/gate2a-bench-prep`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/force-aware/gate2a-bench-prep) | motor telemetry + Gate-2A bench readiness | `6868dd6` |
+| [`archive/research/factr2-next-openarm`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/research/factr2-next-openarm) | FACTR2/NEXT effort estimation (offline) | `0eeef77` |
+| [`archive/official-lerobot-quest-real2sim2real-v0-codex`](https://github.com/StanleyChueh/lerobot_openarm/tree/archive/official-lerobot-quest-real2sim2real-v0-codex) | legacy real→sim replay (physics simulator), frozen | `14c2376` |
 
-Existing names are kept because frozen protocols, reviews and the research notes refer to them. Rules for syncing
-branches are in [docs/BRANCH_WORKFLOW.md](docs/BRANCH_WORKFLOW.md).
+**Superseded tags:** `archive/docs-sfagen-visual-walkthrough-2026-11-12`, `archive/force-aware/telemetry-gate1-2026-11-05`.
+
+**New work:** sfagen work starts from `main-pipeline`; robot-side work goes on this branch. Rules for syncing branches
+are in [docs/BRANCH_WORKFLOW.md](docs/BRANCH_WORKFLOW.md).
 
 ![Real and sim data collection, training and evaluation pipeline](docs/pipeline.svg)
 
