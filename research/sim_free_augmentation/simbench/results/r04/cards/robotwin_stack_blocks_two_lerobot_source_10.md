@@ -22,6 +22,6 @@ This repo contains only those 10 source demos (no synthetic data). They are the 
 
 **Load** (`lerobot` >= 0.4): `LeRobotDataset("ethanCSL/robotwin_stack_blocks_two_lerobot_source_10", revision="v3.0")`. Task string: "Set red block at the center, then stack green block over red block after placing it alongside." (see `meta/tasks.parquet`).
 
-**Provenance.** sfagen code commit `379bd2b91f` (branch `research/sfagen-simbench`; local, not yet public). Upstream data:
+**Provenance.** sfagen code commit `c7d5c01db1` (branch `research/sfagen-simbench`; local, not yet public). Upstream data:
 RoboTwin 2.0 (MIT-licensed code, https://github.com/RoboTwin-Platform/RoboTwin); the upstream LeRobot dataset declares no
 license, so the RoboTwin terms apply. Please cite RoboTwin 2.0 when using these data.

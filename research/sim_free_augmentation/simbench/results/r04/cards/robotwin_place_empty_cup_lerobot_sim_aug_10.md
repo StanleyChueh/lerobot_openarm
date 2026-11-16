@@ -41,6 +41,6 @@ calibration is still 16-35 px off); inspect the videos before training on them.
 
 **Load** (`lerobot` >= 0.4): `LeRobotDataset("ethanCSL/robotwin_place_empty_cup_lerobot_sim_aug_10", revision="v3.0")`. Task string: "Slide the cup for holding liquids onto the round coaster with light streaks with the arm." (see `meta/tasks.parquet`).
 
-**Provenance.** sfagen code commit `379bd2b91f` (branch `research/sfagen-simbench`; local, not yet public). Upstream data:
+**Provenance.** sfagen code commit `c7d5c01db1` (branch `research/sfagen-simbench`; local, not yet public). Upstream data:
 RoboTwin 2.0 (MIT-licensed code, https://github.com/RoboTwin-Platform/RoboTwin); the upstream LeRobot dataset declares no
 license, so the RoboTwin terms apply. Please cite RoboTwin 2.0 when using these data.
