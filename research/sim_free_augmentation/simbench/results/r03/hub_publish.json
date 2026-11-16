@@ -1,0 +1,14 @@
+{
+ "code_commit": "951d725a26942919d371e069944993dc10604796",
+ "repos": {
+  "ethanCSL/robotwin_place_empty_cup_lerobot_source_10": "28c2816648262b1435c0191e05d332fe0a368b5a",
+  "ethanCSL/robotwin_place_empty_cup_lerobot_sim_aug_10": "bb4b2deeca310d76397c95581537e5461bd6675b",
+  "ethanCSL/robotwin_place_empty_cup_lerobot_source_and_sim_aug_10": "c07ba5e3c749d451b5afb17a1c3c99ec9d0aa9b5",
+  "ethanCSL/robotwin_stack_blocks_two_lerobot_source_10": "2098d9e3835185f178b4c332145272fcdd87ec13",
+  "ethanCSL/robotwin_stack_blocks_two_lerobot_sim_aug_10": "8c6353ddd27f9fd4bfc9a5de1e3daf5c3cf8fe1b",
+  "ethanCSL/robotwin_stack_blocks_two_lerobot_source_and_sim_aug_10": "eb56d2b616ec06c1a27e054bfbb28c997d0dea78",
+  "ethanCSL/robotwin_handover_block_lerobot_source_10": "fe6f5715148b6202bdd12d4dbfe3a77c8871a620",
+  "ethanCSL/robotwin_handover_block_lerobot_sim_aug_10": "9bf9ab739e5539bbc54983603062187be00cfe9d",
+  "ethanCSL/robotwin_handover_block_lerobot_source_and_sim_aug_10": "ef75d8385c498c35b8b61b6d5b156f5c1e9c4442"
+ }
+}
