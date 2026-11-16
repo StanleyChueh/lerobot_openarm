@@ -49,7 +49,7 @@ Training episodes (real + synthetic) within 4 cm of the 40 measured evaluation s
 
 Densest / thinnest region: {d['region_max_over_min_before']:.1f} -> **{d['region_max_over_min_after']:.1f}** (pre-registered goal 1.5: near miss;
 front-right stays somewhat denser). {len(chk['rear_episodes'])} synthetic episodes have the can in the rear (x < 17 cm).
-Density map: `assets/density.png`.
+Density map: `assets/density.png` (bottom row = OpenArm; left v03 rev 2, right v04).
 
 ## Contents
 - families: {', '.join(f'{k} {v}' for k, v in fam.items())} (v03 rev 2 also had 60 hand-over location + 11 timing
