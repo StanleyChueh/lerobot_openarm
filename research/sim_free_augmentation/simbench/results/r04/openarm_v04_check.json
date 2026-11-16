@@ -1,0 +1,46 @@
+{
+ "dataset": {
+  "episodes": 100,
+  "frames": 25803,
+  "real": 0,
+  "length_ratio": [
+   1.0
+  ],
+  "families": {
+   "object_workspace": 92,
+   "interaction_location": 8
+  }
+ },
+ "dataset_mixed": {
+  "episodes": 110,
+  "frames": 28378,
+  "real": 10,
+  "length_ratio": [
+   1.0
+  ],
+  "families": {
+   "object_workspace": 92,
+   "interaction_location": 8
+  }
+ },
+ "rear_episodes": [
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  64,
+  65,
+  75,
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82,
+  88
+ ]
+}
