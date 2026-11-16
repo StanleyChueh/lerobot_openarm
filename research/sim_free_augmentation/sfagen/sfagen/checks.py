@@ -210,7 +210,16 @@ class Checker:
     def placement(self, rec, c, S_src=None):
         k = [o["name"] for o in rec.objects].index(c["object"]); o = rec.objects[k]; T0 = c["objects"][k][0]
         P = (T0[:3, :3] @ o["points"].T).T + T0[:3, 3]; uv, _ = rec.cam.project(P)
-        inside = bool((uv[:, 0] > 10).all() and (uv[:, 0] < rec.W - 10).all() and (uv[:, 1] > 10).all() and (uv[:, 1] < rec.H - 10).all())
+        vis = lambda uv: (uv[:, 0] > 10) & (uv[:, 0] < rec.W - 10) & (uv[:, 1] > 10) & (uv[:, 1] < rec.H - 10)  # noqa: E731
+        inside = bool(vis(uv).all())
+        if self.cfg.get("visibility", "full") == "partial":
+            # pipeline v1: the moved object must be visibly in view, not necessarily whole: visible fraction of its points
+            # >= min(min_visible_fraction, the same object's visible fraction at its source position)
+            P0 = (o["table"][:3, :3] @ o["points"].T).T + o["table"][:3, 3]; f0 = float(vis(rec.cam.project(P0)[0]).mean())
+            f = float(vis(uv).mean()); inside = f >= min(float(self.cfg.get("min_visible_fraction", .5)), f0)
+            vis_info = {"visible_fraction": f, "source_visible_fraction": f0}
+        else:
+            vis_info = {}
         hsv = cv2.cvtColor(rec.plate, cv2.COLOR_RGB2HSV).astype(int)
         new = rec.obj_sil(k, T0); orig = rec.obj_sil(k, o["table"])
         ring = (cv2.dilate(orig.astype(np.uint8), np.ones((41, 41), np.uint8)) > 0) & ~(cv2.dilate(orig.astype(np.uint8), np.ones((15, 15), np.uint8)) > 0)
@@ -251,7 +260,7 @@ class Checker:
         # Include the rigid approach and guard the same source-time interval after slowing.
         te=pregrasp_guard_end(rec,c,k)
         extra = int(np.maximum(near(c["state"], T0, te) - near(rec.state if S_src is None else S_src, o["table"], te), 0).sum())
-        return {"in_view": inside, "on_table": on_table, "support_footprint_fraction": support_fraction, "plate_hsv_diff": dv.tolist(),
+        return {**vis_info, "in_view": inside, "on_table": on_table, "support_footprint_fraction": support_fraction, "plate_hsv_diff": dv.tolist(),
                 "appearance_space": self.cfg.get("plate_appearance_space", "hsv"), "gap_to_other_objects_m": gap,
                 "robot_points_near_object_extra_vs_source": extra,
                 "ok": inside and on_table and gap >= self.cfg["object_gap_m"] and extra == 0}

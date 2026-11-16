@@ -1,0 +1,135 @@
+{
+ "place_empty_cup": {
+  "source_demos": 10,
+  "source_demos_used": 10,
+  "synthetic_episodes": 60,
+  "families": {
+   "object_workspace": 60
+  },
+  "per_source": {
+   "0": 5,
+   "1": 6,
+   "2": 2,
+   "3": 10,
+   "4": 3,
+   "5": 3,
+   "6": 6,
+   "7": 8,
+   "8": 6,
+   "9": 11
+  },
+  "shift_cm": {
+   "min": 1.2887888443183075,
+   "median": 5.494765632370198,
+   "max": 10.284418499882793
+  },
+  "source_xy_range_m": {
+   "x": [
+    0.423595154998608,
+    0.6546792874315217
+   ],
+   "y": [
+    -0.24708502184006742,
+    0.2667391970534814
+   ]
+  },
+  "synthetic_xy_range_m": {
+   "x": [
+    0.45,
+    0.66
+   ],
+   "y": [
+    -0.21,
+    0.24
+   ]
+  },
+  "distinct_synthetic_targets": 44,
+  "grid_targets": 108
+ },
+ "stack_blocks_two": {
+  "source_demos": 10,
+  "source_demos_used": 9,
+  "synthetic_episodes": 99,
+  "families": {
+   "object_workspace": 99
+  },
+  "per_source": {
+   "0": 5,
+   "1": 2,
+   "2": 25,
+   "3": 17,
+   "4": 13,
+   "5": 0,
+   "6": 2,
+   "7": 23,
+   "8": 1,
+   "9": 11
+  },
+  "shift_cm": {
+   "min": 0.7729413621628698,
+   "median": 6.236051161393356,
+   "max": 11.998711226064053
+  },
+  "source_xy_range_m": {
+   "x": [
+    0.5547641644844727,
+    0.6684092968348271
+   ],
+   "y": [
+    -0.24396279262700735,
+    0.27026763910007656
+   ]
+  },
+  "synthetic_xy_range_m": {
+   "x": [
+    0.57,
+    0.69
+   ],
+   "y": [
+    -0.22,
+    0.26
+   ]
+  },
+  "distinct_synthetic_targets": 59,
+  "grid_targets": 95
+ },
+ "handover_block": {
+  "source_demos": 10,
+  "source_demos_used": 10,
+  "synthetic_episodes": 63,
+  "families": {
+   "interaction_location": 43,
+   "interaction_timing": 20
+  },
+  "per_source": {
+   "0": 6,
+   "1": 6,
+   "2": 6,
+   "3": 7,
+   "4": 6,
+   "5": 7,
+   "6": 6,
+   "7": 6,
+   "8": 7,
+   "9": 6
+  },
+  "shift_cm": {
+   "min": 0.0,
+   "median": 3.0,
+   "max": 5.0
+  },
+  "source_xy_range_m": {
+   "x": [
+    0.6955420579753998,
+    0.8670602260512936
+   ],
+   "y": [
+    0.08289725287973888,
+    0.250713368049907
+   ]
+  },
+  "synthetic_xy_range_m": null,
+  "distinct_synthetic_targets": null,
+  "grid_targets": 63
+ }
+}

@@ -2,11 +2,23 @@
 import numpy as np
 
 
+def auto_targets(cfg, sources):
+    """pipeline v1 `positions_xy_m: auto`: the target area comes from the source demos alone. Lattice points (step
+    `grid_step_m`, default 3 cm, aligned to the robot-frame origin) within `max_shift_m` of at least one frozen source
+    object position. The per-source min/max shift and nearest-source rules below then assign them, exactly as for an
+    explicit list. Deterministic from the frozen source positions, so every group of a task shares one target list."""
+    step = float(cfg.get("grid_step_m", .03)); cap = float(cfg.get("max_shift_m", .08)); P = np.array(list(sources.values()), float)
+    lo = np.floor((P.min(0) - cap) / step) * step; hi = np.ceil((P.max(0) + cap) / step) * step
+    xs, ys = (np.round(np.arange(lo[i], hi[i] + step / 2, step), 6) for i in (0, 1))
+    g = np.array([[x, y] for x in xs for y in ys])
+    return g[np.linalg.norm(g[:, None] - P[None], axis=2).min(1) <= cap + 1e-12]
+
+
 def target_offsets(rec, cfg):
     name = cfg["object"]
     obj = next(o for o in rec.objects if o["name"] == name)
-    targets = np.asarray(cfg["positions_xy_m"], float)
     sources = {int(e): np.asarray(p, float) for e, p in cfg["source_positions_xy_m"].items()}
+    targets = auto_targets(cfg, sources) if cfg["positions_xy_m"] == "auto" else np.asarray(cfg["positions_xy_m"], float)
     if targets.ndim != 2 or targets.shape[1] != 2 or not np.isfinite(targets).all():
         raise ValueError("Object targets must be finite world x/y positions in metres")
     if len(np.unique(targets, axis=0)) != len(targets):

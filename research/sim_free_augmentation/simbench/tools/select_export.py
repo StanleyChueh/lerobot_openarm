@@ -1,6 +1,6 @@
 """Pipeline-v0 selection for one task (SIM_BENCHMARK_PLAN §6; same rule as v03 rev 2 finalize without a distortion cap):
 every passing + rendered non-grid candidate (interaction location / timing) + at most 2 lowest-distortion candidates per
-grid target, pooled over the task's episode groups. Then, per group, an export work dir `<group>_export` with copies of
+grid target POSITION (R03 fix: target keys repeat across groups with separate grids), pooled over the task's episode groups. Then, per group, an export work dir `<group>_export` with copies of
 the rig files, symlinks to the group's cache/ and candidates/, and hard links of only the selected renders, so
 `sfagen build` (which exports every passing candidate with a current render) exports exactly the selection.
 Usage: select_export.py TASK_RUN_DIR   -> writes selection.json and <group>_export/ dirs (refuses to overwrite)"""
@@ -17,12 +17,15 @@ for g in groups:
         for k, v in json.loads(cj.read_text()).items():
             f = g / "body" / f"{e}_{k}.json"
             if v["pass"] and f.exists():
+                txy = v.get("marks", {}).get("target_xy_m")    # group by target POSITION: key names repeat across groups
                 rows.append({"group": g.name, "source": e, "key": k, "family": v["family"], "score": score_file(f),
-                             "shift_cm": 100 * float(sum(x * x for x in v["shift_m"][:2]) ** .5)})
+                             "shift_cm": 100 * float(sum(x * x for x in v["shift_m"][:2]) ** .5),
+                             "target": [round(float(x), 4) for x in txy] if txy else k})
 keep = [r for r in rows if r["family"] != "object_workspace"]; per = {}
 for r in sorted((r for r in rows if r["family"] == "object_workspace"), key=lambda r: (r["score"], r["shift_cm"])):
-    if len(per.setdefault(r["key"], [])) < 2:
-        per[r["key"]].append(r)
+    t = tuple(r["target"]) if isinstance(r["target"], list) else r["target"]
+    if len(per.setdefault(t, [])) < 2:
+        per[t].append(r)
 keep += [r for v in per.values() for r in v]
 assert not (run / "selection.json").exists(), "selection exists"
 (run / "selection.json").write_text(json.dumps({"rule": "all non-grid + <= 2 lowest-distortion per grid target (no cap)",
