@@ -1,4 +1,62 @@
-# sfagen v02 / v02b / v03: arena augmentation for the OpenArm Pringles hand-over
+# sfagen main pipeline: simulation-free data augmentation for bimanual robots (OpenArm + RoboTwin 2.0)
+
+> **Main pipeline branch** (`main-pipeline`). Robot setup, teleoperation, recording, training and evaluation commands
+> are on [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map).
+> Older research branches are kept under `archive/*`.
+
+sfagen turns ~10 real demos into many synthetic demos **without a physics simulator**: it reconstructs the scene from the
+demo videos, moves the object (or the hand-over), re-plans the arm with IK from the robot URDF, re-renders the camera,
+and keeps only candidates that pass kinematic/visual gates. Every synthetic episode keeps its source demo's length and
+speed. Adapting to a new robot/task needs the URDF + the source demos (plus the task's object list).
+
+## Current version: pipeline v1 + v04 even spread (2026-11-16)
+| change | what | report |
+|---|---|---|
+| joint-space fallback | v0 Cartesian blend first; if that candidate fails a gate, a joint-space transit blend with exact IK only near the grasp (fixes near-singular start poses, e.g. RoboTwin's folded arms) | [R02](research/sim_free_augmentation/simbench/results/reports/R02_blend_space_pipeline_v1.md) |
+| targets from the demos | `positions_xy_m: auto` = 3 cm lattice within 12 cm of the source object positions; the object must be visibly in view (partial OK) | [R03](research/sim_free_augmentation/simbench/results/reports/R03_targets_from_source_demos.md) |
+| even spread | exactly **100 synthetic episodes** per dataset, filled cell by cell (emptiest 3 cm cell first, real demos count as occupied, farthest point, least-used source) so no table area is over-represented | [R04](research/sim_free_augmentation/simbench/results/reports/R04_even_position_quota.md) |
+OpenArm guard: every episode the v0 pipeline produced is bit-identical under v1 (163/163); 62 unit tests pass.
+
+### Published datasets (LeRobot v3.0, load with `revision="v3.0"`)
+| robot / task | synthetic only | 10 real + synthetic | 10 source demos |
+|---|---|---|---|
+| OpenArm Pringles hand-over (**v04**) | [`openarm_pringles_lerobot_real_to_sim_10_3cam_v04`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_to_sim_10_3cam_v04) (100) | [`…_real_and_sim_10_3cam_v04`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_and_sim_10_3cam_v04) (110) | [`openarm_pringles_lerobot_real_10_v00`](https://huggingface.co/datasets/ethanCSL/openarm_pringles_lerobot_real_10_v00) |
+| RoboTwin 2.0 `place_empty_cup` | [`robotwin_place_empty_cup_lerobot_sim_aug_10`](https://huggingface.co/datasets/ethanCSL/robotwin_place_empty_cup_lerobot_sim_aug_10) (100) | [`…_source_and_sim_aug_10`](https://huggingface.co/datasets/ethanCSL/robotwin_place_empty_cup_lerobot_source_and_sim_aug_10) (110) | [`…_source_10`](https://huggingface.co/datasets/ethanCSL/robotwin_place_empty_cup_lerobot_source_10) |
+| RoboTwin 2.0 `stack_blocks_two` | [`robotwin_stack_blocks_two_lerobot_sim_aug_10`](https://huggingface.co/datasets/ethanCSL/robotwin_stack_blocks_two_lerobot_sim_aug_10) (100) | [`…_source_and_sim_aug_10`](https://huggingface.co/datasets/ethanCSL/robotwin_stack_blocks_two_lerobot_source_and_sim_aug_10) (110) | [`…_source_10`](https://huggingface.co/datasets/ethanCSL/robotwin_stack_blocks_two_lerobot_source_10) |
+| RoboTwin 2.0 `handover_block` | [`robotwin_handover_block_lerobot_sim_aug_10`](https://huggingface.co/datasets/ethanCSL/robotwin_handover_block_lerobot_sim_aug_10) (100) | [`…_source_and_sim_aug_10`](https://huggingface.co/datasets/ethanCSL/robotwin_handover_block_lerobot_source_and_sim_aug_10) (110) | [`…_source_10`](https://huggingface.co/datasets/ethanCSL/robotwin_handover_block_lerobot_source_10) |
+RoboTwin repos keep their first release at tag `r03` (128/195/155 synthetic episodes, uneven).
+
+### Key results
+- **OpenArm training density** near the evaluation starts (episodes within 4 cm; front-right / front-left / middle /
+  rear-right / rear-left): v03 rev 2 loose 22.0 / 22.8 / 24.2 / 4.5 / 4.0 (6.1x) -> **v04 16.0 / 11.6 / 13.2 / 10.2 / 9.7
+  (1.7x)**. The real-robot v03 model failed sometimes at the rear; v04 is the data-side fix (evaluation pending).
+- **RoboTwin yield** (object-position candidates passing every gate): place_empty_cup 0 % (v0) -> 29 %,
+  stack_blocks_two 63 %, handover_block 36 % (v0: 0 block-position episodes).
+- **Image quality (honest):** OpenArm good (faint smudge at the old can position); RoboTwin stack good, cup mediocre,
+  handover block-position poor (camera fit still 16-35 px off; tall-block proxy). Next fix: camera fit.
+
+### Reproduce
+```bash
+PY="env -u PYTHONPATH -u LD_LIBRARY_PATH HF_HUB_OFFLINE=1 .venv/bin/python -B"; S=research/sim_free_augmentation/simbench
+# OpenArm v04: generate (pipeline v1) -> render -> even selection -> build (+ mixed) -> verify
+(cd research/sim_free_augmentation/sfagen && $PY -m sfagen generate ../simbench/configs/r03/openarm_v03r2_loose_v1.yaml && \
+ $PY -m sfagen render ../simbench/configs/r03/openarm_v03r2_loose_v1.yaml)
+mkdir -p RUN && ln -s <work_dir> RUN/all && $PY $S/tools/balanced_select.py RUN $S/configs/r03/openarm_v03r2_loose_v1.yaml N=100 0.03
+(cd research/sim_free_augmentation/sfagen && $PY -m sfagen build ../simbench/configs/r03/openarm_v03r2_loose_v1.yaml --work-dir ../../../RUN/all_export \
+   --repo-id local/v04 --mixed-repo-id local/v04_mixed && $PY -m sfagen verify ../simbench/configs/r03/openarm_v03r2_loose_v1.yaml --work-dir ../../../RUN/all_export)
+# RoboTwin 2.0 (per task): subset -> configs -> calibrate/table -> generate/render -> even selection -> build -> package
+$PY $S/tools/robotwin_subset.py; $PY $S/configs/robotwin/make_configs.py RUN_DIR
+(cd research/sim_free_augmentation/sfagen && $PY -m sfagen calibrate ../simbench/configs/robotwin/<task>_base.yaml --search && $PY -m sfagen table ../simbench/configs/robotwin/<task>_base.yaml)
+$S/tools/s1_task.sh <task> <gpu> RUN_DIR                       # positions, generate, render, build, verify
+$PY $S/tools/balanced_select.py RUN_DIR2/<task> $S/configs/robotwin/<task>_<group>.yaml N=100 0.03   # RUN_DIR2/<task>/<group> -> symlinks
+$PY $S/tools/package_task.py <task> RUN_DIR2 <robotwin_pilot> <out>   # source / synthetic / mixed
+$PY $S/tools/density_report.py OUT_PREFIX; $PY $S/tools/dataset_distribution.py RUN_DIR DATA_DIR CONFIG_DIR OUT_PREFIX
+(cd research/sim_free_augmentation/sfagen && $PY -m unittest discover -s tests)   # 62 tests
+```
+Plan and protocols: `research/sim_free_augmentation/sfagen/results/SIM_BENCHMARK_PLAN.md`, `simbench/results/r0{2,3,4}/PROTOCOL.md`.
+
+---
+## History: v03 (published 2026-11-14, superseded by v04 for training)
 
 > **Research branch.** Robot setup, teleoperation, recording, training and evaluation commands are on
 > [`official-lerobot-quest`](https://github.com/StanleyChueh/lerobot_openarm/tree/official-lerobot-quest#branch-map).
