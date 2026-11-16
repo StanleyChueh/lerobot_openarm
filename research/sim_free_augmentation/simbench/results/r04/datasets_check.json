@@ -1,0 +1,90 @@
+{
+ "place_empty_cup": {
+  "source": {
+   "episodes": 10,
+   "frames": 1741
+  },
+  "synthetic": {
+   "episodes": 100,
+   "frames": 17281,
+   "real": 0,
+   "length_ratio": [
+    1.0
+   ],
+   "families": {
+    "object_workspace": 100
+   }
+  },
+  "mixed": {
+   "episodes": 110,
+   "frames": 19022,
+   "real": 10,
+   "length_ratio": [
+    1.0
+   ],
+   "families": {
+    "object_workspace": 100
+   }
+  }
+ },
+ "stack_blocks_two": {
+  "source": {
+   "episodes": 10,
+   "frames": 3140
+  },
+  "synthetic": {
+   "episodes": 100,
+   "frames": 31264,
+   "real": 0,
+   "length_ratio": [
+    1.0
+   ],
+   "families": {
+    "object_workspace": 100
+   }
+  },
+  "mixed": {
+   "episodes": 110,
+   "frames": 34404,
+   "real": 10,
+   "length_ratio": [
+    1.0
+   ],
+   "families": {
+    "object_workspace": 100
+   }
+  }
+ },
+ "handover_block": {
+  "source": {
+   "episodes": 10,
+   "frames": 2835
+  },
+  "synthetic": {
+   "episodes": 100,
+   "frames": 28317,
+   "real": 0,
+   "length_ratio": [
+    1.0
+   ],
+   "families": {
+    "object_workspace": 94,
+    "interaction_timing": 3,
+    "interaction_location": 3
+   }
+  },
+  "mixed": {
+   "episodes": 110,
+   "frames": 31152,
+   "real": 10,
+   "length_ratio": [
+    1.0
+   ],
+   "families": {
+    "object_workspace": 94,
+    "interaction_timing": 3,
+    "interaction_location": 3
+   }
+  }
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "place_empty_cup": {
+  "source_demos": 10,
+  "source_demos_used": 10,
+  "synthetic_episodes": 100,
+  "families": {
+   "object_workspace": 100
+  },
+  "per_source": {
+   "0": 6,
+   "1": 6,
+   "2": 4,
+   "3": 19,
+   "4": 4,
+   "5": 6,
+   "6": 7,
+   "7": 14,
+   "8": 18,
+   "9": 16
+  },
+  "shift_cm": {
+   "min": 0.6240418102370029,
+   "median": 5.893263192920408,
+   "max": 11.929438301467563
+  },
+  "source_xy_range_m": {
+   "x": [
+    0.423595154998608,
+    0.6546792874315217
+   ],
+   "y": [
+    -0.24708502184006742,
+    0.2667391970534814
+   ]
+  },
+  "synthetic_xy_range_m": {
+   "x": [
+    0.39,
+    0.66
+   ],
+   "y": [
+    -0.27,
+    0.33
+   ]
+  },
+  "families_note": "object_workspace = moved object; interaction_* = handover location/timing",
+  "distinct_synthetic_targets": 97,
+  "grid_targets": 222
+ },
+ "stack_blocks_two": {
+  "source_demos": 10,
+  "source_demos_used": 10,
+  "synthetic_episodes": 100,
+  "families": {
+   "object_workspace": 100
+  },
+  "per_source": {
+   "0": 14,
+   "1": 7,
+   "2": 14,
+   "3": 8,
+   "4": 8,
+   "5": 6,
+   "6": 7,
+   "7": 17,
+   "8": 6,
+   "9": 13
+  },
+  "shift_cm": {
+   "min": 2.633454721658333,
+   "median": 8.371050133342411,
+   "max": 11.63973667278657
+  },
+  "source_xy_range_m": {
+   "x": [
+    0.5547641644844727,
+    0.6684092968348271
+   ],
+   "y": [
+    -0.24396279262700735,
+    0.27026763910007656
+   ]
+  },
+  "synthetic_xy_range_m": {
+   "x": [
+    0.45,
+    0.72
+   ],
+   "y": [
+    -0.3,
+    0.36
+   ]
+  },
+  "families_note": "object_workspace = moved object; interaction_* = handover location/timing",
+  "distinct_synthetic_targets": 100,
+  "grid_targets": 176
+ },
+ "handover_block": {
+  "source_demos": 10,
+  "source_demos_used": 10,
+  "synthetic_episodes": 100,
+  "families": {
+   "object_workspace": 94,
+   "interaction_timing": 3,
+   "interaction_location": 3
+  },
+  "per_source": {
+   "0": 9,
+   "1": 10,
+   "2": 9,
+   "3": 11,
+   "4": 9,
+   "5": 10,
+   "6": 9,
+   "7": 11,
+   "8": 12,
+   "9": 10
+  },
+  "shift_cm": {
+   "min": 0.0,
+   "median": 7.035428842112399,
+   "max": 11.998532393061224
+  },
+  "source_xy_range_m": {
+   "x": [
+    0.6955420579753998,
+    0.8670602260512936
+   ],
+   "y": [
+    0.08289725287973888,
+    0.250713368049907
+   ]
+  },
+  "synthetic_xy_range_m": {
+   "x": [
+    0.63,
+    0.87
+   ],
+   "y": [
+    -0.03,
+    0.3
+   ]
+  },
+  "families_note": "object_workspace = moved object; interaction_* = handover location/timing",
+  "distinct_synthetic_targets": 55,
+  "grid_targets": 135
+ }
+}
