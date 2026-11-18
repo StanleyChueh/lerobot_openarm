@@ -1,0 +1,362 @@
+{
+ "openarm_e0_f50": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 0,
+  "frame": 50,
+  "kind": "far",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e0_f86": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 0,
+  "frame": 86,
+  "kind": "near",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e0_f110": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 0,
+  "frame": 110,
+  "kind": "grasp",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e3_f43": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 3,
+  "frame": 43,
+  "kind": "far",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e3_f71": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 3,
+  "frame": 71,
+  "kind": "near",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e3_f95": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 3,
+  "frame": 95,
+  "kind": "grasp",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e5_f45": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 5,
+  "frame": 45,
+  "kind": "far",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e5_f75": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 5,
+  "frame": 75,
+  "kind": "near",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e5_f99": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 5,
+  "frame": 99,
+  "kind": "grasp",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e8_f43": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 8,
+  "frame": 43,
+  "kind": "far",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e8_f72": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 8,
+  "frame": 72,
+  "kind": "near",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "openarm_e8_f96": {
+  "name": "openarm",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r03/openarm_v03r2_loose_v1.yaml",
+  "episode": 8,
+  "frame": 96,
+  "kind": "grasp",
+  "arms": [
+   "R",
+   "L"
+  ],
+  "W": 640
+ },
+ "cup_e3_f36": {
+  "name": "cup",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/place_empty_cup_L_PB.yaml",
+  "episode": 3,
+  "frame": 36,
+  "kind": "far",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "cup_e3_f58": {
+  "name": "cup",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/place_empty_cup_L_PB.yaml",
+  "episode": 3,
+  "frame": 58,
+  "kind": "near",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "cup_e3_f82": {
+  "name": "cup",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/place_empty_cup_L_PB.yaml",
+  "episode": 3,
+  "frame": 82,
+  "kind": "grasp",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "cup_e5_f43": {
+  "name": "cup",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/place_empty_cup_L_PB.yaml",
+  "episode": 5,
+  "frame": 43,
+  "kind": "far",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "cup_e5_f71": {
+  "name": "cup",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/place_empty_cup_L_PB.yaml",
+  "episode": 5,
+  "frame": 71,
+  "kind": "near",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "cup_e5_f95": {
+  "name": "cup",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/place_empty_cup_L_PB.yaml",
+  "episode": 5,
+  "frame": 95,
+  "kind": "grasp",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "stack_e0_f30": {
+  "name": "stack",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/stack_blocks_two_LL_PB.yaml",
+  "episode": 0,
+  "frame": 30,
+  "kind": "far",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "stack_e0_f46": {
+  "name": "stack",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/stack_blocks_two_LL_PB.yaml",
+  "episode": 0,
+  "frame": 46,
+  "kind": "near",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "stack_e0_f70": {
+  "name": "stack",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/stack_blocks_two_LL_PB.yaml",
+  "episode": 0,
+  "frame": 70,
+  "kind": "grasp",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "stack_e7_f29": {
+  "name": "stack",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/stack_blocks_two_LL_PB.yaml",
+  "episode": 7,
+  "frame": 29,
+  "kind": "far",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "stack_e7_f43": {
+  "name": "stack",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/stack_blocks_two_LL_PB.yaml",
+  "episode": 7,
+  "frame": 43,
+  "kind": "near",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "stack_e7_f67": {
+  "name": "stack",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/stack_blocks_two_LL_PB.yaml",
+  "episode": 7,
+  "frame": 67,
+  "kind": "grasp",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "handover_e0_f30": {
+  "name": "handover",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/handover_block_L_PB.yaml",
+  "episode": 0,
+  "frame": 30,
+  "kind": "far",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "handover_e0_f45": {
+  "name": "handover",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/handover_block_L_PB.yaml",
+  "episode": 0,
+  "frame": 45,
+  "kind": "near",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "handover_e0_f69": {
+  "name": "handover",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/handover_block_L_PB.yaml",
+  "episode": 0,
+  "frame": 69,
+  "kind": "grasp",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "handover_e1_f28": {
+  "name": "handover",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/handover_block_L_PB.yaml",
+  "episode": 1,
+  "frame": 28,
+  "kind": "far",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "handover_e1_f41": {
+  "name": "handover",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/handover_block_L_PB.yaml",
+  "episode": 1,
+  "frame": 41,
+  "kind": "near",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ },
+ "handover_e1_f65": {
+  "name": "handover",
+  "config": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/simbench/configs/r05/handover_block_L_PB.yaml",
+  "episode": 1,
+  "frame": 65,
+  "kind": "grasp",
+  "arms": [
+   "L",
+   "R"
+  ],
+  "W": 640
+ }
+}

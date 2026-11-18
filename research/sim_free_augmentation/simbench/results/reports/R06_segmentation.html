@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><title>R06 segmentation</title>
+<style>body{font:15px/1.5 system-ui,sans-serif;max-width:1500px;margin:24px auto;padding:0 16px;color:#111;background:#fff}img{max-width:100%;border:1px solid #ccc}h2{margin-top:32px}table{border-collapse:collapse}td,th{border:1px solid #bbb;padding:4px 10px;text-align:left}</style>
+<h1>R06: arm and object masks against a hand-checked gold set</h1>
+<p><b>Status: RoboTwin 17/18 gold frames with the pipeline's own camera; OpenArm 0/12. Not done.</b> Full text and limits: <a href="R06_segmentation.md">R06_segmentation.md</a>. Protocol: <a href="../r06/PROTOCOL.md">PROTOCOL.md</a>.</p>
+<table><tr><th>Condition</th><th>Gold frames passing</th></tr>
+<tr><td>Baseline v1, fitted camera</td><td>0 / 30</td></tr><tr><td>R05 rules, fitted camera</td><td>0 / 30</td></tr>
+<tr><td>R06 rules, fitted camera</td><td>10 / 30 (RoboTwin 10 / 18, OpenArm 0 / 12)</td></tr>
+<tr><td>R05 rules, true camera (RoboTwin)</td><td>0 / 18</td></tr><tr><td>R06 rules, true camera (RoboTwin)</td><td>18 / 18</td></tr></table>
+<h2>Update: refined camera (Opus 5.5)</h2><p>Camera error vs truth: cup 25.8 → 3.7 px, stack 15.8 → 3.0 px, hand-over 35–41 → 3.6 px. Gold frames passing with the pipeline's own camera: cup 6/6, stack 5/6, hand-over 6/6, OpenArm 0/12. Pose transfer vs baseline: cup +1.4 dB, stack +1.7 dB.</p><h3>cup (refined camera)</h3><img src="../r06/gold_H_cup.jpg"><h3>stack (refined camera)</h3><img src="../r06/gold_H_stack.jpg"><h3>hand-over (refined camera, 4 rounds)</h3><img src="../r06/gold_H_handover.jpg"><h3>OpenArm (refined camera): wrist cameras missing from the URDF</h3><img src="../r06/gold_H_openarm.jpg">
+<h2>1. Gold set for your approval</h2><p>White / green-blue outline = arm, yellow = gripper, orange = object, magenta = not scored (I could not assign these pixels).</p><img src="../r06/gold_sheet_dev.jpg">
+<h2>2. Baseline v1, fitted camera (0 / 30)</h2><p>Filled = pipeline masks (arms blue / green, objects orange / pink). Lines = gold. Red text = failed checks.</p><img src="../r06/gold_A.jpg">
+<h2>3. R06 rules, fitted camera (10 / 30)</h2><img src="../r06/gold_F.jpg">
+<h2>4. R05 rules, true camera (0 / 18)</h2><img src="../r06/gold_PB.jpg">
+<h2>5. R06 rules, true camera (18 / 18)</h2><img src="../r06/gold_PF.jpg">
+<h2>6. OpenArm: projected links (lines) on two real frames, fitted camera</h2><img src="../r06/openarm_projection_ep0.jpg">

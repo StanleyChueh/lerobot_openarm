@@ -1,0 +1,226 @@
+source:
+  repo_id: local/robotwin_unified_place_empty_cup
+  root: /home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_data/robotwin_pilot/place_empty_cup
+  body_camera: observation.images.cam_high
+  wrist_cameras:
+  - observation.images.cam_left_wrist
+  - observation.images.cam_right_wrist
+  wrist_camera_arms:
+    observation.images.cam_left_wrist: L
+    observation.images.cam_right_wrist: R
+  episodes:
+  - 0
+  - 1
+  - 2
+  - 4
+  - 6
+  - 7
+robot:
+  urdf: /home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_data/rt_assets/embodiments/aloha-agilex/urdf/arx5_sfagen.urdf
+  package_dirs:
+  - /home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_data/rt_assets/embodiments/aloha-agilex/urdf
+  arms:
+    L:
+      joints:
+      - fl_joint1
+      - fl_joint2
+      - fl_joint3
+      - fl_joint4
+      - fl_joint5
+      - fl_joint6
+      state_indices:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      tcp_frame: fl_tcp
+      gripper:
+        state_index: 6
+        open_raw: 1.0
+        closed_raw: 0.0
+        finger_joints:
+        - fl_joint7
+        - fl_joint8
+        finger_open: 0.045
+        close_threshold: 0.5
+    R:
+      joints:
+      - fr_joint1
+      - fr_joint2
+      - fr_joint3
+      - fr_joint4
+      - fr_joint5
+      - fr_joint6
+      state_indices:
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      tcp_frame: fr_tcp
+      gripper:
+        state_index: 13
+        open_raw: 1.0
+        closed_raw: 0.0
+        finger_joints:
+        - fr_joint7
+        - fr_joint8
+        finger_open: 0.045
+        close_threshold: 0.5
+camera:
+  intrinsics:
+    width: 640
+    height: 480
+    fx: 717.284
+    fy: 717.284
+    cx: 320.0
+    cy: 240.0
+  extrinsics:
+    position:
+    - 0.21282
+    - -0.03345
+    - 1.39418
+    quat_wxyz:
+    - 0.256183
+    - -0.624331
+    - 0.708151
+    - -0.207613
+  note: initial guess = nominal RoboTwin head-camera mount + seeded error (seed 0,
+    8.0 deg, 0.08 m); refined by `sfagen calibrate --search`
+reconstruction:
+  lag_default: -1.75
+  lag_scan: true
+  lag_scan_range:
+  - -4.0
+  - 1.51
+  - 0.25
+  foreground_threshold: 30
+  robot_masks: sam2
+  sam2_keyframe_every: 15
+  sam2_exclude_links:
+  - link1
+  lag_method: photometric
+  lag_candidates:
+  - -3.0
+  - 0.51
+  - 0.25
+  prompt_object_cut: depth
+  mask_repair: 0.6
+render:
+  tm_erode: 21
+  despeckle: true
+  part_fill: false
+  plate_adapt: 10
+  object_mask_grow: 60
+checks:
+  speed_ratio: 1.25
+  accel_ratio: 1.5
+  clearance_floor_m: 0.02
+  hand_tol_m: 0.005
+  table_tol_m: 0.01
+  skip_collision_links:
+  - link1
+  table_skip_links:
+  - link1
+  - link2
+  hand_floor_m: 0.1
+  fast_reject: true
+  support_check: appearance
+  plate_appearance_space: lab
+  fixed_duration: true
+  speed_similarity:
+  - 0.8
+  - 1.25
+  visibility: partial
+  min_visible_fraction: 0.5
+calibration:
+  search_deg: 15
+  search_m: 0.15
+  search_samples: 400
+  maxfev: 900
+objects:
+  cup:
+    grasped_by: R
+    grasp_index: 0
+    proxy:
+      type: box
+variations:
+  object_targets:
+    object: cup
+    positions_xy_m: auto
+    source_positions_xy_m:
+      3:
+      - 0.48223657728913416
+      - 0.15072658493661778
+      5:
+      - 0.6546792874315217
+      - 0.2667391970534814
+      8:
+      - 0.423595154998608
+      - 0.19570213314654966
+      9:
+      - 0.5510980211132849
+      - 0.23344777931591007
+      0:
+      - 0.6362206736180896
+      - -0.21813724903014525
+      1:
+      - 0.5537933241376811
+      - -0.1792646570717518
+      2:
+      - 0.5958560850106233
+      - -0.24708502184006742
+      4:
+      - 0.592479857622395
+      - -0.24575575859465262
+      6:
+      - 0.5590141227195353
+      - -0.21697700592836425
+      7:
+      - 0.4762724567716838
+      - -0.22889864555346406
+    nearest_sources: 10
+    min_shift_m: 0.005
+    max_shift_m: 0.12
+    planner: f1w
+    time_scales:
+    - 1.0
+    wide_blend: true
+  interaction_location:
+    shifts_cm:
+    - - 3
+      - 0
+    - - -3
+      - 0
+    - - 0
+      - 3
+    - - 0
+      - -3
+    - - 5
+      - 0
+    - - -5
+      - 0
+    - - 0
+      - 5
+    - - 0
+      - -5
+    d_interact_m: 0.2
+    ramp_frames: 45
+  interaction_timing:
+    offsets_frames:
+    - -10
+    - 10
+video_encoding:
+  vcodec: h264
+  pix_fmt: yuv444p
+  crf: 12
+  preset: fast
+  g: 2
+work_dir: /home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_runs/r05/B/place_empty_cup_R
+plan:
+  action_aware_bounds: true
+  action_bound_margin_rad: 0.005
+  blend_space: joint_fallback

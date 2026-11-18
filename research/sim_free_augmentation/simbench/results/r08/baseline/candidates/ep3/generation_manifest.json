@@ -1,0 +1,885 @@
+{
+ "complete": true,
+ "episode": 3,
+ "started_unix": 1794794337.916815,
+ "source": {
+  "repo_id": "ethanCSL/openarm_pringles_lerobot_real_10_v00",
+  "revision": "cebdee98115ab6827a4ec2655335c536b5dd085b",
+  "root": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/snapshots/cebdee98115ab6827a4ec2655335c536b5dd085b",
+  "body_camera": "observation.images.body_cam",
+  "wrist_cameras": [
+   "observation.images.wrist_cam",
+   "observation.images.right_wrist_cam"
+  ],
+  "wrist_camera_arms": {
+   "observation.images.wrist_cam": "L",
+   "observation.images.right_wrist_cam": "R"
+  },
+  "episodes": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "wrist_camera_lags": {
+   "observation.images.wrist_cam": -0.25,
+   "observation.images.right_wrist_cam": -1.0
+  }
+ },
+ "config": {
+  "source": {
+   "repo_id": "ethanCSL/openarm_pringles_lerobot_real_10_v00",
+   "revision": "cebdee98115ab6827a4ec2655335c536b5dd085b",
+   "root": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/snapshots/cebdee98115ab6827a4ec2655335c536b5dd085b",
+   "body_camera": "observation.images.body_cam",
+   "wrist_cameras": [
+    "observation.images.wrist_cam",
+    "observation.images.right_wrist_cam"
+   ],
+   "wrist_camera_arms": {
+    "observation.images.wrist_cam": "L",
+    "observation.images.right_wrist_cam": "R"
+   },
+   "episodes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "wrist_camera_lags": {
+    "observation.images.wrist_cam": -0.25,
+    "observation.images.right_wrist_cam": -1.0
+   }
+  },
+  "robot": {
+   "urdf": "/home/stanley/Stanley_ws/lerobot_openarm/model/openarm_description.urdf",
+   "package_dirs": [
+    "/home/stanley/Stanley_ws/lerobot_openarm/model/meshes"
+   ],
+   "arms": {
+    "R": {
+     "joints": [
+      "openarm_right_joint1",
+      "openarm_right_joint2",
+      "openarm_right_joint3",
+      "openarm_right_joint4",
+      "openarm_right_joint5",
+      "openarm_right_joint6",
+      "openarm_right_joint7"
+     ],
+     "state_indices": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12
+     ],
+     "tcp_frame": "openarm_right_hand_tcp",
+     "gripper": {
+      "state_index": 14,
+      "open_raw": -1.298,
+      "closed_raw": 0.0,
+      "finger_joints": [
+       "openarm_right_finger_joint1",
+       "openarm_right_finger_joint2"
+      ],
+      "finger_open": 0.044,
+      "close_threshold": 0.5
+     }
+    },
+    "L": {
+     "joints": [
+      "openarm_left_joint1",
+      "openarm_left_joint2",
+      "openarm_left_joint3",
+      "openarm_left_joint4",
+      "openarm_left_joint5",
+      "openarm_left_joint6",
+      "openarm_left_joint7"
+     ],
+     "state_indices": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13
+     ],
+     "tcp_frame": "openarm_left_hand_tcp",
+     "gripper": {
+      "state_index": 15,
+      "open_raw": 1.2121,
+      "closed_raw": 0.0,
+      "finger_joints": [
+       "openarm_left_finger_joint1",
+       "openarm_left_finger_joint2"
+      ],
+      "finger_open": 0.044,
+      "close_threshold": 0.5
+     }
+    }
+   }
+  },
+  "camera": {
+   "intrinsics": {
+    "fx": 607.22,
+    "fy": 607.22,
+    "cx": 326.4,
+    "cy": 238.7,
+    "width": 640,
+    "height": 480
+   },
+   "extrinsics": {
+    "position": [
+     0.05621,
+     -0.00305,
+     0.83062
+    ],
+    "quat_wxyz": [
+     0.1872,
+     -0.68244,
+     0.69543,
+     -0.1249
+    ]
+   },
+   "note": "initial guess (OpenArm body camera, IsaacLab mount); refined per rig by `sfagen calibrate`"
+  },
+  "reconstruction": {
+   "lag_default": -1.75,
+   "lag_scan": true,
+   "lag_scan_range": [
+    -4.0,
+    1.51,
+    0.25
+   ],
+   "foreground_threshold": 30,
+   "robot_masks": "sam2",
+   "sam2_keyframe_every": 15,
+   "sam2_exclude_links": [
+    "link0",
+    "link1",
+    "link2",
+    "link3"
+   ],
+   "lag_method": "photometric",
+   "lag_candidates": [
+    -3.0,
+    0.51,
+    0.25
+   ]
+  },
+  "render": {
+   "tm_erode": 21,
+   "despeckle": true,
+   "part_fill": false,
+   "plate_adapt": 10,
+   "object_mask_grow": 60
+  },
+  "checks": {
+   "visibility": "partial",
+   "min_visible_fraction": 0.5,
+   "speed_ratio": 1.25,
+   "accel_ratio": 1.5,
+   "clearance_floor_m": 0.02,
+   "hand_tol_m": 0.005,
+   "table_tol_m": 0.01,
+   "skip_collision_links": [
+    "link0",
+    "link1"
+   ],
+   "table_skip_links": [
+    "link0",
+    "link1",
+    "link2"
+   ],
+   "hand_floor_m": 0.1,
+   "fast_reject": true,
+   "support_check": "appearance",
+   "plate_appearance_space": "lab",
+   "fixed_duration": true,
+   "speed_similarity": [
+    0.8,
+    1.25
+   ]
+  },
+  "calibration": {
+   "search_deg": 15,
+   "search_m": 0.15,
+   "search_samples": 400,
+   "maxfev": 900
+  },
+  "objects": {
+   "can": {
+    "grasped_by": "R",
+    "grasp_index": 0,
+    "proxy": {
+     "type": "cylinder",
+     "radius": 0.0375,
+     "length": 0.23,
+     "axis": "vertical"
+    }
+   }
+  },
+  "variations": {
+   "object_targets": {
+    "object": "can",
+    "positions_xy_m": [
+     [
+      0.09,
+      -0.09
+     ],
+     [
+      0.09,
+      -0.06
+     ],
+     [
+      0.09,
+      -0.03
+     ],
+     [
+      0.09,
+      0.0
+     ],
+     [
+      0.09,
+      0.03
+     ],
+     [
+      0.09,
+      0.06
+     ],
+     [
+      0.09,
+      0.09
+     ],
+     [
+      0.09,
+      0.12
+     ],
+     [
+      0.09,
+      0.15
+     ],
+     [
+      0.12,
+      -0.09
+     ],
+     [
+      0.12,
+      -0.06
+     ],
+     [
+      0.12,
+      -0.03
+     ],
+     [
+      0.12,
+      0.0
+     ],
+     [
+      0.12,
+      0.03
+     ],
+     [
+      0.12,
+      0.06
+     ],
+     [
+      0.12,
+      0.09
+     ],
+     [
+      0.12,
+      0.12
+     ],
+     [
+      0.12,
+      0.15
+     ],
+     [
+      0.15,
+      -0.09
+     ],
+     [
+      0.15,
+      -0.06
+     ],
+     [
+      0.15,
+      -0.03
+     ],
+     [
+      0.15,
+      0.0
+     ],
+     [
+      0.15,
+      0.03
+     ],
+     [
+      0.15,
+      0.06
+     ],
+     [
+      0.15,
+      0.09
+     ],
+     [
+      0.15,
+      0.12
+     ],
+     [
+      0.15,
+      0.15
+     ],
+     [
+      0.18,
+      -0.09
+     ],
+     [
+      0.18,
+      -0.06
+     ],
+     [
+      0.18,
+      -0.03
+     ],
+     [
+      0.18,
+      0.0
+     ],
+     [
+      0.18,
+      0.03
+     ],
+     [
+      0.18,
+      0.06
+     ],
+     [
+      0.18,
+      0.09
+     ],
+     [
+      0.18,
+      0.12
+     ],
+     [
+      0.18,
+      0.15
+     ],
+     [
+      0.21,
+      -0.09
+     ],
+     [
+      0.21,
+      -0.06
+     ],
+     [
+      0.21,
+      -0.03
+     ],
+     [
+      0.21,
+      0.0
+     ],
+     [
+      0.21,
+      0.03
+     ],
+     [
+      0.21,
+      0.06
+     ],
+     [
+      0.21,
+      0.09
+     ],
+     [
+      0.21,
+      0.12
+     ],
+     [
+      0.21,
+      0.15
+     ],
+     [
+      0.24,
+      -0.09
+     ],
+     [
+      0.24,
+      -0.06
+     ],
+     [
+      0.24,
+      -0.03
+     ],
+     [
+      0.24,
+      0.0
+     ],
+     [
+      0.24,
+      0.03
+     ],
+     [
+      0.24,
+      0.06
+     ],
+     [
+      0.24,
+      0.09
+     ],
+     [
+      0.24,
+      0.12
+     ],
+     [
+      0.24,
+      0.15
+     ],
+     [
+      0.27,
+      -0.09
+     ],
+     [
+      0.27,
+      -0.06
+     ],
+     [
+      0.27,
+      -0.03
+     ],
+     [
+      0.27,
+      0.0
+     ],
+     [
+      0.27,
+      0.03
+     ],
+     [
+      0.27,
+      0.06
+     ],
+     [
+      0.27,
+      0.09
+     ],
+     [
+      0.27,
+      0.12
+     ],
+     [
+      0.27,
+      0.15
+     ],
+     [
+      0.3,
+      -0.09
+     ],
+     [
+      0.3,
+      -0.06
+     ],
+     [
+      0.3,
+      -0.03
+     ],
+     [
+      0.3,
+      0.0
+     ],
+     [
+      0.3,
+      0.03
+     ],
+     [
+      0.3,
+      0.06
+     ],
+     [
+      0.3,
+      0.09
+     ],
+     [
+      0.3,
+      0.12
+     ],
+     [
+      0.3,
+      0.15
+     ],
+     [
+      0.33,
+      -0.09
+     ],
+     [
+      0.33,
+      -0.06
+     ],
+     [
+      0.33,
+      -0.03
+     ],
+     [
+      0.33,
+      0.0
+     ],
+     [
+      0.33,
+      0.03
+     ],
+     [
+      0.33,
+      0.06
+     ],
+     [
+      0.33,
+      0.09
+     ],
+     [
+      0.33,
+      0.12
+     ],
+     [
+      0.33,
+      0.15
+     ],
+     [
+      0.36,
+      -0.09
+     ],
+     [
+      0.36,
+      -0.06
+     ],
+     [
+      0.36,
+      -0.03
+     ],
+     [
+      0.36,
+      0.0
+     ],
+     [
+      0.36,
+      0.03
+     ],
+     [
+      0.36,
+      0.06
+     ],
+     [
+      0.36,
+      0.09
+     ],
+     [
+      0.36,
+      0.12
+     ],
+     [
+      0.36,
+      0.15
+     ]
+    ],
+    "source_positions_xy_m": {
+     "0": [
+      0.27214077952816174,
+      -0.00473233177882567
+     ],
+     "1": [
+      0.3412099703908898,
+      -0.02952402819032472
+     ],
+     "2": [
+      0.19521355430589948,
+      0.03510002558047145
+     ],
+     "3": [
+      0.2668712242645124,
+      0.015563925380444633
+     ],
+     "4": [
+      0.3376581300798624,
+      -0.022478403809440897
+     ],
+     "5": [
+      0.3634223681996736,
+      0.025171705546685026
+     ],
+     "6": [
+      0.34045430555266304,
+      0.013637825719106302
+     ],
+     "7": [
+      0.2475468637640474,
+      0.03293677308928586
+     ],
+     "8": [
+      0.16157145520365176,
+      0.03581079822052005
+     ],
+     "9": [
+      0.26756161853970906,
+      0.05466151623334266
+     ]
+    },
+    "nearest_sources": 10,
+    "min_shift_m": 0.005,
+    "max_shift_m": 0.12,
+    "planner": "f1w",
+    "time_scales": [
+     1.0
+    ],
+    "wide_blend": true
+   },
+   "interaction_location": {
+    "shifts_cm": [
+     [
+      3,
+      0
+     ],
+     [
+      -3,
+      0
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      -3
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      -5,
+      0
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      -5
+     ]
+    ],
+    "d_interact_m": 0.2,
+    "ramp_frames": 45
+   },
+   "interaction_timing": {
+    "offsets_frames": [
+     -10,
+     10
+    ]
+   }
+  },
+  "video_encoding": {
+   "vcodec": "h264",
+   "pix_fmt": "yuv444p",
+   "crf": 12,
+   "preset": "fast",
+   "g": 2
+  },
+  "work_dir": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_runs/r03_openarm_v1",
+  "plan": {
+   "blend_space": "joint_fallback",
+   "action_aware_bounds": true,
+   "action_bound_margin_rad": 0.005
+  }
+ },
+ "source_state_sha256": "a80d1686cc997ee14914f1fde1ac36f5174cbc944762fd28b1b53e23b96e3ad8",
+ "source_action_sha256": "dcf41a49d7508447e40f76e12649273edffd709f77f294b4e9cd29e51fb128cc",
+ "replay_envelope": {
+  "speed": [
+   1.6601412557065487,
+   1.4188152551651,
+   1.0993963479995728,
+   3.612746000289917,
+   1.0161203518509865,
+   1.4835476875305176,
+   0.9134405851364136,
+   0.9957289695739746,
+   0.8109703660011292,
+   0.6160569190979004,
+   0.9862804412841797,
+   1.1771965026855469,
+   1.1123228073120117,
+   0.720231500454247
+  ],
+  "accel": [
+   30.697561986744404,
+   24.686308298259974,
+   10.774245858192444,
+   78.44012975692749,
+   15.644748508930206,
+   23.89928698539734,
+   19.14914846420288,
+   17.90395975112915,
+   13.982731103897095,
+   10.175952315330505,
+   18.58588457107544,
+   11.860916018486023,
+   19.07780170440674,
+   13.463777303695679
+  ],
+  "min_z_m": 0.2684644684541089,
+  "episodes": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "code_sha256": {
+  "generate.py": "49ceeff6f5944fb2a2cfc85bc680edcb4b058f77d07e192f14ad1db090e6547e",
+  "data.py": "e66b17925266a5946946e62bb5f3ba7e12ea5f59fc34cb0497600e3458ef3083",
+  "workspace_plan.py": "c4c0dc3c169239dcf2118082da66d0241c10cf6a6f3cccff3833166cae3e37cd",
+  "wrist.py": "ed2eefc5ac258868fa292ff407c8d277322350382be1da2342e2d39258f9a80b",
+  "calibrate.py": "f47443a42bf106a479c25a0a49ba24917a603c475df822af9d251699429c96f5",
+  "robot.py": "77df0fb6f1e5d49e637134910ca3922b6c3705001cacd439981cc6be59c36340",
+  "distortion.py": "15eaf6258dd9f13747881563d291f26d669ed3cc550bc719d1cace4c07023217",
+  "verify.py": "08145425119e183c159390acc7b309387009f7caf49999639092ee8458e2fcdc",
+  "compare_video.py": "203b263669b2f53d3eec7acbd94d12c884c6728b8eb2843a6a7915353cf24e4b",
+  "why.py": "e46124d5c422f5cb2924d53f1d0e833e634fad42e576ae49a283f9d22f2b9a9a",
+  "timing.py": "2cead4545c2d260e42938cd0035499e4adb48950c4157c0032f408f2cb513e20",
+  "segment.py": "62da0e7b57c37fcf4038c2cffee2240d639a8526c290de69875d82d9523e7f7c",
+  "checks.py": "f15c43a3da4f8ac3a3485dbe3db8c903aec636bd4326016bff90efb2e930ebd3",
+  "build.py": "ea39019bb96effccc0fe17b008ccfaaa103770e89016dfd1d997fc033aa62b79",
+  "__init__.py": "45958242be26abf721dd965f3e400243274270f59e59141c7af34e2f17d2fe11",
+  "render_stage.py": "45f933722fd79ba4df46480786da8e2d9f2f32db65204d6706ba575aac94770f",
+  "cli.py": "78f58abb061d4724e834cb0519321770179c032e468be8c30554e1cb9d811973",
+  "target_plan.py": "32e9ad40641212109222c3862232f11b813efcf772fd17f7b077401be7901211",
+  "bench.py": "f162069ef92bb12ca7341dfefe88df1d018a4d6a8164bd85d45bd5a218a1512e",
+  "mesh.py": "bba0beaee2a92f9266a8640957187cc8e794f53720d5a8665f8b638a8ad42af9",
+  "camera.py": "1f8ccd256a8095bf4123cc89172ecc0d9149de33107b37e1cc566a77d4a05e60",
+  "plan.py": "d245343ffa6352db3a9e10dd7d4fc0f3caf88e7c74b3d08efb7ce607ecf71d25",
+  "recon.py": "632090d52014bc8b34d33f538e88da902bee3facb08431afb24b569a19a126e3",
+  "render.py": "781d83943e095ff9a0e59db4dd610996f994bf80e9c3ee6a9ee2e4d6da22b3f6",
+  "__main__.py": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3",
+  "handover_timing.py": "f6b51bde5c1ca5d07cdf3f12829ecc0c838500e9e05ec384c44ff604af845352",
+  "context.py": "be0c53056499b445773bbafeed19e61bbe366ccf95ce422581e7f9499d6b4a2e"
+ },
+ "camera_calibration": {
+  "params7": [
+   0.051979558879318974,
+   0.009296965716161678,
+   0.016824596205050276,
+   -0.030949290021156494,
+   0.0007019861918872001,
+   -0.009926881310387962,
+   0.020121677009833045
+  ],
+  "fit_iou": {
+   "initial": 0.2933454202569049,
+   "fitted": 0.35767260647338367
+  },
+  "heldout_iou": {
+   "initial": 0.30684290542489007,
+   "fitted": 0.36054536416417077
+  },
+  "heldout_frames_improved": 0.9523809523809523,
+  "n_fit": 23,
+  "n_heldout": 42,
+  "runtime_s": 144.43496870994568,
+  "adopted": true,
+  "rule": "adopted if held-out IoU improves by > 0.005; confirm with `sfagen bench --compare-camera`"
+ },
+ "lag": -0.5,
+ "reconstruction_sha256": "4bb1074887966ec937f7ee8d24f9182a7072c52b0bf89c1319035406a23c8c6c",
+ "finished_unix": 1794794356.8497567,
+ "candidates": 62,
+ "passed": 35,
+ "candidate_sha256": {
+  "can_target_021": "fc4f23748cd8f4b9ae8eaa88d567d5d89a94abd2120d3f5bd9675cde345ed54c",
+  "can_target_022": "ef6ba0fba63aa6a55e1495c1ce2f491a6f2b1bed0290f1c0e466fb7662f9c975",
+  "can_target_028": "fa1daca08ce3de1a7259da8385996b2da2b9b56eeec4cffd52d6b8f5e9bef95c",
+  "can_target_029": "63d9552a01bda81a656a77cd215588a9a85e91d476b333f6e8675e5637482153",
+  "can_target_030": "9dbe093cb2111da9943f8722ecf559c08c50401de9ae7d82a898a4394a20a0fb",
+  "can_target_031": "f9712d8ae449ba3776f6a5258f7d7b745fcd3b4c5cceb8503665df258ce45b2c",
+  "can_target_032": "cf662f49e6dd946b65b1efe36ad875f01a08a723b1ab3f52371246ab05dab105",
+  "can_target_033": "16119213d046d6ba45199c43a6dbd03268eb162356d89b848cfb9ba4b8d8389d",
+  "can_target_036": "da8eb58a92753b1ee0b42b59c7bda510dbdfd207276a7ab94642df905100da3b",
+  "can_target_037": "57c4ab8c1956e536e3a502e8b6344145c093a2ceb2e92d04f96c86e706d70547",
+  "can_target_038": "15eb7ba7e0ad23efbe182e638d5f9d88e8ff1a4978b8546c18158dc3297ca18d",
+  "can_target_039": "0c872423bade676a6efe02869485acb71062b53758862c0892f9db708de22880",
+  "can_target_040": "5881edf66469b6e8e68e7d9347dfffb9de5494ae8fe71963d88c655579444c68",
+  "can_target_041": "8b6d18ea82765771ffe6a212e1e23ec016ec2abe8ad70197cda7c50b1352c4d9",
+  "can_target_042": "75bb5dee21d550fc734e6384e655ddb6f230e24abc3ec066466999f675bbe5c3",
+  "can_target_043": "543e8c3e3a36b22bfe09007a623eef80839fa8181009dc75c9847592b263e17e",
+  "can_target_045": "5b6022799a185b56ced153d51d80efd9194287ec779462436e1f5be4de5aa181",
+  "can_target_046": "c402946e9f4a8b8bcc39f39980ca0d8b9fd1fa72e5e1e78d925c3b715717a78e",
+  "can_target_047": "1390c215b7faf7682214b74ccde66e98bb310fbe4c5516c3e006b6fa54ffe390",
+  "can_target_048": "51fb719aa1760bf5048fc8d69f8242400ae7b16aa785ff2600568aff6b2cca67",
+  "can_target_049": "07f5f6386a37fcc9aab1c974485aee1618db1e88bfe2c7211fc2904a60502f12",
+  "can_target_050": "d3df29469ca41e677513f078678c9d4b809190a1995c1d4a82b338cc9b985d95",
+  "can_target_051": "658066bf11f91d8c4171653c28b74324e7ab64ea8afaa5be4a47a92717c2337a",
+  "can_target_052": "8d50e884d3347fe593841039b34f7926d5dfaf4448aa8c3e5d697a56f0bd2939",
+  "can_target_054": "1db95fc503f97caa38e2385f03fbf01cf82754afeb23e4b45ec40f4976163ff2",
+  "can_target_055": "43d39697136ffcab95534f75d5d5c1e1371ac35766a54eea0bf8e3569c42e93f",
+  "can_target_056": "5e7b3039121307fd1c1b731f5cb7f4d20f057b4338c4f5d39fd83d45e2a26c34",
+  "can_target_057": "109eafcf42c4c8dd930827fdf573b84ee0cf807244dec2c80e090b27697daa9a",
+  "can_target_058": "7fc8f7091bf36fd735389da0a912d5793d306821d63cf60368120b1ebe1be371",
+  "can_target_059": "18754a0c3d50df704f10f9d29d337925d40187b1b08820f6b7448d4e6a4fef98",
+  "can_target_060": "f17af0ab1abf0c4386e20790668f11757a6d993031402ec485f506cfe8579cf0",
+  "can_target_061": "82226cf8e66e8187640adb5eed71b798a7b3ef7c5a212d2486f0f876b8594367",
+  "can_target_063": "dc8013f85cf97fcf376aec9c57c4bd6c3e992a61b58674dd07168914d21d5663",
+  "can_target_064": "cf2851db43deb3ddaf2b0d3ee43560f214956177b2795c9d4fb0269b1b031778",
+  "can_target_065": "6d0f81d5b5cc7dd64841e2681268682d19a82565c9931f4f5082b2cff8a4c208",
+  "can_target_066": "3b62856590a197f23e4828d1b75805d3b745c50109a8a1785113d58a1189fde1",
+  "can_target_067": "d5ed6df2f28f67cccd09c7b0eb8b1044bc38f164506f203c39c59435eb0ce865",
+  "can_target_068": "c75cb36718ed322d0bac35ae08b377b1d71d6d677851f162f6c0a18fff6568ef",
+  "can_target_069": "5137df838716b1c50aede6e05affddc282fd458f68c223c12cb5e75e49712f8e",
+  "can_target_070": "d6bb6c05c2a84059dc03ced1f06a768fd633c2d1e2d55ded06db02a4d8a422c0",
+  "can_target_073": "c8ca257513bf9ac3863026a56ea4ecb1cc389fe854c0a4244393bc7611c05cd0",
+  "can_target_074": "3fe4fc8c4a95c5410d07232cb2bb6a51c11e02b26d5a93beb3464478fcdb6277",
+  "can_target_075": "ceaad612a6bde79d57c3d64975d63014b806e440a25444eea0cf63dbcbd6f389",
+  "can_target_076": "d603c8fcbae5aec5e733c928f69922567c0099156d3ca207ca85623313597086",
+  "can_target_077": "1bb45167a1df891119c4716a1eb0061ea566c792617cca688f22f8aa546c3725",
+  "can_target_078": "183ae653ce6da8b5323a9e5d44bd92d318aeb60708c778fbbf88467ff3e93ed6",
+  "can_target_082": "48f2238ea6c57ca376a9e297521473cd9ae01a0eed9bcdb71dd8973843a92c0a",
+  "can_target_083": "21a6869e972a42f2928559a582e2bbedb7225c706786b13f85e079b9f6574f8f",
+  "can_target_084": "9f5eebfe0361270b182184366af1f5c552a99889e2618448748ba4976f6c5930",
+  "can_target_085": "1086285627b349f209d361d2805688f1727fe283cd6e3e50f6de869179f3b7db",
+  "can_target_086": "a778515a2895a2b7cf2ce4ad6ce39666cc5d7e9f9461d1e54931f71a9feb5e4c",
+  "can_target_087": "432b27af603b3889a9dfe51d985e920bff221ce8a91b2fa748ae7c6408f3a55b",
+  "interact_x+3_y+0_z+0": "199dc03306e6b708e8b2cf649e444b9b0fabdfb6d479ff23e8497c61617b4e15",
+  "interact_x-3_y+0_z+0": "0042eb9ad27f79fc70785682321a7ff729ab16a1b858297221d64868c7f789ca",
+  "interact_x+0_y+3_z+0": "b3f2c58933c317b34eecc49f31e311882c0089cf4948c3ed55d79a194442bd31",
+  "interact_x+0_y-3_z+0": "f40837cf5acc7e73c82a3617040f68bd63004f67553b6b5440ef57667348386b",
+  "interact_x+5_y+0_z+0": "6c351570ab15ea7668a3a239b6f77654d11c088dbe417794cbd0b5c26650fcc6",
+  "interact_x-5_y+0_z+0": "f5fbaaa0a4dbf68afe1c4c74299424f3fb704ea71882d84369eda8331fe89ff3",
+  "interact_x+0_y+5_z+0": "04cdd6ae83d3ea73baf38c771eb2a2252214aa8cd68becc45f078285ebbede66",
+  "interact_x+0_y-5_z+0": "e7bbd33e685651aa07cc50ac8cd043a013d234bca9158dff5bc7c57cc3f9b49a",
+  "timing_-10": "ac07855e7ca10c315e6acc1fe365deeeea15b3d55ae16fc79f156feb5a99afbe",
+  "timing_+10": "66c4eab682f8c068764bfaa72b51a44dccec808c6417064797c25a73eb207804"
+ }
+}

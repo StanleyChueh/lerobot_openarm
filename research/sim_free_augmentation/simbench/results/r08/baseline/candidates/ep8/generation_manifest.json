@@ -1,0 +1,879 @@
+{
+ "complete": true,
+ "episode": 8,
+ "started_unix": 1794794433.0476468,
+ "source": {
+  "repo_id": "ethanCSL/openarm_pringles_lerobot_real_10_v00",
+  "revision": "cebdee98115ab6827a4ec2655335c536b5dd085b",
+  "root": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/snapshots/cebdee98115ab6827a4ec2655335c536b5dd085b",
+  "body_camera": "observation.images.body_cam",
+  "wrist_cameras": [
+   "observation.images.wrist_cam",
+   "observation.images.right_wrist_cam"
+  ],
+  "wrist_camera_arms": {
+   "observation.images.wrist_cam": "L",
+   "observation.images.right_wrist_cam": "R"
+  },
+  "episodes": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "wrist_camera_lags": {
+   "observation.images.wrist_cam": -0.25,
+   "observation.images.right_wrist_cam": -1.0
+  }
+ },
+ "config": {
+  "source": {
+   "repo_id": "ethanCSL/openarm_pringles_lerobot_real_10_v00",
+   "revision": "cebdee98115ab6827a4ec2655335c536b5dd085b",
+   "root": "/home/stanley/.cache/huggingface/lerobot/hub/datasets--ethanCSL--openarm_pringles_lerobot_real_10_v00/snapshots/cebdee98115ab6827a4ec2655335c536b5dd085b",
+   "body_camera": "observation.images.body_cam",
+   "wrist_cameras": [
+    "observation.images.wrist_cam",
+    "observation.images.right_wrist_cam"
+   ],
+   "wrist_camera_arms": {
+    "observation.images.wrist_cam": "L",
+    "observation.images.right_wrist_cam": "R"
+   },
+   "episodes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "wrist_camera_lags": {
+    "observation.images.wrist_cam": -0.25,
+    "observation.images.right_wrist_cam": -1.0
+   }
+  },
+  "robot": {
+   "urdf": "/home/stanley/Stanley_ws/lerobot_openarm/model/openarm_description.urdf",
+   "package_dirs": [
+    "/home/stanley/Stanley_ws/lerobot_openarm/model/meshes"
+   ],
+   "arms": {
+    "R": {
+     "joints": [
+      "openarm_right_joint1",
+      "openarm_right_joint2",
+      "openarm_right_joint3",
+      "openarm_right_joint4",
+      "openarm_right_joint5",
+      "openarm_right_joint6",
+      "openarm_right_joint7"
+     ],
+     "state_indices": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12
+     ],
+     "tcp_frame": "openarm_right_hand_tcp",
+     "gripper": {
+      "state_index": 14,
+      "open_raw": -1.298,
+      "closed_raw": 0.0,
+      "finger_joints": [
+       "openarm_right_finger_joint1",
+       "openarm_right_finger_joint2"
+      ],
+      "finger_open": 0.044,
+      "close_threshold": 0.5
+     }
+    },
+    "L": {
+     "joints": [
+      "openarm_left_joint1",
+      "openarm_left_joint2",
+      "openarm_left_joint3",
+      "openarm_left_joint4",
+      "openarm_left_joint5",
+      "openarm_left_joint6",
+      "openarm_left_joint7"
+     ],
+     "state_indices": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13
+     ],
+     "tcp_frame": "openarm_left_hand_tcp",
+     "gripper": {
+      "state_index": 15,
+      "open_raw": 1.2121,
+      "closed_raw": 0.0,
+      "finger_joints": [
+       "openarm_left_finger_joint1",
+       "openarm_left_finger_joint2"
+      ],
+      "finger_open": 0.044,
+      "close_threshold": 0.5
+     }
+    }
+   }
+  },
+  "camera": {
+   "intrinsics": {
+    "fx": 607.22,
+    "fy": 607.22,
+    "cx": 326.4,
+    "cy": 238.7,
+    "width": 640,
+    "height": 480
+   },
+   "extrinsics": {
+    "position": [
+     0.05621,
+     -0.00305,
+     0.83062
+    ],
+    "quat_wxyz": [
+     0.1872,
+     -0.68244,
+     0.69543,
+     -0.1249
+    ]
+   },
+   "note": "initial guess (OpenArm body camera, IsaacLab mount); refined per rig by `sfagen calibrate`"
+  },
+  "reconstruction": {
+   "lag_default": -1.75,
+   "lag_scan": true,
+   "lag_scan_range": [
+    -4.0,
+    1.51,
+    0.25
+   ],
+   "foreground_threshold": 30,
+   "robot_masks": "sam2",
+   "sam2_keyframe_every": 15,
+   "sam2_exclude_links": [
+    "link0",
+    "link1",
+    "link2",
+    "link3"
+   ],
+   "lag_method": "photometric",
+   "lag_candidates": [
+    -3.0,
+    0.51,
+    0.25
+   ]
+  },
+  "render": {
+   "tm_erode": 21,
+   "despeckle": true,
+   "part_fill": false,
+   "plate_adapt": 10,
+   "object_mask_grow": 60
+  },
+  "checks": {
+   "visibility": "partial",
+   "min_visible_fraction": 0.5,
+   "speed_ratio": 1.25,
+   "accel_ratio": 1.5,
+   "clearance_floor_m": 0.02,
+   "hand_tol_m": 0.005,
+   "table_tol_m": 0.01,
+   "skip_collision_links": [
+    "link0",
+    "link1"
+   ],
+   "table_skip_links": [
+    "link0",
+    "link1",
+    "link2"
+   ],
+   "hand_floor_m": 0.1,
+   "fast_reject": true,
+   "support_check": "appearance",
+   "plate_appearance_space": "lab",
+   "fixed_duration": true,
+   "speed_similarity": [
+    0.8,
+    1.25
+   ]
+  },
+  "calibration": {
+   "search_deg": 15,
+   "search_m": 0.15,
+   "search_samples": 400,
+   "maxfev": 900
+  },
+  "objects": {
+   "can": {
+    "grasped_by": "R",
+    "grasp_index": 0,
+    "proxy": {
+     "type": "cylinder",
+     "radius": 0.0375,
+     "length": 0.23,
+     "axis": "vertical"
+    }
+   }
+  },
+  "variations": {
+   "object_targets": {
+    "object": "can",
+    "positions_xy_m": [
+     [
+      0.09,
+      -0.09
+     ],
+     [
+      0.09,
+      -0.06
+     ],
+     [
+      0.09,
+      -0.03
+     ],
+     [
+      0.09,
+      0.0
+     ],
+     [
+      0.09,
+      0.03
+     ],
+     [
+      0.09,
+      0.06
+     ],
+     [
+      0.09,
+      0.09
+     ],
+     [
+      0.09,
+      0.12
+     ],
+     [
+      0.09,
+      0.15
+     ],
+     [
+      0.12,
+      -0.09
+     ],
+     [
+      0.12,
+      -0.06
+     ],
+     [
+      0.12,
+      -0.03
+     ],
+     [
+      0.12,
+      0.0
+     ],
+     [
+      0.12,
+      0.03
+     ],
+     [
+      0.12,
+      0.06
+     ],
+     [
+      0.12,
+      0.09
+     ],
+     [
+      0.12,
+      0.12
+     ],
+     [
+      0.12,
+      0.15
+     ],
+     [
+      0.15,
+      -0.09
+     ],
+     [
+      0.15,
+      -0.06
+     ],
+     [
+      0.15,
+      -0.03
+     ],
+     [
+      0.15,
+      0.0
+     ],
+     [
+      0.15,
+      0.03
+     ],
+     [
+      0.15,
+      0.06
+     ],
+     [
+      0.15,
+      0.09
+     ],
+     [
+      0.15,
+      0.12
+     ],
+     [
+      0.15,
+      0.15
+     ],
+     [
+      0.18,
+      -0.09
+     ],
+     [
+      0.18,
+      -0.06
+     ],
+     [
+      0.18,
+      -0.03
+     ],
+     [
+      0.18,
+      0.0
+     ],
+     [
+      0.18,
+      0.03
+     ],
+     [
+      0.18,
+      0.06
+     ],
+     [
+      0.18,
+      0.09
+     ],
+     [
+      0.18,
+      0.12
+     ],
+     [
+      0.18,
+      0.15
+     ],
+     [
+      0.21,
+      -0.09
+     ],
+     [
+      0.21,
+      -0.06
+     ],
+     [
+      0.21,
+      -0.03
+     ],
+     [
+      0.21,
+      0.0
+     ],
+     [
+      0.21,
+      0.03
+     ],
+     [
+      0.21,
+      0.06
+     ],
+     [
+      0.21,
+      0.09
+     ],
+     [
+      0.21,
+      0.12
+     ],
+     [
+      0.21,
+      0.15
+     ],
+     [
+      0.24,
+      -0.09
+     ],
+     [
+      0.24,
+      -0.06
+     ],
+     [
+      0.24,
+      -0.03
+     ],
+     [
+      0.24,
+      0.0
+     ],
+     [
+      0.24,
+      0.03
+     ],
+     [
+      0.24,
+      0.06
+     ],
+     [
+      0.24,
+      0.09
+     ],
+     [
+      0.24,
+      0.12
+     ],
+     [
+      0.24,
+      0.15
+     ],
+     [
+      0.27,
+      -0.09
+     ],
+     [
+      0.27,
+      -0.06
+     ],
+     [
+      0.27,
+      -0.03
+     ],
+     [
+      0.27,
+      0.0
+     ],
+     [
+      0.27,
+      0.03
+     ],
+     [
+      0.27,
+      0.06
+     ],
+     [
+      0.27,
+      0.09
+     ],
+     [
+      0.27,
+      0.12
+     ],
+     [
+      0.27,
+      0.15
+     ],
+     [
+      0.3,
+      -0.09
+     ],
+     [
+      0.3,
+      -0.06
+     ],
+     [
+      0.3,
+      -0.03
+     ],
+     [
+      0.3,
+      0.0
+     ],
+     [
+      0.3,
+      0.03
+     ],
+     [
+      0.3,
+      0.06
+     ],
+     [
+      0.3,
+      0.09
+     ],
+     [
+      0.3,
+      0.12
+     ],
+     [
+      0.3,
+      0.15
+     ],
+     [
+      0.33,
+      -0.09
+     ],
+     [
+      0.33,
+      -0.06
+     ],
+     [
+      0.33,
+      -0.03
+     ],
+     [
+      0.33,
+      0.0
+     ],
+     [
+      0.33,
+      0.03
+     ],
+     [
+      0.33,
+      0.06
+     ],
+     [
+      0.33,
+      0.09
+     ],
+     [
+      0.33,
+      0.12
+     ],
+     [
+      0.33,
+      0.15
+     ],
+     [
+      0.36,
+      -0.09
+     ],
+     [
+      0.36,
+      -0.06
+     ],
+     [
+      0.36,
+      -0.03
+     ],
+     [
+      0.36,
+      0.0
+     ],
+     [
+      0.36,
+      0.03
+     ],
+     [
+      0.36,
+      0.06
+     ],
+     [
+      0.36,
+      0.09
+     ],
+     [
+      0.36,
+      0.12
+     ],
+     [
+      0.36,
+      0.15
+     ]
+    ],
+    "source_positions_xy_m": {
+     "0": [
+      0.27214077952816174,
+      -0.00473233177882567
+     ],
+     "1": [
+      0.3412099703908898,
+      -0.02952402819032472
+     ],
+     "2": [
+      0.19521355430589948,
+      0.03510002558047145
+     ],
+     "3": [
+      0.2668712242645124,
+      0.015563925380444633
+     ],
+     "4": [
+      0.3376581300798624,
+      -0.022478403809440897
+     ],
+     "5": [
+      0.3634223681996736,
+      0.025171705546685026
+     ],
+     "6": [
+      0.34045430555266304,
+      0.013637825719106302
+     ],
+     "7": [
+      0.2475468637640474,
+      0.03293677308928586
+     ],
+     "8": [
+      0.16157145520365176,
+      0.03581079822052005
+     ],
+     "9": [
+      0.26756161853970906,
+      0.05466151623334266
+     ]
+    },
+    "nearest_sources": 10,
+    "min_shift_m": 0.005,
+    "max_shift_m": 0.12,
+    "planner": "f1w",
+    "time_scales": [
+     1.0
+    ],
+    "wide_blend": true
+   },
+   "interaction_location": {
+    "shifts_cm": [
+     [
+      3,
+      0
+     ],
+     [
+      -3,
+      0
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      -3
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      -5,
+      0
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      -5
+     ]
+    ],
+    "d_interact_m": 0.2,
+    "ramp_frames": 45
+   },
+   "interaction_timing": {
+    "offsets_frames": [
+     -10,
+     10
+    ]
+   }
+  },
+  "video_encoding": {
+   "vcodec": "h264",
+   "pix_fmt": "yuv444p",
+   "crf": 12,
+   "preset": "fast",
+   "g": 2
+  },
+  "work_dir": "/home/stanley/Stanley_ws/lerobot_openarm_simbench/artifacts/simbench_runs/r03_openarm_v1",
+  "plan": {
+   "blend_space": "joint_fallback",
+   "action_aware_bounds": true,
+   "action_bound_margin_rad": 0.005
+  }
+ },
+ "source_state_sha256": "b07ecb0cf344978f938ac7c71d6f8a58e5dbbe0289d4dcb1cc977174aa154042",
+ "source_action_sha256": "22660a627e123788b793505992553f90f79baa84e4da9c15e5574b75ab768538",
+ "replay_envelope": {
+  "speed": [
+   1.6601412557065487,
+   1.4188152551651,
+   1.0993963479995728,
+   3.612746000289917,
+   1.0161203518509865,
+   1.4835476875305176,
+   0.9134405851364136,
+   0.9957289695739746,
+   0.8109703660011292,
+   0.6160569190979004,
+   0.9862804412841797,
+   1.1771965026855469,
+   1.1123228073120117,
+   0.720231500454247
+  ],
+  "accel": [
+   30.697561986744404,
+   24.686308298259974,
+   10.774245858192444,
+   78.44012975692749,
+   15.644748508930206,
+   23.89928698539734,
+   19.14914846420288,
+   17.90395975112915,
+   13.982731103897095,
+   10.175952315330505,
+   18.58588457107544,
+   11.860916018486023,
+   19.07780170440674,
+   13.463777303695679
+  ],
+  "min_z_m": 0.2684644684541089,
+  "episodes": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "code_sha256": {
+  "generate.py": "49ceeff6f5944fb2a2cfc85bc680edcb4b058f77d07e192f14ad1db090e6547e",
+  "data.py": "e66b17925266a5946946e62bb5f3ba7e12ea5f59fc34cb0497600e3458ef3083",
+  "workspace_plan.py": "c4c0dc3c169239dcf2118082da66d0241c10cf6a6f3cccff3833166cae3e37cd",
+  "wrist.py": "ed2eefc5ac258868fa292ff407c8d277322350382be1da2342e2d39258f9a80b",
+  "calibrate.py": "f47443a42bf106a479c25a0a49ba24917a603c475df822af9d251699429c96f5",
+  "robot.py": "77df0fb6f1e5d49e637134910ca3922b6c3705001cacd439981cc6be59c36340",
+  "distortion.py": "15eaf6258dd9f13747881563d291f26d669ed3cc550bc719d1cace4c07023217",
+  "verify.py": "08145425119e183c159390acc7b309387009f7caf49999639092ee8458e2fcdc",
+  "compare_video.py": "203b263669b2f53d3eec7acbd94d12c884c6728b8eb2843a6a7915353cf24e4b",
+  "why.py": "e46124d5c422f5cb2924d53f1d0e833e634fad42e576ae49a283f9d22f2b9a9a",
+  "timing.py": "2cead4545c2d260e42938cd0035499e4adb48950c4157c0032f408f2cb513e20",
+  "segment.py": "62da0e7b57c37fcf4038c2cffee2240d639a8526c290de69875d82d9523e7f7c",
+  "checks.py": "f15c43a3da4f8ac3a3485dbe3db8c903aec636bd4326016bff90efb2e930ebd3",
+  "build.py": "ea39019bb96effccc0fe17b008ccfaaa103770e89016dfd1d997fc033aa62b79",
+  "__init__.py": "45958242be26abf721dd965f3e400243274270f59e59141c7af34e2f17d2fe11",
+  "render_stage.py": "45f933722fd79ba4df46480786da8e2d9f2f32db65204d6706ba575aac94770f",
+  "cli.py": "78f58abb061d4724e834cb0519321770179c032e468be8c30554e1cb9d811973",
+  "target_plan.py": "32e9ad40641212109222c3862232f11b813efcf772fd17f7b077401be7901211",
+  "bench.py": "f162069ef92bb12ca7341dfefe88df1d018a4d6a8164bd85d45bd5a218a1512e",
+  "mesh.py": "bba0beaee2a92f9266a8640957187cc8e794f53720d5a8665f8b638a8ad42af9",
+  "camera.py": "1f8ccd256a8095bf4123cc89172ecc0d9149de33107b37e1cc566a77d4a05e60",
+  "plan.py": "d245343ffa6352db3a9e10dd7d4fc0f3caf88e7c74b3d08efb7ce607ecf71d25",
+  "recon.py": "632090d52014bc8b34d33f538e88da902bee3facb08431afb24b569a19a126e3",
+  "render.py": "781d83943e095ff9a0e59db4dd610996f994bf80e9c3ee6a9ee2e4d6da22b3f6",
+  "__main__.py": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3",
+  "handover_timing.py": "f6b51bde5c1ca5d07cdf3f12829ecc0c838500e9e05ec384c44ff604af845352",
+  "context.py": "be0c53056499b445773bbafeed19e61bbe366ccf95ce422581e7f9499d6b4a2e"
+ },
+ "camera_calibration": {
+  "params7": [
+   0.051979558879318974,
+   0.009296965716161678,
+   0.016824596205050276,
+   -0.030949290021156494,
+   0.0007019861918872001,
+   -0.009926881310387962,
+   0.020121677009833045
+  ],
+  "fit_iou": {
+   "initial": 0.2933454202569049,
+   "fitted": 0.35767260647338367
+  },
+  "heldout_iou": {
+   "initial": 0.30684290542489007,
+   "fitted": 0.36054536416417077
+  },
+  "heldout_frames_improved": 0.9523809523809523,
+  "n_fit": 23,
+  "n_heldout": 42,
+  "runtime_s": 144.43496870994568,
+  "adopted": true,
+  "rule": "adopted if held-out IoU improves by > 0.005; confirm with `sfagen bench --compare-camera`"
+ },
+ "lag": -0.5,
+ "reconstruction_sha256": "551599727b79367e99ae989ee9a458b13c68bf620aaf1cd8a85659316ba40b07",
+ "finished_unix": 1794794453.6682837,
+ "candidates": 56,
+ "passed": 23,
+ "candidate_sha256": {
+  "can_target_001": "9e8100fb0e0629fd4f37c6d5081d4d0493ea940c653ac71e3212e041356d0b16",
+  "can_target_002": "a23959987a5cf29743dac14777bca2c15d64d15202b639c4c63a398836d1d1e7",
+  "can_target_003": "c72b7b6eb0bf8abddb953fb895065858d785de7768d79f54f8241f2f63d7caea",
+  "can_target_004": "ea82e51012a14c5a45d268aa456cc7bdde2487d32a77afa71668b2d06b6e1056",
+  "can_target_005": "dcafb519c39e04109d8bd8056ae1ea15d0c772bc6198a3cfe1d0bb708b1df282",
+  "can_target_006": "618a3496612bcb69b1e0ec21de3d7164e07dccb99c0dd09f47260c03b79367b2",
+  "can_target_007": "182e11b11e9f33134830506e9d3570d91f44da4320df115e2c39b961d674e58a",
+  "can_target_010": "178f46e4a329389d66168324a20ca2327046d01b1a7febb131ac28386c8f0d11",
+  "can_target_011": "368d44464beadaeaae8cb37cde9822bb84c8b0a350c9ae6bb87262ab56953f11",
+  "can_target_012": "93557fa604dfa5af0de896fa8cc28929f30342632fcef0b0b27e0533f56ad528",
+  "can_target_013": "7d6bc75852a3dcaa1166c4b6ca8f29ac4ba48bdf0e3c78fab8272af3de3da2b0",
+  "can_target_014": "90b169cfcccdcfea2271ea32f01dad61d7bc2d01a83bd8e5e11de38db07eff7c",
+  "can_target_015": "c5778f82ff098e68143851ce1f11e3e07854b4e4814c5269b3551b1d86095971",
+  "can_target_016": "c7f1fc07a8258fa9c4135e8d56c2ea41c0740a534ea9d2b745e6d27b4ebe53c9",
+  "can_target_019": "5ed24a05b241f4b1fd3f958e39a8c3144ac00afaca58e754fb10b0fbcb64a274",
+  "can_target_020": "12bd22099f35cf90dc935f421da80849ecc16740c7f933ef435fd2cee2e2ec00",
+  "can_target_021": "57626e605b96118771ba00d1fb55b561c8c679c3be5825c9a21928fcb439059e",
+  "can_target_022": "966cc5f6017cd089762d6567f26d5a692de6f3ac4e751424ef447b4c8b71843f",
+  "can_target_023": "c3a271ab90e4105a84ca3db43b5b3877af20fc7e40b910e8ea68118ef2e47ae6",
+  "can_target_024": "d39d99c5f49020cd0b16b67b2fcde59c76a8cc181bff071375054d62b7981c1a",
+  "can_target_025": "fe3778e8da0fdf7928b3b0af987473cb7d2566a6bf70636d386ede3b0ac59a27",
+  "can_target_026": "700dc532aa3a016e88b87e63f77566747a8fedbb5671338e773e484b5f78f75d",
+  "can_target_028": "fdaccd448571f65f018f188f017b9f9587411bd120085a80a92f090f554a608b",
+  "can_target_029": "1399b7a6fb5fd137f9c4ef28f9d86e1913b5d9dff4229e8a10906d161b846c37",
+  "can_target_030": "745b782f75690cd78aa93d02f46546a56eaab94c78dbb7053f3ae31446f74c4c",
+  "can_target_031": "228d7daf0aa682ff4bf850f6d0bfaa864e07133cd4d2299b6acaeed594261f90",
+  "can_target_032": "859616ed8d50720299d78eeda117ea6178c82b5892fe1aef5c3f32fb70434dc7",
+  "can_target_033": "917ad297d91d0d413c71363a8a40543d2ccf1ac3b803bc4a2aed321e6c68e517",
+  "can_target_034": "ffda6d8494fbd8306f3226fef40e98a45dd30525da9edc75516d43f4edf5dcea",
+  "can_target_035": "0cc8acd6a10446d97969824f7325f72e9c2010ddb2651ac0fa78df33f3fc003f",
+  "can_target_037": "187ccbf9db1a5cfa358eca927dc6e0f57787b393b69432f3300c33bcf4bc023b",
+  "can_target_038": "1c994610eb0031bb6b6f59b098534062258cd3bfacee430cb665e32e2907132c",
+  "can_target_039": "f51f6732a0c2af514ea832afbed95c8974c39ce02a52558a224d23c6afd7a0c6",
+  "can_target_040": "78bf54d20bacccaec5bdef589687dc73417d843a9dd68616fc9ff2663e1743e2",
+  "can_target_041": "8d9e9077ecd62d0eae5c282b5fd703368941602e3e9a4b6a693d4c6922b00eaa",
+  "can_target_042": "c53c4732e89ce491d451b2450d00aada02912a5fd7330e8bf1670c7c8d5fb17b",
+  "can_target_043": "346303202779deeb1c60d3742d692a4d83fbd68b9bb12acb44b3e9f465558857",
+  "can_target_047": "e6e1b183942942f97a216f343a2d2117ce32e761372a11bc8073060f6da72ffd",
+  "can_target_048": "7d313b38f6ccd05d00ff2bc4f9b2c6fbc362827caf9f6030e461aabdea305ba1",
+  "can_target_049": "a2a48c6a1515cc0bbfb05199af26c97a32f570b5ffa2f17b29c3da3435043839",
+  "can_target_050": "43c8ca2ad4c836a3cb30c442e0029e4c8c6c95d7b2826578bb0c03bc9b82328b",
+  "can_target_051": "a105d1979333718b83c2c2f31974f9bc12cbfc3c9ccfc73e94f46f4ebd9d620e",
+  "can_target_052": "e4f308b14d7049541477150300fb0d1ecf5f9307042fba06dfafd307dad13735",
+  "can_target_057": "4d0b1cb55b847a8d7a58665725ac1d36d70f45a57e8a7733c4aed7e28f83c3fd",
+  "can_target_058": "dd1d760d1ad1183896683a12b64e7cce0042741b0277e6080983454747deb591",
+  "can_target_059": "42af5983b8dbd4631c0bf0134135ab89765522a0f931eacf63dd7fbb52f72577",
+  "interact_x+3_y+0_z+0": "71d2feaaebb57cfe1b26426211272eb69b7e00bc9b68cc801d99a71aad499731",
+  "interact_x-3_y+0_z+0": "16dbab208efd7c34c00416d977effed1126f00039d0e8f1a3abe2d446db7c30e",
+  "interact_x+0_y+3_z+0": "d8568ca1427495492619bb3fc0d3b90291e70485b30eb1bad87471c1edf2133b",
+  "interact_x+0_y-3_z+0": "335b12d974131f6960897c742e999c633a43efb178a1e5557146793a1e2f5c00",
+  "interact_x+5_y+0_z+0": "1bdfd2244459c848ca701a6de29f0254e9a31f4522189786f44b0d101800d053",
+  "interact_x-5_y+0_z+0": "22b8db902ef22cf51a3a1959fa5b51650f84c059086d4b5b209940014d3c353c",
+  "interact_x+0_y+5_z+0": "b4773813522487b26cc1ddd5b62d46d0b2db40182d351191922edc6712e21712",
+  "interact_x+0_y-5_z+0": "46a543fc4e5888f87fef0c7242c4718703ec3ce3d962f8910024e10b98ae67e4",
+  "timing_-10": "f82a6a74386bdf8068cc57db7627b77f22d0582238ff6bb1a66be4aa8f0b2a01",
+  "timing_+10": "594a631a8fc89f02bfc23e369eea3179675380c717196e4e14b4ccf38f52f8ab"
+ }
+}

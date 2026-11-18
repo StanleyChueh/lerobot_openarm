@@ -1,6 +1,7 @@
 """sfagen command line. Every stage records wall time and peak GPU memory to <work>/profile.jsonl.
 
   python -m sfagen calibrate  CONFIG [--search]          fit the body camera (once per rig)
+  python -m sfagen calibrate  CONFIG --refine          refine it on the arm masks (contour ICP; needs the R06 mask flags)
   python -m sfagen table      CONFIG                     table height of the rig from all source episodes (once per rig)
   python -m sfagen generate   CONFIG [--episodes 0,1]    reconstruct + plan + replay-check all variations
   python -m sfagen render     CONFIG [--episodes 0,1]    render every passing candidate (body camera)
@@ -81,12 +82,14 @@ def estimate_table(ctx, device):
 def main():
     ap = argparse.ArgumentParser(prog="sfagen"); ap.add_argument("cmd", choices=["calibrate", "table", "generate", "render", "build", "verify", "video", "bench", "run"])
     ap.add_argument("config"); ap.add_argument("--episodes"); ap.add_argument("--device", default="cuda:0"); ap.add_argument("--work-dir")
-    ap.add_argument("--search", action="store_true"); ap.add_argument("--repo-id"); ap.add_argument("--mixed-repo-id")
+    ap.add_argument("--search", action="store_true"); ap.add_argument("--refine", action="store_true"); ap.add_argument("--repo-id"); ap.add_argument("--mixed-repo-id")
     ap.add_argument("--compare", default="camera"); ap.add_argument("--speed", type=int, default=1); ap.add_argument("--keys")
     a = ap.parse_args(); ctx = Context(a.config, a.work_dir); prof = Profiler(ctx.work / "profile.jsonl")
     eps = [int(x) for x in a.episodes.split(",")] if a.episodes else ctx.episodes()
     if a.cmd == "calibrate":
         from . import calibrate
+        if a.refine:
+            prof.stage("calibrate refine (arm-mask contours)", lambda: calibrate.refine(ctx, a.device)); return
         prof.stage("calibrate", lambda: calibrate.run(ctx, a.device, a.search)); return
     if a.cmd == "table":
         prof.stage("table height (all source episodes)", lambda: estimate_table(ctx, a.device)); return

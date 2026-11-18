@@ -105,6 +105,14 @@ class Renderer:
 
     def robust_masks(self, j, lab):
         rec = self.rec; img = rec.F[j].astype(np.int16)
+        if self.cfg.get("trust_masks"):                     # R06: the reconstruction masks as they are, no growth by plate difference
+            cat = np.full((self.H, self.W), -1, np.int64)
+            for c, name in enumerate(self.cats):
+                cat[rec.masks[name][j] > 0] = c
+            return cat
+        if rec.ctx.cfg.get("reconstruction", {}).get("photometric_align"):   # R07: camera auto exposure
+            from .recon import match_exposure
+            img = match_exposure(rec.F[j], rec.plate, lab.cpu().numpy() < 0).astype(np.int16)
         diff = np.abs(img - rec.plate.astype(np.int16)).max(2) > 28
         diff = cv2.morphologyEx(diff.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)) > 0
         labn = lab.cpu().numpy(); rs = np.where(labn >= 0, self.cat_of[np.clip(labn, 0, None)], -1)

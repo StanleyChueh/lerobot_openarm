@@ -1,0 +1,373 @@
+{
+ "cup_L": {
+  "reference": "true camera",
+  "links_repaired": 294,
+  "fitted_vs_true_silhouette_iou_median": 0.6508934987192196,
+  "far": {
+   "n": 39,
+   "arm_iou_raw": 0.7105114172485375,
+   "arm_iou_final": 0.7024111675126904,
+   "arm_recall_final": 0.8629572991412775,
+   "arm_precision_final": 0.8351851851851851,
+   "gripper_raw": 0.8812561334641805,
+   "gripper_final": 0.8730371272063299,
+   "gripper_renderer": 0.9347534996956787,
+   "leak_final": 0.0,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "near": {
+   "n": 30,
+   "arm_iou_raw": 0.6750884739392963,
+   "arm_iou_final": 0.6380728810538945,
+   "arm_recall_final": 0.8360813545724367,
+   "arm_precision_final": 0.7143098024601319,
+   "gripper_raw": 0.7970162325330283,
+   "gripper_final": 0.728351778985608,
+   "gripper_renderer": 0.8114685264422998,
+   "leak_final": 0.10046989113902943,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "held": {
+   "n": 45,
+   "arm_iou_raw": 0.7039284295005379,
+   "arm_iou_final": 0.6216987986415018,
+   "arm_recall_final": 0.8341548274862279,
+   "arm_precision_final": 0.7411248930710008,
+   "gripper_raw": 0.8107509005264616,
+   "gripper_final": 0.7435872709739634,
+   "gripper_renderer": 0.8216180853383732,
+   "leak_final": 0.06536533480406158,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "all": {
+   "n": 114,
+   "arm_iou_raw": 0.7037114126404451,
+   "arm_iou_final": 0.6494717241636352,
+   "arm_recall_final": 0.8504052793553238,
+   "arm_precision_final": 0.7570746339207962,
+   "gripper_raw": 0.8435701648338696,
+   "gripper_final": 0.7751743698022269,
+   "gripper_renderer": 0.8594575886892466,
+   "leak_final": 0.03923278799380864,
+   "gripper_final_below_0.2_frac": 0.0
+  }
+ },
+ "cup_R": {
+  "reference": "true camera",
+  "links_repaired": 1480,
+  "fitted_vs_true_silhouette_iou_median": 0.7284512964260687,
+  "far": {
+   "n": 181,
+   "arm_iou_raw": 0.7297683728910495,
+   "arm_iou_final": 0.7297683728910495,
+   "arm_recall_final": 0.9707557918723889,
+   "arm_precision_final": 0.7464953271028038,
+   "gripper_raw": 0.9707557918723889,
+   "gripper_final": 0.9707557918723889,
+   "gripper_renderer": 0.994303076338777,
+   "leak_final": 0.009534816527015313,
+   "gripper_final_below_0.2_frac": 0.011049723756906077
+  },
+  "near": {
+   "n": 41,
+   "arm_iou_raw": 0.548052196968487,
+   "arm_iou_final": 0.5780517055546278,
+   "arm_recall_final": 0.8949858088930936,
+   "arm_precision_final": 0.6816,
+   "gripper_raw": 0.8847365284753554,
+   "gripper_final": 0.8465425958607412,
+   "gripper_renderer": 0.9042962962962963,
+   "leak_final": 0.0937486135143529,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "held": {
+   "n": 55,
+   "arm_iou_raw": 0.2779528865295289,
+   "arm_iou_final": 0.5125442176870748,
+   "arm_recall_final": 0.5852563831138586,
+   "arm_precision_final": 0.7960745475826055,
+   "gripper_raw": 0.5386593795209773,
+   "gripper_final": 0.6649855373433212,
+   "gripper_renderer": 0.9046283309957924,
+   "leak_final": 0.0,
+   "gripper_final_below_0.2_frac": 0.05454545454545454
+  },
+  "all": {
+   "n": 277,
+   "arm_iou_raw": 0.7273765343990864,
+   "arm_iou_final": 0.7270916334661355,
+   "arm_recall_final": 0.9692366122293962,
+   "arm_precision_final": 0.7471432757105186,
+   "gripper_raw": 0.9696164071401443,
+   "gripper_final": 0.9692366122293962,
+   "gripper_renderer": 0.9935434865172806,
+   "leak_final": 0.009623797025371828,
+   "gripper_final_below_0.2_frac": 0.018050541516245487
+  }
+ },
+ "stack_LL": {
+  "reference": "true camera",
+  "links_repaired": 250,
+  "fitted_vs_true_silhouette_iou_median": 0.7039233923717103,
+  "far": {
+   "n": 19,
+   "arm_iou_raw": 0.7437830783730878,
+   "arm_iou_final": 0.7413911060433296,
+   "arm_recall_final": 0.916549196504088,
+   "arm_precision_final": 0.7764241027329601,
+   "gripper_raw": 0.9261939218523878,
+   "gripper_final": 0.9261939218523878,
+   "gripper_renderer": 0.9619477313356601,
+   "leak_final": 0.058204940083149914,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "near": {
+   "n": 37,
+   "arm_iou_raw": 0.6067928124149197,
+   "arm_iou_final": 0.6072847682119206,
+   "arm_recall_final": 0.8484174748597642,
+   "arm_precision_final": 0.7280947815691984,
+   "gripper_raw": 0.884928893513701,
+   "gripper_final": 0.8733686400605258,
+   "gripper_renderer": 0.9041614123581336,
+   "leak_final": 0.11411951595570714,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "held": {
+   "n": 46,
+   "arm_iou_raw": 0.6441101018778088,
+   "arm_iou_final": 0.6715275158322391,
+   "arm_recall_final": 0.8793211718617449,
+   "arm_precision_final": 0.7275234721697479,
+   "gripper_raw": 0.8555548412747769,
+   "gripper_final": 0.8623688338131332,
+   "gripper_renderer": 0.9282376609186566,
+   "leak_final": 0.11034146580446369,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "all": {
+   "n": 102,
+   "arm_iou_raw": 0.6668825724134566,
+   "arm_iou_final": 0.6778410855113004,
+   "arm_recall_final": 0.8869152317520153,
+   "arm_precision_final": 0.7342538277403545,
+   "gripper_raw": 0.8846307363496106,
+   "gripper_final": 0.8777265775046216,
+   "gripper_renderer": 0.9309815178456528,
+   "leak_final": 0.10268533175992711,
+   "gripper_final_below_0.2_frac": 0.0
+  }
+ },
+ "stack_LR": {
+  "reference": "true camera",
+  "links_repaired": 699,
+  "fitted_vs_true_silhouette_iou_median": 0.5466484822596933,
+  "far": {
+   "n": 69,
+   "arm_iou_raw": 0.6047460140897293,
+   "arm_iou_final": 0.6038151137197358,
+   "arm_recall_final": 0.885699096225412,
+   "arm_precision_final": 0.6657246669358095,
+   "gripper_raw": 0.885699096225412,
+   "gripper_final": 0.885699096225412,
+   "gripper_renderer": 0.936735778841042,
+   "leak_final": 0.12272910779168349,
+   "gripper_final_below_0.2_frac": 0.028985507246376812
+  },
+  "near": {
+   "n": 36,
+   "arm_iou_raw": 0.5494893133788826,
+   "arm_iou_final": 0.5798929698956223,
+   "arm_recall_final": 0.8540535212470737,
+   "arm_precision_final": 0.7629947022397074,
+   "gripper_raw": 0.8766168396842481,
+   "gripper_final": 0.824940936759762,
+   "gripper_renderer": 0.9028538540752955,
+   "leak_final": 0.09922568818600556,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "held": {
+   "n": 45,
+   "arm_iou_raw": 0.752908882333661,
+   "arm_iou_final": 0.7607089602819574,
+   "arm_recall_final": 0.8852598836042544,
+   "arm_precision_final": 0.8411677727726007,
+   "gripper_raw": 0.7987971569163478,
+   "gripper_final": 0.8224997440884431,
+   "gripper_renderer": 0.924160555769973,
+   "leak_final": 0.015009655333840482,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "all": {
+   "n": 150,
+   "arm_iou_raw": 0.6142719944987012,
+   "arm_iou_final": 0.6187899423682115,
+   "arm_recall_final": 0.8774078859791605,
+   "arm_precision_final": 0.7373532112855801,
+   "gripper_raw": 0.8760141402676505,
+   "gripper_final": 0.8753322700691122,
+   "gripper_renderer": 0.9335459861775651,
+   "leak_final": 0.09638079029851584,
+   "gripper_final_below_0.2_frac": 0.013333333333333334
+  }
+ },
+ "stack_RL": {
+  "reference": "true camera",
+  "links_repaired": 1308,
+  "fitted_vs_true_silhouette_iou_median": 0.5289831685395456,
+  "far": {
+   "n": 195,
+   "arm_iou_raw": 0.6123371443764957,
+   "arm_iou_final": 0.6123371443764957,
+   "arm_recall_final": 0.8826433725788074,
+   "arm_precision_final": 0.6700819672131147,
+   "gripper_raw": 0.8826433725788074,
+   "gripper_final": 0.8826433725788074,
+   "gripper_renderer": 0.9422711735662742,
+   "leak_final": 0.14916424645069615,
+   "gripper_final_below_0.2_frac": 0.010256410256410256
+  },
+  "near": {
+   "n": 86,
+   "arm_iou_raw": 0.7242406927974062,
+   "arm_iou_final": 0.7384106633471847,
+   "arm_recall_final": 0.8812290422092297,
+   "arm_precision_final": 0.8129291749878966,
+   "gripper_raw": 0.8899874966837318,
+   "gripper_final": 0.8615564346695124,
+   "gripper_renderer": 0.9208001450862943,
+   "leak_final": 0.027737302060221306,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "held": {
+   "n": 120,
+   "arm_iou_raw": 0.7384248726719389,
+   "arm_iou_final": 0.7506759980913207,
+   "arm_recall_final": 0.882524846493332,
+   "arm_precision_final": 0.8639249118888247,
+   "gripper_raw": 0.8003948033012307,
+   "gripper_final": 0.839168172762714,
+   "gripper_renderer": 0.932346818046009,
+   "leak_final": 0.00877099483028954,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "all": {
+   "n": 401,
+   "arm_iou_raw": 0.6721875383910921,
+   "arm_iou_final": 0.6931779225231403,
+   "arm_recall_final": 0.8826433725788074,
+   "arm_precision_final": 0.7599587912087912,
+   "gripper_raw": 0.8790944605829911,
+   "gripper_final": 0.8761868590960881,
+   "gripper_renderer": 0.9402370429891522,
+   "leak_final": 0.0866031475449758,
+   "gripper_final_below_0.2_frac": 0.004987531172069825
+  }
+ },
+ "stack_RR": {
+  "reference": "true camera",
+  "links_repaired": 175,
+  "fitted_vs_true_silhouette_iou_median": 0.4032979318054779,
+  "far": {
+   "n": 54,
+   "arm_iou_raw": 0.5951104063635603,
+   "arm_iou_final": 0.5951104063635603,
+   "arm_recall_final": 0.8796050132928219,
+   "arm_precision_final": 0.6494714716757322,
+   "gripper_raw": 0.8796050132928219,
+   "gripper_final": 0.8796050132928219,
+   "gripper_renderer": 0.9365742499050513,
+   "leak_final": 0.16807271022083806,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "near": {
+   "n": 18,
+   "arm_iou_raw": 0.7583863440911038,
+   "arm_iou_final": 0.7662948809605583,
+   "arm_recall_final": 0.8630029649788098,
+   "arm_precision_final": 0.8769153633698883,
+   "gripper_raw": 0.914468923286061,
+   "gripper_final": 0.8598727157079525,
+   "gripper_renderer": 0.9157842082942924,
+   "leak_final": 0.0011031395863204815,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "held": {
+   "n": 23,
+   "arm_iou_raw": 0.7840491112050957,
+   "arm_iou_final": 0.7818831277557626,
+   "arm_recall_final": 0.8730909910378422,
+   "arm_precision_final": 0.8894811443173425,
+   "gripper_raw": 0.879822428918719,
+   "gripper_final": 0.8751717577423105,
+   "gripper_renderer": 0.9272345301757067,
+   "leak_final": 0.009030064803994476,
+   "gripper_final_below_0.2_frac": 0.0
+  },
+  "all": {
+   "n": 95,
+   "arm_iou_raw": 0.6125792811839323,
+   "arm_iou_final": 0.6161780673181325,
+   "arm_recall_final": 0.8784656285605773,
+   "arm_precision_final": 0.6828614008941878,
+   "gripper_raw": 0.8803646031143183,
+   "gripper_final": 0.8784656285605773,
+   "gripper_renderer": 0.9350550702620585,
+   "leak_final": 0.14425936942296252,
+   "gripper_final_below_0.2_frac": 0.0
+  }
+ },
+ "handover_L": {
+  "reference": "true camera",
+  "links_repaired": 4154,
+  "fitted_vs_true_silhouette_iou_median": 0.21526115725749684,
+  "far": {
+   "n": 205,
+   "arm_iou_raw": 0.0,
+   "arm_iou_final": 0.0,
+   "arm_recall_final": 0.0,
+   "arm_precision_final": 0.0,
+   "gripper_raw": 0.0,
+   "gripper_final": 0.0,
+   "gripper_renderer": 0.0,
+   "leak_final": 0.0,
+   "gripper_final_below_0.2_frac": 0.7804878048780488
+  },
+  "near": {
+   "n": 159,
+   "arm_iou_raw": 0.5056330232641183,
+   "arm_iou_final": 0.5382721877528999,
+   "arm_recall_final": 0.6301776967063598,
+   "arm_precision_final": 0.8036254551048664,
+   "gripper_raw": 0.4462463302111002,
+   "gripper_final": 0.3570661347245665,
+   "gripper_renderer": 0.42105263157894735,
+   "leak_final": 0.06645519429024584,
+   "gripper_final_below_0.2_frac": 0.4716981132075472
+  },
+  "held": {
+   "n": 337,
+   "arm_iou_raw": 0.1566347026046391,
+   "arm_iou_final": 0.13504450294596967,
+   "arm_recall_final": 0.14765333838670963,
+   "arm_precision_final": 0.8140703517587939,
+   "gripper_raw": 0.02080025406261811,
+   "gripper_final": 0.007591888343813703,
+   "gripper_renderer": 0.017759396620530117,
+   "leak_final": 0.010713877784123358,
+   "gripper_final_below_0.2_frac": 0.6379821958456974
+  },
+  "all": {
+   "n": 701,
+   "arm_iou_raw": 0.1168823012184399,
+   "arm_iou_final": 0.1168823012184399,
+   "arm_recall_final": 0.12568807339449542,
+   "arm_precision_final": 0.7600576893881889,
+   "gripper_raw": 0.0,
+   "gripper_final": 0.01615355486023392,
+   "gripper_renderer": 0.056245436523718634,
+   "leak_final": 0.007835346116927473,
+   "gripper_final_below_0.2_frac": 0.6419400855920114
+  }
+ }
+}

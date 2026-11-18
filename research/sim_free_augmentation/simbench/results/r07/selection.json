@@ -1,0 +1,152 @@
+{
+ "rule": "N=10 synthetic, rounds over 3 cm cells, farthest-point (real demos count first); least-used source, then distortion",
+ "per_cell_counts_incl_real": {
+  "2": 1,
+  "3": 1,
+  "1": 15
+ },
+ "shortfall": 0,
+ "candidates": 12,
+ "selected": 10,
+ "families_selected": {
+  "object_workspace": 10
+ },
+ "families_available": {
+  "object_workspace": 12
+ },
+ "cells_with_episodes": 17,
+ "per_source": {
+  "0": 1,
+  "1": 2,
+  "2": 0,
+  "3": 3,
+  "4": 0,
+  "5": 0,
+  "6": 0,
+  "7": 1,
+  "8": 1,
+  "9": 2
+ },
+ "selection": [
+  {
+   "group": "main",
+   "source": 3,
+   "key": "eraser_target_000",
+   "family": "object_workspace",
+   "score": 0.4863971480548088,
+   "shift_cm": 11.868147645925884,
+   "pos": [
+    0.12,
+    0.03
+   ]
+  },
+  {
+   "group": "main",
+   "source": 3,
+   "key": "eraser_target_017",
+   "family": "object_workspace",
+   "score": 0.47953956630231753,
+   "shift_cm": 10.455939365311515,
+   "pos": [
+    0.21,
+    -0.03
+   ]
+  },
+  {
+   "group": "main",
+   "source": 9,
+   "key": "eraser_target_044",
+   "family": "object_workspace",
+   "score": 0.37359393740460545,
+   "shift_cm": 10.039041329151186,
+   "pos": [
+    0.3,
+    -0.03
+   ]
+  },
+  {
+   "group": "main",
+   "source": 3,
+   "key": "eraser_target_006",
+   "family": "object_workspace",
+   "score": 0.4493269570330008,
+   "shift_cm": 8.27047015322288,
+   "pos": [
+    0.15,
+    0.09
+   ]
+  },
+  {
+   "group": "main",
+   "source": 1,
+   "key": "eraser_target_060",
+   "family": "object_workspace",
+   "score": 0.330316114924888,
+   "shift_cm": 8.40826245244322,
+   "pos": [
+    0.33,
+    0.15
+   ]
+  },
+  {
+   "group": "main",
+   "source": 9,
+   "key": "eraser_target_076",
+   "family": "object_workspace",
+   "score": 0.42639712224118526,
+   "shift_cm": 7.648083160038369,
+   "pos": [
+    0.39,
+    0.03
+   ]
+  },
+  {
+   "group": "main",
+   "source": 0,
+   "key": "eraser_target_011",
+   "family": "object_workspace",
+   "score": 0.4858424427536034,
+   "shift_cm": 8.862771750308958,
+   "pos": [
+    0.18,
+    0.03
+   ]
+  },
+  {
+   "group": "main",
+   "source": 1,
+   "key": "eraser_target_031",
+   "family": "object_workspace",
+   "score": 0.33345638002991396,
+   "shift_cm": 5.328328952429717,
+   "pos": [
+    0.24,
+    0.15
+   ]
+  },
+  {
+   "group": "main",
+   "source": 8,
+   "key": "eraser_target_078",
+   "family": "object_workspace",
+   "score": 0.428094517484331,
+   "shift_cm": 6.036426525161042,
+   "pos": [
+    0.39,
+    0.09
+   ]
+  },
+  {
+   "group": "main",
+   "source": 7,
+   "key": "eraser_target_027",
+   "family": "object_workspace",
+   "score": 0.3474684758217386,
+   "shift_cm": 5.420676567901883,
+   "pos": [
+    0.24,
+    0.03
+   ]
+  }
+ ]
+}

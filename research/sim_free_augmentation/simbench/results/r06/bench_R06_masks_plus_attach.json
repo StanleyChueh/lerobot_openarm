@@ -1,0 +1,46 @@
+{
+ "cup: true camera, R06 masks + attach vs R05 masks": {
+  "pairs": 34,
+  "before_psnr": 18.032,
+  "after_psnr": 18.101,
+  "diff": 0.07,
+  "ci95": [
+   -0.025,
+   0.197
+  ],
+  "after_better_frac": 0.441
+ },
+ "stack: true camera, R06 masks + attach vs R05 masks": {
+  "pairs": 59,
+  "before_psnr": 17.656,
+  "after_psnr": 17.585,
+  "diff": -0.071,
+  "ci95": [
+   -0.232,
+   0.068
+  ],
+  "after_better_frac": 0.576
+ },
+ "handover: true camera, R06 masks + attach vs R05 masks": {
+  "pairs": 54,
+  "before_psnr": 19.703,
+  "after_psnr": 19.754,
+  "diff": 0.051,
+  "ci95": [
+   -0.285,
+   0.367
+  ],
+  "after_better_frac": 0.648
+ },
+ "openarm: fitted camera, R06 masks + attach vs baseline A": {
+  "pairs": 172,
+  "before_psnr": 18.712,
+  "after_psnr": 19.072,
+  "diff": 0.36,
+  "ci95": [
+   0.287,
+   0.44
+  ],
+  "after_better_frac": 0.826
+ }
+}

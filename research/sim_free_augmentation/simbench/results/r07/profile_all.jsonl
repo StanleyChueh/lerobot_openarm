@@ -1,0 +1,50 @@
+{"stage": "calibrate", "seconds": 344.3, "gpu_peak_torch_gib": 2.861, "gpu_peak_process_gib": 3.311, "time": "2026-11-17 23:29:45"}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 1.68, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-18 00:03:33"}
+{"stage": "replay-check envelope (all source episodes)", "seconds": 1.67, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-18 00:03:33"}
+{"stage": "reconstruct ep5", "seconds": 25.99, "gpu_peak_torch_gib": 0.152, "gpu_peak_process_gib": 0.6, "time": "2026-11-18 00:03:59", "episode": 5}
+{"stage": "reconstruct ep0", "seconds": 27.01, "gpu_peak_torch_gib": 0.156, "gpu_peak_process_gib": 0.604, "time": "2026-11-18 00:04:00", "episode": 0}
+{"stage": "plan+check ep5", "seconds": 38.04, "gpu_peak_torch_gib": 0.152, "gpu_peak_process_gib": 0.6, "time": "2026-11-18 00:04:37", "episode": 5}
+{"stage": "plan+check ep0", "seconds": 38.02, "gpu_peak_torch_gib": 0.156, "gpu_peak_process_gib": 0.604, "time": "2026-11-18 00:04:38", "episode": 0}
+{"stage": "reconstruct ep1", "seconds": 26.54, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:05:04", "episode": 1}
+{"stage": "reconstruct ep6", "seconds": 31.21, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:05:08", "episode": 6}
+{"stage": "plan+check ep1", "seconds": 29.01, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:05:33", "episode": 1}
+{"stage": "plan+check ep6", "seconds": 39.41, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:05:48", "episode": 6}
+{"stage": "reconstruct ep2", "seconds": 20.18, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:05:54", "episode": 2}
+{"stage": "reconstruct ep7", "seconds": 26.28, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-18 00:06:14", "episode": 7}
+{"stage": "plan+check ep2", "seconds": 23.7, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:06:17", "episode": 2}
+{"stage": "reconstruct ep3", "seconds": 20.78, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:06:38", "episode": 3}
+{"stage": "plan+check ep7", "seconds": 27.49, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-18 00:06:41", "episode": 7}
+{"stage": "reconstruct ep8", "seconds": 25.78, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-18 00:07:07", "episode": 8}
+{"stage": "plan+check ep3", "seconds": 35.27, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:07:13", "episode": 3}
+{"stage": "reconstruct ep4", "seconds": 26.16, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:07:40", "episode": 4}
+{"stage": "plan+check ep8", "seconds": 39.95, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-18 00:07:47", "episode": 8}
+{"stage": "reconstruct ep9", "seconds": 27.92, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-18 00:08:15", "episode": 9}
+{"stage": "plan+check ep4", "seconds": 36.95, "gpu_peak_torch_gib": 0.18, "gpu_peak_process_gib": 0.627, "time": "2026-11-18 00:08:17", "episode": 4}
+{"stage": "plan+check ep9", "seconds": 38.34, "gpu_peak_torch_gib": 0.186, "gpu_peak_process_gib": 0.633, "time": "2026-11-18 00:08:53", "episode": 9}
+{"stage": "render ep3", "seconds": 24.78, "gpu_peak_torch_gib": 2.295, "gpu_peak_process_gib": 2.746, "time": "2026-11-18 00:09:46", "episode": 3}
+{"stage": "render wrist ep3", "seconds": 0.3, "gpu_peak_torch_gib": 2.295, "gpu_peak_process_gib": 2.746, "time": "2026-11-18 00:09:46", "episode": 3}
+{"stage": "render ep3", "seconds": 26.8, "gpu_peak_torch_gib": 2.236, "gpu_peak_process_gib": 2.688, "time": "2026-11-18 00:09:49", "episode": 3}
+{"stage": "render wrist ep3", "seconds": 0.3, "gpu_peak_torch_gib": 2.236, "gpu_peak_process_gib": 2.688, "time": "2026-11-18 00:09:49", "episode": 3}
+{"stage": "render ep3", "seconds": 26.96, "gpu_peak_torch_gib": 2.311, "gpu_peak_process_gib": 2.762, "time": "2026-11-18 00:10:45", "episode": 3}
+{"stage": "render wrist ep3", "seconds": 0.3, "gpu_peak_torch_gib": 2.311, "gpu_peak_process_gib": 2.762, "time": "2026-11-18 00:10:46", "episode": 3}
+{"stage": "render ep9", "seconds": 28.49, "gpu_peak_torch_gib": 2.234, "gpu_peak_process_gib": 2.686, "time": "2026-11-18 00:10:51", "episode": 9}
+{"stage": "render wrist ep9", "seconds": 0.3, "gpu_peak_torch_gib": 2.234, "gpu_peak_process_gib": 2.686, "time": "2026-11-18 00:10:51", "episode": 9}
+{"stage": "render ep1", "seconds": 26.52, "gpu_peak_torch_gib": 2.234, "gpu_peak_process_gib": 2.686, "time": "2026-11-18 00:11:49", "episode": 1}
+{"stage": "render wrist ep1", "seconds": 0.3, "gpu_peak_torch_gib": 2.234, "gpu_peak_process_gib": 2.686, "time": "2026-11-18 00:11:49", "episode": 1}
+{"stage": "render ep9", "seconds": 32.96, "gpu_peak_torch_gib": 2.35, "gpu_peak_process_gib": 2.801, "time": "2026-11-18 00:11:59", "episode": 9}
+{"stage": "render wrist ep9", "seconds": 0.3, "gpu_peak_torch_gib": 2.35, "gpu_peak_process_gib": 2.801, "time": "2026-11-18 00:11:59", "episode": 9}
+{"stage": "render ep1", "seconds": 27.22, "gpu_peak_torch_gib": 2.273, "gpu_peak_process_gib": 2.725, "time": "2026-11-18 00:12:59", "episode": 1}
+{"stage": "render wrist ep1", "seconds": 0.3, "gpu_peak_torch_gib": 2.273, "gpu_peak_process_gib": 2.725, "time": "2026-11-18 00:12:59", "episode": 1}
+{"stage": "render ep0", "seconds": 27.7, "gpu_peak_torch_gib": 2.232, "gpu_peak_process_gib": 2.684, "time": "2026-11-18 00:13:00", "episode": 0}
+{"stage": "render wrist ep0", "seconds": 0.3, "gpu_peak_torch_gib": 2.232, "gpu_peak_process_gib": 2.684, "time": "2026-11-18 00:13:01", "episode": 0}
+{"stage": "render ep7", "seconds": 25.47, "gpu_peak_torch_gib": 2.303, "gpu_peak_process_gib": 2.754, "time": "2026-11-18 00:13:59", "episode": 7}
+{"stage": "render wrist ep7", "seconds": 0.3, "gpu_peak_torch_gib": 2.303, "gpu_peak_process_gib": 2.754, "time": "2026-11-18 00:13:59", "episode": 7}
+{"stage": "render ep8", "seconds": 28.51, "gpu_peak_torch_gib": 2.332, "gpu_peak_process_gib": 2.783, "time": "2026-11-18 00:14:00", "episode": 8}
+{"stage": "render wrist ep8", "seconds": 0.3, "gpu_peak_torch_gib": 2.332, "gpu_peak_process_gib": 2.783, "time": "2026-11-18 00:14:00", "episode": 8}
+{"stage": "render ep3", "seconds": 26.68, "gpu_peak_torch_gib": 2.277, "gpu_peak_process_gib": 2.729, "time": "2026-11-18 00:14:55", "episode": 3}
+{"stage": "render wrist ep3", "seconds": 0.3, "gpu_peak_torch_gib": 2.277, "gpu_peak_process_gib": 2.729, "time": "2026-11-18 00:14:56", "episode": 3}
+{"stage": "render ep4", "seconds": 27.48, "gpu_peak_torch_gib": 2.217, "gpu_peak_process_gib": 2.668, "time": "2026-11-18 00:15:00", "episode": 4}
+{"stage": "render wrist ep4", "seconds": 0.3, "gpu_peak_torch_gib": 2.217, "gpu_peak_process_gib": 2.668, "time": "2026-11-18 00:15:01", "episode": 4}
+{"stage": "build", "seconds": 479.33, "gpu_peak_torch_gib": 0.188, "gpu_peak_process_gib": 0.635, "time": "2026-11-18 00:23:07"}
+{"stage": "verify", "seconds": 110.19, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-18 00:25:03"}
+{"stage": "video", "seconds": 92.69, "gpu_peak_torch_gib": 0.0, "gpu_peak_process_gib": 0.377, "time": "2026-11-18 00:26:43"}

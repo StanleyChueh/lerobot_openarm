@@ -1,0 +1,68 @@
+{
+ "cup: baseline A (fitted camera, v1 masks) -> H (refined camera, R06 masks)": {
+  "pairs": 34,
+  "before": 16.34,
+  "after": 17.74,
+  "diff": 1.4,
+  "ci95": [
+   0.91,
+   1.91
+  ],
+  "after_better_frac": 0.76
+ },
+ "cup: H -> true camera with the same R06 masks (PG)": {
+  "pairs": 34,
+  "before": 17.74,
+  "after": 18.1,
+  "diff": 0.36,
+  "ci95": [
+   -0.01,
+   0.76
+  ],
+  "after_better_frac": 0.5
+ },
+ "stack: baseline A (fitted camera, v1 masks) -> H (refined camera, R06 masks)": {
+  "pairs": 59,
+  "before": 15.66,
+  "after": 17.38,
+  "diff": 1.72,
+  "ci95": [
+   1.17,
+   2.3
+  ],
+  "after_better_frac": 0.78
+ },
+ "stack: H -> true camera with the same R06 masks (PG)": {
+  "pairs": 59,
+  "before": 17.38,
+  "after": 17.59,
+  "diff": 0.2,
+  "ci95": [
+   0.03,
+   0.38
+  ],
+  "after_better_frac": 0.59
+ },
+ "openarm: baseline A -> H (refined camera, R06 masks)": {
+  "pairs": 172,
+  "before": 18.71,
+  "after": 18.96,
+  "diff": 0.25,
+  "ci95": [
+   0.14,
+   0.36
+  ],
+  "after_better_frac": 0.6
+ },
+ "openarm: Gf (fitted camera, R06 masks) -> H (refined camera, R06 masks)": {
+  "pairs": 172,
+  "before": 19.07,
+  "after": 18.96,
+  "diff": -0.11,
+  "ci95": [
+   -0.2,
+   -0.01
+  ],
+  "after_better_frac": 0.41
+ }
+}

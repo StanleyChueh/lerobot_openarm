@@ -1,0 +1,1046 @@
+{
+ "frames": 12,
+ "failing": 12,
+ "rows": [
+  {
+   "frame": "openarm_e0_f110",
+   "kind": "grasp",
+   "band_px": 5,
+   "checks": {
+    "arm_R": {
+     "gold_px": 25888,
+     "grip_px": 7865,
+     "render": {
+      "recall": 0.9713471945314726,
+      "precision": 0.930278232405892,
+      "grip_recall": 0.9859502095144195,
+      "px": 27696
+     },
+     "recon": {
+      "recall": 0.9713471945314726,
+      "precision": 0.930278232405892,
+      "grip_recall": 0.9859502095144195,
+      "px": 27696
+     },
+     "sam2": {
+      "recall": 0.9713471945314726,
+      "precision": 0.930278232405892,
+      "grip_recall": 0.9859502095144195,
+      "px": 27696
+     },
+     "projection": {
+      "recall": 0.2648248362289946,
+      "precision": 0.7504439063761098,
+      "grip_recall": 0.5104757209760907,
+      "px": 9534
+     },
+     "proj_grip_shift_px": [
+      39.175395163700216,
+      -20.68399877701262,
+      44.300557464207216
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 49808,
+     "grip_px": 14367,
+     "render": {
+      "recall": 0.8521306032097399,
+      "precision": 0.9999025942400728,
+      "grip_recall": 0.8113010115102895,
+      "px": 45855
+     },
+     "recon": {
+      "recall": 0.8521306032097399,
+      "precision": 0.9999025942400728,
+      "grip_recall": 0.8113010115102895,
+      "px": 45855
+     },
+     "sam2": {
+      "recall": 0.8521306032097399,
+      "precision": 0.9999025942400728,
+      "grip_recall": 0.8113010115102895,
+      "px": 45855
+     },
+     "projection": {
+      "recall": 0.44933591588267846,
+      "precision": 0.912457155700399,
+      "grip_recall": 0.545517963027555,
+      "px": 31337
+     },
+     "proj_grip_shift_px": [
+      6.8041186288855044,
+      -13.432559966458726,
+      15.057546200110309
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 12934,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 13462
+    }
+   },
+   "fail": [
+    "G1 arm R precision 0.93",
+    "G1 arm L recall 0.85",
+    "G2 gripper L recall 0.81"
+   ]
+  },
+  {
+   "frame": "openarm_e0_f50",
+   "kind": "far",
+   "band_px": 10,
+   "checks": {
+    "arm_R": {
+     "gold_px": 14332,
+     "grip_px": 6477,
+     "render": {
+      "recall": 1.0,
+      "precision": 0.9099504727600181,
+      "grip_recall": 1.0,
+      "px": 13624
+     },
+     "recon": {
+      "recall": 1.0,
+      "precision": 0.9099504727600181,
+      "grip_recall": 1.0,
+      "px": 13624
+     },
+     "sam2": {
+      "recall": 1.0,
+      "precision": 0.9099504727600181,
+      "grip_recall": 1.0,
+      "px": 13624
+     },
+     "projection": {
+      "recall": 0.7714002968827314,
+      "precision": 0.7603023652767618,
+      "grip_recall": 0.7203891708967851,
+      "px": 11214
+     },
+     "proj_grip_shift_px": [
+      12.779300995520202,
+      -3.739384059826932,
+      13.31516154918863
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 44362,
+     "grip_px": 15224,
+     "render": {
+      "recall": 0.919396617400579,
+      "precision": 0.9501364686122192,
+      "grip_recall": 0.9174051754696916,
+      "px": 46462
+     },
+     "recon": {
+      "recall": 0.919396617400579,
+      "precision": 0.9501364686122192,
+      "grip_recall": 0.9174051754696916,
+      "px": 46462
+     },
+     "sam2": {
+      "recall": 0.919396617400579,
+      "precision": 0.9501364686122192,
+      "grip_recall": 0.9174051754696916,
+      "px": 46462
+     },
+     "projection": {
+      "recall": 0.3800091421605973,
+      "precision": 0.8551834495370899,
+      "grip_recall": 0.554236086494151,
+      "px": 31538
+     },
+     "proj_grip_shift_px": [
+      5.9415599475811405,
+      -11.977818081262214,
+      13.37049963907529
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 12508,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 12611
+    }
+   },
+   "fail": [
+    "G1 arm R precision 0.91",
+    "G1 arm L recall 0.92",
+    "G2 gripper L recall 0.92"
+   ]
+  },
+  {
+   "frame": "openarm_e0_f86",
+   "kind": "near",
+   "band_px": 5,
+   "checks": {
+    "arm_R": {
+     "gold_px": 29665,
+     "grip_px": 10358,
+     "render": {
+      "recall": 0.9862306368330465,
+      "precision": 0.9691214844882574,
+      "grip_recall": 0.9596652719665272,
+      "px": 28225
+     },
+     "recon": {
+      "recall": 0.9862306368330465,
+      "precision": 0.9691214844882574,
+      "grip_recall": 0.9596652719665272,
+      "px": 28225
+     },
+     "sam2": {
+      "recall": 0.9862306368330465,
+      "precision": 0.9691214844882574,
+      "grip_recall": 0.9596652719665272,
+      "px": 28225
+     },
+     "projection": {
+      "recall": 0.24155397098598475,
+      "precision": 0.7930255085566678,
+      "grip_recall": 0.3703765690376569,
+      "px": 8578
+     },
+     "proj_grip_shift_px": [
+      21.938040113690647,
+      -27.987655509321314,
+      35.56102452036982
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 41833,
+     "grip_px": 15205,
+     "render": {
+      "recall": 0.8531335053550599,
+      "precision": 0.8649036049595069,
+      "grip_recall": 0.7895298006184028,
+      "px": 45090
+     },
+     "recon": {
+      "recall": 0.8531335053550599,
+      "precision": 0.8649036049595069,
+      "grip_recall": 0.7895298006184028,
+      "px": 45090
+     },
+     "sam2": {
+      "recall": 0.8531335053550599,
+      "precision": 0.8649036049595069,
+      "grip_recall": 0.7895298006184028,
+      "px": 45090
+     },
+     "projection": {
+      "recall": 0.418861121911562,
+      "precision": 0.6936314680402716,
+      "grip_recall": 0.5498453992963003,
+      "px": 31580
+     },
+     "proj_grip_shift_px": [
+      5.591159139381546,
+      -12.100264562751292,
+      13.329570998740525
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 12549,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 12742
+    }
+   },
+   "fail": [
+    "G1 arm L recall 0.85",
+    "G1 arm L precision 0.86",
+    "G2 gripper L recall 0.79"
+   ]
+  },
+  {
+   "frame": "openarm_e3_f43",
+   "kind": "far",
+   "band_px": 10,
+   "checks": {
+    "arm_R": {
+     "gold_px": 16119,
+     "grip_px": 13043,
+     "render": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "grip_recall": 1.0,
+      "px": 15697
+     },
+     "recon": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "grip_recall": 1.0,
+      "px": 15697
+     },
+     "sam2": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "grip_recall": 1.0,
+      "px": 15697
+     },
+     "projection": {
+      "recall": 0.7892545598731165,
+      "precision": 0.8827050997782705,
+      "grip_recall": 0.7875553765606121,
+      "px": 13101
+     },
+     "proj_grip_shift_px": [
+      -0.5689533363580495,
+      -3.3506181160968254,
+      3.3985805358810013
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 57523,
+     "grip_px": 16305,
+     "render": {
+      "recall": 0.8856421565782601,
+      "precision": 1.0,
+      "grip_recall": 0.9854768436340164,
+      "px": 51478
+     },
+     "recon": {
+      "recall": 0.8856421565782601,
+      "precision": 1.0,
+      "grip_recall": 0.9854768436340164,
+      "px": 51478
+     },
+     "sam2": {
+      "recall": 0.8856421565782601,
+      "precision": 1.0,
+      "grip_recall": 0.9854768436340164,
+      "px": 51478
+     },
+     "projection": {
+      "recall": 0.44269049968080787,
+      "precision": 0.9591349176411417,
+      "grip_recall": 0.5078263675972244,
+      "px": 33291
+     },
+     "proj_grip_shift_px": [
+      2.8120613544658966,
+      -12.240832605160918,
+      12.559684388106701
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 12427,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 12554
+    }
+   },
+   "fail": [
+    "G1 arm L recall 0.89"
+   ]
+  },
+  {
+   "frame": "openarm_e3_f71",
+   "kind": "near",
+   "band_px": 5,
+   "checks": {
+    "arm_R": {
+     "gold_px": 31321,
+     "grip_px": 13199,
+     "render": {
+      "recall": 0.9753604672385472,
+      "precision": 1.0,
+      "grip_recall": 0.949879762055436,
+      "px": 28112
+     },
+     "recon": {
+      "recall": 0.9753604672385472,
+      "precision": 1.0,
+      "grip_recall": 0.949879762055436,
+      "px": 28112
+     },
+     "sam2": {
+      "recall": 0.9753604672385472,
+      "precision": 1.0,
+      "grip_recall": 0.949879762055436,
+      "px": 28112
+     },
+     "projection": {
+      "recall": 0.26738455922613613,
+      "precision": 0.827683615819209,
+      "grip_recall": 0.321351727629414,
+      "px": 9390
+     },
+     "proj_grip_shift_px": [
+      19.74801693609885,
+      -2.2417283579413834,
+      19.874846387815065
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 57671,
+     "grip_px": 15119,
+     "render": {
+      "recall": 0.8695971874353731,
+      "precision": 0.9922651354256797,
+      "grip_recall": 0.9931207004377736,
+      "px": 51341
+     },
+     "recon": {
+      "recall": 0.8695971874353731,
+      "precision": 0.9922651354256797,
+      "grip_recall": 0.9931207004377736,
+      "px": 51341
+     },
+     "sam2": {
+      "recall": 0.8695971874353731,
+      "precision": 0.9922651354256797,
+      "grip_recall": 0.9931207004377736,
+      "px": 51341
+     },
+     "projection": {
+      "recall": 0.4599600174636366,
+      "precision": 0.9310232558139535,
+      "grip_recall": 0.469251615593079,
+      "px": 32961
+     },
+     "proj_grip_shift_px": [
+      -1.4504336187812044,
+      -12.11349801379643,
+      12.200024254596414
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 12400,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 12555
+    }
+   },
+   "fail": [
+    "G2 gripper R recall 0.95",
+    "G1 arm L recall 0.87"
+   ]
+  },
+  {
+   "frame": "openarm_e3_f95",
+   "kind": "grasp",
+   "band_px": 5,
+   "checks": {
+    "arm_R": {
+     "gold_px": 33995,
+     "grip_px": 11563,
+     "render": {
+      "recall": 0.9930544139404899,
+      "precision": 0.9950172953384945,
+      "grip_recall": 1.0,
+      "px": 32911
+     },
+     "recon": {
+      "recall": 0.9930544139404899,
+      "precision": 0.9950172953384945,
+      "grip_recall": 1.0,
+      "px": 32911
+     },
+     "sam2": {
+      "recall": 0.9930544139404899,
+      "precision": 0.9950172953384945,
+      "grip_recall": 1.0,
+      "px": 32911
+     },
+     "projection": {
+      "recall": 0.28407036001972713,
+      "precision": 0.7477282561661618,
+      "grip_recall": 0.4728142670726403,
+      "px": 13582
+     },
+     "proj_grip_shift_px": [
+      24.821751373989514,
+      5.037673872332618,
+      25.327800917492482
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 56209,
+     "grip_px": 15159,
+     "render": {
+      "recall": 0.875228889970563,
+      "precision": 0.9973323472702781,
+      "grip_recall": 0.9926282379440975,
+      "px": 50366
+     },
+     "recon": {
+      "recall": 0.875228889970563,
+      "precision": 0.9973323472702781,
+      "grip_recall": 0.9926282379440975,
+      "px": 50366
+     },
+     "sam2": {
+      "recall": 0.875228889970563,
+      "precision": 0.9973323472702781,
+      "grip_recall": 0.9926282379440975,
+      "px": 50366
+     },
+     "projection": {
+      "recall": 0.46438587951695526,
+      "precision": 0.9357339685208538,
+      "grip_recall": 0.48950547762874985,
+      "px": 32346
+     },
+     "proj_grip_shift_px": [
+      2.9116477047501803,
+      -14.908955485429075,
+      15.190610455906066
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 12929,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 12977
+    }
+   },
+   "fail": [
+    "G1 arm L recall 0.88"
+   ]
+  },
+  {
+   "frame": "openarm_e5_f45",
+   "kind": "far",
+   "band_px": 10,
+   "checks": {
+    "arm_R": {
+     "gold_px": 17586,
+     "grip_px": 14867,
+     "render": {
+      "recall": 1.0,
+      "precision": 0.9183512140033879,
+      "grip_recall": 1.0,
+      "px": 18886
+     },
+     "recon": {
+      "recall": 1.0,
+      "precision": 0.9183512140033879,
+      "grip_recall": 1.0,
+      "px": 18886
+     },
+     "sam2": {
+      "recall": 1.0,
+      "precision": 0.9183512140033879,
+      "grip_recall": 1.0,
+      "px": 18886
+     },
+     "projection": {
+      "recall": 0.6069847515986228,
+      "precision": 0.7966429954809554,
+      "grip_recall": 0.6322096391888333,
+      "px": 11184
+     },
+     "proj_grip_shift_px": [
+      -2.0579969658907658,
+      -1.815071837235564,
+      2.744054898492609
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 46929,
+     "grip_px": 16281,
+     "render": {
+      "recall": 0.7543013844044407,
+      "precision": 0.9916845961504913,
+      "grip_recall": 0.37710978942292234,
+      "px": 40522
+     },
+     "recon": {
+      "recall": 0.7543013844044407,
+      "precision": 0.9916845961504913,
+      "grip_recall": 0.37710978942292234,
+      "px": 40522
+     },
+     "sam2": {
+      "recall": 0.7543013844044407,
+      "precision": 0.9916845961504913,
+      "grip_recall": 0.37710978942292234,
+      "px": 40522
+     },
+     "projection": {
+      "recall": 0.39391392808173736,
+      "precision": 0.895795614564474,
+      "grip_recall": 0.5230670310239511,
+      "px": 32637
+     },
+     "proj_grip_shift_px": [
+      5.583821826325789,
+      -9.511634869219947,
+      11.029517853175316
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 11749,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 11869
+    }
+   },
+   "fail": [
+    "G1 arm R precision 0.92",
+    "G1 arm L recall 0.75",
+    "G2 gripper L recall 0.38"
+   ]
+  },
+  {
+   "frame": "openarm_e5_f75",
+   "kind": "near",
+   "band_px": 5,
+   "checks": {
+    "arm_R": {
+     "gold_px": 36066,
+     "grip_px": 11700,
+     "render": {
+      "recall": 0.9943759943759943,
+      "precision": 0.9683986739694437,
+      "grip_recall": 0.9791695217212553,
+      "px": 35312
+     },
+     "recon": {
+      "recall": 0.9943759943759943,
+      "precision": 0.9683986739694437,
+      "grip_recall": 0.9791695217212553,
+      "px": 35312
+     },
+     "sam2": {
+      "recall": 0.9943759943759943,
+      "precision": 0.9683986739694437,
+      "grip_recall": 0.9791695217212553,
+      "px": 35312
+     },
+     "projection": {
+      "recall": 0.3746623746623747,
+      "precision": 0.8822094441540338,
+      "grip_recall": 0.635329587501713,
+      "px": 17130
+     },
+     "proj_grip_shift_px": [
+      19.480716831654092,
+      -7.278008907114668,
+      20.79585876868593
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 48215,
+     "grip_px": 14284,
+     "render": {
+      "recall": 0.7479791864384593,
+      "precision": 0.9672859621651361,
+      "grip_recall": 0.4441071802386435,
+      "px": 39274
+     },
+     "recon": {
+      "recall": 0.7479791864384593,
+      "precision": 0.9672859621651361,
+      "grip_recall": 0.4441071802386435,
+      "px": 39274
+     },
+     "sam2": {
+      "recall": 0.7479791864384593,
+      "precision": 0.9672859621651361,
+      "grip_recall": 0.4441071802386435,
+      "px": 39274
+     },
+     "projection": {
+      "recall": 0.44889877933043165,
+      "precision": 0.8765976482617587,
+      "grip_recall": 0.5009420138162026,
+      "px": 30882
+     },
+     "proj_grip_shift_px": [
+      8.61978795139504,
+      -15.822136459626236,
+      18.017789722217564
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 11286,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 11669
+    }
+   },
+   "fail": [
+    "G1 arm L recall 0.75",
+    "G2 gripper L recall 0.44"
+   ]
+  },
+  {
+   "frame": "openarm_e5_f99",
+   "kind": "grasp",
+   "band_px": 5,
+   "checks": {
+    "arm_R": {
+     "gold_px": 40704,
+     "grip_px": 8392,
+     "render": {
+      "recall": 0.9932231300272342,
+      "precision": 1.0,
+      "grip_recall": 0.9723950233281493,
+      "px": 39022
+     },
+     "recon": {
+      "recall": 0.9932231300272342,
+      "precision": 1.0,
+      "grip_recall": 0.9723950233281493,
+      "px": 39022
+     },
+     "sam2": {
+      "recall": 0.9932231300272342,
+      "precision": 1.0,
+      "grip_recall": 0.9723950233281493,
+      "px": 39022
+     },
+     "projection": {
+      "recall": 0.4104123123693711,
+      "precision": 0.720360180090045,
+      "grip_recall": 0.7204510108864697,
+      "px": 26312
+     },
+     "proj_grip_shift_px": [
+      24.167419543747087,
+      12.888383840686885,
+      27.389315534134244
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 50931,
+     "grip_px": 14610,
+     "render": {
+      "recall": 0.7415530024336409,
+      "precision": 0.9745620885864108,
+      "grip_recall": 0.4152744630071599,
+      "px": 39672
+     },
+     "recon": {
+      "recall": 0.7415530024336409,
+      "precision": 0.9745620885864108,
+      "grip_recall": 0.4152744630071599,
+      "px": 39672
+     },
+     "sam2": {
+      "recall": 0.7415530024336409,
+      "precision": 0.9745620885864108,
+      "grip_recall": 0.4152744630071599,
+      "px": 39672
+     },
+     "projection": {
+      "recall": 0.429452713792518,
+      "precision": 0.8954977282114829,
+      "grip_recall": 0.4813738715367853,
+      "px": 31175
+     },
+     "proj_grip_shift_px": [
+      8.069791597272626,
+      -15.764024790733671,
+      17.70948937790917
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 10558,
+     "iou": 0.9806581260989701,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 11956
+    }
+   },
+   "fail": [
+    "G1 arm L recall 0.74",
+    "G2 gripper L recall 0.42"
+   ]
+  },
+  {
+   "frame": "openarm_e8_f43",
+   "kind": "far",
+   "band_px": 10,
+   "checks": {
+    "arm_R": {
+     "gold_px": 14580,
+     "grip_px": 14176,
+     "render": {
+      "recall": 1.0,
+      "precision": 0.9946645109135004,
+      "grip_recall": 1.0,
+      "px": 13579
+     },
+     "recon": {
+      "recall": 1.0,
+      "precision": 0.9946645109135004,
+      "grip_recall": 1.0,
+      "px": 13579
+     },
+     "sam2": {
+      "recall": 1.0,
+      "precision": 0.9946645109135004,
+      "grip_recall": 1.0,
+      "px": 13579
+     },
+     "projection": {
+      "recall": 0.7187906371911573,
+      "precision": 0.9822301199466904,
+      "grip_recall": 0.7187906371911573,
+      "px": 10732
+     },
+     "proj_grip_shift_px": [
+      -4.9821923464267,
+      13.635901239221312,
+      14.517577042419651
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 44006,
+     "grip_px": 15982,
+     "render": {
+      "recall": 0.9531183026146592,
+      "precision": 0.87273708482559,
+      "grip_recall": 0.9663881872935691,
+      "px": 49644
+     },
+     "recon": {
+      "recall": 0.9531183026146592,
+      "precision": 0.87273708482559,
+      "grip_recall": 0.9663881872935691,
+      "px": 49644
+     },
+     "sam2": {
+      "recall": 0.9531183026146592,
+      "precision": 0.87273708482559,
+      "grip_recall": 0.9663881872935691,
+      "px": 49644
+     },
+     "projection": {
+      "recall": 0.3650878696956708,
+      "precision": 0.6925500558999899,
+      "grip_recall": 0.5012628715756752,
+      "px": 32737
+     },
+     "proj_grip_shift_px": [
+      3.783874728224447,
+      -9.298604594021072,
+      10.039011672213825
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 11697,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 11703
+    }
+   },
+   "fail": [
+    "G1 arm L precision 0.87"
+   ]
+  },
+  {
+   "frame": "openarm_e8_f72",
+   "kind": "near",
+   "band_px": 5,
+   "checks": {
+    "arm_R": {
+     "gold_px": 28218,
+     "grip_px": 15065,
+     "render": {
+      "recall": 0.821969696969697,
+      "precision": 0.8875709392095711,
+      "grip_recall": 0.7423670977011494,
+      "px": 25548
+     },
+     "recon": {
+      "recall": 0.821969696969697,
+      "precision": 0.8875709392095711,
+      "grip_recall": 0.7423670977011494,
+      "px": 25548
+     },
+     "sam2": {
+      "recall": 0.821969696969697,
+      "precision": 0.8875709392095711,
+      "grip_recall": 0.7423670977011494,
+      "px": 25548
+     },
+     "projection": {
+      "recall": 0.18759469696969697,
+      "precision": 0.7413922155688623,
+      "grip_recall": 0.2237787356321839,
+      "px": 6597
+     },
+     "proj_grip_shift_px": [
+      9.316014370835092,
+      -38.076984335125246,
+      39.20006198738695
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 48880,
+     "grip_px": 16337,
+     "render": {
+      "recall": 0.8954570816080816,
+      "precision": 0.9391998028767672,
+      "grip_recall": 0.9177570093457944,
+      "px": 48393
+     },
+     "recon": {
+      "recall": 0.8954570816080816,
+      "precision": 0.9391998028767672,
+      "grip_recall": 0.9177570093457944,
+      "px": 48393
+     },
+     "sam2": {
+      "recall": 0.8954570816080816,
+      "precision": 0.9391998028767672,
+      "grip_recall": 0.9177570093457944,
+      "px": 48393
+     },
+     "projection": {
+      "recall": 0.469121663289578,
+      "precision": 0.8832310499253607,
+      "grip_recall": 0.5508071367884452,
+      "px": 31469
+     },
+     "proj_grip_shift_px": [
+      4.88809403781076,
+      -11.25462134003618,
+      12.270287887008964
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 11663,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 11672
+    }
+   },
+   "fail": [
+    "G1 arm R recall 0.82",
+    "G1 arm R precision 0.89",
+    "G2 gripper R recall 0.74",
+    "G1 arm L recall 0.90",
+    "G1 arm L precision 0.94",
+    "G2 gripper L recall 0.92"
+   ]
+  },
+  {
+   "frame": "openarm_e8_f96",
+   "kind": "grasp",
+   "band_px": 5,
+   "checks": {
+    "arm_R": {
+     "gold_px": 32609,
+     "grip_px": 11663,
+     "render": {
+      "recall": 0.9078690318043291,
+      "precision": 0.8568478501364407,
+      "grip_recall": 0.8942828979793002,
+      "px": 32543
+     },
+     "recon": {
+      "recall": 0.9078690318043291,
+      "precision": 0.8568478501364407,
+      "grip_recall": 0.8942828979793002,
+      "px": 32543
+     },
+     "sam2": {
+      "recall": 0.9078690318043291,
+      "precision": 0.8568478501364407,
+      "grip_recall": 0.8942828979793002,
+      "px": 32543
+     },
+     "projection": {
+      "recall": 0.19508478549660077,
+      "precision": 0.6278923541247485,
+      "grip_recall": 0.186914736323312,
+      "px": 10128
+     },
+     "proj_grip_shift_px": [
+      27.654013360166118,
+      -51.996436882852834,
+      58.89290197839418
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "arm_L": {
+     "gold_px": 48852,
+     "grip_px": 15945,
+     "render": {
+      "recall": 0.8889381839692398,
+      "precision": 0.9557654391655537,
+      "grip_recall": 0.8947144437824496,
+      "px": 48176
+     },
+     "recon": {
+      "recall": 0.8889381839692398,
+      "precision": 0.9557654391655537,
+      "grip_recall": 0.8947144437824496,
+      "px": 48176
+     },
+     "sam2": {
+      "recall": 0.8889381839692398,
+      "precision": 0.9557654391655537,
+      "grip_recall": 0.8947144437824496,
+      "px": 48176
+     },
+     "projection": {
+      "recall": 0.48612836438923396,
+      "precision": 0.8970146810020193,
+      "grip_recall": 0.5584305047238063,
+      "px": 31578
+     },
+     "proj_grip_shift_px": [
+      4.648419082094563,
+      -11.684163810155837,
+      12.57487510495974
+     ],
+     "object_px_on_gold_arm": 0
+    },
+    "obj_0": {
+     "gold_px": 11965,
+     "iou": 1.0,
+     "pred": 0,
+     "on_gold_robot": 0.0,
+     "px": 13714
+    }
+   },
+   "fail": [
+    "G1 arm R recall 0.91",
+    "G1 arm R precision 0.86",
+    "G2 gripper R recall 0.89",
+    "G1 arm L recall 0.89",
+    "G2 gripper L recall 0.89"
+   ]
+  }
+ ]
+}

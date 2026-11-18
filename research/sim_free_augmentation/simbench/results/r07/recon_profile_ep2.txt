@@ -1,0 +1,61 @@
+You are using a model of type `sam2_video` to instantiate a model of type `sam2`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+Loading weights:   0%|          | 0/357 [00:00<?, ?it/s]Loading weights: 100%|██████████| 357/357 [00:00<00:00, 12995.04it/s]
+Loading weights:   0%|          | 0/517 [00:00<?, ?it/s]Loading weights: 100%|██████████| 517/517 [00:00<00:00, 12667.54it/s]
+You are using a model of type `sam2_video` to instantiate a model of type `sam2`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+Loading weights:   0%|          | 0/357 [00:00<?, ?it/s]Loading weights: 100%|██████████| 357/357 [00:00<00:00, 13248.22it/s]
+total 311.39829564094543
+Wed Nov 18 00:33:46 2026    /tmp/claude-1000/-home-stanley-Stanley-ws-lerobot-openarm/aa60a31a-7179-41fc-a5df-34c63cfc0db7/scratchpad/recon.prof
+
+         30311610 function calls (28407737 primitive calls) in 310.759 seconds
+
+   Ordered by: cumulative time
+   List reduced from 10405 to 45 due to restriction <45>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+5572/1131    0.027    0.000  229.342    0.203 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py:120(decorate_context)
+        1    0.470    0.470  204.919  204.919 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/recon.py:203(_photometric_lag)
+      240    1.697    0.007  199.346    0.831 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/render.py:161(render)
+     5173   19.535    0.004  192.870    0.037 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/render.py:80(source_state)
+     4933    1.367    0.000  188.111    0.038 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/render.py:138(lookup)
+     4094   10.648    0.003   93.693    0.023 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/render.py:106(robust_masks)
+    10874    0.756    0.000   77.631    0.007 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/mesh.py:36(splat)
+    21748   63.562    0.003   72.136    0.003 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/mesh.py:44(_splat)
+     6540    1.505    0.000   48.152    0.007 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/recon.py:127(robot_sil)
+   203574   39.849    0.000   39.849    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+     4334    0.028    0.000   37.358    0.009 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/render.py:77(zbuf)
+    22384    0.020    0.000   36.637    0.002 {method 'max' of 'numpy.ndarray' objects}
+    22384    0.011    0.000   36.617    0.002 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/numpy/_core/_methods.py:42(_amax)
+    12282    7.209    0.001   28.558    0.002 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/render.py:22(_nearest)
+      888    0.021    0.000   25.587    0.029 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/models/sam2_video/modeling_sam2_video.py:1713(forward)
+     1636    0.302    0.000   25.097    0.015 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/recon.py:167(_fg)
+     2424    0.048    0.000   24.914    0.010 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/models/sam2_video/modeling_sam2_video.py:2514(_run_single_frame_inference)
+     5731   11.650    0.002   23.157    0.004 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/recon.py:24(match_exposure)
+96433/96415   22.056    0.000   22.723    0.000 {built-in method torch.tensor}
+    17067   19.982    0.001   19.982    0.001 {distanceTransform}
+        3    0.130    0.043   18.930    6.310 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/recon.py:175(_plate)
+     2313    0.023    0.000   15.872    0.007 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/models/sam2_video/modeling_sam2_video.py:2388(_prepare_memory_conditioned_features)
+    12282   15.479    0.001   15.479    0.001 {distanceTransformWithLabels}
+     2313    0.036    0.000   10.770    0.005 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/models/sam2_video/modeling_sam2_video.py:2339(_process_object_pointers)
+       38    0.000    0.000   10.696    0.281 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/torch/_ops.py:368(fallthrough)
+    27977   10.552    0.000   10.552    0.000 {method 'cpu' of 'torch._C.TensorBase' objects}
+     4094    8.897    0.002    8.897    0.002 {method 'argmin' of 'numpy.ndarray' objects}
+    76884    0.072    0.000    8.576    0.000 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:51(_wrapfunc)
+ 674659/4    0.616    0.000    8.178    2.045 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py:1783(_call_impl)
+   1784/5    0.029    0.000    7.943    1.589 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/torch/autograd/grad_mode.py:289(__enter__)
+        2    0.105    0.052    7.688    3.844 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/recon.py:427(_masks)
+    51579    5.281    0.000    5.809    0.000 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/numpy/linalg/_linalg.py:2394(lstsq)
+        1    0.036    0.036    5.737    5.737 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/recon.py:193(_lag_scan)
+    12286    0.008    0.000    5.403    0.000 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:2018(nonzero)
+    12288    5.381    0.000    5.381    0.000 {method 'nonzero' of 'numpy.ndarray' objects}
+    21908    0.019    0.000    5.317    0.000 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/modeling_layers.py:59(__call__)
+   290139    5.166    0.000    5.166    0.000 {method 'astype' of 'numpy.ndarray' objects}
+     2424    0.204    0.000    5.044    0.002 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/models/sam2_video/modeling_sam2_video.py:1901(_single_frame_forward)
+     2313    0.050    0.000    4.793    0.002 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/models/sam2_video/modeling_sam2_video.py:952(forward)
+    10874    2.063    0.000    4.754    0.000 /home/stanley/Stanley_ws/lerobot_openarm_simbench/research/sim_free_augmentation/sfagen/sfagen/mesh.py:65(fill_holes)
+     9252    0.221    0.000    4.648    0.001 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/models/sam2_video/modeling_sam2_video.py:913(forward)
+ 1884/942    0.006    0.000    4.582    0.005 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/utils/generic.py:870(wrapper)
+      942    0.006    0.000    4.492    0.005 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/transformers/models/sam2/modeling_sam2.py:684(forward)
+    10875    0.032    0.000    4.368    0.000 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:1015(isin)
+    10875    4.077    0.000    4.316    0.000 /home/stanley/Stanley_ws/lerobot_openarm/.venv/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py:862(_in1d)
+
+

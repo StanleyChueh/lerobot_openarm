@@ -21,6 +21,23 @@ import cv2, numpy as np, torch
 from . import mesh
 
 
+def match_exposure(img, ref, valid=None, step=4):
+    """R07: per-channel robust gain + offset that maps img onto ref (camera auto exposure / white balance), fitted on
+    `valid` pixels (every `step`-th) with 3 trimmed least-squares passes; changed pixels (robot, object) are outliers."""
+    m = np.ones(img.shape[:2], bool) if valid is None else valid.copy(); sub = np.zeros_like(m); sub[::step, ::step] = True; m &= sub
+    if m.sum() < 500:
+        return img
+    out = img.astype(np.float32)
+    for c in range(img.shape[2]):
+        x = img[..., c][m].astype(np.float32); y = ref[..., c][m].astype(np.float32); keep = np.ones(len(x), bool); a, b = 1.0, 0.0
+        for _ in range(3):
+            if keep.sum() < 100:
+                break
+            a, b = np.linalg.lstsq(np.c_[x[keep], np.ones(keep.sum())], y[keep], rcond=None)[0]; keep = np.abs(a * x + b - y) < 20
+        out[..., c] = a * out[..., c] + b
+    return np.clip(out, 0, 255).astype(np.uint8)
+
+
 def interp_rows(X, t):
     T = len(X); t = np.clip(t, 0, T - 1); i = np.floor(t).astype(int); j = np.minimum(i + 1, T - 1); f = (t - i)[..., None]
     return X[i] * (1 - f) + X[j] * f
@@ -113,8 +130,45 @@ class Recon:
         side = np.array(self.G.side + ["X"])[lab.cpu().numpy()]
         return side if sides else np.isin(side, self.arms)
 
+    def scene_labels(self, j):
+        """Joint z-buffer of the robot and the object proxies at video frame j: per pixel the robot geometry index
+        (< G.ng), G.ng + k for object k, or -1."""
+        q = {s: self.gv[s][j] for s in self.arms}; g = {s: float(self.grip_v[s][j]) for s in self.grip_v}
+        P = self.G.world(self.G.placements(q, g)); ids = self.G.gid
+        for k, o in enumerate(self.objects):
+            T = self.obj_pose(k, j + self.lag)
+            Po = torch.tensor(o["points"] @ T[:3, :3].T + T[:3, 3], dtype=torch.float32, device=self.dev)
+            P = torch.cat([P, Po]); ids = torch.cat([ids, torch.full((len(Po),), self.G.ng + k, dtype=torch.long, device=self.dev)])
+        return mesh.splat(P, ids, self.cam, dev=self.dev)[1].cpu().numpy()
+
+    def _repair(self, j, sd, thr, skip=()):
+        """R05 in-place repair of the arm masks of frame j with the projected URDF (reconstruction.mask_repair = thr):
+        background: drop pixels farther than 25 px (at 640 px width) from the arm's projection; ownership: drop pixels
+        where an object proxy is in front; occlusion: a prompted link whose visible silhouette is covered < thr gets
+        that silhouette (eroded 2 px) added. Links and owners come from the URDF only. Returns the links added."""
+        sc = self.W / 640; ker = lambda px: np.ones((2 * max(1, round(px * sc)) + 1,) * 2, np.uint8)  # noqa: E731
+        lab = self.scene_labels(j); ng = self.G.ng; side = np.array(self.G.side); added = 0
+        for s in self.arms:
+            m = (self.masks[s][j] > 0) & (cv2.dilate((sd == s).astype(np.uint8), ker(25)) > 0) & (lab < ng)
+            for i in np.flatnonzero(side == s):
+                vis = lab == i; n = int(vis.sum())
+                if n < 30 * sc * sc or any(x in self.robot.links[i][0] for x in skip):
+                    continue
+                if (m & vis).sum() < thr * n:
+                    er = cv2.erode(vis.astype(np.uint8), ker(2)) > 0
+                    m |= er if er.any() else vis; added += 1
+            self.masks[s][j] = m
+        for i, a in enumerate(self.arms):                    # one owner per pixel: the z-buffer winner
+            for b in self.arms[i + 1:]:
+                both = (self.masks[a][j] > 0) & (self.masks[b][j] > 0); wb = both & np.isin(lab, np.flatnonzero(side == b))
+                self.masks[a][j][wb] = 0; self.masks[b][j][both & ~wb] = 0
+        return added
+
     def _fg(self, j, plate, thr=None):
-        fg = np.abs(self.F[j].astype(np.int16) - plate.astype(np.int16)).max(2) > (thr or self.fg_thr)
+        img = self.F[j]
+        if self.ctx.cfg.get("reconstruction", {}).get("photometric_align"):   # R07: auto exposure is not "change"
+            img = match_exposure(img, plate, ~(cv2.dilate(self.robot_sil(j).astype(np.uint8), np.ones((15, 15), np.uint8)) > 0))
+        fg = np.abs(img.astype(np.int16) - plate.astype(np.int16)).max(2) > (thr or self.fg_thr)
         return cv2.morphologyEx(fg.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)) > 0
 
     # ------------------------------------------------------------------ plate
@@ -205,7 +259,8 @@ class Recon:
         r = cv2.dilate(self.robot_sil(0).astype(np.uint8), np.ones((7, 7), np.uint8)) > 0
         # the object = what disappears when it is picked up: frame 0 vs the median of robot-free pixels AFTER the grasp
         ref, valid = self._after_ref(tg + 20)
-        fg = (np.abs(self.F[0].astype(np.int16) - ref.astype(np.int16)).max(2) > self.fg_thr) & valid
+        f0 = match_exposure(self.F[0], ref, valid & ~r) if self.ctx.cfg.get("reconstruction", {}).get("photometric_align") else self.F[0]
+        fg = (np.abs(f0.astype(np.int16) - ref.astype(np.int16)).max(2) > self.fg_thr) & valid
         fg = (cv2.morphologyEx(fg.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)) > 0) & ~r
         for o in self.objects:
             fg &= ~self.obj_sil(self.objects.index(o), o["table"], dil=9)
@@ -216,6 +271,11 @@ class Recon:
         keep = [k for k in range(1, n) if st[k, cv2.CC_STAT_AREA] >= 40 and (near[lab == k] > 0).any()]
         m = np.isin(lab, keep) & (far > 0)
         p = oc["proxy"]
+        if self.ctx.cfg.get("reconstruction", {}).get("object_footprint") == "sam2" and p["type"] != "cylinder":   # R07
+            from .segment import footprint_mask
+            m2 = footprint_mask(self.F[0], (u0, v0), fg, self.dev)
+            if m2 is not None:
+                m = m2 & ~r
         if p["type"] == "cylinder":
             h_obj = p["length"] if p.get("axis", "vertical") == "vertical" else 2 * p["radius"]
         else:
@@ -371,23 +431,31 @@ class Recon:
         self.masks = {s: np.zeros((self.T, self.H, self.W), np.uint8) for s in self.arms}
         for k in range(len(self.objects)):
             self.masks[f"obj{k}"] = np.zeros((self.T, self.H, self.W), np.uint8)
-        sam = None
+        sam = None; cut = rc.get("prompt_object_cut", "neighbourhood"); rep = rc.get("mask_repair"); skip = tuple(rc.get("sam2_exclude_links", []))
         if mode == "sam2":
-            cp = self.ctx.cache_dir / f"sam2_ep{self.e}.npz"
+            so = rc.get("object_masks", "plate") == "sam2" and bool(self.objects)   # R06: objects as SAM2 tracks
+            from .segment import cache_name
+            cp = self.ctx.cache_dir / cache_name(rc, self.e, bool(self.objects))
             if cp.exists():
-                z = np.load(cp); sam = {s: z[s] for s in self.arms}
+                z = np.load(cp); sam = {s: z[s] for s in z.files}
             else:
                 from .segment import segment_arms
-                sam, meta = segment_arms(self, self.dev, rc.get("sam2_keyframe_every", 15), tuple(rc.get("sam2_exclude_links", [])))
+                sam, meta = segment_arms(self, self.dev, rc.get("sam2_keyframe_every", 15), skip, cut=cut, objects=so, object_prompt_kind=rc.get("object_prompt", "mask"), arm_prompt_kind=rc.get("arm_prompt", "hull"))
                 np.savez_compressed(cp, **sam); self.info["sam2"] = meta
+        self.repaired_links = 0
         for j in range(self.T):
             sd = self.robot_sil(j, sides=True); robot = np.isin(sd, self.arms)
             for s in self.arms:
                 self.masks[s][j] = sam[s][j] if sam is not None else (sd == s)
+            if sam is not None and rep:
+                self.repaired_links += self._repair(j, sd, float(rep), skip)
             if sam is not None:
-                robot = robot | np.any([sam[s][j] > 0 for s in self.arms], axis=0)
+                robot = robot | np.any([self.masks[s][j] > 0 for s in self.arms], axis=0)
             fg = self._fg(j, self.plate, 25)
             for k in range(len(self.objects)):
-                self.masks[f"obj{k}"][j] = self.obj_sil(k, self.obj_pose(k, j + self.lag), dil=21) & fg & ~robot
+                if sam is not None and f"objok{k}" in sam and sam[f"objok{k}"][j]:
+                    self.masks[f"obj{k}"][j] = sam[f"obj{k}"][j] & ~np.any([self.masks[s][j] > 0 for s in self.arms], axis=0)
+                else:
+                    self.masks[f"obj{k}"][j] = self.obj_sil(k, self.obj_pose(k, j + self.lag), dil=21) & fg & ~robot
                 for s in self.arms:
                     self.masks[s][j][self.masks[f"obj{k}"][j] > 0] = 0

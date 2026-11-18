@@ -1,0 +1,1235 @@
+{
+ "rule": "N=100 synthetic, rounds over 3 cm cells, farthest-point (real demos count first); least-used source, then distortion",
+ "per_cell_counts_incl_real": {
+  "3": 17,
+  "2": 24,
+  "1": 11
+ },
+ "shortfall": 0,
+ "candidates": 239,
+ "selected": 100,
+ "families_selected": {
+  "object_workspace": 92,
+  "interaction_location": 8
+ },
+ "families_available": {
+  "object_workspace": 166,
+  "interaction_location": 62,
+  "interaction_timing": 11
+ },
+ "cells_with_episodes": 52,
+ "per_source": {
+  "0": 11,
+  "1": 8,
+  "2": 11,
+  "3": 12,
+  "4": 8,
+  "5": 7,
+  "6": 7,
+  "7": 11,
+  "8": 13,
+  "9": 12
+ },
+ "selection": [
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_010",
+   "family": "object_workspace",
+   "score": 6.654113085597681,
+   "shift_cm": 10.444086816664457,
+   "pos": [
+    0.12,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_054",
+   "family": "object_workspace",
+   "score": 0.8090070638084045,
+   "shift_cm": 8.529453781376892,
+   "pos": [
+    0.27,
+    -0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_037",
+   "family": "object_workspace",
+   "score": 0.8819737063839296,
+   "shift_cm": 10.735470649554735,
+   "pos": [
+    0.21,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 4,
+   "key": "can_target_081",
+   "family": "object_workspace",
+   "score": 0.3698984259465658,
+   "shift_cm": 7.112190312167746,
+   "pos": [
+    0.36,
+    -0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_033",
+   "family": "object_workspace",
+   "score": 1.3931203982940816,
+   "shift_cm": 11.43999073862528,
+   "pos": [
+    0.18,
+    0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_012",
+   "family": "object_workspace",
+   "score": 5.9424692279000375,
+   "shift_cm": 8.300054546252236,
+   "pos": [
+    0.12,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_014",
+   "family": "object_workspace",
+   "score": 4.856164878225225,
+   "shift_cm": 7.922807253379112,
+   "pos": [
+    0.12,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_077",
+   "family": "object_workspace",
+   "score": 0.4956389705370082,
+   "shift_cm": 7.7199786615353965,
+   "pos": [
+    0.33,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_051",
+   "family": "object_workspace",
+   "score": 1.452084073747391,
+   "shift_cm": 4.481574780648805,
+   "pos": [
+    0.24,
+    0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_020",
+   "family": "object_workspace",
+   "score": 3.3283784033305026,
+   "shift_cm": 7.926082780005871,
+   "pos": [
+    0.15,
+    -0.030000000000000006
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_064",
+   "family": "object_workspace",
+   "score": 0.618780568799256,
+   "shift_cm": 6.189225570218211,
+   "pos": [
+    0.3,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_047",
+   "family": "object_workspace",
+   "score": 1.172403211783358,
+   "shift_cm": 6.3387637277038085,
+   "pos": [
+    0.24,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_030",
+   "family": "object_workspace",
+   "score": 2.3545158869151863,
+   "shift_cm": 7.514925033487615,
+   "pos": [
+    0.18,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 1,
+   "key": "can_target_067",
+   "family": "object_workspace",
+   "score": 0.6842226860538693,
+   "shift_cm": 7.239731757199701,
+   "pos": [
+    0.3,
+    0.030000000000000002
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_060",
+   "family": "object_workspace",
+   "score": 1.0458895975029447,
+   "shift_cm": 3.5422508932488035,
+   "pos": [
+    0.27,
+    0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 4,
+   "key": "can_target_072",
+   "family": "object_workspace",
+   "score": 0.47884096632771833,
+   "shift_cm": 6.795449145156645,
+   "pos": [
+    0.33,
+    -0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_011",
+   "family": "object_workspace",
+   "score": 6.729856255847272,
+   "shift_cm": 7.784116552423423,
+   "pos": [
+    0.12,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_013",
+   "family": "object_workspace",
+   "score": 5.601735493451348,
+   "shift_cm": 7.538626540854743,
+   "pos": [
+    0.12,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_021",
+   "family": "object_workspace",
+   "score": 3.758748219871954,
+   "shift_cm": 3.763391880632313,
+   "pos": [
+    0.15,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_028",
+   "family": "object_workspace",
+   "score": 2.105145711486432,
+   "shift_cm": 9.75670042533039,
+   "pos": [
+    0.18,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_029",
+   "family": "object_workspace",
+   "score": 2.5294130083977926,
+   "shift_cm": 6.834231797161272,
+   "pos": [
+    0.18,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_038",
+   "family": "object_workspace",
+   "score": 2.1142249415839554,
+   "shift_cm": 10.237632665728693,
+   "pos": [
+    0.21,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_039",
+   "family": "object_workspace",
+   "score": 2.468070496681163,
+   "shift_cm": 4.994595078733651,
+   "pos": [
+    0.21,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_042",
+   "family": "object_workspace",
+   "score": 1.1814646220503608,
+   "shift_cm": 9.367531880977229,
+   "pos": [
+    0.21,
+    0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_046",
+   "family": "object_workspace",
+   "score": 1.0291785412418664,
+   "shift_cm": 6.393391008912018,
+   "pos": [
+    0.24,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 1,
+   "key": "can_target_048",
+   "family": "object_workspace",
+   "score": 0.8820721801523258,
+   "shift_cm": 10.54282995552327,
+   "pos": [
+    0.24,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 5,
+   "key": "can_target_065",
+   "family": "object_workspace",
+   "score": 0.940430523773717,
+   "shift_cm": 8.406136973060269,
+   "pos": [
+    0.3,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 6,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "score": 0.48212569093967794,
+   "shift_cm": 7.618768632834397,
+   "pos": [
+    0.36,
+    -0.05999999999999999
+   ]
+  },
+  {
+   "group": "all",
+   "source": 1,
+   "key": "can_target_068",
+   "family": "object_workspace",
+   "score": 0.6921325294327719,
+   "shift_cm": 9.855360613919752,
+   "pos": [
+    0.3,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_019",
+   "family": "object_workspace",
+   "score": 3.718420031735366,
+   "shift_cm": 9.650703410209708,
+   "pos": [
+    0.15,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_055",
+   "family": "object_workspace",
+   "score": 0.8478130591456888,
+   "shift_cm": 7.562867218525246,
+   "pos": [
+    0.27,
+    -0.05999999999999999
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_063",
+   "family": "object_workspace",
+   "score": 0.3898985711589053,
+   "shift_cm": 11.064021928512394,
+   "pos": [
+    0.3,
+    -0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 6,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "score": 0.6608410220014195,
+   "shift_cm": 7.437621851926806,
+   "pos": [
+    0.33,
+    -0.05999999999999999
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_032",
+   "family": "object_workspace",
+   "score": 1.4435690286956848,
+   "shift_cm": 11.260638538547125,
+   "pos": [
+    0.18,
+    0.060000000000000005
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_041",
+   "family": "object_workspace",
+   "score": 1.949950993337982,
+   "shift_cm": 5.780864414460732,
+   "pos": [
+    0.21,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 5,
+   "key": "can_target_066",
+   "family": "object_workspace",
+   "score": 0.8742489099948991,
+   "shift_cm": 6.823497305769223,
+   "pos": [
+    0.3,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_050",
+   "family": "object_workspace",
+   "score": 1.3795735343223776,
+   "shift_cm": 2.8095789782348057,
+   "pos": [
+    0.24,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_023",
+   "family": "object_workspace",
+   "score": 2.548661098847224,
+   "shift_cm": 5.161660797713948,
+   "pos": [
+    0.15,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 5,
+   "key": "can_target_056",
+   "family": "object_workspace",
+   "score": 0.8502756213359858,
+   "shift_cm": 10.849726251369432,
+   "pos": [
+    0.27,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 4,
+   "key": "can_target_084",
+   "family": "object_workspace",
+   "score": 0.6113190553310632,
+   "shift_cm": 3.1692866537260964,
+   "pos": [
+    0.36,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 1,
+   "key": "can_target_076",
+   "family": "object_workspace",
+   "score": 0.6641985590548005,
+   "shift_cm": 6.057040009911771,
+   "pos": [
+    0.33,
+    0.030000000000000002
+   ]
+  },
+  {
+   "group": "all",
+   "source": 6,
+   "key": "can_target_083",
+   "family": "object_workspace",
+   "score": 0.5633112830753869,
+   "shift_cm": 4.78152068375716,
+   "pos": [
+    0.36,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_031",
+   "family": "object_workspace",
+   "score": 2.2482809070958303,
+   "shift_cm": 6.761067549238605,
+   "pos": [
+    0.18,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 6,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "score": 0.4945162978946159,
+   "shift_cm": 5.0,
+   "pos": [
+    0.34045430555266304,
+    0.013637825719106302
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_040",
+   "family": "object_workspace",
+   "score": 2.152976122382609,
+   "shift_cm": 6.26221231821343,
+   "pos": [
+    0.21,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 4,
+   "key": "can_target_058",
+   "family": "object_workspace",
+   "score": 0.7423326130983682,
+   "shift_cm": 8.562479449487933,
+   "pos": [
+    0.27,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_022",
+   "family": "object_workspace",
+   "score": 3.082108729317352,
+   "shift_cm": 4.550028300894386,
+   "pos": [
+    0.15,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 1,
+   "key": "can_target_049",
+   "family": "object_workspace",
+   "score": 0.8562486377683226,
+   "shift_cm": 11.741621710192916,
+   "pos": [
+    0.24,
+    0.030000000000000002
+   ]
+  },
+  {
+   "group": "all",
+   "source": 5,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "score": 0.46560639068234605,
+   "shift_cm": 5.0,
+   "pos": [
+    0.3634223681996736,
+    0.025171705546685026
+   ]
+  },
+  {
+   "group": "all",
+   "source": 4,
+   "key": "can_target_059",
+   "family": "object_workspace",
+   "score": 0.7069982281439602,
+   "shift_cm": 10.667853420841876,
+   "pos": [
+    0.27,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "score": 0.45615892909758543,
+   "shift_cm": 5.0,
+   "pos": [
+    0.27214077952816174,
+    -0.00473233177882567
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "score": 0.37016555606933327,
+   "shift_cm": 8.001377721501838,
+   "pos": [
+    0.33,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_076",
+   "family": "object_workspace",
+   "score": 0.4897719553637665,
+   "shift_cm": 6.47583398203109,
+   "pos": [
+    0.33,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_020",
+   "family": "object_workspace",
+   "score": 3.7208408152055226,
+   "shift_cm": 6.682035421899621,
+   "pos": [
+    0.15,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_032",
+   "family": "object_workspace",
+   "score": 2.11337189520245,
+   "shift_cm": 7.276673041424618,
+   "pos": [
+    0.18,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_055",
+   "family": "object_workspace",
+   "score": 1.025553934928034,
+   "shift_cm": 5.53091139650058,
+   "pos": [
+    0.27,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 5,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "score": 0.4867400382327183,
+   "shift_cm": 8.524043658865992,
+   "pos": [
+    0.36,
+    -0.05999999999999999
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_067",
+   "family": "object_workspace",
+   "score": 0.5815090041420694,
+   "shift_cm": 4.074848432384657,
+   "pos": [
+    0.3,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_012",
+   "family": "object_workspace",
+   "score": 6.506159393851975,
+   "shift_cm": 5.486892706204513,
+   "pos": [
+    0.12,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_013",
+   "family": "object_workspace",
+   "score": 5.883045659382705,
+   "shift_cm": 4.197560319648575,
+   "pos": [
+    0.12,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_014",
+   "family": "object_workspace",
+   "score": 5.252209941952817,
+   "shift_cm": 4.809681247731103,
+   "pos": [
+    0.12,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_021",
+   "family": "object_workspace",
+   "score": 3.112650819388302,
+   "shift_cm": 5.723877434678587,
+   "pos": [
+    0.15,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_023",
+   "family": "object_workspace",
+   "score": 3.455806135313069,
+   "shift_cm": 10.123146191289752,
+   "pos": [
+    0.15,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_030",
+   "family": "object_workspace",
+   "score": 2.3822635314052425,
+   "shift_cm": 10.322266416936499,
+   "pos": [
+    0.18,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_031",
+   "family": "object_workspace",
+   "score": 2.1939765689913884,
+   "shift_cm": 1.6045637897572538,
+   "pos": [
+    0.18,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_033",
+   "family": "object_workspace",
+   "score": 2.1535214108824663,
+   "shift_cm": 9.442375483012643,
+   "pos": [
+    0.18,
+    0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_038",
+   "family": "object_workspace",
+   "score": 2.239996963024827,
+   "shift_cm": 7.328577205302672,
+   "pos": [
+    0.21,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_039",
+   "family": "object_workspace",
+   "score": 2.277137648029542,
+   "shift_cm": 7.938023233676607,
+   "pos": [
+    0.21,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_041",
+   "family": "object_workspace",
+   "score": 1.2764388058048526,
+   "shift_cm": 7.217271559903475,
+   "pos": [
+    0.21,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_042",
+   "family": "object_workspace",
+   "score": 1.7047943560116445,
+   "shift_cm": 6.754367745272153,
+   "pos": [
+    0.21,
+    0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_047",
+   "family": "object_workspace",
+   "score": 0.9810345060485841,
+   "shift_cm": 4.088379588557359,
+   "pos": [
+    0.24,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_048",
+   "family": "object_workspace",
+   "score": 0.9373194854375781,
+   "shift_cm": 3.2487300176265563,
+   "pos": [
+    0.24,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_050",
+   "family": "object_workspace",
+   "score": 1.2334215431192865,
+   "shift_cm": 5.1929061430651835,
+   "pos": [
+    0.24,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_051",
+   "family": "object_workspace",
+   "score": 1.1558566050553765,
+   "shift_cm": 7.91378032184476,
+   "pos": [
+    0.24,
+    0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_056",
+   "family": "object_workspace",
+   "score": 1.0187233196998908,
+   "shift_cm": 2.5358193830072744,
+   "pos": [
+    0.27,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_060",
+   "family": "object_workspace",
+   "score": 0.9919809567457165,
+   "shift_cm": 7.450180160486719,
+   "pos": [
+    0.27,
+    0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_064",
+   "family": "object_workspace",
+   "score": 0.46887683964529925,
+   "shift_cm": 8.250710636444376,
+   "pos": [
+    0.3,
+    -0.05999999999999999
+   ]
+  },
+  {
+   "group": "all",
+   "source": 1,
+   "key": "can_target_065",
+   "family": "object_workspace",
+   "score": 0.8369494382465916,
+   "shift_cm": 4.12127190170901,
+   "pos": [
+    0.3,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 4,
+   "key": "can_target_066",
+   "family": "object_workspace",
+   "score": 0.8302560528443287,
+   "shift_cm": 4.385673721256661,
+   "pos": [
+    0.3,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 3,
+   "key": "can_target_068",
+   "family": "object_workspace",
+   "score": 0.7884649049084597,
+   "shift_cm": 5.542635211997021,
+   "pos": [
+    0.3,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 6,
+   "key": "can_target_081",
+   "family": "object_workspace",
+   "score": 0.4000102540439386,
+   "shift_cm": 10.546484291560155,
+   "pos": [
+    0.36,
+    -0.09
+   ]
+  },
+  {
+   "group": "all",
+   "source": 5,
+   "key": "can_target_083",
+   "family": "object_workspace",
+   "score": 0.641170055403955,
+   "shift_cm": 5.5277750470006035,
+   "pos": [
+    0.36,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 6,
+   "key": "can_target_084",
+   "family": "object_workspace",
+   "score": 0.6628158244680851,
+   "shift_cm": 2.3833263766705888,
+   "pos": [
+    0.36,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 6,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "score": 0.6055683170508953,
+   "shift_cm": 3.0,
+   "pos": [
+    0.34045430555266304,
+    0.013637825719106302
+   ]
+  },
+  {
+   "group": "all",
+   "source": 1,
+   "key": "interact_x+5_y+0_z+0",
+   "family": "interaction_location",
+   "score": 0.48182680395862404,
+   "shift_cm": 5.0,
+   "pos": [
+    0.3412099703908898,
+    -0.02952402819032472
+   ]
+  },
+  {
+   "group": "all",
+   "source": 5,
+   "key": "interact_x+3_y+0_z+0",
+   "family": "interaction_location",
+   "score": 0.602046110872495,
+   "shift_cm": 3.0,
+   "pos": [
+    0.3634223681996736,
+    0.025171705546685026
+   ]
+  },
+  {
+   "group": "all",
+   "source": 1,
+   "key": "can_target_057",
+   "family": "object_workspace",
+   "score": 0.7867097721394982,
+   "shift_cm": 7.708779490719972,
+   "pos": [
+    0.27,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 4,
+   "key": "can_target_073",
+   "family": "object_workspace",
+   "score": 0.6371247703990447,
+   "shift_cm": 3.8295132027549825,
+   "pos": [
+    0.33,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 4,
+   "key": "can_target_082",
+   "family": "object_workspace",
+   "score": 0.4660187769866208,
+   "shift_cm": 4.366954696600056,
+   "pos": [
+    0.36,
+    -0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "score": 0.7845846072547465,
+   "shift_cm": 5.0,
+   "pos": [
+    0.2475468637640474,
+    0.03293677308928586
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_022",
+   "family": "object_workspace",
+   "score": 3.4769027716673997,
+   "shift_cm": 9.759106140615327,
+   "pos": [
+    0.15,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_023",
+   "family": "object_workspace",
+   "score": 4.09150587162661,
+   "shift_cm": 11.768276663387436,
+   "pos": [
+    0.15,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_030",
+   "family": "object_workspace",
+   "score": 2.332435595302136,
+   "shift_cm": 3.8255248402909414,
+   "pos": [
+    0.18,
+    0.0
+   ]
+  },
+  {
+   "group": "all",
+   "source": 9,
+   "key": "can_target_031",
+   "family": "object_workspace",
+   "score": 2.2495813348290894,
+   "shift_cm": 9.096827702128333,
+   "pos": [
+    0.18,
+    0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "can_target_032",
+   "family": "object_workspace",
+   "score": 1.9682940440657797,
+   "shift_cm": 2.9179803986862716,
+   "pos": [
+    0.18,
+    0.06
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_038",
+   "family": "object_workspace",
+   "score": 1.021742215913497,
+   "shift_cm": 8.170914950918233,
+   "pos": [
+    0.21,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 2,
+   "key": "interact_x+0_y+5_z+0",
+   "family": "interaction_location",
+   "score": 0.532453806733553,
+   "shift_cm": 5.0,
+   "pos": [
+    0.19521355430589948,
+    0.03510002558047145
+   ]
+  },
+  {
+   "group": "all",
+   "source": 0,
+   "key": "can_target_041",
+   "family": "object_workspace",
+   "score": 0.9575228653269776,
+   "shift_cm": 8.973155107258298,
+   "pos": [
+    0.21,
+    0.060000000000000005
+   ]
+  },
+  {
+   "group": "all",
+   "source": 8,
+   "key": "can_target_047",
+   "family": "object_workspace",
+   "score": 0.6259334917460555,
+   "shift_cm": 10.238211660878479,
+   "pos": [
+    0.24,
+    -0.03
+   ]
+  },
+  {
+   "group": "all",
+   "source": 7,
+   "key": "can_target_048",
+   "family": "object_workspace",
+   "score": 1.3988996594183913,
+   "shift_cm": 3.379032663660114,
+   "pos": [
+    0.24,
+    0.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,5491 @@
+{
+ "can_target_001": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed",
+  "fast_rejection_reasons": [
+   "speed"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.7472041323844496,
+  "accel_ratio_to_real_max": 1.0259658253032937,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.07157145520365177,
+   -0.09581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.09,
+    -0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_002": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed",
+  "fast_rejection_reasons": [
+   "speed"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.567495598694358,
+  "accel_ratio_to_real_max": 1.0101911789830977,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.07157145520365177,
+   -0.06581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.09,
+    -0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_003": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed",
+  "fast_rejection_reasons": [
+   "speed"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.4040089365687347,
+  "accel_ratio_to_real_max": 1.0,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.07157145520365177,
+   -0.03581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.09,
+    0.0
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_004": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed",
+  "fast_rejection_reasons": [
+   "speed"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.2659076612209503,
+  "accel_ratio_to_real_max": 1.0,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.07157145520365177,
+   -0.005810798220520053,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.09,
+    0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_005": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09959688964655947,
+  "ik_rot_err_deg_max": 0.03190100806454183,
+  "ik_pos_err_mm_max_blend": 0.09959688964655947,
+  "ik_rot_err_deg_max_blend": 0.0353364364881138,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.120370340930488,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 87.2967572921568,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2754403415678589,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.121905438530541,
+   1.121905438530541
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.70060783068092,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.0025111127363031116,
+  "placement": {
+   "visible_fraction": 0.42876012994894863,
+   "source_visible_fraction": 1.0,
+   "in_view": false,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    1.9607843137254903,
+    1.0,
+    1.9607843137254903
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": false
+  },
+  "pass": false,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.07157145520365177,
+   0.024189201779479946,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.09,
+    0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_006": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09964149931732119,
+  "ik_rot_err_deg_max": 0.012160715954521862,
+  "ik_pos_err_mm_max_blend": 0.09966606825866406,
+  "ik_rot_err_deg_max_blend": 0.03441507575966802,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.1105211981105128,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 77.09368661103225,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2754644911522222,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.1418052444245004,
+   1.1418052444245004
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.69656184422172,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.004146970123325433,
+  "placement": {
+   "visible_fraction": 0.4192995608867945,
+   "source_visible_fraction": 1.0,
+   "in_view": false,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    1.568627450980392,
+    5.0990195135927845,
+    1.568627450980392
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 4646,
+   "ok": false
+  },
+  "pass": false,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.07157145520365177,
+   0.054189201779479945,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.09,
+    0.09
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_007": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09888573077263445,
+  "ik_rot_err_deg_max": 0.013736039116731078,
+  "ik_pos_err_mm_max_blend": 0.09982487291155365,
+  "ik_rot_err_deg_max_blend": 0.03360903294759954,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0871726797552868,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 63.42373114891668,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2754911254313032,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.172450391508707,
+   1.172450391508707
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.6912854088142,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.014377855223846048,
+  "placement": {
+   "visible_fraction": 0.41008889364892365,
+   "source_visible_fraction": 1.0,
+   "in_view": false,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    1.9607843137254903,
+    6.082762530298219,
+    1.9607843137254903
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 21953,
+   "ok": false
+  },
+  "pass": false,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.07157145520365177,
+   0.08418920177947994,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.09,
+    0.12
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_010": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09684755543449058,
+  "ik_rot_err_deg_max": 0.027167677727980847,
+  "ik_pos_err_mm_max_blend": 0.09684755543449058,
+  "ik_rot_err_deg_max_blend": 0.027167677727980847,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0422977786933387,
+  "accel_ratio_to_real_max": 1.0058376217548872,
+  "min_mesh_distance_mm": 87.49165728207952,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27771042902457316,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.060649794926083,
+   1.060649794926083
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.7262449561091,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.010032785307229064,
+  "placement": {
+   "visible_fraction": 0.7809789011459783,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    1.1764705882352935,
+    4.47213595499958,
+    1.1764705882352935
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.04157145520365177,
+   -0.09581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.12,
+    -0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_011": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.08914507671633126,
+  "ik_rot_err_deg_max": 0.017240126638778625,
+  "ik_pos_err_mm_max_blend": 0.08914507671633126,
+  "ik_rot_err_deg_max_blend": 0.017240126638778625,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.004784452489995,
+  "min_mesh_distance_mm": 87.43380646078191,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2774253013658989,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.051078714014273,
+   1.051078714014273
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.7161130687969,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.010068453991651793,
+  "placement": {
+   "visible_fraction": 0.7692335154046624,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    3.137254901960784,
+    4.47213595499958,
+    3.137254901960784
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.04157145520365177,
+   -0.06581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.12,
+    -0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_012": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.08995967009489067,
+  "ik_rot_err_deg_max": 0.011434830439120101,
+  "ik_pos_err_mm_max_blend": 0.09918473068617852,
+  "ik_rot_err_deg_max_blend": 0.03707565401182131,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.193906103917656,
+  "accel_ratio_to_real_max": 1.019420477329249,
+  "min_mesh_distance_mm": 87.36527015347862,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2754087831486598,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0700056870664707,
+   1.0700056870664707
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.71092767282948,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.008559623848186648,
+  "placement": {
+   "visible_fraction": 0.7580236335725251,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    4.705882352941176,
+    3.0,
+    4.705882352941176
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.04157145520365177,
+   -0.03581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.12,
+    0.0
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_013": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.08952540365720638,
+  "ik_rot_err_deg_max": 0.006446844862780431,
+  "ik_pos_err_mm_max_blend": 0.0997237355815087,
+  "ik_rot_err_deg_max_blend": 0.036294030638967564,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0299579436873592,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 87.32825609815517,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27543150335085004,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.061259918189661,
+   1.061259918189661
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.70255227294183,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.00582231373508213,
+  "placement": {
+   "visible_fraction": 0.7465638499161044,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    4.705882352941176,
+    2.0,
+    4.705882352941176
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.04157145520365177,
+   -0.005810798220520053,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.12,
+    0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_014": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.08180243623280321,
+  "ik_rot_err_deg_max": 0.021174933608033724,
+  "ik_pos_err_mm_max_blend": 0.09796974031533205,
+  "ik_rot_err_deg_max_blend": 0.03512641787939345,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.025212489691134,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 87.29163186692692,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27545528429292027,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0682448478048292,
+   1.0682448478048292
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.68237373496578,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.001248574005324743,
+  "placement": {
+   "visible_fraction": 0.734996965477848,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    1.568627450980392,
+    1.0,
+    1.568627450980392
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.04157145520365177,
+   0.024189201779479946,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.12,
+    0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_015": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.06430975424517794,
+  "ik_rot_err_deg_max": 0.010406829277944585,
+  "ik_pos_err_mm_max_blend": 0.09978189933546393,
+  "ik_rot_err_deg_max_blend": 0.03480396318499364,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0180745796269053,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 75.65912323708852,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27548096295233354,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0914931619880963,
+   1.0914931619880963
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.6961564887043,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.005858208515230334,
+  "placement": {
+   "visible_fraction": 0.7228588768698011,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    1.568627450980392,
+    5.0990195135927845,
+    1.568627450980392
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 2237,
+   "ok": false
+  },
+  "pass": false,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.04157145520365177,
+   0.054189201779479945,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.12,
+    0.09
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_016": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09591626654976149,
+  "ik_rot_err_deg_max": 0.012363282027850175,
+  "ik_pos_err_mm_max_blend": 0.09875343975258405,
+  "ik_rot_err_deg_max_blend": 0.03428396687208747,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 61.4459329953275,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2755091241015726,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.1268776005129035,
+   1.1268776005129035
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.69351884159627,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.017140470961601872,
+  "placement": {
+   "visible_fraction": 0.7113990932133805,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    2.3529411764705888,
+    6.082762530298219,
+    2.3529411764705888
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 19256,
+   "ok": false
+  },
+  "pass": false,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.04157145520365177,
+   0.08418920177947994,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.12,
+    0.12
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_019": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09964210337035348,
+  "ik_rot_err_deg_max": 0.0352738195147884,
+  "ik_pos_err_mm_max_blend": 0.09964210337035348,
+  "ik_rot_err_deg_max_blend": 0.0352738195147884,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0008491492159568,
+  "accel_ratio_to_real_max": 1.0066041552514962,
+  "min_mesh_distance_mm": 87.44368193186799,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2774241808611399,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0253031082051347,
+   1.0253031082051347
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.71468779250694,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.008019075947912624,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    0.3921568627450984,
+    3.605551275463989,
+    0.3921568627450984
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.01157145520365177,
+   -0.09581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.15,
+    -0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_020": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09820011653248233,
+  "ik_rot_err_deg_max": 0.035144160957790355,
+  "ik_pos_err_mm_max_blend": 0.09820011653248233,
+  "ik_rot_err_deg_max_blend": 0.035144160957790355,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0059109944322424,
+  "min_mesh_distance_mm": 87.39181069501544,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.277094619915229,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0158824845730776,
+   1.0158824845730776
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.70627290736965,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.007615540089017658,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    2.352941176470587,
+    3.1622776601683795,
+    2.352941176470587
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.01157145520365177,
+   -0.06581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.15,
+    -0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_021": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09993864050265157,
+  "ik_rot_err_deg_max": 0.03309601734491201,
+  "ik_pos_err_mm_max_blend": 0.09993864050265157,
+  "ik_rot_err_deg_max_blend": 0.03309601734491201,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0438624024078131,
+  "min_mesh_distance_mm": 87.34812697164814,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27542128635620555,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0283621812045385,
+   1.0283621812045385
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.7013855455709,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.005849760011861216,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    3.9215686274509807,
+    3.1622776601683795,
+    3.9215686274509807
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.01157145520365177,
+   -0.03581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.15,
+    0.0
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_022": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09814634791347317,
+  "ik_rot_err_deg_max": 0.048439630473943215,
+  "ik_pos_err_mm_max_blend": 0.09995722142014588,
+  "ik_rot_err_deg_max_blend": 0.048439630473943215,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 87.32385452907201,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27544589640951916,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0151322392647304,
+   1.0151322392647304
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.7079759021815,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.020625129831641775,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    3.9215686274509807,
+    3.0,
+    3.9215686274509807
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.01157145520365177,
+   -0.005810798220520053,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.15,
+    0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_023": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09697216194589953,
+  "ik_rot_err_deg_max": 0.011439948831903125,
+  "ik_pos_err_mm_max_blend": 0.09697216194589953,
+  "ik_rot_err_deg_max_blend": 0.032929178030526224,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 87.24576072633272,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2754717590857109,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0212707751691334,
+   1.0212707751691334
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.70207860608625,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.0022650262897772055,
+  "placement": {
+   "visible_fraction": 0.9989646924422548,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    1.1764705882352935,
+    1.0,
+    1.1764705882352935
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.01157145520365177,
+   0.024189201779479946,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.15,
+    0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_024": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.060216685768448394,
+  "ik_rot_err_deg_max": 0.008926725079807955,
+  "ik_pos_err_mm_max_blend": 0.09903051127927066,
+  "ik_rot_err_deg_max_blend": 0.008926725079807955,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 77.50642093191435,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2754994782290533,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0492830556937485,
+   1.0492830556937485
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.68366579905057,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.010378493895707441,
+  "placement": {
+   "visible_fraction": 0.9967512762843169,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    2.745098039215687,
+    5.0,
+    2.745098039215687
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 347,
+   "ok": false
+  },
+  "pass": false,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.01157145520365177,
+   0.054189201779479945,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.15,
+    0.09
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_025": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09058052816570816,
+  "ik_rot_err_deg_max": 0.010943301070195073,
+  "ik_pos_err_mm_max_blend": 0.09058052816570816,
+  "ik_rot_err_deg_max_blend": 0.010943301070195073,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 65.82700348714937,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2755295827479265,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0900193578291661,
+   1.0900193578291661
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.6776416662411,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.023969946178009627,
+  "placement": {
+   "visible_fraction": 0.9942165577808718,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    3.137254901960784,
+    6.082762530298219,
+    3.137254901960784
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 1675,
+   "ok": false
+  },
+  "pass": false,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.01157145520365177,
+   0.08418920177947994,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.15,
+    0.12
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_026": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09946392126084037,
+  "ik_rot_err_deg_max": 0.011053386587150753,
+  "ik_pos_err_mm_max_blend": 0.09946392126084037,
+  "ik_rot_err_deg_max_blend": 0.011053386587150753,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0,
+  "min_mesh_distance_mm": 55.10693521766138,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2754645253397296,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.136461814832555,
+   1.136461814832555
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.67175162701344,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.04959070463966819,
+  "placement": {
+   "visible_fraction": 0.9898611259862197,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    3.5294117647058822,
+    6.082762530298219,
+    3.5294117647058822
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 1866,
+   "ok": false
+  },
+  "pass": false,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   -0.01157145520365177,
+   0.11418920177947994,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.15,
+    0.15
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_028": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09959344137685848,
+  "ik_rot_err_deg_max": 0.03710165044126183,
+  "ik_pos_err_mm_max_blend": 0.09959344137685848,
+  "ik_rot_err_deg_max_blend": 0.03710165044126183,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0542982912927068,
+  "min_mesh_distance_mm": 87.39946915921969,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27646023519762974,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.007213098562483,
+   1.007213098562483
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.7044935523642,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.004375390860705819,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    2.3529411764705888,
+    3.605551275463989,
+    2.3529411764705888
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.01842854479634823,
+   -0.09581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.18,
+    -0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_029": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09878908185846084,
+  "ik_rot_err_deg_max": 0.033262183456026405,
+  "ik_pos_err_mm_max_blend": 0.09878908185846084,
+  "ik_rot_err_deg_max_blend": 0.033262183456026405,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0495450687115513,
+  "min_mesh_distance_mm": 87.3483307589171,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2759398703036843,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9976600531789181,
+   0.9976600531789181
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.6963509529355,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.00340132113207936,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    0.7843137254901968,
+    2.23606797749979,
+    0.7843137254901968
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.01842854479634823,
+   -0.06581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.18,
+    -0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_030": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09591739773412891,
+  "ik_rot_err_deg_max": 0.032542633381253225,
+  "ik_pos_err_mm_max_blend": 0.09591739773412891,
+  "ik_rot_err_deg_max_blend": 0.032542633381253225,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.043518719300858,
+  "min_mesh_distance_mm": 87.31144326297856,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2754150541633148,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9911228598283317,
+   0.9911228598283317
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.692372041207,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.0010031551303801844,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    2.352941176470587,
+    2.23606797749979,
+    2.352941176470587
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.01842854479634823,
+   -0.03581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.18,
+    0.0
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_031": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: accel",
+  "fast_rejection_reasons": [
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 3.0812982000571116,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.01842854479634823,
+   -0.005810798220520053,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.18,
+    0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_032": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: accel",
+  "fast_rejection_reasons": [
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.7644066406233538,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.01842854479634823,
+   0.024189201779479946,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.18,
+    0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_033": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: accel",
+  "fast_rejection_reasons": [
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 2.077109368699788,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.01842854479634823,
+   0.054189201779479945,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.18,
+    0.09
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_034": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: accel",
+  "fast_rejection_reasons": [
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 2.07298186915054,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.01842854479634823,
+   0.08418920177947994,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.18,
+    0.12
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_035": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed,accel",
+  "fast_rejection_reasons": [
+   "speed",
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.9574170926753798,
+  "accel_ratio_to_real_max": 6.723945295727463,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.01842854479634823,
+   0.11418920177947994,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.18,
+    0.15
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_037": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09964370238893339,
+  "ik_rot_err_deg_max": 0.037167035738932076,
+  "ik_pos_err_mm_max_blend": 0.09964370238893339,
+  "ik_rot_err_deg_max_blend": 0.037167035738932076,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0212519356341756,
+  "accel_ratio_to_real_max": 1.0466858614321854,
+  "min_mesh_distance_mm": 87.35029298101523,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27629465679786,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9827597934201378,
+   0.9827597934201378
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.69314559562008,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.0027458639905997284,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    3.5294117647058822,
+    2.23606797749979,
+    3.5294117647058822
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.04842854479634823,
+   -0.09581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.21,
+    -0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_038": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09694485102135968,
+  "ik_rot_err_deg_max": 0.03350482572379053,
+  "ik_pos_err_mm_max_blend": 0.09694485102135968,
+  "ik_rot_err_deg_max_blend": 0.03350482572379053,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 1.0433335350482527,
+  "min_mesh_distance_mm": 87.30406425487026,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2757491625928207,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9768256281339475,
+   0.9768256281339475
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.68622133397025,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.004426432110432588,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    3.137254901960784,
+    1.4142135623730951,
+    3.137254901960784
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.04842854479634823,
+   -0.06581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.21,
+    -0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_039": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed,accel",
+  "fast_rejection_reasons": [
+   "speed",
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 4.7301398793421665,
+  "accel_ratio_to_real_max": 15.21174484791274,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.04842854479634823,
+   -0.03581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.21,
+    0.0
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_040": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed,accel",
+  "fast_rejection_reasons": [
+   "speed",
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 2.9441313899866794,
+  "accel_ratio_to_real_max": 9.744453949216643,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.04842854479634823,
+   -0.005810798220520053,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.21,
+    0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_041": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: accel",
+  "fast_rejection_reasons": [
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.128170713605551,
+  "accel_ratio_to_real_max": 3.9653885851205106,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.04842854479634823,
+   0.024189201779479946,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.21,
+    0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_042": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: accel",
+  "fast_rejection_reasons": [
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 3.3970576047364682,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.04842854479634823,
+   0.054189201779479945,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.21,
+    0.09
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_043": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: accel",
+  "fast_rejection_reasons": [
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0,
+  "accel_ratio_to_real_max": 3.2293993069486446,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.04842854479634823,
+   0.08418920177947994,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.21,
+    0.12
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_047": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09937402847561418,
+  "ik_rot_err_deg_max": 0.03480918307268873,
+  "ik_pos_err_mm_max_blend": 0.09937402847561418,
+  "ik_rot_err_deg_max_blend": 0.03480918307268873,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0403255149638575,
+  "accel_ratio_to_real_max": 1.0379208635084585,
+  "min_mesh_distance_mm": 87.26380744134048,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27560918033875803,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9675454587091902,
+   0.9675454587091902
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.67723837720516,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.020557841060725446,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    4.7058823529411775,
+    1.0,
+    4.7058823529411775
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.07842854479634823,
+   -0.06581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.24,
+    -0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_048": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09957416027240582,
+  "ik_rot_err_deg_max": 0.033265203422215034,
+  "ik_pos_err_mm_max_blend": 0.09957416027240582,
+  "ik_rot_err_deg_max_blend": 0.033265203422215034,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.002948228598792,
+  "accel_ratio_to_real_max": 1.036199880976434,
+  "min_mesh_distance_mm": 87.2501507091524,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2750023471495913,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.97036039459523,
+   0.97036039459523
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.6793624009679,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.02620894061286516,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    4.313725490196077,
+    1.0,
+    4.313725490196077
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.07842854479634823,
+   -0.03581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.24,
+    0.0
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_049": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed,accel",
+  "fast_rejection_reasons": [
+   "speed",
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 5.485749366749446,
+  "accel_ratio_to_real_max": 17.524800411809327,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.07842854479634823,
+   -0.005810798220520053,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.24,
+    0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_050": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed,accel",
+  "fast_rejection_reasons": [
+   "speed",
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 3.119639979611207,
+  "accel_ratio_to_real_max": 10.28171708117602,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.07842854479634823,
+   0.024189201779479946,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.24,
+    0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_051": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed,accel",
+  "fast_rejection_reasons": [
+   "speed",
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.260416039166314,
+  "accel_ratio_to_real_max": 4.438981526723916,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.07842854479634823,
+   0.054189201779479945,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.24,
+    0.09
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_052": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: accel",
+  "fast_rejection_reasons": [
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.170161120312482,
+  "accel_ratio_to_real_max": 4.120065092703121,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.07842854479634823,
+   0.08418920177947994,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.24,
+    0.12
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "can_target_057": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09986496163611583,
+  "ik_rot_err_deg_max": 0.035667462027991335,
+  "ik_pos_err_mm_max_blend": 0.09986496163611583,
+  "ik_rot_err_deg_max_blend": 0.035667462027991335,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.062835502985298,
+  "accel_ratio_to_real_max": 1.034361949138424,
+  "min_mesh_distance_mm": 87.21411301364876,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.2749184891206046,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9757005262202164,
+   0.9757005262202164
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.6714096598895,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.04283119894782361,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    5.882352941176471,
+    2.0,
+    5.882352941176471
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.10842854479634825,
+   -0.03581079822052005,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.27,
+    0.0
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_058": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09931040534193822,
+  "ik_rot_err_deg_max": 0.036898551736535584,
+  "ik_pos_err_mm_max_blend": 0.09931040534193822,
+  "ik_rot_err_deg_max_blend": 0.036898551736535584,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.0296948532262746,
+  "accel_ratio_to_real_max": 1.0504368278414404,
+  "min_mesh_distance_mm": 87.22064346476256,
+  "source_min_mesh_distance_same_frames_mm": 87.30131029641207,
+  "lowest_arm_z_m": 0.27426758681436914,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0,
+   1.0
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9880806093465365,
+   0.9880806093465365
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 137.67894203202076,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.05743615508557731,
+  "placement": {
+   "visible_fraction": 1.0,
+   "source_visible_fraction": 1.0,
+   "in_view": true,
+   "on_table": true,
+   "support_footprint_fraction": null,
+   "plate_hsv_diff": [
+    6.274509803921568,
+    3.1622776601683795,
+    6.274509803921568
+   ],
+   "appearance_space": "lab",
+   "gap_to_other_objects_m": Infinity,
+   "robot_points_near_object_extra_vs_source": 0,
+   "ok": true
+  },
+  "pass": true,
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.10842854479634825,
+   -0.005810798220520053,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "blend_space": "joint",
+   "exact_from": 68,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.27,
+    0.03
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "can_target_059": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: speed,accel",
+  "fast_rejection_reasons": [
+   "speed",
+   "accel"
+  ],
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 5.745163315268735,
+  "accel_ratio_to_real_max": 18.318912829632236,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "object_workspace",
+  "object": "can",
+  "shift_m": [
+   0.10842854479634825,
+   0.024189201779479946,
+   0.0
+  ],
+  "marks": {
+   "t_motion": 0,
+   "t_approach": 47,
+   "t_grasp": 83,
+   "t_rejoin": 150,
+   "next_event": 160,
+   "r_app_m": 0.1,
+   "approach_metric": "3D distance to object bounds; final travel bout",
+   "protected_windows": [
+    [
+     75,
+     95
+    ],
+    [
+     152,
+     172
+    ],
+    [
+     156,
+     176
+    ]
+   ],
+   "transit_lift_m": 0.0,
+   "t_motion_out": 0,
+   "t_approach_out": 47,
+   "t_grasp_out": 83,
+   "t_rejoin_out": 150,
+   "time_scale": 1.0,
+   "retiming_mode": "local",
+   "source_t_grasp": 83,
+   "frames_out": 249,
+   "frames_added": 0,
+   "src_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "out_knots": [
+    0,
+    47,
+    75,
+    93,
+    95,
+    150,
+    152,
+    156,
+    172,
+    176,
+    248
+   ],
+   "target_xy_m": [
+    0.27,
+    0.06
+   ]
+  },
+  "lead": 2,
+  "t_rejoin": 150,
+  "blend_space": "cartesian"
+ },
+ "interact_x+3_y+0_z+0": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: limits",
+  "fast_rejection_reasons": [
+   "limits"
+  ],
+  "limit_violations": 57,
+  "speed_ratio_to_real_max": 0.9774026881747359,
+  "accel_ratio_to_real_max": 1.3787163458424032,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "interaction_location",
+  "object": null,
+  "shift_m": [
+   0.03,
+   0.0,
+   0.0
+  ],
+  "marks": {
+   "t_ramp_in": 93,
+   "t_window_start": 138,
+   "t_window_end": 203,
+   "t_ramp_out_end": 248,
+   "min_tcp_distance_m": 0.12911472751142225
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ },
+ "interact_x-3_y+0_z+0": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.0991885364019192,
+  "ik_rot_err_deg_max": 0.03542104651619639,
+  "ik_pos_err_mm_max_blend": 0.7816356436673596,
+  "ik_rot_err_deg_max_blend": 0.16059709710740175,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.1126574052836347,
+  "accel_ratio_to_real_max": 1.0901417504695756,
+  "min_mesh_distance_mm": 40.20349038335067,
+  "source_min_mesh_distance_same_frames_mm": 40.19258501187086,
+  "lowest_arm_z_m": 0.2949641328024842,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   0.9989685265520303,
+   0.999827919762107
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.015654145199202,
+   1.0567614287182607
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 129.17578296923259,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.009749713014067796,
+  "pass": true,
+  "family": "interaction_location",
+  "object": null,
+  "shift_m": [
+   -0.03,
+   0.0,
+   0.0
+  ],
+  "marks": {
+   "t_ramp_in": 93,
+   "t_window_start": 138,
+   "t_window_end": 203,
+   "t_ramp_out_end": 248,
+   "min_tcp_distance_m": 0.12911472751142225
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ },
+ "interact_x+0_y+3_z+0": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.09888450376338029,
+  "ik_rot_err_deg_max": 0.05111071417241323,
+  "ik_pos_err_mm_max_blend": 0.3990753076334045,
+  "ik_rot_err_deg_max_blend": 0.10772576463987339,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 0.9129845649689788,
+  "accel_ratio_to_real_max": 1.001407601167788,
+  "min_mesh_distance_mm": 40.171875837587805,
+  "source_min_mesh_distance_same_frames_mm": 40.19258501187086,
+  "lowest_arm_z_m": 0.29500469196911117,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.000013390275858,
+   1.0004429136597686
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.967183818662617,
+   1.0313768122694034
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 129.09540863584863,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.030142687161893722,
+  "pass": true,
+  "family": "interaction_location",
+  "object": null,
+  "shift_m": [
+   0.0,
+   0.03,
+   0.0
+  ],
+  "marks": {
+   "t_ramp_in": 93,
+   "t_window_start": 138,
+   "t_window_end": 203,
+   "t_ramp_out_end": 248,
+   "min_tcp_distance_m": 0.12911472751142225
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ },
+ "interact_x+0_y-3_z+0": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: limits,accel",
+  "fast_rejection_reasons": [
+   "limits",
+   "accel"
+  ],
+  "limit_violations": 52,
+  "speed_ratio_to_real_max": 1.0748494314716672,
+  "accel_ratio_to_real_max": 1.7323615014294091,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "interaction_location",
+  "object": null,
+  "shift_m": [
+   0.0,
+   -0.03,
+   0.0
+  ],
+  "marks": {
+   "t_ramp_in": 93,
+   "t_window_start": 138,
+   "t_window_end": 203,
+   "t_ramp_out_end": 248,
+   "min_tcp_distance_m": 0.12911472751142225
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ },
+ "interact_x+5_y+0_z+0": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: limits,accel",
+  "fast_rejection_reasons": [
+   "limits",
+   "accel"
+  ],
+  "limit_violations": 59,
+  "speed_ratio_to_real_max": 1.176874600295692,
+  "accel_ratio_to_real_max": 3.0325382366483007,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "interaction_location",
+  "object": null,
+  "shift_m": [
+   0.05,
+   0.0,
+   0.0
+  ],
+  "marks": {
+   "t_ramp_in": 93,
+   "t_window_start": 138,
+   "t_window_end": 203,
+   "t_ramp_out_end": 248,
+   "min_tcp_distance_m": 0.12911472751142225
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ },
+ "interact_x-5_y+0_z+0": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.08804467689907548,
+  "ik_rot_err_deg_max": 0.017178961356953463,
+  "ik_pos_err_mm_max_blend": 0.08804467689907548,
+  "ik_rot_err_deg_max_blend": 0.017178961356953463,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 1.2493584519929717,
+  "accel_ratio_to_real_max": 1.0620507369268126,
+  "min_mesh_distance_mm": 40.15287725745257,
+  "source_min_mesh_distance_same_frames_mm": 40.19258501187086,
+  "lowest_arm_z_m": 0.29497000240074694,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.0000249413332332,
+   1.0001763436001743
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   1.0343437840995016,
+   1.1077562021451242
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 129.0701622184115,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": -0.003675862109836503,
+  "pass": true,
+  "family": "interaction_location",
+  "object": null,
+  "shift_m": [
+   -0.05,
+   0.0,
+   0.0
+  ],
+  "marks": {
+   "t_ramp_in": 93,
+   "t_window_start": 138,
+   "t_window_end": 203,
+   "t_ramp_out_end": 248,
+   "min_tcp_distance_m": 0.12911472751142225
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "joint",
+  "ik_blend_scope": "exact segment only (joint-space blend; exact IK from max(first full-offset frame, t_grasp-15) for object families, the interaction window for F2)"
+ },
+ "interact_x+0_y+5_z+0": {
+  "action_reference_error_max": 0.0,
+  "finite_arrays": true,
+  "ik_pos_err_mm_max": 0.08679212883568597,
+  "ik_rot_err_deg_max": 0.006946645528170005,
+  "ik_pos_err_mm_max_blend": 0.6633838394373275,
+  "ik_rot_err_deg_max_blend": 0.17636256159826239,
+  "limit_violations": 0,
+  "speed_ratio_to_real_max": 0.9076139955874512,
+  "accel_ratio_to_real_max": 1.0024614383975468,
+  "min_mesh_distance_mm": 40.16042447705557,
+  "source_min_mesh_distance_same_frames_mm": 40.19258501187086,
+  "lowest_arm_z_m": 0.29502482698779336,
+  "real_lowest_arm_z_m": 0.2684644684541089,
+  "start_state_err_rad": 0.0,
+  "frames_out": 249,
+  "source_frames": 249,
+  "tcp_peak_speed_ratio": [
+   1.000003947001823,
+   1.0007069220864397
+  ],
+  "tcp_mean_speed_ratio_edited": [
+   0.9621043307543243,
+   1.0568366798182511
+  ],
+  "timing_ok": true,
+  "min_hand_distance_mm": 129.08417812684118,
+  "source_min_hand_distance_same_frames_mm": 100.0,
+  "untouched_bit_identical": true,
+  "identical_after_rejoin": true,
+  "object_lowest_point_vs_source_mm": 0.049809026109598475,
+  "pass": true,
+  "family": "interaction_location",
+  "object": null,
+  "shift_m": [
+   0.0,
+   0.05,
+   0.0
+  ],
+  "marks": {
+   "t_ramp_in": 93,
+   "t_window_start": 138,
+   "t_window_end": 203,
+   "t_ramp_out_end": 248,
+   "min_tcp_distance_m": 0.12911472751142225
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ },
+ "interact_x+0_y-5_z+0": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: limits,speed,accel",
+  "fast_rejection_reasons": [
+   "limits",
+   "speed",
+   "accel"
+  ],
+  "limit_violations": 55,
+  "speed_ratio_to_real_max": 1.3987226400895085,
+  "accel_ratio_to_real_max": 3.4855415643229963,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "interaction_location",
+  "object": null,
+  "shift_m": [
+   0.0,
+   -0.05,
+   0.0
+  ],
+  "marks": {
+   "t_ramp_in": 93,
+   "t_window_start": 138,
+   "t_window_end": 203,
+   "t_ramp_out_end": 248,
+   "min_tcp_distance_m": 0.12911472751142225
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ },
+ "timing_-10": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: limits",
+  "fast_rejection_reasons": [
+   "limits"
+  ],
+  "limit_violations": 7,
+  "speed_ratio_to_real_max": 1.0049790333542568,
+  "accel_ratio_to_real_max": 1.0,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "interaction_timing",
+  "object": null,
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "marks": {
+   "t_grasp": 83,
+   "t_rejoin": 248,
+   "dt_frames": -10,
+   "t_window_start": 150,
+   "t_window_end": 160,
+   "knots_output": [
+    0.0,
+    95.0,
+    150.0,
+    160.0,
+    248.0
+   ],
+   "knots_source": [
+    0.0,
+    95.0,
+    160.0,
+    170.0,
+    248.0
+   ],
+   "time_scale": 1.0
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ },
+ "timing_+10": {
+  "pass": false,
+  "error": "necessary-condition failure before mesh/placement checks: limits",
+  "fast_rejection_reasons": [
+   "limits"
+  ],
+  "limit_violations": 1,
+  "speed_ratio_to_real_max": 1.1440402726148413,
+  "accel_ratio_to_real_max": 1.0,
+  "unevaluated_checks": [
+   "mesh_clearance",
+   "hands",
+   "table",
+   "placement",
+   "object_lowest_point"
+  ],
+  "family": "interaction_timing",
+  "object": null,
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "marks": {
+   "t_grasp": 83,
+   "t_rejoin": 248,
+   "dt_frames": 10,
+   "t_window_start": 170,
+   "t_window_end": 180,
+   "knots_output": [
+    0.0,
+    95.0,
+    170.0,
+    180.0,
+    248.0
+   ],
+   "knots_source": [
+    0.0,
+    95.0,
+    160.0,
+    170.0,
+    248.0
+   ],
+   "time_scale": 1.0
+  },
+  "lead": 2,
+  "t_rejoin": 248,
+  "blend_space": "cartesian"
+ }
+}

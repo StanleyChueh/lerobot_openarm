@@ -1,0 +1,11 @@
+<!doctype html><meta charset="utf-8"><title>R05 segmentation check</title>
+<style>body{font:15px/1.5 system-ui;max-width:1100px;margin:24px auto;padding:0 16px;color:#222;background:#fff}img{max-width:100%;border:1px solid #ccc}h2{margin-top:32px}</style>
+<h1>R05: arm / gripper segmentation – images</h1>
+<p>Numbers and conclusions: <a href="R05_gripper_segmentation.md">R05_gripper_segmentation.md</a>. A = baseline masks, B = prompt cut by depth + repair. Green line = true robot silhouette (RoboTwin, true camera).</p>
+<h2>1. Masks before (A): raw SAM2 | final arm mask | masks the renderer uses</h2><img src="../r05/mask_A_robotwin.jpg">
+<h2>2. Masks after (B), same camera</h2><img src="../r05/mask_B_robotwin.jpg">
+<h2>3. Masks with the true camera, old rules (PA) and new rules (PB)</h2><img src="../r05/mask_PA_robotwin.jpg"><img src="../r05/mask_PB_robotwin.jpg">
+<h2>4. Rendered frames, RoboTwin: A left, B right of each pair (not visibly better)</h2><img src="../r05/compare_robotwin_A_vs_B.jpg">
+<h2>5. Rendered frames, OpenArm at 11–12 cm shifts: A left, B right</h2><img src="../r05/compare_openarm_A_vs_B.jpg">
+<h2>6. OpenArm zoom at the frame where A and B differ most</h2><img src="../r05/compare_openarm_zoom.jpg">
+<h2>7. OpenArm masks (reference = fitted camera, not truth)</h2><img src="../r05/mask_A_openarm.jpg"><img src="../r05/mask_B_openarm.jpg">
