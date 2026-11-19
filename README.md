@@ -136,6 +136,12 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 lerobot-dataset-viz --repo-id ethanCSL/openarm_pringles_lerobot_real_v00 --episode-index 0
 ```
 
+### Step 3.5 Replay episode
+
+```bash
+lerobot-replay   --robot.type=openarm_umeow   --robot.right_port=can0   --robot.left_port=can1   --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_10_v00   --dataset.episode=8
+```
+
 ### Step 4. Train
 
 Training runs on the training machine with the lerobot fork
