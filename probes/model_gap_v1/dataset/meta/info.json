@@ -1,0 +1,101 @@
+{
+    "codebase_version": "v3.0",
+    "fps": 30,
+    "features": {
+        "action": {
+            "dtype": "float32",
+            "shape": [
+                16
+            ],
+            "names": [
+                "RJ1.pos",
+                "LJ1.pos",
+                "RJ2.pos",
+                "LJ2.pos",
+                "RJ3.pos",
+                "LJ3.pos",
+                "RJ4.pos",
+                "LJ4.pos",
+                "RJ5.pos",
+                "LJ5.pos",
+                "RJ6.pos",
+                "LJ6.pos",
+                "RJ7.pos",
+                "LJ7.pos",
+                "RJ8.pos",
+                "LJ8.pos"
+            ]
+        },
+        "observation.state": {
+            "dtype": "float32",
+            "shape": [
+                16
+            ],
+            "names": [
+                "RJ1.pos",
+                "LJ1.pos",
+                "RJ2.pos",
+                "LJ2.pos",
+                "RJ3.pos",
+                "LJ3.pos",
+                "RJ4.pos",
+                "LJ4.pos",
+                "RJ5.pos",
+                "LJ5.pos",
+                "RJ6.pos",
+                "LJ6.pos",
+                "RJ7.pos",
+                "LJ7.pos",
+                "RJ8.pos",
+                "LJ8.pos"
+            ]
+        },
+        "timestamp": {
+            "dtype": "float32",
+            "shape": [
+                1
+            ],
+            "names": null
+        },
+        "frame_index": {
+            "dtype": "int64",
+            "shape": [
+                1
+            ],
+            "names": null
+        },
+        "episode_index": {
+            "dtype": "int64",
+            "shape": [
+                1
+            ],
+            "names": null
+        },
+        "index": {
+            "dtype": "int64",
+            "shape": [
+                1
+            ],
+            "names": null
+        },
+        "task_index": {
+            "dtype": "int64",
+            "shape": [
+                1
+            ],
+            "names": null
+        }
+    },
+    "total_episodes": 9,
+    "total_frames": 10442,
+    "total_tasks": 9,
+    "chunks_size": 1000,
+    "data_files_size_in_mb": 100,
+    "video_files_size_in_mb": 200,
+    "data_path": "data/chunk-{chunk_index:03d}/file-{file_index:03d}.parquet",
+    "video_path": null,
+    "robot_type": "openarm_umeow",
+    "splits": {
+        "train": "0:9"
+    }
+}
