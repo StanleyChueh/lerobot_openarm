@@ -154,15 +154,8 @@ On a 16 GB GPU, SmolVLA needs `--batch_size=32 --steps=40000` (batch 64 runs out
 **SmolVLA**:
 
 ```bash
-lerobot-train \
-  --policy.path=lerobot/smolvla_base \
-  --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00 \
-  --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}' \
-  --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00 \
-  --batch_size=64 --steps=20000 --policy.device=cuda \
-  --output_dir=outputs/train/openarm_pringles_lerobot_real_smolvla_v00 \
-  --job_name=openarm_pringles_lerobot_real_smolvla_v00 \
-  --wandb.enable=true --dataset.image_transforms.enable=true --dataset.image_transforms.random_order=true --dataset.image_transforms.max_num_transforms=6
+cd ~/Stanley_ws/lerobot_experiment/lerobot && conda activate lerobot
+lerobot-train   --policy.path=lerobot/smolvla_base   --dataset.repo_id=ethanCSL/openarm_pringles_lerobot_real_v00   --rename_map='{"observation.images.right_wrist_cam": "observation.images.camera1", "observation.images.wrist_cam": "observation.images.camera2", "observation.images.body_cam": "observation.images.camera3"}'   --policy.repo_id=ethanCSL/openarm_pringles_lerobot_real_smolvla_v00   --batch_size=16 --steps=20000 --policy.device=cuda   --output_dir=outputs/train/openarm_pringles_lerobot_real_smolvla_v00   --job_name=openarm_pringles_lerobot_real_smolvla_v00   --wandb.enable=false --dataset.image_transforms.enable=true --dataset.image_transforms.random_order=true --dataset.image_transforms.max_num_transforms=6
 ```
 
 **GR00T N1.7** (does not fit a 16 GB GPU):
